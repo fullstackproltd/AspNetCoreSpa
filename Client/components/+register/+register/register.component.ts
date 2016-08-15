@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
                 type: 'password',
                 required: true,
                 order: 3
-            }),
+            })
         ];
 
         this.controls = controls;

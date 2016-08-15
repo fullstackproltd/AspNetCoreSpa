@@ -7,7 +7,7 @@ import './vendor';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule }              from './components/app.module';
 
-//bootstrap(AppComponent, [router.ROUTER_PROVIDERS, HTTP_PROVIDERS, FormBuilder]);
+// bootstrap(AppComponent, [router.ROUTER_PROVIDERS, HTTP_PROVIDERS, FormBuilder]);
 platformBrowserDynamic().bootstrapModule(AppModule);
 
 // Basic hot reloading support. Automatically reloads and restarts the Angular 2 app each time

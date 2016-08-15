@@ -31,7 +31,7 @@ export class AsyncNgModuleLoader implements NgModuleFactoryLoader {
           .then((type: any) => this.compiler.compileModuleAsync(type));
     }
 
-    return Promise.resolve(null);
+    return Promise.resolve(undefined);
   }
 }
 

@@ -1,11 +1,9 @@
 import {
-  it,
   inject,
   async,
-  describe,
-  beforeEachProviders
+  TestComponentBuilder,
+  addProviders
 } from '@angular/core/testing';
-import { TestComponentBuilder } from '@angular/compiler/testing';
 
 import { Component, provide } from '@angular/core';
 
@@ -14,9 +12,9 @@ import { AboutMeComponent } from './about-me.component';
 
 describe('AboutMeComponent', () => {
   // provide our implementations or mocks to the dependency injector
-  beforeEachProviders(() => [
-    AboutMeComponent
-  ]);
+  beforeEach(() => {
+    addProviders([AboutMeComponent]);
+  });
 
   it('should log ngOnInit', inject([AboutMeComponent], (aboutMeComponent) => {
     spyOn(console, 'log');

@@ -23,7 +23,9 @@ export class AboutMeComponent implements OnInit {
     public buttonState: string = 'inactive';
     constructor() { }
 
-    ngOnInit() {    }
+    ngOnInit() { 
+        console.log("testing the spec");
+       }
 
     toggleAnimation() {
         this.buttonState = this.buttonState === 'active' ? 'inactive' : 'active';

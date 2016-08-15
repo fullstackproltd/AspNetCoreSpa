@@ -12,7 +12,7 @@ export class HeaderComponent {
     isCollapsed: boolean = true;
     constructor(private router: Router, private authService: AuthService) { }
 
-    toggleNav(){
+    toggleNav() {
         this.isCollapsed = !this.isCollapsed;
     }
 }
