@@ -17,5 +17,7 @@ import { RouterConfig } from '@angular/router';
 export class AboutComponent implements OnInit {
   constructor() { }
 
-  ngOnInit() {  }
+  ngOnInit() { 
+    console.log("testing the spec");
+   }
 }
