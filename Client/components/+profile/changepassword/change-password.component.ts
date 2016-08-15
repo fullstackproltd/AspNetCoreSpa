@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/common';
 import { ProfileService } from '../profile.service';
 import { ChangePasswordModel } from './change-password.model';
 import { PageHeading } from '../../shared/directives';
-import { ValidationService } from '../../shared/forms'
+import { ValidationService } from '../../shared/forms';
 
 @Component({
     selector: 'sd-change-password',
@@ -16,8 +16,7 @@ export class ChangePasswordComponent {
     @Output() notification = new EventEmitter<string>();
 
     constructor(public profileService: ProfileService, private fb: FormBuilder) {
-        
-        this.changePasswordForm = this.fb.group({
+             this.changePasswordForm = this.fb.group({
             'oldPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
             'newPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
             'confirmPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]

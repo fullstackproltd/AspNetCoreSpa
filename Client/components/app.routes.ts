@@ -9,37 +9,37 @@ export const routes: Routes = [
     path: 'login', loadChildren: load(() => new Promise(resolve => {
       (require as any).ensure([], (require: any) => {
         resolve(require('./+login/login.module').LoginModule);
-      })
+      });
     }))
   },
   {
     path: 'register', loadChildren: load(() => new Promise(resolve => {
       (require as any).ensure([], (require: any) => {
         resolve(require('./+register/register.module').RegisterModule);
-      })
+      });
     }))
   },
   {
     path: 'profile', loadChildren: load(() => new Promise(resolve => {
       (require as any).ensure([], (require: any) => {
         resolve(require('./+profile/profile.module').ProfileModule);
-      })
+      });
     }))
   },
   {
     path: 'admin', loadChildren: load(() => new Promise(resolve => {
       (require as any).ensure([], (require: any) => {
         resolve(require('./+admin/admin.module').AdminModule);
-      })
+      });
     }))
   },
   {
     path: 'about', loadChildren: load(() => new Promise(resolve => {
       (require as any).ensure([], (require: any) => {
         resolve(require('./+about/about.module').AboutModule);
-      })
+      });
     }))
-  },
+  }
 ];
 
 export const routing = RouterModule.forRoot(routes);

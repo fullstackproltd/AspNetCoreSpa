@@ -1,7 +1,7 @@
 import { UppercasePipe } from './uppercase.pipe';
 describe('Pipe sd-uppercase', () => {
   let pipe: UppercasePipe;
-  
+
   beforeEach(() => {
     pipe = new UppercasePipe();
   });
@@ -13,7 +13,7 @@ describe('Pipe sd-uppercase', () => {
   it('transforms "abc def" to "ABC DEF"', () => {
     expect(pipe.transform('abc def')).toEqual('ABC DEF');
   });
-  
+
   it('leaves "ABC DEF" unchanged', () => {
     expect(pipe.transform('ABC DEF')).toEqual('ABC DEF');
   });
