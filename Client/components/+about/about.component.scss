@@ -1,0 +1,17 @@
+@import '../_variables.scss';
+
+
+a {
+    font-size: 20px;
+    margin: 10px;
+    border: 4px solid lightslategrey;
+    padding: 10px;
+}
+
+.router-link-active {
+    background-color: lightblue;
+}
+
+div.nav {
+    margin: 40px 10px;
+}

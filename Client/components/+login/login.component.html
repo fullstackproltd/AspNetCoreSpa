@@ -1,0 +1,41 @@
+﻿<div class="col-md-6 col-lg-offset-3">
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            Login
+        </div>
+
+        <div class="panel-body">
+
+            <sd-error-summary [errors]="errors"></sd-error-summary>
+
+            <dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></dynamic-form>
+        </div>
+
+        <!--<form class="form-horizontal" [ngFormModel]="loginForm" (submit)="login()" novalidate>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Email</label>
+
+                    <div class="col-lg-10">
+                        <input ngControl="email" #email type="email" id="email" name="email" [class.error]="!email.valid" class="form-control input-lg" placeholder="Email"/>
+                        <control-messages control="email"></control-messages>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">Password</label>
+
+                    <div class="col-lg-10">
+                        <input ngControl="password" #password type="password" id="password" name="password" [class.error]="!password.valid" class="form-control input-lg" placeholder="Password" />
+                        <control-messages control="password"></control-messages>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-offset-2 col-lg-10">
+                        <button class="btn btn-primary pull-right" [disabled]="!loginForm.valid">Sign In</button>
+                    </div>
+                </div>
+            </form>-->
+
+    </div>
+</div>

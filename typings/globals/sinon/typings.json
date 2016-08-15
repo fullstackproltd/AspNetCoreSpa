@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/6f5c53028aaeb2f9e184561f4bf70eaa22a351c3/sinon/sinon.d.ts",
+    "raw": "registry:dt/sinon#1.16.0+20160517064723",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/6f5c53028aaeb2f9e184561f4bf70eaa22a351c3/sinon/sinon.d.ts"
+  }
+}

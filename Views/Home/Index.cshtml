@@ -1,0 +1,34 @@
+<style>
+    body {
+    margin: 70px;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+.container {
+    min-height: 100%;
+}
+
+div.app-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+</style>
+<sg-app  asp-prerender-webpack-config="config/webpack.config.js">
+    <div class="app-spinner">
+        <i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
+    </div>
+</sg-app>
+
+<!--<sc-app asp-prerender-module="Client/boot-server"
+     asp-prerender-webpack-config="config/webpack.config.js">Loading...</sc-app>-->
+
+    <script>
+        window.user = '@ViewBag.user';
+    </script>
+
+@section scripts {
+    <script src="~/dist/main.js" asp-append-version="true"></script>
+}

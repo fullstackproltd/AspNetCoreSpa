@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "skipDefaultLibCheck": true
+  },
+  "exclude": [
+    "./node_modules",
+    "./typings/main.d.ts",
+    "./typings/main"
+  ],
+  "filesGlob": [
+    "./client/components/**/*.ts",
+    "./client/platform/**/*.ts",
+    "!./node_modules/**",
+    "./client/custom-typings.d.ts",
+    "./typings/index.d.ts"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "awesomeTypescriptLoaderOptions": {
+    "useWebpackText": true //Allows loaders to be chained to awesome-typescript-loader.
+  }
+}

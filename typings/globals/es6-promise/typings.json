@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/71b4d6f6087f49891a01c937d2a86eee6f6c9b3a/es6-promise/es6-promise.d.ts",
+    "raw": "registry:dt/es6-promise#0.0.0+20160423074304",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/71b4d6f6087f49891a01c937d2a86eee6f6c9b3a/es6-promise/es6-promise.d.ts"
+  }
+}

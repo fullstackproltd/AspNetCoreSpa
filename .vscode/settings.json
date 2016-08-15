@@ -1,0 +1,23 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/obj": true,
+        // "**/typings": true,
+        ".npmignore": true,
+        "*.xproj": true,
+        "*.xproj.user": true,
+        "Dockerfile": true,
+        ".vs": true,
+        "project.lock.json": true,
+        "Properties": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/coverage": true
+    }
+}

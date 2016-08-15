@@ -1,0 +1,12 @@
+<!--Alert message-->
+<div class="row">
+    <div class="container col-md-4 alert alert-success animated fadeInRight" *ngIf="notificationMessage">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button" (click)="notificationMessage = ''">&times;</button>
+        {{notificationMessage}}
+    </div>
+</div>
+
+<sd-change-name (notification)="notify($event)"></sd-change-name>
+
+<sd-change-password (notification)="notify($event)"></sd-change-password>
+
