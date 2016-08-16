@@ -5,7 +5,7 @@ import './polyfills';
 import './vendor';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule }              from './components/app.module';
+import { AppModule }              from './modules/app.module';
 
 // bootstrap(AppComponent, [router.ROUTER_PROVIDERS, HTTP_PROVIDERS, FormBuilder]);
 platformBrowserDynamic().bootstrapModule(AppModule);

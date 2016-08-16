@@ -14,7 +14,7 @@
     "./typings/main"
   ],
   "filesGlob": [
-    "./client/components/**/*.ts",
+    "./client/modules/**/*.ts",
     "./client/platform/**/*.ts",
     "!./node_modules/**",
     "./client/custom-typings.d.ts",
