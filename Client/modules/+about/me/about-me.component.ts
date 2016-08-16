@@ -23,7 +23,7 @@ export class AboutMeComponent implements OnInit {
     public buttonState: string = 'inactive';
     constructor() { }
 
-    ngOnInit() { 
+    ngOnInit() {
         console.log('aboutme component loaded');
     }
 
