@@ -18,6 +18,8 @@
 * [Serilog](https://serilog.net/) with [Seq](https://getseq.net/) support to manage structured logging.
 * [Swagger](http://swagger.io/) as Api explorer (Visit url **http://localhost:5000/swagger/ui** after running the application)
 
+ [![Dependency Status](https://david-dm.org/asadsahi/AspNetCoreSpa.svg)](https://david-dm.org/asadsahi/AspNetCoreSpa)
+
 ## Pre-requisites
 
 1. [.Net core sdk](https://www.microsoft.com/net/core#windows)
