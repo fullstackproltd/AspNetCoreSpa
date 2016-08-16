@@ -4,7 +4,7 @@ import { FormGroupDirective } from '@angular/forms';
 import { ValidationService } from './validation.service';
 
 @Component({
-    selector: 'control-error-message',
+    selector: 'appc-control-error-message',
     template: `<label *ngIf="errorMessage" class="error"> {{errorMessage}} </label>`
 })
 export class ErrorMessageComponent {

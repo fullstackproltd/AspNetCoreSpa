@@ -3,7 +3,7 @@ import { CommonModule, FormBuilder } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { PageHeading } from './directives';
+import { PageHeadingComponent } from './directives';
 import { DynamicFormComponent, DynamicFormControlComponent, ErrorMessageComponent, ErrorSummaryComponent, FormControlService } from './forms';
 import { HeaderComponent, FooterComponent } from './layout';
 import { DataService, ApiGateway, AuthService, HttpErrorHandler } from './services';
@@ -23,7 +23,7 @@ import { UppercasePipe } from './pipes';
     ErrorSummaryComponent,
     FooterComponent,
     HeaderComponent,
-    PageHeading,
+    PageHeadingComponent,
     UppercasePipe
   ],
   exports: [
@@ -38,7 +38,7 @@ import { UppercasePipe } from './pipes';
     ErrorMessageComponent,
     FooterComponent,
     HeaderComponent,
-    PageHeading,
+    PageHeadingComponent,
     UppercasePipe
   ]
 

@@ -1,13 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { RegisterModel } from '../register.model';
 import { RegisterService } from '../register.service';
 import { ControlBase, ControlTextbox } from '../../shared/forms';
 
 @Component({
-    selector: 'sg-register',
+    selector: 'appc-register',
     templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     private errors: string[];
     private controls: ControlBase<any>[];
 
-    constructor(public registerService: RegisterService, public router: Router) {
+    constructor(public registerService: RegisterService, public router: Router, private route: ActivatedRoute) {
         this.registerModel = new RegisterModel('', '', '');
     }
 
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
         this.registerModel.password = model.password;
         this.registerService.register(this.registerModel)
             .subscribe((res: Response) => {
-                this.router.navigate(['registerconfirmation'], { queryParams: { emailConfirmed: true } });
+                this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });
             },
             (errors: string[]) => {
                 this.errors = errors;

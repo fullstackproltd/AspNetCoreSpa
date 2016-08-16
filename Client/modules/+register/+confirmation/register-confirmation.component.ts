@@ -1,11 +1,11 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'sg-register-confirmation',
+    selector: 'appc-register-confirmation',
     templateUrl: './register-confirmation.component.html'
 })
-export class RegisterConfirmationComponent implements OnInit {
+export class RegisterConfirmationComponent implements OnInit, OnDestroy {
     emailConfirmed: boolean;
     private sub: any;
 
@@ -15,8 +15,8 @@ export class RegisterConfirmationComponent implements OnInit {
         this.sub = this.router
             .routerState
             .queryParams
-            .subscribe(params => {
-                this.emailConfirmed = (params['emailConfirmed'] && params['emailConfirmed'].toLowerCase() === 'true');
+            .subscribe((params: any) => {
+                this.emailConfirmed = (params.emailConfirmed && params.emailConfirmed.toLowerCase() === 'true');
             });
 
     }

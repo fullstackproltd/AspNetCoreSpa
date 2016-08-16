@@ -9,10 +9,10 @@ import { ControlBase, ControlTextbox, ControlCheckbox } from '../shared/forms';
 
 
 @Component({
-    selector: 'sd-login',
+    selector: 'appc-login',
     templateUrl: './login.component.html'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     loginModel: LoginModel;
     errors: string[];
     controls: any;

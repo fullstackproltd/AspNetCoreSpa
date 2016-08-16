@@ -2,10 +2,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { ProfileService } from '../profile.service';
 import { ChangeNameModel } from './';
-import { PageHeading } from '../../shared/directives';
+import { PageHeadingComponent } from '../../shared/directives';
 
 @Component({
-    selector: 'sd-change-name',
+    selector: 'appc-change-name',
     templateUrl: './change-name.component.html'
 })
 export class ChangeNameComponent implements OnInit {

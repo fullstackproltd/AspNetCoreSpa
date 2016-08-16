@@ -17,10 +17,3 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/observable/throw';
-
-
-if (process.env.ENV === 'Development') {
-  // Development
-} else {
-  // Production
-}

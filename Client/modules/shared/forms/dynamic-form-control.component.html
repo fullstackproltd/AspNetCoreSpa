@@ -12,7 +12,7 @@
         <input #ck *ngSwitchCase="'checkbox'" (change)="control.value = ck.checked" [id]="control.key" [formControlName]="control.key"
             [type]="control.type" [class.error]="!control.valid">
 
-        <control-error-message [form]="f" [control]="control.key"></control-error-message>
+        <appc-control-error-message [form]="f" [control]="control.key"></appc-control-error-message>
 
     </div>
 

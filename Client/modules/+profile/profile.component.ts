@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ProfileService } from './profile.service';
 
 @Component({
-    selector: 'sd-user-profile',
+    selector: 'appc-user-profile',
     templateUrl: './profile.component.html'
 })
 export class ProfileComponent {

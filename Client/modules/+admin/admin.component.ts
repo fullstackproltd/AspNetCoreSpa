@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { AdminService } from './admin.service';
 
 @Component({
-    selector: 'sg-admin',
+    selector: 'appc--admin',
     templateUrl: './admin.component.html'
 })
 export class AdminComponent {

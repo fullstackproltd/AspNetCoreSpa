@@ -7,9 +7,9 @@
         </div>
         
         <div class="panel-body">
-            <sd-error-summary [errors]="errors"></sd-error-summary>
+            <appc-error-summary [errors]="errors"></appc-error-summary>
 
-            <dynamic-form (formsubmit)="register($event)" [controls]="controls" [btnText]="'Register'"></dynamic-form>
+            <appc-dynamic-form (formsubmit)="register($event)" [controls]="controls" [btnText]="'Register'"></appc-dynamic-form>
 
         </div>
     </div>

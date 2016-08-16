@@ -1,13 +1,13 @@
-import { Component, Input, Output, EventEmitter }  from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit }  from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { ControlBase, FormControlService } from './controls';
 
 @Component({
-    selector: 'dynamic-form',
+    selector: 'appc-dynamic-form',
     templateUrl: './dynamic-form.component.html'
 })
-export class DynamicFormComponent {
+export class DynamicFormComponent implements OnInit {
 
     @Input() controls: ControlBase<any>[] = [];
     @Input() btnText: string = 'Submit'; // Default value at least

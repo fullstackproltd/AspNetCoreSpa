@@ -7,9 +7,9 @@
 
         <div class="panel-body">
 
-            <sd-error-summary [errors]="errors"></sd-error-summary>
+            <appc-error-summary [errors]="errors"></appc-error-summary>
 
-            <dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></dynamic-form>
+            <appc-dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></appc-dynamic-form>
         </div>
 
         <!--<form class="form-horizontal" [ngFormModel]="loginForm" (submit)="login()" novalidate>

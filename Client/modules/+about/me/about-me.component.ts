@@ -1,7 +1,7 @@
 import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
 
 @Component({
-    selector: 'sg-about-me',
+    selector: 'appc-about-me',
     styleUrls: ['./about-me.component.scss'],
     templateUrl: './about-me.component.html',
     animations: [
@@ -24,8 +24,8 @@ export class AboutMeComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { 
-        console.log("testing the spec");
-       }
+        console.log('aboutme component loaded');
+    }
 
     toggleAnimation() {
         this.buttonState = this.buttonState === 'active' ? 'inactive' : 'active';

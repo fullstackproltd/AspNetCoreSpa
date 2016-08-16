@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'page-heading',
+    selector: 'appc-page-heading',
     template: `<h2>{{text}}</h2>`
 })
-export class PageHeading {
+export class PageHeadingComponent {
     @Input() text: string;
     constructor() { }
 }

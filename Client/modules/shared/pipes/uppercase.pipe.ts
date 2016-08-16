@@ -1,9 +1,9 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-        name: 'sd-uppercase'
+        name: 'appfUppercase'
 })
-export class UppercasePipe {
+export class UppercasePipe implements PipeTransform {
     transform(value: string) {
         return value.toUpperCase();
     }

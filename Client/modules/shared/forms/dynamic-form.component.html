@@ -1,6 +1,6 @@
 <form class="{{formClass}}" (ngSubmit)="onSubmit()" [formGroup]="form" novalidate role="form">
     <fieldset>
-        <df-control *ngFor="let ctrl of controls" [control]="ctrl" [form]="form"></df-control>
+        <appc-dynamic-control *ngFor="let ctrl of controls" [control]="ctrl" [form]="form"></appc-dynamic-control>
 
         <div class="form-group">
             <div class="col-lg-offset-2 col-lg-10">

@@ -2,10 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { RouterConfig } from '@angular/router';
 
 @Component({
-  selector: 'sg-about',
+  selector: 'appc-about',
   styleUrls: ['./about.component.scss'],
   template: `
-  <page-heading text='About page'></page-heading>
+  <appc-page-heading text='About page'></appc-page-heading>
   <p>With nested Angular 2 routing</p>
     <div class="nav">
         <a routerLink="../about">About me</a>
@@ -17,7 +17,7 @@ import { RouterConfig } from '@angular/router';
 export class AboutComponent implements OnInit {
   constructor() { }
 
-  ngOnInit() { 
-    console.log("testing the spec");
-   }
+  ngOnInit() {
+    console.log('testing the spec');
+  }
 }

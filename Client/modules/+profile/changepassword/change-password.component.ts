@@ -3,11 +3,11 @@ import { FormBuilder, Validators } from '@angular/common';
 
 import { ProfileService } from '../profile.service';
 import { ChangePasswordModel } from './change-password.model';
-import { PageHeading } from '../../shared/directives';
+import { PageHeadingComponent } from '../../shared/directives';
 import { ValidationService } from '../../shared/forms';
 
 @Component({
-    selector: 'sd-change-password',
+    selector: 'appc-change-password',
     templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent {

@@ -12,7 +12,7 @@ import { DataService } from './shared/services';
  */
 
 @Component({
-  selector: 'sg-app',
+  selector: 'appc-app',
   pipes: [],
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'

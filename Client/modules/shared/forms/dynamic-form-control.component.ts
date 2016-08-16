@@ -4,7 +4,7 @@ import { ControlBase }     from './controls';
 import { ErrorMessageComponent }     from './error-message.component';
 
 @Component({
-    selector: 'df-control',
+    selector: 'appc-dynamic-control',
     templateUrl: './dynamic-form-control.component.html'
 })
 export class DynamicFormControlComponent {

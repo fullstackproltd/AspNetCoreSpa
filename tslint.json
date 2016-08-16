@@ -21,11 +21,11 @@
         ],
         "directive-selector-prefix": [
             true,
-            "sg"
+            "appd"
         ],
         "component-selector-prefix": [
             true,
-            "sg"
+            "appc"
         ],
         "use-input-property-decorator": true,
         "use-output-property-decorator": true,
@@ -39,7 +39,7 @@
         "pipe-naming": [
             true,
             "camelCase",
-            "sg"
+            "appf"
         ],
         "component-class-suffix": true,
         "directive-class-suffix": true,
