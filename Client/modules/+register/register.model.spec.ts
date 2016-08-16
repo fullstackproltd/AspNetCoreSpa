@@ -9,7 +9,7 @@ describe('Register Model', () => {
     let registerModel: RegisterModel = {email: 'test@test.test', password: 'Super Cat', username: 'test'};
     expect(registerModel.password).toEqual('Super Cat');
   });
-  it('has email', () => {
+  it('has username', () => {
     let registerModel: RegisterModel = {email: 'test@test.test', password: 'Super Cat', username: 'test'};
     expect(registerModel.username).toEqual('test');
   });

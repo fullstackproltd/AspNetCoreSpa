@@ -9,7 +9,7 @@ describe('Login Model', () => {
     let loginModel: LoginModel = {email: 'test@test.test', password: 'Super Cat', rememberMe: true};
     expect(loginModel.password).toEqual('Super Cat');
   });
-  it('has email', () => {
+  it('has rememberMe', () => {
     let loginModel: LoginModel = {email: 'test@test.test', password: 'Super Cat', rememberMe: true};
     expect(loginModel.rememberMe).toEqual(true);
   });
