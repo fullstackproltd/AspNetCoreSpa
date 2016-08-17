@@ -32,7 +32,7 @@ namespace AspNetCoreSpa
         public Startup(IHostingEnvironment env)
         {
             _hostingEnv = env;
-            
+
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel
@@ -102,6 +102,7 @@ namespace AspNetCoreSpa
                 // NOTE: For SPA swagger needs adding before MVC
                 // Enable middleware to serve generated Swagger as a JSON endpoint
                 app.UseSwagger();
+
                 // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
                 app.UseSwaggerUi();
 
