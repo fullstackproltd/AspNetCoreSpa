@@ -1,7 +1,7 @@
 #image: Visual Studio 2015 - GCE
 environment:
   website_name: aspnetcorespa
-  website_psw: fcNZB0xvnEas8b67pydFsFLxC16dCuSB1dqFYWFLQt8EeKCrHaTvwoljJAbl
+  website_psw: twePnoXZKws9fnk2LMHNBO7AFl7Lkl6oiEq6SHFKkDUxHDakKM56umRYI7qCz2X4QlknC+ko1JwpphPAfl9p3g==
 branches:
   only:
     - appveyor
