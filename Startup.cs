@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Events;
+using Swashbuckle.Swagger.Model;
 
 namespace AspNetCoreSpa
 {
@@ -32,7 +33,7 @@ namespace AspNetCoreSpa
         public Startup(IHostingEnvironment env)
         {
             _hostingEnv = env;
-            
+
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
             .MinimumLevel
@@ -79,6 +80,26 @@ namespace AspNetCoreSpa
                 });
 
             services.AddSwaggerGen();
+
+            // Add the detail information for the API.
+            services.ConfigureSwaggerGen(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "AspNetCoreSpa Api",
+                    Description = "Here is the api used in this application of different functionality",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "Asad Sahi", Email = "", Url = "http://twitter.com/asadsahi" },
+                    License = new License { Name = "Use under MIT", Url = "https://opensource.org/licenses/MIT" }
+                });
+
+                // //Determine base path for the application.
+                // var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+
+                // //Set the comments path for the swagger json and ui.
+                // options.IncludeXmlComments(basePath + "\\TodoApi.xml");
+            });
         }
 
 
@@ -102,6 +123,7 @@ namespace AspNetCoreSpa
                 // NOTE: For SPA swagger needs adding before MVC
                 // Enable middleware to serve generated Swagger as a JSON endpoint
                 app.UseSwagger();
+
                 // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
                 app.UseSwaggerUi();
 
