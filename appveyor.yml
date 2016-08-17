@@ -3,8 +3,11 @@ environment:
   website_name: aspnetcorespa
   website_psw:
     secure: zTHSWn+iE4RfNYHExaZxBEEoOrcu40MUtZKOV704vHlRuBCHfNa7iE0G9l6nriCprhHEuUddb733Qgpb56V6Tw==
+branches:
+  only:
+    - appveyor
 before_build:
-- dotnet restore AspNetCoreSpa\project.json
+- dotnet restore
 build:
   parallel: true
   verbosity: minimal
