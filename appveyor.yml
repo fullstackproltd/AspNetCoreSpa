@@ -2,7 +2,7 @@
 environment:
   website_name: aspnetcorespa
   website_psw:
-    secure: zTHSWn+iE4RfNYHExaZxBEEoOrcu40MUtZKOV704vHlRuBCHfNa7iE0G9l6nriCprhHEuUddb733Qgpb56V6Tw==
+    secure: fcNZB0xvnEas8b67pydFsFLxC16dCuSB1dqFYWFLQt8EeKCrHaTvwoljJAbl
 branches:
   only:
     - appveyor
