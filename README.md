@@ -32,7 +32,7 @@
 
 ## Installation
 ```
-1. clone the repo
+1. Clone the repo
     git clone https://github.com/asadsahi/AspNetCoreSpa
 2. Change directory to our repo
     cd AspNetCoreSpa
