@@ -108,10 +108,6 @@ namespace AspNetCoreSpa
         {
             if (env.IsDevelopment())
             {
-                app.UseSimulatedLatency(
-                    min: TimeSpan.FromMilliseconds(2000),
-                    max: TimeSpan.FromMilliseconds(4000));
-
                 loggerFactory.AddSerilog();
                 // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
                 // loggerFactory.AddDebug();
