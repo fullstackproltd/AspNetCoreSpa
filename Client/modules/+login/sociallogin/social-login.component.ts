@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
 
@@ -8,7 +9,7 @@ import { Response } from '@angular/http';
     templateUrl: './social-login.component.html'
 })
 export class SocialLoginComponent implements OnInit {
-    constructor() { }
+    constructor(private location: Location) { }
 
     ngOnInit() { }
 
@@ -37,7 +38,9 @@ export class SocialLoginComponent implements OnInit {
     }
 
     redirect(provider: string): void {
-        window.location.href = window.location.protocol + '//' + window.location.host + '/' + '/api/account/ExternalLogin?provider=' + provider;
+        let url = window.location.protocol + '//' + window.location.host + '/api/account/ExternalLogin?provider=' + provider;
+        console.log(url);
+        window.location.href = url;
     }
 
 }
