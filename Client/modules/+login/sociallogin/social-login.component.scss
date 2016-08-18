@@ -1,0 +1,43 @@
+
+.social-login-button {
+                margin: 5px;
+                &.google,
+                &.facebook,
+                &.microsoft,
+                &.twitter,
+                &.github,
+                &.linkedin {
+                    width: 192px;
+                    text-transform: none;
+                    color: #FFFFFF;
+                    font-size: 13px;
+
+                    md-icon {
+                        color: #FFFFFF;
+                        margin: 0 8px 0 0;
+                    }
+                }
+
+                &.google {
+                    background-color: #D73D32;
+                }
+
+                &.facebook {
+                    background-color: rgb(63, 92, 154);
+                }
+
+                &.microsoft {
+                    background-color: #2672EC;
+                }
+
+                &.twitter {
+                    background-color: #55ACEE;
+                }
+
+                &.github {
+                    background-color: #444444;
+                }
+                &.linkedin {
+                    background-color: #007BB6;
+                }
+            }

@@ -1,0 +1,21 @@
+#image: Visual Studio 2015 - GCE
+environment:
+  website_name: aspnetcorespa
+  website_psw:
+    secure: twePnoXZKws9fnk2LMHNBO7AFl7Lkl6oiEq6SHFKkDUxHDakKM56umRYI7qCz2X4QlknC+ko1JwpphPAfl9p3g==
+branches:
+  only:
+    - master
+before_build:
+- dotnet restore
+build:
+  parallel: true
+  verbosity: minimal
+after_build:
+- dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
+test: off
+artifacts:
+- path: dist
+  name: web-app
+deploy_script:
+- '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'

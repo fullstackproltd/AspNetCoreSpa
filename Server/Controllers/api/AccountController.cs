@@ -116,7 +116,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet("ExternalLogin")]
         [AllowAnonymous]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
@@ -132,13 +132,12 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             if (remoteError != null)
             {
-                ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
-                return View(nameof(Login));
+                return Render(ExternalLoginStatus.Error);
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
             if (info == null)
             {
-                return RedirectToAction(nameof(Login));
+                return Render(ExternalLoginStatus.Invalid);
             }
 
             // Sign in the user with this external login provider if the user already has a login.
@@ -146,30 +145,31 @@ namespace AspNetCoreSpa.Server.Controllers.api
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
             }
             if (result.RequiresTwoFactor)
             {
-                return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl });
+                return Render(ExternalLoginStatus.TwoFactor);
             }
             if (result.IsLockedOut)
             {
-                return View("Lockout");
+                return Render(ExternalLoginStatus.Lockout);
             }
             else
             {
                 // If the user does not have an account, then ask the user to create an account.
-                ViewData["ReturnUrl"] = returnUrl;
-                ViewData["LoginProvider"] = info.LoginProvider;
-                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+                // ViewData["ReturnUrl"] = returnUrl;
+                // ViewData["LoginProvider"] = info.LoginProvider;
+                // var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                // return RedirectToAction("Index", "Home", new ExternalLoginCreateAccountViewModel { Email = email });
+                return Render(ExternalLoginStatus.CreateAccount);
             }
         }
 
-        [HttpPost("ExternalLoginConfirmation")]
+        [HttpPost("ExternalLoginCreateAccount")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
+        public async Task<IActionResult> ExternalLoginCreateAccount([FromBody]ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -177,7 +177,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 var info = await _signInManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
-                    return View("ExternalLoginFailure");
+                    return BadRequest("External login information cannot be accessed, try again.");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
@@ -188,16 +188,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+                        return Ok(); // Everything ok
                     }
                 }
-                AddErrors(result);
+                ModelState.AddModelError("", "Email already exists");
             }
+            return BadRequest(ModelState.GetModelErrors());
 
-            ViewData["ReturnUrl"] = returnUrl;
-            return View(model);
         }
-
         [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
@@ -392,6 +390,12 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
+
+        private IActionResult Render(ExternalLoginStatus status)
+        {
+            return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
+        }
+
 
         #endregion
     }

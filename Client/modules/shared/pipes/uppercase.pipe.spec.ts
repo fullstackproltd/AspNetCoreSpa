@@ -1,5 +1,5 @@
 import { UppercasePipe } from './uppercase.pipe';
-describe('Pipe sd-uppercase', () => {
+describe('Pipe appfUppercase', () => {
   let pipe: UppercasePipe;
 
   beforeEach(() => {
