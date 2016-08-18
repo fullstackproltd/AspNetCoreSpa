@@ -13,6 +13,7 @@
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
 * Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
+* End-to-end Angular 2 code using [Protractor](http://www.protractortest.org).
 * Coverage with [Istanbul](https://github.com/gotwarlost/istanbul) and [Karma](https://karma-runner.github.io/0.13/index.html).
 * Type manager with [Typings](https://github.com/typings/typings)
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
@@ -40,7 +41,7 @@
     cd AspNetCoreSpa
 3. dotnet restore
 4. Install global dependencies
-    npm install typings rimraf webpack -g
+    npm install webpack protractor typings rimraf -g
 5. npm install
 6. typings install
 7. Create webpack vendor manifest file for fast webpack rebuils
@@ -49,7 +50,7 @@
     set ASPNETCORE_ENVIRONMENT=Development
 9. Run the app 
     dotnet run (for single run) OR dotnet watch (in watch mode)
-10. Browse using http://localhost:5000
+10. Browse using http://localhost:5000 or http://localhost:5001 
 
 ```
 
@@ -68,3 +69,22 @@ npm run watch:test
 npm run docs
 # this will create documentation in doc folder at the root location (open index.html file) 
 ```
+### run end-to-end tests
+```bash
+# make sure you have your server running in another terminal (i.e run "dotnet run" command)
+npm run e2e
+```
+
+### run webdriver (for end-to-end)
+```bash
+npm run webdriver:update
+npm run webdriver:start
+```
+
+### run Protractor's elementExplorer (for end-to-end)
+```bash
+npm run webdriver:start
+# in another terminal
+npm run e2e:live
+```
+
