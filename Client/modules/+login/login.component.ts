@@ -10,6 +10,7 @@ import { ControlBase, ControlTextbox, ControlCheckbox } from '../shared/forms';
 
 @Component({
     selector: 'appc-login',
+    styleUrls: ['./login.component.scss'],
     templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
@@ -66,4 +67,33 @@ export class LoginComponent implements OnInit {
 
         this.controls = controls;
     }
+
+    loginGoogle(): void {
+        this.redirect('Google');
+    }
+
+    loginFacebook(): void {
+        this.redirect('Facebook');
+    }
+
+    loginMicrosoft(): void {
+        this.redirect('Microsoft');
+    }
+
+    loginTwitter(): void {
+        this.redirect('Twitter');
+    }
+
+    loginGithub(): void {
+        this.redirect('GitHub');
+    }
+
+    loginLinkedIn(): void {
+        this.redirect('LinkedIn');
+    }
+
+    redirect(provider: string): void {
+        window.location.href = window.location.protocol + '//' + window.location.host + '/' + '/api/account/ExternalLogin?provider=' + provider;
+    }
+
 }
