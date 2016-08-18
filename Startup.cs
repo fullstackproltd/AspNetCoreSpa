@@ -161,48 +161,48 @@ namespace AspNetCoreSpa
             app.UseIdentity();
 
             // Facebook Auth
-            app.UseFacebookAuthentication(new FacebookOptions()
-            {
-                AppId = Configuration["Authentication:Facebook:AppId"],
-                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
-            });
-            // Google Auth
-            app.UseGoogleAuthentication(new GoogleOptions()
-            {
-                ClientId = Configuration["Authentication:Google:ClientId"],
-                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
-            });
-            // Twitter Auth
-            // https://apps.twitter.com/
-            app.UseTwitterAuthentication(new TwitterOptions()
-            {
-                ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
-                ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
-            });
-            // Microsoft Auth
-            // https://apps.dev.microsoft.com/?mkt=en-us#/appList
-            app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-            {
-                ClientId = Configuration["Authentication:Microsoft:ClientId"],
-                ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"]
-            });
+            // app.UseFacebookAuthentication(new FacebookOptions()
+            // {
+            //     AppId = Configuration["Authentication:Facebook:AppId"],
+            //     AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            // });
+            // // Google Auth
+            // app.UseGoogleAuthentication(new GoogleOptions()
+            // {
+            //     ClientId = Configuration["Authentication:Google:ClientId"],
+            //     ClientSecret = Configuration["Authentication:Google:ClientSecret"]
+            // });
+            // // Twitter Auth
+            // // https://apps.twitter.com/
+            // app.UseTwitterAuthentication(new TwitterOptions()
+            // {
+            //     ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
+            //     ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
+            // });
+            // // Microsoft Auth
+            // // https://apps.dev.microsoft.com/?mkt=en-us#/appList
+            // app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
+            // {
+            //     ClientId = Configuration["Authentication:Microsoft:ClientId"],
+            //     ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"]
+            // });
 
-            // Note: Below social providers are supported through this open source library:
-            // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
+            // // Note: Below social providers are supported through this open source library:
+            // // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
 
-            // Github Auth
-            // https://github.com/settings/developers
-            app.UseGitHubAuthentication(new GitHubAuthenticationOptions
-            {
-                ClientId = Configuration["Authentication:Github:ClientId"],
-                ClientSecret = Configuration["Authentication:Github:ClientSecret"]
-            });
+            // // Github Auth
+            // // https://github.com/settings/developers
+            // app.UseGitHubAuthentication(new GitHubAuthenticationOptions
+            // {
+            //     ClientId = Configuration["Authentication:Github:ClientId"],
+            //     ClientSecret = Configuration["Authentication:Github:ClientSecret"]
+            // });
 
-            app.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
-            {
-                ClientId = Configuration["Authentication:LinkedIn:ClientId"],
-                ClientSecret = Configuration["Authentication:LinkedIn:ClientSecret"]
-            });
+            // app.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
+            // {
+            //     ClientId = Configuration["Authentication:LinkedIn:ClientId"],
+            //     ClientSecret = Configuration["Authentication:LinkedIn:ClientSecret"]
+            // });
 
             app.UseMvc(routes =>
             {
