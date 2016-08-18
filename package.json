@@ -8,7 +8,6 @@
     "typedoc": "typedoc",
     "typings": "typings",
     "webpack": "webpack",
-    "webpack-dev-server": "webpack-dev-server",
     "webdriver-manager": "webdriver-manager",
     "protractor": "protractor",
     "clean": "npm cache clean && npm run rimraf -- node_modules doc typings coverage wwwroot/dist",
