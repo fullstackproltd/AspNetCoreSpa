@@ -2,14 +2,17 @@
 environment:
   website_name: aspnetcorespa
   website_psw:
-    secure: zTHSWn+iE4RfNYHExaZxBEEoOrcu40MUtZKOV704vHlRuBCHfNa7iE0G9l6nriCprhHEuUddb733Qgpb56V6Tw==
+    secure: twePnoXZKws9fnk2LMHNBO7AFl7Lkl6oiEq6SHFKkDUxHDakKM56umRYI7qCz2X4QlknC+ko1JwpphPAfl9p3g==
+branches:
+  only:
+    - master
 before_build:
-- dotnet restore AspNetCoreSpa\project.json
+- dotnet restore
 build:
   parallel: true
   verbosity: minimal
 after_build:
-- dotnet publish .\AspNetCoreSpa --output %appveyor_build_folder%\dist --configuration Debug --no-build
+- dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
 test: off
 artifacts:
 - path: dist
