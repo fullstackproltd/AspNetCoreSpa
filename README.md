@@ -14,7 +14,8 @@
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
 * Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
 * End-to-end Angular 2 code using [Protractor](http://www.protractortest.org).
-* Coverage with [Istanbul](https://github.com/gotwarlost/istanbul) and [Karma](https://karma-runner.github.io/0.13/index.html).
+* [Istanbul](https://github.com/gotwarlost/istanbul) for test coverage
+  * with [Remap Istanbul](https://github.com/SitePen/remap-istanbul) for remapping Javascript to TypeScript coverage
 * Type manager with [Typings](https://github.com/typings/typings)
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
 * [Typedoc](http://typedoc.io/) for typescript documentation
@@ -30,8 +31,9 @@
 
 1. [.Net core sdk](https://www.microsoft.com/net/core#windows)
 2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2015 update 3](https://www.visualstudio.com/) with [.Net Core tooling](https://www.microsoft.com/net/core#windows)
-4. [Nodejs](https://nodejs.org/en/)
+3. [Nodejs](https://nodejs.org/en/)
 
+**Make sure you have Node version >= 5.0 and NPM >= 3**
 
 ## Installation
 ```
@@ -59,6 +61,7 @@
 ### run Angular 2 tests
 ```bash
 npm run test
+# this will also create coverage remaped to typescript files in coverage folder after test run completes
 ```
 ### watch and run Angular 2 tests
 ```bash
