@@ -41,10 +41,9 @@ before_build:
 build:
   parallel: true
   verbosity: minimal
-  - dotnet build
 
 after_build:
-  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
+  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Release
 
 artifacts:
   - path: dist
