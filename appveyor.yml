@@ -38,6 +38,9 @@ build:
   parallel: true
   verbosity: minimal
 
+after_build:
+  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
+
 artifacts:
 - path: dist
   name: web-app
