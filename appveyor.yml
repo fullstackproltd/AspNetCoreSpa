@@ -39,7 +39,7 @@ build:
 
 after_build:
   - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
-test: off
+
 artifacts:
 - path: dist
   name: web-app
