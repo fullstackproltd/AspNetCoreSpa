@@ -33,9 +33,7 @@ cache:
 
 before_build:
   - dotnet restore
-  - node node_modules/webpack/bin/webpack.js --config config/webpack.config.vendor.js,
-  - node node_modules/webpack/bin/webpack.js --config config/webpack.config.js
-
+  - npm build:prod                                                      # Client production artefacts
 
 build:
   parallel: true
