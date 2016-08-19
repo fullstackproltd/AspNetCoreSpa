@@ -30,7 +30,7 @@ test_script:
 
 # scripts to run after tests
 after_test:
-  - cmd: npm build:prod                                                      # Client production artefacts
+  - cmd: npm run build:prod                                           # Client production artefacts
 
 cache:
   - node_modules -> package.json                                        # local npm modules
