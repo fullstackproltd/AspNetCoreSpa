@@ -17,7 +17,7 @@ install:
   - npm install -g npm typings
   - ps: $env:path = $env:appdata + "\npm;" + $env:path
   - npm install
-
+  - typings install
 test_script:
   # Output useful info for debugging.
   - node --version && npm --version
