@@ -58,7 +58,6 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
-    "@angularclass/angular2-beta-to-rc-alias": "^0.1.0",
     "angular2-template-loader": "^0.4.0",
     "awesome-typescript-loader": "1.1.1",
     "codelyzer": "0.0.26",
