@@ -121,9 +121,6 @@
   },
   "scripts": {
     "prepublish": [
-      "npm install typings -g",
-      "npm install",
-      "npm run test",
       "node node_modules/webpack/bin/webpack.js --config config/webpack.config.vendor.js",
       "node node_modules/webpack/bin/webpack.js --config config/webpack.config.js"
     ],
