@@ -7,7 +7,7 @@ environment:
 
 branches:
   only:
-    - appveyor
+    - master
     # Fix line endings on Windows
 init:
   - git config --global core.autocrlf true
