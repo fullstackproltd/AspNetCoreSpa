@@ -15,7 +15,7 @@ module.exports = function(config) {
      *
      * available frameworks: https://npmjs.org/browse/keyword/karma-adapter
      */
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'source-map-support'],
 
     // list of files to exclude
     exclude: [ ],
@@ -31,7 +31,7 @@ module.exports = function(config) {
      * preprocess matching files before serving them to the browser
      * available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
      */
-    preprocessors: { './config/spec-bundle.js': ['coverage', 'webpack', 'sourcemap'] },
+    preprocessors: { './config/spec-bundle.js': [ 'webpack' ] },
 
     // Webpack Config at ./webpack.test.js
     webpack: testWebpackConfig,
@@ -40,7 +40,7 @@ module.exports = function(config) {
       dir : 'coverage/',
       reporters: [
         { type: 'text-summary' },
-        { type: 'json' },
+        { type: 'json', file: 'coverage.json', subdir: '.' },
         { type: 'html' }
       ]
     },

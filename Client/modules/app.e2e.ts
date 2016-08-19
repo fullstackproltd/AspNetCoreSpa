@@ -10,5 +10,5 @@ describe('App', () => {
     let result  = 'AspNetCoreSpa';
     expect(subject).toEqual(result);
   });
-  
+
 });

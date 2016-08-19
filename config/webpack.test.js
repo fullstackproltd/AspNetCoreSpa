@@ -109,6 +109,8 @@ module.exports = {
         test: /\.ts$/,
         loader: 'awesome-typescript-loader',
         query: {
+          sourceMap: false,
+          inlineSourceMap: true,
           compilerOptions: {
 
             // Remove TypeScript helpers to be injected
