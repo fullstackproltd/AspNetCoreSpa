@@ -119,12 +119,7 @@
       "web.config"
     ]
   },
-  "scripts": {
-    "prepublish": [
-      "node node_modules/webpack/bin/webpack.js --config config/webpack.config.vendor.js",
-      "node node_modules/webpack/bin/webpack.js --config config/webpack.config.js"
-    ]
-  },
+  "scripts": {},
   "tooling": {
     "defaultNamespace": "AspNetCoreSPA"
   }

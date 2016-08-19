@@ -33,6 +33,9 @@ cache:
 
 before_build:
   - dotnet restore
+  - node node_modules/webpack/bin/webpack.js --config config/webpack.config.vendor.js,
+  - node node_modules/webpack/bin/webpack.js --config config/webpack.config.js
+
 
 build:
   parallel: true
@@ -42,7 +45,8 @@ after_build:
   - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
 
 artifacts:
-- path: dist
-  name: web-app
+  - path: dist
+    name: web-app
+
 deploy_script:
-- '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'
+  - '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'
