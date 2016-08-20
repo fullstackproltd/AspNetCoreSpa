@@ -103,7 +103,8 @@
     "preserveCompilationContext": true,
     "compile": {
       "exclude": [
-        "**/node_modules/"
+        "node_modules",
+        "Client"
       ]
     },
     "debugType": "portable"
@@ -119,7 +120,11 @@
       "web.config"
     ]
   },
-  "scripts": {},
+  "scripts": {
+    "postpublish": [
+      "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
+    ]
+  },
   "tooling": {
     "defaultNamespace": "AspNetCoreSPA"
   }

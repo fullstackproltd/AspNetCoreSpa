@@ -1,3 +1,10 @@
+# AppVeyor file
+# http://www.appveyor.com/docs/appveyor-yml
+# This file: cloned from https://github.com/gruntjs/grunt/blob/master/appveyor.yml
+
+# Build version format
+version: "{build}"
+
 #image: Visual Studio 2015 - GCE
 environment:
   website_name: aspnetcorespa
@@ -23,22 +30,17 @@ test_script:
   # Output useful info for debugging.
   - node --version && npm --version
   - node -e 'console.log(process.env);'
-  # We test multiple Windows shells because of prior stdout buffering issues
-  # filed against Grunt. https://github.com/joyent/node/issues/3584
-  - ps: "npm test # PowerShell" # Pass comment to PS for easier debugging
   - cmd: npm test
-
-# scripts to run after tests
-after_test:
-  - cmd: npm run build:prod                                           # Client production artefacts
 
 cache:
   - node_modules -> package.json                                        # local npm modules
 
 before_build:
+  - npm run build:prod                                           # Client production artefacts
   - dotnet restore
 
 build:
+  project: AspNetCoreSpa.sln
   parallel: true
   verbosity: minimal
 
@@ -46,8 +48,7 @@ after_build:
   - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
 
 artifacts:
-  - path: dist
-    name: web-app
-
+- path: dist
+  name: web-app
 deploy_script:
-  - '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'
+- cmd: '"C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe" -source:IisApp=''%appveyor_build_folder%\dist'' -dest:IisApp=''%website_name%'',ComputerName=''https://%website_name%.scm.azurewebsites.net/msdeploy.axd'',UserName=''$%website_name%'',Password=''%website_psw%'',IncludeAcls=''False'',AuthType=''Basic'' -verb:sync -enablerule:AppOffline -enableRule:DoNotDeleteRule -retryAttempts:2'

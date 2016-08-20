@@ -6,13 +6,13 @@
         "**/.DS_Store": true,
         "**/node_modules": true,
         "**/obj": true,
-        // "**/typings": true,
         ".npmignore": true,
-        "*.xproj": true,
         "*.xproj.user": true,
         "Dockerfile": true,
         ".vs": true,
         "project.lock.json": true,
+        "AspNetCoreSpa.xproj": true,
+        "AspNetCoreSpa.sln": true,
         "Properties": true
     },
     "search.exclude": {
