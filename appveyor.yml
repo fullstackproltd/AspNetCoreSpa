@@ -43,7 +43,7 @@ build:
   verbosity: minimal
 
 after_build:
-  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Release
+  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
 
 artifacts:
   - path: dist
