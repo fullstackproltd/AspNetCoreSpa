@@ -13,7 +13,7 @@ export class RegisterConfirmationComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.router
-            .routerState
+            .routerState.root
             .queryParams
             .subscribe((params: any) => {
                 this.emailConfirmed = (params.emailConfirmed && params.emailConfirmed.toLowerCase() === 'true');

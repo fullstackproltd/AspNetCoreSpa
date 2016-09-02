@@ -1,7 +1,7 @@
 import {
   inject,
   async,
-  TestComponentBuilder
+  TestBed
 } from '@angular/core/testing';
 
 import { Component, provide } from '@angular/core';
@@ -19,7 +19,7 @@ describe('x-large directive', () => {
   })
   class TestComponent {}
 
-  it('should set font-size to x-large', async(inject([TestComponentBuilder], (tcb) => {
+  it('should set font-size to x-large', async(inject([TestBed], (tcb) => {
     return tcb.overrideTemplate(TestComponent, '<div appdXlarge>Content</div>')
       .createAsync(TestComponent).then((fixture: any) => {
         fixture.detectChanges();

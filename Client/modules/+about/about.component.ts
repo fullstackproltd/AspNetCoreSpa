@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { RouterConfig } from '@angular/router';
 
 @Component({
   selector: 'appc-about',

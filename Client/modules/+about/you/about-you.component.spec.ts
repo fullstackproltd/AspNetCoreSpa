@@ -1,7 +1,7 @@
 import {
   inject,
   async,
-  TestComponentBuilder,
+  TestBed,
   addProviders
 } from '@angular/core/testing';
 

@@ -1,11 +1,11 @@
 import {
   inject,
   async,
-  TestComponentBuilder,
+  TestBed,
   addProviders
 } from '@angular/core/testing';
 
-import { Component, provide } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Load the implementations that should be tested
 import { AboutMeComponent } from './about-me.component';

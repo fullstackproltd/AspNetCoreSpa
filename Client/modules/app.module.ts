@@ -4,7 +4,6 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/Router';
 
-import { AsyncNgModuleLoader } from '../utils/async-ng-module-loader';
 import { routing }        from './app.routes';
 import { AppService } from './app.service';
 import { AppComponent } from './app.component';
@@ -23,8 +22,7 @@ import { HomeModule }  from './home/home.module';
         HomeModule
     ],
     providers: [
-        AppService,
-        { provide: NgModuleFactoryLoader, useClass: AsyncNgModuleLoader }
+        AppService
     ],
     bootstrap: [AppComponent]
 })
