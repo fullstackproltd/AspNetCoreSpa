@@ -1,11 +1,10 @@
 import {
   inject,
   async,
-  TestBed,
-  addProviders
+  TestBed
 } from '@angular/core/testing';
 
-import { Component, provide } from '@angular/core';
+import { Component } from '@angular/core';
 
 // Load the implementations that should be tested
 import { AboutComponent } from './about.component';
@@ -13,7 +12,7 @@ import { AboutComponent } from './about.component';
 describe('AboutComponent', () => {
   // provide our implementations or mocks to the dependency injector
   beforeEach(() => {
-    addProviders([AboutComponent]);
+    TestBed.configureTestingModule([AboutComponent]);
   });
 
   it('should log ngOnInit', inject([AboutComponent], (aboutComponent) => {
