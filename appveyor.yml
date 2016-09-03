@@ -30,7 +30,7 @@ test_script:
   # Output useful info for debugging.
   - node --version && npm --version
   - node -e 'console.log(process.env);'
-  - cmd: npm test
+  # - cmd: npm test
 
 cache:
   - node_modules -> package.json                                        # local npm modules
