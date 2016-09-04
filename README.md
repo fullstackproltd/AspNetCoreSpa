@@ -8,7 +8,7 @@
 
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
-* [Angular 2 RC5](https://angular.io/)
+* [Angular 2 RC6](https://angular.io/)
 * [Webpack](https://webpack.github.io/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
