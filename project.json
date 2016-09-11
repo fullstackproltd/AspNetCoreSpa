@@ -27,12 +27,12 @@
     "Serilog": "2.1.0-dev-00670",
     "Serilog.Extensions.Logging": "1.0.0",
     "Serilog.Sinks.Seq": "3.0.0-dev-00069",
-    "Microsoft.AspNetCore.AngularServices": "1.0.0-beta-000006",
+    "Swashbuckle": "6.0.0-beta902",
+    "Microsoft.AspNetCore.AngularServices": "1.0.0-beta-000012",
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.0.0-preview2-final",
       "type": "build"
     },
-    "Swashbuckle": "6.0.0-beta902",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
