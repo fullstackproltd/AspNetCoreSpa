@@ -79,7 +79,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             if (ModelState.IsValid)
             {
-                var currentUser = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var currentUser = new ApplicationUser { UserName = model.Email, Email = model.Email, Firstname = model.Firstname, Lastname = model.Lastname };
                 var result = await _userManager.CreateAsync(currentUser, model.Password);
                 if (result.Succeeded)
                 {

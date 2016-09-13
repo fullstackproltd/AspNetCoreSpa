@@ -11,9 +11,9 @@ namespace AspNetCoreSpa.Server
     {
         readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public SeedDbData(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public SeedDbData(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -29,12 +29,15 @@ namespace AspNetCoreSpa.Server
 
         private async Task CreateRoles()
         {
-            var rolesToAdd = new[] { "Admin", "User" };
+            var rolesToAdd = new List<ApplicationRole> {
+                new ApplicationRole {Name = "Admin", Description = "This role will have full rights to the website"},
+                new ApplicationRole {Name = "User", Description = "This role will have limited rights to the website"}
+                };
             foreach (var role in rolesToAdd)
             {
-                if (!await _roleManager.RoleExistsAsync(role))
+                if (!await _roleManager.RoleExistsAsync(role.Name))
                 {
-                    await _roleManager.CreateAsync(new IdentityRole(role));
+                    await _roleManager.CreateAsync(role);
                 }
             }
         }
@@ -42,8 +45,8 @@ namespace AspNetCoreSpa.Server
         {
             var users = new List<ApplicationUser>()
             {
-                new ApplicationUser { UserName = "admin@admin.com",  Email = "admin@admin.com", EmailConfirmed = true},
-                new ApplicationUser { UserName = "user@user.com",  Email = "user@user.com", EmailConfirmed = true},
+                new ApplicationUser { UserName = "admin@admin.com",  Email = "admin@admin.com", EmailConfirmed = true, Firstname = "Asad", Lastname = "Sahi"},
+                new ApplicationUser { UserName = "user@user.com",  Email = "user@user.com", EmailConfirmed = true, Firstname = "First", Lastname = "Last"},
             };
 
             if (await _userManager.FindByEmailAsync(users[0].Email) == null)

@@ -23,9 +23,9 @@
     // A relative path to the batch file works for the external terminal.
     // (project root here if using workspace settings, otherwise absolute path in global settings)
     // fix-casing-external.bat contents: `cd .. && cd C%cd:~1%` 
-    "terminal.external.windowsExec": "C:\\Users\\asad\\ng2fb-bootstrap\\.vscode\\terminal.bat",
+    "terminal.external.windowsExec": "C:\\Users\\asahi\\ng2fb-bootstrap\\.vscode\\terminal.bat",
     // The integrated terminal setting requires an absolute path.
     // You also need to invoke `%COMSPEC%` at the end so it doesn't close automatically.
     // fix-casing-integrated.bat contents: `cd .. && cd C%cd:~1% && %COMSPEC%`
-    "terminal.integrated.shell.windows": "C:\\Users\\asad\\ng2fb-bootstrap\\.vscode\\terminal.bat"
+    "terminal.integrated.shell.windows": "C:\\Users\\asahi\\ng2fb-bootstrap\\.vscode\\terminal.bat"
 }

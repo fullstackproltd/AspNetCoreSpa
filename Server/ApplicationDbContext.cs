@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreSpa.Server
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DbSet<Error> Errors { get; set; }
         public DbSet<Language> Languageses { get; set; }

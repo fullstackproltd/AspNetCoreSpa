@@ -21,6 +21,7 @@
 * [Typedoc](http://typedoc.io/) for typescript documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
 * Login and Registration functionality using [Asp.Net Identity](https://docs.asp.net/en/latest/security/authentication/identity.html)
+* Extensible User/Role identity implementation
 * Various social login support, Follow [this](https://github.com/asadsahi/AspNetCoreSpa/wiki/Social-Login-Setup) wiki page to see how it will work.
 * Lazy loading of all routes, child routes (About page example) with basic animation example (On about page).
 * [Angular 2 dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.

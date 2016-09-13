@@ -16,12 +16,14 @@ export class RegisterComponent implements OnInit {
     private controls: ControlBase<any>[];
 
     constructor(public registerService: RegisterService, public router: Router, private route: ActivatedRoute) {
-        this.registerModel = new RegisterModel('', '', '');
+        this.registerModel = new RegisterModel('', '', '', '', '');
     }
 
     register(model: any): void {
         this.registerModel.username = model.username;
         this.registerModel.email = model.email;
+        this.registerModel.firstname = model.firstname;
+        this.registerModel.lastname = model.lastname;
         this.registerModel.password = model.password;
         this.registerService.register(this.registerModel)
             .subscribe((res: Response) => {
@@ -44,13 +46,31 @@ export class RegisterComponent implements OnInit {
                 order: 1
             }),
             new ControlTextbox({
+                key: 'firstname',
+                label: 'Firstname',
+                placeholder: 'Firstname',
+                value: '',
+                type: 'text',
+                required: true,
+                order: 2
+            }),
+            new ControlTextbox({
+                key: 'lastname',
+                label: 'lastname',
+                placeholder: 'Lastname',
+                value: '',
+                type: 'text',
+                required: true,
+                order: 3
+            }),
+            new ControlTextbox({
                 key: 'email',
                 label: 'Email',
                 placeholder: 'Email',
                 value: '',
                 type: 'email',
                 required: true,
-                order: 2
+                order: 4
             }),
             new ControlTextbox({
                 key: 'password',
@@ -59,7 +79,7 @@ export class RegisterComponent implements OnInit {
                 value: '',
                 type: 'password',
                 required: true,
-                order: 3
+                order: 5
             })
         ];
 
