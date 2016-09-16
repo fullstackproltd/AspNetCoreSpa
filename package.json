@@ -34,7 +34,6 @@
     "test": "karma start",
     "ci": "npm test && npm run e2e",
     "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./Client/",
-    "postinstall": "npm run typings -- install",
     "preversion": "npm test",
     "version": "npm run build",
     "postversion": "git push && git push --tags"

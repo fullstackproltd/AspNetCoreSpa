@@ -6,7 +6,6 @@ client/**/*.js
 /doc
 client/**/*.js.map
 npm-debug.log*
-typings
 # User-specific files
 *.suo
 *.user

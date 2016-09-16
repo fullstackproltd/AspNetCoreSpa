@@ -45,7 +45,8 @@ build:
   verbosity: minimal
 
 after_build:
-  - dotnet publish .\ --output %appveyor_build_folder%\dist --configuration Debug --no-build
+  - dotnet publish .\ --output %appveyor_build_folder%\dist -c Release --no-build
+  - dotnet publish-iis --publish-folder %appveyor_build_folder%\dist --framework %publish:FullTargetFramework%
 
 artifacts:
 - path: dist

@@ -93,7 +93,6 @@
     "netcoreapp1.0": {
       "imports": [
         "dotnet5.6",
-        "dnxcore50",
         "portable-net45+win8"
       ]
     }
@@ -110,17 +109,29 @@
     "debugType": "portable"
   },
   "runtimeOptions": {
-    "gcServer": true
+    "configProperties": {
+      "System.GC.Server": true
+    }
   },
   "publishOptions": {
     "include": [
-      "wwwroot",
-      "Views",
       "appsettings.json",
-      "web.config"
+      "Client",
+      "typings",
+      "Views",
+      "tsconfig.json",
+      "tsd.json",
+      "web.config",
+      "config",
+      "wwwroot"
     ]
   },
   "scripts": {
+    // "prepublish": [
+    //   "npm install",
+    //   "node node_modules/webpack/bin/webpack.js --config config/webpack.config.vendor.js",
+    //   "node node_modules/webpack/bin/webpack.js --config config/webpack.config.js"
+    // ],
     "postpublish": [
       "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%"
     ]
