@@ -3,7 +3,7 @@ pull_requests:
   do_not_increment_build_number: true
 branches:
   only:
-  - ci
+  - master
 configuration: Release
 platform: Any CPU
 init:
