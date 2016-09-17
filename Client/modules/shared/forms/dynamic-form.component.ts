@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit }  from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { ControlBase, FormControlService } from './controls';
+import { ControlBase } from './control-base';
+import { FormControlService } from './form-control.service';
 
 @Component({
     selector: 'appc-dynamic-form',

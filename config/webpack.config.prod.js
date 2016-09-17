@@ -5,8 +5,8 @@ var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 module.exports = {
     devtool: 'source-map',
     plugins: [
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new DedupePlugin(),
+        // new webpack.optimize.OccurenceOrderPlugin(),
+        // new DedupePlugin(),
         // new UglifyJsPlugin({
         //     // beautify: true, //debug
         //     // mangle: false, //debug

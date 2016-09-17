@@ -1,28 +1,33 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "experimentalDecorators": true,
+    "declaration": false,
     "emitDecoratorMetadata": true,
-    "sourceMap": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "mapRoot": "./",
+    "module": "es6",
     "moduleResolution": "node",
-    "skipDefaultLibCheck": true
-  },
-  "exclude": [
-    "./node_modules",
-    "./typings/main.d.ts",
-    "./typings/main"
-  ],
-  "filesGlob": [
-    "./client/modules/**/*.ts",
-    "./client/platform/**/*.ts",
-    "!./node_modules/**",
-    "./client/custom-typings.d.ts",
-    "./typings/index.d.ts"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "awesomeTypescriptLoaderOptions": {
-    "useWebpackText": true
+    "outDir": "../dist/out-tsc",
+    "sourceMap": true,
+    "target": "es5",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
+    "types": [
+      "jasmine",
+      "node",
+      "protractor",
+      "selenium-webdriver",
+      "source-map",
+      "uglify-js",
+      "webpack"
+    ],
+    "exclude": [
+      "node_modules",
+      "wwwroot"
+    ]
   }
 }

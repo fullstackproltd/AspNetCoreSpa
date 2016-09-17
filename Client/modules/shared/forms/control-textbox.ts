@@ -1,4 +1,4 @@
-import { ControlBase } from './';
+import { ControlBase } from './control-base';
 
 export class ControlTextbox extends ControlBase<boolean> {
     controlType = 'textbox';

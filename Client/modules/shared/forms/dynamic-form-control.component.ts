@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlBase }     from './controls';
+import { ControlBase }     from './control-base';
 import { ErrorMessageComponent }     from './error-message.component';
 
 @Component({
