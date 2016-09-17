@@ -1,5 +1,5 @@
 [![Build status](https://asadsahi.visualstudio.com/_apis/public/build/definitions/a1519ab8-9104-47eb-96cc-6c37519c8b69/7/badge)](https://asadsahi.visualstudio.com/playground/_build/index?context=allDefinitions&path=%5C&definitionId=7&_a=completed)
-[![Build status](https://ci.appveyor.com/api/projects/status/ilf9yiplb03f1a02?svg=true)](https://ci.appveyor.com/project/asadsahi/aspnetcorespa)
+[![Build status](https://ci.appveyor.com/api/projects/status/xm3d3c8wens0ee1b?svg=true)](https://ci.appveyor.com/project/asadsahi/aspnetcorespa)
 [![Join the chat at https://gitter.im/aspnetcorespa/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/aspnetcorespa/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Dependency Status](https://david-dm.org/asadsahi/AspNetCoreSpa.svg)](https://david-dm.org/asadsahi/AspNetCoreSpa)
 [![devDependencies Status](https://david-dm.org/asadsahi/AspNetCoreSpa/dev-status.svg)](https://david-dm.org/asadsahi/AspNetCoreSpa?type=dev)
