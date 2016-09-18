@@ -1,11 +1,11 @@
 ﻿import { Injectable } from '@angular/core';
 
-import { ApiGateway } from './apiGateway.service';
+import { ApiGatewayService } from './api-gateway.service';
 
 @Injectable()
 export class DataService {
 
-    constructor(public http: ApiGateway) { }
+    constructor(public http: ApiGatewayService) { }
 
     get(url: string, params?: any) {
         return this.http.get(url, undefined);

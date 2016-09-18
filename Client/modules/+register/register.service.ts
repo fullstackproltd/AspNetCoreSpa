@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 
-import { DataService } from '../shared/services';
+import { DataService } from '../shared/services/data.service';
 import { User } from '../shared/models';
 import { RegisterModel } from './register.model';
 

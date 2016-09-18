@@ -1,19 +1,26 @@
-<div #f="ngForm" [formGroup]="form" [ngSwitch]="control.controlType" class="form-group {{control.class}}">
-    <label [attr.for]="control.key" class="col-lg-2 control-label">{{control.label}}</label>
+<!--{{f.controls[control.key]  | json}}-->
+<div #f="ngForm" [formGroup]="form" [ngSwitch]="control.type" class="form-group {{control.class}}" [class.has-danger]="invalid"
+    [class.has-success]="valid" [class.checkbox]="control.type === 'checkbox'">
 
-    <div class="col-lg-10">
-        <input *ngSwitchCase="'textbox'" [formControlName]="control.key" [type]="control.type" [placeholder]="control.placeholder"
-            [class.error]="!control.valid" [id]="control.key" class="form-control">
-
-        <select *ngSwitchCase="'dropdown'" [id]="control.key" [formControlName]="control.key" class="form-control">
+    <label *ngSwitchCase="'dropdown'" [attr.for]="control.key" class="col-form-label">{{control.label}}</label>
+    <select *ngSwitchCase="'dropdown'" [id]="control.key" [formControlName]="control.key" [class.form-control-success]="valid"
+        [class.form-control-danger]="invalid" class="form-control">
             <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
-        </select>
+    </select>
 
-        <input #ck *ngSwitchCase="'checkbox'" (change)="control.value = ck.checked" [id]="control.key" [formControlName]="control.key"
-            [type]="control.type" [class.error]="!control.valid">
+    <label *ngSwitchCase="'checkbox'" [attr.for]="control.key">
+    <input #ck *ngSwitchCase="'checkbox'" (change)="control.value = ck.checked" [id]="control.key" [formControlName]="control.key"
+        [type]="control.type">
+        {{control.label}}
+    </label>
 
-        <appc-control-error-message [form]="f" [control]="control.key"></appc-control-error-message>
+    <!--This is not the switch case because of multiple control types-->
+    <label *ngIf="'textbox' || 'email' || 'password'" [attr.for]="control.key" class="col-form-label">{{control.label}}</label>
+    <input *ngIf="'textbox' || 'email' || 'password'" [id]="control.key" [formControlName]="control.key" [type]="control.type"
+        [placeholder]="control.placeholder" [class.form-control-success]="valid" [class.form-control-danger]="invalid" class="form-control">
 
-    </div>
+
+
+    <appc-control-error-message [form]="f" [control]="control"></appc-control-error-message>
 
 </div>

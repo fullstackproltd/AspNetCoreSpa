@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 
-import { DataService } from './';
+import { DataService } from './data.service';
 
 @Injectable()
 export class ContentService {

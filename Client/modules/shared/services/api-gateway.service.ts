@@ -16,7 +16,7 @@ import { Http, Response, RequestOptions, RequestMethod, URLSearchParams } from '
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { HttpErrorHandler } from './httpErrorHandler';
+import { HttpErrorHandlerService } from './http-error-handler.service';
 
 // Import the rxjs operators we need (in a production app you'll
 //  probably want to import only the operators you actually use)
@@ -31,7 +31,7 @@ export class ApiGatewayOptions {
 
 
 @Injectable()
-export class ApiGateway {
+export class ApiGatewayService {
 
     // Define the internal Subject we'll use to push the command count
     private pendingCommandsSubject = new Subject<number>();
@@ -40,7 +40,7 @@ export class ApiGateway {
     // Provide the *public* Observable that clients can subscribe to
     private pendingCommands$: Observable<number>;
 
-    constructor(private http: Http, private httpErrorHandler: HttpErrorHandler) {
+    constructor(private http: Http, private httpErrorHandler: HttpErrorHandlerService) {
         this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
     }
 

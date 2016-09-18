@@ -1,47 +1,20 @@
-﻿<div class="col-md-6 col-lg-offset-3">
-    <div class="panel panel-default">
-
-        <div class="panel-heading">
+﻿<div class="col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header">
             Login
         </div>
 
-        <div class="panel-body">
-
+        <div class="card-block">
             <appc-error-summary [errors]="errors"></appc-error-summary>
-
             <appc-dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></appc-dynamic-form>
         </div>
 
-        <!--<form class="form-horizontal" [ngFormModel]="loginForm" (submit)="login()" novalidate>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Email</label>
-
-                    <div class="col-lg-10">
-                        <input ngControl="email" #email type="email" id="email" name="email" [class.error]="!email.valid" class="form-control input-lg" placeholder="Email"/>
-                        <control-messages control="email"></control-messages>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Password</label>
-
-                    <div class="col-lg-10">
-                        <input ngControl="password" #password type="password" id="password" name="password" [class.error]="!password.valid" class="form-control input-lg" placeholder="Password" />
-                        <control-messages control="password"></control-messages>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary pull-right" [disabled]="!loginForm.valid">Sign In</button>
-                    </div>
-                </div>
-            </form>-->
-
     </div>
 
-    <div class="separator">
-        <span class="text">OR</span>
-    </div>
-    
+    <p class="text-xs-center font-weight-bold">
+        OR
+    </p>
+
     <appc-social-login></appc-social-login>
+
 </div>

@@ -4,7 +4,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { DataService } from './shared/services';
+import { DataService } from './shared/services/data.service';
 
 /*
  * App Component

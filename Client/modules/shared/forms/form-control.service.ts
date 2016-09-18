@@ -2,6 +2,7 @@ import { Injectable }   from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ControlBase } from './control-base';
+import { ValidationService } from './validation.service';
 
 @Injectable()
 export class FormControlService {
@@ -11,9 +12,28 @@ export class FormControlService {
         let group: any = {};
 
         controls.forEach(control => {
-            group[control.key] = control.required ?
-                new FormControl(control.value || '', Validators.required)
-                : new FormControl(control.value || '');
+            let validators = [];
+            // Required
+            if (control.required) {
+                validators.push(Validators.required);
+            }
+            // Minlength
+            if (control.minlength) {
+                validators.push(Validators.minLength(control.minlength));
+            }
+            // Maxlength
+            if (control.maxlength) {
+                validators.push(Validators.minLength(control.maxlength));
+            }
+            // Email
+            if (control.type === 'email') {
+                validators.push(ValidationService.emailValidator);
+            }
+            // Password
+            if (control.type === 'password') {
+                validators.push(ValidationService.passwordValidator);
+            }
+            group[control.key] = new FormControl(control.value || '', validators);
         });
 
         return new FormGroup(group);

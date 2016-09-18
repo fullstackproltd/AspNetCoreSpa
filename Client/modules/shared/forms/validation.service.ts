@@ -1,8 +1,10 @@
 ﻿export class ValidationService {
 
-    static getValidatorErrorMessage(code: string) {
+    static getValidatorErrorMessage(code: string, fieldLength: number) {
         let config: any = {
             'required': 'This is a required field',
+            'minlength': 'Minimum length is ' + fieldLength,
+            'maxlength': 'Maximum length is ' + fieldLength,
             'invalidCreditCard': 'Invalid credit card number',
             'invalidEmailAddress': 'Invalid email address',
             'invalidPassword': 'Password must be at least 6 characters long, and contain a number and special character.'

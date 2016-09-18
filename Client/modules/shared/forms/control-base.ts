@@ -4,8 +4,10 @@ export class ControlBase<T>{
     label: string;
     placeholder: string;
     required: boolean;
+    minlength: number;
+    maxlength: number;
     order: number;
-    controlType: string;
+    type: string;
     class: string;
 
     constructor(options: {
@@ -14,8 +16,10 @@ export class ControlBase<T>{
         label?: string,
         placeholder?: string,
         required?: boolean,
+        minlength?: number,
+        maxlength?: number,
         order?: number,
-        controlType?: string,
+        type?: string,
         class?: string;
     } = {}) {
         this.value = options.value;
@@ -23,8 +27,10 @@ export class ControlBase<T>{
         this.label = options.label || '';
         this.placeholder = options.placeholder || '';
         this.required = !!options.required;
+        this.minlength = options.minlength;
+        this.maxlength = options.maxlength;
         this.order = options.order === undefined ? 1 : options.order;
-        this.controlType = options.controlType || '';
+        this.type = options.type || '';
         this.class = options.class || '';
     }
 }

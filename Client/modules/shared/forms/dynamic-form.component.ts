@@ -16,8 +16,7 @@ export class DynamicFormComponent implements OnInit {
     // Note: don't keep name of output events as same as native events such as submit etc.
     @Output() formsubmit: EventEmitter<any> = new EventEmitter<any>();
     form: FormGroup;
-    payLoad = '';
-
+    
     constructor(private _controlService: FormControlService) { }
 
     ngOnInit() {
