@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { TranslateModule, TranslateLoader } from 'ng2-translate/ng2-translate';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule, TranslateLoader } from 'ng2-translate/ng2-translate';
 
 import { PageHeadingComponent } from './directives/page-heading.directive';
 import { DynamicFormComponent } from './forms/dynamic-form.component';
@@ -20,9 +20,11 @@ import { DataService } from './services/data.service';
 import { ApiGatewayService } from './services/api-gateway.service';
 import { AuthService } from './services/auth.service';
 import { HttpErrorHandlerService } from './services/http-error-handler.service';
+// import { WikipediaService } from './services/wikipedia.service';
+import { ApiTranslationLoader } from './services/api-translation-loader.service';
 import { ContentService } from './services/content.service';
 import { UtilityService } from './services/utility.service';
-import { UppercasePipe } from './pipes/uppercase.pipe';
+// import { UppercasePipe } from './pipes';
 
 @NgModule({
   imports: [
@@ -30,11 +32,11 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    // NgbModule,
+    NgbModule,
     // No need to export as these modules don't expose any components/directive etc'
     HttpModule,
     JsonpModule,
-    // TranslateModule.forRoot({ provide: TranslateLoader, useClass: ApiTranslationLoader })
+    TranslateModule.forRoot({ provide: TranslateLoader, useClass: ApiTranslationLoader })
   ],
   declarations: [
     DynamicFormComponent,
@@ -44,7 +46,7 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
     FooterComponent,
     HeaderComponent,
     PageHeadingComponent,
-    UppercasePipe
+    // UppercasePipe
   ],
   exports: [
     // Modules
@@ -52,8 +54,8 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    // NgbModule,
-    // TranslateModule,
+    NgbModule,
+    TranslateModule,
     // Providers, Components, directive, pipes
     DynamicFormComponent,
     DynamicFormControlComponent,
@@ -62,7 +64,7 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
     FooterComponent,
     HeaderComponent,
     PageHeadingComponent,
-    UppercasePipe
+    // UppercasePipe
   ]
 
 })
@@ -78,7 +80,8 @@ export class SharedModule {
         DataService,
         ContentService,
         FormControlService,
-        UtilityService
+        UtilityService,
+        // WikipediaService
       ]
     };
   }

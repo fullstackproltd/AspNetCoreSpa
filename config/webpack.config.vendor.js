@@ -17,8 +17,8 @@ module.exports = {
     },
     entry: {
         vendor: [
-            'bootstrap/dist/css/bootstrap.css',
             'font-awesome/css/font-awesome.css',
+            'bootstrap/dist/css/bootstrap.css',
             'style-loader',
             '@angular/common',
             '@angular/compiler',

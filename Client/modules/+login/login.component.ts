@@ -61,8 +61,8 @@ export class LoginComponent implements OnInit {
             new ControlCheckbox({
                 key: 'rememberMe',
                 label: 'Remember me?',
+                type: 'checkbox',
                 value: false,
-                class: 'rememberme',
                 order: 3
             })
         ];
