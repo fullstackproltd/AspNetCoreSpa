@@ -10,7 +10,8 @@
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
 * [Angular 2.0.0 Final](https://angular.io/)
-* [Webpack](https://webpack.github.io/)
+* [Webpack 2](https://webpack.github.io/)
+* [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
 * Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
