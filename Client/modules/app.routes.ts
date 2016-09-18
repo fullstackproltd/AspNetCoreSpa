@@ -32,9 +32,9 @@ export const routes: Routes = [
     })
   },
   {
-    path: 'about', loadChildren: () => new Promise(resolve => {
+    path: 'examples', loadChildren: () => new Promise(resolve => {
       (require as any).ensure([], (require: any) => {
-        resolve(require('./+about/about.module').AboutModule);
+        resolve(require('./+examples/examples.module').ExamplesModule);
       });
     })
   }
