@@ -6,9 +6,15 @@ import { HttpModule, JsonpModule } from '@angular/http';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { TranslateModule, TranslateLoader } from 'ng2-translate/ng2-translate';
 
-import { PageHeadingComponent } from './directives';
-import { DynamicFormComponent, DynamicFormControlComponent, ErrorMessageComponent, ErrorSummaryComponent, FormControlService } from './forms';
-import { HeaderComponent, FooterComponent } from './layout';
+import { PageHeadingComponent } from './directives/page-heading.directive';
+import { DynamicFormComponent } from './forms/dynamic-form.component';
+import { DynamicFormControlComponent } from './forms/dynamic-form-control.component';
+import { ErrorMessageComponent } from './forms/error-message.component';
+import { ErrorSummaryComponent } from './forms/error-summary.component';
+import { FormControlService } from './forms/form-control.service';
+
+import { HeaderComponent } from './layout/header.component';
+import { FooterComponent } from './layout/footer.component';
 // Services
 import { DataService } from './services/data.service';
 import { ApiGatewayService } from './services/api-gateway.service';
@@ -16,7 +22,7 @@ import { AuthService } from './services/auth.service';
 import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { ContentService } from './services/content.service';
 import { UtilityService } from './services/utility.service';
-import { UppercasePipe } from './pipes';
+import { UppercasePipe } from './pipes/uppercase.pipe';
 
 @NgModule({
   imports: [

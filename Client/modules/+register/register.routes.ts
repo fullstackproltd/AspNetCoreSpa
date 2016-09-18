@@ -1,7 +1,7 @@
 import { Routes, RouterModule }  from '@angular/router';
 
-import { RegisterComponent }  from './+register';
-import { RegisterConfirmationComponent } from './+confirmation';
+import { RegisterComponent } from './+register/register.component';
+import { RegisterConfirmationComponent } from './+confirmation/register-confirmation.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'registerhome', pathMatch: 'full'},

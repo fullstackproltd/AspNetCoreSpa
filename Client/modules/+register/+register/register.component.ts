@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { RegisterModel } from '../register.model';
 import { RegisterService } from '../register.service';
-import { ControlBase, ControlTextbox } from '../../shared/forms';
+import { ControlBase} from '../../shared/forms/control-base';
+import { ControlTextbox } from '../../shared/forms/control-textbox';
 
 @Component({
     selector: 'appc-register',

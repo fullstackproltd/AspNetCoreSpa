@@ -2,7 +2,7 @@
 import { Router } from '@angular/router';
 
 import { DataService } from './data.service';
-import { User } from '../models';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {

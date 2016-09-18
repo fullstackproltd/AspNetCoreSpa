@@ -6,8 +6,8 @@ import { SharedModule }            from '../shared/shared.module';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { routing }            from './profile.routes';
-import { ChangeNameComponent } from './changename';
-import { ChangePasswordComponent } from './changepassword';
+import { ChangeNameComponent } from './changename/change-name.component';
+import { ChangePasswordComponent } from './changepassword/change-password.component';
 
 @NgModule({
     imports: [routing, SharedModule],

@@ -1,25 +1,21 @@
-import {
-  inject,
-  async,
-  TestBed
-} from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
-import { Component } from '@angular/core';
-
-// Load the implementations that should be tested
 import { AboutComponent } from './about.component';
 
 describe('AboutComponent', () => {
-  // provide our implementations or mocks to the dependency injector
   beforeEach(() => {
-    TestBed.configureTestingModule([AboutComponent]);
+    TestBed.configureTestingModule({
+      declarations: [
+        AboutComponent
+      ]
+    });
   });
 
-  it('should log ngOnInit', inject([AboutComponent], (aboutComponent) => {
+  it('should log ngOnInit', inject([AboutComponent], (about: AboutComponent) => {
     spyOn(console, 'log');
     expect(console.log).not.toHaveBeenCalled();
 
-    aboutComponent.ngOnInit();
+    about.ngOnInit();
     expect(console.log).toHaveBeenCalled();
   }));
 

@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { ProfileService } from '../profile.service';
-import { ChangeNameModel } from './';
-import { PageHeadingComponent } from '../../shared/directives';
+import { ChangeNameModel } from './change-name.model';
 
 @Component({
     selector: 'appc-change-name',
