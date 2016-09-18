@@ -12,6 +12,9 @@
 * [Angular 2.0.0 Final](https://angular.io/)
 * [Webpack 2](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
+* [ng-bootstrap](https://ng-bootstrap.github.io/)
+* [ng2-translate](https://github.com/ocombe/ng2-translate)
+* [Typescript 2](http://www.typescriptlang.org/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
 * Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
@@ -33,7 +36,7 @@
 ## Pre-requisites
 
 1. [.Net core sdk](https://www.microsoft.com/net/core#windows)
-2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2015 update 3](https://www.visualstudio.com/) with [.Net Core tooling](https://www.microsoft.com/net/core#windows)
+2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2015 update 4](https://www.visualstudio.com/) with [.Net Core tooling](https://www.microsoft.com/net/core#windows)
 3. [Nodejs](https://nodejs.org/en/)
 
 **Make sure you have Node version >= 5.0 and NPM >= 3**
@@ -46,16 +49,15 @@
     cd AspNetCoreSpa
 3. dotnet restore
 4. Install global dependencies
-    npm install webpack protractor typings rimraf -g
+    npm install protractor rimraf -g
 5. npm install
-6. typings install
-7. Create webpack vendor manifest file for fast webpack rebuils
-    webpack --config config/webpack.config.vendor.js
-8. Set appropriate environment 
+6. Create webpack vendor manifest file for fast webpack rebuils
+    npm run build:vendor
+7. Set appropriate environment 
     set ASPNETCORE_ENVIRONMENT=Development
-9. Run the app 
+8. Run the app 
     dotnet run (for single run) OR dotnet watch (in watch mode)
-10. Browse using http://localhost:5000 or http://localhost:5001 
+9. Browse using http://localhost:5000 or http://localhost:5001 
 
 ```
 

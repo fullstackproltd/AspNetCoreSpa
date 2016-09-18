@@ -76,7 +76,7 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.Content.Any())
             {
-                _context.Content.Add(new Content { Id = 1, Key = "App_SiteTitle" });
+                _context.Content.Add(new Content { Id = 1, Key = "TITLE" });
                 _context.SaveChanges();
             }
 
