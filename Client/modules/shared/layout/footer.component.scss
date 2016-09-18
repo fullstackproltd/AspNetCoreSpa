@@ -1,9 +1,8 @@
 @import '../../_variables.scss';
 
-footer {
-    position: absolute;
-    bottom: 0;
-    p {
-        font-weight: bold;
-    }
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
 }
