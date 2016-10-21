@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "typescript.tsdk": "node_modules/typescript/lib/",
+    // "typescript.tsdk": "node_modules/typescript/lib/",
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -20,13 +20,5 @@
         "**/node_modules": true,
         "**/bower_components": true,
         "**/coverage": true
-    },
-    // A relative path to the batch file works for the external terminal.
-    // (project root here if using workspace settings, otherwise absolute path in global settings)
-    // fix-casing-external.bat contents: `cd .. && cd C%cd:~1%` 
-    "terminal.external.windowsExec": "C:\\Users\\asad\\ng2fb-bootstrap\\.vscode\\terminal.bat",
-    // The integrated terminal setting requires an absolute path.
-    // You also need to invoke `%COMSPEC%` at the end so it doesn't close automatically.
-    // fix-casing-integrated.bat contents: `cd .. && cd C%cd:~1% && %COMSPEC%`
-    "terminal.integrated.shell.windows": "C:\\Users\\asad\\ng2fb-bootstrap\\.vscode\\terminal.bat"
+    }
 }

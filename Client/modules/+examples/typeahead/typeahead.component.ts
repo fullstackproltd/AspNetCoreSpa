@@ -36,7 +36,7 @@ export class TypeaheadComponent implements OnInit {
     text$
       .debounceTime(300)
       .distinctUntilChanged()
-      .do(term => { this._searching = term.length > 0; })
+      .do((term: any) => { this._searching = term.length > 0; })
       .switchMap(term => term === '' ? Observable.of([]) : this._service.search(term))
       .do(() => { this._searching = false; });
 }

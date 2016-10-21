@@ -9,7 +9,8 @@ module.exports = {
         // }),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
-            comments: false
+            comments: false,
+            sourceMap: true
         })
     ]
 };

@@ -1,4 +1,5 @@
 import { UppercasePipe } from './uppercase.pipe';
+
 describe('Pipe appfUppercase', () => {
   let pipe: UppercasePipe;
 

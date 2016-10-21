@@ -5,7 +5,7 @@ export class ControlDropdown extends ControlBase<string> {
 
     constructor(options: any = {}) {
         super(options);
-        this.type = 'dropdown'
+        this.type = 'dropdown';
         this.options = options.options || [];
     }
 }

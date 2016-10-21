@@ -1,22 +1,22 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [
-      "es6",
-      "dom"
-    ],
-    "mapRoot": "./",
-    "module": "es6",
-    "moduleResolution": "node",
-    "outDir": "../dist/out-tsc",
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "target": "es5",
-    "typeRoots": [
-      "../node_modules/@types"
+    "strictNullChecks": false,
+    "baseUrl": "./src",
+    "paths": {},
+    "lib": [
+      "dom",
+      "es6"
     ],
     "types": [
+      "hammerjs",
       "jasmine",
       "node",
       "protractor",
@@ -24,10 +24,19 @@
       "source-map",
       "uglify-js",
       "webpack"
-    ],
-    "exclude": [
-      "node_modules",
-      "wwwroot"
     ]
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true,
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
   }
 }

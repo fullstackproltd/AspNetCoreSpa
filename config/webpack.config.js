@@ -9,10 +9,10 @@ var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
 
 module.exports = merge({
     resolve: {
-        extensions: ['', '.js', '.ts']
+        extensions: ['.js', '.ts']
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader', 'angular2-template-loader'] },
             { test: /\.html$/, loader: "html" },
             { test: /\.css/, loader: extractCSS.extract(['css']) },
@@ -36,7 +36,7 @@ module.exports = merge({
             }]
     },
     entry: {
-        main: ['./Client/boot-client.ts']
+        'main': './Client/boot-client.ts'
     },
     output: {
         path: path.join(__dirname, '../wwwroot', 'dist'),
@@ -50,6 +50,12 @@ module.exports = merge({
             context: __dirname,
             manifest: require('../wwwroot/dist/vendor-manifest.json')
         }),
+        // To eliminate warning
+        // https://github.com/AngularClass/angular2-webpack-starter/issues/993
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+            __dirname
+        ),
         new webpack.DefinePlugin({
             'process.env': {
                 'ENV': JSON.stringify(process.env.ASPNETCORE_ENVIRONMENT)

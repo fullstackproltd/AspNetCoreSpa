@@ -5,7 +5,7 @@ import { TypeaheadComponent } from './typeahead.component';
 
 describe('Component: Typeahead', () => {
   it('should create an instance', () => {
-    let component = new TypeaheadComponent();
+    let component = new TypeaheadComponent(undefined);
     expect(component).toBeTruthy();
   });
 });

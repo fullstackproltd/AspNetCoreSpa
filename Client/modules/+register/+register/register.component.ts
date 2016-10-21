@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { RegisterModel } from '../register.model';
 import { RegisterService } from '../register.service';
-import { ControlBase} from '../../shared/forms/control-base';
+import { ControlBase } from '../../shared/forms/control-base';
 import { ControlTextbox } from '../../shared/forms/control-textbox';
 
 @Component({

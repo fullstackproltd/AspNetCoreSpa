@@ -5,7 +5,7 @@ import { Response } from '@angular/http';
 import { LoginModel } from './login.model';
 import { LoginService } from './login.service';
 import { AuthService } from '../shared/services/auth.service';
-import { ControlBase} from '../shared/forms/control-base';
+import { ControlBase } from '../shared/forms/control-base';
 import { ControlTextbox } from '../shared/forms/control-textbox';
 import { ControlCheckbox } from '../shared/forms/control-checkbox';
 
