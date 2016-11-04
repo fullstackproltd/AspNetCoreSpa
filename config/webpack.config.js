@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var merge = require('extendify')({ isDeep: true, arrays: 'concat' });
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('styles.css');
+const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var devConfig = require('./webpack.config.dev');
 var prodConfig = require('./webpack.config.prod');
 var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
@@ -13,7 +14,7 @@ module.exports = merge({
     },
     module: {
         rules: [
-            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader', 'angular2-template-loader'] },
+            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader?forkChecker=true ', 'angular2-template-loader'] },
             { test: /\.html$/, loader: "html" },
             { test: /\.css/, loader: extractCSS.extract(['css']) },
             { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader?sourceMap'] },
@@ -56,6 +57,11 @@ module.exports = merge({
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname
         ),
+        /*
+            * Plugin: ForkCheckerPlugin
+            * Description: Do type checking in a separate process, so webpack don't need to wait.
+        */
+        new ForkCheckerPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 'ENV': JSON.stringify(process.env.ASPNETCORE_ENVIRONMENT)

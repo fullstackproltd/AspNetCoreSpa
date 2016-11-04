@@ -1,6 +1,5 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    // "typescript.tsdk": "node_modules/typescript/lib/",
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -21,4 +20,6 @@
         "**/bower_components": true,
         "**/coverage": true
     }
+,
+"typescript.tsdk": "./node_modules/typescript/lib"
 }
