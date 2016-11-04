@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { TranslateLoader } from 'ng2-translate/ng2-translate';
-import { MissingTranslationHandler } from 'ng2-translate/ng2-translate';
+import { MissingTranslationHandler, MissingTranslationHandlerParams } from 'ng2-translate/ng2-translate';
 
 import { ContentService } from './content.service';
 
@@ -17,7 +17,7 @@ export class ApiTranslationLoader implements TranslateLoader {
 
 @Injectable()
 export class CustomMissingTranslationHandler implements MissingTranslationHandler {
-    handle(key: string) {
-        return key;
+    handle(params: MissingTranslationHandlerParams) {
+        return params.key;
     }
 }
