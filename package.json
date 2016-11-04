@@ -75,7 +75,7 @@
     "ng2-translate": "4.0.0",
     "normalize.css": "5.0.0",
     "preboot": "4.5.2",
-    "rxjs": "5.0.0-rc.1",
+    "rxjs": "5.0.0-beta.12",
     "zone.js": "0.6.26"
   },
   "devDependencies": {
@@ -130,7 +130,7 @@
     "tslint": "3.15.1",
     "tslint-loader": "2.1.5",
     "typedoc": "0.5.0",
-    "typescript": "2.0.3",
+    "typescript": "2.0.6",
     "url-loader": "0.5.7",
     "webpack": "2.1.0-beta.25",
     "webpack-externals-plugin": "1.0.0",
