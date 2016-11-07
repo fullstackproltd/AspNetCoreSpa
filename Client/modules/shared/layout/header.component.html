@@ -15,46 +15,42 @@
                     <li class="nav-item">
                         <a class="nav-item nav-link" routerLinkActive="active" routerLink="home">Home</a>
                     </li>
-                    <!--<li class="nav-item">
-                        <a class="nav-item nav-link" routerLinkActive="active" routerLink="examples">Examples</a>
-                    </li>
--->
                     <li class="nav-item">
                         <a class="nav-item nav-link" routerLinkActive="active" routerLink="examples">Examples</a>
                     </li>
+                    <li>
+                        <ul class="nav float-xs-left float-md-right">
 
-                    <ul class="nav float-xs-left float-md-right">
+                            <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.user()">
+                                <a class="nav-item nav-link" routerLinkActive="active" routerLink="profile">
+                                    <i class="fa fa-user"></i> {{authService.user().displayName}}
+                                </a>
+                            </li>
 
-                        <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.user()">
-                            <a class="nav-item nav-link" routerLinkActive="active" routerLink="profile">
-                                <i class="fa fa-user"></i> {{authService.user().displayName}}
-                            </a>
-                        </li>
+                            <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                                <a class="nav-item nav-link" routerLinkActive="active" routerLink="register">
+                                    <i class="fa fa-user"></i> Register
+                                </a>
+                            </li>
 
-                        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
-                            <a class="nav-item nav-link" routerLinkActive="active" routerLink="register">
-                                <i class="fa fa-user"></i> Register
-                            </a>
-                        </li>
+                            <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+                                <a class="nav-item nav-link" routerLinkActive="active" routerLink="login">
+                                    <i class="fa fa-sign-in"></i>Login
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.user()?.roles?.indexOf('Admin') > -1">
+                                <a class="nav-item nav-link" routerLinkActive="active" routerLink="admin">
+                                    <i class="fa fa-gear"></i> Admin
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="authService.isLoggedIn()">
+                                <a class="nav-item nav-link" (click)="authService.logout()" routerLinkActive="active" href="javascript:void(null);">
+                                    <i class="fa fa-sign-out"></i> Logout
+                                </a>
+                            </li>
 
-                        <li class="nav-item" *ngIf="!authService.isLoggedIn()">
-                            <a class="nav-item nav-link" routerLinkActive="active" routerLink="login">
-                                <i class="fa fa-sign-in"></i>Login
-                            </a>
-                        </li>
-                        <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.user()?.roles?.indexOf('Admin') > -1">
-                            <a class="nav-item nav-link" routerLinkActive="active" routerLink="admin">
-                                <i class="fa fa-gear"></i> Admin
-                            </a>
-                        </li>
-                        <li class="nav-item" *ngIf="authService.isLoggedIn()">
-                            <a class="nav-item nav-link" (click)="authService.logout()" routerLinkActive="active" href="javascript:void(null);">
-                                <i class="fa fa-sign-out"></i> Logout
-                            </a>
-                        </li>
-
-                    </ul>
-
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
