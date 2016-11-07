@@ -1,17 +1,16 @@
-
 <header class="navbar navbar-light navbar-static-top">
     <div class="container">
         <nav>
             <div class="clearfix">
-                <button class="navbar-toggler pull-xs-right hidden-sm-up collapsed" type="button" data-toggle="collapse" data-target="#bd-main-nav"
-                    aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler float-xs-right hidden-sm-up collapsed" type="button" data-toggle="collapse" data-target="#bd-main-nav"
+                    aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNav()">
                     ☰
                 </button>
                 <a class="navbar-brand hidden-sm-up" routerLink="home">
                     Ng2fbBootstrap
                 </a>
             </div>
-            <div class="navbar-toggleable-xs collapse" id="bd-main-nav" aria-expanded="false" style="height: 0px;">
+            <div class="navbar-toggleable-xs collapse" [class.in]="!isCollapsed" id="bd-main-nav" aria-expanded="false" style="height: 0px;">
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
                         <a class="nav-item nav-link" routerLinkActive="active" routerLink="home">Home</a>
@@ -24,7 +23,7 @@
                         <a class="nav-item nav-link" routerLinkActive="active" routerLink="examples">Examples</a>
                     </li>
 
-                    <ul class="nav float-xs-right">
+                    <ul class="nav float-xs-left float-md-right">
 
                         <li class="nav-item" *ngIf="authService.isLoggedIn() && authService.user()">
                             <a class="nav-item nav-link" routerLinkActive="active" routerLink="profile">
@@ -61,4 +60,3 @@
         </nav>
     </div>
 </header>
-
