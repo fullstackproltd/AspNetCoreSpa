@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
                 label: 'Username',
                 placeholder: 'Username',
                 value: '',
-                type: 'text',
+                type: 'textbox',
                 required: true,
                 order: 1
             }),
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
                 label: 'Firstname',
                 placeholder: 'Firstname',
                 value: '',
-                type: 'text',
+                type: 'textbox',
                 required: true,
                 order: 2
             }),
@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
                 label: 'lastname',
                 placeholder: 'Lastname',
                 value: '',
-                type: 'text',
+                type: 'textbox',
                 required: true,
                 order: 3
             }),
