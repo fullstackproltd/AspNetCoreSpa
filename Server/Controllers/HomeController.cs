@@ -3,22 +3,28 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IHostingEnvironment _env;
 
-        public HomeController(UserManager<ApplicationUser> userManager)
+        public HomeController(UserManager<ApplicationUser> userManager, IHostingEnvironment env)
         {
             _userManager = userManager;
+            _env = env;
         }
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.HashedMain = GetHashedMainDotJs();
+
             if (Request.Query.ContainsKey("emailConfirmCode") &&
                 Request.Query.ContainsKey("userId"))
             {
@@ -45,6 +51,15 @@ namespace AspNetCoreSpa.Server.Controllers
             }
 
             return View();
+        }
+
+        public string GetHashedMainDotJs()
+        {
+            var basePath = _env.WebRootPath + "//dist//";
+            var info = new System.IO.DirectoryInfo(basePath);
+            var file = info.GetFiles().Where(f => f.Name.StartsWith("main.") && !f.Name.EndsWith("bundle.map")).FirstOrDefault();
+
+            return file.Name;
         }
 
     }
