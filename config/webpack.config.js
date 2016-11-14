@@ -17,25 +17,25 @@ module.exports = merge({
     module: {
         rules: [
             { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader?forkChecker=true ', 'angular2-template-loader'] },
-            { test: /\.html$/, loader: "html" },
+            { test: /\.html$/, loader: "html-loader" },
             { test: /\.css/, loader: extractCSS.extract(['css']) },
             { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader?sourceMap'] },
             { test: /\.json$/, loader: 'json-loader' },
             {
                 test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=application/font-woff"
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
             }, {
                 test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=application/font-woff"
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
             }, {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=application/octet-stream"
+                loader: "url-loader?limit=10000&mimetype=application/octet-stream"
             }, {
                 test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "file"
+                loader: "file-loader"
             }, {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url?limit=10000&mimetype=image/svg+xml"
+                loader: "url-loader?limit=10000&mimetype=image/svg+xml"
             }]
     },
     entry: {

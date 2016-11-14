@@ -6,12 +6,12 @@ var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
 
 module.exports = {
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js', '.scss']
     },
     module: {
         rules: [
             { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
-            { test: /\.scss$/i, loader: extractCSS.extract(['css?minimize', 'sass']) },
+            { test: /\.scss$/i, loaders: extractCSS.extract(['css-loader?minimize', 'sass-loader']) },
             { test: /\.json$/, loader: 'json-loader' }
         ]
     },
