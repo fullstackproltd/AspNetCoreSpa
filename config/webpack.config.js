@@ -7,9 +7,9 @@ var extractCSS = new ExtractTextPlugin('styles.css');
 var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var devConfig = require('./webpack.config.dev');
 var prodConfig = require('./webpack.config.prod');
-var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
+var isDevBuild = process.argv.indexOf('--env.prod') < 0;
 
-console.log("==========Dev Mode = " + isDevelopment + " ============")
+console.log("==========Is Dev Build = " + isDevBuild + " ============")
 
 module.exports = merge({
     resolve: {
@@ -25,7 +25,7 @@ module.exports = merge({
     },
     module: {
         rules: [
-            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader?forkChecker=true ', 'angular2-template-loader', 'angular2-router-loader'] },
+            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['ts-loader', 'angular2-template-loader', 'angular2-router-loader'] },
             { test: /\.html$/, loader: "html-loader" },
             { test: /\.css/, loader: extractCSS.extract(['css']) },
             { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader?sourceMap'] },
@@ -58,8 +58,8 @@ module.exports = merge({
         new ForkCheckerPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
-                'ENV': JSON.stringify(process.env.ASPNETCORE_ENVIRONMENT)
+                'ENV': JSON.stringify(isDevBuild ? 'Development' : 'Production')
             }
         })
     ]
-}, isDevelopment ? devConfig : prodConfig);
+}, isDevBuild ? devConfig : prodConfig);

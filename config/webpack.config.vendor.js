@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('vendor.css');
-var isDevelopment = process.env.ASPNETCORE_ENVIRONMENT === 'Development';
+var isDevBuild = process.argv.indexOf('--env.prod') < 0;
 
 module.exports = {
     resolve: {
@@ -73,7 +73,7 @@ module.exports = {
             path: path.join(__dirname, '../wwwroot', 'dist', '[name]-manifest.json'),
             name: '[name]_[hash]'
         })
-    ].concat(isDevelopment ? [] : [
+    ].concat(isDevBuild ? [] : [
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             comments: false

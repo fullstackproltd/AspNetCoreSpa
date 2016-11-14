@@ -30,14 +30,11 @@
     "node_modules",
     "wwwroot"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true,
-    "useCache": true
-  },
+  // "awesomeTypescriptLoaderOptions": {
+  //   "forkChecker": true,
+  //   "useWebpackText": true,
+  //   "useCache": true
+  // },
   "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  "buildOnSave": false
 }
