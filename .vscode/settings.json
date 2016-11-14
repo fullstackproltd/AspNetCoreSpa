@@ -13,13 +13,13 @@
         "project.lock.json": true,
         "AspNetCoreSpa.xproj": true,
         "AspNetCoreSpa.sln": true,
-        "Properties": true
+        "Properties": true,
+        ".awcache": true
     },
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
         "**/coverage": true
-    }
-,
-"typescript.tsdk": "./node_modules/typescript/lib"
+    },
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }

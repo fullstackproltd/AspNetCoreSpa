@@ -46,7 +46,7 @@ module.exports = merge({
     plugins: [
         extractCSS,
         new webpack.DllReferencePlugin({
-            context: __dirname,
+            context: '.',
             manifest: require('../wwwroot/dist/vendor-manifest.json')
         }),
         // To eliminate warning

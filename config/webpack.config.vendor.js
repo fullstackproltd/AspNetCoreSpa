@@ -30,6 +30,9 @@ module.exports = {
         //     'core-js/es6/regexp',
         //     'core-js/es6/map',
         //     'core-js/es6/set',
+        //     'core-js/es6/weak-map',
+        //     'core-js/es6/weak-set',
+        //     'core-js/es6/typed',
         //     'core-js/es6/reflect',
         //     'core-js/es7/reflect',
         //     'zone.js/dist/zone'
@@ -44,7 +47,10 @@ module.exports = {
             '@angular/forms',
             '@angular/platform-browser',
             '@angular/platform-browser-dynamic',
-            '@angular/router'
+            '@angular/router',
+            'rxjs',
+            'zone.js',
+            'reflect-metadata'
         ]
     },
     output: {
