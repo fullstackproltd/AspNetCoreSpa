@@ -49,6 +49,9 @@ module.exports = {
             '@angular/platform-browser-dynamic',
             '@angular/router',
             'rxjs',
+            'bootstrap',
+            'ng2-translate',
+            '@ng-bootstrap/ng-bootstrap',
             'zone.js',
             'reflect-metadata'
         ]

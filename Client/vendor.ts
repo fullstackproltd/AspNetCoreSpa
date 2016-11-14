@@ -12,6 +12,11 @@ import '@angular/forms';
 import '@angular/http';
 import '@angular/router';
 
+// import 3rd party libs
+import 'bootstrap';
+import 'ng2-translate';
+import '@ng-bootstrap/ng-bootstrap';
+
 // RxJS
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
