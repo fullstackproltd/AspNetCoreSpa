@@ -1,41 +1,27 @@
 <div class="col-lg-4">
-    <div class="ibox float-e-margins">
-        <div class="ibox-title">
-            <appc-page-heading text="Change username"></appc-page-heading>
+    <appc-page-heading text="Change User's name"></appc-page-heading>
+
+    <div *ngFor="let error of errors">
+        <label class="error">{{error}}</label>
+    </div>
+    <form class="form-horizontal" #hf="ngForm" novalidate>
+        <div class="form-group">
+            <label for="firstName">First name</label>
+            <input type="text" [class.error]="!firstName.valid" class="form-control input-lg" placeholder="First name" [(ngModel)]="userNameModel.firstName"
+                name="firstName" ngControl="firstName" required #firstName="ngModel" />
+            <label *ngIf="!firstName.valid && firstName.touched" class="error">
+                        FirstName is required
+            </label>
         </div>
-
-        <div class="ibox-content">
-            <div *ngFor="let error of errors">
-                <label class="error">{{error}}</label>
-            </div>
-            <form class="form-horizontal" #hf="ngForm" novalidate>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">First name</label>
-
-                    <div class="col-lg-10">
-                        <input type="text" [class.error]="!firstName.valid" class="form-control input-lg" placeholder="First name"
-                               [(ngModel)]="userNameModel.firstName" name="firstName" ngControl="firstName" required #firstName="ngModel" />
-                        <label *ngIf="!firstName.valid && firstName.touched" class="error">
-                            FirstName is required
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-lg-2 control-label">Last name</label>
-                    <div class="col-lg-10">
-                        <input type="text" [class.error]="!lastName.valid" class="form-control input-lg" placeholder="LastName"
-                               [(ngModel)]="userNameModel.lastName" name="lastName" ngControl="lastName" required #lastName="ngModel" />
-                        <label *ngIf="!lastName.valid && lastName.touched" class="error">
+        <div class="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" [class.error]="!lastName.valid" class="form-control input-lg" placeholder="LastName" [(ngModel)]="userNameModel.lastName"
+                name="lastName" ngControl="lastName" required #lastName="ngModel" />
+            <label *ngIf="!lastName.valid && lastName.touched" class="error">
                             LastName is required
                         </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary pull-right" (click)="save()" [disabled]="!hf.form.valid">Update</button>
-                    </div>
-                </div>
-            </form>
         </div>
-    </div>
+
+        <button class="btn btn-primary pull-right" (click)="save()" [disabled]="!hf.form.valid">Update</button>
+    </form>
 </div>

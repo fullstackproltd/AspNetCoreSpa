@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { ProfileService } from '../profile.service';
 import { ChangePasswordModel } from './change-password.model';
@@ -9,20 +9,24 @@ import { ValidationService } from '../../shared/forms/validation.service';
     selector: 'appc-change-password',
     templateUrl: './change-password.component.html'
 })
-export class ChangePasswordComponent {
-    changePasswordForm: any;
+export class ChangePasswordComponent implements OnInit {
+    submitted: boolean = false;
+    changePasswordForm: FormGroup;
     changePasswordModel: ChangePasswordModel = new ChangePasswordModel('', '', '');
     @Output() notification = new EventEmitter<string>();
 
-    constructor(public profileService: ProfileService, private fb: FormBuilder) {
-             this.changePasswordForm = this.fb.group({
-            'oldPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
-            'newPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
-            'confirmPassword': ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
+    constructor(public profileService: ProfileService, private fb: FormBuilder) { }
+
+    ngOnInit() {
+        this.changePasswordForm = this.fb.group({
+            oldPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
+            newPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
+            confirmPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
         });
     }
 
-    changePassword(form: any): void {
+    changePassword(): void {
+        this.submitted = true;
         if (this.changePasswordForm.valid && this.changePasswordForm.dirty) {
             this.changePasswordModel.oldPassword = this.changePasswordForm.value.oldPassword;
             this.changePasswordModel.newPassword = this.changePasswordForm.value.newPassword;
