@@ -1,42 +1,22 @@
 import { Routes, RouterModule } from '@angular/router';
 
-export const routes: Routes = [
+const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   // Lazy async modules
   {
-    path: 'login', loadChildren: () => new Promise(resolve => {
-      (require as any).ensure([], (require: any) => {
-        resolve(require('./+login/login.module').LoginModule);
-      });
-    })
+    path: 'login', loadChildren: './+login/login.module#LoginModule'
   },
   {
-    path: 'register', loadChildren: () => new Promise(resolve => {
-      (require as any).ensure([], (require: any) => {
-        resolve(require('./+register/register.module').RegisterModule);
-      });
-    })
+    path: 'register', loadChildren: './+register/register.module#RegisterModule'
   },
   {
-    path: 'profile', loadChildren: () => new Promise(resolve => {
-      (require as any).ensure([], (require: any) => {
-        resolve(require('./+profile/profile.module').ProfileModule);
-      });
-    })
+    path: 'profile', loadChildren: './+profile/profile.module#ProfileModule'
   },
   {
-    path: 'admin', loadChildren: () => new Promise(resolve => {
-      (require as any).ensure([], (require: any) => {
-        resolve(require('./+admin/admin.module').AdminModule);
-      });
-    })
+    path: 'admin', loadChildren: './+admin/admin.module#AdminModule'
   },
   {
-    path: 'examples', loadChildren: () => new Promise(resolve => {
-      (require as any).ensure([], (require: any) => {
-        resolve(require('./+examples/examples.module').ExamplesModule);
-      });
-    })
+    path: 'examples', loadChildren: './+examples/examples.module#ExamplesModule'
   }
 ];
 
