@@ -23,6 +23,7 @@
   * with [Remap Istanbul](https://github.com/SitePen/remap-istanbul) for remapping Javascript to TypeScript coverage
 * Type manager with [Typings](https://github.com/typings/typings)
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
+* Webpack DLL support for fast rebuilds (~ < 0.5 second)
 * [Typedoc](http://typedoc.io/) for typescript documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
 * Login and Registration functionality using [Asp.Net Identity](https://docs.asp.net/en/latest/security/authentication/identity.html)
