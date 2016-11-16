@@ -4,7 +4,6 @@ var webpack = require('webpack');
 var merge = require('extendify')({ isDeep: true, arrays: 'concat' });
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var extractCSS = new ExtractTextPlugin('styles.css');
-var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 var devConfig = require('./webpack.config.dev');
 var prodConfig = require('./webpack.config.prod');
 var isDevBuild = process.argv.indexOf('--env.prod') < 0;
@@ -55,7 +54,6 @@ module.exports = merge({
             /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
             __dirname
         ),
-        new ForkCheckerPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 'ENV': JSON.stringify(isDevBuild ? 'Development' : 'Production')
