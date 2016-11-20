@@ -1,6 +1,6 @@
 import { ControlBase } from './control-base';
 
-export class ControlCheckbox extends ControlBase<string> {
+export class ControlCheckbox extends ControlBase<boolean> {
     type: string;
 
     constructor(options: any = {}) {
