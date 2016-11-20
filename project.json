@@ -1,5 +1,6 @@
 {
   "userSecretsId": "aspnetcorespa-c23d27a4-eb88-4b18-9b77-2a93f3b15119",
+  "version": "1.0.0-*",
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
