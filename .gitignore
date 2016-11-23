@@ -181,7 +181,7 @@ bower_components/
 **/wwwroot/tmp/
 **/wwwroot/*.bundle.map
 **/wwwroot/*.js
-/wwwroot/dist/
+#/wwwroot/dist/
 
 
 orleans.codegen.cs
