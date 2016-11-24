@@ -97,7 +97,7 @@ module.exports = function (options) {
          */
         {
           test: /\.ts$/,
-          loader: 'awesome-typescript-loader',
+          loader: 'ts-loader',
           query: {
             // use inline sourcemaps for "karma-remap-coverage" reporter
             sourceMap: false,
@@ -216,7 +216,7 @@ module.exports = function (options) {
       new LoaderOptionsPlugin({
         debug: true,
         options: {
-
+          resolve: {},
           /**
            * Static analysis linter for TypeScript advanced options configuration
            * Description: An extensible linter for the TypeScript language.
@@ -226,7 +226,7 @@ module.exports = function (options) {
           tslint: {
             emitErrors: false,
             failOnHint: false,
-            resourcePath: 'src'
+            resourcePath: 'Client'
           },
 
         }
