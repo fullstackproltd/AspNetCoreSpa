@@ -62,7 +62,7 @@
   },
   "tools": {
     "Microsoft.DotNet.Watcher.Tools": {
-      "version": "1.0.0-*",
+      "version": "1.0.0-preview2-final",
       "imports": "portable-net451+win8"
     },
     "Microsoft.AspNetCore.Razor.Tools": {

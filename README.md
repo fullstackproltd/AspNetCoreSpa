@@ -40,7 +40,7 @@
 2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2015 update 4](https://www.visualstudio.com/) with [.Net Core tooling](https://www.microsoft.com/net/core#windows)
 3. [Nodejs](https://nodejs.org/en/)
 
-**Make sure you have Node version >= 5.0 and NPM >= 3**
+**Make sure you have Node version >= 6.0 and NPM >= 3**
 
 ## Installation
 ```
@@ -53,11 +53,14 @@
     npm install protractor rimraf -g
 5. npm install
 6. Create webpack vendor manifest file for fast webpack rebuils
-    npm run build:vendor
-7. Set appropriate environment 
+    For Development: npm run build:dev
+    For Production: npm run build:prod 
+8. Run the app:
+    1) One way
     set ASPNETCORE_ENVIRONMENT=Development
-8. Run the app 
-    dotnet run (for single run) OR dotnet watch (in watch mode)
+    `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
+    2) Another way:
+    Just F5 key if you are using VS code editor or Visual Studio IDE
 9. Browse using http://localhost:5000 or http://localhost:5001 
 
 ```
