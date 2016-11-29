@@ -93,6 +93,7 @@
     "@types/webpack": "1.12.35",
     "angular2-router-loader": "0.3.4",
     "angular2-template-loader": "0.6.0",
+    "awesome-typescript-loader": "3.0.0-beta.9",
     "codelyzer": "",
     "copy-webpack-plugin": "4.0.0",
     "css": "2.2.1",
