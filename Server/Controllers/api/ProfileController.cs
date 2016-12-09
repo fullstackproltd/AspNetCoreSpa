@@ -31,7 +31,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 var user = await _userManager.FindByEmailAsync(HttpContext.User.Identity.Name);
                 if (user != null)
                 {
-                    return Ok(new { FirstName = user.Firstname, LastName = user.Lastname });
+                    return Ok(new { FirstName = user.FirstName, LastName = user.LastName });
                 }
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json(ModelState.GetModelErrors());
@@ -54,8 +54,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 var user = await _userManager.FindByEmailAsync(HttpContext.User.Identity.Name);
                 if (user != null)
                 {
-                    user.Firstname = model.FirstName;
-                    user.Lastname = model.LastName;
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
                     var result = await _userManager.UpdateAsync(user);
                     if (result == IdentityResult.Success)
                     {

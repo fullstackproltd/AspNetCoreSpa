@@ -24,7 +24,7 @@ module.exports = merge({
     },
     module: {
         rules: [
-            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader', 'angular2-template-loader', 'angular2-router-loader'] },
+            { test: /\.ts$/, exclude: [/\.(spec|e2e)\.ts$/], loaders: ['awesome-typescript-loader', 'angular2-template-loader', 'angular-router-loader'] },
             { test: /\.html$/, loader: "html-loader" },
             { test: /\.css/, loader: extractCSS.extract(['css']) },
             { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader?sourceMap'] },

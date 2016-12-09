@@ -7,6 +7,7 @@
       "type": "platform"
     },
     "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
+    "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.1.0",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
@@ -24,6 +25,7 @@
     "Microsoft.Extensions.Caching.Memory": "1.1.0",
     "Microsoft.AspNetCore.ResponseCompression": "1.0.0",
     "Microsoft.EntityFrameworkCore.Sqlite": "1.1.0",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
     "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
     "Microsoft.Extensions.Configuration.Json": "1.1.0",
@@ -43,6 +45,7 @@
     "Serilog.Extensions.Logging": "1.2.0",
     "Serilog.Sinks.Seq": "3.1.1",
     "Swashbuckle": "6.0.0-beta902",
+    "Bogus": "8.0.1-beta-1",
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.0.0-preview2-final",
       "type": "build"

@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Net;
+using System.Threading.Tasks;
 using AspNet.Security.OAuth.GitHub;
 using AspNet.Security.OAuth.LinkedIn;
 using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Entities;
+using AspNetCoreSpa.Server.Filters;
 using AspNetCoreSpa.Server.Repositories;
 using AspNetCoreSpa.Server.Repositories.Abstract;
 using AspNetCoreSpa.Server.Services;
 using AspNetCoreSpa.Server.Services.Abstract;
 using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -64,13 +68,50 @@ namespace AspNetCoreSpa
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // To add response caching
+            services.AddResponseCompression();
+
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                string useSqLite = Configuration["Data:useSqLite"];
+                if (useSqLite.ToLower() == "true")
+                {
+                    options.UseSqlite(Configuration["Data:SqlLiteConnectionString"]);
+                }
+                else
+                {
+                    options.UseSqlServer(Configuration["Data:SqlServerConnectionString"]);
+                }
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+            });
+
+            // For api unauthorised calls return 401 with no body
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            {
+                options.Cookies.ApplicationCookie.LoginPath = "/login";
+                options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
+                {
+                    OnRedirectToLogin = ctx =>
+                    {
+                        if (ctx.Request.Path.StartsWithSegments("/api") &&
+                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        return Task.FromResult(0);
+                    }
+                };
+            })
+            .AddEntityFrameworkStores<ApplicationDbContext, int>()
+            .AddDefaultTokenProviders();
+
+            // In memory caching
+            services.AddMemoryCache();
 
             // New instance every time, only configuration class needs so its ok
             services.AddScoped<ILoggingRepository, LoggingRepository>();
@@ -81,11 +122,16 @@ namespace AspNetCoreSpa
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
+            services.AddScoped<ApiExceptionFilter>();
+            
             services.AddMvc()
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
+
+            // Node services are to execute any arbitrary nodejs code from .net
+            services.AddNodeServices();
 
             services.AddSwaggerGen();
 
@@ -138,6 +184,8 @@ namespace AspNetCoreSpa
             }
             else
             {
+                app.UseResponseCompression();
+
                 // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
                 try
                 {

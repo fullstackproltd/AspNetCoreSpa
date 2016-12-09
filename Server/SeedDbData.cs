@@ -45,8 +45,8 @@ namespace AspNetCoreSpa.Server
         {
             var users = new List<ApplicationUser>()
             {
-                new ApplicationUser { UserName = "admin@admin.com",  Email = "admin@admin.com", EmailConfirmed = true, Firstname = "Asad", Lastname = "Sahi"},
-                new ApplicationUser { UserName = "user@user.com",  Email = "user@user.com", EmailConfirmed = true, Firstname = "First", Lastname = "Last"},
+                new ApplicationUser { UserName = "admin@admin.com",  Email = "admin@admin.com", EmailConfirmed = true, FirstName = "Asad", LastName = "Sahi"},
+                new ApplicationUser { UserName = "user@user.com",  Email = "user@user.com", EmailConfirmed = true, FirstName = "First", LastName = "Last"},
             };
 
             if (await _userManager.FindByEmailAsync(users[0].Email) == null)
