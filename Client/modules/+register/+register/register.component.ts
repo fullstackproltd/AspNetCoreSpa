@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'lastname',
-                label: 'lastname',
+                label: 'Lastname',
                 placeholder: 'Lastname',
                 value: '',
                 type: 'textbox',

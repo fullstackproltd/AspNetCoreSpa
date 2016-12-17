@@ -7,9 +7,11 @@
 //  2. Adding type notations
 //  3. Using the 'fat-arrow' syntax to properly scope in-line functions
 //
+import 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/finally';
+import 'rxjs/add/observable/throw';
 
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, RequestMethod, URLSearchParams } from '@angular/http';

@@ -18,6 +18,7 @@ import 'ng2-translate';
 import '@ng-bootstrap/ng-bootstrap';
 
 // RxJS
+import 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
