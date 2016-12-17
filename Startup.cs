@@ -1,8 +1,21 @@
 ﻿using System;
+using System.IO;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using AspNet.Security.OAuth.GitHub;
 using AspNet.Security.OAuth.LinkedIn;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel;
+using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Filters;
@@ -10,21 +23,7 @@ using AspNetCoreSpa.Server.Repositories;
 using AspNetCoreSpa.Server.Repositories.Abstract;
 using AspNetCoreSpa.Server.Services;
 using AspNetCoreSpa.Server.Services.Abstract;
-using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Serialization;
 using Serilog;
-using Serilog.Events;
-using Swashbuckle.Swagger.Model;
 
 namespace AspNetCoreSpa
 {
@@ -53,7 +52,6 @@ namespace AspNetCoreSpa
                            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                            .AddEnvironmentVariables();
-
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
@@ -68,6 +66,17 @@ namespace AspNetCoreSpa
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            if (_hostingEnv.IsDevelopment())
+            {
+                var cert = new X509Certificate2(Path.Combine(_hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
+
+                services.Configure<KestrelServerOptions>(options =>
+                {
+                    options.UseHttps(cert);
+
+                });
+            }
+            services.AddOptions();
             // To add response caching
             services.AddResponseCompression();
 
@@ -114,46 +123,28 @@ namespace AspNetCoreSpa
             services.AddMemoryCache();
 
             // New instance every time, only configuration class needs so its ok
+            services.AddTransient<UserResolverService>();
             services.AddScoped<ILoggingRepository, LoggingRepository>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ISmsSender, SmsSender>();
-
+            services.Configure<SmsSettings>(options => Configuration.GetSection("SmsSettingsTwillio").Bind(options));
             services.AddTransient<SeedDbData>();
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
             services.AddScoped<ApiExceptionFilter>();
-            
+
             services.AddMvc()
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                });
+            .AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             // Node services are to execute any arbitrary nodejs code from .net
             services.AddNodeServices();
 
             services.AddSwaggerGen();
 
-            // Add the detail information for the API.
-            services.ConfigureSwaggerGen(options =>
-            {
-                options.SingleApiVersion(new Info
-                {
-                    Version = "v1",
-                    Title = "AspNetCoreSpa Api",
-                    Description = "Here is the api used in this application of different functionality",
-                    TermsOfService = "None",
-                    Contact = new Contact { Name = "Asad Sahi", Email = "", Url = "http://twitter.com/asadsahi" },
-                    License = new License { Name = "Use under MIT", Url = "https://opensource.org/licenses/MIT" }
-                });
-
-                // //Determine base path for the application.
-                // var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-
-                // //Set the comments path for the swagger json and ui.
-                // options.IncludeXmlComments(basePath + "\\TodoApi.xml");
-            });
         }
 
 
@@ -163,8 +154,8 @@ namespace AspNetCoreSpa
             if (env.IsDevelopment())
             {
                 loggerFactory.AddSerilog();
-                // loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-                // loggerFactory.AddDebug();
+                loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+                loggerFactory.AddDebug();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
 
@@ -177,7 +168,6 @@ namespace AspNetCoreSpa
                 // NOTE: For SPA swagger needs adding before MVC
                 // Enable middleware to serve generated Swagger as a JSON endpoint
                 app.UseSwagger();
-
                 // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
                 app.UseSwaggerUi();
 
@@ -214,7 +204,7 @@ namespace AspNetCoreSpa
 
             app.UseIdentity();
 
-            // Facebook Auth
+            // // Facebook Auth
             // app.UseFacebookAuthentication(new FacebookOptions()
             // {
             //     AppId = Configuration["Authentication:Facebook:AppId"],
@@ -260,10 +250,6 @@ namespace AspNetCoreSpa
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });

@@ -42,6 +42,9 @@ module.exports = merge({
         publicPath: '/dist/'
     },
     profile: true,
+    performance: {
+        hints: false
+    },
     plugins: [
         extractCSS,
         new webpack.DllReferencePlugin({

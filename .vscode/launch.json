@@ -7,7 +7,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceRoot}\\bin\\Debug\\netcoreapp1.1\\AspNetCoreSpa.dll",
-            "args": [],
+            // "args": ["dropdb", "seeddb"],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",

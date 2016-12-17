@@ -4,6 +4,7 @@ namespace AspNetCoreSpa.Server.Services.Abstract
 {
     public interface ISmsSender
     {
-        Task SendSmsAsync(string number, string message);
+        Task<bool> SendSmsTwillioAsync(string number, string message);
+        Task<bool> SendSmsFastSmsAsync(string number, string message);
     }
 }

@@ -1,3 +1,3 @@
 {
-    "server.urls": "http://localhost:5000;http://localhost:5001"
+    "server.urls": "http://localhost:5000;https://localhost:5001;"
 }
