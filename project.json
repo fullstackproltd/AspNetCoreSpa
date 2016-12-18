@@ -129,7 +129,6 @@
       "wwwroot",
       "Views",
       "appsettings.json",
-      "appsettings.json",
       "web.config"
     ]
   },
