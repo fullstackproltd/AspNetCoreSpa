@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.translate.get('title')
+    this.translate.get('TITLE')
       .subscribe(title => this.setTitle(title));
   }
 
