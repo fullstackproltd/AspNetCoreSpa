@@ -80,7 +80,11 @@ module.exports = function (options) {
             helpers.root('node_modules/@angular')
           ]
         },
-
+        {
+          test: /\.(scss|sass)$/,
+          exclude: /node_modules/,
+          loaders: ['raw-loader', 'sass-loader']
+        },
         /**
          * Typescript loader support for .ts and Angular 2 async routes via .async.ts
          *
@@ -88,19 +92,24 @@ module.exports = function (options) {
          */
         {
           test: /\.ts$/,
-          loader: 'awesome-typescript-loader',
-          query: {
-            // use inline sourcemaps for "karma-remap-coverage" reporter
-            sourceMap: false,
-            inlineSourceMap: true,
-            compilerOptions: {
+          use: [
+            {
+              loader: 'awesome-typescript-loader',
+              query: {
+                // use inline sourcemaps for "karma-remap-coverage" reporter
+                sourceMap: false,
+                inlineSourceMap: true,
+                compilerOptions: {
 
-              // Remove TypeScript helpers to be injected
-              // below by DefinePlugin
-              removeComments: true
+                  // Remove TypeScript helpers to be injected
+                  // below by DefinePlugin
+                  removeComments: true
 
-            }
-          },
+                }
+              },
+            },
+            'angular2-template-loader'
+          ],
           exclude: [/\.e2e\.ts$/]
         },
 
