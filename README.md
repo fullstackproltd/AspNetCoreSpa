@@ -22,7 +22,6 @@
 * End-to-end Angular 2 code using [Protractor](http://www.protractortest.org).
 * [Istanbul](https://github.com/gotwarlost/istanbul) for test coverage
   * with [Remap Istanbul](https://github.com/SitePen/remap-istanbul) for remapping Javascript to TypeScript coverage
-* Type manager with [Typings](https://github.com/typings/typings)
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
 * Webpack DLL support for fast rebuilds (~ < 0.5 second)
 * [compodoc](https://github.com/compodoc/compodoc) for better angular documentation
