@@ -2,6 +2,7 @@ var webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');
 const OptimizeJsPlugin = require('optimize-js-plugin');
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
@@ -24,7 +25,7 @@ module.exports = webpackMerge(commonConfig, {
         new OptimizeJsPlugin({
             sourceMap: false
         }),
-
+        new BundleAnalyzerPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
             comments: false,

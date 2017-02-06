@@ -4,7 +4,6 @@ let webpack = require('webpack');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ngcWebpack = require('ngc-webpack');
 let devConfig = require('./webpack.dev');
 let prodConfig = require('./webpack.prod');
@@ -81,7 +80,6 @@ let commonConfig = {
        * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
        */
         new CheckerPlugin(),
-        new BundleAnalyzerPlugin(),
         new ngcWebpack.NgcWebpackPlugin({
             disabled: !AOT,
             tsConfig: helpers.root('tsconfig.webpack.json')
