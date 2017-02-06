@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using AspNetCoreSpa.Server.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +9,7 @@ namespace AspNetCoreSpa.Server
 {
     public class ProcessDbCommands
     {
-        public async static void Process(string[] args, IWebHost host)
+        public static void Process(string[] args, IWebHost host)
         {
             var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
             var seedService = (SeedDbData)host.Services.GetService(typeof(SeedDbData));
@@ -32,9 +33,7 @@ namespace AspNetCoreSpa.Server
                 {
                     Console.WriteLine("Seeding database");
                     var db = GetApplicationDbContext(scope);
-                    await seedService.EnsureSeedDataAsync();
-
-                    // db.Seed();
+                    db.Seed(host);
                 }
             }
         }

@@ -1,0 +1,13 @@
+<!--Alert message-->
+<div class="row">
+    <ngb-alert *ngIf="notificationMessage" type="success" (close)="notificationMessage = null">{{ notificationMessage }}</ngb-alert>
+</div>
+
+<div class="row">
+    <div class="col">
+        <appc-change-name (notification)="notify($event)"></appc-change-name>
+    </div>
+    <div class="col">
+        <appc-change-password (notification)="notify($event)"></appc-change-password>
+    </div>
+</div>

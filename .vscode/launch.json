@@ -7,7 +7,11 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceRoot}\\bin\\Debug\\netcoreapp1.1\\AspNetCoreSpa.dll",
-            // "args": ["dropdb", "seeddb"],
+            "args": [
+                // "dropdb",
+                "migratedb",
+                "seeddb"
+            ],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",

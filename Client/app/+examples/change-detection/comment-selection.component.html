@@ -1,0 +1,27 @@
+<div style="border: 1px solid black;padding: 5px;">
+
+<div class="alert alert-info">
+    {{message}}
+</div>
+
+<div><strong>{{lastUpdated()}}</strong></div>
+
+<div>
+    <button (click)="addComment()">Add Comment</button>
+</div>
+
+<div>Author</div>
+<input [(ngModel)]="author" />
+
+<div>Text</div>
+<input [(ngModel)]="text" />
+<br>
+<br>
+<table class="table">
+    <tr *ngFor="let comment of comments">
+        <td>{{comment.author}}</td>
+        <td>{{comment.text}}</td>
+    </tr>
+</table>
+
+</div>

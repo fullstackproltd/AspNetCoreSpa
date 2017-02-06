@@ -4,6 +4,9 @@
 coverage/**/**
 client/**/*.js
 /doc
+/documentation
+/logs
+stats.json
 client/**/*.js.map
 npm-debug.log*
 .awcache
@@ -178,11 +181,8 @@ ClientBin/
 *.publishsettings
 node_modules/
 bower_components/
-**/wwwroot/tmp/
-**/wwwroot/*.bundle.map
-**/wwwroot/*.js
-#/wwwroot/dist/
-
+wwwroot/dist
+compiled
 
 orleans.codegen.cs
 

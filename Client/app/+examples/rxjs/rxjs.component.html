@@ -1,0 +1,3 @@
+<h2>Clock by merging streams</h2>
+
+<button (click)="click$.next()">Update an hour</button> {{ clock | async | date: 'dd-MM-yyyy hh:mm:ss'}}

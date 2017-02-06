@@ -1,22 +1,19 @@
 using System;
-using System.Diagnostics;
-using System.Net.Mail;
 using System.Threading.Tasks;
-using MailKit.Net.Smtp;
-using MimeKit;
-using AspNetCoreSpa.Server.Entities;
-using AspNetCoreSpa.Server.Repositories.Abstract;
 using AspNetCoreSpa.Server.Services.Abstract;
+using MailKit.Net.Smtp;
+using Microsoft.Extensions.Logging;
+using MimeKit;
 
 namespace AspNetCoreSpa.Server.Services
 {
     public class EmailSender : IEmailSender
     {
-        private readonly ILoggingRepository _loggingRepository;
+        private readonly ILogger _logger;
 
-        public EmailSender(ILoggingRepository loggingRepository)
+        public EmailSender(ILoggerFactory loggerFactory)
         {
-            _loggingRepository = loggingRepository;
+            _logger = loggerFactory.CreateLogger<EmailSender>();
         }
 
         public async Task<bool> SendEmailAsync(MailType type, EmailModel emailModel, string extraData)
@@ -111,8 +108,7 @@ namespace AspNetCoreSpa.Server.Services
             {
                 // if AuthenticationMechanismTooWeak: 5.7.14 , solution is to allow less secure apps
                 // https://support.google.com/accounts/answer/6010255
-                _loggingRepository.Add(new Error { Message = ex.Message, StackTrace = ex.StackTrace });
-                _loggingRepository.Commit();
+                _logger.LogError(1, ex, "Unable to send email to {0}", model.To);
                 return false;
             }
 

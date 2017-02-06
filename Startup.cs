@@ -1,29 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
-using AspNet.Security.OAuth.GitHub;
-using AspNet.Security.OAuth.LinkedIn;
-using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel;
-using Microsoft.AspNetCore.SpaServices.Webpack;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using AspNetCoreSpa.Server;
-using AspNetCoreSpa.Server.Entities;
-using AspNetCoreSpa.Server.Filters;
-using AspNetCoreSpa.Server.Repositories;
-using AspNetCoreSpa.Server.Repositories.Abstract;
-using AspNetCoreSpa.Server.Services;
-using AspNetCoreSpa.Server.Services.Abstract;
-using Serilog;
+using AspNetCoreSpa.Server.Extensions;
 
 namespace AspNetCoreSpa
 {
@@ -39,13 +19,7 @@ namespace AspNetCoreSpa
         {
             _hostingEnv = env;
 
-            // Configure Serilog
-            Log.Logger = new LoggerConfiguration()
-            .MinimumLevel
-            .Information()
-            // .WriteTo.RollingFile("log-{Date}.txt", LogEventLevel.Information) // Uncomment if logging required on text file
-            .WriteTo.Seq("http://localhost:5341/")
-            .CreateLogger();
+            Helpers.SetupSerilog();
 
             var builder = new ConfigurationBuilder()
                            .SetBasePath(env.ContentRootPath)
@@ -68,185 +42,71 @@ namespace AspNetCoreSpa
         {
             if (_hostingEnv.IsDevelopment())
             {
-                var cert = new X509Certificate2(Path.Combine(_hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
-
-                services.Configure<KestrelServerOptions>(options =>
-                {
-                    options.UseHttps(cert);
-
-                });
+                services.AddSslCertificate(_hostingEnv);
             }
             services.AddOptions();
-            // To add response caching
-            services.AddResponseCompression();
 
-            // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddResponseCompression(options =>
             {
-                string useSqLite = Configuration["Data:useSqLite"];
-                if (useSqLite.ToLower() == "true")
-                {
-                    options.UseSqlite(Configuration["Data:SqlLiteConnectionString"]);
-                }
-                else
-                {
-                    options.UseSqlServer(Configuration["Data:SqlServerConnectionString"]);
-                }
-
+                options.MimeTypes = Helpers.DefaultMimeTypes;
             });
 
-            // For api unauthorised calls return 401 with no body
-            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-            {
-                options.Cookies.ApplicationCookie.LoginPath = "/login";
-                options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-                {
-                    OnRedirectToLogin = ctx =>
-                    {
-                        if (ctx.Request.Path.StartsWithSegments("/api") &&
-                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        }
-                        else
-                        {
-                            ctx.Response.Redirect(ctx.RedirectUri);
-                        }
-                        return Task.FromResult(0);
-                    }
-                };
-            })
-            .AddEntityFrameworkStores<ApplicationDbContext, int>()
-            .AddDefaultTokenProviders();
+            services.AddCustomDbContext();
 
-            // In memory caching
+            services.AddCustomIdentity();
+
+            services.AddCustomOpenIddict();
+
             services.AddMemoryCache();
 
-            // New instance every time, only configuration class needs so its ok
-            services.AddTransient<UserResolverService>();
-            services.AddScoped<ILoggingRepository, LoggingRepository>();
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<ISmsSender, SmsSender>();
-            services.Configure<SmsSettings>(options => Configuration.GetSection("SmsSettingsTwillio").Bind(options));
-            services.AddTransient<SeedDbData>();
+            services.RegisterCustomServices();
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
-            services.AddScoped<ApiExceptionFilter>();
-
-            services.AddMvc()
-            .AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            services.AddCustomizedMvc();
 
             // Node services are to execute any arbitrary nodejs code from .net
             services.AddNodeServices();
 
             services.AddSwaggerGen();
-
         }
-
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IAntiforgery antiforgery, SeedDbData seedData)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
-            {
-                loggerFactory.AddSerilog();
-                loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-                loggerFactory.AddDebug();
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+            app.AddDevMiddlewares();
 
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true,
-                    ConfigFile = "config/webpack.config.js"
-                });
-
-                // NOTE: For SPA swagger needs adding before MVC
-                // Enable middleware to serve generated Swagger as a JSON endpoint
-                app.UseSwagger();
-                // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-                app.UseSwaggerUi();
-
-            }
-            else
+            if (_hostingEnv.IsProduction())
             {
                 app.UseResponseCompression();
-
-                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-                try
-                {
-                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
-                    }
-                }
-                catch (Exception) { }
-
             }
 
-            // Configure XSRF middleware, This pattern is for SPA style applications where XSRF token is added on Index page 
-            // load and passed back token on every subsequent async request            
-            app.Use(async (context, next) =>
-            {
-                if (string.Equals(context.Request.Path.Value, "/", StringComparison.OrdinalIgnoreCase))
-                {
-                    var tokens = antiforgery.GetAndStoreTokens(context);
-                    context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
-                }
-                await next.Invoke();
-            });
+            app.SetupMigrations();
+
+            app.UseXsrf();
 
             app.UseStaticFiles();
 
             app.UseIdentity();
 
-            // // Facebook Auth
-            // app.UseFacebookAuthentication(new FacebookOptions()
-            // {
-            //     AppId = Configuration["Authentication:Facebook:AppId"],
-            //     AppSecret = Configuration["Authentication:Facebook:AppSecret"]
-            // });
-            // // Google Auth
-            // app.UseGoogleAuthentication(new GoogleOptions()
-            // {
-            //     ClientId = Configuration["Authentication:Google:ClientId"],
-            //     ClientSecret = Configuration["Authentication:Google:ClientSecret"]
-            // });
-            // // Twitter Auth
-            // // https://apps.twitter.com/
-            // app.UseTwitterAuthentication(new TwitterOptions()
-            // {
-            //     ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
-            //     ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
-            // });
-            // // Microsoft Auth
-            // // https://apps.dev.microsoft.com/?mkt=en-us#/appList
-            // app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-            // {
-            //     ClientId = Configuration["Authentication:Microsoft:ClientId"],
-            //     ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"]
+            app.UseOpenIddict();
+
+            // Add a middleware used to validate access
+            // tokens and protect the API endpoints.
+            app.UseOAuthValidation();
+
+            // Alternatively, you can also use the introspection middleware.
+            // Using it is recommended if your resource server is in a
+            // different application/separated from the authorization server.
+            //
+            // app.UseOAuthIntrospection(options => {
+            //     options.AutomaticAuthenticate = true;
+            //     options.AutomaticChallenge = true;
+            //     options.Authority = "http://localhost:54895/";
+            //     options.Audiences.Add("resource_server");
+            //     options.ClientId = "resource_server";
+            //     options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
             // });
 
-            // // Note: Below social providers are supported through this open source library:
-            // // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
-
-            // // Github Auth
-            // // https://github.com/settings/developers
-            // app.UseGitHubAuthentication(new GitHubAuthenticationOptions
-            // {
-            //     ClientId = Configuration["Authentication:Github:ClientId"],
-            //     ClientSecret = Configuration["Authentication:Github:ClientSecret"]
-            // });
-
-            // app.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
-            // {
-            //     ClientId = Configuration["Authentication:LinkedIn:ClientId"],
-            //     ClientSecret = Configuration["Authentication:LinkedIn:ClientSecret"]
-            // });
+            app.UseOAuthProviders();
 
             app.UseMvc(routes =>
             {
@@ -254,9 +114,6 @@ namespace AspNetCoreSpa
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-
-            await seedData.EnsureSeedDataAsync();
         }
     }
 }

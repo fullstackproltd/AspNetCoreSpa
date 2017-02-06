@@ -4,23 +4,24 @@
 // run `typings install x` where `x` is your module
 
 // Angular 2
-import '@angular/platform-browser';
-import '@angular/platform-browser-dynamic';
-import '@angular/core';
-import '@angular/common';
-import '@angular/forms';
-import '@angular/http';
-import '@angular/router';
+// import '@angular/platform-browser';
+// import '@angular/platform-browser-dynamic';
+// import '@angular/core';
+// import '@angular/common';
+// import '@angular/forms';
+// import '@angular/http';
+// import '@angular/router';
 
-// import 3rd party libs
-import 'bootstrap';
-import 'ng2-translate';
-import '@ng-bootstrap/ng-bootstrap';
+// // import 3rd party libs
+// import 'jquery';
+// import 'bootstrap';
+// import 'ng2-translate';
+// import '@ng-bootstrap/ng-bootstrap';
 
-// RxJS
-import 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/finally';
-import 'rxjs/add/observable/throw';
+// // RxJS
+// import 'rxjs/Observable';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/mergeMap';
+// import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/finally';
+// import 'rxjs/add/observable/throw';

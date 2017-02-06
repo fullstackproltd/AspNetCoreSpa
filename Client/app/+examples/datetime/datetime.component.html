@@ -1,0 +1,15 @@
+<appc-page-heading text="Date time example"></appc-page-heading>
+
+<form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-addon" (click)="d.toggle()" style="cursor: pointer;">
+        <i class="fa fa-calendar"></i>
+      </div>
+    </div>
+  </div>
+</form>
+
+<hr>
+<pre>Model: {{ model | json }}</pre>

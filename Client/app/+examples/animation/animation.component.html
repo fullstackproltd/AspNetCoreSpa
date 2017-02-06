@@ -1,0 +1,16 @@
+<h3> Animated button</h3>
+<div class="row">
+    <div class="container">
+        <button (click)="toggleAnimation()" class="btn btn-primary" [@buttonState]="buttonState"> {{buttonState}} </button>
+    </div>
+</div>
+
+<h3>Traffic light</h3>
+<div class="row">
+    <div class="container">
+        <div class="traffic-light" *ngIf="isHere" [@signal]="signal"></div>
+        <button (click)="onGoClick()" class="btn btn-sm btn-primary">Go </button>
+        <button (click)="onStopClick()" class="btn btn-sm btn-danger">Stop </button>
+        <button (click)="onToggle()" class="btn btn-sm btn-warning">Toggle </button>
+    </div>
+</div>

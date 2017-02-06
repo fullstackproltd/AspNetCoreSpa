@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Text;
 
 namespace AspNetCoreSpa.Server.Filters
 {

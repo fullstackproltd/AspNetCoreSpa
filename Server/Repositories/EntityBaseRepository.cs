@@ -104,7 +104,7 @@ namespace AspNetCoreSpa.Server.Repositories
 
         public virtual void Commit()
         {
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
     }
 }

@@ -6,15 +6,25 @@
     }
 </style>
 
-<appc-app asp-prerender-webpack-config="config/webpack.config.js">
-    <div class="app-spinner">
-        <i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
-    </div>
-</appc-app>
+<div class="container">
+    <appc-root>
+        <div class="app-spinner">
+            <i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
+        </div>
+    </appc-root>
+</div>
 
 <script>
     window.user = '@ViewBag.user';
 </script>
 
-<script src="~/dist/vendor.js" asp-append-version="true"></script>
-<script src="~/dist/@ViewBag.HashedMain" asp-append-version="true"></script>
+<environment names="Development">
+    <script src="~/dist/vendor.dll.js" asp-append-version="true"></script>
+    <script src="~/dist/polyfills.dll.js" asp-append-version="true"></script>
+</environment>
+
+<environment names="Production">
+    <script src="~/dist/polyfills.3f156d525b694e155fad.bundle.js" asp-append-version="true"></script>
+</environment>
+
+<script src="~/dist/@ViewBag.MainDotJs" asp-append-version="true"></script>

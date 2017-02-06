@@ -1,0 +1,70 @@
+﻿import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Response } from '@angular/http';
+
+import { LoginModel } from '../core/models/login-model';
+import { AccountService } from '../core/account/account.service';
+import { ControlBase } from '../shared/forms/control-base';
+import { ControlTextbox } from '../shared/forms/control-textbox';
+import { ControlCheckbox } from '../shared/forms/control-checkbox';
+import { UtilityService } from '../shared/services/utility.service';
+
+@Component({
+    selector: 'appc-login',
+    styleUrls: ['./login.component.scss'],
+    templateUrl: './login.component.html'
+})
+export class LoginComponent implements OnInit {
+    public loginModel: LoginModel;
+    public errors: string[] = [];
+    public controls: any;
+
+    constructor(
+        public accountService: AccountService,
+        public router: Router,
+        public utilityService: UtilityService
+    ) { }
+
+    public login(model: LoginModel): void {
+        console.log(model);
+        this.accountService.login(model)
+            .subscribe(() => {
+                this.utilityService.navigate('');
+            },
+            (errors: any) => {
+                this.errors.push(errors['error_description']);
+            });
+    };
+
+    public ngOnInit() {
+        let controls: Array<ControlBase<any>> = [
+            new ControlTextbox({
+                key: 'username',
+                label: 'Email',
+                placeholder: 'Email',
+                value: '',
+                type: 'email',
+                required: true,
+                order: 1
+            }),
+            new ControlTextbox({
+                key: 'password',
+                label: 'Password',
+                placeholder: 'Password',
+                value: '',
+                type: 'password',
+                required: true,
+                order: 2
+            }),
+            new ControlCheckbox({
+                key: 'rememberMe',
+                label: 'Remember me?',
+                type: 'checkbox',
+                value: false,
+                order: 3
+            })
+        ];
+
+        this.controls = controls;
+    }
+}

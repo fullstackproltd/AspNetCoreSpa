@@ -3,10 +3,10 @@ using System.Net;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Extensions;
-using AspNetCoreSpa.Server.Repositories.Abstract;
 using AspNetCoreSpa.Server.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -14,11 +14,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
     public class ProfileController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ILoggingRepository _loggingRepository;
+        private readonly ILogger _logger;
 
-        public ProfileController(ILoggingRepository loggingRepository, UserManager<ApplicationUser> userManager)
+        public ProfileController(ILoggerFactory loggerFactory, UserManager<ApplicationUser> userManager)
         {
-            _loggingRepository = loggingRepository;
+            _logger = loggerFactory.CreateLogger<ProfileController>();
             _userManager = userManager;
         }
 
@@ -38,9 +38,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
             catch (Exception ex)
             {
-                _loggingRepository.Add(new Error() { Message = ex.Message, StackTrace = ex.StackTrace, DateCreated = DateTime.Now });
-                _loggingRepository.Commit();
-
+                _logger.LogError(1, ex, "Unable to get profile of user");
                 return BadRequest();
             }
 
@@ -69,8 +67,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             }
             catch (Exception ex)
             {
-                _loggingRepository.Add(new Error() { Message = ex.Message, StackTrace = ex.StackTrace, DateCreated = DateTime.Now });
-                _loggingRepository.Commit();
+                _logger.LogError(1, ex, "Unable to save user name");
 
                 return BadRequest();
             }
@@ -97,12 +94,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     }
                 }
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json(new []{"Unable to change password"});
+                return Json(new[] { "Unable to change password" });
             }
             catch (Exception ex)
             {
-                _loggingRepository.Add(new Error() { Message = ex.Message, StackTrace = ex.StackTrace, DateCreated = DateTime.Now });
-                _loggingRepository.Commit();
+                _logger.LogError(1, ex, "Unable to change password");
                 return BadRequest();
             }
 

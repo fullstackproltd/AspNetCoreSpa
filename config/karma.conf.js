@@ -55,7 +55,7 @@ module.exports = function (config) {
      * possible values: 'dots', 'progress'
      * available reporters: https://npmjs.org/browse/keyword/karma-reporter
      */
-    reporters: ['mocha', 'coverage'],
+    reporters: ['mocha', 'coverage', 'remap-coverage'],
 
     // web server port
     port: 9876,
@@ -77,9 +77,7 @@ module.exports = function (config) {
      * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
      */
     browsers: [
-      // 'Chrome',
-      'PhantomJS'
-
+      'Chrome'
     ],
 
     customLaunchers: {
@@ -98,8 +96,7 @@ module.exports = function (config) {
 
   if (process.env.TRAVIS) {
     configuration.browsers = [
-      'ChromeTravisCi',
-      'PhantomJS'
+      'ChromeTravisCi'
     ];
   }
 

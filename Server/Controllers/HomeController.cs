@@ -1,12 +1,11 @@
 ﻿// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.PlatformAbstractions;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
@@ -23,7 +22,7 @@ namespace AspNetCoreSpa.Server.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.HashedMain = GetHashedMainDotJs();
+            ViewBag.MainDotJs = await GetMainDotJs();
 
             if (Request.Query.ContainsKey("emailConfirmCode") &&
                 Request.Query.ContainsKey("userId"))
@@ -53,13 +52,25 @@ namespace AspNetCoreSpa.Server.Controllers
             return View();
         }
 
-        public string GetHashedMainDotJs()
+        // Becasue for production this is hashed chunk so has changes on each production build
+        public async Task<string> GetMainDotJs()
         {
             var basePath = _env.WebRootPath + "//dist//";
-            var info = new System.IO.DirectoryInfo(basePath);
-            var file = info.GetFiles().Where(f => f.Name.StartsWith("main.") && !f.Name.EndsWith("bundle.map")).FirstOrDefault();
 
-            return file.Name;
+            if (_env.IsDevelopment() && !System.IO.File.Exists(basePath + "main.js"))
+            {
+                // Just a .js request to make it wait to finish webpack dev middleware finish creating bundles:
+                // More info here: https://github.com/aspnet/JavaScriptServices/issues/578#issuecomment-272039541
+                using (var client = new HttpClient())
+                {
+                    var requestUri = Request.Scheme + "://" + Request.Host + "/dist/main.js";
+                    await client.GetAsync(requestUri);
+                }
+            }
+
+            var info = new System.IO.DirectoryInfo(basePath);
+            var file = info.GetFiles().Where(f => f.Name.StartsWith("main.") && !f.Name.EndsWith("bundle.map"));
+            return file.FirstOrDefault().Name;
         }
 
     }

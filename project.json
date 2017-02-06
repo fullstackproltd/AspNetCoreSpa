@@ -6,7 +6,8 @@
       "version": "1.1.0",
       "type": "platform"
     },
-    "Microsoft.AspNetCore.Authentication.Cookies": "1.1.0",
+    "AspNet.Security.OAuth.Introspection": "1.0.0-alpha2-final",
+    "AspNet.Security.OAuth.Validation": "1.0.0-alpha2-final",
     "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "1.1.0",
@@ -36,20 +37,23 @@
     "Microsoft.Extensions.Logging.Debug": "1.1.0",
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
-    "Microsoft.AspNetCore.AngularServices": "1.0.0-beta-000019",
+    "Microsoft.AspNetCore.AngularServices": "1.0.0-beta-000021",
     "AspNet.Security.OAuth.GitHub": "1.0.0-beta1-final",
     "AspNet.Security.OAuth.LinkedIn": "1.0.0-beta1-final",
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.EntityFrameworkCore": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
     "SendGrid.NetCore": "1.0.0-rtm-00002",
     "MailKit": "1.10.1",
     "Twilio": "5.0.0-rca2",
-    "Stripe.net": "6.9.0",
+    "Stripe.net": "7.0.3",
     "Newtonsoft.Json": "9.0.1",
     "Webpack": "3.0.0",
-    "Serilog": "2.4.0-dev-00746",
-    "Serilog.Extensions.Logging": "1.2.0",
-    "Serilog.Sinks.Seq": "3.1.1",
+    "Serilog": "2.4.0-dev-00769",
+    "Serilog.Extensions.Logging": "1.3.1",
+    "Serilog.Sinks.Seq": "3.2.0",
     "Swashbuckle": "6.0.0-beta902",
-    "Bogus": "8.0.1-beta-1",
+    "Bogus": "9.0.2",
     "Microsoft.AspNetCore.Razor.Tools": {
       "version": "1.0.0-preview2-final",
       "type": "build"
@@ -129,13 +133,14 @@
       "wwwroot",
       "Views",
       "appsettings.json",
-      "web.config"
+      "web.config",
+      "Dockerfile"
     ]
   },
   "scripts": {
     // "prepublish": [
     //   "npm install",
-    //   "node node_modules/webpack/bin/webpack.js --config config/webpack.config.vendor.js",
+    //   "node node_modules/webpack/bin/webpack.js --config config/webpack.vendor.js",
     //   "node node_modules/webpack/bin/webpack.js --config config/webpack.config.js"
     // ],
     "postpublish": [

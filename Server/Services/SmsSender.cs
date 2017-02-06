@@ -4,10 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using AspNetCoreSpa.Server.Entities;
-using AspNetCoreSpa.Server.Repositories.Abstract;
 using AspNetCoreSpa.Server.Services.Abstract;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace AspNetCoreSpa.Server.Services
 {
@@ -16,13 +15,13 @@ namespace AspNetCoreSpa.Server.Services
     // For more details see this link https://go.microsoft.com/fwlink/?LinkID=532713
     public class SmsSender : ISmsSender
     {
-        private readonly ILoggingRepository _loggingRepository;
+        private readonly ILogger _logger;
         private readonly SmsSettings _smsSettings;
 
-        public SmsSender(IOptions<SmsSettings> smsSettings, ILoggingRepository loggingRepository)
+        public SmsSender(IOptions<SmsSettings> smsSettings, ILoggerFactory loggerFactory)
         {
             _smsSettings = smsSettings.Value;
-            _loggingRepository = loggingRepository;
+            _logger = loggerFactory.CreateLogger<SmsSender>();
 
         }
 
@@ -50,12 +49,7 @@ namespace AspNetCoreSpa.Server.Services
             }
             catch (Exception ex)
             {
-                _loggingRepository.Add(new Error
-                {
-                    Message = ex.Message,
-                    StackTrace = ex.StackTrace
-                });
-                _loggingRepository.Commit();
+                _logger.LogError(1, ex, "Unable to send sms to {0}", number);
 
                 return false;
             }
@@ -78,8 +72,7 @@ namespace AspNetCoreSpa.Server.Services
             }
             catch (Exception ex)
             {
-                _loggingRepository.Add(new Error { Message = ex.Message, StackTrace = ex.StackTrace });
-                _loggingRepository.Commit();
+                _logger.LogError(1, ex, "Unable to send fastsms to {0}", number);
                 return false;
             }
         }

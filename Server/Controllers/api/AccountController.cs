@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Extensions;

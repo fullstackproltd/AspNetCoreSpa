@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using AspNetCoreSpa.Server;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
@@ -25,7 +26,7 @@ namespace AspNetCoreSpa
                 .Build();
 
             // http://odetocode.com/blogs/scott/archive/2016/09/20/database-migrations-and-seeding-in-asp-net-core.aspx
-            // ProcessDbCommands.Process(args, host);
+            ProcessDbCommands.Process(args, host);
 
             host.Run();
         }

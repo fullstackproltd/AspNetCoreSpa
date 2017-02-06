@@ -9,9 +9,7 @@ namespace AspNetCoreSpa.Server.Filters
 
         public ValidationErrorCollection Errors { get; set; }
 
-        public ApiException(string message,
-                            int statusCode = 500,
-                            ValidationErrorCollection errors = null) :
+        public ApiException(string message, int statusCode = 500, ValidationErrorCollection errors = null) :
             base(message)
         {
             StatusCode = statusCode;

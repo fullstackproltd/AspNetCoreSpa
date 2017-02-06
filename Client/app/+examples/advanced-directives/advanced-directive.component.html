@@ -1,0 +1,10 @@
+<h1>Advanced directives</h1>
+
+<h2>Example 1: Host bindings and host listeners</h2>
+<basic [first]="'This text will be replaced'"></basic>
+<basic></basic>
+<basic [first]="'This text will be replaced too'"></basic>
+
+<h2>Example 2: Structural directives example using directive prefixed with * (astrick)</h2>
+
+<p *three="let message from messages"> {{message}} </p>

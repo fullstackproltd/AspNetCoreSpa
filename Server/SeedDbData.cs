@@ -1,70 +1,59 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCoreSpa.Server
 {
     public class SeedDbData
     {
         readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _hostingEnv;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public SeedDbData(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public SeedDbData(IWebHost host, ApplicationDbContext context)
         {
+            var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
+            var serviceScope = services.CreateScope();
+            _hostingEnv = serviceScope.ServiceProvider.GetService<IHostingEnvironment>();
+            _roleManager = serviceScope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
+            _userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
             _context = context;
-            _userManager = userManager;
-            _roleManager = roleManager;
-        }
-
-        public async Task EnsureSeedDataAsync()
-        {
-            await CreateRoles(); // Add roles
-            await CreateUsers(); // Add users
+            CreateRoles(); // Add roles
+            CreateUsers(); // Add users
             AddLanguagesAndContent();
         }
 
-        private async Task CreateRoles()
+        private void CreateRoles()
         {
-            var rolesToAdd = new List<ApplicationRole> {
-                new ApplicationRole {Name = "Admin", Description = "This role will have full rights to the website"},
-                new ApplicationRole {Name = "User", Description = "This role will have limited rights to the website"}
-                };
+            var rolesToAdd = new List<ApplicationRole>(){
+                new ApplicationRole { Name= "Admin", Description = "Full rights role"},
+                new ApplicationRole { Name= "User", Description = "Limited rights role"}
+            };
             foreach (var role in rolesToAdd)
             {
-                if (!await _roleManager.RoleExistsAsync(role.Name))
+                if (!_roleManager.RoleExistsAsync(role.Name).Result)
                 {
-                    await _roleManager.CreateAsync(role);
+                    _roleManager.CreateAsync(role).Result.ToString();
                 }
             }
         }
-        private async Task CreateUsers()
+        private void CreateUsers()
         {
-            var users = new List<ApplicationUser>()
+            if (!_context.ApplicationUsers.Any())
             {
-                new ApplicationUser { UserName = "admin@admin.com",  Email = "admin@admin.com", EmailConfirmed = true, FirstName = "Asad", LastName = "Sahi"},
-                new ApplicationUser { UserName = "user@user.com",  Email = "user@user.com", EmailConfirmed = true, FirstName = "First", LastName = "Last"},
-            };
 
-            if (await _userManager.FindByEmailAsync(users[0].Email) == null)
-            {
-                await _userManager.CreateAsync(users[0], "P@ssw0rd!");
-                var currentUser = await _userManager.FindByEmailAsync(users[0].Email);
-                var rolesResult = await _userManager.AddToRoleAsync(currentUser, "Admin");
+                _userManager.CreateAsync(new ApplicationUser { UserName = "admin@admin.com", FirstName = "Admin first", LastName = "Admin last", Email = "admin@admin.com", EmailConfirmed = true, CreatedDate = DateTime.Now, IsEnabled = true }, "P@ssw0rd!").Result.ToString();
+                _userManager.AddToRoleAsync(_userManager.FindByNameAsync("admin@admin.com").GetAwaiter().GetResult(), "Admin").Result.ToString();
+
+                _userManager.CreateAsync(new ApplicationUser { UserName = "user@user.com", FirstName = "First", LastName = "Last", Email = "user@user.com", EmailConfirmed = true, CreatedDate = DateTime.Now, IsEnabled = true }, "P@ssw0rd!").Result.ToString();
+                _userManager.AddToRoleAsync(_userManager.FindByNameAsync("user@user.com").GetAwaiter().GetResult(), "User").Result.ToString();
             }
-
-            if (await _userManager.FindByEmailAsync(users[1].Email) == null)
-            {
-                await _userManager.CreateAsync(users[1], "P@ssw0rd!");
-                var currentUser = await _userManager.FindByEmailAsync(users[1].Email);
-                var rolesResult = await _userManager.AddToRoleAsync(currentUser, "User");
-            }
-
         }
-
         private void AddLanguagesAndContent()
         {
             if (!_context.Languageses.Any())

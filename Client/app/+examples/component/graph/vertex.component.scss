@@ -1,0 +1,18 @@
+.vertex-text{
+    position:absolute;
+    top:50%;
+    height:50%;
+    width:40px;
+    margin-top:-25%;
+    text-align:center;
+    color:white;
+}
+
+.vertex {
+    /*border-radius: 50%;*/
+    width: 40px;
+    height: 40px;
+    background-color: #337ab7;
+    position:relative;
+    display:block;
+}

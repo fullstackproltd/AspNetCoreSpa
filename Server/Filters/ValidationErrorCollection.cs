@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -84,10 +83,6 @@ namespace AspNetCoreSpa.Server.Filters
 
             return Condition;
         }
-
-
-
-
 
         /// <summary>
         /// Asserts a business rule - if condition is true it's added otherwise not.

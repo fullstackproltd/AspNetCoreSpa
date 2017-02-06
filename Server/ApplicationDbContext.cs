@@ -6,7 +6,8 @@ namespace AspNetCoreSpa.Server
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
-        public DbSet<Error> Errors { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<Language> Languageses { get; set; }
         public DbSet<Content> Content { get; set; }
         public DbSet<ContentText> ContentText { get; set; }
