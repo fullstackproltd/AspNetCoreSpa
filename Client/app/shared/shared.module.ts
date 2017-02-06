@@ -17,9 +17,7 @@ import { HeaderComponent } from './layout/header.component';
 import { FooterComponent } from './layout/footer.component';
 // Services
 import { DataService } from './services/data.service';
-import { ApiGatewayService } from './services/api-gateway.service';
 import { AuthService } from './services/auth.service';
-import { HttpErrorHandlerService } from './services/http-error-handler.service';
 import { ApiTranslationLoader } from './services/api-translation-loader.service';
 import { ContentService } from './services/content.service';
 import { UtilityService } from './services/utility.service';
@@ -73,8 +71,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         // Providers
-        HttpErrorHandlerService,
-        ApiGatewayService,
+        DataService,
         AuthService,
         DataService,
         ContentService,

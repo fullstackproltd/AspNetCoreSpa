@@ -10,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -45,23 +48,27 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.Password.RequiredLength = 4;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                // options.Cookies.ApplicationCookie.LoginPath = "/login";
-                // options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-                // {
-                //     OnRedirectToLogin = ctx =>
-                //     {
-                //         if (ctx.Request.Path.StartsWithSegments("/api") &&
-                //             ctx.Response.StatusCode == (int)HttpStatusCode.OK)
-                //         {
-                //             ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                //         }
-                //         else
-                //         {
-                //             ctx.Response.Redirect(ctx.RedirectUri);
-                //         }
-                //         return Task.FromResult(0);
-                //     }
-                // };
+                options.Cookies.ApplicationCookie.LoginPath = "/login";
+                options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
+                {
+                    OnRedirectToLogin = ctx =>
+                    {
+                        if (ctx.Request.Path.StartsWithSegments("/api") &&
+                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                        }
+                        else if (ctx.Response.StatusCode == (int)HttpStatusCode.Forbidden)
+                        {
+                            ctx.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                        }
+                        else
+                        {
+                            ctx.Response.Redirect(ctx.RedirectUri);
+                        }
+                        return Task.FromResult(0);
+                    }
+                };
             })
             .AddEntityFrameworkStores<ApplicationDbContext, int>()
             .AddDefaultTokenProviders();

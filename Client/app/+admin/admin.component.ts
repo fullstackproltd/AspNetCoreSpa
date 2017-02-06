@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
+import { DataService } from './../shared/services/data.service';
 import { AdminService } from './admin.service';
 
 @Component({
@@ -7,11 +8,17 @@ import { AdminService } from './admin.service';
     styleUrls: ['./admin.component.scss'],
     templateUrl: './admin.component.html'
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit {
     public message: any;
+    public loading: boolean;
 
-    constructor(public adminService: AdminService) { }
+    constructor(public adminService: AdminService, public apiGateway: DataService) { }
 
+    public ngOnInit() {
+        this.apiGateway.pendingCommands$.subscribe(x => {
+            this.loading = x > 0;
+        });
+    }
     public doAdminOperation() {
         this.adminService.do()
             .subscribe(data => this.message = data);

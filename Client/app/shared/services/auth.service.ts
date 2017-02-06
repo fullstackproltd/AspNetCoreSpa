@@ -1,17 +1,17 @@
 ﻿import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { DataService } from './data.service';
+import { UtilityService } from './utility.service';
 import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
 
-    constructor(public router: Router) { }
+    constructor(public us: UtilityService) { }
 
     public logout() {
         sessionStorage.clear();
-        this.router.navigate(['/login']);
+        this.us.navigateToSignIn();
     }
 
     public isLoggedIn(): boolean {
