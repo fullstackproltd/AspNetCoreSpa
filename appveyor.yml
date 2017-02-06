@@ -12,20 +12,18 @@ environment:
   website_name: aspnetcorespa
   website_psw:
     secure: UBm/tZDG4wmtrN6phRaqCBGkZqkpXWIWqMJJFxx6Zknn5imdJssw+9ZZPnT9iriMs364WsFtpNqDi7/sgDt5cQ==
-  nodejs_version: "6.6.0"
+  nodejs_version: "6.9.1"
 
 install:
   - ps: Install-Product node $env:nodejs_version
-  - npm install -g npm typings
   - ps: $env:path = $env:appdata + "\npm;" + $env:path
   - npm install
-  - typings install
 
 test_script:
   # Output useful info for debugging.
   - node --version && npm --version
   - node -e 'console.log(process.env);'
-  # - cmd: npm test
+  - cmd: npm test
 
 cache:
   - node_modules -> package.json                                        # local npm modules
