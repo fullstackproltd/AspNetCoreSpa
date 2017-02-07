@@ -7,17 +7,16 @@
 
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
-* [Angular 4](https://angular.io/)
-* [Angular 4 CLI](https://github.com/angular/angular-cli/) integration for Angular 2 scaffolding.
+* [Angular](https://angular.io/)
 * [Webpack 2](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [ng-bootstrap](https://ng-bootstrap.github.io/)
 * [ng2-translate](https://github.com/ocombe/ng2-translate)
 * [Typescript 2](http://www.typescriptlang.org/)
 * [SASS](http://sass-lang.com/) support
-* [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular 2.
-* Testing Angular 2 code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
-* End-to-end Angular 2 code using [Protractor](http://www.protractortest.org).
+* [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
+* Testing Angular code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
+* End-to-end Angular code using [Protractor](http://www.protractortest.org).
 * [Istanbul](https://github.com/gotwarlost/istanbul) for test coverage
   * with [Remap Istanbul](https://github.com/SitePen/remap-istanbul) for remapping Javascript to TypeScript coverage
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
@@ -70,12 +69,12 @@
 
 ## Other commands
 
-### run Angular 2 tests
+### run Angular tests
 ```bash
-npm run test
+npm test
 # this will also create coverage remaped to typescript files in coverage folder after test run completes
 ```
-### watch and run Angular 2 tests
+### watch and run Angular tests
 ```bash
 npm run test:watch
 ```
@@ -86,7 +85,7 @@ npm run test:watch
     * cd docs
     * http-server
 
-### Compodoc Angular 2 documentation
+### Compodoc Angular documentation
 
  * Steps to generate:
     * npm i compodoc -g
