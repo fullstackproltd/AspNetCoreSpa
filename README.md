@@ -30,7 +30,7 @@
 * Extensible User/Role identity implementation
 * Various social login support, Follow [this](https://github.com/asadsahi/AspNetCoreSpa/wiki/Social-Login-Setup) wiki page to see how it will work.
 * Lazy loading with pre loading all modules for fast navigation.
-* [Angular 4 dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.
+* [Angular dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.
 * [Serilog](https://serilog.net/) with [Seq](https://getseq.net/) support to manage structured logging.
 * [Swagger](http://swagger.io/) as Api explorer (Visit url **http://localhost:5000/swagger/ui** after running the application)
  
