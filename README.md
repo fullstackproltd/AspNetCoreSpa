@@ -114,7 +114,7 @@ npm run webdriver:start
 npm run e2e:live
 ```
 
-# AOT Don'ts
+# [AOT - Ahead of time](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html) compilation DON'TS
 
 ## The following are some things that will make AOT compile fail.
 
