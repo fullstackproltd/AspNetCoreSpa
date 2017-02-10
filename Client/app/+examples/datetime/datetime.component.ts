@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-datetime',
-  templateUrl: './datetime.component.html',
-  styleUrls: ['./datetime.component.scss']
+  templateUrl: './datetime.component.html'
 })
 export class DatetimeComponent {
   public model: any;

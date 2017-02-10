@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'appc-examples-home',
-  templateUrl: './examples-home.component.html',
-  styleUrls: ['./examples-home.component.scss']
+  templateUrl: './examples-home.component.html'
 })
 export class ExamplesHomeComponent implements OnInit {
   public examples: any;

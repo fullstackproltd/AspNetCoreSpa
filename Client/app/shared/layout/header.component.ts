@@ -10,7 +10,6 @@ import { AuthState } from '../../core/auth-store/auth.store';
 
 @Component({
     selector: 'appc-header',
-    styleUrls: ['./header.component.scss'],
     templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit, OnDestroy {

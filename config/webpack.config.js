@@ -46,11 +46,11 @@ let commonConfig = {
             },
             {
                 test: /\.css$/, loader: ExtractTextPlugin.extract({
-                    fallbackLoader: "style-loader",
-                    loader: "css-loader"
+                    fallback: "style-loader",
+                    use: "css-loader"
                 })
             },
-            { test: /\.scss$/, use: ['raw-loader', 'sass-loader'] },
+            { test: /\.scss$/, use: ['to-string-loader', 'css-loader', 'sass-loader'] },
             { test: /\.html$/, use: 'html-loader' },
             { test: /\.json$/, use: 'json-loader' },
             { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }

@@ -3,8 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'appd-advnaced-directives',
-  templateUrl: './advanced-directive.component.html',
-  styleUrls: ['./advanced-directive.component.scss'],
+  templateUrl: './advanced-directive.component.html'
 })
 export class AdvancedDirectivesComponent implements OnInit {
   public messages = {

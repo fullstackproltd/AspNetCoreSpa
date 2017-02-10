@@ -14,8 +14,7 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 
 @Component({
   selector: 'appc-typeahead',
-  templateUrl: './typeahead.component.html',
-  styleUrls: ['./typeahead.component.scss']
+  templateUrl: './typeahead.component.html'
 })
 export class TypeaheadComponent {
   public _searching: boolean;

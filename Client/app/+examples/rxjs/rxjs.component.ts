@@ -4,8 +4,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'appc-rxjs',
-  templateUrl: './rxjs.component.html',
-  styleUrls: ['./rxjs.component.scss'],
+  templateUrl: './rxjs.component.html'
 })
 export class RxjsComponent implements OnInit {
 
