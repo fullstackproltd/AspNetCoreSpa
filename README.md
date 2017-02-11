@@ -24,7 +24,7 @@
 * [compodoc](https://github.com/compodoc/compodoc) for better angular documentation
 * [Typedoc](http://typedoc.io/) for typescript documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
-* Login and Registration functionality using [Asp.Net Identity](https://docs.asp.net/en/latest/security/authentication/identity.html)
+* Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
 * Token based authentication using [Openiddict](https://github.com/openiddict/openiddict-core)
      * Get public key acess using: http://localhost:5000/.well-known/jwks
 * Extensible User/Role identity implementation
@@ -133,5 +133,7 @@ npm run e2e:live
 * Navigate http://localhost:85
 
 # Azure MSDeploy command
-    * Use your site url, username, password
-"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -enableRule:AppOffline -source:contentPath="%USERPROFILE%\AspNetCoreSpa\bin\release\netcoreapp1.1\publish" -dest:contentPath="aspnetcorespa",ComputerName="https://aspnetcorespa.scm.azurewebsites.net/msdeploy.axd",UserName='yourusername',Password='yourpassword',AuthType='Basic'
+* Use your site url, username, password
+```
+"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -enableRule:AppOffline -source:contentPath="%USERPROFILE%\AspNetCoreSpa\bin\release\netcoreapp1.1\publish" -dest:contentPath="aspnetcorespa",ComputerName="https://yoursitename.scm.azurewebsites.net/msdeploy.axd",UserName='yourusername',Password='yourpassword',AuthType='Basic'
+```
