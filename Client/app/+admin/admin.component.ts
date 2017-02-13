@@ -4,7 +4,7 @@ import { DataService } from './../shared/services/data.service';
 import { AdminService } from './admin.service';
 
 @Component({
-    selector: 'appc--admin',
+    selector: 'appc-admin',
     templateUrl: './admin.component.html'
 })
 export class AdminComponent implements OnInit {

@@ -22,7 +22,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 Description= "Leaf rake with 48-inch wooden handle.",
                 Price= 19.95,
                 StarRating= 3.2,
-                ImageUrl= "http=//openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
+                ImageUrl= "http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png",
                 Tags = new string[] {"rake", "leaf", "yard", "home"}
             },
             new Product{
@@ -33,7 +33,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 Description= "15 gallon capacity rolling garden cart",
                 Price= 32.99,
                 StarRating= 4.2,
-                ImageUrl= "http=//openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
+                ImageUrl= "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
             },
             new Product{
                 Id= 5,
