@@ -9,7 +9,7 @@ export class ExamplesHomeComponent implements OnInit {
 
   public ngOnInit() {
     this.examples = [
-      { route: 'animation', title: 'Animation', description: 'An example using angular 2 webanimations api' },
+      { route: 'animations', title: 'Animations', description: 'Various examples of animations in angular 2' },
       { route: 'typeahead', title: 'Typeahead', description: 'An example showing ngbootstrap\'s typeahed control' },
       { route: 'rxjs', title: 'Rxjs', description: 'Various Rxjs examples to cover some concepts' },
       { route: 'advanceddirectives', title: 'Advanced directives', description: 'Advanced directives examples' },

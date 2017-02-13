@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ExamplesComponent } from './examples.component';
 import { ExamplesHomeComponent } from './examples-home/examples-home.component';
-import { AnimationComponent } from './animation/animation.component';
 import { TypeaheadComponent } from './typeahead/typeahead.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { AdvancedDirectivesModule } from './advanced-directives/advaned-directive.module';
@@ -22,7 +21,6 @@ import { DatetimeComponent } from './datetime/datetime.component';
         ExamplesComponent,
         ExamplesHomeComponent,
         // Examples
-        AnimationComponent,
         TypeaheadComponent,
         RxjsComponent,
         JqueryIntegrationComponent,

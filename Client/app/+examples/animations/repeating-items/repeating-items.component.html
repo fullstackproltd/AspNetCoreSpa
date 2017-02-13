@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="panel" [@focusPanel]='state'>
+        <input type="text" placeholder="Add an item here." on-focus='toggleFocus()' on-focusout='toggleFocus()' (keyup.enter)='submitItem($event)'>
+        <p id="subtxt" [@note]='state'>Hit enter to add</p>
+    </div>
+</div>
+
+<div class="small-12 medium-6">
+    <div class="panel nplr">
+        <div class="item-container" *ngFor="let item of ourItems; let i = index" [attr.data-index]="i" [@itemEnter]="state">
+            <div class="identifier"></div>
+            <p>{{ item }}</p>
+            <a (click)="removeItem($event, i)">X</a>
+        </div>
+    </div>
+</div>

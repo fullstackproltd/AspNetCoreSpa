@@ -1,9 +1,9 @@
-import { Component, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, trigger, style, state, transition, animate } from '@angular/core';
 
 @Component({
-  selector: 'appc-animation',
-  templateUrl: './animation.component.html',
-  styleUrls: ['./animation.component.scss'],
+  selector: 'appc-animations-basic-examples',
+  templateUrl: './basic-examples.component.html',
+  styleUrls: ['./basic-examples.component.scss'],
   animations: [
     trigger('signal', [
       state('void', style({
@@ -33,8 +33,7 @@ import { Component, trigger, state, style, transition, animate } from '@angular/
     ])
   ]
 })
-export class AnimationComponent {
-
+export class AnimationsBasicExamplesComponent {
   public buttonState: string = 'inactive';
 
   public signal = 'stop';

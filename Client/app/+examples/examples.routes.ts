@@ -2,7 +2,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ExamplesComponent } from './examples.component';
 import { ExamplesHomeComponent } from './examples-home/examples-home.component';
-import { AnimationComponent } from './animation/animation.component';
 import { TypeaheadComponent } from './typeahead/typeahead.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { JqueryIntegrationComponent } from './jquery-integration/jquery-integration.component';
@@ -14,7 +13,6 @@ const routes: Routes = [
   {
     path: '', component: ExamplesComponent, children: [
       { path: '', component: ExamplesHomeComponent },
-      { path: 'animation', component: AnimationComponent },
       { path: 'typeahead', component: TypeaheadComponent },
       { path: 'rxjs', component: RxjsComponent },
       { path: 'advanceddirectives', component: AdvancedDirectivesComponent },
@@ -25,7 +23,9 @@ const routes: Routes = [
         loadChildren: './reactive-forms/product.module#ReactiveFormsExampleModules'
       },
       { path: 'changedetection', component: ChangeDetectionComponent },
-      { path: '', loadChildren: './component/component-home.module#ComponentModule' }
+      { path: '', loadChildren: './component/component-home.module#ComponentModule' },
+      { path: 'animations', loadChildren: './animations/animations.module#AnimationsModule' }
+
     ]
   }
 ];
