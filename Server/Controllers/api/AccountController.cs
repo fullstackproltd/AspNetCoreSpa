@@ -41,68 +41,56 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+            if (result.Succeeded)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    var user = await _userManager.FindByEmailAsync(model.Email);
-                    var roles = await _userManager.GetRolesAsync(user);
-                    _logger.LogInformation(1, "User logged in.");
-                    return AppUtils.SignIn(user, roles);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToAction(nameof(SendCode), new { RememberMe = model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning(2, "User account locked out.");
-                    return BadRequest("Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return BadRequest(ModelState.GetModelErrors());
-                }
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                var roles = await _userManager.GetRolesAsync(user);
+                _logger.LogInformation(1, "User logged in.");
+                return AppUtils.SignIn(user, roles);
+            }
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToAction(nameof(SendCode), new { RememberMe = model.RememberMe });
+            }
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning(2, "User account locked out.");
+                return BadRequest("Lockout");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return BadRequest(ModelState.GetModelErrors());
             }
 
-            return BadRequest(new string[] { "Unable to login" });
         }
 
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model, string returnUrl = null)
         {
-            if (ModelState.IsValid)
+            var currentUser = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.Firstname, LastName = model.Lastname };
+            var result = await _userManager.CreateAsync(currentUser, model.Password);
+            if (result.Succeeded)
             {
-                var currentUser = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.Firstname, LastName = model.Lastname };
-                var result = await _userManager.CreateAsync(currentUser, model.Password);
-                if (result.Succeeded)
+                // Add to roles
+                var roleAddResult = await _userManager.AddToRoleAsync(currentUser, "User");
+                if (roleAddResult.Succeeded)
                 {
-                    // Add to roles
-                    var roleAddResult = await _userManager.AddToRoleAsync(currentUser, "User");
-                    if (roleAddResult.Succeeded)
-                    {
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(currentUser);
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(currentUser);
 
-                        var host = Request.Scheme + "://" + Request.Host;
-                        var callbackUrl = host + "?userId=" + currentUser.Id + "&emailConfirmCode=" + code;
-                        var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Confirm email address</a>";
-                        _logger.LogInformation(3, "User created a new account with password.");
-                        //await _emailSender.SendEmailAsync(MailType.Register, new EmailModel { To = model.Email }, confirmationLink);
-                        return Json(new { });
-                    }
+                    var host = Request.Scheme + "://" + Request.Host;
+                    var callbackUrl = host + "?userId=" + currentUser.Id + "&emailConfirmCode=" + code;
+                    var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Confirm email address</a>";
+                    _logger.LogInformation(3, "User created a new account with password.");
+                    //await _emailSender.SendEmailAsync(MailType.Register, new EmailModel { To = model.Email }, confirmationLink);
+                    return Json(new { });
                 }
-                AddErrors(result);
             }
-            else
-            {
-                return BadRequest(ModelState.GetModelErrors());
-            }
-
+            AddErrors(result);
             // If we got this far, something failed, redisplay form
             return BadRequest(ModelState.GetModelErrors());
         }
@@ -170,30 +158,25 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginCreateAccount([FromBody]ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
-            if (ModelState.IsValid)
+            // Get the information about the user from the external login provider
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
             {
-                // Get the information about the user from the external login provider
-                var info = await _signInManager.GetExternalLoginInfoAsync();
-                if (info == null)
-                {
-                    return BadRequest("External login information cannot be accessed, try again.");
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user);
+                return BadRequest("External login information cannot be accessed, try again.");
+            }
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user);
+            if (result.Succeeded)
+            {
+                result = await _userManager.AddLoginAsync(user, info);
                 if (result.Succeeded)
                 {
-                    result = await _userManager.AddLoginAsync(user, info);
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return Ok(); // Everything ok
-                    }
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
+                    return Ok(); // Everything ok
                 }
-                ModelState.AddModelError("", "Email already exists");
             }
-            return BadRequest(ModelState.GetModelErrors());
-
+            return BadRequest(new[] { "Email already exists" });
         }
         [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
@@ -223,37 +206,27 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [AllowAnonymous]
         public async Task<IActionResult> ForgotPassword([FromBody]ForgotPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            var currentUser = await _userManager.FindByNameAsync(model.Email);
+            if (currentUser == null || !(await _userManager.IsEmailConfirmedAsync(currentUser)))
             {
-                var currentUser = await _userManager.FindByNameAsync(model.Email);
-                if (currentUser == null || !(await _userManager.IsEmailConfirmedAsync(currentUser)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
-                // Send an email with this link
-                var code = await _userManager.GeneratePasswordResetTokenAsync(currentUser);
-
-                var host = Request.Scheme + "://" + Request.Host;
-                var callbackUrl = host + "?userId=" + currentUser.Id + "&passwordResetCode=" + code;
-                var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Reset your password</a>";
-                await _emailSender.SendEmailAsync(MailType.ForgetPassword, new EmailModel { To = model.Email }, confirmationLink);
-                return Json(new { });
+                // Don't reveal that the user does not exist or is not confirmed
+                return View("ForgotPasswordConfirmation");
             }
+            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
+            // Send an email with this link
+            var code = await _userManager.GeneratePasswordResetTokenAsync(currentUser);
 
-            // If we got this far, something failed, redisplay form
-            return BadRequest(model);
+            var host = Request.Scheme + "://" + Request.Host;
+            var callbackUrl = host + "?userId=" + currentUser.Id + "&passwordResetCode=" + code;
+            var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Reset your password</a>";
+            await _emailSender.SendEmailAsync(MailType.ForgetPassword, new EmailModel { To = model.Email }, confirmationLink);
+            return Json(new { });
         }
 
         [HttpPost("resetpassword")]
         [AllowAnonymous]
         public async Task<IActionResult> ResetPassword([FromBody]ResetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             var user = await _userManager.FindByNameAsync(model.Email);
 
             if (user == null)
@@ -288,11 +261,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [AllowAnonymous]
         public async Task<IActionResult> SendCode([FromBody]SendCodeViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.GetModelErrors());
-            }
-
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
@@ -338,11 +306,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyCode(VerifyCodeViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             // The following code protects for brute force attacks against the two factor codes.
             // If a user enters incorrect codes for a specified amount of time then the user account
             // will be locked out for a specified amount of time.

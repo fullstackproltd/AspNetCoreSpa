@@ -102,11 +102,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpPut("{id}")]
         public IActionResult PutProduct([FromRoute] int id, [FromBody] Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.GetModelErrors());
-            }
-
             var productToEdit = _products.FirstOrDefault(p => p.Id == id);
             var index = _products.IndexOf(productToEdit);
 
@@ -121,11 +116,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpPost]
         public IActionResult PostProduct([FromBody] Product product)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.GetModelErrors());
-            }
-
             product.Id = _products.Count + 1;
 
             _products.Add(product);
@@ -136,11 +126,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct([FromRoute] int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState.GetModelErrors());
-            }
-
             _products.Remove(_products.FirstOrDefault(p => p.Id == id));
 
             return Ok();

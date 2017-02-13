@@ -32,7 +32,10 @@ namespace AspNetCoreSpa.Server.Extensions
         }
         public static IServiceCollection AddCustomizedMvc(this IServiceCollection services)
         {
-            services.AddMvc()
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ModelValidationFilter));
+            })
             .AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;

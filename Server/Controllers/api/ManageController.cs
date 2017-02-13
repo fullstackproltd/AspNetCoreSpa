@@ -92,10 +92,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             // Generate the token and send it
             var user = await GetCurrentUserAsync();
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
@@ -151,10 +147,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
@@ -203,10 +195,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
@@ -237,10 +225,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
 
             var user = await GetCurrentUserAsync();
             if (user != null)

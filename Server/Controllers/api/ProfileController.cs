@@ -76,12 +76,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordVm model)
         {
-            if (!ModelState.IsValid)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json(ModelState.GetModelErrors());
-            }
-
             try
             {
                 var user = await _userManager.FindByEmailAsync(HttpContext.User.Identity.Name);
