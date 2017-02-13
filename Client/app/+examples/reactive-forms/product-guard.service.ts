@@ -13,7 +13,7 @@ export class ProductDetailGuard implements CanActivate {
         if (isNaN(id) || id < 1) {
             alert('Invalid product Id');
             // start a new navigation to redirect to list page
-            this.router.navigate(['/products']);
+            this.router.navigate(['examples/reactiveforms']);
             // abort current navigation
             return false;
         }
