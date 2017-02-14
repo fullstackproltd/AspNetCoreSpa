@@ -2,13 +2,11 @@ var webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');
 const OptimizeJsPlugin = require('optimize-js-plugin');
-let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'source-map',
-    entry: {
-        'polyfills': './Client/polyfills.ts'
-    },
     output: {
         filename: '[name].[chunkhash].bundle.js',
         sourceMapFilename: '[name].[chunkhash].bundle.map',
@@ -50,7 +48,7 @@ module.exports = webpackMerge(commonConfig, {
             // Log level. Can be 'info', 'warn', 'error' or 'silent'. 
             logLevel: 'info'
         }),
-        new webpack.optimize.UglifyJsPlugin({
+        new UglifyJsPlugin({
             beautify: false,
             comments: false,
             sourceMap: true

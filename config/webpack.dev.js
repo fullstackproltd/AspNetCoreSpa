@@ -1,3 +1,4 @@
+const path = require('path');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');
 const webpackMergeDll = webpackMerge.strategy({ plugins: 'replace' });
@@ -7,6 +8,9 @@ const helpers = require('./helpers');
 
 module.exports = webpackMerge(commonConfig, {
     devtool: 'cheap-module-source-map',
+    output: {
+        filename: '[name].js',
+    },
     plugins: [
         new DllBundlesPlugin({
             bundles: {
@@ -40,6 +44,19 @@ module.exports = webpackMerge(commonConfig, {
                 devtool: 'cheap-module-source-map',
                 plugins: []
             })
-        })
+        }),
+        /**
+         * Plugin: AddAssetHtmlPlugin
+         * Description: Adds the given JS or CSS file to the files
+         * Webpack knows about, and put it into the list of assets
+         * html-webpack-plugin injects into the generated html.
+         *
+         * See: https://github.com/SimenB/add-asset-html-webpack-plugin
+         */
+        new AddAssetHtmlPlugin([
+            { filepath: helpers.root(`wwwroot/dist/${DllBundlesPlugin.resolveFile('polyfills')}`) },
+            { filepath: helpers.root(`wwwroot/dist/${DllBundlesPlugin.resolveFile('vendor')}`) }
+        ]),
+
     ]
 });

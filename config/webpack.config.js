@@ -17,6 +17,13 @@ console.log("==========Is Dev Build = " + isDevBuild + " ============")
 console.log("==========Is AOT Build = " + AOT + " ============")
 
 let commonConfig = {
+    entry: {
+        'main': AOT ? './Client/main.aot.ts' : './Client/main.ts'
+    },
+    output: {
+        path: path.join(__dirname, '../wwwroot', 'dist'),
+        publicPath: '/dist/'
+    },
     resolve: {
         /*
        * An array of extensions that should be used to resolve modules.
@@ -58,15 +65,6 @@ let commonConfig = {
             { test: /\.(woff|woff2|eot|ttf|svg)$/, use: 'file-loader' }
         ]
     },
-    entry: {
-        'polyfills': './Client/polyfills.ts',
-        'main': AOT ? './Client/main.aot.ts' : './Client/main.ts'
-    },
-    output: {
-        path: path.join(__dirname, '../wwwroot', 'dist'),
-        filename: '[name].js',
-        publicPath: '/dist/'
-    },
     profile: true,
     plugins: [
         new ExtractTextPlugin("vendor.css"),
@@ -86,6 +84,9 @@ let commonConfig = {
             disabled: !AOT,
             tsConfig: helpers.root('tsconfig.webpack.json')
         }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     name: ['main', 'vendor', 'polyfills']
+        // }),
         /**
          * Plugin: ContextReplacementPlugin
          * Description: Provides context to Angular's use of System.import
