@@ -1,13 +1,14 @@
-let path = require('path');
-let helpers = require('./helpers');
-let webpack = require('webpack');
+const path = require('path');
+const helpers = require('./helpers');
+const webpack = require('webpack');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const ngcWebpack = require('ngc-webpack');
-let devConfig = require('./webpack.dev');
-let prodConfig = require('./webpack.prod');
-let isDevBuild = process.argv.indexOf('--env.prod') < 0;
+const devConfig = require('./webpack.dev');
+const prodConfig = require('./webpack.prod');
+const isDevBuild = process.argv.indexOf('--env.prod') < 0;
 
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = helpers.hasNpmFlag('aot');
@@ -53,7 +54,8 @@ let commonConfig = {
             { test: /\.scss$/, use: ['to-string-loader', 'css-loader', 'sass-loader'] },
             { test: /\.html$/, use: 'html-loader' },
             { test: /\.json$/, use: 'json-loader' },
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
+            { test: /\.(jpg|png|gif)$/, use: 'file-loader' },
+            { test: /\.(woff|woff2|eot|ttf|svg)$/, use: 'file-loader' }
         ]
     },
     entry: {
@@ -83,7 +85,23 @@ let commonConfig = {
         new ngcWebpack.NgcWebpackPlugin({
             disabled: !AOT,
             tsConfig: helpers.root('tsconfig.webpack.json')
-        })
+        }),
+        /**
+         * Plugin: ContextReplacementPlugin
+         * Description: Provides context to Angular's use of System.import
+         *
+         * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+         * See: https://github.com/angular/angular/issues/11580
+         */
+        new ContextReplacementPlugin(
+            // The (\\|\/) piece accounts for path separators in *nix and Windows
+            /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
+            helpers.root('Client'), // location of your Client
+            {
+                // your Angular Async Route paths relative to this root directory
+            }
+        ),
+
     ]
 };
 
