@@ -1,14 +1,11 @@
 <h3>Angular 2 examples kitchen sink</h3>
 
-<div class="card">
-</div>
-
 <div class="row">
-  <div class="col-sm-4" *ngFor="let example of examples">
+  <div class="col-sm-2" *ngFor="let example of examples">
     <div class="card card-block">
-      <h3 class="card-title">{{example.title}}</h3>
+      <h6 class="card-title">{{example.title}}</h6>
       <p class="card-text">{{example.description}}</p>
-      <a class="btn btn-primary" routerLink="{{example.route}}">View »</a>
+      <a routerLink="{{example.route}}">View »</a>
     </div>
   </div>
 </div>
