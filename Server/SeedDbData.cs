@@ -66,6 +66,12 @@ namespace AspNetCoreSpa.Server
             if (!_context.Content.Any())
             {
                 _context.Content.Add(new Content { Id = 1, Key = "TITLE" });
+                _context.Content.Add(new Content { Id = 2, Key = "APP_NAV_HOME" });
+                _context.Content.Add(new Content { Id = 3, Key = "APP_NAV_EXAMPLES" });
+                _context.Content.Add(new Content { Id = 4, Key = "APP_NAV_LOGIN" });
+                _context.Content.Add(new Content { Id = 5, Key = "APP_NAV_LOGOUT" });
+                _context.Content.Add(new Content { Id = 6, Key = "APP_NAV_REGISTER" });
+                _context.Content.Add(new Content { Id = 7, Key = "APP_NAV_ADMIN" });
                 _context.SaveChanges();
             }
 
@@ -73,6 +79,25 @@ namespace AspNetCoreSpa.Server
             {
                 _context.ContentText.Add(new ContentText { Text = "Site title", LanguageId = 1, ContentId = 1 });
                 _context.ContentText.Add(new ContentText { Text = "Titre du site", LanguageId = 2, ContentId = 1 });
+
+                _context.ContentText.Add(new ContentText { Text = "Home", LanguageId = 1, ContentId = 2 });
+                _context.ContentText.Add(new ContentText { Text = "Accueil", LanguageId = 2, ContentId = 2 });
+
+                _context.ContentText.Add(new ContentText { Text = "Examples", LanguageId = 1, ContentId = 3 });
+                _context.ContentText.Add(new ContentText { Text = "Exemples", LanguageId = 2, ContentId = 3 });
+
+                _context.ContentText.Add(new ContentText { Text = "Login", LanguageId = 1, ContentId = 4 });
+                _context.ContentText.Add(new ContentText { Text = "S'identifier", LanguageId = 2, ContentId = 4 });
+
+                _context.ContentText.Add(new ContentText { Text = "Logout", LanguageId = 1, ContentId = 5 });
+                _context.ContentText.Add(new ContentText { Text = "Connectez - Out", LanguageId = 2, ContentId = 5 });
+
+                _context.ContentText.Add(new ContentText { Text = "Register", LanguageId = 1, ContentId = 6 });
+                _context.ContentText.Add(new ContentText { Text = "registre", LanguageId = 2, ContentId = 6 });
+
+                _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 1, ContentId = 7});
+                _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 2, ContentId = 7 });
+
                 _context.SaveChanges();
             }
         }

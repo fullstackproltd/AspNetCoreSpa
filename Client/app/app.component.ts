@@ -36,8 +36,10 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.translate.get('TITLE')
-      .subscribe(title => this.setTitle(title));
+    this.translate.onLangChange.subscribe(lan => {
+      this.translate.get('TITLE')
+        .subscribe(title => this.setTitle(title));
+    });
 
     this.authState$ = this.store.select(state => state.auth);
 

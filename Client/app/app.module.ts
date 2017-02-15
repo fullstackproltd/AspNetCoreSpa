@@ -4,14 +4,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/Router';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { HomeModule } from './home/home.module';
 
 import { routing } from './app.routes';
 import { AppService } from './app.service';
 import { appReducer } from './app-store';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
-import { CoreModule } from './core/core.module';
-import { HomeModule } from './home/home.module';
 
 @NgModule({
     declarations: [AppComponent],
@@ -21,8 +21,8 @@ import { HomeModule } from './home/home.module';
         // FormsModule,
         HttpModule,
         // Only module that app module loads
+        CoreModule.forRoot(),
         SharedModule.forRoot(),
-        CoreModule,
         HomeModule,
         StoreModule.provideStore(appReducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension()
