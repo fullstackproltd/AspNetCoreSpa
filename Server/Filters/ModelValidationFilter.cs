@@ -1,3 +1,4 @@
+using AspNetCoreSpa.Server.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace AspNetCoreSpa.Server.Filters
                 else
                 {
                     var result = new ContentResult();
-                    string content = JsonConvert.SerializeObject(filterContext.ModelState,
+                    string content = JsonConvert.SerializeObject(filterContext.ModelState.GetModelErrors(),
                         new JsonSerializerSettings
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore

@@ -3,7 +3,9 @@ using System.ComponentModel.DataAnnotations;
 namespace AspNetCoreSpa.Server.Entities
 {
     public class ContactUs : IEntityBase
-    {        
+    {
+        [Key]
+        public int Id { get; set; }
         [Required]
         [StringLength(255, MinimumLength = 5)]
         public string Name { get; set; }
@@ -16,7 +18,6 @@ namespace AspNetCoreSpa.Server.Entities
         [StringLength(1024, MinimumLength = 5)]
         public string Message { get; set; }
 
-        public int Id { get; set; }
     }
 
 }

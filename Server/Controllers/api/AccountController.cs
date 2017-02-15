@@ -72,7 +72,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model, string returnUrl = null)
         {
-            var currentUser = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.Firstname, LastName = model.Lastname };
+            var currentUser = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                FirstName = model.Firstname,
+                LastName = model.Lastname
+            };
+            
             var result = await _userManager.CreateAsync(currentUser, model.Password);
             if (result.Succeeded)
             {

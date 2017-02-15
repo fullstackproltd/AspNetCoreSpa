@@ -10,7 +10,8 @@ import { AuthState } from '../../core/auth-store/auth.store';
 
 @Component({
     selector: 'appc-header',
-    templateUrl: './header.component.html'
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
     public isCollapsed: boolean = true;

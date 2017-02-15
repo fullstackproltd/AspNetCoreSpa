@@ -10,6 +10,7 @@ namespace AspNetCoreSpa.Server.Entities
         [Required]
         [MaxLength(7)]
         public string Locale { get; set; }
+        [MaxLength(100)]
         public string Description { get; set; }
         public ICollection<ContentText> ContentTexts { get; set; }
     }

@@ -12,6 +12,7 @@ namespace AspNetCoreSpa.Server.Entities
         public string UserId { get; private set; }
 
         [Required]
+        [DataType(DataType.DateTime)]
         public DateTimeOffset Timestamp { get; private set; } = DateTime.UtcNow;
 
         [Required]
