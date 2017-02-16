@@ -132,6 +132,10 @@ npm run e2e:live
 * docker run -it -d -p 85:80 aspnetcorespa
 * Navigate http://localhost:85
 
+# Compatability
+ * This project is supported in everygreen browsers and IE10+
+ * IE8 & IE9 aren't supported since Bootstrap 4 is supported in IE10+ [explained here](http://v4-alpha.getbootstrap.com/getting-started/browsers-devices/).
+
 # Azure MSDeploy command
 * Use your site url, username, password
 ```
