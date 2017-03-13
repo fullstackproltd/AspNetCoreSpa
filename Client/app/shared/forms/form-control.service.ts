@@ -22,7 +22,7 @@ export class FormControlService {
             }
             // Maxlength
             if (control.maxlength) {
-                validators.push(Validators.minLength(control.maxlength));
+                validators.push(Validators.maxLength(control.maxlength));
             }
             // Email
             if (control.type === 'email') {
