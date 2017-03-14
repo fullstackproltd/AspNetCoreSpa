@@ -1,4 +1,5 @@
 version: 1.0.{build}
+image: Visual Studio 2017
 pull_requests:
   do_not_increment_build_number: true
 branches:
@@ -34,6 +35,7 @@ before_build:
 build:
   project: AspNetCoreSpa.csproj
   publish_wap: true
+  configuration: Release
   verbosity: minimal
 
 after_build:
