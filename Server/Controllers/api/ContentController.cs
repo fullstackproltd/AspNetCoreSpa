@@ -30,8 +30,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             var contentCacheKey = "ContentKey" + lang;
             var result = (from c in _context.Content
-                          join t in _context.ContentText on c._id equals t.ContentId
-                          join l in _context.Languageses on t.LanguageId equals l._id
+                          join t in _context.ContentText on c.Id equals t.ContentId
+                          join l in _context.Languageses on t.LanguageId equals l.Id
                           where l.Locale == lang
                           select new ContentVm
                           {
@@ -49,7 +49,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var content = _context.Content.FirstOrDefault(c => c.Key == model.Key);
             if (content != null)
             {
-                var contentText = _context.ContentText.FirstOrDefault(t => t.ContentId == content._id);
+                var contentText = _context.ContentText.FirstOrDefault(t => t.ContentId == content.Id);
                 if (contentText != null)
                 {
                     contentText.Text = model.Value;

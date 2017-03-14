@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AspNetCoreSpa.Server.Entities
 {
-    public class Product : IEntityBase
+    public class Product
     {
         [Key]
         public int _id { get; set; }

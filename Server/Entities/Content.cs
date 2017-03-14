@@ -6,7 +6,7 @@ namespace AspNetCoreSpa.Server.Entities
     public class Content : IEntityBase
     {
         [Key]
-        public int _id { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(250)]
         public string Key { get; set; }

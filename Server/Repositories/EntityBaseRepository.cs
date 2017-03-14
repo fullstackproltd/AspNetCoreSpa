@@ -52,7 +52,7 @@ namespace AspNetCoreSpa.Server.Repositories
         }
         public T GetSingle(int id)
         {
-            return _context.Set<T>().FirstOrDefault(x => x._id == id);
+            return _context.Set<T>().FirstOrDefault(x => x.Id == id);
         }
 
         public T GetSingle(Expression<Func<T, bool>> predicate)
@@ -73,7 +73,7 @@ namespace AspNetCoreSpa.Server.Repositories
 
         public async Task<T> GetSingleAsync(int id)
         {
-            return await _context.Set<T>().FirstOrDefaultAsync(e => e._id == id);
+            return await _context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
         }
         public virtual IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate)
         {

@@ -6,7 +6,7 @@ namespace AspNetCoreSpa.Server.Entities
     public class Language : IEntityBase
     {
         [Key]
-        public int _id { get; set; }
+        public int Id { get; set; }
         [Required]
         [MaxLength(7)]
         public string Locale { get; set; }

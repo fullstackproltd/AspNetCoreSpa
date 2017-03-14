@@ -5,7 +5,7 @@ namespace AspNetCoreSpa.Server.Entities
     public class ContactUs : IEntityBase
     {
         [Key]
-        public int _id { get; set; }
+        public int Id { get; set; }
         [Required]
         [StringLength(255, MinimumLength = 5)]
         public string Name { get; set; }

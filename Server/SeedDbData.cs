@@ -58,20 +58,20 @@ namespace AspNetCoreSpa.Server
         {
             if (!_context.Languageses.Any())
             {
-                _context.Languageses.Add(new Language { _id = 1, Locale = "en", Description = "English" });
-                _context.Languageses.Add(new Language { _id = 2, Locale = "fr", Description = "Frensh" });
+                _context.Languageses.Add(new Language { Id = 1, Locale = "en", Description = "English" });
+                _context.Languageses.Add(new Language { Id = 2, Locale = "fr", Description = "Frensh" });
                 _context.SaveChanges();
             }
 
             if (!_context.Content.Any())
             {
-                _context.Content.Add(new Content { _id = 1, Key = "TITLE" });
-                _context.Content.Add(new Content { _id = 2, Key = "APP_NAV_HOME" });
-                _context.Content.Add(new Content { _id = 3, Key = "APP_NAV_EXAMPLES" });
-                _context.Content.Add(new Content { _id = 4, Key = "APP_NAV_LOGIN" });
-                _context.Content.Add(new Content { _id = 5, Key = "APP_NAV_LOGOUT" });
-                _context.Content.Add(new Content { _id = 6, Key = "APP_NAV_REGISTER" });
-                _context.Content.Add(new Content { _id = 7, Key = "APP_NAV_ADMIN" });
+                _context.Content.Add(new Content { Id = 1, Key = "TITLE" });
+                _context.Content.Add(new Content { Id = 2, Key = "APP_NAV_HOME" });
+                _context.Content.Add(new Content { Id = 3, Key = "APP_NAV_EXAMPLES" });
+                _context.Content.Add(new Content { Id = 4, Key = "APP_NAV_LOGIN" });
+                _context.Content.Add(new Content { Id = 5, Key = "APP_NAV_LOGOUT" });
+                _context.Content.Add(new Content { Id = 6, Key = "APP_NAV_REGISTER" });
+                _context.Content.Add(new Content { Id = 7, Key = "APP_NAV_ADMIN" });
                 _context.SaveChanges();
             }
 
