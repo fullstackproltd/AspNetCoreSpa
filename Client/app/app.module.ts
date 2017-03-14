@@ -1,4 +1,5 @@
 import { NgModule, NgModuleFactoryLoader } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -16,6 +17,7 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        BrowserAnimationsModule,
         BrowserModule,
         routing,
         // FormsModule,

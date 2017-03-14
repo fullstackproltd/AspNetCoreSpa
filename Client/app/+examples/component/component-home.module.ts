@@ -9,9 +9,25 @@ import { ParentComponent } from './access-child-components/parent';
 import { ChildComponent } from './access-child-components/child';
 import { EdgeService } from './graph/edge.service';
 import { routing } from './component-home.routes';
+import { GridModule } from './dynamic-components/library/grid.module';
+import { BlueDynamicComponent } from './dynamic-components/blue-dynamic.component';
+import { GreenDynamicComponent } from './dynamic-components/green-dynamic.component';
+import { RedDynamicComponent } from './dynamic-components/red-dynamic.component';
+import { DynamicComponent } from './dynamic-components/dynamic.component';
+import { ChangeDetectionComponent } from './change-detection/change-detection.component';
+import { ChangeDetectionOnPushComponent } from './change-detection/comment-selection-1.component';
+import { ChangeDetectionDefaultComponent } from './change-detection/comment-selection-2.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
-    imports: [SharedModule, routing],
+    imports: [
+        routing,
+        SharedModule,
+        GridModule.withComponents([
+            BlueDynamicComponent,
+            GreenDynamicComponent,
+            RedDynamicComponent])
+    ],
     exports: [],
     declarations: [
         GraphComponent,
@@ -19,7 +35,16 @@ import { routing } from './component-home.routes';
         VertexComponent,
         ComponentHomeComponent,
         ParentComponent,
-        ChildComponent
+        ChildComponent,
+        DynamicComponent,
+        BlueDynamicComponent,
+        GreenDynamicComponent,
+        RedDynamicComponent,
+        ChangeDetectionComponent,
+        ChangeDetectionOnPushComponent,
+        ChangeDetectionDefaultComponent,
+        RxjsComponent
+
     ],
     // dynamic components have to be added in entry components
     entryComponents: [EdgeComponent],

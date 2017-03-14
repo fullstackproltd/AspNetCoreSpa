@@ -1,9 +1,12 @@
 
+using System.ComponentModel.DataAnnotations;
+
 namespace AspNetCoreSpa.Server.Entities
 {
     public class Product : IEntityBase
     {
-        public int Id { get; set; }
+        [Key]
+        public int _id { get; set; }
         public string ProductName { get; set; }
         public string ProductCode { get; set; }
         public string[] Tags { get; set; }

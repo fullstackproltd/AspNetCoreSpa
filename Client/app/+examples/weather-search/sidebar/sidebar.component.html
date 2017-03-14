@@ -1,0 +1,26 @@
+<h3>Saved Profiles</h3>
+<div class="row">
+  <form (ngSubmit)="onSaveNew()" class="form-inline">
+    <input type="text" [(ngModel)]="newProfile.profileName" name="profileName" placeholder="Name" class="form-control">
+    <input type="text" [(ngModel)]="newProfile.cities" name="profileCity" placeholder="City" class="form-control">
+    <button class="btn btn-primary" type="submit">Save</button>
+  </form>
+</div>
+
+<!--Profile list-->
+<div class="row">
+  <div class="card" *ngFor="let profile of profiles">
+    <div class="card-block">
+      <h4 class="card-title">{{ profile.profileName }} - {{ profile.cities }}</h4>
+      <p class="card-text"></p>
+      <a class="btn btn-danger" (click)="onDeleteProfile($event, profile)">Delete</a>
+      <a class="btn btn-primary" (click)="onLoadProfile(profile)">Load</a>
+    </div>
+  </div>
+
+  <div class="well" *ngIf="weatherItem">
+    <h2>{{ weatherItem?.name }}</h2>
+    <p><span class="label label-primary">Temp </span>&nbsp; {{ weatherItem?.main.temp }}°F</p>
+    <p><span class="label label-info">Outlook </span>&nbsp; {{ weatherItem?.weather[0].description }}</p>
+  </div>
+</div>

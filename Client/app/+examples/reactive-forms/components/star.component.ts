@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 
 @Component({
-    selector: 'ai-star',
+    selector: 'appc-ai-star',
     templateUrl: './star.component.html',
     styleUrls: ['./star.component.scss']
 })

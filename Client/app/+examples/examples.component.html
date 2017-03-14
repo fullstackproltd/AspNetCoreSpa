@@ -1,2 +1,22 @@
-
-<router-outlet></router-outlet>
+<div class="row">
+  <div class="col-md-9 push-md-3 bd-content">
+    <router-outlet>
+      <appc-page-heading text="Examples kitchensink"></appc-page-heading>
+    </router-outlet>
+  </div>
+  <div class="col-md-3 pull-md-9">
+    <div class="list-group">
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['animationexamples']">Animations</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['reactiveforms']">Reactive forms</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['uibootstrap']">Ng Bootstrap</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['directives']">Directives</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['components']">Components</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['jquery']">jQuery</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['weather']">Weathers</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['texteditor']">Text Editor (tinymce)</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['markdowneditor']">Markdown Editor (SimpleMDE)</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['googlemaps']">Google maps</a>
+      <a class="list-group-item" routerLinkActive="active" [routerLink]="['stripepayment']">Stripe payment</a>
+    </div>
+  </div>
+</div>

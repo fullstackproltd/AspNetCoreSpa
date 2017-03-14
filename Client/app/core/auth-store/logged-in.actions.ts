@@ -10,7 +10,7 @@ export const LoggedInActionTypes = {
 @Injectable()
 export class LoggedInActions {
     public loggedIn(): Action {
-        return{
+        return {
             type: LoggedInActionTypes.LOGGED_IN
         };
     }

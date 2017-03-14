@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
     // This starts up the token refresh preocess for the app
     this.tokens.startupTokenRefresh()
       .subscribe(
+      // tslint:disable-next-line:no-console
       () => console.info('Startup success'),
       error => console.warn(error)
       );

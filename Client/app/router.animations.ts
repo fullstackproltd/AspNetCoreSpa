@@ -1,4 +1,4 @@
-import { trigger, state, animate, style, transition } from '@angular/core';
+import { trigger, state, animate, style, transition } from '@angular/animations';
 
 export function routerTransition() {
     return trigger('routerTransition', [

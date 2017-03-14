@@ -11,8 +11,8 @@ import { FormControlService } from './form-control.service';
 export class DynamicFormComponent implements OnInit {
 
     @Input() public controls: Array<ControlBase<any>> = [];
-    @Input() public btnText: string = 'Submit'; // Default value at least
-    @Input() public formClass: string = 'form-horizontal';
+    @Input() public btnText = 'Submit'; // Default value at least
+    @Input() public formClass = 'form-horizontal';
     // Note: don't keep name of output events as same as native events such as submit etc.
     @Output() public formsubmit: EventEmitter<any> = new EventEmitter<any>();
     public form: FormGroup;
@@ -20,7 +20,7 @@ export class DynamicFormComponent implements OnInit {
     constructor(public _controlService: FormControlService) { }
 
     public ngOnInit() {
-        let sortedControls = this.controls.sort((a, b) => a.order - b.order);
+        const sortedControls = this.controls.sort((a, b) => a.order - b.order);
         this.form = this._controlService.toControlGroup(sortedControls);
     }
 

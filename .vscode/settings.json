@@ -9,15 +9,11 @@
         "**/node_modules": true,
         "**/obj": true,
         ".npmignore": true,
-        "*.xproj.user": true,
         "Dockerfile": false,
         ".vs": true,
-        "project.lock.json": true,
-        "AspNetCoreSpa.xproj": true,
         "AspNetCoreSpa.sln": true,
         "Properties": true,
         ".awcache": true,
-        "*.csproj*": true,
         "*.PublishSettings": true,
         "logs": true,
         "npm-debug.log.*": true,
@@ -44,99 +40,5 @@
         "wwwroot": true,
         "bin": true
     },
-    "typescript.tsdk": "./node_modules/typescript/lib",
-    // https://github.com/mkloubert/vs-deploy
-    // https://marketplace.visualstudio.com/items?itemName=mkloubert.vs-deploy
-    "deploy": {
-        "button": {
-            "enabled": true,
-            "text": "Deploy",
-            "packages": [
-                "azureWebDeploy"
-                // "ftp"
-            ]
-        },
-        "packages": [
-            {
-                "name": "azureWebDeploy",
-                "files": [
-                    "bin/Release/netcoreapp1.1/publish/**"
-                ],
-                "exclude": [],
-                "deployOnSave": false,
-                "targets": [
-                    "AzureWebDeploy"
-                ]
-            },
-            {
-                "name": "ftp",
-                "files": [
-                    "bin/Release/netcoreapp1.1/publish/**"
-                ],
-                "exclude": [],
-                "deployOnSave": false,
-                "targets": [
-                    "AzureFtp"
-                ]
-            }
-        ],
-        "targets": [
-            {
-                "name": "AzureWebDeploy",
-                "type": "test",
-                "description": "Deploys via Web Deploy from the command line",
-                // "beforeDeploy": [
-                //     {
-                //         "target": "C:\\Program Files\\dotnet\\dotnet.exe",
-                //         "arguments": [
-                //             "publish",
-                //             "-c",
-                //             "release"
-                //         ]
-                //     }
-                // ],
-                "deployed": [
-                    {
-                        "target": "C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe",
-                        "arguments": [
-                            "-verb:sync",
-                            "-enableRule:appoffline",
-                            "-source:contentPath=%USERPROFILE%\\AspNetCoreSpa\\bin\\release\\netcoreapp1.1\\publish",
-                            "-dest:contentPath=aspnetcorespa,ComputerName=https://aspnetcorespa.scm.azurewebsites.net//msdeploy.axd,UserName='$aspnetcorespa',Password='kaP1gm5cfio1Cm2o0zErWh2Rg3tzqEnbTmBtiB6jpXG7dja1poj0mwwRMnqJ',AuthType='Basic'"
-                            // "-source:package='..\\package.zip'",
-                            // "-dest:auto,computerName=aspnetcorespa.azurewebsites.net,userName=$aspnetcorespa,password=kaP1gm5cfio1Cm2o0zErWh2Rg3tzqEnbTmBtiB6jpXG7dja1poj0mwwRMnqJ,authtype=basic,includeAcls=False",
-                            // "-verb:sync",
-                            // "-disableLink:AppPoolExtension",
-                            // "-disableLink:ContentExtension",
-                            // "-disableLink:CertificateExtension"
-                        ]
-                    }
-                ]
-            },
-            {
-                "name": "AzureFtp",
-                "type": "ftp",
-                "host": "waws-prod-sn1-053.ftp.azurewebsites.windows.net",
-                "dir": "/site/wwwroot",
-                "user": "aspnetcorespa\\$aspnetcorespa",
-                "password": "kaP1gm5cfio1Cm2o0zErWh2Rg3tzqEnbTmBtiB6jpXG7dja1poj0mwwRMnqJ",
-                "mappings": [
-                    {
-                        "source": "bin/Release/netcoreapp1.1/publish",
-                        "target": "/"
-                    }
-                ],
-                "beforeDeploy": [
-                    {
-                        "target": "C:\\Program Files\\dotnet\\dotnet.exe",
-                        "arguments": [
-                            "publish",
-                            "-c",
-                            "release"
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
+    "typescript.tsdk": "./node_modules/typescript/lib"
 }

@@ -1,5 +1,11 @@
 import './polyfills';
 import './styles/vendor.css';
+import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/select';
+import 'rxjs/add/operator/finally';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';

@@ -1,0 +1,13 @@
+<appc-page-heading text="Google maps"></appc-page-heading> using <a href="https://angular-maps.com/">angular2-google-maps</a> module.
+
+<div class="alert alert-danger">
+  <strong>CSS styling is required! </strong>
+  <p>
+    It is really important that you define a height for the css class .sebm-google-map-container. Otherwise, you won't see a
+    map on the page!
+  </p>
+</div>
+
+<sebm-google-map [latitude]="lat" [longitude]="lng">
+  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+</sebm-google-map>

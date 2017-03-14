@@ -1,4 +1,5 @@
-import { Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import { Component } from '@angular/core';
+import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'appc-animation-repeating-items',
@@ -52,7 +53,7 @@ import { Component, trigger, state, style, transition, animate, keyframes } from
   ]
 })
 export class AnimationsRepeatingItemsComponent {
-  public state: string = 'inactive';
+  public state = 'inactive';
 
   public ourItems = [
     'Start the new app project',

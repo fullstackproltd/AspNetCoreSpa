@@ -38,7 +38,7 @@
 
                         <li class="nav-item" *ngIf="(authState$ | async)?.loggedIn">
                             <a class="nav-link" routerLinkActive="active" routerLink="profile">
-                                <i class="fa fa-user"></i> {{(authState$ | async)?.profile.unique_name}}
+                                <i class="fa fa-user"></i> {{(authState$ | async)?.profile.name}}
                             </a>
                         </li>
 

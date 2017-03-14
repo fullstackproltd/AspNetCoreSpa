@@ -13,8 +13,8 @@ export class ErrorMessageComponent {
     @Input() public form: FormGroupDirective;
 
     get errorMessage() {
-        let c = this.form.form.get(this.control.key);
-        for (let propertyName in c.errors) {
+        const c = this.form.form.get(this.control.key);
+        for (const propertyName in c.errors) {
             if (c.errors.hasOwnProperty(propertyName) && c.touched) {
                 return ValidationService.getValidatorErrorMessage(propertyName, this.control.minlength || this.control.maxlength);
             }

@@ -3,11 +3,11 @@ import { User } from './user.model';
 
 describe('User Model', () => {
   it('has displayName', () => {
-    let userModel: User = {displayName: 'test', roles: ['1']};
+    const userModel: User = { displayName: 'test', roles: ['1'] };
     expect(userModel.displayName).toEqual('test');
   });
   it('has displayName', () => {
-    let userModel: User = {displayName: 'test', roles: ['admin']};
+    const userModel: User = { displayName: 'test', roles: ['admin'] };
     expect(userModel.roles[0]).toEqual('admin');
   });
 });

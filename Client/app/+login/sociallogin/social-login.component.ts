@@ -36,7 +36,7 @@ export class SocialLoginComponent {
     }
 
     public redirect(provider: string): void {
-        let url = window.location.protocol + '//' + window.location.host + '/api/account/ExternalLogin?provider=' + provider;
+        const url = window.location.protocol + '//' + window.location.host + '/api/account/ExternalLogin?provider=' + provider;
         console.log(url);
         window.location.href = url;
     }

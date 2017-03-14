@@ -4,11 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { StarComponent } from './components/star.component';
 import { SharedModule } from './../../shared/shared.module';
-import { ProductListComponent } from './product-list.component';
-import { ProductDetailComponent } from './product-detail.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDetailGuard, ProductEditGuard } from './product-guard.service';
-import { ProductEditComponent } from './product-edit.component';
-import { ReactiveFormsExampleComponent } from './reactive-forms.component';
 
 import { ProductFilterPipe } from './product-filter.pipe';
 import { ProductService } from './product.service';
@@ -20,10 +19,9 @@ import { routing } from './product.routes';
     routing
   ],
   declarations: [
-    ReactiveFormsExampleComponent,
     ProductListComponent,
-    ProductDetailComponent,
     ProductEditComponent,
+    ProductDetailComponent,
     ProductFilterPipe,
     StarComponent
   ],

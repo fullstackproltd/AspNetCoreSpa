@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { routerTransition, hostStyle } from '../router.animations';
 
 @Component({
   selector: 'appc-examples',
   templateUrl: './examples.component.html',
-  animations: [routerTransition()],
-  // tslint:disable-next-line:use-host-property-decorator
-  host: hostStyle()
+  styleUrls: ['./examples.component.scss']
 })
 export class ExamplesComponent { }

@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     };
 
     public ngOnInit() {
-        let controls: Array<ControlBase<any>> = [
+        const controls: Array<ControlBase<any>> = [
             new ControlTextbox({
                 key: 'username',
                 label: 'Email',

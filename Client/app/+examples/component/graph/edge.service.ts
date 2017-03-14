@@ -1,6 +1,5 @@
 import { Subject } from 'rxjs/Subject';
 import { Coordinates } from './coordinates';
-// import 'rxjs/add/operator/bufferCount';
 
 export class EdgeService extends Subject<Coordinates> {
 

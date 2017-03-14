@@ -3,11 +3,10 @@ import { EdgeService } from './edge.service';
 import { Coordinates } from './coordinates';
 
 @Component({
-    selector: 'vertex',
+    selector: 'appc-vertex',
     styleUrls: ['./vertex.component.scss'],
     template: '<div #vertex class="vertex" (click)="setCoordinates()"><span class="vertex-text">{{value}}</span></div>'
 })
-
 export class VertexComponent {
 
     @ViewChild('vertex') public element: ElementRef;
@@ -16,8 +15,8 @@ export class VertexComponent {
     constructor(private edgeService: EdgeService, private vc: ViewContainerRef) { }
 
     public setCoordinates() {
-        let offsetLeft = this.element.nativeElement.offsetLeft;
-        let offsetTop = this.element.nativeElement.offsetTop;
+        const offsetLeft = this.element.nativeElement.offsetLeft;
+        const offsetTop = this.element.nativeElement.offsetTop;
         this.edgeService.next(new Coordinates(offsetLeft, offsetTop, this.vc));
     }
 }

@@ -1,6 +1,6 @@
 /* Defines the product entity */
 export interface IProduct {
-    id: number;
+    _id: string;
     productName: string;
     productCode: string;
     tags?: string[];

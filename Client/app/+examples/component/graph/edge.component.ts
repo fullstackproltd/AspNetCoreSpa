@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Coordinates } from './coordinates';
 
 @Component({
-    selector: 'edge',
+    selector: 'appc-edge',
     template: '<div class="edge" [ngStyle]="style"></div>',
     styleUrls: ['./edge.component.scss']
 })
@@ -23,9 +23,9 @@ export class EdgeComponent {
     }
 
     public drawLine(x1, y1, x2, y2) {
-        let length = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-        let angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-        let transform = 'rotate(' + angle + 'deg)';
+        const length = Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        const transform = 'rotate(' + angle + 'deg)';
 
         this.style = {
             position: 'absolute',

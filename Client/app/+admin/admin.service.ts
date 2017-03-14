@@ -4,8 +4,7 @@ import { DataService } from '../shared/services/data.service';
 
 @Injectable()
 export class AdminService {
-
-    public adminApiUrl: string = 'api/admin/doadminoperation/';
+    public adminApiUrl = 'api/admin/doadminoperation/';
 
     constructor(public dataService: DataService) { }
 

@@ -10,7 +10,7 @@ import { ValidationService } from '../../shared/forms/validation.service';
     templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent implements OnInit {
-    public submitted: boolean = false;
+    public submitted = false;
     public errors: string[];
     public changePasswordForm: FormGroup;
     public changePasswordModel: ChangePasswordModel = new ChangePasswordModel('', '', '');
@@ -19,14 +19,13 @@ export class ChangePasswordComponent implements OnInit {
     constructor(public profileService: ProfileService, public fb: FormBuilder) { }
 
     public ngOnInit() {
-        let form =
+        const form =
             this.changePasswordForm = this.fb.group({
                 oldPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
                 newPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
                 confirmPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
             });
     }
-
     public changePassword(): void {
         this.submitted = true;
         if (this.changePasswordForm.valid && this.changePasswordForm.dirty) {

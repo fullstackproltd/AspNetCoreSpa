@@ -15,7 +15,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         public static List<Product> PRODUCTS = new List<Product>{
 
             new Product{
-                Id= 1,
+                _id= 1,
                 ProductName= "Leaf Rake",
                 ProductCode= "GDN-0011",
                 ReleaseDate= "March 19, 2016",
@@ -26,7 +26,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 Tags = new string[] {"rake", "leaf", "yard", "home"}
             },
             new Product{
-                Id= 2,
+                _id= 2,
                 ProductName= "Garden Cart",
                 ProductCode= "GDN-0023",
                 ReleaseDate= "March 18, 2016",
@@ -36,7 +36,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 ImageUrl= "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
             },
             new Product{
-                Id= 5,
+                _id= 5,
                 ProductName= "Hammer",
                 ProductCode= "TBX-0048",
                 ReleaseDate= "May 21, 2016",
@@ -47,7 +47,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 Tags = new string[] {"tools", "hammer", "construction"}
             },
             new Product{
-                Id= 8,
+                _id= 8,
                 ProductName= "Saw",
                 ProductCode= "TBX-0022",
                 ReleaseDate= "May 15, 2016",
@@ -57,7 +57,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 ImageUrl= "http://openclipart.org/image/300px/svg_to_png/27070/egore911_saw.png"
             },
             new Product{
-                Id= 10,
+                _id= 10,
                 ProductName= "Video Game Controller",
                 ProductCode= "GMG-0042",
                 ReleaseDate= "October 15, 2015",
@@ -96,13 +96,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpGet("{id}")]
         public Product GetProduct([FromRoute]int id)
         {
-            return _products.FirstOrDefault(x => x.Id == id);
+            return _products.FirstOrDefault(x => x._id == id);
         }
 
         [HttpPut("{id}")]
         public IActionResult PutProduct([FromRoute] int id, [FromBody] Product product)
         {
-            var productToEdit = _products.FirstOrDefault(p => p.Id == id);
+            var productToEdit = _products.FirstOrDefault(p => p._id == id);
             var index = _products.IndexOf(productToEdit);
 
             if (index > -1)
@@ -116,7 +116,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpPost]
         public IActionResult PostProduct([FromBody] Product product)
         {
-            product.Id = _products.Count + 1;
+            product._id = _products.Count + 1;
 
             _products.Add(product);
 
@@ -126,7 +126,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct([FromRoute] int id)
         {
-            _products.Remove(_products.FirstOrDefault(p => p.Id == id));
+            _products.Remove(_products.FirstOrDefault(p => p._id == id));
 
             return Ok();
         }

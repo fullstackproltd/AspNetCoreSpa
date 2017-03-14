@@ -3,7 +3,7 @@ import { EdgeService } from './edge.service';
 import { EdgeComponent } from './edge.component';
 
 @Component({
-    selector: 'graph',
+    selector: 'appc-graph',
     templateUrl: './graph.component.html',
     styles: [
         `
@@ -20,8 +20,8 @@ export class GraphComponent implements OnInit {
 
     public ngOnInit() {
         this.edgeService.getCoordinates().subscribe(coordinates => {
-            let factory = this.componentResolver.resolveComponentFactory(EdgeComponent);
-            let res = coordinates.first.viewContainer.createComponent(factory);
+            const factory = this.componentResolver.resolveComponentFactory(EdgeComponent);
+            const res = coordinates.first.viewContainer.createComponent(factory);
             res.instance.setCoordinates(coordinates.first, coordinates.second);
         });
     }

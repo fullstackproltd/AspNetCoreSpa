@@ -34,7 +34,7 @@ import { Component, trigger, style, state, transition, animate } from '@angular/
   ]
 })
 export class AnimationsBasicExamplesComponent {
-  public buttonState: string = 'inactive';
+  public buttonState = 'inactive';
 
   public signal = 'stop';
   public isHere = false;

@@ -8,10 +8,10 @@ import { ValidationService } from './validation.service';
 export class FormControlService {
 
     public toControlGroup(controls: Array<ControlBase<any>>) {
-        let group: any = {};
+    const group: any = {};
 
         controls.forEach(control => {
-            let validators: ValidatorFn[] = [];
+            const validators: ValidatorFn[] = [];
             // Required
             if (control.required) {
                 validators.push(Validators.required);

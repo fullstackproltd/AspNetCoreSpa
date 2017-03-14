@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <DebugType>portable</DebugType>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>AspNetCoreSpa</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>AspNetCoreSpa</PackageId>
+    <UserSecretsId>aspnetcorespa-c23d27a4-eb88-4b18-9b77-2a93f3b15119</UserSecretsId>
+    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="node_modules\**\*;Client\**\*" />
+    <Content Include="wwwroot\assets\skins\lightgray\content.inline.min.css" />
+    <Content Include="wwwroot\assets\skins\lightgray\content.min.css" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="wwwroot\assets\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="wwwroot\assets\skins\lightgray\img\anchor.gif" />
+    <Content Include="wwwroot\assets\skins\lightgray\img\loader.gif" />
+    <Content Include="wwwroot\assets\skins\lightgray\img\object.gif" />
+    <Content Include="wwwroot\assets\skins\lightgray\img\trans.gif" />
+    <Content Include="wwwroot\assets\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="wwwroot\assets\skins\lightgray\skin.min.css" />
+    <None Update="wwwroot\**\*;Views\**\*;Dockerfile">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Introspection" Version="1.0.0-beta1-final" />
+    <PackageReference Include="AspNet.Security.OAuth.Validation" Version="1.0.0-beta1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Https" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Server" Version="0.2.0-*" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="1.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.WebSockets" Version="1.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.AngularServices" Version="1.1.0-beta-000002" />
+    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="1.0.0-beta3-final" />
+    <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="1.0.0-beta3-final" />
+    <PackageReference Include="OpenIddict" Version="1.0.0-*" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="1.0.0-*" />
+    <PackageReference Include="OpenIddict.Mvc" Version="1.0.0-*" />
+    <PackageReference Include="SendGrid.NetCore" Version="1.0.0-rtm-00002" />
+    <PackageReference Include="MailKit" Version="1.12.0" />
+    <PackageReference Include="Twilio" Version="5.1.1-alpha1" />
+    <PackageReference Include="Stripe.net" Version="7.4.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1-beta1" />
+    <PackageReference Include="Webpack" Version="3.0.0" />
+    <PackageReference Include="Serilog" Version="2.4.1-dev-00801" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="1.4.1-dev-10147" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="3.2.0" />
+    <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
+    <PackageReference Include="Bogus" Version="11.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>

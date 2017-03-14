@@ -7,8 +7,9 @@ describe('App', () => {
     });
 
     it('should have a title', () => {
-        let subject = browser.getTitle();
-        let result = 'AspNetCoreSpa';
+        const subject = browser.getTitle();
+        // title is replaced using translation text set in DB as 'Site title'
+        const result = 'Site title';
         expect(subject).toEqual(result);
     });
 

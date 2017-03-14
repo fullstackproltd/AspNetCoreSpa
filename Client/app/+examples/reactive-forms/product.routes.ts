@@ -1,21 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { ReactiveFormsExampleComponent } from './reactive-forms.component';
-import { ProductListComponent } from './product-list.component';
-import { ProductDetailComponent } from './product-detail.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDetailGuard, ProductEditGuard } from './product-guard.service';
-import { ProductEditComponent } from './product-edit.component';
 
 const routes: Routes = [
-    {
-        path: 'reactiveforms',
-        component: ReactiveFormsExampleComponent,
-        children: [
-            { path: '', component: ProductListComponent },
-            { path: 'product/:id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
-            { path: 'productEdit/:id', canDeactivate: [ProductEditGuard], component: ProductEditComponent }
-        ]
-    }
+    { path: '', component: ProductListComponent },
+    { path: 'product/:_id', canActivate: [ProductDetailGuard], component: ProductDetailComponent },
+    { path: 'productEdit/:_id', canDeactivate: [ProductEditGuard], component: ProductEditComponent }
 ];
 
 export const routing = RouterModule.forChild(routes);

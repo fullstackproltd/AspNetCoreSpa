@@ -1,7 +1,7 @@
 ﻿export class ValidationService {
 
     public static getValidatorErrorMessage(code: string, fieldLength: number) {
-        let config: any = {
+        const config: any = {
             required: 'This is a required field',
             minlength: 'Minimum length is ' + fieldLength,
             maxlength: 'Maximum length is ' + fieldLength,

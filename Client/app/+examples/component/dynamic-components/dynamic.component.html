@@ -1,0 +1,29 @@
+<b>Creating AOT Friendly Dynamic Components with Angular 2</b>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Application Code</div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <select class="form-control" [(ngModel)]="selectedComponentType">
+                        <option *ngFor="let cellComponentType of componentTypes" [ngValue]="cellComponentType">{{cellComponentType.name}}</option>
+                    </select>
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" (click)="grid.addDynamicCellComponent(selectedComponentType)">Add Dynamic Grid component</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Library Code</div>
+            <div class="panel-body">
+                <appc-grid-component #grid></appc-grid-component>
+            </div>
+        </div>
+    </div>
+</div>

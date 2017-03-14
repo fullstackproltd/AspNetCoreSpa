@@ -33,7 +33,7 @@ export class DataService {
     // I perform a GET request to the API, appending the given params
     // as URL search parameters. Returns a stream.
     public get(url: string, params?: any): Observable<Response> {
-        let options = new DataServiceOptions();
+        const options = new DataServiceOptions();
         options.method = RequestMethod.Get;
         options.url = url;
         options.params = params;
@@ -50,11 +50,31 @@ export class DataService {
             data = params;
             params = {};
         }
-        let options = new DataServiceOptions();
+        const options = new DataServiceOptions();
         options.method = RequestMethod.Post;
         options.url = url;
         options.params = params;
         options.data = data;
+        return this.request(options);
+    }
+
+    public put(url: string, data?: any, params?: any): Observable<Response> {
+        if (!data) {
+            data = params;
+            params = {};
+        }
+        const options = new DataServiceOptions();
+        options.method = RequestMethod.Put;
+        options.url = url;
+        options.params = params;
+        options.data = data;
+        return this.request(options);
+    }
+
+    public delete(url: string): Observable<Response> {
+        const options = new DataServiceOptions();
+        options.method = RequestMethod.Delete;
+        options.url = url;
         return this.request(options);
     }
 
@@ -70,7 +90,7 @@ export class DataService {
         this.addContentType(options);
         this.addAuthToken(options);
 
-        let requestOptions = new RequestOptions();
+        const requestOptions = new RequestOptions();
         requestOptions.method = options.method;
         requestOptions.url = options.url;
         requestOptions.headers = options.headers;
@@ -79,7 +99,7 @@ export class DataService {
 
         this.pendingCommandsSubject.next(++this.pendingCommandCount);
 
-        let stream = this.http.request(options.url, requestOptions)
+        const stream = this.http.request(options.url, requestOptions)
             .catch((error: any) => {
                 this.handleErrors(error);
                 return Observable.throw(error);
@@ -96,14 +116,14 @@ export class DataService {
     }
 
     private addContentType(options: DataServiceOptions): DataServiceOptions {
-        if (options.method !== RequestMethod.Get) {
-            options.headers['Content-Type'] = 'application/json; charset=UTF-8';
-        }
+        // if (options.method !== RequestMethod.Get) {
+        options.headers['Content-Type'] = 'application/json; charset=UTF-8';
+        // }
         return options;
     }
 
     private addAuthToken(options: DataServiceOptions): DataServiceOptions {
-        let authTokens = localStorage.getItem('auth-tokens');
+        const authTokens = localStorage.getItem('auth-tokens');
         if (authTokens) {
             // tslint:disable-next-line:whitespace
             options.headers.Authorization = 'Bearer ' + JSON.parse((<any>authTokens)).access_token;
@@ -112,13 +132,13 @@ export class DataService {
     }
 
     private extractValue(collection: any, key: string): any {
-        let value = collection[key];
+        const value = collection[key];
         delete (collection[key]);
         return value;
     }
 
     private addXsrfToken(options: DataServiceOptions): DataServiceOptions {
-        let xsrfToken = this.getXsrfCookie();
+        const xsrfToken = this.getXsrfCookie();
         if (xsrfToken) {
             options.headers['X-XSRF-TOKEN'] = xsrfToken;
         }
@@ -126,7 +146,7 @@ export class DataService {
     }
 
     private getXsrfCookie(): string {
-        let matches = document.cookie.match(/\bXSRF-TOKEN=([^\s;]+)/);
+        const matches = document.cookie.match(/\bXSRF-TOKEN=([^\s;]+)/);
         try {
             return (matches && decodeURIComponent(matches[1]));
         } catch (decodeError) {
@@ -140,8 +160,8 @@ export class DataService {
     }
 
     private buildUrlSearchParams(params: any): URLSearchParams {
-        let searchParams = new URLSearchParams();
-        for (let key in params) {
+        const searchParams = new URLSearchParams();
+        for (const key in params) {
             if (params.hasOwnProperty(key)) {
                 searchParams.append(key, params[key]);
             }

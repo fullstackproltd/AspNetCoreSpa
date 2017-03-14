@@ -1,6 +1,6 @@
-import { Routes, RouterModule }  from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
-import { AnimationsComponent }  from './animations.component';
+import { AnimationsComponent } from './animations.component';
 
 const routes: Routes = [
   { path: '', component: AnimationsComponent }

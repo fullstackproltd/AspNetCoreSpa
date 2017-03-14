@@ -7,8 +7,8 @@ import { ChangeNameModel } from './changename/change-name.model';
 @Injectable()
 export class ProfileService {
 
-    public userNameApi: string = 'api/profile/username/';
-    public changePasswordApi: string = 'api/profile/changepassword/';
+    public userNameApi = 'api/profile/username/';
+    public changePasswordApi = 'api/profile/changepassword/';
 
     constructor(public dataService: DataService) { }
 
