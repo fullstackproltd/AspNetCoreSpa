@@ -35,8 +35,7 @@ before_build:
 build:
   project: AspNetCoreSpa.csproj
   publish_wap: true
-  configuration: Release
-
+  
 after_build:
 - cmd: >-
     dotnet publish .\ --output %appveyor_build_folder%\dist
