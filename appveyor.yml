@@ -32,7 +32,7 @@ before_build:
   - npm run build:prod                                           # Client production artefacts
   - dotnet restore
 build:
-  project: AspNetCoreSpa.xproj
+  project: AspNetCoreSpa.csproj
   publish_wap: true
   verbosity: minimal
 
