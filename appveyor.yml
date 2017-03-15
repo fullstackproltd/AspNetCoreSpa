@@ -35,6 +35,7 @@ before_build:
 build:
   project: AspNetCoreSpa.csproj
   publish_wap: true
+  verbosity: quiet
   
 after_build:
 - cmd: >-
