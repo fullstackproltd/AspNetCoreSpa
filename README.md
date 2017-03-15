@@ -52,7 +52,7 @@
     cd AspNetCoreSpa
 3. dotnet restore
 4. Install global dependencies
-    npm install protractor rimraf @angular/cli -g
+    npm install protractor rimraf http-server @angular/cli -g
 5. npm install
 6. Run the app (Development mode):
     * If you are running the project for first time:
@@ -83,7 +83,6 @@
 ## Other commands
 
 ### Scaffold Angular components using Angular CLI
-You can find all possible blueprints in the table below:
 
 Scaffold  | Usage
 ---       | ---
@@ -107,12 +106,13 @@ npm test
 npm run test:watch
 ```
 ### Compodoc Angular documentation
-
  * Steps to generate:
     * npm i compodoc -g
     * npm run compodoc
     * cd documentation
     * http-server
+
+Compodoc documentation: ![alt text](compodoc.jpg "compodoc documentation")
 
 ```
 ### run end-to-end tests
