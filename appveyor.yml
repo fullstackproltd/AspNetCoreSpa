@@ -4,7 +4,7 @@ pull_requests:
   do_not_increment_build_number: true
 branches:
   only:
-  - master
+  - appveyor
 configuration: Release
 platform: Any CPU
 init:
@@ -40,7 +40,7 @@ after_build:
 - cmd: >-
     dotnet publish .\ --output %appveyor_build_folder%\dist
 
-    # dotnet publish-iis --publish-folder %appveyor_build_folder%\dist --framework %publish:FullTargetFramework%
+# dotnet publish-iis --publish-folder %appveyor_build_folder%\dist --framework %publish:FullTargetFramework%
 
 artifacts:
 - path: dist
