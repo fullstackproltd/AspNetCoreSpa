@@ -50,7 +50,7 @@
     "@angular/platform-browser-dynamic": "4.0.0-rc.3",
     "@angular/platform-server": "4.0.0-rc.3",
     "@angular/router": "4.0.0-rc.3",
-    "@ng-bootstrap/ng-bootstrap": "1.0.0-alpha.20",
+    "@ng-bootstrap/ng-bootstrap": "1.0.0-alpha.21",
     "@ngrx/core": "1.2.0",
     "@ngrx/devtools": "1.4.0",
     "@ngrx/store": "2.2.1",
