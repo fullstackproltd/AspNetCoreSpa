@@ -53,9 +53,12 @@
     npm install protractor rimraf -g
 5. npm install
 6. Run the app (Development mode):
-    i) One way:
+    * If you are running the project for first time:
+      dotnet run migratedb seeddb (this will create database, apply migrations and seed the data)
+    Subsequently
+    i) One way (from VScode or Visual studio IDE):
         F5 (This will automatically launch browser)
-    ii) Another way
+    ii) Another way (from command line)
         set ASPNETCORE_ENVIRONMENT=Development
         `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
         Browse using http://localhost:5000 or http://localhost:5001 
