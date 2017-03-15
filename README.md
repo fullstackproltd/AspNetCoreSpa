@@ -8,6 +8,7 @@
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
 * [Angular](https://angular.io/)
+* [Angular CLI](https://cli.angular.io/) (Only code scaffolding for now)
 * [Webpack 2](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [ng-bootstrap](https://ng-bootstrap.github.io/)
@@ -50,7 +51,7 @@
     cd AspNetCoreSpa
 3. dotnet restore
 4. Install global dependencies
-    npm install protractor rimraf -g
+    npm install protractor rimraf @angular/cli -g
 5. npm install
 6. Run the app (Development mode):
     * If you are running the project for first time:
@@ -71,6 +72,21 @@
 ```
 
 ## Other commands
+
+### Scaffold Angular components using Angular CLI
+You can find all possible blueprints in the table below:
+
+Scaffold  | Usage
+---       | ---
+Component | `ng g component my-new-component`
+Directive | `ng g directive my-new-directive`
+Pipe      | `ng g pipe my-new-pipe`
+Service   | `ng g service my-new-service`
+Class     | `ng g class my-new-class`
+Guard     | `ng g guard my-new-guard`
+Interface | `ng g interface my-new-interface`
+Enum      | `ng g enum my-new-enum`
+Module    | `ng g module my-module`
 
 ### run Angular tests
 ```bash

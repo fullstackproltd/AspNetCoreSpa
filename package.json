@@ -70,6 +70,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "4.0.0-rc.3",
+    "@angular/cli": "1.0.0-rc.2",
     "@types/hammerjs": "2.0.34",
     "@types/jasmine": "2.5.45",
     "@types/node": "7.0.8",
