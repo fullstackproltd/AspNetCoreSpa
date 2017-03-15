@@ -12,7 +12,7 @@
 * [Webpack 2](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [ng-bootstrap](https://ng-bootstrap.github.io/)
-* [ng2-translate](https://github.com/ocombe/ng2-translate)
+* [@ngx-translate](http://www.ngx-translate.com/)
 * [Typescript 2](http://www.typescriptlang.org/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
