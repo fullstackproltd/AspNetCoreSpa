@@ -6,6 +6,7 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/operator/mapTo';
 import 'rxjs/add/operator/scan';
 import 'rxjs/add/operator/bufferCount';
+import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/finally';
 import 'rxjs/add/operator/catch';
