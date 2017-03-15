@@ -7,6 +7,7 @@
 
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
+    * Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 * [Angular](https://angular.io/)
 * [Angular CLI](https://cli.angular.io/) (Only code scaffolding for now)
 * [Webpack 2](https://webpack.github.io/)
@@ -23,7 +24,7 @@
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
 * Webpack DLL support for fast rebuilds (~ < 0.5 second)
 * [compodoc](https://github.com/compodoc/compodoc) for better angular documentation
-* [Typedoc](http://typedoc.io/) for typescript documentation
+* [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
 * Token based authentication using [Openiddict](https://github.com/openiddict/openiddict-core)
@@ -68,6 +69,14 @@
     set ASPNETCORE_ENVIRONMENT=Production
     `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
     Browse using http://localhost:5000 or http://localhost:5001 
+8. Notes on setting up database
+    * This project supports both sql server and sql lite databases
+    * Currently this project is configured to run under sqllite to speedup development cycle and the migrations added in this project are W.R.T sql lite
+    * To run under sql server:
+        * delete bin & Migrations folders
+        * Run `dotnet ef migrations add "MigrationName"`
+        * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup as default instance.
+    * CAUTION: If you want to drop database while in development, you can run command `dotnet run dropdb`
 
 ```
 
@@ -97,13 +106,6 @@ npm test
 ```bash
 npm run test:watch
 ```
-### Typescript documentation
-
- * Steps to generate:
-    * npm run docs
-    * cd docs
-    * http-server
-
 ### Compodoc Angular documentation
 
  * Steps to generate:

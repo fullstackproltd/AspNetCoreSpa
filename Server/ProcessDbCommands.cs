@@ -16,25 +16,24 @@ namespace AspNetCoreSpa.Server
 
             using (var scope = services.CreateScope())
             {
+                var db = GetApplicationDbContext(scope);
                 if (args.Contains("dropdb"))
                 {
                     Console.WriteLine("Dropping database");
-                    var db = GetApplicationDbContext(scope);
                     db.Database.EnsureDeleted();
-                    db.Database.EnsureCreated();
                 }
-                if (args.Contains("migratedb"))
-                {
-                    Console.WriteLine("Migrating database");
-                    var db = GetApplicationDbContext(scope);
-                    db.Database.Migrate();
-                }
-                if (args.Contains("seeddb"))
-                {
-                    Console.WriteLine("Seeding database");
-                    var db = GetApplicationDbContext(scope);
-                    db.Seed(host);
-                }
+
+                // if (args.Contains("migratedb"))
+                // {
+                Console.WriteLine("Migrating database");
+                db.Database.Migrate();
+                // }
+
+                // if (args.Contains("seeddb"))
+                // {
+                Console.WriteLine("Seeding database");
+                db.Seed(host);
+                // }
             }
         }
 

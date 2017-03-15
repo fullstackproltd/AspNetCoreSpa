@@ -15,7 +15,6 @@
   "scripts": {
     "rimraf": "rimraf",
     "tslint": "tslint",
-    "typedoc": "typedoc",
     "webpack": "webpack",
     "protractor": "protractor",
     "clean:aot": "npm run rimraf -- compiled",
@@ -32,7 +31,6 @@
     "e2e:live": "npm-run-all -p -r server:prod:ci e2e:debug",
     "e2e:debug": "protractor --elementExplorer",
     "test": "npm run lint && karma start",
-    "docs": "npm run typedoc -- --options typedoc.json --exclude '**/*.spec.ts' ./Client/",
     "compodoc": "compodoc -p tsconfig.json",
     "webdriver-manager": "webdriver-manager",
     "webdriver:start": "npm run webdriver-manager start",
@@ -119,7 +117,6 @@
     "ts-node": "2.1.0",
     "tslib": "1.6.0",
     "tslint": "4.5.1",
-    "typedoc": "0.5.7",
     "typescript": "2.2.1",
     "url-loader": "0.5.8",
     "webpack": "2.2.1",

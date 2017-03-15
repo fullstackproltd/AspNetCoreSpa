@@ -9,8 +9,8 @@
             "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/AspNetCoreSpa.dll",
             "args": [
                 // "dropdb",
-                "migratedb",
-                "seeddb"
+                // "migratedb",
+                // "seeddb"
             ],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

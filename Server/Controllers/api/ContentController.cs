@@ -20,7 +20,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpGet("languages")]
         public IActionResult Languages()
         {
-            var langs = _context.Languageses.ToList();
+            var langs = _context.Languages.ToList();
 
             return Ok(langs);
         }
@@ -31,7 +31,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var contentCacheKey = "ContentKey" + lang;
             var result = (from c in _context.Content
                           join t in _context.ContentText on c.Id equals t.ContentId
-                          join l in _context.Languageses on t.LanguageId equals l.Id
+                          join l in _context.Languages on t.LanguageId equals l.Id
                           where l.Locale == lang
                           select new ContentVm
                           {

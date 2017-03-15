@@ -56,22 +56,29 @@ namespace AspNetCoreSpa.Server
         }
         private void AddLanguagesAndContent()
         {
-            if (!_context.Languageses.Any())
+            if (!_context.Languages.Any())
             {
-                _context.Languageses.Add(new Language { Id = 1, Locale = "en", Description = "English" });
-                _context.Languageses.Add(new Language { Id = 2, Locale = "fr", Description = "Frensh" });
+                _context.Languages.Add(new Language { Locale = "en", Description = "English" });
+                _context.SaveChanges();
+                _context.Languages.Add(new Language { Locale = "fr", Description = "Frensh" });
                 _context.SaveChanges();
             }
 
             if (!_context.Content.Any())
             {
-                _context.Content.Add(new Content { Id = 1, Key = "TITLE" });
-                _context.Content.Add(new Content { Id = 2, Key = "APP_NAV_HOME" });
-                _context.Content.Add(new Content { Id = 3, Key = "APP_NAV_EXAMPLES" });
-                _context.Content.Add(new Content { Id = 4, Key = "APP_NAV_LOGIN" });
-                _context.Content.Add(new Content { Id = 5, Key = "APP_NAV_LOGOUT" });
-                _context.Content.Add(new Content { Id = 6, Key = "APP_NAV_REGISTER" });
-                _context.Content.Add(new Content { Id = 7, Key = "APP_NAV_ADMIN" });
+                _context.Content.Add(new Content { Key = "TITLE" });
+                _context.SaveChanges();
+                _context.Content.Add(new Content { Key = "APP_NAV_HOME" });
+                _context.SaveChanges();
+                _context.Content.Add(new Content { Key = "APP_NAV_EXAMPLES" });
+                _context.SaveChanges();
+                _context.Content.Add(new Content { Key = "APP_NAV_LOGIN" });
+                _context.SaveChanges();
+                _context.Content.Add(new Content { Key = "APP_NAV_LOGOUT" });
+                _context.SaveChanges();
+                _context.Content.Add(new Content { Key = "APP_NAV_REGISTER" });
+                _context.SaveChanges();
+                _context.Content.Add(new Content { Key = "APP_NAV_ADMIN" });
                 _context.SaveChanges();
             }
 
@@ -95,7 +102,7 @@ namespace AspNetCoreSpa.Server
                 _context.ContentText.Add(new ContentText { Text = "Register", LanguageId = 1, ContentId = 6 });
                 _context.ContentText.Add(new ContentText { Text = "registre", LanguageId = 2, ContentId = 6 });
 
-                _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 1, ContentId = 7});
+                _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 1, ContentId = 7 });
                 _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 2, ContentId = 7 });
 
                 _context.SaveChanges();
