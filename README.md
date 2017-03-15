@@ -23,7 +23,6 @@
   * with [Remap Istanbul](https://github.com/SitePen/remap-istanbul) for remapping Javascript to TypeScript coverage
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
 * Webpack DLL support for fast rebuilds (~ < 0.5 second)
-* [compodoc](https://github.com/compodoc/compodoc) for better angular documentation
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
@@ -74,8 +73,9 @@
     * Currently this project is configured to run under sqllite to speedup development cycle and the migrations added in this project are W.R.T sql lite
     * To run under sql server:
         * delete bin & Migrations folders
+        * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup   as default instance.
         * Run `dotnet ef migrations add "MigrationName"`
-        * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup as default instance.
+        
     * CAUTION: If you want to drop database while in development, you can run command `dotnet run dropdb`
 
 ```
