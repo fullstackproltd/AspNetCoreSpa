@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule, TranslateLoader } from 'ng2-translate/ng2-translate';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -32,7 +32,7 @@ import { UtilityService } from './services/utility.service';
     ReactiveFormsModule,
     RouterModule,
     NgbModule.forRoot(),
-    TranslateModule.forRoot({ provide: TranslateLoader, useClass: ApiTranslationLoader }),
+    TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } }),
     // No need to export as these modules don't expose any components/directive etc'
     HttpModule,
     JsonpModule

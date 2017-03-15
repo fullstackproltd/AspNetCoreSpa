@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
 import { AppState } from './app-store';

@@ -35,7 +35,7 @@ module.exports = webpackMerge(commonConfig, {
                     '@angular/router',
                     'rxjs',
                     'bootstrap',
-                    'ng2-translate',
+                    '@ngx-translate/core',
                     '@ng-bootstrap/ng-bootstrap'
                 ]
             },

@@ -2,7 +2,7 @@
 import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { TranslateService } from 'ng2-translate/ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 
 import { AppState } from './../../app-store';
 import { AccountService } from './../../core/account/account.service';
