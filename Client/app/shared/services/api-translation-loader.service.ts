@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { TranslateLoader } from 'ng2-translate/ng2-translate';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from 'ng2-translate/ng2-translate';
 

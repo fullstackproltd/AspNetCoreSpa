@@ -1,10 +1,9 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
-// Declare Global Variable
-import '../../../../node_modules/simplemde/dist/simplemde.min.js';
-import '../../../../node_modules/simplemde/dist/simplemde.min.css';
+import { UtilityService } from '../../shared/services/utility.service';
 
-import * as SimpleMDE from 'simplemde';
+declare var SimpleMDE: any;
+
 @Component({
   selector: 'appc-markdown-editor',
   templateUrl: './markdown-editor.component.html',
@@ -15,9 +14,15 @@ export class MarkdownEditorComponent implements AfterViewInit {
   @ViewChild('simplemde')
   public textarea: ElementRef;
 
-  constructor(private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef, private us: UtilityService) { }
   public ngAfterViewInit() {
-    const mde = new SimpleMDE({ element: this.textarea.nativeElement });
+    this.us.loadStyle('https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.css')
+      .subscribe(style => {
+        this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/simplemde/1.11.2/simplemde.min.js')
+          .subscribe(script => {
+            const mde = new SimpleMDE({ element: this.textarea.nativeElement });
+          });
+      });
   }
 
 }

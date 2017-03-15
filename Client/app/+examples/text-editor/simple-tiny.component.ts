@@ -1,5 +1,7 @@
 import { Component, OnDestroy, AfterViewInit, EventEmitter, Input, Output } from '@angular/core';
 
+import { UtilityService } from '../../shared/services/utility.service';
+
 declare var tinymce: any;
 
 @Component({
@@ -18,22 +20,37 @@ export class SimpleTinyComponent implements AfterViewInit, OnDestroy {
     public elementId: String;
     @Output()
     public onEditorKeyup = new EventEmitter<any>();
-
     public editor;
-
+    constructor(private us: UtilityService) { }
     public ngAfterViewInit() {
-        tinymce.init({
-            selector: '#' + this.elementId,
-            plugins: ['link', 'paste', 'table'],
-            skin_url: '/assets/skins/lightgray',
-            setup: editor => {
-                this.editor = editor;
-                editor.on('keyup', () => {
-                    const content = editor.getContent();
-                    this.onEditorKeyup.emit(content);
-                });
-            },
-        });
+        this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.5/tinymce.min.js')
+            .subscribe(tm => {
+                this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.5/themes/modern/theme.min.js')
+                    .subscribe(mt => {
+                        this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.5/plugins/link/plugin.min.js')
+                            .subscribe(lp => {
+                                this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.5/plugins/paste/plugin.min.js')
+                                    .subscribe(pp => {
+                                        this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.5/plugins/noneditable/plugin.min.js')
+                                            .subscribe(nep => {
+                                                tinymce.init({
+                                                    selector: '#' + this.elementId,
+                                                    plugins: ['link', 'paste', 'table'],
+                                                    skin_url: '/assets/skins/lightgray',
+                                                    setup: editor => {
+                                                        this.editor = editor;
+                                                        editor.on('keyup', () => {
+                                                            const content = editor.getContent();
+                                                            this.onEditorKeyup.emit(content);
+                                                        });
+                                                    },
+                                                });
+                                            });
+                                    });
+                            });
+                    });
+
+            });
     }
 
     public ngOnDestroy() {

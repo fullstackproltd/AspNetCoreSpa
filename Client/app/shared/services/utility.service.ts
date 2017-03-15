@@ -57,6 +57,21 @@ export class UtilityService {
             .replace(/(\w+?(?=[A-Z]))/g, '$1 ');
     }
 
+    public loadStyle(link: string): Observable<any> {
+        if (this.isLoadedScript(link)) {
+            return Observable.of('');
+        } else {
+            const head = document.getElementsByTagName('head')[0];
+            // Load jquery Ui
+            const styleNode = document.createElement('link');
+            styleNode.rel = 'stylesheet';
+            styleNode.type = 'text/css';
+            styleNode.href = link;
+            styleNode.media = 'all';
+            head.appendChild(styleNode);
+            return Observable.fromEvent(styleNode, 'load');
+        }
+    }
     public loadScript(script: string): Observable<any> {
         if (this.isLoadedScript(script)) {
             return Observable.of('');
@@ -76,6 +91,10 @@ export class UtilityService {
     // Detect if library loaded
     private isLoadedScript(lib) {
         return document.querySelectorAll('[src="' + lib + '"]').length > 0;
+    }
+
+    private isLoadedStyle(lib) {
+        return document.querySelectorAll('[href="' + lib + '"]').length > 0;
     }
 
 }

@@ -67,8 +67,6 @@
     "ng2-translate": "5.0.0",
     "preboot": "4.5.2",
     "rxjs": "5.2.0",
-    "simplemde": "^1.11.2",
-    "tinymce": "^4.5.5",
     "zone.js": "0.8.1"
   },
   "devDependencies": {
