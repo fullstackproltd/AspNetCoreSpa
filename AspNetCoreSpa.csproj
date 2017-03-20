@@ -78,14 +78,14 @@
     <PackageReference Include="SendGrid.NetCore" Version="1.0.0-rtm-00002" />
     <PackageReference Include="MailKit" Version="1.12.0" />
     <PackageReference Include="Twilio" Version="5.1.1-alpha1" />
-    <PackageReference Include="Stripe.net" Version="7.4.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.1-beta1" />
-    <PackageReference Include="Webpack" Version="3.0.0" />
+    <PackageReference Include="Stripe.net" Version="7.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+    <PackageReference Include="Webpack" Version="4.0.0" />
     <PackageReference Include="Serilog" Version="2.4.1-dev-00801" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="1.4.1-dev-10147" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="3.2.0" />
     <PackageReference Include="Swashbuckle" Version="6.0.0-beta902" />
-    <PackageReference Include="Bogus" Version="11.0.3" />
+    <PackageReference Include="Bogus" Version="11.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
