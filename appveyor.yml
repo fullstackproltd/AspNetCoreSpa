@@ -30,7 +30,7 @@ cache:
   - node_modules -> package.json                                        # local npm modules
 
 before_build:
-  - npm run build:prod                                           # Client production artefacts
+  # - npm run build:prod                                           # Client production artefacts
   - dotnet restore
 build:
   project: AspNetCoreSpa.csproj

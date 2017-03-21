@@ -7,10 +7,10 @@ describe('App', () => {
     });
 
     it('should have a title', () => {
-        const subject = browser.getTitle();
-        // title is replaced using translation text set in DB as 'Site title'
-        const result = 'Site title';
-        expect(subject).toEqual(result);
+        browser.getTitle().then((webpageTitle) => {
+            // title is replaced using translation text set in DB as 'Site title'
+            expect(webpageTitle).toEqual('Site title');
+        });
     });
 
 });

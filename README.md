@@ -62,12 +62,12 @@
     ii) Another way (from command line)
         set ASPNETCORE_ENVIRONMENT=Development
         `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
-        Browse using http://localhost:5000 or http://localhost:5001 
+        Browse using http://localhost:5000 or https://localhost:5001 
 7. Run the app (Production mode):
     npm run build:prod
     set ASPNETCORE_ENVIRONMENT=Production
     `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
-    Browse using http://localhost:5000 or http://localhost:5001 
+    Browse using http://localhost:5000 (Note: https://localhost:5001 will not work for production as private SSL certificate only added as Dev middleware)
 8. Notes on setting up database
     * This project supports both sql server and sql lite databases
     * Currently this project is configured to run under sqllite to speedup development cycle and the migrations added in this project are W.R.T sql lite
