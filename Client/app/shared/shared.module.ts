@@ -20,10 +20,7 @@ import { FooterComponent } from './layout/footer.component';
 import { UppercasePipe } from './pipes/uppercase.pipe';
 
 // Services
-import { DataService } from './services/data.service';
-// import { AuthService } from './services/auth.service';
 import { ContentService } from './services/content.service';
-import { UtilityService } from './services/utility.service';
 
 @NgModule({
   imports: [
@@ -72,11 +69,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         FormControlService,
-        DataService,
-        // AuthService,
-        DataService,
-        ContentService,
-        UtilityService
+        ContentService
       ]
     };
   }

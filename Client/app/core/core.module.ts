@@ -2,11 +2,14 @@ import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core
 import { Title } from '@angular/platform-browser';
 
 import { AuthTokenService } from './auth-token/auth-token.service';
-import { AccountService } from './account/account.service';
 import { LoggedInActions } from './auth-store/logged-in.actions';
 import { ProfileActions } from './profile/profile.actions';
 import { AuthTokenActions } from './auth-token/auth-token.actions';
 import { AuthReadyActions } from './auth-store/auth-ready.actions';
+// Services
+import { AccountService } from './account/account.service';
+import { DataService } from './services/data.service';
+import { UtilityService } from './services/utility.service';
 
 @NgModule({
     imports: [
@@ -29,7 +32,9 @@ export class CoreModule {
                 LoggedInActions,
                 ProfileActions,
                 AuthTokenActions,
-                AuthReadyActions
+                AuthReadyActions,
+                DataService,
+                UtilityService
             ]
         };
     }

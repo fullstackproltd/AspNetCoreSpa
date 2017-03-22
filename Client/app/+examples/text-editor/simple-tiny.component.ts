@@ -1,6 +1,6 @@
 import { Component, OnDestroy, AfterViewInit, EventEmitter, Input, Output } from '@angular/core';
 
-import { UtilityService } from '../../shared/services/utility.service';
+import { UtilityService } from '../../core/services/utility.service';
 
 declare var tinymce: any;
 

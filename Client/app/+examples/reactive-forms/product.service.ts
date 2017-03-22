@@ -4,7 +4,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import { IProduct } from './product';
-import { DataService } from '../../shared/services/data.service';
+import { DataService } from '../../core/services/data.service';
 
 @Injectable()
 export class ProductService {

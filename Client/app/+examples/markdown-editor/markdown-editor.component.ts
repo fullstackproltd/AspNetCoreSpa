@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { UtilityService } from '../../shared/services/utility.service';
+import { UtilityService } from '../../core/services/utility.service';
 
 declare var SimpleMDE: any;
 

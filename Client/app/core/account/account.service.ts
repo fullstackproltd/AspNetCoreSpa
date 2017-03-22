@@ -9,7 +9,7 @@ import { AppState } from '../../app-store';
 import { LoggedInActions } from '../auth-store/logged-in.actions';
 import { AuthTokenActions } from '../auth-token/auth-token.actions';
 import { ProfileActions } from '../profile/profile.actions';
-import { UtilityService } from '../../shared/services/utility.service';
+import { UtilityService } from '../../core/services/utility.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
