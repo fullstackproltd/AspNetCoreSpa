@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Response, Headers, RequestOptions, Http } from '@angular/http';
+import { JwtHelper } from 'angular2-jwt';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 
 import { AppState } from '../../app-store';
-import { Store } from '@ngrx/store';
 import { ProfileModel } from '../models/profile-model';
 import { LoginModel } from '../models/login-model';
-import { JwtHelper } from 'angular2-jwt';
 import { LoggedInActions } from '../auth-store/logged-in.actions';
 import { AuthTokenActions } from './auth-token.actions';
 import { AuthReadyActions } from '../auth-store/auth-ready.actions';
@@ -45,12 +45,12 @@ export class AuthTokenService {
             .map(res => res.json())
             .map((tokens: AuthTokenModel) => {
                 const now = new Date();
-                tokens.expiration_date = new Date(now.getTime() + tokens.expires_in * 1000).getTime().toString();
+                tokens.expiration_date = new Date(now.getTime() + (tokens.expires_in ? (tokens.expires_in * 1000) : 0)).getTime().toString();
 
                 this.store.dispatch(this.authTokenActions.load(tokens));
                 this.store.dispatch(this.loggedInActions.loggedIn());
 
-                const profile = this.jwtHelper.decodeToken(tokens.id_token) as ProfileModel;
+                const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '') as ProfileModel;
                 this.store.dispatch(this.profileActions.load(profile));
 
                 localStorage.setItem('auth-tokens', JSON.stringify(tokens));
@@ -73,11 +73,10 @@ export class AuthTokenService {
     public refreshTokens(): Observable<Response> {
         return this.store.select(state => state.auth.authTokens)
             .first()
-            .flatMap(tokens => {
-                return this.getTokens(
-                    { refresh_token: tokens.refresh_token }, 'refresh_token')
+            .flatMap((tokens: any) => {
+                return this.getTokens({ refresh_token: tokens.refresh_token }, 'refresh_token')
                     // This should only happen if the refresh token has expired
-                    .catch(error => {
+                    .catch((error: any) => {
                         // let the app know that we cant refresh the token
                         // which means something is invalid and they aren't logged in
                         this.loggedInActions.notLoggedIn();
@@ -128,7 +127,7 @@ export class AuthTokenService {
                 // the interval is how long inbetween token refreshes
                 // here we are taking half of the time it takes to expired
                 // you may want to change how this time interval is calculated
-                const interval = tokens.expires_in / 2 * 1000;
+                const interval = tokens.expires_in ? (tokens.expires_in / 2 * 1000) : 0;
                 return Observable.interval(interval);
             });
 

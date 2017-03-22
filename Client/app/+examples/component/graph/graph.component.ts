@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { EdgeService } from './edge.service';
 import { EdgeComponent } from './edge.component';
 

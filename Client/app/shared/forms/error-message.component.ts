@@ -1,4 +1,4 @@
-﻿import { Component, Host, Input } from '@angular/core';
+﻿import { Component, Input } from '@angular/core';
 import { FormGroupDirective } from '@angular/forms';
 
 import { ControlBase } from './control-base';

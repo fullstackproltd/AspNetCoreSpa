@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { routing } from './jquery.routes';
 import { SharedModule } from '../../shared/shared.module';

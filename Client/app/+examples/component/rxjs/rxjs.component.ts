@@ -10,9 +10,6 @@ export class RxjsComponent implements OnInit {
 
   public click$ = new Subject();
   public clock: Observable<any>;
-
-  private subscription: any;
-
   public ngOnInit() {
     this.clock = Observable.merge(
       this.click$.mapTo('hour'),

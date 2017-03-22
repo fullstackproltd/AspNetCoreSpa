@@ -148,16 +148,16 @@ export class DataService {
     private getXsrfCookie(): string {
         const matches = document.cookie.match(/\bXSRF-TOKEN=([^\s;]+)/);
         try {
-            return (matches && decodeURIComponent(matches[1]));
+            return matches ? decodeURIComponent(matches[1]) : '';
         } catch (decodeError) {
-            return ('');
+            return '';
         }
     }
 
-    private addCors(options: DataServiceOptions): DataServiceOptions {
-        options.headers['Access-Control-Allow-Origin'] = '*';
-        return options;
-    }
+    // private addCors(options: DataServiceOptions): DataServiceOptions {
+    //     options.headers['Access-Control-Allow-Origin'] = '*';
+    //     return options;
+    // }
 
     private buildUrlSearchParams(params: any): URLSearchParams {
         const searchParams = new URLSearchParams();

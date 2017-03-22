@@ -26,13 +26,14 @@ export class UtilityService {
     public getParams() {
         const searchParams = window.location.search.split('?')[1];
         if (searchParams) {
-            const paramsObj = {};
+            const paramsObj: any = {};
 
             searchParams.split('&').forEach(i => {
                 paramsObj[i.split('=')[0]] = i.split('=')[1];
             });
             return paramsObj;
         }
+        return undefined;
     }
     public readableColumnName(columnName: string): string {
         // Convert underscores to spaces
@@ -58,7 +59,7 @@ export class UtilityService {
     }
 
     public loadStyle(link: string): Observable<any> {
-        if (this.isLoadedScript(link)) {
+        if (this.isLoadedStyle(link)) {
             return Observable.of('');
         } else {
             const head = document.getElementsByTagName('head')[0];
@@ -89,11 +90,11 @@ export class UtilityService {
     }
 
     // Detect if library loaded
-    private isLoadedScript(lib) {
+    private isLoadedScript(lib: string) {
         return document.querySelectorAll('[src="' + lib + '"]').length > 0;
     }
 
-    private isLoadedStyle(lib) {
+    private isLoadedStyle(lib: string) {
         return document.querySelectorAll('[href="' + lib + '"]').length > 0;
     }
 

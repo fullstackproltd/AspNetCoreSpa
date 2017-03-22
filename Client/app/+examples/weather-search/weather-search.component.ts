@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { WeatherService } from './weather.service';
 import { Weather } from './weather';
-import { Subject } from 'rxjs/Subject';
 
 @Component({
     selector: 'appc-we-search',

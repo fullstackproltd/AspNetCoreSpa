@@ -1,3 +1,3 @@
 export class Coordinates {
-  constructor(public x, public y, public viewContainer) { }
+  constructor(public x: any, public y: any, public viewContainer: any) { }
 }

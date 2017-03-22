@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./text-editor.component.scss']
 })
 export class TextEditorComponent {
-  public keyupHandlerFunction(content) {
+  public keyupHandlerFunction(content: any) {
     console.log(content);
   }
 }

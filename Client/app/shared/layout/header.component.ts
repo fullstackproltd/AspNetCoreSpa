@@ -1,5 +1,5 @@
 // tslint:disable
-import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { TranslateService } from '@ngx-translate/core';
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isCollapsed = !this.isCollapsed;
     }
 
-    public setLang(lang) {
+    public setLang(lang: any) {
         this.currentLanguage = lang;
         this.translation.use(lang.locale);
     }

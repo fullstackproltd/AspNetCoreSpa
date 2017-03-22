@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
-import { Response } from '@angular/http';
 
 @Component({
     selector: 'appc-social-login',

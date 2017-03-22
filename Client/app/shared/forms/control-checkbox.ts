@@ -1,9 +1,9 @@
 import { ControlBase } from './control-base';
 
 export class ControlCheckbox extends ControlBase<boolean> {
-    public type: string;
+    public options: Array<{ key: string, value: string }> = [];
 
-    constructor(private options: any = {}) {
+    constructor(options: any = {}) {
         super(options);
         this.type = 'checkbox';
         this.value = options.value || false;

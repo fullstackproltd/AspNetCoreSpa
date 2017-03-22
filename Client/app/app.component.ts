@@ -1,19 +1,12 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
 
 import { AppState } from './app-store';
 import { AuthState } from './core/auth-store/auth.store';
 import { AuthTokenService } from './core/auth-token/auth-token.service';
-import { DataService } from './shared/services/data.service';
-
-/*
- * App Component
- * Top Level Component
- */
 
 @Component({
   selector: 'appc-root',
@@ -36,7 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.translate.onLangChange.subscribe(lan => {
+    this.translate.onLangChange.subscribe((lan: string) => {
       this.translate.get('TITLE')
         .subscribe(title => this.setTitle(title));
     });

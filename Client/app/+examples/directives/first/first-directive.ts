@@ -1,4 +1,4 @@
-import { Directive, OnInit, HostBinding, HostListener, Input, Component } from '@angular/core';
+import { Directive, HostBinding, HostListener, Input, Component } from '@angular/core';
 
 @Component({
   selector: 'appc-basic',
@@ -21,7 +21,7 @@ export class FirstAdvancedDirective {
     return this.first;
   }
 
-  @HostListener('click', ['$event']) public onClick($event) {
+  @HostListener('click', ['$event']) public onClick($event: any) {
     this.first = 'clicked';
   }
 

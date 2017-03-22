@@ -65,12 +65,12 @@ export class AnimationsRepeatingItemsComponent {
     this.state = (this.state === 'inactive' ? 'active' : 'inactive');
   }
 
-  public submitItem(event) {
+  public submitItem(event: any) {
     this.ourItems.push(event.target.value);
     event.target.value = '';
   }
 
-  public removeItem(event, i) {
+  public removeItem(event: any, i: any) {
     this.ourItems.splice(i, 1);
   }
 }

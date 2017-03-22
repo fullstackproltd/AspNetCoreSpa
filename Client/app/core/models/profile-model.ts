@@ -1,14 +1,14 @@
 export interface ProfileModel {
-    sub: string;
-    jti: string;
-    useage: string;
-    at_hash: string;
-    nbf: number;
-    exp: number;
-    iat: number;
-    iss: string;
+    sub: string | null;
+    jti: string | null;
+    useage: string | null;
+    at_hash: string | null;
+    nbf: number | null;
+    exp: number | null;
+    iat: number | null;
+    iss: string | null;
 
-    unique_name: string;
+    unique_name: string | null;
     email_confirmed: boolean;
     role: string[];
 }

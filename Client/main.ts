@@ -14,6 +14,8 @@ import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/merge';
 
+declare var module: any;
+
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 

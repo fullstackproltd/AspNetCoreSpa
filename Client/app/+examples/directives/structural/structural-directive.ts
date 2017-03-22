@@ -1,4 +1,4 @@
-import { Directive, OnInit, ElementRef, ViewContainerRef, TemplateRef, Input } from '@angular/core';
+import { Directive, ElementRef, ViewContainerRef, TemplateRef, Input } from '@angular/core';
 
 @Directive({
   // tslint:disable-next-line:directive-selector
@@ -7,7 +7,7 @@ import { Directive, OnInit, ElementRef, ViewContainerRef, TemplateRef, Input } f
 export class StructuralAdvancedDirective {
 
   // three="let message from message" is expanded to threeFrom
-  @Input() set threeFrom({ one, two, three }) {
+  @Input() set threeFrom({ one, two, three }: any) {
     // If we don't clear it will append the incoming values each time they change
     this.view.clear();
 

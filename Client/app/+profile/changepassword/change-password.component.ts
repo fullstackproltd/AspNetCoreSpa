@@ -19,12 +19,11 @@ export class ChangePasswordComponent implements OnInit {
     constructor(public profileService: ProfileService, public fb: FormBuilder) { }
 
     public ngOnInit() {
-        const form =
-            this.changePasswordForm = this.fb.group({
-                oldPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
-                newPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
-                confirmPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
-            });
+        this.changePasswordForm = this.fb.group({
+            oldPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
+            newPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])],
+            confirmPassword: ['', Validators.compose([Validators.required, ValidationService.passwordValidator])]
+        });
     }
     public changePassword(): void {
         this.submitted = true;

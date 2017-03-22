@@ -1,6 +1,6 @@
 <appc-page-heading text="Change User's name"></appc-page-heading>
 
-<form class="form-horizontal" #hf="ngForm" novalidate>
+<form class="form-horizontal" #hf="ngForm">
     <div class="form-group">
         <label for="firstName">First name</label>
         <input type="text" [class.error]="!firstName.valid" class="form-control input-lg" placeholder="First name" [(ngModel)]="userNameModel.firstName"

@@ -1,6 +1,5 @@
-import { Component, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Jsonp, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class WikipediaService {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ControlBase } from './control-base';
 import { ValidationService } from './validation.service';
@@ -8,10 +8,10 @@ import { ValidationService } from './validation.service';
 export class FormControlService {
 
     public toControlGroup(controls: Array<ControlBase<any>>) {
-    const group: any = {};
+        const group: any = {};
 
         controls.forEach(control => {
-            const validators: ValidatorFn[] = [];
+            const validators: any = [];
             // Required
             if (control.required) {
                 validators.push(Validators.required);

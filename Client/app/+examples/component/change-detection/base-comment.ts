@@ -1,7 +1,7 @@
 import { Comment } from './comment';
 
 export class BaseComment {
-    public comments = [];
+    public comments: Array<Comment> = [];
     public text: string;
     public author: string;
     public message: string;

@@ -1,11 +1,11 @@
 export class ControlBase<T>{
-    public value: T;
+    public value: T | undefined;
     public key: string;
     public label: string;
     public placeholder: string;
     public required: boolean;
-    public minlength: number;
-    public maxlength: number;
+    public minlength: number | undefined;
+    public maxlength: number | undefined;
     public order: number;
     public type: string;
     public class: string;

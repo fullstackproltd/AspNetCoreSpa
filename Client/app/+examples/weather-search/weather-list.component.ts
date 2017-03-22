@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { WeatherItemComponent } from './weather-item.component';
 import { Weather } from './weather';
 import { WeatherService } from './weather.service';
 
@@ -14,7 +13,6 @@ import { WeatherService } from './weather.service';
         </div>
     `
 })
-
 export class WeatherListComponent implements OnInit {
     public weatherItems: Weather[];
 

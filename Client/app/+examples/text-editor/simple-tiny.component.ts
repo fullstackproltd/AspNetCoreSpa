@@ -20,7 +20,7 @@ export class SimpleTinyComponent implements AfterViewInit, OnDestroy {
     public elementId: String;
     @Output()
     public onEditorKeyup = new EventEmitter<any>();
-    public editor;
+    public editor: any;
     constructor(private us: UtilityService) { }
     public ngAfterViewInit() {
         this.us.loadScript('https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.5/tinymce.min.js')
@@ -37,7 +37,7 @@ export class SimpleTinyComponent implements AfterViewInit, OnDestroy {
                                                     selector: '#' + this.elementId,
                                                     plugins: ['link', 'paste', 'table'],
                                                     skin_url: '/assets/skins/lightgray',
-                                                    setup: editor => {
+                                                    setup: (editor: any) => {
                                                         this.editor = editor;
                                                         editor.on('keyup', () => {
                                                             const content = editor.getContent();

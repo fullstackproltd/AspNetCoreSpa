@@ -1,8 +1,7 @@
 // tslint:disable
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ControlBase }     from './control-base';
-import { ErrorMessageComponent }     from './error-message.component';
+import { ControlBase } from './control-base';
 
 @Component({
     selector: 'appc-dynamic-control',
@@ -12,10 +11,7 @@ export class DynamicFormControlComponent {
     @Input() public control: ControlBase<string | boolean>;
     @Input() public form: FormGroup;
 
-    constructor() {
-        this.control = undefined;
-        this.form = undefined;
-    }
+    constructor() { }
 
     get valid() {
         return this.form.controls[this.control.key].valid;

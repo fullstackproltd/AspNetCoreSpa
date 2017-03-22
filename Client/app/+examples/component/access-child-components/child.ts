@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class ChildComponent {
     public time: string;
 
-    public setTime(time) {
+    public setTime(time: string) {
         this.time = time;
     }
 }

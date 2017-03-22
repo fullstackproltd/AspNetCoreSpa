@@ -1,7 +1,4 @@
-import {
-    Component, OnChanges, Input,
-    Output, EventEmitter
-} from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'appc-ai-star',
@@ -14,7 +11,7 @@ export class StarComponent implements OnChanges {
     public starWidth: number;
     @Output() public ratingClicked = new EventEmitter<string>();
 
-    public ngOnChanges(changes): void {
+    public ngOnChanges(changes: any): void {
         // Convert x out of 5 starts
         // to y out of 86px width
         this.starWidth = this.rating * 86 / 5;

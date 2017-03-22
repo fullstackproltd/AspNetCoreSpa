@@ -1,4 +1,4 @@
-import { Component, trigger, state, style, transition, animate } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'appc-animation',

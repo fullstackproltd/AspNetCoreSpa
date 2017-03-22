@@ -10,7 +10,12 @@
     "noEmit": true,
     "importHelpers": true,
     "noEmitHelpers": true,
-    "strictNullChecks": false,
+    "noUnusedLocals": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "noImplicitReturns": true,
     "lib": [
       "dom",
       "es6"
@@ -32,13 +37,6 @@
     "dist",
     "compiled"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  },
   "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  "buildOnSave": false
 }
