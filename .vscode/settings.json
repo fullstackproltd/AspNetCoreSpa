@@ -12,6 +12,8 @@
         "Dockerfile": false,
         ".vs": true,
         "*.sln": true,
+        "*.csproj.user": true,
+        "compodoc.jpg": true,
         "Properties": true,
         ".awcache": true,
         "*.PublishSettings": true,

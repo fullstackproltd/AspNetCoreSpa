@@ -16,9 +16,9 @@
   <ItemGroup>
     <Compile Remove="node_modules\**\*;Client\**\*" />
     <Content Include="wwwroot\assets\**\*" />
-    <None Update="wwwroot\**\*;Views\**\*;Dockerfile">
+    <!--<None Update="wwwroot\**\*;Views\**\*;Dockerfile">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
+    </None>-->
   </ItemGroup>
 
  <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
