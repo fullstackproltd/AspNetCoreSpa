@@ -13,30 +13,19 @@
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
 
-   <ItemGroup>
+  <ItemGroup>
     <Compile Remove="node_modules\**\*;Client\**\*" />
-    <Content Update="wwwroot\dist\**\*" CopyToPublishDirectory="Never" />
-   </ItemGroup>
+    <Content Remove="wwwroot\dist\**\*" />
+  </ItemGroup>
 
-  <Target Name="CustomActionsBeforePublish" BeforeTargets="BeforePublish">
-    <Message Text="Actions BeforePublish" Importance="high" />
+  <Target Name="RunWebpack" BeforeTargets="BeforePublish">
     <Exec Command="npm run clean:dist" />
-  </Target>
-
- <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
-
     <Exec Command="npm run build:prod" />
-
-    <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="wwwroot\dist\**\*;" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-        <RelativePath>%(DistFiles.Identity)</RelativePath>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </ResolvedFileToPublish>
+      <Content Include="wwwroot\dist\**\*" CopytoPublishDirectory="Always" />
     </ItemGroup>
   </Target>
-
+  
   <ItemGroup>
     <PackageReference Include="AspNet.Security.OAuth.Introspection" Version="1.0.0-beta1-final" />
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="1.0.0-beta1-final" />
