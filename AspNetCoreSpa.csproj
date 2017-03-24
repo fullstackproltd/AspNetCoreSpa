@@ -13,22 +13,23 @@
     <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
 
-  <ItemGroup>
+   <ItemGroup>
     <Compile Remove="node_modules\**\*;Client\**\*" />
-    <Content Include="wwwroot\assets\**\*" />
-    <!--<None Update="wwwroot\**\*;Views\**\*;Dockerfile">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>-->
-  </ItemGroup>
+    <Content Update="wwwroot\dist\**\*" CopyToPublishDirectory="Never" />
+   </ItemGroup>
+
+  <Target Name="CustomActionsBeforePublish" BeforeTargets="BeforePublish">
+    <Message Text="Actions BeforePublish" Importance="high" />
+    <Exec Command="npm run clean:dist" />
+  </Target>
 
  <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
-    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <!--<Exec Command="npm install" />-->
+
     <Exec Command="npm run build:prod" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="wwwroot\dist\**;" />
+      <DistFiles Include="wwwroot\dist\**\*;" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
