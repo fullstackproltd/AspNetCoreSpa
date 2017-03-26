@@ -1,5 +1,3 @@
-__dirname = __dirname.charAt(0).toUpperCase() + __dirname.slice(1);
-
 const path = require('path');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');

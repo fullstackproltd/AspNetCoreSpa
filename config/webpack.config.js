@@ -1,6 +1,3 @@
-// To fix issue since webpack 2.3.0 https://github.com/webpack/webpack/issues/4530
-__dirname = __dirname.charAt(0).toUpperCase() + __dirname.slice(1);
-
 const path = require('path');
 const helpers = require('./helpers');
 const webpack = require('webpack');
