@@ -15,14 +15,15 @@
 
   <ItemGroup>
     <Compile Remove="node_modules\**\*;Client\**\*" />
-    <Content Remove="wwwroot\dist\**\*" />
   </ItemGroup>
 
   <Target Name="RunWebpack" BeforeTargets="BeforePublish">
     <Exec Command="npm run clean:dist" />
     <Exec Command="npm run build:prod" />
     <ItemGroup>
-      <Content Include="wwwroot\dist\**\*" CopytoPublishDirectory="Always" />
+      <DistFiles Include="wwwroot\dist\**\*" />
+      <Content Include="@(DistFiles)" CopytoPublishDirectory="Always" />
+      <ContentWithTargetPath Include="@(DistFiles)" TargetPath="%(Identity)" CopyToPublishDirectory="Always" />
     </ItemGroup>
   </Target>
   
