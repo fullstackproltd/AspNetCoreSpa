@@ -23,6 +23,7 @@
     <ItemGroup>
       <DistFiles Include="wwwroot\dist\**\*" />
       <Content Include="@(DistFiles)" CopytoPublishDirectory="Always" />
+      <Content Include="app.yaml" CopyToOutputDirectory="Always" />
       <ContentWithTargetPath Include="@(DistFiles)" TargetPath="%(Identity)" CopyToPublishDirectory="Always" />
     </ItemGroup>
   </Target>
