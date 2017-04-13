@@ -65,8 +65,6 @@ namespace AspNetCoreSpa
 
             services.AddCustomizedMvc();
 
-            services.AddSignalR(options => options.Hubs.EnableDetailedErrors = true);
-
             // Node services are to execute any arbitrary nodejs code from .net
             services.AddNodeServices();
 
@@ -116,8 +114,6 @@ namespace AspNetCoreSpa
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
-
-            app.UseSignalR();
         }
     }
 }

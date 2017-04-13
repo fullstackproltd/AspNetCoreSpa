@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     public login(model: LoginModel): void {
-        console.log(model);
+        this.errors = [];
         this.accountService.login(model)
             .subscribe(() => {
                 this.utilityService.navigate('');
