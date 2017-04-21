@@ -22,7 +22,7 @@
 * [Istanbul](https://github.com/gotwarlost/istanbul) for test coverage
   * with [Remap Istanbul](https://github.com/SitePen/remap-istanbul) for remapping Javascript to TypeScript coverage
 * [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
-* Webpack DLL support for fast rebuilds (~ < 0.5 second)
+* Webpack DLL support for fast rebuilds (~ < 0.5 second), depends upon machine performance.
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * [Server](https://github.com/aspnet/dotnet-watch) and [client](https://webpack.github.io/docs/hot-module-replacement.html) watches
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
@@ -33,7 +33,7 @@
 * Lazy loading with pre loading all modules for fast navigation.
 * [Angular dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.
 * [Serilog](https://serilog.net/) with [Seq](https://getseq.net/) support to manage structured logging.
-* [Swagger](http://swagger.io/) as Api explorer (Visit url **http://localhost:5000/swagger/ui** after running the application)
+* [Swagger](http://swagger.io/) as Api explorer (Visit url **http://localhost:5000/swagger** after running the application). More [details](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
  
 ## Pre-requisites
 

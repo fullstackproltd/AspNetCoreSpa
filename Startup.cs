@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Extensions;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AspNetCoreSpa
 {
@@ -68,7 +69,10 @@ namespace AspNetCoreSpa
             // Node services are to execute any arbitrary nodejs code from .net
             services.AddNodeServices();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
+            });
         }
         public void Configure(IApplicationBuilder app)
         {
