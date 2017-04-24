@@ -8,6 +8,7 @@ const path = require('path');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 
 /**
  * Webpack Constants
@@ -193,7 +194,21 @@ module.exports = function (options) {
           'HMR': false,
         }
       }),
-
+      /**
+            * Plugin: ContextReplacementPlugin
+            * Description: Provides context to Angular's use of System.import
+            *
+            * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+            * See: https://github.com/angular/angular/issues/11580
+            */
+      new ContextReplacementPlugin(
+        // The (\\|\/) piece accounts for path separators in *nix and Windows
+        /angular(\\|\/)core(\\|\/)@angular/,
+        helpers.root('src'), // location of your src
+        {
+          // your Angular Async Route paths relative to this root directory
+        }
+      ),
       /**
       * Plugin LoaderOptionsPlugin (experimental)
       *

@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ElementRef } from '@angular/core';
 
 import { UtilityService } from '../../../core/services/utility.service';
 
-declare var jQuery: any;
+declare const jQuery: any;
 
 @Component({
   selector: 'appc-jquery-drag',

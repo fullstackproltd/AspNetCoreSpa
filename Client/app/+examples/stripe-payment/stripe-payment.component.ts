@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { UtilityService } from '../../core/services/utility.service';
 
-declare var Stripe: any;
+declare const Stripe: any;
 
 @Component({
   selector: 'appc-stripe-payment',

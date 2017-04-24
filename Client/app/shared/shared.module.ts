@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -12,7 +12,7 @@ import { DynamicFormControlComponent } from './forms/dynamic-form-control.compon
 import { ErrorMessageComponent } from './forms/error-message.component';
 import { ErrorSummaryComponent } from './forms/error-summary.component';
 import { FormControlService } from './forms/form-control.service';
-import { ApiTranslationLoader } from './services/api-translation-loader.service';
+
 
 import { HeaderComponent } from './layout/header.component';
 import { FooterComponent } from './layout/footer.component';
@@ -28,8 +28,8 @@ import { ContentService } from './services/content.service';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    TranslateModule,
     NgbModule.forRoot(),
-    TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } }),
     // No need to export as these modules don't expose any components/directive etc'
     HttpModule,
     JsonpModule
@@ -51,6 +51,7 @@ import { ContentService } from './services/content.service';
     ReactiveFormsModule,
     RouterModule,
     NgbModule,
+    TranslateModule,
     // Providers, Components, directive, pipes
     DynamicFormComponent,
     DynamicFormControlComponent,

@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ElementRef, ViewChild, ViewEncapsulation } fr
 
 import { UtilityService } from '../../core/services/utility.service';
 
-declare var SimpleMDE: any;
+declare const SimpleMDE: any;
 
 @Component({
   selector: 'appc-markdown-editor',

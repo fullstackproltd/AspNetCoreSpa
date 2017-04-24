@@ -2,7 +2,7 @@ import { Component, OnDestroy, AfterViewInit, EventEmitter, Input, Output } from
 
 import { UtilityService } from '../../core/services/utility.service';
 
-declare var tinymce: any;
+declare const tinymce: any;
 
 @Component({
     selector: 'appc-simple-tiny',

@@ -14,9 +14,6 @@ import { BlueDynamicComponent } from './dynamic-components/blue-dynamic.componen
 import { GreenDynamicComponent } from './dynamic-components/green-dynamic.component';
 import { RedDynamicComponent } from './dynamic-components/red-dynamic.component';
 import { DynamicComponent } from './dynamic-components/dynamic.component';
-import { ChangeDetectionComponent } from './change-detection/change-detection.component';
-import { ChangeDetectionOnPushComponent } from './change-detection/comment-selection-1.component';
-import { ChangeDetectionDefaultComponent } from './change-detection/comment-selection-2.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
@@ -40,9 +37,6 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         BlueDynamicComponent,
         GreenDynamicComponent,
         RedDynamicComponent,
-        ChangeDetectionComponent,
-        ChangeDetectionOnPushComponent,
-        ChangeDetectionDefaultComponent,
         RxjsComponent
 
     ],
