@@ -15,7 +15,8 @@
 
   <ItemGroup>
     <Compile Remove="node_modules\**\*;Client\**\*" />
-  </ItemGroup>
+    <Content Remove="wwwroot\dist\**\*" />
+  </ItemGroup>  
 
   <Target Name="RunWebpack" BeforeTargets="BeforePublish">
     <Exec Command="npm run clean:dist" />
