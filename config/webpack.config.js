@@ -96,7 +96,7 @@ let commonConfig = {
          */
         new ContextReplacementPlugin(
             // The (\\|\/) piece accounts for path separators in *nix and Windows
-            /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
+            /angular(\\|\/)core(\\|\/)@angular/,
             helpers.root('Client'), // location of your Client
             {
                 // your Angular Async Route paths relative to this root directory
