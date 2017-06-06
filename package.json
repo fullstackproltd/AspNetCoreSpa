@@ -37,6 +37,7 @@
     "webdriver:update": "webdriver-manager update"
   },
   "dependencies": {
+    "@agm/core": "^1.0.0-beta.0",
     "@angular/animations": "4.2.0-rc.2",
     "@angular/common": "4.2.0-rc.2",
     "@angular/compiler": "4.2.0-rc.2",
@@ -54,7 +55,6 @@
     "@ngrx/store": "2.2.2",
     "@ngrx/store-devtools": "3.2.4",
     "@ngx-translate/core": "6.0.1",
-    "angular2-google-maps": "0.17.0",
     "angular2-jwt": "0.2.3",
     "aspnet-prerendering": "2.0.5",
     "aspnet-webpack": "1.0.29",

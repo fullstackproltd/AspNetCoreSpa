@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule } from '@agm/core';
 
 import { SharedModule } from '../../shared/shared.module';
 import { routing } from './google-maps.routes';
