@@ -29,7 +29,7 @@ import { AppComponent } from './app.component';
         SharedModule.forRoot(),
         HomeModule,
         StoreModule.provideStore(appReducer),
-        StoreDevtoolsModule.instrumentOnlyWithExtension(),
+        StoreDevtoolsModule.instrument(),
         TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } })
     ],
     providers: [

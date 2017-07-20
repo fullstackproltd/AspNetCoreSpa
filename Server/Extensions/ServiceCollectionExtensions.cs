@@ -5,15 +5,12 @@ using AspNetCoreSpa.Server.Filters;
 using AspNetCoreSpa.Server.Services;
 using AspNetCoreSpa.Server.Services.Abstract;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Net;
-using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Primitives;
+using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -23,11 +20,10 @@ namespace AspNetCoreSpa.Server.Extensions
         {
             var cert = new X509Certificate2(Path.Combine(hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
 
-            services.Configure<KestrelServerOptions>(options =>
-            {
-                options.UseHttps(cert);
-
-            });
+            //services.Configure<KestrelServerOptions>(options =>
+            //{
+            //    options.UseHttps(cert);
+            //});
 
             return services;
         }
@@ -52,30 +48,30 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.Password.RequiredLength = 4;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
-                options.Cookies.ApplicationCookie.AutomaticChallenge = false;
-                options.Cookies.ApplicationCookie.LoginPath = "/login";
-                options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-                {
-                    OnRedirectToLogin = ctx =>
-                    {
-                        if (ctx.Request.Path.StartsWithSegments("/api") &&
-                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        }
-                        else if (ctx.Response.StatusCode == (int)HttpStatusCode.Forbidden)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                        }
-                        else
-                        {
-                            ctx.Response.Redirect(ctx.RedirectUri);
-                        }
-                        return Task.FromResult(0);
-                    }
-                };
+                //options.Cookies.ApplicationCookie.AutomaticChallenge = false;
+                //options.Cookies.ApplicationCookie.LoginPath = "/login";
+                //options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
+                //{
+                //    OnRedirectToLogin = ctx =>
+                //    {
+                //        if (ctx.Request.Path.StartsWithSegments("/api") &&
+                //            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
+                //        {
+                //            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                //        }
+                //        else if (ctx.Response.StatusCode == (int)HttpStatusCode.Forbidden)
+                //        {
+                //            ctx.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                //        }
+                //        else
+                //        {
+                //            ctx.Response.Redirect(ctx.RedirectUri);
+                //        }
+                //        return Task.FromResult(0);
+                //    }
+                //};
             })
-            .AddEntityFrameworkStores<ApplicationDbContext, int>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
             return services;
@@ -162,5 +158,56 @@ namespace AspNetCoreSpa.Server.Extensions
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }
+
+        public static IServiceCollection RegisterOAuthProviders(this IServiceCollection services)
+        {
+            // TODO
+            // Facebook Auth
+            //services.AddFacebookAuthenticationOptions(options => 
+            //{
+            //    AppId = Startup.Configuration["Authentication:Facebook:AppId"],
+            //    AppSecret = Startup.Configuration["Authentication:Facebook:AppSecret"]
+            //});
+            //// Google Auth
+            //services.AddGoogleAuthenticationOptions(new GoogleOptions()
+            //{
+            //    ClientId = Startup.Configuration["Authentication:Google:ClientId"],
+            //    ClientSecret = Startup.Configuration["Authentication:Google:ClientSecret"]
+            //});
+            //// Twitter Auth
+            //// https://apps.twitter.com/
+            //services.UseTwitterAuthentication(option => TwitterOptions()
+            //{
+            //    ConsumerKey = Startup.Configuration["Authentication:Twitter:ConsumerKey"],
+            //    ConsumerSecret = Startup.Configuration["Authentication:Twitter:ConsumerSecret"]
+            //});
+            //// Microsoft Auth
+            //// https://apps.dev.microsoft.com/?mkt=en-us#/appList
+            //services.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
+            //{
+            //    ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"],
+            //    ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"]
+            //});
+
+            //// Note: Below social providers are supported through this open source library:
+            //// https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
+
+            //// Github Auth
+            //// https://github.com/settings/developers
+            //services.UseGitHubAuthentication(new GitHubAuthenticationOptions
+            //{
+            //    ClientId = Startup.Configuration["Authentication:Github:ClientId"],
+            //    ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"]
+            //});
+
+            //services.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
+            //{
+            //    ClientId = Startup.Configuration["Authentication:LinkedIn:ClientId"],
+            //    ClientSecret = Startup.Configuration["Authentication:LinkedIn:ClientSecret"]
+            //});
+
+            return services;
+        }
+
     }
 }

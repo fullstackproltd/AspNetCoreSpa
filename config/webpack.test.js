@@ -48,7 +48,7 @@ module.exports = function (options) {
       /**
        * Make sure root is Client
        */
-      modules: [helpers.root('Client'), 'node_modules']
+      modules: [helpers.root('ClientApp'), 'node_modules']
 
     },
 
@@ -121,7 +121,7 @@ module.exports = function (options) {
         {
           test: /\.json$/,
           loader: 'json-loader',
-          exclude: [helpers.root('Client/index.html')]
+          exclude: [helpers.root('ClientApp/index.html')]
         },
 
         /**
@@ -133,7 +133,7 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           loader: ['to-string-loader', 'css-loader'],
-          exclude: [helpers.root('Client/index.html')]
+          exclude: [helpers.root('ClientApp/index.html')]
         },
 
         /**
@@ -145,7 +145,7 @@ module.exports = function (options) {
         {
           test: /\.html$/,
           loader: 'raw-loader',
-          exclude: [helpers.root('Client/index.html')]
+          exclude: [helpers.root('ClientApp/index.html')]
         },
 
         /**
@@ -158,7 +158,7 @@ module.exports = function (options) {
           enforce: 'post',
           test: /\.(js|ts)$/,
           loader: 'istanbul-instrumenter-loader',
-          include: helpers.root('Client'),
+          include: helpers.root('ClientApp'),
           exclude: [
             /\.(e2e|spec)\.ts$/,
             /node_modules/

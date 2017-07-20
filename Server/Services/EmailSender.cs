@@ -48,7 +48,7 @@ namespace AspNetCoreSpa.Server.Services
             // Plug in your email service here to send an email.
             var myMessage = new SendGrid.SendGridMessage();
             myMessage.AddTo(model.To);
-            myMessage.From = new System.Net.Mail.MailAddress(model.From, model.Subject);
+            // TODO myMessage.From = new System.Net.Mail.MailAddress(model.From, model.Subject);
             myMessage.Subject = model.Subject;
             myMessage.Text = model.TextBody;
             myMessage.Html = model.HtmlBody;

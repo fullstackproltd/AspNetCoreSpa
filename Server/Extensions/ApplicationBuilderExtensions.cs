@@ -10,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
+using Microsoft.AspNetCore.Authentication.Facebook;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Twitter;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -19,8 +23,7 @@ namespace AspNetCoreSpa.Server.Extensions
         {
             app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
             {
-                HotModuleReplacement = true,
-                ConfigFile = "config/webpack.dev.js"
+                HotModuleReplacement = true
             });
             return app;
         }
@@ -70,7 +73,7 @@ namespace AspNetCoreSpa.Server.Extensions
                 app.UseCustomSwaggerApi();
             }
 
-            loggerFactory.AddSerilog();
+            // TODO loggerFactory.AddSerilog();
 
             return app;
         }
@@ -87,53 +90,5 @@ namespace AspNetCoreSpa.Server.Extensions
             return app;
         }
 
-        public static IApplicationBuilder UseOAuthProviders(this IApplicationBuilder app)
-        {
-            // Facebook Auth
-            app.UseFacebookAuthentication(new FacebookOptions()
-            {
-                AppId = Startup.Configuration["Authentication:Facebook:AppId"],
-                AppSecret = Startup.Configuration["Authentication:Facebook:AppSecret"]
-            });
-            // Google Auth
-            app.UseGoogleAuthentication(new GoogleOptions()
-            {
-                ClientId = Startup.Configuration["Authentication:Google:ClientId"],
-                ClientSecret = Startup.Configuration["Authentication:Google:ClientSecret"]
-            });
-            // Twitter Auth
-            // https://apps.twitter.com/
-            app.UseTwitterAuthentication(new TwitterOptions()
-            {
-                ConsumerKey = Startup.Configuration["Authentication:Twitter:ConsumerKey"],
-                ConsumerSecret = Startup.Configuration["Authentication:Twitter:ConsumerSecret"]
-            });
-            // Microsoft Auth
-            // https://apps.dev.microsoft.com/?mkt=en-us#/appList
-            app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-            {
-                ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"],
-                ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"]
-            });
-
-            // Note: Below social providers are supported through this open source library:
-            // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
-
-            // Github Auth
-            // https://github.com/settings/developers
-            app.UseGitHubAuthentication(new GitHubAuthenticationOptions
-            {
-                ClientId = Startup.Configuration["Authentication:Github:ClientId"],
-                ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"]
-            });
-
-            app.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
-            {
-                ClientId = Startup.Configuration["Authentication:LinkedIn:ClientId"],
-                ClientSecret = Startup.Configuration["Authentication:LinkedIn:ClientSecret"]
-            });
-
-            return app;
-        }
     }
 }
