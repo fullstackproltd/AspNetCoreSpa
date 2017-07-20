@@ -2,7 +2,7 @@
 import 'zone.js';
 import 'rxjs/add/operator/first';
 import { APP_BASE_HREF } from '@angular/common';
-import { enableProdMode, ApplicationRef, NgZone, ValueProvider } from '@angular/core';
+import { enableProdMode, ApplicationRef, NgZone } from '@angular/core';
 import { platformDynamicServer, PlatformState, INITIAL_CONFIG } from '@angular/platform-server';
 import { createServerRenderer, RenderResult } from 'aspnet-prerendering';
 import { AppModule } from './app/app.module.server';

@@ -92,8 +92,6 @@ namespace AspNetCoreSpa
 
             app.UseAuthentication();
 
-            app.UseOpenIddict();
-
             // Add a middleware used to validate access
             // tokens and protect the API endpoints.
             //app.UseOAuthValidation();

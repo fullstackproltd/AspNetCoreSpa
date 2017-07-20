@@ -10,12 +10,7 @@ namespace AspNetCoreSpa
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                        .SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("hosting.json", optional: true)
-                        .Build();
-
-            var host = BuildWebHost(args, config);
+            var host = BuildWebHost(args);
 
             host.Run();
 
@@ -33,10 +28,14 @@ namespace AspNetCoreSpa
             ProcessDbCommands.Process(args, host);
         }
 
-        public static IWebHost BuildWebHost(string[] args, IConfigurationRoot config) =>  
-                    WebHost
-                    .CreateDefaultBuilder(args)
-                    .UseConfiguration(config)
-                    .UseStartup<Startup>().Build();
+        public static IWebHost BuildWebHost(string[] args) =>
+          WebHost.CreateDefaultBuilder(args)
+              .UseConfiguration(new ConfigurationBuilder()
+                  .SetBasePath(Directory.GetCurrentDirectory())
+                  .AddJsonFile("hosting.json", optional: true)
+                  .Build()
+              )
+              .UseStartup<Startup>()
+              .Build();
     }
 }

@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/AspNetCoreSpa.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/AspNetCoreSpa.dll",
             "args": [
                 // "dropdb",
                 // "migratedb",
@@ -40,7 +40,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp1.1/AspNetCoreSpa.dll",
+            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.0/AspNetCoreSpa.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,

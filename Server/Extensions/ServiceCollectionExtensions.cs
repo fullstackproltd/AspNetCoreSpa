@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Identity;
+using OpenIddict.Core;
+using OpenIddict.Models;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -87,46 +89,49 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
             });
+
             // Register the OpenIddict services.
-            services.AddOpenIddict()
+            services.AddOpenIddict(options =>
+            {
                 // Register the Entity Framework stores.
-                .AddEntityFrameworkCoreStores<ApplicationDbContext>()
+                options.AddEntityFrameworkCoreStores<ApplicationDbContext>();
 
                 // Register the ASP.NET Core MVC binder used by OpenIddict.
                 // Note: if you don't call this method, you won't be able to
                 // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
-                .AddMvcBinders()
+                options.AddMvcBinders();
 
-                // Enable the token endpoint.
-                .EnableTokenEndpoint("/connect/token")
+                // Enable the authorization, logout, token and userinfo endpoints.
+                options.EnableAuthorizationEndpoint("/connect/authorize")
+                       .EnableLogoutEndpoint("/connect/logout")
+                       .EnableTokenEndpoint("/connect/token")
+                       .EnableUserinfoEndpoint("/api/userinfo");
 
-                // Enable the password and the refresh token flows.
-                .AllowPasswordFlow()
-                .AllowRefreshTokenFlow()
+                // Note: the Mvc.Client sample only uses the code flow and the password flow, but you
+                // can enable the other flows if you need to support implicit or client credentials.
+                options.AllowAuthorizationCodeFlow()
+                       .AllowPasswordFlow()
+                       .AllowRefreshTokenFlow();
+
+                // Make the "client_id" parameter mandatory when sending a token request.
+                options.RequireClientIdentification();
+
+                // When request caching is enabled, authorization and logout requests
+                // are stored in the distributed cache by OpenIddict and the user agent
+                // is redirected to the same page with a single parameter (request_id).
+                // This allows flowing large OpenID Connect requests even when using
+                // an external authentication provider like Google, Facebook or Twitter.
+                options.EnableRequestCaching();
 
                 // During development, you can disable the HTTPS requirement.
-                .DisableHttpsRequirement()
+                options.DisableHttpsRequirement();
 
-                // Register a new ephemeral key, that is discarded when the application
-                // shuts down. Tokens signed using this key are automatically invalidated.
-                // This method should only be used during development.
-                .AddEphemeralSigningKey();
-
-            // On production, using a X.509 certificate stored in the machine store is recommended.
-            // You can generate a self-signed certificate using Pluralsight's self-cert utility:
-            // https://s3.amazonaws.com/pluralsight-free/keith-brown/samples/SelfCert.zip
-            //
-            // services.AddOpenIddict()
-            //     .AddSigningCertificate("7D2A741FE34CC2C7369237A5F2078988E17A6A75");
-            //
-            // Alternatively, you can also store the certificate as an embedded .pfx resource
-            // directly in this assembly or in a file published alongside this project:
-            //
-            // services.AddOpenIddict()
-            //     .AddSigningCertificate(
-            //          assembly: typeof(Startup).GetTypeInfo().Assembly,
-            //          resource: "AuthorizationServer.Certificate.pfx",
-            //          password: "OpenIddict");
+                // Note: to use JWT access tokens instead of the default
+                // encrypted format, the following lines are required:
+                //
+                // options.UseJsonWebTokens();
+                options.AddEphemeralSigningKey();
+            });
 
             return services;
         }
@@ -161,33 +166,29 @@ namespace AspNetCoreSpa.Server.Extensions
 
         public static IServiceCollection RegisterOAuthProviders(this IServiceCollection services)
         {
-            // TODO
-            // Facebook Auth
-            //services.AddFacebookAuthenticationOptions(options => 
-            //{
-            //    AppId = Startup.Configuration["Authentication:Facebook:AppId"],
-            //    AppSecret = Startup.Configuration["Authentication:Facebook:AppSecret"]
-            //});
-            //// Google Auth
-            //services.AddGoogleAuthenticationOptions(new GoogleOptions()
-            //{
-            //    ClientId = Startup.Configuration["Authentication:Google:ClientId"],
-            //    ClientSecret = Startup.Configuration["Authentication:Google:ClientSecret"]
-            //});
-            //// Twitter Auth
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Startup.Configuration["Authentication:Google:ClientId"];
+                    options.ClientSecret = Startup.Configuration["Authentication:Google:ClientSecret"];
+                })
+            .AddFacebook(options =>
+            {
+                options.AppId = Startup.Configuration["Authentication:Facebook:AppId"];
+                options.AppSecret = Startup.Configuration["Authentication:Facebook:AppSecret"];
+            })
             //// https://apps.twitter.com/
-            //services.UseTwitterAuthentication(option => TwitterOptions()
-            //{
-            //    ConsumerKey = Startup.Configuration["Authentication:Twitter:ConsumerKey"],
-            //    ConsumerSecret = Startup.Configuration["Authentication:Twitter:ConsumerSecret"]
-            //});
-            //// Microsoft Auth
+            .AddTwitter(options =>
+            {
+                options.ConsumerKey = Startup.Configuration["Authentication:Twitter:ConsumerKey"];
+                options.ConsumerSecret = Startup.Configuration["Authentication:Twitter:ConsumerSecret"];
+            })
             //// https://apps.dev.microsoft.com/?mkt=en-us#/appList
-            //services.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions()
-            //{
-            //    ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"],
-            //    ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"]
-            //});
+            .AddMicrosoftAccount(options =>
+            {
+                options.ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"];
+                options.ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"];
+            });
 
             //// Note: Below social providers are supported through this open source library:
             //// https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
