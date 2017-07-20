@@ -11,7 +11,7 @@ enableProdMode();
 
 export default createServerRenderer(params => {
     const providers = [
-        { provide: INITIAL_CONFIG, useValue: { document: '<app></app>', url: params.url } },
+        { provide: INITIAL_CONFIG, useValue: { document: '<appc-root></appc-root>', url: params.url } },
         { provide: APP_BASE_HREF, useValue: params.baseUrl },
         { provide: 'BASE_URL', useValue: params.origin + params.baseUrl },
     ];
