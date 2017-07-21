@@ -67,6 +67,8 @@ namespace AspNetCoreSpa
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
+            services.RegisterOAuthProviders();
+
             services.AddCustomizedMvc();
 
             // Node services are to execute any arbitrary nodejs code from .net
@@ -110,8 +112,6 @@ namespace AspNetCoreSpa
             //     options.ClientId = "resource_server";
             //     options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
             // });
-
-            // TODO app.UseOAuthProviders();
 
             app.UseMvc(routes =>
             {
