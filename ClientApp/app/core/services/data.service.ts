@@ -10,8 +10,10 @@
 
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions, RequestMethod, URLSearchParams } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { Subject } from 'rxjs/Subject';
+import { PLATFORM_ID, Inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 import { UtilityService } from './utility.service';
 import { DataServiceOptions } from './data-service-options';
@@ -26,7 +28,7 @@ export class DataService {
     // Provide the *public* Observable that clients can subscribe to
     public pendingCommands$: Observable<number>;
 
-    constructor(public http: Http, public us: UtilityService) {
+    constructor(public http: Http, public us: UtilityService, @Inject(PLATFORM_ID) private platformId: Object) {
         this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
     }
 
@@ -78,7 +80,7 @@ export class DataService {
         return this.request(options);
     }
 
-    private request(options: DataServiceOptions): Observable<any> {
+    public request(options: DataServiceOptions): Observable<any> {
         options.method = (options.method || RequestMethod.Get);
         options.url = (options.url || '');
         options.headers = (options.headers || {});
@@ -86,9 +88,13 @@ export class DataService {
         options.data = (options.data || {});
 
         this.interpolateUrl(options);
-        this.addXsrfToken(options);
         this.addContentType(options);
-        this.addAuthToken(options);
+        // Client only code.
+        // because it uses global window/documents stuff
+        if (isPlatformBrowser(this.platformId)) {
+            this.addXsrfToken(options);
+            this.addAuthToken(options);
+        }
 
         const requestOptions = new RequestOptions();
         requestOptions.method = options.method;

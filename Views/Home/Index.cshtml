@@ -18,10 +18,9 @@
     window.user = '@ViewBag.user';
 </script>
 
-<environment names="Development">
-    <script src="~/dist/vendor.js" asp-append-version="true"></script>
-    <!-- Or load main client file if SSR not required -->
-    <!-- <script src="~/dist/main-client.js" asp-append-version="true"></script> -->
-</environment>
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}
 
 @*<script src="~/dist/@ViewBag.MainDotJs" asp-append-version="true"></script>*@

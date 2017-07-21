@@ -15,9 +15,11 @@
     </label>
 
     <!--This is not the switch case because of multiple control types-->
-    <label *ngIf="control.type === 'textbox' || control.type === 'email' || control.type === 'password'" [attr.for]="control.key" class="col-form-label">{{control.label}}</label>
-    <input *ngIf="control.type === 'textbox' || control.type === 'email' || control.type === 'password'" [id]="control.key" [formControlName]="control.key" [type]="control.type"
-        [placeholder]="control.placeholder" [class.form-control-success]="valid" [class.form-control-danger]="invalid" class="form-control">
+    <label *ngIf="control.type === 'textbox' || control.type === 'email' || control.type === 'password'" [attr.for]="control.key"
+        class="col-form-label">{{control.label}}</label>
+    <input *ngIf="control.type === 'textbox' || control.type === 'email' || control.type === 'password'" [id]="control.key" [formControlName]="control.key"
+        [type]="control.type" [placeholder]="control.placeholder" [class.form-control-success]="valid" [class.form-control-danger]="invalid"
+        class="form-control">
 
     <appc-control-error-message [form]="f" [control]="control"></appc-control-error-message>
 

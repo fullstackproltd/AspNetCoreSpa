@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const merge = require('webpack-merge');
 const treeShakableModules = [
-    '@angular/animations',
+    // '@angular/animations',
     '@angular/common',
     '@angular/compiler',
     '@angular/core',
@@ -17,16 +17,17 @@ const treeShakableModules = [
     '@ngrx/store',
     '@ngrx/store-devtools',
     '@ngx-translate/core',
-    '@ng-bootstrap/ng-bootstrap',
+    // '@ng-bootstrap/ng-bootstrap',
     'rxjs',
     'zone.js',
 ];
 const nonTreeShakableModules = [
     'font-awesome/css/font-awesome.css',
-    'bootstrap/dist/css/bootstrap.css'
+    'bootstrap/dist/css/bootstrap.css',
+    // '@ng-bootstrap/ng-bootstrap',
     //'es6-promise',
     //'es6-shim',
-    //'event-source-polyfill',
+    // 'event-source-polyfill'
     //'jquery',
 ];
 const allModules = treeShakableModules.concat(nonTreeShakableModules);

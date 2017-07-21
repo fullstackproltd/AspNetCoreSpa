@@ -12,6 +12,9 @@ namespace AspNetCoreSpa
         {
             var host = BuildWebHost(args);
 
+            // http://odetocode.com/blogs/scott/archive/2016/09/20/database-migrations-and-seeding-in-asp-net-core.aspx
+            ProcessDbCommands.Process(args, host);
+
             host.Run();
 
             // var host = new WebHostBuilder()
@@ -24,8 +27,6 @@ namespace AspNetCoreSpa
             //     .UseStartup<Startup>()
             //     .Build();
 
-            // http://odetocode.com/blogs/scott/archive/2016/09/20/database-migrations-and-seeding-in-asp-net-core.aspx
-            ProcessDbCommands.Process(args, host);
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

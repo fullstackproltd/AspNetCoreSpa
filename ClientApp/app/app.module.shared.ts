@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -19,7 +18,6 @@ import { AppComponent } from './app.component';
 @NgModule({
     declarations: [AppComponent],
     imports: [
-        BrowserAnimationsModule,
         BrowserModule,
         routing,
         // FormsModule,
@@ -30,7 +28,12 @@ import { AppComponent } from './app.component';
         HomeModule,
         StoreModule.provideStore(appReducer),
         StoreDevtoolsModule.instrumentOnlyWithExtension(),
-        TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } })
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useClass: ApiTranslationLoader
+            }
+        })
     ],
     providers: [
         AppService

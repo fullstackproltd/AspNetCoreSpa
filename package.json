@@ -60,6 +60,7 @@
     "aspnet-webpack": "2.0.1",
     "bootstrap": "4.0.0-alpha.6",
     "core-js": "2.4.1",
+    "event-source-polyfill": "0.0.9",
     "font-awesome": "4.7.0",
     "isomorphic-fetch": "2.2.1",
     "preboot": "5.0.0-rc.13",

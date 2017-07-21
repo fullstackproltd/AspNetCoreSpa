@@ -27,13 +27,13 @@ export class AccountService {
 
     public register(data: RegisterModel): Observable<Response> {
         return this.http.post('api/account/register', data)
-            .catch(res => Observable.throw(res.json()));
+            .catch((res: any) => Observable.throw(res.json()));
     }
 
     public login(user: LoginModel) {
         return this.authTokens.getTokens(user, 'password')
-            .catch(res => Observable.throw(res.json()))
-            .do(res => this.authTokens.scheduleRefresh());
+            .catch((res: any) => Observable.throw(res.json()))
+            .do((res: any) => this.authTokens.scheduleRefresh());
     }
 
     public logout() {

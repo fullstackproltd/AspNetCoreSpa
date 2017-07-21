@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
       .subscribe(
       // tslint:disable-next-line:no-console
       () => console.info('Startup success'),
-      error => console.warn(error)
+      (error: any) => console.warn(error)
       );
   }
 

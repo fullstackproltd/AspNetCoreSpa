@@ -38,7 +38,7 @@ export class AuthTokenService {
         Object.assign(data, {
             grant_type: grantType,
             // offline_access is required for a refresh token
-            scope: ['openid offline_access']
+            scope: ['openid offline_access client_id']
         });
 
         return this.http.post('/connect/token', this.encodeObjectToParams(data), options)
@@ -113,7 +113,7 @@ export class AuthTokenService {
                         this.scheduleRefresh();
                     });
             })
-            .catch(error => {
+            .catch((error: any) => {
                 this.store.dispatch(this.loggedInActions.notLoggedIn());
                 this.store.dispatch(this.authReadyActions.ready());
                 return Observable.throw(error);

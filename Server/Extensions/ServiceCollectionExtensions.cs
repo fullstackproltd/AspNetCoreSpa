@@ -13,6 +13,8 @@ using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Identity;
 using OpenIddict.Core;
 using OpenIddict.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Net;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -49,29 +51,6 @@ namespace AspNetCoreSpa.Server.Extensions
             {
                 options.Password.RequiredLength = 4;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                //options.Cookies.ApplicationCookie.AutomaticChallenge = false;
-                //options.Cookies.ApplicationCookie.LoginPath = "/login";
-                //options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-                //{
-                //    OnRedirectToLogin = ctx =>
-                //    {
-                //        if (ctx.Request.Path.StartsWithSegments("/api") &&
-                //            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
-                //        {
-                //            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                //        }
-                //        else if (ctx.Response.StatusCode == (int)HttpStatusCode.Forbidden)
-                //        {
-                //            ctx.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                //        }
-                //        else
-                //        {
-                //            ctx.Response.Redirect(ctx.RedirectUri);
-                //        }
-                //        return Task.FromResult(0);
-                //    }
-                //};
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
@@ -114,7 +93,7 @@ namespace AspNetCoreSpa.Server.Extensions
                        .AllowRefreshTokenFlow();
 
                 // Make the "client_id" parameter mandatory when sending a token request.
-                options.RequireClientIdentification();
+                // options.RequireClientIdentification();
 
                 // When request caching is enabled, authorization and logout requests
                 // are stored in the distributed cache by OpenIddict and the user agent

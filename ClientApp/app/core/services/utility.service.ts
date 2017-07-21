@@ -1,11 +1,10 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class UtilityService {
     public _router: Router;
-
     constructor(router: Router) {
         this._router = router;
     }

@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using AspNetCoreSpa.Server;
 using AspNetCoreSpa.Server.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace AspNetCoreSpa
 {

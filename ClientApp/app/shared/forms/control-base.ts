@@ -9,6 +9,7 @@ export class ControlBase<T>{
     public order: number;
     public type: string;
     public class: string;
+    public options: any
 
     constructor(options: {
         value?: T,

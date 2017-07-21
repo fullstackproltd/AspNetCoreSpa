@@ -104,7 +104,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 }
 
                 // Create a new authentication ticket.
-                AuthenticationTicket ticket = null; // await CreateTicketAsync(request, user);
+                AuthenticationTicket ticket = await CreateTicketAsync(request, user);
 
                 return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
             }
@@ -137,7 +137,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
                 // Create a new authentication ticket, but reuse the properties stored
                 // in the refresh token, including the scopes originally granted.
-                AuthenticationTicket ticket = null;// TODO: await CreateTicketAsync(request, user, info.Properties);
+                AuthenticationTicket ticket = await CreateTicketAsync(request, user);
 
                 return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
             }
@@ -149,46 +149,43 @@ namespace AspNetCoreSpa.Server.Controllers.api
             });
         }
 
-        //private async Task<AuthenticationTicket> CreateTicketAsync(
-        //    OpenIdConnectRequest request, ApplicationUser user,
-        //    AuthenticationProperties properties = null)
-        //{
-        //    // Create a new ClaimsPrincipal containing the claims that
-        //    // will be used to create an id_token, a token or a code.
-        //    var principal = await _signInManager.CreateUserPrincipalAsync(user);
+        private async Task<AuthenticationTicket> CreateTicketAsync(OpenIdConnectRequest request, ApplicationUser user)
+        {
+            // Create a new ClaimsPrincipal containing the claims that
+            // will be used to create an id_token, a token or a code.
+            var principal = await _signInManager.CreateUserPrincipalAsync(user);
 
-        //    // Note: by default, claims are NOT automatically included in the access and identity tokens.
-        //    // To allow OpenIddict to serialize them, you must attach them a destination, that specifies
-        //    // whether they should be included in access tokens, in identity tokens or in both.
+            // Note: by default, claims are NOT automatically included in the access and identity tokens.
+            // To allow OpenIddict to serialize them, you must attach them a destination, that specifies
+            // whether they should be included in access tokens, in identity tokens or in both.
 
-        //    foreach (var claim in principal.Claims)
-        //    {
-        //        // In this sample, every claim is serialized in both the access and the identity tokens.
-        //        // In a real world application, you'd probably want to exclude confidential claims
-        //        // or apply a claims policy based on the scopes requested by the client application.
-        //        claim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken,
-        //                              OpenIdConnectConstants.Destinations.IdentityToken);
-        //    }
+            foreach (var claim in principal.Claims)
+            {
+                // In this sample, every claim is serialized in both the access and the identity tokens.
+                // In a real world application, you'd probably want to exclude confidential claims
+                // or apply a claims policy based on the scopes requested by the client application.
+                claim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken,
+                                      OpenIdConnectConstants.Destinations.IdentityToken);
+            }
 
-        //    // Create a new authentication ticket holding the user identity.
-        //    var ticket = new AuthenticationTicket(principal, properties,
-        //        OpenIdConnectServerDefaults.AuthenticationScheme);
+            // Create a new authentication ticket holding the user identity.
+            var ticket = new AuthenticationTicket(principal, OpenIdConnectServerDefaults.AuthenticationScheme);
 
-        //    if (!request.IsRefreshTokenGrantType())
-        //    {
-        //        // Set the list of scopes granted to the client application.
-        //        // Note: the offline_access scope must be granted
-        //        // to allow OpenIddict to return a refresh token.
-        //        ticket.SetScopes(new[] {
-        //            OpenIdConnectConstants.Scopes.OpenId,
-        //            OpenIdConnectConstants.Scopes.Email,
-        //            OpenIdConnectConstants.Scopes.Profile,
-        //            OpenIdConnectConstants.Scopes.OfflineAccess,
-        //            OpenIddictConstants.Scopes.Roles
-        //        }.Intersect(request.GetScopes()));
-        //    }
+            if (!request.IsRefreshTokenGrantType())
+            {
+                // Set the list of scopes granted to the client application.
+                // Note: the offline_access scope must be granted
+                // to allow OpenIddict to return a refresh token.
+                ticket.SetScopes(new[] {
+                   OpenIdConnectConstants.Scopes.OpenId,
+                   OpenIdConnectConstants.Scopes.Email,
+                   OpenIdConnectConstants.Scopes.Profile,
+                   OpenIdConnectConstants.Scopes.OfflineAccess,
+                   OpenIddictConstants.Scopes.Roles
+               }.Intersect(request.GetScopes()));
+            }
 
-        //    return ticket;
-        //}
+            return ticket;
+        }
     }
 }

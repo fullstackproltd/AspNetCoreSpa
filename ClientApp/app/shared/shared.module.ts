@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { PageHeadingComponent } from './directives/page-heading.directive';
 import { DynamicFormComponent } from './forms/dynamic-form.component';
@@ -29,7 +29,7 @@ import { ContentService } from './services/content.service';
     ReactiveFormsModule,
     RouterModule,
     TranslateModule,
-    NgbModule.forRoot(),
+    // NgbModule.forRoot(),
     // No need to export as these modules don't expose any components/directive etc'
     HttpModule,
     JsonpModule
@@ -50,7 +50,7 @@ import { ContentService } from './services/content.service';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    NgbModule,
+    // NgbModule,
     TranslateModule,
     // Providers, Components, directive, pipes
     DynamicFormComponent,
