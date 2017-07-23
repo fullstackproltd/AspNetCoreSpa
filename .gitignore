@@ -175,6 +175,7 @@ ClientBin/
 [Ss]tyle[Cc]op.*
 ~$*
 *~
+AspNetCoreSpa.db
 *.dbmdl
 *.dbproj.schemaview
 #*.pfx
