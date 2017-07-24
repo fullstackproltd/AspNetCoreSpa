@@ -31,7 +31,6 @@ module.exports = (env) => {
                 { test: /\.html$/, use: 'html-loader?minimize=false' },
                 { test: /\.css$/, use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize'] },
                 { test: /\.scss$/, use: ['to-string-loader', 'css-loader', 'sass-loader'] },
-                { test: /\.json$/, use: 'json-loader' },
                 { test: /\.(jpg|png|gif)$/, use: 'file-loader' },
                 { test: /\.(woff|woff2|eot|ttf|svg)$/, use: 'file-loader' }
             ]
