@@ -1207,7 +1207,7 @@ exports.async = new AsyncScheduler_1.AsyncScheduler(AsyncAction_1.AsyncAction);
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -1244,7 +1244,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -2036,7 +2036,7 @@ var Version = (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('4.3.1');
+var VERSION = new Version('5.0.0-beta.0');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -15567,7 +15567,7 @@ function keyframes$1(steps) {
  * ])
  * ```
  *
- * ### Transition Aliases (`:enter` and `:leave`)
+ * ### Using :enter and :leave
  *
  * Given that enter (insertion) and leave (removal) animations are so common, the `transition`
  * function accepts both `:enter` and `:leave` values which are aliases for the `void => *` and `*
@@ -15577,10 +15577,86 @@ function keyframes$1(steps) {
  * transition(":enter", [
  *   style({ opacity: 0 }),
  *   animate(500, style({ opacity: 1 }))
- * ])
+ * ]),
  * transition(":leave", [
  *   animate(500, style({ opacity: 0 }))
  * ])
+ * ```
+ *
+ * ### Using :increment and :decrement
+ * In addition to the :enter and :leave transition aliases, the :increment and :decrement aliases
+ * can be used to kick off a transition when a numeric value has increased or decreased in value.
+ *
+ * ```
+ * import {group, animate, query, transition, style, trigger} from '\@angular/animations';
+ * import {Component} from '\@angular/core';
+ *
+ * \@Component({
+ *   selector: 'banner-carousel-component',
+ *   styles: [`
+ *     .banner-container {
+ *        position:relative;
+ *        height:500px;
+ *        overflow:hidden;
+ *      }
+ *     .banner-container > .banner {
+ *        position:absolute;
+ *        left:0;
+ *        top:0;
+ *        font-size:200px;
+ *        line-height:500px;
+ *        font-weight:bold;
+ *        text-align:center;
+ *        width:100%;
+ *      }
+ *   `],
+ *   template: `
+ *     <button (click)="previous()">Previous</button>
+ *     <button (click)="next()">Next</button>
+ *     <hr>
+ *     <div [\@bannerAnimation]="selectedIndex" class="banner-container">
+ *       <div class="banner"> {{ banner }} </div>
+ *     </div>
+ *   `
+ *   animations: [
+ *     trigger('bannerAnimation', [
+ *       transition(":increment", group([
+ *         query(':enter', [
+ *           style({ left: '100%' }),
+ *           animate('0.5s ease-out', style('*'))
+ *         ]),
+ *         query(':leave', [
+ *           animate('0.5s ease-out', style({ left: '-100%' }))
+ *         ])
+ *       ])),
+ *       transition(":decrement", group([
+ *         query(':enter', [
+ *           style({ left: '-100%' }),
+ *           animate('0.5s ease-out', style('*'))
+ *         ]),
+ *         query(':leave', [
+ *           animate('0.5s ease-out', style({ left: '100%' }))
+ *         ])
+ *       ])),
+ *     ])
+ *   ]
+ * })
+ * class BannerCarouselComponent {
+ *   allBanners: string[] = ['1', '2', '3', '4'];
+ *   selectedIndex: number = 0;
+ *
+ *   get banners() {
+ *      return [this.allBanners[this.selectedIndex]];
+ *   }
+ *
+ *   previous() {
+ *     this.selectedIndex = Math.max(this.selectedIndex - 1, 0);
+ *   }
+ *
+ *   next() {
+ *     this.selectedIndex = Math.min(this.selectedIndex + 1, this.allBanners.length - 1);
+ *   }
+ * }
  * ```
  *
  * {\@example core/animation/ts/dsl/animation_example.ts region='Component'}
@@ -17391,7 +17467,7 @@ exports.EmptyError = EmptyError;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -17428,7 +17504,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -21833,7 +21909,7 @@ var By = (function () {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 
 exports.BrowserModule = BrowserModule;
 exports.platformBrowser = platformBrowser;
@@ -21891,7 +21967,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -21928,7 +22004,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -25870,7 +25946,7 @@ function isPlatformWorkerUi(platformId) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 
 exports.NgLocaleLocalization = NgLocaleLocalization;
 exports.NgLocalization = NgLocalization;
@@ -28230,7 +28306,7 @@ webpackEmptyAsyncContext.id = 59;
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -28267,7 +28343,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -28286,7 +28362,7 @@ function __extends(d, b) {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -59411,7 +59487,7 @@ function toComment(sourceMap) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -59448,7 +59524,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -61600,7 +61676,7 @@ JsonpModule.ctorParameters = function () { return []; };
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 
 exports.BrowserXhr = BrowserXhr;
 exports.JSONPBackend = JSONPBackend;
@@ -78578,7 +78654,7 @@ exports.middlewareOnError = function(onError) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -78615,7 +78691,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -84459,7 +84535,7 @@ FormBuilder.ctorParameters = function () { return []; };
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -84673,7 +84749,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -84710,7 +84786,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -84839,7 +84915,7 @@ var CachedResourceLoader = (function (_super) {
 /**
  * @stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 /**
  * @license
  * Copyright Google Inc. All Rights Reserved.
@@ -84873,7 +84949,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -84910,7 +84986,7 @@ function __extends(d, b) {
 }
 
 /**
- * @license Angular v4.3.1
+ * @license Angular v5.0.0-beta.0
  * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -91139,7 +91215,7 @@ function provideRouterInitializer() {
 /**
  * \@stable
  */
-var VERSION = new _angular_core.Version('4.3.1');
+var VERSION = new _angular_core.Version('5.0.0-beta.0');
 
 exports.RouterLink = RouterLink;
 exports.RouterLinkWithHref = RouterLinkWithHref;
