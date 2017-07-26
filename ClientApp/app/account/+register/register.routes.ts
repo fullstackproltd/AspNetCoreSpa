@@ -4,7 +4,7 @@ import { RegisterComponent } from './+register/register.component';
 import { RegisterConfirmationComponent } from './+confirmation/register-confirmation.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'registerhome', pathMatch: 'full' },
+  { path: '', redirectTo: 'registerhome', pathMatch: 'full', data: { state: 'register' } },
   { path: 'registerhome', component: RegisterComponent },
   { path: 'registerconfirmation', component: RegisterConfirmationComponent }
 ];
