@@ -2,10 +2,10 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { RegisterModel } from '../../core/models/register-model';
-import { AccountService } from '../../core/account/account.service';
-import { ControlBase } from '../../shared/forms/control-base';
-import { ControlTextbox } from '../../shared/forms/control-textbox';
+import { RegisterModel } from '../../../core/models/register-model';
+import { AccountService } from '../../../core/account/account.service';
+import { ControlBase } from '../../../shared/forms/control-base';
+import { ControlTextbox } from '../../../shared/forms/control-textbox';
 
 @Component({
     selector: 'appc-register',

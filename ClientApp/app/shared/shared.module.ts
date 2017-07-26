@@ -2,9 +2,10 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
 import { HttpModule, JsonpModule } from '@angular/http';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { PageHeadingComponent } from './directives/page-heading.directive';
 import { DynamicFormComponent } from './forms/dynamic-form.component';
@@ -21,6 +22,8 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
 
 // Services
 import { ContentService } from './services/content.service';
+import { appReducer } from '../app-store';
+import { ApiTranslationLoader } from './services/api-translation-loader.service';
 
 @NgModule({
   imports: [
@@ -32,7 +35,16 @@ import { ContentService } from './services/content.service';
     // NgbModule.forRoot(),
     // No need to export as these modules don't expose any components/directive etc'
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    HttpModule,
+    StoreModule.provideStore(appReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: ApiTranslationLoader
+      }
+    })
   ],
   declarations: [
     DynamicFormComponent,

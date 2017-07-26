@@ -7,9 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppState } from './app-store';
 import { AuthState } from './core/auth-store/auth.store';
 import { AuthTokenService } from './core/auth-token/auth-token.service';
+import { routerTransition } from './router.animations';
 
 @Component({
   selector: 'appc-root',
+  animations: [routerTransition],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -48,4 +50,9 @@ export class AppComponent implements OnInit {
   public setTitle(newTitle: string) {
     this.titleService.setTitle(newTitle);
   }
+
+  public getState(outlet: any) {
+    return outlet.activatedRouteData.state;
+  }
+
 }

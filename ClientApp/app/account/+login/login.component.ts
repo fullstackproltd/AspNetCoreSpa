@@ -1,11 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginModel } from '../core/models/login-model';
-import { AccountService } from '../core/account/account.service';
-import { ControlBase } from '../shared/forms/control-base';
-import { ControlTextbox } from '../shared/forms/control-textbox';
-import { UtilityService } from '../core/services/utility.service';
+import { LoginModel } from '../../core/models/login-model';
+import { AccountService } from '../../core/account/account.service';
+import { ControlBase } from '../../shared/forms/control-base';
+import { ControlTextbox } from '../../shared/forms/control-textbox';
+import { UtilityService } from '../../core/services/utility.service';
 
 @Component({
     selector: 'appc-login',

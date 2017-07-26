@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
     bootstrap: [AppComponent],
+    declarations: [AppComponent],
     imports: [
         ServerModule,
         // As explained here, animations module used document hence we need Noop animations module on server
