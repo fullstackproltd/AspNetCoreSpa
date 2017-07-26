@@ -3,7 +3,6 @@ using System.Security.Cryptography.X509Certificates;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Filters;
 using AspNetCoreSpa.Server.Services;
-using AspNetCoreSpa.Server.Services.Abstract;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -135,10 +134,9 @@ namespace AspNetCoreSpa.Server.Extensions
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
         {
             // New instance every time, only configuration class needs so its ok
-            services.Configure<SmsSettings>(options => Startup.Configuration.GetSection("SmsSettingsTwillio").Bind(options));
             services.AddTransient<UserResolverService>();
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<ISmsSender, SmsSender>();
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }
@@ -146,6 +144,7 @@ namespace AspNetCoreSpa.Server.Extensions
         public static IServiceCollection RegisterOAuthProviders(this IServiceCollection services)
         {
             services.AddAuthentication()
+                // https://console.developers.google.com/projectselector/apis/library?pli=1
                 .AddGoogle(options =>
                 {
                     options.ClientId = Startup.Configuration["Authentication:Google:ClientId"];
@@ -156,24 +155,24 @@ namespace AspNetCoreSpa.Server.Extensions
                     options.AppId = Startup.Configuration["Authentication:Facebook:AppId"];
                     options.AppSecret = Startup.Configuration["Authentication:Facebook:AppSecret"];
                 })
-                //// https://apps.twitter.com/
+                // https://apps.twitter.com/
                 .AddTwitter(options =>
                 {
                     options.ConsumerKey = Startup.Configuration["Authentication:Twitter:ConsumerKey"];
                     options.ConsumerSecret = Startup.Configuration["Authentication:Twitter:ConsumerSecret"];
                 })
-                //// https://apps.dev.microsoft.com/?mkt=en-us#/appList
+                // https://apps.dev.microsoft.com/?mkt=en-us#/appList
                 .AddMicrosoftAccount(options =>
                 {
                     options.ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"];
                     options.ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"];
                 });
 
-            //// Note: Below social providers are supported through this open source library:
-            //// https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
+            // Note: Below social providers are supported through this open source library:
+            // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
 
-            //// Github Auth
-            //// https://github.com/settings/developers
+            // Github Auth
+            // https://github.com/settings/developers
             //services.UseGitHubAuthentication(new GitHubAuthenticationOptions
             //{
             //    ClientId = Startup.Configuration["Authentication:Github:ClientId"],

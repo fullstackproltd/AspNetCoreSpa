@@ -10,18 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-rtm-26239" />
-
-    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="1.0.0-rc2-final" />
-    <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="1.0.0-rc2-final" />
     <PackageReference Include="OpenIddict" Version="2.0.0-preview1-0632" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.0-preview1-0632" />
     <PackageReference Include="OpenIddict.Mvc" Version="2.0.0-preview1-0632" />
-    <PackageReference Include="SendGrid.NetCore" Version="1.0.0-rtm-00002" />
-    <PackageReference Include="MailKit" Version="1.16.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.0.0" />
-    <PackageReference Include="Twilio" Version="5.5.3-alpha2" />
-    <PackageReference Include="Stripe.net" Version="10.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Serilog" Version="2.5.1-dev-00869" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.0-dev-10169" />

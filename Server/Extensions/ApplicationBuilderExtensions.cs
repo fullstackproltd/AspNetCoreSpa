@@ -1,6 +1,4 @@
 ﻿using System;
-using AspNet.Security.OAuth.GitHub;
-using AspNet.Security.OAuth.LinkedIn;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

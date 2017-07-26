@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
-using AspNetCoreSpa.Server.Services.Abstract;
 using AspNetCoreSpa.Server.ViewModels.ManageViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using AspNetCoreSpa.Server.Services;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -95,7 +95,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             // Generate the token and send it
             var user = await GetCurrentUserAsync();
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
-            await _smsSender.SendSmsTwillioAsync(model.PhoneNumber, "Your security code is: " + code);
+            await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
             return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
         }
 
