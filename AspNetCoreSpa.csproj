@@ -9,7 +9,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-rtm-26239" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
     <PackageReference Include="OpenIddict" Version="2.0.0-preview1-0632" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.0-preview1-0632" />
     <PackageReference Include="OpenIddict.Mvc" Version="2.0.0-preview1-0632" />
@@ -18,10 +18,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Serilog" Version="2.5.1-dev-00869" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.0-dev-10169" />
-    <PackageReference Include="Serilog.Sinks.Seq" Version="3.3.2" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="3.3.3" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0-rtm-26402" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0-rtm-26239" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
 
   </ItemGroup>
 
