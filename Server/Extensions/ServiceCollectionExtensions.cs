@@ -116,7 +116,7 @@ namespace AspNetCoreSpa.Server.Extensions
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContextPool<ApplicationDbContext>(options =>
             {
                 string useSqLite = Startup.Configuration["Data:useSqLite"];
                 if (useSqLite.ToLower() == "true")
