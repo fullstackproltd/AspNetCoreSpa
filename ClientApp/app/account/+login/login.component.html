@@ -1,22 +1,28 @@
-﻿<div class="col-md-6 offset-md-3">
-    <div class="card">
-        <div class="card-header">
-            Login
+﻿<div class="row justify-content-md-center">
+
+    <div class="col-md-6 offset-md-3">
+
+        <div class="card">
+            <div class="card-header">
+                Login
+            </div>
+
+
+            <div class="card-block">
+                <appc-error-summary [errors]="errors"></appc-error-summary>
+                <appc-dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></appc-dynamic-form>
+            </div>
+
         </div>
 
-        <div class="card-block">
-            <appc-error-summary [errors]="errors"></appc-error-summary>
-            <appc-dynamic-form (formsubmit)="login($event)" [controls]="controls" [btnText]="'Login'"></appc-dynamic-form>
+        <p class="text-center font-weight-bold">
+            OR
+        </p>
+
+        <div class="text-center">
+            <appc-social-login></appc-social-login>
         </div>
 
     </div>
-
-    <p class="text-center font-weight-bold">
-        OR
-    </p>
-
-    <div class="text-center">
-        <appc-social-login></appc-social-login>
-    </div>
-
+    
 </div>

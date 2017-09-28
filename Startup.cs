@@ -7,6 +7,7 @@ using AspNetCoreSpa.Server.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Threading.Tasks;
 using System.Net;
+using AspNetCoreSpa.Server.SignalR;
 
 namespace AspNetCoreSpa
 {
@@ -67,6 +68,8 @@ namespace AspNetCoreSpa
 
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
+            services.AddSignalR();
+            
             services.AddCustomizedMvc();
 
             // Node services are to execute any arbitrary nodejs code from .net
@@ -93,6 +96,11 @@ namespace AspNetCoreSpa
             app.UseStaticFiles();
 
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<Chat>("chat");
+            });
 
             app.UseMvc(routes =>
             {

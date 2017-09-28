@@ -17,16 +17,6 @@ namespace AspNetCoreSpa
 
             host.Run();
 
-            // var host = new WebHostBuilder()
-            //     .CaptureStartupErrors(true)
-            //     // .UseSetting("detailedErrors", "true")
-            //     .UseKestrel()
-            //     .UseConfiguration(config)
-            //     .UseContentRoot(Directory.GetCurrentDirectory())
-            //     .UseIISIntegration()
-            //     .UseStartup<Startup>()
-            //     .Build();
-
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

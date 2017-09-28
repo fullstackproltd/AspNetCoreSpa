@@ -1,13 +1,8 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
-import { AuthTokenService } from './auth-token/auth-token.service';
-import { LoggedInActions } from './auth-store/logged-in.actions';
-import { ProfileActions } from './profile/profile.actions';
-import { AuthTokenActions } from './auth-token/auth-token.actions';
-import { AuthReadyActions } from './auth-store/auth-ready.actions';
 // Services
-import { AccountService } from './account/account.service';
+import { AccountService } from './services/account.service';
 import { DataService } from './services/data.service';
 import { UtilityService } from './services/utility.service';
 
@@ -27,12 +22,7 @@ export class CoreModule {
             providers: [
                 // Providers
                 Title,
-                AuthTokenService,
                 AccountService,
-                LoggedInActions,
-                ProfileActions,
-                AuthTokenActions,
-                AuthReadyActions,
                 DataService,
                 UtilityService
             ]

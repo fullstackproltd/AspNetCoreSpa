@@ -17,11 +17,11 @@ namespace AspNetCoreSpa.Server
             using (var scope = services.CreateScope())
             {
                 var db = GetApplicationDbContext(scope);
-                if (args.Contains("dropdb"))
-                {
-                    Console.WriteLine("Dropping database");
-                    db.Database.EnsureDeleted();
-                }
+                // if (args.Contains("dropdb"))
+                // {
+                //     Console.WriteLine("Dropping database");
+                //     db.Database.EnsureDeleted();
+                // }
 
                 // if (args.Contains("migratedb"))
                 // {

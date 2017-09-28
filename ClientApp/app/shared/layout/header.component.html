@@ -27,29 +27,29 @@
         <div class="navbar-collapse justify-content-md-end">
             <ul class="navbar-nav">
 
-                <li class="nav-item" *ngIf="(authState$ | async)?.loggedIn">
+                <li class="nav-item" *ngIf="isLoggedIn">
                     <a class="nav-link" routerLinkActive="active" routerLink="profile">
-                                <i class="fa fa-user"></i> {{(authState$ | async)?.profile.name}}
+                                <i class="fa fa-user"></i> {{user?.name}}
                             </a>
                 </li>
 
-                <li class="nav-item" *ngIf="!(authState$ | async)?.loggedIn">
+                <li class="nav-item" *ngIf="!isLoggedIn">
                     <a class="nav-link" routerLinkActive="active" routerLink="register">
                                 <i class="fa fa-user"></i> {{'APP_NAV_REGISTER' | translate}}
                             </a>
                 </li>
 
-                <li class="nav-item" *ngIf="!(authState$ | async)?.loggedIn">
+                <li class="nav-item" *ngIf="!isLoggedIn">
                     <a class="nav-link" routerLinkActive="active" routerLink="login">
                                 <i class="fa fa-sign-in"></i>{{'APP_NAV_LOGIN' | translate}}
                             </a>
                 </li>
-                <li class="nav-item" *ngIf="(authState$ | async)?.loggedIn && (authState$ | async)?.profile.role.indexOf('Admin') > -1">
+                <li class="nav-item" *ngIf="isLoggedIn && user?.role?.indexOf('Admin') > -1">
                     <a class="nav-link" routerLinkActive="active" routerLink="admin">
                                 <i class="fa fa-gear"></i> {{'APP_NAV_ADMIN' | translate}}
                             </a>
                 </li>
-                <li class="nav-item" *ngIf="(authState$ | async)?.loggedIn">
+                <li class="nav-item" *ngIf="isLoggedIn">
                     <a class="nav-link" (click)="accountService.logout()" routerLinkActive="active" href="javascript:void(null);">
                                 <i class="fa fa-sign-out"></i> {{'APP_NAV_LOGOUT' | translate}}
                             </a>

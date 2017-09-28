@@ -13,7 +13,7 @@ namespace AspNetCoreSpa.Server.Extensions
             if (context.AllMigrationsApplied())
             {
                 var seed = new SeedDbData(host, context);
-            }
+        }
         }
 
         public static bool AllMigrationsApplied(this ApplicationDbContext context)

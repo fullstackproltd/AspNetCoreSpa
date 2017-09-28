@@ -68,7 +68,7 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Language",
+                name: "Languages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -78,7 +78,7 @@ namespace AspNetCoreSpa.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Language", x => x.Id);
+                    table.PrimaryKey("PK_Languages", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,9 +236,9 @@ namespace AspNetCoreSpa.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ContentText_Language_LanguageId",
+                        name: "FK_ContentText_Languages_LanguageId",
                         column: x => x.LanguageId,
-                        principalTable: "Language",
+                        principalTable: "Languages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -250,6 +250,7 @@ namespace AspNetCoreSpa.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     ApplicationId = table.Column<string>(type: "TEXT", nullable: true),
                     Scope = table.Column<string>(type: "TEXT", nullable: true),
+                    Status = table.Column<string>(type: "TEXT", nullable: true),
                     Subject = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -270,6 +271,11 @@ namespace AspNetCoreSpa.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     ApplicationId = table.Column<string>(type: "TEXT", nullable: true),
                     AuthorizationId = table.Column<string>(type: "TEXT", nullable: true),
+                    Ciphertext = table.Column<string>(type: "TEXT", nullable: true),
+                    CreationDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    ExpirationDate = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    Hash = table.Column<string>(type: "TEXT", nullable: true),
+                    Status = table.Column<string>(type: "TEXT", nullable: true),
                     Subject = table.Column<string>(type: "TEXT", nullable: true),
                     Type = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -357,6 +363,12 @@ namespace AspNetCoreSpa.Migrations
                 name: "IX_OpenIddictTokens_AuthorizationId",
                 table: "OpenIddictTokens",
                 column: "AuthorizationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OpenIddictTokens_Hash",
+                table: "OpenIddictTokens",
+                column: "Hash",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -395,7 +407,7 @@ namespace AspNetCoreSpa.Migrations
                 name: "Content");
 
             migrationBuilder.DropTable(
-                name: "Language");
+                name: "Languages");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");

@@ -17,7 +17,7 @@ namespace AspNetCoreSpa.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26402");
+                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
 
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationRole", b =>
                 {
@@ -155,7 +155,7 @@ namespace AspNetCoreSpa.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Language");
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -273,6 +273,8 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("Scope");
 
+                    b.Property<string>("Status");
+
                     b.Property<string>("Subject");
 
                     b.HasKey("Id");
@@ -303,6 +305,16 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("AuthorizationId");
 
+                    b.Property<string>("Ciphertext");
+
+                    b.Property<DateTimeOffset?>("CreationDate");
+
+                    b.Property<DateTimeOffset?>("ExpirationDate");
+
+                    b.Property<string>("Hash");
+
+                    b.Property<string>("Status");
+
                     b.Property<string>("Subject");
 
                     b.Property<string>("Type");
@@ -312,6 +324,9 @@ namespace AspNetCoreSpa.Migrations
                     b.HasIndex("ApplicationId");
 
                     b.HasIndex("AuthorizationId");
+
+                    b.HasIndex("Hash")
+                        .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
                 });

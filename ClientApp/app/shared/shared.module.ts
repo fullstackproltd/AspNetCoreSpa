@@ -2,9 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule, JsonpModule } from '@angular/http';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreModule } from '@ngrx/store';
+import { HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { PageHeadingComponent } from './directives/page-heading.directive';
@@ -22,7 +20,6 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
 
 // Services
 import { ContentService } from './services/content.service';
-import { appReducer } from '../app-store';
 import { ApiTranslationLoader } from './services/api-translation-loader.service';
 
 @NgModule({
@@ -34,11 +31,7 @@ import { ApiTranslationLoader } from './services/api-translation-loader.service'
     TranslateModule,
     // NgbModule.forRoot(),
     // No need to export as these modules don't expose any components/directive etc'
-    HttpModule,
-    JsonpModule,
-    HttpModule,
-    StoreModule.provideStore(appReducer),
-    StoreDevtoolsModule.instrumentOnlyWithExtension(),
+    HttpClientModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

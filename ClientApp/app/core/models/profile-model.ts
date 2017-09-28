@@ -7,7 +7,6 @@ export interface ProfileModel {
     exp: number | null;
     iat: number | null;
     iss: string | null;
-
     unique_name: string | null;
     email_confirmed: boolean;
     role: string[];

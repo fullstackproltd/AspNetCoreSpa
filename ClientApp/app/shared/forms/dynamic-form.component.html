@@ -1,4 +1,4 @@
-<form class="{{formClass}}" (ngSubmit)="onSubmit()" [formGroup]="form" role="form">
+<form class="{{formClass}}" (ngSubmit)="onSubmit()" [formGroup]="form" role="form" #f>
     <appc-dynamic-control *ngFor="let ctrl of controls" [control]="ctrl" [form]="form"></appc-dynamic-control>
 
     <button type="submit" class="btn btn-primary pull-right" [disabled]="!form.valid">{{btnText}}</button>

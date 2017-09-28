@@ -1,3 +1,4 @@
-export class User {
-    constructor(public displayName: string, public roles: string[]) { }
+export interface User {
+    displayName: string;
+    roles: string[];
 }
