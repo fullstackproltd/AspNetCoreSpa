@@ -18,7 +18,7 @@ export class AccountService {
 
     public get isLoggedIn(): boolean {
         if (this.accessToken) {
-            return this.jwtHelper.isTokenExpired(this.accessToken);
+            return !this.jwtHelper.isTokenExpired(this.accessToken);
         }
         return false;
     }
@@ -37,11 +37,10 @@ export class AccountService {
         Object.assign(user, {
             grant_type: 'password',
             // offline_access is required for a refresh token
-            scope: ['openid offline_access client_id']
+            scope: ['openid offline_access client_id profile email roles']
         });
 
         return this.http.post('/connect/token', this.encodeObjectToParams(user), options)
-            .do(r => console.log(r))
             .map((tokens: AuthTokenModel) => {
                 const now = new Date();
                 tokens.expiration_date = new Date(now.getTime() + (tokens.expires_in ? (tokens.expires_in * 1000) : 0)).getTime().toString();

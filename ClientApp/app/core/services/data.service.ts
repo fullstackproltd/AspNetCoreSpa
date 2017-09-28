@@ -105,7 +105,7 @@ export class DataService {
             })
             // .map(this.unwrapHttpValue)
             .catch((error: any) => {
-                return Observable.throw(this.unwrapHttpError(error));
+                return Observable.throw(error);
             })
             .finally(() => {
                 this.pendingCommandsSubject.next(--this.pendingCommandCount);
@@ -191,16 +191,16 @@ export class DataService {
         return options;
     }
 
-    private unwrapHttpError(error: any): any {
-        try {
-            return (error.json());
-        } catch (jsonError) {
-            return ({
-                code: -1,
-                message: 'An unexpected error occurred.'
-            });
-        }
-    }
+    // private unwrapHttpError(error: any): any {
+    //     try {
+    //         return (error.json());
+    //     } catch (jsonError) {
+    //         return ({
+    //             code: -1,
+    //             message: 'An unexpected error occurred.'
+    //         });
+    //     }
+    // }
     private handleErrors(error: any) {
         if (error.status === 401) {
             sessionStorage.clear();

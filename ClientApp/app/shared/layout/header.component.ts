@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
     }
     public get user(): ProfileModel | undefined {
         return this.accountService.user;
+
     }
 
     public ngOnInit(): void { }
