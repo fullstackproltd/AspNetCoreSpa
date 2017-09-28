@@ -7,6 +7,7 @@ import { UtilityService } from '../../core/services/utility.service';
 import { Observable } from 'rxjs/Observable';
 import { AuthTokenModel } from '../models/auth-tokens-model';
 import { JwtHelper } from 'angular2-jwt';
+import { ProfileModel } from '../models/profile-model';
 
 @Injectable()
 export class AccountService {
@@ -16,8 +17,16 @@ export class AccountService {
     constructor(private http: HttpClient, private utilityService: UtilityService) { }
 
     public get isLoggedIn(): boolean {
-        const token = localStorage.getItem(this.tokenKey);
-        return !!token;
+        if (this.accessToken) {
+            return this.jwtHelper.isTokenExpired(this.accessToken);
+        }
+        return false;
+    }
+    public get user(): ProfileModel | undefined {
+        if (this.accessToken) {
+            return this.jwtHelper.decodeToken(this.accessToken);
+        }
+        return undefined;
     }
 
     public login(user: LoginModel): Observable<any> {
@@ -55,6 +64,15 @@ export class AccountService {
         return Object.keys(obj)
             .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
             .join('&');
+    }
+
+    private get accessToken(): string {
+        let token = '';
+        const ticket = localStorage.getItem(this.tokenKey);
+        if (ticket) {
+            token = JSON.parse(<any>ticket).id_token;
+        }
+        return token;
     }
 
 }

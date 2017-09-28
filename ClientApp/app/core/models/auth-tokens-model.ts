@@ -1,8 +1,8 @@
 export interface AuthTokenModel {
-    access_token: string | null;
-    refresh_token: string | null;
-    id_token: string | null;
-    expires_in: number | null;
-    token_type: string | null;
-    expiration_date: string | null;
+    access_token: string;
+    refresh_token: string;
+    id_token: string;
+    expires_in: number;
+    token_type: string;
+    expiration_date: string;
 }

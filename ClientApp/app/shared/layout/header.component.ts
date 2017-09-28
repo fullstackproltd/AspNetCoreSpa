@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountService } from '../../core/services/account.service';
+import { ProfileModel } from '../../core/models/profile-model';
 
 @Component({
     selector: 'appc-header',
@@ -23,8 +24,8 @@ export class HeaderComponent implements OnInit {
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
     }
-    public get user(): any {
-        return {};
+    public get user(): ProfileModel | undefined {
+        return this.accountService.user;
     }
 
     public ngOnInit(): void { }

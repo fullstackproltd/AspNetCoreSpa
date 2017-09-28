@@ -14,6 +14,7 @@ using OpenIddict.Core;
 using OpenIddict.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -129,7 +130,13 @@ namespace AspNetCoreSpa.Server.Extensions
             //         options.RequireHttpsMetadata = false;
             //     });
 
-            services.AddAuthentication()
+            services.AddAuthentication(options =>
+            {
+                // This will override default cookies authentication scheme
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                .AddOAuthValidation()
                // https://console.developers.google.com/projectselector/apis/library?pli=1
                .AddGoogle(options =>
