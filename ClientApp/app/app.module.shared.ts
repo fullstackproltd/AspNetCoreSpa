@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
@@ -11,6 +12,7 @@ import { AppService } from './app.service';
     imports: [
         BrowserModule,
         routing,
+        NgbModule.forRoot(),
         CoreModule.forRoot(),
         SharedModule.forRoot(),
         HomeModule,
@@ -19,7 +21,8 @@ import { AppService } from './app.service';
         AppService
     ],
     exports: [
-        SharedModule
+        SharedModule,
+        NgbModule
     ]
 })
 export class AppModuleShared { }
