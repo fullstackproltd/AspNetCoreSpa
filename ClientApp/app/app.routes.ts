@@ -14,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'admin', loadChildren: './+admin/admin.module#AdminModule'
+  },
+  {
+    path: 'chat', loadChildren: './+chat/chat.module#ChatModule'
   }
 ];
 

@@ -99,7 +99,7 @@ namespace AspNetCoreSpa
 
             app.UseSignalR(routes =>
             {
-                routes.MapHub<Chat>("chat");
+                routes.MapHub<Chat>("chathub");
             });
 
             app.UseMvc(routes =>
