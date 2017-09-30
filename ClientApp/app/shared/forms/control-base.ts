@@ -1,4 +1,4 @@
-export class ControlBase<T>{
+export class ControlBase<T> {
     public value: T | undefined;
     public key: string;
     public label: string;
