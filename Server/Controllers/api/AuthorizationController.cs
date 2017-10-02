@@ -32,7 +32,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
             _userManager = userManager;
         }
 
-        [HttpPost("~/connect/token"), Produces("application/json")]
+        [HttpPost("~/connect/token"), 
+        Produces("application/json")]
         public async Task<IActionResult> Exchange(OpenIdConnectRequest request)
         {
             Debug.Assert(request.IsTokenRequest(),

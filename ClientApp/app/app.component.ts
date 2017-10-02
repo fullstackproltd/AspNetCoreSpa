@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Params, ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 
 import { routerTransition } from './router.animations';
+import { ExternalLoginStatus } from './app.models';
 
 @Component({
   selector: 'appc-root',
@@ -13,7 +15,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     public translate: TranslateService,
-    public titleService: Title) {
+    public titleService: Title,
+    private router: Router,
+    private route: ActivatedRoute) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
 
@@ -27,6 +31,20 @@ export class AppComponent implements OnInit {
         .subscribe((title: string) => this.setTitle(title));
     });
 
+    this.route.queryParams.subscribe((params: Params) => {
+      const param = params['externalLoginStatus'];
+      if (param) {
+        const status = <ExternalLoginStatus>+param;
+        switch (status) {
+          case ExternalLoginStatus.CreateAccount:
+            this.router.navigate(['createaccount']);
+            break;
+
+          default:
+            break;
+        }
+      }
+    });
   }
 
   public setTitle(newTitle: string) {

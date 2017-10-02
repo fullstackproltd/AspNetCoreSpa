@@ -10,6 +10,9 @@ const routes: Routes = [
     path: 'register', loadChildren: './account/+register/register.module#RegisterModule'
   },
   {
+    path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule'
+  },
+  {
     path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule'
   },
   {
