@@ -11,6 +11,7 @@ import { ControlTextbox } from '../../shared/forms/control-textbox';
 })
 export class CreateAccountComponent implements OnInit {
   public controls: any;
+  public errors: any;
 
   constructor(private accountService: AccountService) { }
 
@@ -33,7 +34,9 @@ export class CreateAccountComponent implements OnInit {
     this.accountService.create(event.email)
       .subscribe((x: any) => {
         console.log(x);
-      })
+      }, (res) => {
+        this.errors = JSON.parse(res.error);
+      });
   }
 
 }

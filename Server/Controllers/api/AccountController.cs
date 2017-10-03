@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using AspNetCoreSpa.Server.Services;
+using Microsoft.Extensions.Options;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -16,6 +17,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
     [Route("api/[controller]")]
     public class AccountController : BaseController
     {
+        private readonly IOptions<IdentityOptions> _identityOptions;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -24,12 +26,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
+            IOptions<IdentityOptions> identityOptions,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
+            _identityOptions = identityOptions;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
@@ -139,6 +143,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
+
+                // var ticket = await AppUtils.CreateTicketAsync(_signInManager, _identityOptions);
                 return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
             }
             if (result.RequiresTwoFactor)

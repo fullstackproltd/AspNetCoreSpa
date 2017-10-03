@@ -1,4 +1,4 @@
-<h1>Send some basic messages</h1>
+<h1>SignalR demo</h1>
 
 <div class="row">
   <form class="form-inline" (ngSubmit)="sendMessage()" #messageForm="ngForm">
@@ -6,7 +6,7 @@
       <label class="sr-only" for="message">Message</label>
       <input type="text" class="form-control" id="message" placeholder="your message..." name="message" [(ngModel)]="message" required>
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!messageForm.valid">Send SignalR Message</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!messageForm.valid">Send Message</button>
   </form>
 </div>
 <div class="row" *ngIf="messages.length > 0">
