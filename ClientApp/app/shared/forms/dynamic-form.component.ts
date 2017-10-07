@@ -6,7 +6,8 @@ import { FormControlService } from './form-control.service';
 
 @Component({
     selector: 'appc-dynamic-form',
-    templateUrl: './dynamic-form.component.html'
+    templateUrl: './dynamic-form.component.html',
+    styleUrls: ['./dynamic-form.component.scss'],
 })
 export class DynamicFormComponent implements OnInit {
 
