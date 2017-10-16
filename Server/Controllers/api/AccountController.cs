@@ -2,13 +2,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Extensions;
-using AspNetCoreSpa.Server.Services.Abstract;
 using AspNetCoreSpa.Server.ViewModels.AccountViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using AspNetCoreSpa.Server.Services;
+using Microsoft.Extensions.Options;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -16,6 +17,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
     [Route("api/[controller]")]
     public class AccountController : BaseController
     {
+        private readonly IOptions<IdentityOptions> _identityOptions;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -24,12 +26,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
+            IOptions<IdentityOptions> identityOptions,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
+            _identityOptions = identityOptions;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
@@ -79,7 +83,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 FirstName = model.Firstname,
                 LastName = model.Lastname
             };
-            
+
             var result = await _userManager.CreateAsync(currentUser, model.Password);
             if (result.Succeeded)
             {
@@ -139,6 +143,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
+
+                // var ticket = await AppUtils.CreateTicketAsync(_signInManager, _identityOptions);
                 return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
             }
             if (result.RequiresTwoFactor)
@@ -226,7 +232,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var host = Request.Scheme + "://" + Request.Host;
             var callbackUrl = host + "?userId=" + currentUser.Id + "&passwordResetCode=" + code;
             var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Reset your password</a>";
-            await _emailSender.SendEmailAsync(MailType.ForgetPassword, new EmailModel { To = model.Email }, confirmationLink);
+            await _emailSender.SendEmailAsync(model.Email, "Forgotten password email", confirmationLink);
             return Json(new { });
         }
 
@@ -284,12 +290,11 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email")
             {
-                await _emailSender.SendEmailAsync(MailType.SecurityCode, new EmailModel { }, null);
-                //await _emailSender.SendEmailAsync(Email, await _userManager.GetEmailAsync(user), "Security Code", message);
+                await _emailSender.SendEmailAsync(user.Email, "Security Code", message);
             }
             else if (model.SelectedProvider == "Phone")
             {
-                await _smsSender.SendSmsTwillioAsync(await _userManager.GetPhoneNumberAsync(user), message);
+                await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
             }
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });

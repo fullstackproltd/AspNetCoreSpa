@@ -10,11 +10,11 @@
     * Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 * [Angular](https://angular.io/)
 * [Angular CLI](https://cli.angular.io/) (Only code scaffolding for now)
-* [Webpack 2](https://webpack.github.io/)
+* [Webpack](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [ng-bootstrap](https://ng-bootstrap.github.io/)
 * [@ngx-translate](http://www.ngx-translate.com/)
-* [Typescript 2](http://www.typescriptlang.org/)
+* [Typescript](http://www.typescriptlang.org/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
 * Testing Angular code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
@@ -41,7 +41,7 @@
 2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2017](https://www.visualstudio.com/)
 3. [Nodejs](https://nodejs.org/en/)
 
-**Make sure you have Node version >= 6.9.x and NPM >= 3**
+**Make sure you have Node version >= latest LTS and NPM >= latest LTS
 
 ## Installation
 ```

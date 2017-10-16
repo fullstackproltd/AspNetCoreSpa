@@ -6,6 +6,7 @@ using AspNetCoreSpa.Server.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
@@ -22,7 +23,7 @@ namespace AspNetCoreSpa.Server.Controllers
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.MainDotJs = await GetMainDotJs();
+            //ViewBag.MainDotJs = await GetMainDotJs();
 
             if (Request.Query.ContainsKey("emailConfirmCode") &&
                 Request.Query.ContainsKey("userId"))
@@ -52,8 +53,14 @@ namespace AspNetCoreSpa.Server.Controllers
             return View();
         }
 
+        public IActionResult Error()
+        {
+            ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+            return View();
+        }
+
         // Becasue for production this is hashed chunk so has changes on each production build
-        public async Task<string> GetMainDotJs()
+        private async Task<string> GetMainDotJs()
         {
             var basePath = _env.WebRootPath + "//dist//";
 

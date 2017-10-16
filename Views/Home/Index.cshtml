@@ -7,20 +7,24 @@
 </style>
 
 <div class="container">
-    <appc-root>
-        <div class="app-spinner">
-            <i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
-        </div>
-    </appc-root>
+    <!-- <cache expires-after="@TimeSpan.FromMinutes(10)"> -->
+        <!-- <appc-root asp-prerender-module="ClientApp/dist/main-server">  -->
+        <appc-root> 
+         <!-- <appc-root >  -->
+            <div class="app-spinner">
+                <i class="fa fa-spinner fa-spin fa-5x" aria-hidden="true"></i>
+            </div>
+         </appc-root> 
+    <!-- </cache> -->
 </div>
 
 <script>
     window.user = '@ViewBag.user';
 </script>
 
-<environment names="Development">
-    <script src="~/dist/polyfills.dll.js" asp-append-version="true"></script>
-    <script src="~/dist/vendor.dll.js" asp-append-version="true"></script>
-</environment>
+<script src="~/dist/vendor.js" asp-append-version="true"></script>
+@section scripts {
+    <script src="~/dist/main-client.js" asp-append-version="true"></script>
+}
 
-<script src="~/dist/@ViewBag.MainDotJs" asp-append-version="true"></script>
+@*<script src="~/dist/@ViewBag.MainDotJs" asp-append-version="true"></script>*@

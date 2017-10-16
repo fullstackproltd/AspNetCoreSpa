@@ -3,17 +3,18 @@ using System.Security.Cryptography.X509Certificates;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Filters;
 using AspNetCoreSpa.Server.Services;
-using AspNetCoreSpa.Server.Services.Abstract;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using AspNet.Security.OpenIdConnect.Primitives;
+using Microsoft.AspNetCore.Identity;
+using OpenIddict.Core;
+using OpenIddict.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
-using System.Threading.Tasks;
-using AspNet.Security.OpenIdConnect.Primitives;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -21,13 +22,12 @@ namespace AspNetCoreSpa.Server.Extensions
     {
         public static IServiceCollection AddSslCertificate(this IServiceCollection services, IHostingEnvironment hostingEnv)
         {
-            var cert = new X509Certificate2(Path.Combine(hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
+            // var cert = new X509Certificate2(Path.Combine(hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
 
-            services.Configure<KestrelServerOptions>(options =>
-            {
-                options.UseHttps(cert);
-
-            });
+            //services.Configure<KestrelServerOptions>(options =>
+            //{
+            //    options.UseHttps(cert);
+            //});
 
             return services;
         }
@@ -51,31 +51,8 @@ namespace AspNetCoreSpa.Server.Extensions
             {
                 options.Password.RequiredLength = 4;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Cookies.ApplicationCookie.AutomaticChallenge = false;
-                options.Cookies.ApplicationCookie.LoginPath = "/login";
-                options.Cookies.ApplicationCookie.Events = new CookieAuthenticationEvents
-                {
-                    OnRedirectToLogin = ctx =>
-                    {
-                        if (ctx.Request.Path.StartsWithSegments("/api") &&
-                            ctx.Response.StatusCode == (int)HttpStatusCode.OK)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                        }
-                        else if (ctx.Response.StatusCode == (int)HttpStatusCode.Forbidden)
-                        {
-                            ctx.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                        }
-                        else
-                        {
-                            ctx.Response.Redirect(ctx.RedirectUri);
-                        }
-                        return Task.FromResult(0);
-                    }
-                };
             })
-            .AddEntityFrameworkStores<ApplicationDbContext, int>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
             return services;
@@ -91,53 +68,123 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
             });
+
             // Register the OpenIddict services.
-            services.AddOpenIddict()
+            services.AddOpenIddict(options =>
+            {
                 // Register the Entity Framework stores.
-                .AddEntityFrameworkCoreStores<ApplicationDbContext>()
+                options.AddEntityFrameworkCoreStores<ApplicationDbContext>();
 
                 // Register the ASP.NET Core MVC binder used by OpenIddict.
                 // Note: if you don't call this method, you won't be able to
                 // bind OpenIdConnectRequest or OpenIdConnectResponse parameters.
-                .AddMvcBinders()
+                options.AddMvcBinders();
 
                 // Enable the token endpoint.
-                .EnableTokenEndpoint("/connect/token")
+                options.EnableTokenEndpoint("/connect/token");
 
                 // Enable the password and the refresh token flows.
-                .AllowPasswordFlow()
-                .AllowRefreshTokenFlow()
+                options.AllowPasswordFlow()
+                       .AllowRefreshTokenFlow();
 
                 // During development, you can disable the HTTPS requirement.
-                .DisableHttpsRequirement()
+                options.DisableHttpsRequirement();
 
-                // Register a new ephemeral key, that is discarded when the application
-                // shuts down. Tokens signed using this key are automatically invalidated.
-                // This method should only be used during development.
-                .AddEphemeralSigningKey();
+                // Note: to use JWT access tokens instead of the default
+                // encrypted format, the following lines are required:
+                //
+                // options.UseJsonWebTokens();
+                // options.AddEphemeralSigningKey();
+            });
 
-            // On production, using a X.509 certificate stored in the machine store is recommended.
-            // You can generate a self-signed certificate using Pluralsight's self-cert utility:
-            // https://s3.amazonaws.com/pluralsight-free/keith-brown/samples/SelfCert.zip
+            // If you prefer using JWT, don't forget to disable the automatic
+            // JWT -> WS-Federation claims mapping used by the JWT middleware:
             //
-            // services.AddOpenIddict()
-            //     .AddSigningCertificate("7D2A741FE34CC2C7369237A5F2078988E17A6A75");
+            // JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            // JwtSecurityTokenHandler.DefaultOutboundClaimTypeMap.Clear();
             //
-            // Alternatively, you can also store the certificate as an embedded .pfx resource
-            // directly in this assembly or in a file published alongside this project:
+            // services.AddAuthentication()
+            //     .AddJwtBearer(options =>
+            //     {
+            //         options.Authority = "http://localhost:54895/";
+            //         options.Audience = "resource_server";
+            //         options.RequireHttpsMetadata = false;
+            //         options.TokenValidationParameters = new TokenValidationParameters
+            //         {
+            //             NameClaimType = OpenIdConnectConstants.Claims.Subject,
+            //             RoleClaimType = OpenIdConnectConstants.Claims.Role
+            //         };
+            //     });
+
+            // Alternatively, you can also use the introspection middleware.
+            // Using it is recommended if your resource server is in a
+            // different application/separated from the authorization server.
             //
-            // services.AddOpenIddict()
-            //     .AddSigningCertificate(
-            //          assembly: typeof(Startup).GetTypeInfo().Assembly,
-            //          resource: "AuthorizationServer.Certificate.pfx",
-            //          password: "OpenIddict");
+            // services.AddAuthentication()
+            //     .AddOAuthIntrospection(options =>
+            //     {
+            //         options.Authority = new Uri("http://localhost:54895/");
+            //         options.Audiences.Add("resource_server");
+            //         options.ClientId = "resource_server";
+            //         options.ClientSecret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd";
+            //         options.RequireHttpsMetadata = false;
+            //     });
+
+            services.AddAuthentication(options =>
+            {
+                // This will override default cookies authentication scheme
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+               .AddOAuthValidation()
+               // https://console.developers.google.com/projectselector/apis/library?pli=1
+               .AddGoogle(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:Google:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Google:ClientSecret"];
+               })
+               .AddFacebook(options =>
+               {
+                   options.AppId = Startup.Configuration["Authentication:Facebook:AppId"];
+                   options.AppSecret = Startup.Configuration["Authentication:Facebook:AppSecret"];
+               })
+               // https://apps.twitter.com/
+               .AddTwitter(options =>
+               {
+                   options.ConsumerKey = Startup.Configuration["Authentication:Twitter:ConsumerKey"];
+                   options.ConsumerSecret = Startup.Configuration["Authentication:Twitter:ConsumerSecret"];
+               })
+               // https://apps.dev.microsoft.com/?mkt=en-us#/appList
+               .AddMicrosoftAccount(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"];
+               });
+
+            // Note: Below social providers are supported through this open source library:
+            // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
+
+            // Github Auth
+            // https://github.com/settings/developers
+            //services.UseGitHubAuthentication(new GitHubAuthenticationOptions
+            //{
+            //    ClientId = Startup.Configuration["Authentication:Github:ClientId"],
+            //    ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"]
+            //});
+
+            //services.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
+            //{
+            //    ClientId = Startup.Configuration["Authentication:LinkedIn:ClientId"],
+            //    ClientSecret = Startup.Configuration["Authentication:LinkedIn:ClientSecret"]
+            //});
 
             return services;
         }
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContextPool<ApplicationDbContext>(options =>
             {
                 string useSqLite = Startup.Configuration["Data:useSqLite"];
                 if (useSqLite.ToLower() == "true")
@@ -155,12 +202,12 @@ namespace AspNetCoreSpa.Server.Extensions
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
         {
             // New instance every time, only configuration class needs so its ok
-            services.Configure<SmsSettings>(options => Startup.Configuration.GetSection("SmsSettingsTwillio").Bind(options));
             services.AddTransient<UserResolverService>();
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<ISmsSender, SmsSender>();
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }
+
     }
 }
