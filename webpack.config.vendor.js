@@ -14,7 +14,7 @@ const treeShakableModules = [
     '@angular/router',
     'angular2-jwt',
     '@ngx-translate/core',
-    '@ng-bootstrap/ng-bootstrap',
+    // '@ng-bootstrap/ng-bootstrap',
     '@aspnet/signalr-client',
     'rxjs',
     'zone.js',
