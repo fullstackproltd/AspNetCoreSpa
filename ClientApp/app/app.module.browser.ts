@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppModuleShared } from './app.module.shared';
+import { AppModuleShared } from './app.module';
 import { AppComponent } from './app.component';
 
 @NgModule({
