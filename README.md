@@ -12,6 +12,7 @@
 * [Angular CLI](https://cli.angular.io/) (Only code scaffolding for now)
 * [Webpack](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
+* [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
 * [ng-bootstrap](https://ng-bootstrap.github.io/)
 * [@ngx-translate](http://www.ngx-translate.com/)
 * [Typescript](http://www.typescriptlang.org/)

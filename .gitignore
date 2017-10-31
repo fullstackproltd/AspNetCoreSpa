@@ -3,6 +3,7 @@
 
 coverage/**/**
 ClientApp/**/*.js
+ClientApp/dist
 /doc
 /documentation
 /logs
