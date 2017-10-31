@@ -1,6 +1,4 @@
-
 const helpers = require('./helpers');
-const path = require('path');
 
 /**
  * Webpack Plugins
@@ -46,7 +44,7 @@ module.exports = function (options) {
       extensions: ['.ts', '.js'],
 
       /**
-       * Make sure root is Client
+       * Make sure root is ClientApp
        */
       modules: [helpers.root('ClientApp'), 'node_modules']
 
@@ -58,7 +56,7 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#module
      *
      * 'use:' revered back to 'loader:' as a temp. workaround for #1188
-     * See: https://github.com/AngularClass/angular2-webpack-starter/issues/1188#issuecomment-262872034
+     * See: https://github.com/AngularClass/angular-starter/issues/1188#issuecomment-262872034
      */
     module: {
 
@@ -75,16 +73,14 @@ module.exports = function (options) {
           test: /\.js$/,
           loader: 'source-map-loader',
           exclude: [
-            // these packages have problems with their sourcemaps
+            /**
+             * These packages have problems with their sourcemaps
+             */
             helpers.root('node_modules/rxjs'),
             helpers.root('node_modules/@angular')
           ]
         },
-        {
-          test: /\.(scss|sass)$/,
-          exclude: /node_modules/,
-          loaders: ['raw-loader', 'sass-loader']
-        },
+
         /**
          * Typescript loader support for .ts and Angular 2 async routes via .async.ts
          *
@@ -96,13 +92,17 @@ module.exports = function (options) {
             {
               loader: 'awesome-typescript-loader',
               query: {
-                // use inline sourcemaps for "karma-remap-coverage" reporter
+                /**
+                 * Use inline sourcemaps for "karma-remap-coverage" reporter
+                 */
                 sourceMap: false,
                 inlineSourceMap: true,
                 compilerOptions: {
 
-                  // Remove TypeScript helpers to be injected
-                  // below by DefinePlugin
+                  /**
+                   * Remove TypeScript helpers to be injected
+                   * below by DefinePlugin
+                   */
                   removeComments: true
 
                 }
@@ -122,6 +122,17 @@ module.exports = function (options) {
         {
           test: /\.css$/,
           loader: ['to-string-loader', 'css-loader'],
+          exclude: [helpers.root('ClientApp/index.html')]
+        },
+
+        /**
+         * Raw loader support for *.scss files
+         *
+         * See: https://github.com/webpack/raw-loader
+         */
+        {
+          test: /\.scss$/,
+          loader: ['raw-loader', 'sass-loader'],
           exclude: [helpers.root('ClientApp/index.html')]
         },
 
@@ -172,45 +183,63 @@ module.exports = function (options) {
        * Environment helpers
        *
        * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+       *
+       * NOTE: when adding more properties make sure you include them in custom-typings.d.ts
        */
-      // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
       new DefinePlugin({
         'ENV': JSON.stringify(ENV),
         'HMR': false,
-        'process.env': {
-          'ENV': JSON.stringify(ENV),
-          'NODE_ENV': JSON.stringify(ENV),
-          'HMR': false,
-        }
+        // 'process.env': {
+        //   'ENV': JSON.stringify(ENV),
+        //   'NODE_ENV': JSON.stringify(ENV),
+        //   'HMR': false,
+        // }
       }),
+
       /**
-            * Plugin: ContextReplacementPlugin
-            * Description: Provides context to Angular's use of System.import
-            *
-            * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-            * See: https://github.com/angular/angular/issues/11580
-            */
+       * Plugin: ContextReplacementPlugin
+       * Description: Provides context to Angular's use of System.import
+       *
+       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
+       * See: https://github.com/angular/angular/issues/11580
+       */
       new ContextReplacementPlugin(
-        // The (\\|\/) piece accounts for path separators in *nix and Windows
+        /**
+         * The (\\|\/) piece accounts for path separators in *nix and Windows
+         */
         /angular(\\|\/)core(\\|\/)@angular/,
-        helpers.root('src'), // location of your src
+        helpers.root('ClientApp'), // location of your ClientApp
         {
-          // your Angular Async Route paths relative to this root directory
+          /**
+           * your Angular Async Route paths relative to this root directory
+           */
         }
       ),
-      /**
-      * Plugin LoaderOptionsPlugin (experimental)
-      *
-      * See: https://gist.github.com/sokra/27b24881210b56bbaff7
-      */
-      new LoaderOptionsPlugin({
-        debug: true,
-        options: {
 
+      /**
+       * Plugin LoaderOptionsPlugin (experimental)
+       *
+       * See: https://gist.github.com/sokra/27b24881210b56bbaff7
+       */
+      new LoaderOptionsPlugin({
+        debug: false,
+        options: {
+          /**
+           * legacy options go here
+           */
         }
       }),
 
     ],
+
+    /**
+     * Disable performance hints
+     *
+     * See: https://github.com/a-tarasyuk/rr-boilerplate/blob/master/webpack/dev.config.babel.js#L41
+     */
+    performance: {
+      hints: false
+    },
 
     /**
      * Include polyfills or mocks for various node stuff
