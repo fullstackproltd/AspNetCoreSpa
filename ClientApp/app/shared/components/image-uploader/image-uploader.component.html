@@ -1,0 +1,9 @@
+<div>
+  <input type="file" multiple (change)="fileChange(input)" #input />
+</div>
+
+<div *ngFor="let file_src of file_srcs; let i = index">
+  <img [attr.src]='file_src' alt="" />
+  <p>{{ debug_size_before[i] / 1000 }} KB <b>Before</b> </p>
+  <p>{{ debug_size_after[i] / 1000 }} KB <b>After</b></p>
+</div>

@@ -1,24 +1,3 @@
-// import { trigger, animate, style, transition } from '@angular/animations';
-
-// export function routerTransition() {
-//     return trigger('routerTransition', [
-//         transition('void => *', [
-//             style({ transform: 'translateX(-10%)' }),
-//             animate(400)
-//         ])
-//     ]);
-// }
-
-// export function hostStyle() {
-//     return {
-//         '[@routerTransition]': '',
-//         '[style.display]': '"block"',
-
-//         // '[style.position]': '"absolute"'
-//     };
-// }
-
-
 import { trigger, stagger, animate, style, group, query, transition } from '@angular/animations';
 
 export const routerTransition = trigger('routerTransition', [
@@ -42,4 +21,4 @@ export const routerTransition = trigger('routerTransition', [
             animate('1s ease-in-out', style({ transform: 'translateY(0px)', opacity: 1 })),
         ]), { optional: true }),
     ])
-])
+]);

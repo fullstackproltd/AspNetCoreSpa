@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidatorFn } from '@angular/forms';
 
-import { ControlBase } from './control-base';
+import { ControlBase } from './controls';
 import { ValidationService } from './validation.service';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class FormControlService {
         const group: any = {};
 
         controls.forEach(control => {
-            const validators: any = [];
+            const validators: ValidatorFn[] = [];
             // Required
             if (control.required) {
                 validators.push(Validators.required);
@@ -26,7 +26,7 @@ export class FormControlService {
             }
             // Email
             if (control.type === 'email') {
-                validators.push(ValidationService.emailValidator);
+                validators.push(Validators.email);
             }
             // Password
             if (control.type === 'password') {

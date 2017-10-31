@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../shared';
+
 import { routing } from './create.routes';
 import { CreateAccountComponent } from './create.component';
 

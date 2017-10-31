@@ -1,11 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginModel } from '../../core/models/login-model';
-import { ControlBase } from '../../shared/forms/control-base';
-import { ControlTextbox } from '../../shared/forms/control-textbox';
-import { UtilityService } from '../../core/services/utility.service';
-import { AccountService } from '../../core/services/account.service';
+import { AccountService, LoginModel, UtilityService } from '../../core';
+import { ControlBase, ControlTextbox } from '../../shared';
+
+
 
 @Component({
     selector: 'appc-login',
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
             (errors: any) => {
                 this.errors.push(errors['error_description']);
             });
-    };
+    }
 
     public ngOnInit() {
         const controls: Array<ControlBase<any>> = [

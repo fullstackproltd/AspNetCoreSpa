@@ -1,82 +1,67 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { PageHeadingComponent } from './directives/page-heading.directive';
-import { DynamicFormComponent } from './forms/dynamic-form.component';
-import { DynamicFormControlComponent } from './forms/dynamic-form-control.component';
-import { ErrorMessageComponent } from './forms/error-message.component';
-import { ErrorSummaryComponent } from './forms/error-summary.component';
-import { FormControlService } from './forms/form-control.service';
-
-
-import { HeaderComponent } from './layout/header.component';
-import { FooterComponent } from './layout/footer.component';
-
-import { UppercasePipe } from './pipes/uppercase.pipe';
-
+// Components
+import { AppTableComponent, EditTemplateComponent, ImageUploaderComponent, SecureImageComponent, LoadingSpinnerComponent } from './components';
+import { DynamicFormComponent, DynamicFormControlComponent, ErrorSummaryComponent } from './forms';
+// Directives
+import { PageHeadingComponent } from './directives';
+// Pipes
+import { KeysPipe, UppercasePipe } from './pipes';
 // Services
-import { ContentService } from './services/content.service';
-import { ApiTranslationLoader } from './services/api-translation-loader.service';
+import { FormControlService } from './forms';
 
 @NgModule({
+  entryComponents: [EditTemplateComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
-    TranslateModule,
-    // NgbModule.forRoot(),
+    NgbModule,
     // No need to export as these modules don't expose any components/directive etc'
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: ApiTranslationLoader
-      }
-    })
   ],
   declarations: [
     DynamicFormComponent,
     DynamicFormControlComponent,
-    ErrorMessageComponent,
     ErrorSummaryComponent,
-    FooterComponent,
-    HeaderComponent,
     PageHeadingComponent,
-    UppercasePipe
+    AppTableComponent,
+    UppercasePipe,
+    KeysPipe,
+    EditTemplateComponent,
+    ImageUploaderComponent,
+    SecureImageComponent,
+    LoadingSpinnerComponent
   ],
   exports: [
     // Modules
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
-    // NgbModule,
-    TranslateModule,
+    NgbModule,
     // Providers, Components, directive, pipes
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,
-    ErrorMessageComponent,
-    FooterComponent,
-    HeaderComponent,
     PageHeadingComponent,
-    UppercasePipe
+    ImageUploaderComponent,
+    AppTableComponent,
+    LoadingSpinnerComponent,
+    UppercasePipe,
+    KeysPipe,
+  ],
+  providers: [
+    FormControlService
   ]
 
 })
 export class SharedModule {
-  public static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [
-        FormControlService,
-        ContentService
-      ]
-    };
-  }
+  // public static forRoot(): ModuleWithProviders {
+  //   return {
+  //     ngModule: SharedModule,
+
+  //   };
+  // }
 }

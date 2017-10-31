@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
+
+import { SharedModule } from '../../shared';
+
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { routing } from './profile.routes';

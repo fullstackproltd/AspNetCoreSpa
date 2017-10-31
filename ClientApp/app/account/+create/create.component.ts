@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AccountService } from '../../core/services/account.service';
-import { ControlBase } from '../../shared/forms/control-base';
-import { ControlTextbox } from '../../shared/forms/control-textbox';
+import { ControlBase, ControlTextbox } from '../../shared';
+import { AccountService } from '../../core';
+
 
 @Component({
   selector: 'appc-create',

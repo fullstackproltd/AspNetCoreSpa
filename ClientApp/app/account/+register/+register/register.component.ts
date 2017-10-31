@@ -2,10 +2,9 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { RegisterModel } from '../../../core/models/register-model';
-import { ControlBase } from '../../../shared/forms/control-base';
-import { ControlTextbox } from '../../../shared/forms/control-textbox';
-import { AccountService } from '../../../core/services/account.service';
+import { AccountService, RegisterModel } from '../../../core';
+import { ControlBase, ControlTextbox } from '../../../shared';
+
 
 @Component({
     selector: 'appc-register',
@@ -25,7 +24,7 @@ export class RegisterComponent implements OnInit {
             (errors: string[]) => {
                 this.errors = errors;
             });
-    };
+    }
 
     public ngOnInit() {
         const controls: Array<ControlBase<any>> = [

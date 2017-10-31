@@ -61,13 +61,7 @@ export class AccountService {
         this.utilityService.navigateToSignIn();
     }
 
-    private encodeObjectToParams(obj: any): string {
-        return Object.keys(obj)
-            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
-            .join('&');
-    }
-
-    private get accessToken(): string {
+    public get accessToken(): string {
         let token = '';
         const ticket = localStorage.getItem(this.tokenKey);
         if (ticket) {
@@ -76,4 +70,9 @@ export class AccountService {
         return token;
     }
 
+    private encodeObjectToParams(obj: any): string {
+        return Object.keys(obj)
+            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
+            .join('&');
+    }
 }

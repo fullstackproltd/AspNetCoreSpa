@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataService } from './../core/services/data.service';
+
 import { AdminService } from './admin.service';
+
+import { DataService } from '../core';
 
 @Component({
     selector: 'appc-admin',
@@ -20,6 +22,6 @@ export class AdminComponent implements OnInit {
     }
     public doAdminOperation() {
         this.adminService.do()
-            .subscribe(data => this.message = data);
+            .subscribe((data: any) => this.message = data);
     }
 }

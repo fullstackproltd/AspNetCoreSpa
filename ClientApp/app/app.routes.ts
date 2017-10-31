@@ -16,11 +16,8 @@ const routes: Routes = [
     path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule'
   },
   {
-    path: 'admin', loadChildren: './+admin/admin.module#AdminModule'
-  },
-  // {
-  //   path: 'chat', loadChildren: './+chat/chat.module#ChatModule'
-  // }
+    path: 'chat', loadChildren: './+chat/chat.module#ChatModule'
+  }
 ];
 
 export const routing = RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules });

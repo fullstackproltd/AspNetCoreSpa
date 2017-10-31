@@ -1,0 +1,14 @@
+<!--Modal template when data needs editing-->
+<div class="modal-header">
+  <h4 class="modal-title">Edit</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+  <appc-error-summary [errors]="errors"></appc-error-summary>
+  <appc-dynamic-form (formsubmit)="update($event)" [data]="formData.dataToEdit" [controls]="formData.fields" [btnText]="'Update'"></appc-dynamic-form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+</div>
