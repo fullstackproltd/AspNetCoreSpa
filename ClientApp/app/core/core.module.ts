@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SimpleNotificationsModule } from 'angular2-notifications';
 
 // App level components
 import { HeaderComponent } from './components/header/header.component';
@@ -28,8 +27,6 @@ import { GlobalErrorHandler } from './services/global-error.service';
         CommonModule,
         HttpClientModule,
         NgbModule,
-        // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
-        SimpleNotificationsModule.forRoot(),
         RouterModule,
         TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } }),
     ],
@@ -57,7 +54,6 @@ export class CoreModule {
                 UtilityService,
                 { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
                 { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
-                // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true },
                 { provide: ErrorHandler, useClass: GlobalErrorHandler }
             ]
         };

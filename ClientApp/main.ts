@@ -19,7 +19,7 @@ declare const module: any;
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { enableProdMode } from '@angular/core';
 
-import { AppModule } from './app/app.module.browser';
+import { AppModule } from './app/app.module';
 
 // Enable either Hot Module Reloading or production mode
 if (module.hot) {

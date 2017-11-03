@@ -4,17 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Components
-import { AppTableComponent, EditTemplateComponent, ImageUploaderComponent, SecureImageComponent, LoadingSpinnerComponent } from './components';
 import { DynamicFormComponent, DynamicFormControlComponent, ErrorSummaryComponent } from './forms';
 // Directives
 import { PageHeadingComponent } from './directives';
 // Pipes
-import { KeysPipe, UppercasePipe } from './pipes';
+import { UppercasePipe } from './pipes';
 // Services
 import { FormControlService } from './forms';
 
 @NgModule({
-  entryComponents: [EditTemplateComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -27,13 +25,7 @@ import { FormControlService } from './forms';
     DynamicFormControlComponent,
     ErrorSummaryComponent,
     PageHeadingComponent,
-    AppTableComponent,
-    UppercasePipe,
-    KeysPipe,
-    EditTemplateComponent,
-    ImageUploaderComponent,
-    SecureImageComponent,
-    LoadingSpinnerComponent
+    UppercasePipe
   ],
   exports: [
     // Modules
@@ -46,22 +38,11 @@ import { FormControlService } from './forms';
     DynamicFormControlComponent,
     ErrorSummaryComponent,
     PageHeadingComponent,
-    ImageUploaderComponent,
-    AppTableComponent,
-    LoadingSpinnerComponent,
     UppercasePipe,
-    KeysPipe,
   ],
   providers: [
     FormControlService
   ]
 
 })
-export class SharedModule {
-  // public static forRoot(): ModuleWithProviders {
-  //   return {
-  //     ngModule: SharedModule,
-
-  //   };
-  // }
-}
+export class SharedModule { }

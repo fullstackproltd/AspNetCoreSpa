@@ -13,7 +13,6 @@ const treeShakableModules = [
     '@angular/platform-browser-dynamic',
     '@angular/router',
     'angular2-jwt',
-    'angular2-notifications',
     '@ngx-translate/core',
     '@ng-bootstrap/ng-bootstrap',
     '@aspnet/signalr-client',
@@ -22,11 +21,7 @@ const treeShakableModules = [
 ];
 const nonTreeShakableModules = [
     'font-awesome/css/font-awesome.css',
-    'bootstrap/dist/css/bootstrap.css',
-    //'es6-promise',
-    //'es6-shim',
-    // 'event-source-polyfill'
-    //'jquery',
+    'bootstrap/dist/css/bootstrap.css'
 ];
 const allModules = treeShakableModules.concat(nonTreeShakableModules);
 
@@ -77,24 +72,5 @@ module.exports = (env) => {
         ])
     });
 
-    const serverBundleConfig = merge(sharedConfig, {
-        target: 'node',
-        resolve: { mainFields: ['main'] },
-        entry: { vendor: allModules.concat(['aspnet-prerendering']) },
-        output: {
-            path: path.join(__dirname, 'ClientApp', 'dist'),
-            libraryTarget: 'commonjs2',
-        },
-        module: {
-            rules: [{ test: /\.css(\?|$)/, use: ['to-string-loader', isDevBuild ? 'css-loader' : 'css-loader?minimize'] }]
-        },
-        plugins: [
-            new webpack.DllPlugin({
-                path: path.join(__dirname, 'ClientApp', 'dist', '[name]-manifest.json'),
-                name: '[name]_[hash]'
-            })
-        ]
-    });
-
-    return [clientBundleConfig, serverBundleConfig];
+    return [clientBundleConfig];
 }
