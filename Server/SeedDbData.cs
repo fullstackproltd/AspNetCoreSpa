@@ -78,8 +78,6 @@ namespace AspNetCoreSpa.Server
                 _context.SaveChanges();
                 _context.Content.Add(new Content { Key = "APP_NAV_REGISTER" });
                 _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_ADMIN" });
-                _context.SaveChanges();
             }
 
             if (!_context.ContentText.Any())
@@ -101,9 +99,6 @@ namespace AspNetCoreSpa.Server
 
                 _context.ContentText.Add(new ContentText { Text = "Register", LanguageId = 1, ContentId = 6 });
                 _context.ContentText.Add(new ContentText { Text = "registre", LanguageId = 2, ContentId = 6 });
-
-                _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 1, ContentId = 7 });
-                _context.ContentText.Add(new ContentText { Text = "Admin", LanguageId = 2, ContentId = 7 });
 
                 _context.SaveChanges();
             }

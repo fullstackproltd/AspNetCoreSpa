@@ -1,42 +1,29 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "baseUrl": "ClientApp",
+    "sourceMap": true,
+    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "noEmit": true,
-    "importHelpers": true,
-    "noEmitHelpers": true,
     "noUnusedLocals": true,
-    "strictNullChecks": true,
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "noImplicitReturns": true,
-    "lib": [
-      "dom",
-      "es6"
-    ],
+    "target": "es5",
     "typeRoots": [
       "node_modules/@types"
     ],
-    "types": [
-      "hammerjs",
-      "jasmine",
-      "node",
-      "source-map",
-      "uglify-js",
-      "webpack"
-    ]
-  },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "compiled"
-  ],
-  "compileOnSave": false,
-  "buildOnSave": false
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ]
+    }
+  }
 }

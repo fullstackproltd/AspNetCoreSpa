@@ -49,11 +49,6 @@
                         <i class="fa fa-sign-in"></i>{{'APP_NAV_LOGIN' | translate}}
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="isLoggedIn && user?.role?.indexOf('Admin') > -1">
-                    <a class="nav-link" routerLinkActive="active" routerLink="admin">
-                        <i class="fa fa-gear"></i> {{'APP_NAV_ADMIN' | translate}}
-                    </a>
-                </li>
                 <li class="nav-item" *ngIf="isLoggedIn">
                     <a class="nav-link" (click)="accountService.logout()" routerLinkActive="active" href="javascript:void(null);">
                         <i class="fa fa-sign-out"></i> {{'APP_NAV_LOGOUT' | translate}}
