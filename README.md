@@ -9,7 +9,7 @@
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
     * Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 * [Angular](https://angular.io/)
-* [Angular CLI](https://cli.angular.io/) (Only code scaffolding for now)
+* [Angular CLI](https://cli.angular.io/) (Code scaffolding & unit test running. More features from CLI will be added)
 * [Webpack](https://webpack.github.io/)
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
