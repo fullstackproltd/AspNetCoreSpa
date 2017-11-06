@@ -150,7 +150,7 @@ npm run e2e:live
 * Install docker for windows (this will install HyperV linux host on windows)
 * npm run build:prod
 * dotnet publish
-* docker build bin\Debug\netcoreapp1.1\publish -t aspnetcorespa
+* docker build bin\Debug\netcoreapp2.0\publish -t aspnetcorespa
 * docker run -it -d -p 85:80 aspnetcorespa
 * Navigate http://localhost:85
 
