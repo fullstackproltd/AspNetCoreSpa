@@ -54,8 +54,12 @@ export class DataService {
         return this.http.delete<T>(url);
     }
 
-    private get bearerToken() {
-        return 'Bearer ' + JSON.parse(<any>sessionStorage.getItem('token'));
+    private get bearerToken(): string {
+        const token = JSON.parse(<any>sessionStorage.getItem('auth-token'));
+        if (token) {
+            return 'Bearer ' + token.access_token;
+        }
+        return '';
     }
 
     private buildUrlSearchParams(params: any): HttpParams {

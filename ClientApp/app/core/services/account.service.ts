@@ -17,14 +17,14 @@ export class AccountService {
     constructor(private http: HttpClient, private utilityService: UtilityService) { }
 
     public get isLoggedIn(): boolean {
-        if (this.accessToken) {
-            return !this.jwtHelper.isTokenExpired(this.accessToken);
+        if (this.idToken) {
+            return !this.jwtHelper.isTokenExpired(this.idToken);
         }
         return false;
     }
     public get user(): ProfileModel | undefined {
-        if (this.accessToken) {
-            return this.jwtHelper.decodeToken(this.accessToken);
+        if (this.idToken) {
+            return this.jwtHelper.decodeToken(this.idToken);
         }
         return undefined;
     }
@@ -61,7 +61,17 @@ export class AccountService {
         this.utilityService.navigateToSignIn();
     }
 
+    // Used to authenticate user and access api resources
     public get accessToken(): string {
+        let token = '';
+        const ticket = localStorage.getItem(this.tokenKey);
+        if (ticket) {
+            token = JSON.parse(<any>ticket).access_token;
+        }
+        return token;
+    }
+    // Used to access user information
+    public get idToken(): string {
         let token = '';
         const ticket = localStorage.getItem(this.tokenKey);
         if (ticket) {
@@ -69,7 +79,6 @@ export class AccountService {
         }
         return token;
     }
-
     private encodeObjectToParams(obj: any): string {
         return Object.keys(obj)
             .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
