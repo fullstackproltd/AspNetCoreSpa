@@ -58,9 +58,10 @@ module.exports = (env) => {
             vendor: isDevBuild ? allModules : nonTreeShakableModules
         },
         output: { path: path.join(__dirname, 'wwwroot', 'dist') },
+        devtool: "source-map",
         module: {
             rules: [
-                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader' : 'css-loader?minimize' }) }
+                { test: /\.css(\?|$)/, use: extractCSS.extract({ use: isDevBuild ? 'css-loader?sourceMap' : 'css-loader?minimize&sourceMap' }) }
             ]
         },
         plugins: [

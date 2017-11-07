@@ -6,9 +6,11 @@
     "aspnetcore",
     "entityframework core",
     "angular",
-    "webpack2",
-    "typescript2",
-    "bootstrap4"
+    "webpack",
+    "typescript",
+    "bootstrap4",
+    "ng-bootstrap",
+    "ngx-translate"
   ],
   "repository": "git+https://github.com/asadsahi/AspNetCoreSpa.git",
   "author": "Asad Sahi <asadazmat@gmail.com>",

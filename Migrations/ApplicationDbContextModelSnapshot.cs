@@ -244,17 +244,23 @@ namespace AspNetCoreSpa.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ClientId");
+                    b.Property<string>("ClientId")
+                        .IsRequired();
 
                     b.Property<string>("ClientSecret");
 
                     b.Property<string>("DisplayName");
 
-                    b.Property<string>("LogoutRedirectUri");
+                    b.Property<string>("PostLogoutRedirectUris");
 
-                    b.Property<string>("RedirectUri");
+                    b.Property<string>("RedirectUris");
 
-                    b.Property<string>("Type");
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -271,11 +277,20 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("ApplicationId");
 
-                    b.Property<string>("Scope");
+                    b.Property<string>("Scopes");
 
-                    b.Property<string>("Status");
+                    b.Property<string>("Status")
+                        .IsRequired();
 
-                    b.Property<string>("Subject");
+                    b.Property<string>("Subject")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -290,6 +305,13 @@ namespace AspNetCoreSpa.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
 
@@ -315,9 +337,15 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("Status");
 
-                    b.Property<string>("Subject");
+                    b.Property<string>("Subject")
+                        .IsRequired();
 
-                    b.Property<string>("Type");
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("Type")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -400,11 +428,13 @@ namespace AspNetCoreSpa.Migrations
                 {
                     b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
                         .WithMany("Tokens")
-                        .HasForeignKey("ApplicationId");
+                        .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
                         .WithMany("Tokens")
-                        .HasForeignKey("AuthorizationId");
+                        .HasForeignKey("AuthorizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

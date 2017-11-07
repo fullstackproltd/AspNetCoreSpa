@@ -150,7 +150,7 @@ npm run e2e:live
 * Install docker for windows (this will install HyperV linux host on windows)
 * npm run build:prod
 * dotnet publish
-* docker build bin\Debug\netcoreapp1.1\publish -t aspnetcorespa
+* docker build bin\Debug\netcoreapp2.0\publish -t aspnetcorespa
 * docker run -it -d -p 85:80 aspnetcorespa
 * Navigate http://localhost:85
 
@@ -163,3 +163,7 @@ npm run e2e:live
 ```
 "C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -enableRule:AppOffline -source:contentPath="%USERPROFILE%\AspNetCoreSpa\bin\release\netcoreapp1.1\publish" -dest:contentPath="aspnetcorespa",ComputerName="https://yoursitename.scm.azurewebsites.net/msdeploy.axd",UserName='yourusername',Password='yourpassword',AuthType='Basic'
 ```
+
+---
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RB7XESV8CP7GW)
