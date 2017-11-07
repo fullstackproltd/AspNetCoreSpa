@@ -145,7 +145,9 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
 
                 // var ticket = await AppUtils.CreateTicketAsync(_signInManager, _identityOptions);
-                return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
+                return LocalRedirect("~/connect/authorize?client_id='aspnetcorespa'&response_type='id_token token'&redirect_uri='http://localhost:5000/login'&scope='openid email roles profile'");
+
+                // return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
             }
             if (result.RequiresTwoFactor)
             {
@@ -184,9 +186,10 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 result = await _userManager.AddLoginAsync(user, info);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    // await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                    return Ok(); // Everything ok
+                    return LocalRedirect("~/connect/authorize?client_id='aspnetcorespa'&response_type='id_token token'&redirect_uri='http://localhost:5000/login'&scope='openid email roles profile'");
+                    // return Ok(); // Everything ok
                 }
             }
             return BadRequest(new[] { "Email already exists" });

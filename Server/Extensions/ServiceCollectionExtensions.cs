@@ -100,7 +100,7 @@ namespace AspNetCoreSpa.Server.Extensions
                 // encrypted format, the following lines are required:
                 //
                 // options.UseJsonWebTokens();
-                // options.AddEphemeralSigningKey();
+                options.AddEphemeralSigningKey();
             });
 
             // If you prefer using JWT, don't forget to disable the automatic
