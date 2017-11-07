@@ -81,11 +81,17 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.AddMvcBinders();
 
                 // Enable the token endpoint.
+                // Form password flow (used in username/password login requests)
                 options.EnableTokenEndpoint("/connect/token");
+
+                // Enable the authorization endpoint.
+                // Form implicit flow (used in social login redirects)
+                options.EnableAuthorizationEndpoint("/connect/authorize");
 
                 // Enable the password and the refresh token flows.
                 options.AllowPasswordFlow()
-                       .AllowRefreshTokenFlow();
+                       .AllowRefreshTokenFlow()
+                       .AllowImplicitFlow(); // To enable external logins to authenticate
 
                 // During development, you can disable the HTTPS requirement.
                 options.DisableHttpsRequirement();
