@@ -145,7 +145,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
 
                 // var ticket = await AppUtils.CreateTicketAsync(_signInManager, _identityOptions);
-                return LocalRedirect("~/connect/authorize?client_id='aspnetcorespa'&response_type='id_token token'&redirect_uri='http://localhost:5000/login'&scope='openid email roles profile'");
+                return LocalRedirect("~/connect/authorize?client_id=aspnetcorespa&response_type=id_token%20token&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Flogin&scope=openid%20email%20roles%20profile&nonce=test");
 
                 // return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
             }
@@ -188,7 +188,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 {
                     // await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                    return LocalRedirect("~/connect/authorize?client_id='aspnetcorespa'&response_type='id_token token'&redirect_uri='http://localhost:5000/login'&scope='openid email roles profile'");
+                    return LocalRedirect("~/connect/authorize?client_id=aspnetcorespa&response_type=id_token%20token&redirect_uri=http%3A%2F%2Flocalhost%3A5000%2Flogin&scope=openid%20email%20roles%20profile&nonce=test");
                     // return Ok(); // Everything ok
                 }
             }

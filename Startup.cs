@@ -8,6 +8,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.Threading.Tasks;
 using System.Net;
 using AspNetCoreSpa.Server.SignalR;
+using OpenIddict.Core;
+using System;
+using System.Threading;
+using OpenIddict.Models;
 
 namespace AspNetCoreSpa
 {
@@ -69,7 +73,7 @@ namespace AspNetCoreSpa
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
             services.AddSignalR();
-            
+
             services.AddCustomizedMvc();
 
             // Node services are to execute any arbitrary nodejs code from .net
@@ -111,6 +115,62 @@ namespace AspNetCoreSpa
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+
+
+            // Seed the database with the sample applications.
+            // Note: in a real world application, this step should be part of a setup script.
+            InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
+
         }
+
+        private async Task InitializeAsync(IServiceProvider services, CancellationToken cancellationToken)
+        {
+            // Create a new service scope to ensure the database context is correctly disposed when this methods returns.
+            using (var scope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                await context.Database.EnsureCreatedAsync();
+
+                var manager = scope.ServiceProvider.GetRequiredService<OpenIddictApplicationManager<OpenIddictApplication>>();
+
+                if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
+                {
+                    var descriptor = new OpenIddictApplicationDescriptor
+                    {
+                        ClientId = "aspnetcorespa",
+                        DisplayName = "AspnetCoreSpa",
+                        PostLogoutRedirectUris = { new Uri("http://localhost:5000/signout-oidc") },
+                        RedirectUris = { new Uri("http://localhost:5000/login") }
+                        // RedirectUris = { new Uri("http://localhost:5000/signin-oidc") }
+                    };
+
+                    await manager.CreateAsync(descriptor, cancellationToken);
+                }
+
+                // if (await manager.FindByClientIdAsync("resource-server-1", cancellationToken) == null)
+                // {
+                //     var descriptor = new OpenIddictApplicationDescriptor
+                //     {
+                //         ClientId = "resource-server-1",
+                //         ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342"
+                //     };
+
+                //     await manager.CreateAsync(descriptor, cancellationToken);
+                // }
+
+                // if (await manager.FindByClientIdAsync("resource-server-2", cancellationToken) == null)
+                // {
+                //     var descriptor = new OpenIddictApplicationDescriptor
+                //     {
+                //         ClientId = "resource-server-2",
+                //         ClientSecret = "C744604A-CD05-4092-9CF8-ECB7DC3499A2"
+                //     };
+
+                //     await manager.CreateAsync(descriptor, cancellationToken);
+                // }
+            }
+
+        }
+
     }
 }
