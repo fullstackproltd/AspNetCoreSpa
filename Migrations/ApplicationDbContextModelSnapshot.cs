@@ -249,15 +249,14 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("ClientSecret");
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<string>("DisplayName");
 
                     b.Property<string>("PostLogoutRedirectUris");
 
                     b.Property<string>("RedirectUris");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Type")
                         .IsRequired();
@@ -277,6 +276,9 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("ApplicationId");
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<string>("Scopes");
 
                     b.Property<string>("Status")
@@ -284,10 +286,6 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("Subject")
                         .IsRequired();
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Type")
                         .IsRequired();
@@ -304,14 +302,13 @@ namespace AspNetCoreSpa.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
 
@@ -329,6 +326,9 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("Ciphertext");
 
+                    b.Property<string>("ConcurrencyToken")
+                        .IsConcurrencyToken();
+
                     b.Property<DateTimeOffset?>("CreationDate");
 
                     b.Property<DateTimeOffset?>("ExpirationDate");
@@ -339,10 +339,6 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("Subject")
                         .IsRequired();
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<string>("Type")
                         .IsRequired();

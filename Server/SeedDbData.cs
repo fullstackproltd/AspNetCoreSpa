@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using OpenIddict.Core;
+using OpenIddict.Models;
 
 namespace AspNetCoreSpa.Server
 {
@@ -26,6 +30,7 @@ namespace AspNetCoreSpa.Server
             CreateRoles(); // Add roles
             CreateUsers(); // Add users
             AddLanguagesAndContent();
+            AddOpenIdConnectOptions(serviceScope, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         private void CreateRoles()
@@ -102,6 +107,48 @@ namespace AspNetCoreSpa.Server
 
                 _context.SaveChanges();
             }
+        }
+
+        private async Task AddOpenIdConnectOptions(IServiceScope services, CancellationToken cancellationToken)
+        {
+            var manager = services.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
+            
+            if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
+            {
+                var descriptor = new OpenIddictApplicationDescriptor
+                {
+                    ClientId = "aspnetcorespa",
+                    DisplayName = "AspnetCoreSpa",
+                    PostLogoutRedirectUris = { new Uri("http://localhost:5000/signout-oidc") },
+                    RedirectUris = { new Uri("http://localhost:5000/login") }
+                    // RedirectUris = { new Uri("http://localhost:5000/signin-oidc") }
+                };
+
+                await manager.CreateAsync(descriptor, cancellationToken);
+            }
+
+            // if (await manager.FindByClientIdAsync("resource-server-1", cancellationToken) == null)
+            // {
+            //     var descriptor = new OpenIddictApplicationDescriptor
+            //     {
+            //         ClientId = "resource-server-1",
+            //         ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342"
+            //     };
+
+            //     await manager.CreateAsync(descriptor, cancellationToken);
+            // }
+
+            // if (await manager.FindByClientIdAsync("resource-server-2", cancellationToken) == null)
+            // {
+            //     var descriptor = new OpenIddictApplicationDescriptor
+            //     {
+            //         ClientId = "resource-server-2",
+            //         ClientSecret = "C744604A-CD05-4092-9CF8-ECB7DC3499A2"
+            //     };
+
+            //     await manager.CreateAsync(descriptor, cancellationToken);
+            // }
+
         }
 
     }

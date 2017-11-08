@@ -122,25 +122,30 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 "The OpenIddict binder for ASP.NET Core MVC is not registered. " +
                 "Make sure services.AddOpenIddict().AddMvcBinders() is correctly called.");
 
-            var u = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            var auth = await HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
+            var principal = auth.Principal;
+            // var providerKey = auth.Principal.Claims.FirstOrDefault();
+
             if (!User.Identity.IsAuthenticated)
+            {
+                // If the client application request promptless authentication,
+                // return an error indicating that the user is not logged in.
+                if (request.HasPrompt(OpenIdConnectConstants.Prompts.None))
                 {
-                    // If the client application request promptless authentication,
-                    // return an error indicating that the user is not logged in.
-                    if (request.HasPrompt(OpenIdConnectConstants.Prompts.None))
+                    var properties = new AuthenticationProperties(new Dictionary<string, string>
                     {
-                        var properties = new AuthenticationProperties(new Dictionary<string, string>
-                        {
-                            [OpenIdConnectConstants.Properties.Error] = OpenIdConnectConstants.Errors.LoginRequired,
-                            [OpenIdConnectConstants.Properties.ErrorDescription] = "The user is not logged in."
-                        });
+                        [OpenIdConnectConstants.Properties.Error] = OpenIdConnectConstants.Errors.LoginRequired,
+                        [OpenIdConnectConstants.Properties.ErrorDescription] = "The user is not logged in."
+                    });
 
-                        // Ask OpenIddict to return a login_required error to the client application.
-                        return Forbid(properties, OpenIdConnectServerDefaults.AuthenticationScheme);
-                    }
-
-                    return Challenge();
+                    // Ask OpenIddict to return a login_required error to the client application.
+                    return Forbid(properties, OpenIdConnectServerDefaults.AuthenticationScheme);
                 }
+
+                return Challenge();
+            }
 
             // Retrieve the profile of the logged in user.
             var user = await _userManager.GetUserAsync(User);
