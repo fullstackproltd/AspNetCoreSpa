@@ -29,6 +29,7 @@ if (module.hot) {
         const oldRootElem = document.querySelector('appc-root');
         const newRootElem = document.createElement('appc-root');
         oldRootElem!.parentNode!.insertBefore(newRootElem, oldRootElem);
+        oldRootElem!.remove();
         modulePromise.then(appModule => appModule.destroy());
     });
 } else {
