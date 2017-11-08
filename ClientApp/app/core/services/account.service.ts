@@ -47,7 +47,7 @@ export class AccountService {
 
                 // const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '') as ProfileModel;
 
-                localStorage.setItem(this.tokenKey, JSON.stringify(tokens));
+                this.setToken(tokens);
             });
     }
     public register(data: RegisterModel): Observable<any> {
@@ -78,6 +78,9 @@ export class AccountService {
             token = JSON.parse(<any>ticket).id_token;
         }
         return token;
+    }
+    public setToken(tokens: AuthTokenModel): any {
+        localStorage.setItem(this.tokenKey, JSON.stringify(tokens));
     }
     private encodeObjectToParams(obj: any): string {
         return Object.keys(obj)

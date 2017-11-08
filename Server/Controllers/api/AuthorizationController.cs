@@ -9,31 +9,38 @@ using AspNetCoreSpa.Server.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OpenIddict.Core;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
-    public class AuthorizationController : Controller
+    public class AuthorizationController : BaseController
     {
         private readonly IOptions<IdentityOptions> _identityOptions;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger _logger;
 
         public AuthorizationController(
             IOptions<IdentityOptions> identityOptions,
             SignInManager<ApplicationUser> signInManager,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            ILoggerFactory loggerFactory)
         {
             _identityOptions = identityOptions;
             _signInManager = signInManager;
             _userManager = userManager;
+            _logger = loggerFactory.CreateLogger<AuthorizationController>();
+
         }
 
+        [AllowAnonymous]
         [HttpPost("~/connect/token"),
         Produces("application/json")]
         public async Task<IActionResult> Exchange(OpenIdConnectRequest request)
@@ -114,55 +121,90 @@ namespace AspNetCoreSpa.Server.Controllers.api
             });
         }
 
-
+        [AllowAnonymous]
         [HttpGet("~/connect/authorize")]
         public async Task<IActionResult> Authorize(OpenIdConnectRequest request)
         {
-            Debug.Assert(request.IsAuthorizationRequest(),
-                "The OpenIddict binder for ASP.NET Core MVC is not registered. " +
-                "Make sure services.AddOpenIddict().AddMvcBinders() is correctly called.");
 
             var info = await _signInManager.GetExternalLoginInfoAsync();
 
             var auth = await HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
             var principal = auth.Principal;
+
             // var providerKey = auth.Principal.Claims.FirstOrDefault();
-
-            if (!User.Identity.IsAuthenticated)
+            if (info == null)
             {
-                // If the client application request promptless authentication,
-                // return an error indicating that the user is not logged in.
-                if (request.HasPrompt(OpenIdConnectConstants.Prompts.None))
-                {
-                    var properties = new AuthenticationProperties(new Dictionary<string, string>
-                    {
-                        [OpenIdConnectConstants.Properties.Error] = OpenIdConnectConstants.Errors.LoginRequired,
-                        [OpenIdConnectConstants.Properties.ErrorDescription] = "The user is not logged in."
-                    });
+                return Render(ExternalLoginStatus.Invalid);
+            }
 
-                    // Ask OpenIddict to return a login_required error to the client application.
-                    return Forbid(properties, OpenIdConnectServerDefaults.AuthenticationScheme);
+            // Sign in the user with this external login provider if the user already has a login.
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+            if (result.Succeeded)
+            {
+
+                // Retrieve the profile of the logged in user.
+                var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
+                // var user = await _userManager.GetUserAsync(principal);
+                if (user == null)
+                {
+                    return Render(ExternalLoginStatus.Error);
                 }
 
-                return Challenge();
-            }
+                _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
+                var ticket = await CreateTicketAsync(request, user);
+                // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
+                return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
 
-            // Retrieve the profile of the logged in user.
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+                // return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
+            }
+            else
             {
-                return BadRequest(new OpenIdConnectResponse
-                {
-                    Error = OpenIdConnectConstants.Errors.ServerError,
-                    ErrorDescription = "An internal error has occurred."
-                });
+                // External account doesn't have a local account so ask to create one
+                return Render(ExternalLoginStatus.CreateAccount);
             }
 
-            // Create a new authentication ticket.
-            var ticket = await CreateTicketAsync(request, user);
 
-            // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
-            return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
+            // if (result.RequiresTwoFactor)
+            // {
+            //     return Render(ExternalLoginStatus.TwoFactor);
+            // }
+            // if (result.IsLockedOut)
+            // {
+            //     return Render(ExternalLoginStatus.Lockout);
+            // }
+            // else
+            // {
+            //     // If the user does not have an account, then ask the user to create an account.
+            //     // ViewData["ReturnUrl"] = returnUrl;
+            //     // ViewData["LoginProvider"] = info.LoginProvider;
+            //     // var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            //     // return RedirectToAction("Index", "Home", new ExternalLoginCreateAccountViewModel { Email = email });
+            //     return Render(ExternalLoginStatus.CreateAccount);
+            // }
+
+            // if (!User.Identity.IsAuthenticated)
+            // {
+            //     // If the client application request promptless authentication,
+            //     // return an error indicating that the user is not logged in.
+            //     if (request.HasPrompt(OpenIdConnectConstants.Prompts.None))
+            //     {
+            //         var properties = new AuthenticationProperties(new Dictionary<string, string>
+            //         {
+            //             [OpenIdConnectConstants.Properties.Error] = OpenIdConnectConstants.Errors.LoginRequired,
+            //             [OpenIdConnectConstants.Properties.ErrorDescription] = "The user is not logged in."
+            //         });
+
+            //         // Ask OpenIddict to return a login_required error to the client application.
+            //         return Forbid(properties, OpenIdConnectServerDefaults.AuthenticationScheme);
+            //     }
+
+            //     return Challenge();
+            // }
+
+
+
+
         }
 
         private async Task<AuthenticationTicket> CreateTicketAsync(OpenIdConnectRequest request, ApplicationUser user, AuthenticationProperties properties = null)

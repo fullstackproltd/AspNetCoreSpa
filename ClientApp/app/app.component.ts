@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { routerTransition } from './router.animations';
 import { ExternalLoginStatus } from './app.models';
+import { UtilityService, AccountService } from './core';
 
 @Component({
   selector: 'appc-root',
@@ -17,7 +18,9 @@ export class AppComponent implements OnInit {
     public translate: TranslateService,
     public titleService: Title,
     private router: Router,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private us: UtilityService,
+    private as: AccountService) {
     // this language will be used as a fallback when a translation isn't found in the current language
     translate.setDefaultLang('en');
 
@@ -32,6 +35,7 @@ export class AppComponent implements OnInit {
     });
 
     this.route.queryParams.subscribe((params: Params) => {
+      this.as.setToken(this.us.parseQueryString(window.location.href.split('#')[1]));
       const param = params['externalLoginStatus'];
       if (param) {
         const status = <ExternalLoginStatus>+param;
