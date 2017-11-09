@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AspNetCoreSpa.Server.Services;
+using AspNetCoreSpa.Server.Filters;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
@@ -66,7 +67,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 return Ok();
             }
-            return BadRequest("Login cannot be removed");
+            return BadRequest(new ApiError("Login cannot be removed"));
         }
 
         [HttpPost("addphonenumber")]
@@ -107,7 +108,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             // Send an SMS to verify the phone number
             if (string.IsNullOrEmpty(phoneNumber))
             {
-                return BadRequest("Unable to verify phone number");
+                return BadRequest(new ApiError("Unable to verify phone number"));
             }
             return Ok();
         }
@@ -122,7 +123,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return Ok();
             }
             // If we got this far, something failed, redisplay the form
-            return BadRequest("Failed to verify phone number");
+            return BadRequest(new ApiError("Failed to verify phone number"));
         }
 
         [HttpPost("removephonenumber")]
@@ -134,7 +135,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 return Ok();
             }
-            return BadRequest("Failed to remove phone number");
+            return BadRequest(new ApiError("Failed to remove phone number"));
         }
 
         [HttpGet("managelogins")]
@@ -177,14 +178,15 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var info = await _signInManager.GetExternalLoginInfoAsync(await _userManager.GetUserIdAsync(user));
             if (info == null)
             {
-                return BadRequest("Unable to find linked login info");
+                return BadRequest(new ApiError("Unable to find linked login info"));
             }
             var result = await _userManager.AddLoginAsync(user, info);
             if (result.Succeeded)
             {
                 return Ok();
             }
-            return BadRequest("Unable to link login");
+            return BadRequest(new ApiError("Unable to link login"));
+            
         }
 
         [HttpGet("userinfo")]
@@ -210,7 +212,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return Ok(new { FirstName = model.FirstName, LastName = model.LastName });
             }
 
-            return BadRequest("Unable to update user info");
+            return BadRequest(new ApiError("Unable to update user info"));
         }
         [HttpPost("changepassword")]
         public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordViewModel model)
@@ -222,7 +224,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 _logger.LogInformation(3, "User changed their password successfully.");
                 return Ok();
             }
-            return BadRequest("Unable to change password");
+            return BadRequest(new ApiError("Unable to change password"));
         }
 
         [HttpPost("setpassword")]
@@ -235,7 +237,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 return Ok();
             }
-            return BadRequest("Unable to set password");
+            return BadRequest(new ApiError("Unable to set password"));
         }
 
         #region Helpers

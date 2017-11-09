@@ -52,10 +52,6 @@ export class UpdatePasswordComponent implements OnInit {
       .subscribe(res => {
         this.reset.emit(true);
         this.ns.success('Password changed successfully');
-      }, err => {
-        debugger;
-        console.log(err);
-        this.ns.error(err.error)
       });
   }
 }

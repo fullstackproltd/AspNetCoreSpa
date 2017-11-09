@@ -42,7 +42,7 @@ export class UserInfoComponent implements OnInit {
     this.profileService.userInfo(model)
       .subscribe((res: UserInfoModel) => {
         this.ns.success(`Name changed to ${res.firstName} ${res.lastName}`);
-      }, err => this.ns.error(err.error));
+      });
 
   }
 

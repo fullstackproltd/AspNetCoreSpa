@@ -15,7 +15,7 @@ export class NotificationsService {
     notification.click = new EventEmitter<{}>();
     this.emitter.next({ command: 'set', notification: notification, add: to });
     return notification;
-  };
+  }
 
   getChangeEmitter() {
     return this.emitter;
