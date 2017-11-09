@@ -127,9 +127,9 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return LocalRedirect(AUTHORIZE_URL);
         }
 
-        [HttpPost("ExternalLoginCreateAccount")]
+        [HttpGet("ExternalLoginCreateAccount")]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLoginCreateAccount([FromBody]ExternalLoginConfirmationViewModel model, string returnUrl = null)
+        public async Task<IActionResult> ExternalLoginCreateAccount([FromQuery]ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
             // Get the information about the user from the external login provider
             var info = await _signInManager.GetExternalLoginInfoAsync();

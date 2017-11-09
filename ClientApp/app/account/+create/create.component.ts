@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ControlBase, ControlTextbox } from '../../shared';
-import { AccountService } from '../../core';
-
 
 @Component({
   selector: 'appc-create',
@@ -13,7 +11,7 @@ export class CreateAccountComponent implements OnInit {
   public controls: any;
   public errors: any;
 
-  constructor(private accountService: AccountService) { }
+  constructor() { }
 
   public ngOnInit() {
     const controls: Array<ControlBase<any>> = [
@@ -31,12 +29,8 @@ export class CreateAccountComponent implements OnInit {
     this.controls = controls;
   }
   public create(event: any) {
-    this.accountService.create(event.email)
-      .subscribe((x: any) => {
-        console.log(x);
-      }, (res) => {
-        this.errors = JSON.parse(res.error);
-      });
+    const url = window.location.protocol + '//' + window.location.host + '/api/account/ExternalLoginCreateAccount?email=' + event.email;
+    window.location.href = url;
   }
 
 }

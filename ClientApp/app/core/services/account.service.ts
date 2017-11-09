@@ -53,9 +53,7 @@ export class AccountService {
     public register(data: RegisterModel): Observable<any> {
         return this.http.post('api/account/register', data);
     }
-    public create(email: string): Observable<any> {
-        return this.http.post('api/account/externallogincreateaccount', { email });
-    }
+
     public logout() {
         localStorage.removeItem(this.tokenKey);
         this.utilityService.navigateToSignIn();
