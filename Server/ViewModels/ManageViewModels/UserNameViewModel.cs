@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCoreSpa.Server.ViewModels
+namespace AspNetCoreSpa.Server.ViewModels.ManageViewModels
 {
-    public class UserNameViewModel
+    public class UserInfoViewModel
     {
         [Required]
         public string FirstName { get; set; }

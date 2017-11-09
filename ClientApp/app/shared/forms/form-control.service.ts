@@ -29,7 +29,7 @@ export class FormControlService {
                 validators.push(Validators.email);
             }
             // Password
-            if (control.type === 'password') {
+            if (control.type === 'password' && control.required) {
                 validators.push(ValidationService.passwordValidator);
             }
             group[control.key] = new FormControl(control.value || '', validators);

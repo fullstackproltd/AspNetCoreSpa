@@ -34,8 +34,14 @@ export class AppComponent implements OnInit {
         .subscribe((title: string) => this.setTitle(title));
     });
 
+    this.route.fragment.subscribe(hashFragment => {
+      if (hashFragment && hashFragment.indexOf('access_token') > -1 && hashFragment.indexOf('id_token') > -1) {
+        this.as.setToken(this.us.parseQueryString(hashFragment));
+        this.us.navigate('/home');
+      }
+    });
+
     this.route.queryParams.subscribe((params: Params) => {
-      this.as.setToken(this.us.parseQueryString(window.location.href.split('#')[1]));
       const param = params['externalLoginStatus'];
       if (param) {
         const status = <ExternalLoginStatus>+param;

@@ -70,8 +70,6 @@ namespace AspNetCoreSpa
 
             services.RegisterCustomServices();
 
-            services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
-
             services.AddSignalR();
 
             services.AddCustomizedMvc();
@@ -95,11 +93,9 @@ namespace AspNetCoreSpa
 
             app.SetupMigrations();
 
-            app.UseXsrf();
+            app.UseAuthentication();
 
             app.UseStaticFiles();
-
-            app.UseAuthentication();
 
             app.UseSignalR(routes =>
             {

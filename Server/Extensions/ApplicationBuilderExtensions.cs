@@ -37,24 +37,6 @@ namespace AspNetCoreSpa.Server.Extensions
 
             return app;
         }
-        // Configure XSRF middleware, This pattern is for SPA style applications where XSRF token is added on Index page 
-        // load and passed back token on every subsequent async request            
-        public static IApplicationBuilder UseXsrf(this IApplicationBuilder app)
-        {
-            var antiforgery = app.ApplicationServices.GetRequiredService<IAntiforgery>();
-
-            app.Use(async (context, next) =>
-            {
-                if (string.Equals(context.Request.Path.Value, "/", StringComparison.OrdinalIgnoreCase))
-                {
-                    var tokens = antiforgery.GetAndStoreTokens(context);
-                    context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken, new CookieOptions() { HttpOnly = false });
-                }
-                await next.Invoke();
-            });
-
-            return app;
-        }
         public static IApplicationBuilder AddDevMiddlewares(this IApplicationBuilder app)
         {
             var env = app.ApplicationServices.GetRequiredService<IHostingEnvironment>();

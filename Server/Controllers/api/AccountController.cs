@@ -137,7 +137,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         [HttpPost("ExternalLoginCreateAccount")]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginCreateAccount([FromBody]ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
             // Get the information about the user from the external login provider
@@ -159,7 +158,12 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     // return Ok(); // Everything ok
                 }
             }
-            return BadRequest(new[] { "Email already exists" });
+            else
+            {
+                return BadRequest("Email already exists");
+            }
+
+            return BadRequest("Something went wrong with creating account, please try again later");
         }
         [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
@@ -285,7 +289,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         [HttpPost("VerifyCode")]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             // The following code protects for brute force attacks against the two factor codes.

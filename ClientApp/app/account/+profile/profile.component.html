@@ -1,1 +1,18 @@
-<h1>Profile</h1>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-6">
+
+        <ngb-tabset>
+            <ngb-tab title="Change user info">
+                <ng-template ngbTabContent>
+                    <appc-user-info></appc-user-info>
+                </ng-template>
+            </ngb-tab>
+
+            <ngb-tab title="Change password">
+                <ng-template ngbTabContent>
+                    <appc-update-password></appc-update-password>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+</div>
