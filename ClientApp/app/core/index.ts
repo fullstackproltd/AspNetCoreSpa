@@ -6,3 +6,4 @@ export * from './services/content.service';
 export * from './models';
 
 export * from './core.module';
+export * from './simple-notifications';

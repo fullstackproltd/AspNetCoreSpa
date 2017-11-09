@@ -17,6 +17,7 @@ import { ApiTranslationLoader } from './services/api-translation-loader.service'
 import { ContentService } from './services/content.service';
 import { AuthInterceptor, TimingInterceptor } from './services/interceptors';
 import { GlobalErrorHandler } from './services/global-error.service';
+import { SimpleNotificationsModule } from './simple-notifications';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,8 @@ import { GlobalErrorHandler } from './services/global-error.service';
         HttpClientXsrfModule,
         NgbModule,
         RouterModule,
+        // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
+        SimpleNotificationsModule.forRoot(),
         TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } }),
     ],
     exports: [

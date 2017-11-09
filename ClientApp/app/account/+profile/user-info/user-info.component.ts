@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NotificationsService } from '../../../core';
 import { ControlBase, ControlTextbox } from '../../../shared';
 
 import { UserInfoModel } from '../profile.models';
@@ -33,14 +34,15 @@ export class UserInfoComponent implements OnInit {
     })
   ];
 
-  constructor(public profileService: ProfileService) { }
+  constructor(public profileService: ProfileService, private ns: NotificationsService) { }
 
   public ngOnInit() { }
 
   public save(model: UserInfoModel): void {
     this.profileService.userInfo(model)
       .subscribe((res: UserInfoModel) => {
-      }, errors => this.errors = errors.error);
+        this.ns.success(`Name changed to ${res.firstName} ${res.lastName}`);
+      }, err => this.ns.error(err.error));
 
   }
 

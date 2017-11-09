@@ -19,7 +19,12 @@ export class ProfileService {
         }
     }
     changePassword(changePasswordModel: UpdatePasswordModel) {
-        return this.dataService.post(`${this.profileUrl}/changepassword`, changePasswordModel);
+        // for external login accounts, there might not be an old password
+        if (changePasswordModel.oldPassword) {
+            return this.dataService.post(`${this.profileUrl}/changepassword`, changePasswordModel);
+        } else {
+            return this.dataService.post(`${this.profileUrl}/setpassword`, changePasswordModel);
+        }
     }
 
 }

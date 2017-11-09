@@ -12,7 +12,6 @@ using AspNet.Security.OpenIdConnect.Primitives;
 using Microsoft.AspNetCore.Identity;
 using OpenIddict.Core;
 using OpenIddict.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -143,7 +142,6 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddCookie()
                .AddOAuthValidation()
                // https://console.developers.google.com/projectselector/apis/library?pli=1
                .AddGoogle(options =>

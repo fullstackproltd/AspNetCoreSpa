@@ -60,18 +60,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
         [HttpPost("removelogin")]
         public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
         {
-            ManageMessageId? message = ManageMessageId.Error;
             var user = await GetCurrentUserAsync();
-            if (user != null)
+            var result = await _userManager.RemoveLoginAsync(user, account.LoginProvider, account.ProviderKey);
+            if (result.Succeeded)
             {
-                var result = await _userManager.RemoveLoginAsync(user, account.LoginProvider, account.ProviderKey);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    message = ManageMessageId.RemoveLoginSuccess;
-                }
+                return Ok();
             }
-            return RedirectToAction(nameof(ManageLogins), new { Message = message });
+            return BadRequest("Login cannot be removed");
         }
 
         [HttpPost("addphonenumber")]
@@ -81,7 +76,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var user = await GetCurrentUserAsync();
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
             await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
+            return Ok();
         }
 
         [HttpPost("enabletwofactorauthentication")]
@@ -91,23 +86,18 @@ namespace AspNetCoreSpa.Server.Controllers.api
             if (user != null)
             {
                 await _userManager.SetTwoFactorEnabledAsync(user, true);
-                await _signInManager.SignInAsync(user, isPersistent: false);
                 _logger.LogInformation(1, "User enabled two-factor authentication.");
             }
-            return RedirectToAction(nameof(Index), "Manage");
+            return Ok();
         }
 
         [HttpPost("disabletwofactorauthentication")]
         public async Task<IActionResult> DisableTwoFactorAuthentication()
         {
             var user = await GetCurrentUserAsync();
-            if (user != null)
-            {
-                await _userManager.SetTwoFactorEnabledAsync(user, false);
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                _logger.LogInformation(2, "User disabled two-factor authentication.");
-            }
-            return RedirectToAction(nameof(Index), "Manage");
+            await _userManager.SetTwoFactorEnabledAsync(user, false);
+            _logger.LogInformation(2, "User disabled two-factor authentication.");
+            return Ok();
         }
 
         [HttpGet("verifyphonenumber")]
@@ -115,41 +105,36 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(await GetCurrentUserAsync(), phoneNumber);
             // Send an SMS to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            if (string.IsNullOrEmpty(phoneNumber))
+            {
+                return BadRequest("Unable to verify phone number");
+            }
+            return Ok();
         }
 
         [HttpPost("verifyphonenumber")]
         public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
             var user = await GetCurrentUserAsync();
-            if (user != null)
+            var result = await _userManager.ChangePhoneNumberAsync(user, model.PhoneNumber, model.Code);
+            if (result.Succeeded)
             {
-                var result = await _userManager.ChangePhoneNumberAsync(user, model.PhoneNumber, model.Code);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.AddPhoneSuccess });
-                }
+                return Ok();
             }
             // If we got this far, something failed, redisplay the form
-            ModelState.AddModelError(string.Empty, "Failed to verify phone number");
-            return View(model);
+            return BadRequest("Failed to verify phone number");
         }
 
         [HttpPost("removephonenumber")]
         public async Task<IActionResult> RemovePhoneNumber()
         {
             var user = await GetCurrentUserAsync();
-            if (user != null)
+            var result = await _userManager.SetPhoneNumberAsync(user, null);
+            if (result.Succeeded)
             {
-                var result = await _userManager.SetPhoneNumberAsync(user, null);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.RemovePhoneSuccess });
-                }
+                return Ok();
             }
-            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+            return BadRequest("Failed to remove phone number");
         }
 
         [HttpGet("managelogins")]
@@ -189,18 +174,17 @@ namespace AspNetCoreSpa.Server.Controllers.api
         public async Task<ActionResult> LinkLoginCallback()
         {
             var user = await GetCurrentUserAsync();
-            if (user == null)
-            {
-                return View("Error");
-            }
             var info = await _signInManager.GetExternalLoginInfoAsync(await _userManager.GetUserIdAsync(user));
             if (info == null)
             {
-                return RedirectToAction(nameof(ManageLogins), new { Message = ManageMessageId.Error });
+                return BadRequest("Unable to find linked login info");
             }
             var result = await _userManager.AddLoginAsync(user, info);
-            var message = result.Succeeded ? ManageMessageId.AddLoginSuccess : ManageMessageId.Error;
-            return RedirectToAction(nameof(ManageLogins), new { Message = message });
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest("Unable to link login");
         }
 
         [HttpGet("userinfo")]
@@ -232,19 +216,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
         public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordViewModel model)
         {
             var user = await GetCurrentUserAsync();
-            if (user != null)
+            var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
             {
-                var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User changed their password successfully.");
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangePasswordSuccess });
-                }
-                AddErrors(result);
-                return View(model);
+                _logger.LogInformation(3, "User changed their password successfully.");
+                return Ok();
             }
-            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+            return BadRequest("Unable to change password");
         }
 
         [HttpPost("setpassword")]
@@ -252,29 +230,15 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
 
             var user = await GetCurrentUserAsync();
-            if (user != null)
+            var result = await _userManager.AddPasswordAsync(user, model.NewPassword);
+            if (result.Succeeded)
             {
-                var result = await _userManager.AddPasswordAsync(user, model.NewPassword);
-                if (result.Succeeded)
-                {
-                    // await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.SetPasswordSuccess });
-                }
-                AddErrors(result);
-                return View(model);
+                return Ok();
             }
-            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+            return BadRequest("Unable to set password");
         }
 
         #region Helpers
-
-        private void AddErrors(IdentityResult result)
-        {
-            foreach (var error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
 
         public enum ManageMessageId
         {

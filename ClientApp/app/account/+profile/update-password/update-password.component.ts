@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
+import { NotificationsService } from '../../../core';
+
 import { ControlBase, ControlTextbox } from '../../../shared';
 import { ProfileService } from '../profile.service';
 import { UpdatePasswordModel } from '../profile.models';
@@ -41,7 +43,7 @@ export class UpdatePasswordComponent implements OnInit {
   ];
 
   public reset = new EventEmitter<boolean>();
-  constructor(public profileService: ProfileService) { }
+  constructor(public profileService: ProfileService, private ns: NotificationsService) { }
 
   public ngOnInit() { }
 
@@ -49,6 +51,11 @@ export class UpdatePasswordComponent implements OnInit {
     this.profileService.changePassword(model)
       .subscribe(res => {
         this.reset.emit(true);
-      }, err => this.errors = err);
+        this.ns.success('Password changed successfully');
+      }, err => {
+        debugger;
+        console.log(err);
+        this.ns.error(err.error)
+      });
   }
 }
