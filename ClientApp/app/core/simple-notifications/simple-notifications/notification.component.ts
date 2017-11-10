@@ -281,14 +281,17 @@ export class NotificationComponent implements OnInit, OnDestroy {
         this.zone.runOutsideAngular(() => {
             this.zone.run(() => this.diff = (new Date().getTime() - this.start) - (this.count * this.speed));
 
-            if (this.count++ === this.steps) this.zone.run(() => this.remove());
-            else if (!this.stopTime) {
-                if (this.showProgressBar) this.zone.run(() => this.progressWidth += 100 / this.steps);
+            if (this.count++ === this.steps) {
+                this.zone.run(() => this.remove());
+            } else if (!this.stopTime) {
+                if (this.showProgressBar) {
+                    this.zone.run(() => this.progressWidth += 100 / this.steps);
+                }
 
                 this.timer = setTimeout(this.instance, (this.speed - this.diff));
             }
-        })
-    };
+        });
+    }
 
     private remove() {
         if (this.animate) {

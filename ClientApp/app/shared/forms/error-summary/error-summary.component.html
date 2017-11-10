@@ -1,4 +1,4 @@
 <div class="alert alert-{{notification.type}}" *ngIf="notification">
-    <strong>{{notification.title}}</strong>
-    <p>{{notification.content}}</p>
+    <strong>{{notification?.title}}</strong>
+    <p>{{notification?.content?.errors | json}}</p>
 </div>
