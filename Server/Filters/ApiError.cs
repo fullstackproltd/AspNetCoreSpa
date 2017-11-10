@@ -1,32 +1,30 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AspNetCoreSpa.Server.Filters
 {
 
     public class ApiError
     {
-        public string message { get; set; }
+        public string Message { get; set; }
         public bool isError { get; set; }
         public string detail { get; set; }
-        public ValidationErrorCollection errors { get; set; }
+        public List<ValidationError> Errors { get; set; }
 
         public ApiError(string message)
         {
-            this.message = message;
+            this.Message = message;
             isError = true;
         }
 
         public ApiError(ModelStateDictionary modelState)
         {
             this.isError = true;
-            if (modelState != null && modelState.Any(m => m.Value.Errors.Count > 0))
-            {
-                message = "Please correct the specified errors and try again.";
-                // errors = modelState.SelectMany(m => m.Value.Errors).ToDictionary(m => m.Key, m => m.ErrorMessage);
-                // errors = modelState.SelectMany(m => m.Value.Errors.Select(me => new KeyValuePair<string, string>(m.Key, me.ErrorMessage)));
-                // errors = modelState.SelectMany(m => m.Value.Errors.Select(me => new ModelError { FieldName = m.Key, ErrorMessage = me.ErrorMessage }));
-            }
+            Message = "Validation Failed";
+            Errors = modelState.Keys
+                    .SelectMany(key => modelState[key].Errors.Select(x => new ValidationError(key, x.ErrorMessage)))
+                    .ToList();
         }
     }
 }

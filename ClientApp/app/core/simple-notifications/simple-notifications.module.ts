@@ -7,6 +7,7 @@ import { NotificationsService } from './simple-notifications/notifications.servi
 
 // Type
 export * from './simple-notifications/interfaces/notification.type';
+export * from './simple-notifications/interfaces/notification-event.type';
 export * from './simple-notifications/interfaces/options.type';
 export * from './simple-notifications/interfaces/icons';
 

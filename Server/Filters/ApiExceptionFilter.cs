@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AspNetCoreSpa.Server.Filters
 {
@@ -24,28 +25,33 @@ namespace AspNetCoreSpa.Server.Filters
                 var ex = context.Exception as ApiException;
                 context.Exception = null;
                 apiError = new ApiError(ex.Message);
-                apiError.errors = ex.Errors;
+                apiError.Errors = ex.Errors;
 
                 context.HttpContext.Response.StatusCode = ex.StatusCode;
 
-                _Logger.LogWarning($"Application thrown error: {ex.Message}", ex);
+                _Logger.LogError($"Application thrown error: {ex.Message}", ex);
             }
             else if (context.Exception is UnauthorizedAccessException)
             {
                 apiError = new ApiError("Unauthorized Access");
                 context.HttpContext.Response.StatusCode = 401;
-                _Logger.LogWarning("Unauthorized Access in Controller Filter.");
+                _Logger.LogError("Unauthorized Access in Controller Filter.");
             }
             else
             {
                 // Unhandled errors
-#if !DEBUG
-                var msg = "An unhandled error occurred.";
-                string stack = null;
-#else
-                var msg = context.Exception.GetBaseException().Message;
-                string stack = context.Exception.StackTrace;
-#endif
+                var msg = "";
+                var stack = "";
+                if (Startup._hostingEnv.IsDevelopment())
+                {
+                    msg = context.Exception.GetBaseException().Message;
+                    stack = context.Exception.StackTrace;
+                }
+                else
+                {
+                    msg = "An unhandled error occurred.";
+                    stack = null;
+                }
 
                 apiError = new ApiError(msg);
                 apiError.detail = stack;

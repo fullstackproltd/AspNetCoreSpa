@@ -5,7 +5,7 @@ import { Notification } from './interfaces/notification.type';
 import { NotificationsService } from './notifications.service';
 
 @Component({
-    selector: 'simple-notifications',
+    selector: 'appc-simple-notifications',
     encapsulation: ViewEncapsulation.None,
     template: `
         <div class="simple-notification-wrapper" [ngClass]="position">

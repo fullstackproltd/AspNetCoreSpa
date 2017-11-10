@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace AspNetCoreSpa.Server.Filters
 {
@@ -7,9 +8,9 @@ namespace AspNetCoreSpa.Server.Filters
     {
         public int StatusCode { get; set; }
 
-        public ValidationErrorCollection Errors { get; set; }
+        public List<ValidationError> Errors { get; set; }
 
-        public ApiException(string message, int statusCode = 500, ValidationErrorCollection errors = null) :
+        public ApiException(string message, int statusCode = 500, List<ValidationError> errors = null) :
             base(message)
         {
             StatusCode = statusCode;

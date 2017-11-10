@@ -2,6 +2,7 @@ using AspNetCoreSpa.Server.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace AspNetCoreSpa.Server.Filters
 {
@@ -19,10 +20,11 @@ namespace AspNetCoreSpa.Server.Filters
                 else
                 {
                     var result = new ContentResult();
-                    string content = JsonConvert.SerializeObject(filterContext.ModelState.GetModelErrors(),
+                    string content = JsonConvert.SerializeObject(new ApiError(filterContext.ModelState),
                         new JsonSerializerSettings
                         {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
                         });
                     result.Content = content;
                     result.ContentType = "application/json";

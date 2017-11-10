@@ -192,7 +192,12 @@ namespace AspNetCoreSpa.Server.Extensions
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
                 string useSqLite = Startup.Configuration["Data:useSqLite"];
-                if (useSqLite.ToLower() == "true")
+                string useInMemory = Startup.Configuration["Data:useInMemory"];
+                if (useInMemory.ToLower() == "true")
+                {
+                    options.UseInMemoryDatabase("AspNetCoreSpa"); // Takes database name
+                }
+                else if (useSqLite.ToLower() == "true")
                 {
                     options.UseSqlite(Startup.Configuration["Data:SqlLiteConnectionString"]);
                 }

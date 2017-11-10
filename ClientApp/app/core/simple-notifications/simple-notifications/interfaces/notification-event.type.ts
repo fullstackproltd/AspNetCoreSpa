@@ -1,4 +1,4 @@
-import {Notification} from './notification.type';
+import { Notification } from './notification.type';
 
 export interface NotificationEvent {
   add?: boolean;
