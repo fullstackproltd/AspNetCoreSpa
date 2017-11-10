@@ -112,16 +112,17 @@ namespace AspNetCoreSpa.Server
         private async Task AddOpenIdConnectOptions(IServiceScope services, CancellationToken cancellationToken)
         {
             var manager = services.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
-            
+
             if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
             {
+                var host = _hostingEnv.IsDevelopment() ? "http://localhost:5000" : "http://aspnetcorespa.azurewebsites.net";
                 var descriptor = new OpenIddictApplicationDescriptor
                 {
                     ClientId = "aspnetcorespa",
                     DisplayName = "AspnetCoreSpa",
-                    PostLogoutRedirectUris = { new Uri("http://localhost:5000/signout-oidc") },
-                    RedirectUris = { new Uri("http://localhost:5000") }
-                    // RedirectUris = { new Uri("http://localhost:5000/signin-oidc") }
+                    PostLogoutRedirectUris = { new Uri($"{host}/signout-oidc") },
+                    RedirectUris = { new Uri(host) }
+                    // RedirectUris = { new Uri($"{host}/signin-oidc") }
                 };
 
                 await manager.CreateAsync(descriptor, cancellationToken);

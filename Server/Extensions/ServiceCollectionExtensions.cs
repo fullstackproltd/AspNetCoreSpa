@@ -149,6 +149,7 @@ namespace AspNetCoreSpa.Server.Extensions
                    options.ClientId = Startup.Configuration["Authentication:Google:ClientId"];
                    options.ClientSecret = Startup.Configuration["Authentication:Google:ClientSecret"];
                })
+               // https://developers.facebook.com/apps
                .AddFacebook(options =>
                {
                    options.AppId = Startup.Configuration["Authentication:Facebook:AppId"];
