@@ -120,7 +120,7 @@ namespace AspNetCoreSpa.Server
                     ClientId = "aspnetcorespa",
                     DisplayName = "AspnetCoreSpa",
                     PostLogoutRedirectUris = { new Uri("http://localhost:5000/signout-oidc") },
-                    RedirectUris = { new Uri("http://localhost:5000/login") }
+                    RedirectUris = { new Uri("http://localhost:5000") }
                     // RedirectUris = { new Uri("http://localhost:5000/signin-oidc") }
                 };
 

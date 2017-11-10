@@ -124,7 +124,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 return Render(ExternalLoginStatus.Error);
             }
-            return LocalRedirect(AUTHORIZE_URL);
+            return LocalRedirect(IMPLICIT_AUTHORISATION_URL);
         }
 
         [HttpGet("ExternalLoginCreateAccount")]
@@ -145,7 +145,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                    return LocalRedirect(AUTHORIZE_URL);
+                    return LocalRedirect(IMPLICIT_AUTHORISATION_URL);
                 }
             }
             else

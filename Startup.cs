@@ -22,7 +22,7 @@ namespace AspNetCoreSpa
         //2) Configure services
         //3) Configure
 
-        private IHostingEnvironment _hostingEnv;
+        public static IHostingEnvironment _hostingEnv;
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
