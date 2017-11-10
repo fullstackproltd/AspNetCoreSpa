@@ -10,13 +10,14 @@ export class GlobalErrorHandler implements ErrorHandler {
   constructor(private ns: NotificationsService, private inj: Injector) { }
 
   handleError(errorResponse: HttpErrorResponse): void {
-    console.log('***** HANDLE ERROR *****');
     if (errorResponse.status === 401) {
       this.ns.error('Unauthorised', 'Pleae login again.');
       this.inj.get(ApplicationRef).tick();
       this.inj.get(UtilityService).navigateToSignIn();
     } else if (errorResponse.status === 400) {
-      this.ns.error(errorResponse.error.message, errorResponse.error);
+      console.log('***** HANDLE ERROR *****');
+      const us = this.inj.get(UtilityService);
+      this.ns.error(errorResponse.error.message, us.formatErrors(errorResponse.error.errors));
       this.inj.get(ApplicationRef).tick();
     }
     // IMPORTANT: Don't Rethrow the error otherwise it will not emit errors after once

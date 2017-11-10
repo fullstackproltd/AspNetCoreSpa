@@ -100,6 +100,10 @@ export class UtilityService {
         }
         return query;
     }
+
+    public formatErrors(errors: any) {
+        return errors ? errors.map((err: any) => err.message).join('/n') : '';
+    }
     // Detect if library loaded
     private isLoadedScript(lib: string) {
         return document.querySelectorAll('[src="' + lib + '"]').length > 0;
