@@ -166,24 +166,25 @@ namespace AspNetCoreSpa.Server.Extensions
                {
                    options.ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"];
                    options.ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"];
+               })
+
+               // Note: Below social providers are supported through this open source library:
+               // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
+
+               // https://github.com/settings/developers
+               .AddGitHub(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:Github:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"];
+
+               })
+               // https://www.linkedin.com/secure/developer?newapp=
+               .AddLinkedIn(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:LinkedIn:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:LinkedIn:ClientSecret"];
+
                });
-
-            // Note: Below social providers are supported through this open source library:
-            // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
-
-            // Github Auth
-            // https://github.com/settings/developers
-            //services.UseGitHubAuthentication(new GitHubAuthenticationOptions
-            //{
-            //    ClientId = Startup.Configuration["Authentication:Github:ClientId"],
-            //    ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"]
-            //});
-
-            //services.UseLinkedInAuthentication(new LinkedInAuthenticationOptions
-            //{
-            //    ClientId = Startup.Configuration["Authentication:LinkedIn:ClientId"],
-            //    ClientSecret = Startup.Configuration["Authentication:LinkedIn:ClientSecret"]
-            //});
 
             return services;
         }

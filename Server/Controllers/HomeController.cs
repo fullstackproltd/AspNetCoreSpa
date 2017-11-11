@@ -13,16 +13,24 @@ namespace AspNetCoreSpa.Server.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IHostingEnvironment _env;
 
-        public HomeController(UserManager<ApplicationUser> userManager, IHostingEnvironment env)
+        public HomeController(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+             IHostingEnvironment env
+             )
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _env = env;
         }
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.schemes = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
             if (Request.Query.ContainsKey("emailConfirmCode") &&
                 Request.Query.ContainsKey("userId"))
             {
