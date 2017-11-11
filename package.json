@@ -25,7 +25,7 @@
     "pree2e": "npm run webdriver:update -- --standalone",
     "e2e": "npm run protractor",
     "e2e:debug": "protractor --elementExplorer",
-    "compodoc": "compodoc -p tsconfig.json",
+    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json",
     "webdriver-manager": "webdriver-manager",
     "webdriver:start": "npm run webdriver-manager start",
     "webdriver:update": "webdriver-manager update"
@@ -60,6 +60,7 @@
   "devDependencies": {
     "@angular/cli": "1.5.0",
     "@angular/compiler-cli": "5.0.0",
+    "@compodoc/compodoc": "1.0.4",
     "@ngtools/webpack": "1.8.0",
     "@types/hammerjs": "2.0.35",
     "@types/jasmine": "2.6.2",
