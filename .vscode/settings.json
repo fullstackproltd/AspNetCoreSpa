@@ -18,7 +18,6 @@
         "logs": true,
         "npm-debug.log.*": true,
         "runtimeconfig.template.json": true,
-        "*.yml": true,
         "LICENSE": true,
         "NuGet.config": true
     },

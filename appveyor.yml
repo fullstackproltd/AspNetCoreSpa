@@ -13,7 +13,7 @@ environment:
   website_name: aspnetcorespa
   website_psw:
     secure: UBm/tZDG4wmtrN6phRaqCBGkZqkpXWIWqMJJFxx6Zknn5imdJssw+9ZZPnT9iriMs364WsFtpNqDi7/sgDt5cQ==
-  nodejs_version: "6.9.1"
+  nodejs_version: "8.8.1"
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -30,7 +30,6 @@ cache:
   - node_modules -> package.json                                        # local npm modules
 
 before_build:
-  # - npm run build:prod                                           # Client production artefacts
   - dotnet restore
 build:
   project: AspNetCoreSpa.csproj
