@@ -138,8 +138,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 {
                     // Request a redirect to the external login provider.
                     var returnUrl = Request.PathBase + Request.Path + Request.QueryString;
-                    var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
-                    var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+                    var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, returnUrl);
                     return Challenge(properties, provider);
                 }
 

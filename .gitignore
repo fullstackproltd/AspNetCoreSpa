@@ -225,4 +225,4 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/Properties/PublishProfiles/CustomProfile.pubxml
+/Properties/PublishProfiles/*
