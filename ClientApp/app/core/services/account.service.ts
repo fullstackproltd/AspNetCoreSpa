@@ -1,26 +1,18 @@
 import { Injectable } from '@angular/core';
-import { RegisterModel } from '../models/register-model';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { OAuthService } from 'angular-oauth2-oidc';
 
-import { LoginModel } from '../models/login-model';
 import { UtilityService } from '../../core/services/utility.service';
-import { Observable } from 'rxjs/Observable';
-import { AuthTokenModel } from '../models/auth-tokens-model';
 import { JwtHelper } from 'angular2-jwt';
 import { ProfileModel } from '../models/profile-model';
 
 @Injectable()
 export class AccountService {
-    private tokenKey = 'auth-token';
     public jwtHelper: JwtHelper = new JwtHelper();
 
-    constructor(private http: HttpClient, private utilityService: UtilityService) { }
+    constructor(private utilityService: UtilityService, private oAuthService: OAuthService) { }
 
     public get isLoggedIn(): boolean {
-        if (this.idToken) {
-            return !this.jwtHelper.isTokenExpired(this.idToken);
-        }
-        return false;
+        return this.oAuthService.hasValidAccessToken();
     }
     public get user(): ProfileModel | undefined {
         if (this.idToken) {
@@ -28,61 +20,16 @@ export class AccountService {
         }
         return undefined;
     }
-
-    public login(user: LoginModel): Observable<any> {
-        // data can be any since it can either be a refresh tokens or login details
-        // The request for tokens must be x-www-form-urlencoded
-        const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        const options = { headers };
-        Object.assign(user, {
-            grant_type: 'password',
-            // offline_access is required for a refresh token
-            scope: ['openid offline_access client_id profile email roles']
-        });
-
-        return this.http.post('/connect/token', this.encodeObjectToParams(user), options)
-            .map((tokens: AuthTokenModel) => {
-                const now = new Date();
-                tokens.expiration_date = new Date(now.getTime() + (tokens.expires_in ? (tokens.expires_in * 1000) : 0)).getTime().toString();
-
-                // const profile = this.jwtHelper.decodeToken(tokens.id_token ? tokens.id_token : '') as ProfileModel;
-
-                this.setToken(tokens);
-            });
-    }
-    public register(data: RegisterModel): Observable<any> {
-        return this.http.post('api/account/register', data);
-    }
-
     public logout() {
-        localStorage.removeItem(this.tokenKey);
+        this.oAuthService.logOut();
         this.utilityService.navigateToSignIn();
     }
 
-    // Used to authenticate user and access api resources
     public get accessToken(): string {
-        let token = '';
-        const ticket = localStorage.getItem(this.tokenKey);
-        if (ticket) {
-            token = JSON.parse(<any>ticket).access_token;
-        }
-        return token;
+        return this.oAuthService.getAccessToken();
     }
     // Used to access user information
     public get idToken(): string {
-        let token = '';
-        const ticket = localStorage.getItem(this.tokenKey);
-        if (ticket) {
-            token = JSON.parse(<any>ticket).id_token;
-        }
-        return token;
-    }
-    public setToken(tokens: AuthTokenModel): any {
-        localStorage.setItem(this.tokenKey, JSON.stringify(tokens));
-    }
-    private encodeObjectToParams(obj: any): string {
-        return Object.keys(obj)
-            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
-            .join('&');
+        return this.oAuthService.getIdToken();
     }
 }

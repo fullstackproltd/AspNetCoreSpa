@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 import { ControlBase, ControlTextbox } from '../../shared';
 
@@ -9,9 +10,7 @@ import { ControlBase, ControlTextbox } from '../../shared';
 })
 export class CreateAccountComponent implements OnInit {
   public controls: any;
-  public errors: any;
-
-  constructor() { }
+  constructor(private oAuthService: OAuthService) { }
 
   public ngOnInit() {
     const controls: Array<ControlBase<any>> = [
@@ -29,8 +28,7 @@ export class CreateAccountComponent implements OnInit {
     this.controls = controls;
   }
   public create(event: any) {
-    const url = window.location.protocol + '//' + window.location.host + '/api/account/ExternalLoginCreateAccount?email=' + event.email;
-    window.location.href = url;
+    this.oAuthService.initImplicitFlow(null, { email: event.email });
   }
 
 }

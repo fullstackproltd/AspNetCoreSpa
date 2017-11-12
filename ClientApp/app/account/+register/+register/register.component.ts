@@ -2,7 +2,7 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AccountService, RegisterModel } from '../../../core';
+import { DataService, RegisterModel } from '../../../core';
 import { ControlBase, ControlTextbox } from '../../../shared';
 
 
@@ -11,18 +11,14 @@ import { ControlBase, ControlTextbox } from '../../../shared';
     templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit {
-    public errors: string[] = [];
     public controls: Array<ControlBase<any>>;
 
-    constructor(public accountService: AccountService, public router: Router, public route: ActivatedRoute) { }
+    constructor(public dataService: DataService, public router: Router, public route: ActivatedRoute) { }
 
     public register(model: RegisterModel): void {
-        this.accountService.register(model)
+        this.dataService.post('api/account/register', model)
             .subscribe((res: Response) => {
                 this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });
-            },
-            (errors: string[]) => {
-                this.errors = errors;
             });
     }
 

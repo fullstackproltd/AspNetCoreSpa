@@ -12,7 +12,6 @@ import { ProfileService } from '../profile.service';
   styleUrls: ['./user-info.component.scss']
 })
 export class UserInfoComponent implements OnInit {
-  public errors: string[];
   public controls: Array<ControlBase<string>> = [
     new ControlTextbox({
       key: 'firstName',

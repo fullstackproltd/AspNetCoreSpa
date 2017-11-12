@@ -105,7 +105,7 @@ namespace AspNetCoreSpa
             app.UseMvc(routes =>
             {
                 // http://stackoverflow.com/questions/25982095/using-googleoauth2authenticationoptions-got-a-redirect-uri-mismatch-error
-                routes.MapRoute(name: "signin-google", template: "signin-google", defaults: new { controller = "Account", action = "ExternalLoginCallback" });
+                // routes.MapRoute(name: "signin-google", template: "signin-google", defaults: new { controller = "Account", action = "ExternalLoginCallback" });
 
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",

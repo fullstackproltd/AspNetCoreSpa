@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using OpenIddict.Core;
 using Microsoft.Extensions.Logging;
+using AspNetCoreSpa.Server.Filters;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -127,42 +128,73 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
             var info = await _signInManager.GetExternalLoginInfoAsync();
 
-            var auth = await HttpContext.AuthenticateAsync(IdentityConstants.ExternalScheme);
-            var principal = auth.Principal;
-
-            // var providerKey = auth.Principal.Claims.FirstOrDefault();
             if (info == null)
             {
-                return Render(ExternalLoginStatus.Invalid);
+                // If an identity provider was explicitly specified, redirect
+                // the user agent to the AccountController.ExternalLogin action.
+                var provider = (string)request["provider"];
+
+                if (!string.IsNullOrEmpty(provider))
+                {
+                    // Request a redirect to the external login provider.
+                    var returnUrl = Request.PathBase + Request.Path + Request.QueryString;
+                    var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+                    var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+                    return Challenge(properties, provider);
+                }
+
+                return Render(ExternalLoginStatus.Error);
             }
 
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+
             if (result.Succeeded)
             {
-
                 // Retrieve the profile of the logged in user.
                 var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
 
-                // var user = await _userManager.GetUserAsync(principal);
                 if (user == null)
                 {
                     return Render(ExternalLoginStatus.Error);
                 }
 
-                _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
+                _logger.LogInformation(5, $"User logged in with ${info.LoginProvider} provider.");
                 var ticket = await CreateTicketAsync(request, user);
                 // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
                 return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
-
-                // return Render(ExternalLoginStatus.Ok); // Everything Ok, login user
             }
             else
             {
-                // External account doesn't have a local account so ask to create one
-                return Render(ExternalLoginStatus.CreateAccount);
+                var email = (string)request["email"];
+                if (!string.IsNullOrEmpty(email))
+                {
+                    var user = new ApplicationUser { UserName = email, Email = email };
+                    var accountCreateResult = await _userManager.CreateAsync(user);
+                    if (accountCreateResult.Succeeded)
+                    {
+                        accountCreateResult = await _userManager.AddLoginAsync(user, info);
+                        if (accountCreateResult.Succeeded)
+                        {
+                            _logger.LogInformation(6, $"User created an account using ${info.LoginProvider} provider.");
+
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest(new ApiError("Email already exists"));
+                    }
+                }
+                else
+                {
+                    // External account doesn't have a local account so ask to create one
+                    return Render(ExternalLoginStatus.CreateAccount);
+                }
+
             }
 
+
+            return Render(ExternalLoginStatus.Error);
 
             // if (result.RequiresTwoFactor)
             // {

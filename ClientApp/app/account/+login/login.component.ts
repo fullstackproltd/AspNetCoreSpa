@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
-import { AccountService, LoginModel, UtilityService } from '../../core';
+import { LoginModel, UtilityService } from '../../core';
 import { ControlBase, ControlTextbox } from '../../shared';
 
 
@@ -13,23 +13,13 @@ import { ControlBase, ControlTextbox } from '../../shared';
 })
 export class LoginComponent implements OnInit {
     public loginModel: LoginModel;
-    public errors: string[] = [];
     public controls: any;
 
-    constructor(
-        public accountService: AccountService,
-        public router: Router,
-        public utilityService: UtilityService
-    ) { }
-
+    constructor(public oAuthService: OAuthService, public us: UtilityService) { }
     public login(model: LoginModel): void {
-        this.errors = [];
-        this.accountService.login(model)
-            .subscribe(() => {
-                this.utilityService.navigate('');
-            },
-            (errors: any) => {
-                this.errors.push(errors['error_description']);
+        this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
+            .then((x: any) => {
+                this.us.navigate('');
             });
     }
 

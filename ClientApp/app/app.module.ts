@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { SharedModule } from './shared';
 import { CoreModule } from './core';
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
         routing,
         NgbModule.forRoot(),
         CoreModule.forRoot(),
+        OAuthModule.forRoot(),
         SharedModule,
         HomeModule,
     ],

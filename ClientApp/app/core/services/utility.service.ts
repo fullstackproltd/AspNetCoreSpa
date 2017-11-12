@@ -1,6 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UtilityService {
@@ -87,11 +87,13 @@ export class UtilityService {
             return Observable.fromEvent(scriptNode, 'load');
         }
     }
+    toQueryParams(obj: any): string {
+        return Object.keys(obj)
+            .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
+            .join('&');
+    }
 
-    public parseQueryString(queryString: string) {
-        // example
-        // tslint:disable-next-line:max-line-length
-        // var query = 'resource=resource_server&token_type=Bearer&access_token=CfDJ8MbGfXTNdiFIk1nMkGjAnbrAFAQ-Y9IoX0dpKgLKsJX2KgteDPde_VhHGtFiqkvZ9XPcQJr_9bjTEFDtVpKkWpBjCTKNmQF0fqaLQAl-sRRPlZuWesMlWcTzav_VmKXNdk8cuuFx2MIjodae3NJpzFl0BOCA2c4r97PD4mXehAxXKFpeztCLIhcoGQUjH08kvlkkJ3YsoOs_rqWARKn1IEK7iJU2eMDMCaH_UIMv0Uey31gB0C-VKOqpt7V9K30UJ4-HtBXAy1wRkk9J8hxfIwZnlgvJuPLeXW5vvVhtMv5gNNskcR-C6teiqkqczaKfwo9OAbNhWDslHTfuHTHNfbWnewzsqIoacgdJX0MC-vxhXaF94QDM5vuTx5jpNf8L7hOVYAaywMafI2SCb8hTx-XEgCZMXd8wqXkyy3uFuMt1_J3OrpmFEF4-i2PuFShDdaC9bGXC4519jgfIuRVhsb5Mr7MNd_2DBSgzDGW10hR6g7WtHZCMj_0-AxsfDmCKoVy6y_VKGYkCuVyZYMf2e_Zso1ESSB57Ecc7xvXm9QYnH4o90ag7SFnOM4ri92t-sWpAaST4FnBtLcl-4ljZwhE&expires_in=3600&id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6IlRTOEdZOFNIR0ZTQ0VDXzRQS0JQSF9JRU1NWERMVlFTSE5XR0pUTzgiLCJ0eXAiOiJKV1QifQ.eyJzdWIiOiIzIiwibmFtZSI6ImFAcy5jb20iLCJ0b2tlbl91c2FnZSI6ImlkX3Rva2VuIiwianRpIjoiYTg3ZDRmNTItOGJhYS00MzEwLWFlNzAtYTE5Mzg2ZWE4NTViIiwiYXVkIjoiYXNwbmV0Y29yZXNwYSIsIm5vbmNlIjoidGVzdCIsImF0X2hhc2giOiJudkYyYVZTaDhXOERTZ25sRmdZQ2VnIiwiYXpwIjoiYXNwbmV0Y29yZXNwYSIsIm5iZiI6MTUxMDE4MDA2NCwiZXhwIjoxNTEwMTgxMjY0LCJpYXQiOjE1MTAxODAwNjQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC8ifQ.lp7s1SA4m1SePiDInZ52RV5CujM2_Qq-l20XMFW-78tHpVlaxdhV2AA8NYDhBV6lDaPnMsUEVoPv0GwDsbYwqDfuAI3uZb6uxGow6F_zs8WK6A6U7B-CCWI-i16H0rOVfSrmk3FGK-YLku6DeUQTF90DStj7QSXLJVShy8uDpDXmySSdAHJT-8r-jzDjEfqhEXu12M11KcXUMqpEAlpSs-0lRS6PhsCBBpLyYOFhglGm32K9FlIu6dV8_hiiYJ3HTyB7PGb85xf_sR-pHtqlB1wPYf_bicYZ9ENYoEJPcjq_4vuDWvWUph1mFfa4AHoOm7ynq9XcdihInMgd2G_lzA';
+    public fromQueryParams(queryString: string): Object {
         const query: any = {};
         const pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
         for (let i = 0; i < pairs.length; i++) {

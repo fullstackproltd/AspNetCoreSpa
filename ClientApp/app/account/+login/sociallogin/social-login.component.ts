@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
     selector: 'appc-social-login',
@@ -7,7 +7,7 @@ import { Location } from '@angular/common';
     templateUrl: './social-login.component.html'
 })
 export class SocialLoginComponent {
-    constructor(public location: Location) { }
+    constructor(private oAuthService: OAuthService) { }
 
     public loginGoogle(): void {
         this.redirect('Google');
@@ -34,9 +34,7 @@ export class SocialLoginComponent {
     }
 
     public redirect(provider: string): void {
-        const url = window.location.protocol + '//' + window.location.host + '/api/account/ExternalLogin?provider=' + provider;
-        console.log(url);
-        window.location.href = url;
+        this.oAuthService.initImplicitFlow(null, { provider: provider });
     }
 
 }

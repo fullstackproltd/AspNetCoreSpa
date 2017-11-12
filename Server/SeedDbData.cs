@@ -115,7 +115,7 @@ namespace AspNetCoreSpa.Server
 
             if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
             {
-                var host = _hostingEnv.IsDevelopment() ? "http://localhost:5000" : "http://aspnetcorespa.azurewebsites.net";
+                var host = _hostingEnv.IsDevelopment() ? "http://localhost:5000/" : "http://aspnetcorespa.azurewebsites.net";
                 var descriptor = new OpenIddictApplicationDescriptor
                 {
                     ClientId = "aspnetcorespa",

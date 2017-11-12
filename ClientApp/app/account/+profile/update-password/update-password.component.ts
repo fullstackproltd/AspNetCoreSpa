@@ -12,7 +12,6 @@ import { UpdatePasswordModel } from '../profile.models';
   styleUrls: ['./update-password.component.scss'],
 })
 export class UpdatePasswordComponent implements OnInit {
-  public errors: string[];
   public controls: Array<ControlBase<string>> = [
     new ControlTextbox({
       key: 'oldPassword',
