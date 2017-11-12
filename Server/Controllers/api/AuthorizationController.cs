@@ -177,7 +177,9 @@ namespace AspNetCoreSpa.Server.Controllers.api
                         if (accountCreateResult.Succeeded)
                         {
                             _logger.LogInformation(6, $"User created an account using ${info.LoginProvider} provider.");
-
+                            var ticket = await CreateTicketAsync(request, user);
+                            // Returning a SignInResult will ask OpenIddict to issue the appropriate access/identity tokens.
+                            return SignIn(ticket.Principal, ticket.Properties, ticket.AuthenticationScheme);
                         }
                     }
                     else
