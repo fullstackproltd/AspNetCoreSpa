@@ -17,9 +17,13 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     @Input() public reset = new Subject<boolean>();
     @Input() public data: Subject<any>;
     @Input() public btnText = 'Save'; // Default value at least
+    @Input() public cancelText = 'Cancel'; // Default value at least
+    @Input() public displayCancel = false; // By default cancel button will be hidden
+
     @Input() public formClass = 'form-horizontal';
     // Note: don't keep name of output events as same as native events such as submit etc.
-    @Output() public formsubmit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onSubmit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public onCancel: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild('formDir') public formDir: NgForm;
     public form: FormGroup;
@@ -47,11 +51,14 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
     }
 
-    public onSubmit() {
+    public submit() {
         if (this.form.valid) {
             this.formatDateToSave(this.form);
-            this.formsubmit.emit(this.form.value);
+            this.onSubmit.emit(this.form.value);
         }
+    }
+    public cancel() {
+        this.onCancel.next();
     }
 
     private formatDateToDisplay(model: any, controls: Array<ControlBase<any>>) {
