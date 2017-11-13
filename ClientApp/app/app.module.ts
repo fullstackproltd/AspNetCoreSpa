@@ -30,9 +30,6 @@ import { AppComponent } from './app.component';
         AppService
     ],
     exports: [
-        SharedModule,
-        CoreModule,
-        NgbModule
     ]
 })
 export class AppModule { }

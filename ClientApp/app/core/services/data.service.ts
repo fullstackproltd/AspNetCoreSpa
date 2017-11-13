@@ -1,9 +1,9 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { UtilityService } from './utility.service';
+import { AccountService } from './account.service';
 
 @Injectable()
 export class DataService {
@@ -15,7 +15,7 @@ export class DataService {
     // Provide the *public* Observable that clients can subscribe to
     public pendingCommands$: Observable<number>;
 
-    constructor(public http: HttpClient, public us: UtilityService) {
+    constructor(public http: HttpClient, private inj: Injector) {
         this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
     }
 
@@ -29,7 +29,8 @@ export class DataService {
                     observer.complete();
                 }
             };
-            req.setRequestHeader('Authorization', this.bearerToken);
+
+            req.setRequestHeader('Authorization', `Bearer ${this.inj.get(AccountService).accessToken}`);
             req.send();
         });
     }
@@ -52,14 +53,6 @@ export class DataService {
 
     public delete<T>(url: string): Observable<T> {
         return this.http.delete<T>(url);
-    }
-
-    private get bearerToken(): string {
-        const token = JSON.parse(<any>sessionStorage.getItem('auth-token'));
-        if (token) {
-            return 'Bearer ' + token.access_token;
-        }
-        return '';
     }
 
     private buildUrlSearchParams(params: any): HttpParams {
