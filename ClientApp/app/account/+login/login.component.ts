@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     public login(model: LoginModel): void {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {
+                localStorage.setItem('id_token', x.id_token);
                 this.us.navigate('');
             });
     }
