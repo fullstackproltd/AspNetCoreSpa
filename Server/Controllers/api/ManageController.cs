@@ -65,7 +65,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = await _userManager.RemoveLoginAsync(user, account.LoginProvider, account.ProviderKey);
             if (result.Succeeded)
             {
-                return Ok();
+                return NoContent();
             }
             return BadRequest(new ApiError("Login cannot be removed"));
         }
@@ -77,7 +77,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var user = await GetCurrentUserAsync();
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
             await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost("enabletwofactorauthentication")]
@@ -89,7 +89,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 await _userManager.SetTwoFactorEnabledAsync(user, true);
                 _logger.LogInformation(1, "User enabled two-factor authentication.");
             }
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost("disabletwofactorauthentication")]
@@ -98,7 +98,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var user = await GetCurrentUserAsync();
             await _userManager.SetTwoFactorEnabledAsync(user, false);
             _logger.LogInformation(2, "User disabled two-factor authentication.");
-            return Ok();
+            return NoContent();
         }
 
         [HttpGet("verifyphonenumber")]
@@ -110,7 +110,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 return BadRequest(new ApiError("Unable to verify phone number"));
             }
-            return Ok();
+            return NoContent();
         }
 
         [HttpPost("verifyphonenumber")]
@@ -120,7 +120,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = await _userManager.ChangePhoneNumberAsync(user, model.PhoneNumber, model.Code);
             if (result.Succeeded)
             {
-                return Ok();
+                return NoContent();
             }
             // If we got this far, something failed, redisplay the form
             return BadRequest(new ApiError("Failed to verify phone number"));
@@ -133,7 +133,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = await _userManager.SetPhoneNumberAsync(user, null);
             if (result.Succeeded)
             {
-                return Ok();
+                return NoContent();
             }
             return BadRequest(new ApiError("Failed to remove phone number"));
         }
@@ -183,7 +183,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = await _userManager.AddLoginAsync(user, info);
             if (result.Succeeded)
             {
-                return Ok();
+                return NoContent();
             }
             return BadRequest(new ApiError("Unable to link login"));
             
@@ -222,7 +222,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             if (result.Succeeded)
             {
                 _logger.LogInformation(3, "User changed their password successfully.");
-                return Ok();
+                return NoContent();
             }
             return BadRequest(new ApiError("Unable to change password"));
         }
@@ -235,7 +235,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = await _userManager.AddPasswordAsync(user, model.NewPassword);
             if (result.Succeeded)
             {
-                return Ok();
+                return NoContent();
             }
             return BadRequest(new ApiError("Unable to set password"));
         }

@@ -98,7 +98,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Confirm email address</a>";
                     _logger.LogInformation(3, "User created a new account with password.");
                     //await _emailSender.SendEmailAsync(MailType.Register, new EmailModel { To = model.Email }, confirmationLink);
-                    return Ok();
+                    return NoContent();
                 }
             }
             AddErrors(result);
@@ -181,7 +181,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             if (currentUser == null || !(await _userManager.IsEmailConfirmedAsync(currentUser)))
             {
                 // Don't reveal that the user does not exist or is not confirmed
-                return Ok();
+                return NoContent();
             }
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             // Send an email with this link
@@ -191,7 +191,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var callbackUrl = host + "?userId=" + currentUser.Id + "&passwordResetCode=" + code;
             var confirmationLink = "<a class='btn-primary' href=\"" + callbackUrl + "\">Reset your password</a>";
             await _emailSender.SendEmailAsync(model.Email, "Forgotten password email", confirmationLink);
-            return Ok();
+            return NoContent(); // sends 204
         }
 
         [HttpPost("resetpassword")]
@@ -293,6 +293,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 ModelState.AddModelError(string.Empty, "Invalid code.");
                 return View(model);
             }
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> LogOff()
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            return NoContent();
         }
 
         #region Helpers

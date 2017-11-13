@@ -3,10 +3,10 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 export const authConfig: AuthConfig = {
 
     // Url of the Identity Provider
-    issuer: 'http://localhost:5000/',
+    issuer: window.location.origin + '/',
 
     // URL of the SPA to redirect the user to after login
-    redirectUri: 'http://localhost:5000/',
+    redirectUri: window.location.origin,
 
     // The SPA's id. The SPA is registered with this id at the auth-server
     clientId: 'aspnetcorespa',

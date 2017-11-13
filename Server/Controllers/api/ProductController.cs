@@ -128,7 +128,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             _products.Remove(_products.FirstOrDefault(p => p._id == id));
 
-            return Ok();
+            return NoContent();
         }
 
     }
