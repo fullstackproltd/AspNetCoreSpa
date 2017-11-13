@@ -12,6 +12,10 @@ using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using Microsoft.AspNetCore.Authentication.Facebook;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Authentication.Twitter;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using System.Collections.Generic;
+using Microsoft.Extensions.Options;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -55,6 +59,13 @@ namespace AspNetCoreSpa.Server.Extensions
 
             // TODO loggerFactory.AddSerilog();
 
+            return app;
+        }
+
+        public static IApplicationBuilder AddCustomLocalization(this IApplicationBuilder app)
+        {
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
             return app;
         }
 

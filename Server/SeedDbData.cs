@@ -63,15 +63,15 @@ namespace AspNetCoreSpa.Server
         {
             if (!_context.Languages.Any())
             {
-                _context.Languages.Add(new Language { Locale = "en", Description = "English" });
+                _context.Languages.Add(new Language { Locale = "en-GB", Description = "English" });
                 _context.SaveChanges();
-                _context.Languages.Add(new Language { Locale = "fr", Description = "Frensh" });
+                _context.Languages.Add(new Language { Locale = "fr-FR", Description = "Frensh" });
                 _context.SaveChanges();
             }
 
             if (!_context.Content.Any())
             {
-                _context.Content.Add(new Content { Key = "TITLE" });
+                _context.Content.Add(new Content { Key = "APP_TITLE" });
                 _context.SaveChanges();
                 _context.Content.Add(new Content { Key = "APP_NAV_HOME" });
                 _context.SaveChanges();
@@ -87,8 +87,8 @@ namespace AspNetCoreSpa.Server
 
             if (!_context.ContentText.Any())
             {
-                _context.ContentText.Add(new ContentText { Text = "Site title", LanguageId = 1, ContentId = 1 });
-                _context.ContentText.Add(new ContentText { Text = "Titre du site", LanguageId = 2, ContentId = 1 });
+                _context.ContentText.Add(new ContentText { Text = "AspNetCoreSpa", LanguageId = 1, ContentId = 1 });
+                _context.ContentText.Add(new ContentText { Text = "AspNetCoreSpa", LanguageId = 2, ContentId = 1 });
 
                 _context.ContentText.Add(new ContentText { Text = "Home", LanguageId = 1, ContentId = 2 });
                 _context.ContentText.Add(new ContentText { Text = "Accueil", LanguageId = 2, ContentId = 2 });

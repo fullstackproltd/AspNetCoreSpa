@@ -72,6 +72,8 @@ namespace AspNetCoreSpa
 
             services.AddSignalR();
 
+            services.AddCustomLocalization();
+
             services.AddCustomizedMvc();
 
             // Node services are to execute any arbitrary nodejs code from .net
@@ -96,6 +98,8 @@ namespace AspNetCoreSpa
             app.UseAuthentication();
 
             app.UseStaticFiles();
+
+            app.AddCustomLocalization();
 
             app.UseSignalR(routes =>
             {

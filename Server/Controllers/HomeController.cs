@@ -7,62 +7,63 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using AspNetCoreSpa.Server.Services;
+using Microsoft.AspNetCore.Localization;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IContentService _contentService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IHostingEnvironment _env;
 
         public HomeController(
+            IContentService contentService,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
              IHostingEnvironment env
              )
         {
+            _contentService = contentService;
             _userManager = userManager;
-            _signInManager = signInManager;
             _env = env;
         }
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.schemes = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            
-            if (Request.Query.ContainsKey("emailConfirmCode") &&
-                Request.Query.ContainsKey("userId"))
+            if (ConfirmEmailRequest())
             {
-                var userId = Request.Query["userId"].ToString();
-                var code = Request.Query["emailConfirmCode"].ToString();
-                code = code.Replace(" ", "+");
-
-                var applicationUser = await _userManager.FindByIdAsync(userId);
-                if (applicationUser != null && !applicationUser.EmailConfirmed)
-                {
-                    var valid = await _userManager.ConfirmEmailAsync(applicationUser, code);
-                    if (valid.Succeeded)
-                    {
-                        ViewBag.emailConfirmed = true;
-                    }
-                }
-            }
-            else if (User.Identity != null && !string.IsNullOrEmpty(User.Identity.Name))
-            {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                var roles = await _userManager.GetRolesAsync(user);
-                var userResult = new { User = new { DisplayName = user.UserName, Roles = roles.ToList() } };
-                ViewBag.user = userResult;
+                await ConfirmEmail();
             }
 
+            var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
+            // Culture contains the information of the requested culture
+            var culture = requestCulture.RequestCulture.Culture;
+            ViewBag.languages = _contentService.GetLanguages();
+            ViewBag.content = _contentService.GetContent(culture.Name);
             return View();
         }
 
-        public IActionResult Error()
+        private bool ConfirmEmailRequest()
         {
-            ViewData["RequestId"] = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            return View();
+            return Request.Query.ContainsKey("emailConfirmCode") && Request.Query.ContainsKey("userId");
+        }
+
+        private async Task ConfirmEmail()
+        {
+            var userId = Request.Query["userId"].ToString();
+            var code = Request.Query["emailConfirmCode"].ToString();
+            code = code.Replace(" ", "+");
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user != null && !user.EmailConfirmed)
+            {
+                var valid = await _userManager.ConfirmEmailAsync(user, code);
+                if (valid.Succeeded)
+                {
+                    ViewBag.emailConfirmed = true;
+                }
+            }
         }
 
     }

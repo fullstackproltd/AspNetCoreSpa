@@ -15,6 +15,9 @@ using OpenIddict.Models;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using System.Collections.Generic;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -92,7 +95,7 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.AllowPasswordFlow()
                        .AllowRefreshTokenFlow()
                        .AllowImplicitFlow(); // To enable external logins to authenticate
-                       
+
                 options.SetAccessTokenLifetime(TimeSpan.FromMinutes(30));
                 options.SetIdentityTokenLifetime(TimeSpan.FromMinutes(30));
                 options.SetRefreshTokenLifetime(TimeSpan.FromMinutes(60));
@@ -214,12 +217,34 @@ namespace AspNetCoreSpa.Server.Extensions
             });
             return services;
         }
+
+        public static IServiceCollection AddCustomLocalization(this IServiceCollection services)
+        {
+            services.Configure<RequestLocalizationOptions>(opts =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                    {
+                                new CultureInfo("en-US"),
+                                new CultureInfo("en-GB"),
+                                new CultureInfo("fr-FR")
+                    };
+
+                    opts.DefaultRequestCulture = new RequestCulture("en-US");
+                    // Formatting numbers, dates, etc.
+                    opts.SupportedCultures = supportedCultures;
+                    // UI strings that we have localized.
+                    opts.SupportedUICultures = supportedCultures;
+                });
+
+            return services;
+        }
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
         {
             // New instance every time, only configuration class needs so its ok
             services.AddTransient<UserResolverService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IContentService, ContentService>();
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }

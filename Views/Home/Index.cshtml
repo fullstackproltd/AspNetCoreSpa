@@ -1,3 +1,7 @@
+@using Microsoft.AspNetCore.Identity;
+@using AspNetCoreSpa.Server.Entities;
+@inject SignInManager<ApplicationUser> SignInManager;
+
 <div class="container">
     <appc-root>
         <style>
@@ -57,18 +61,28 @@
         </h1>
     </appc-root>
 
-    <!-- @foreach (var provider in ViewBag.schemes)
-    {
-         <strong>@provider.Name</strong><br>
-    } -->
 </div>
 
 <script>
-    window.user = '@ViewBag.user';
+    window.languages = '@ViewBag.languages';
+    window.content = '@ViewBag.content';
 </script>
 
 <script src="~/dist/vendor.js" asp-append-version="true"></script> 
 
 @section scripts {
     <script src="~/dist/main-client.js" asp-append-version="true"></script> 
+}
+
+
+@{
+
+/*
+    @foreach (var provider in await SignInManager.GetExternalAuthenticationSchemesAsync())
+    {
+         <strong>@provider.Name</strong><br>
+    }
+
+*/
+
 }
