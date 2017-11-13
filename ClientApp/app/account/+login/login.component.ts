@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {
                 localStorage.setItem('id_token', x.id_token);
+                this.oAuthService.setupAutomaticSilentRefresh();
                 this.us.navigate('');
             });
     }

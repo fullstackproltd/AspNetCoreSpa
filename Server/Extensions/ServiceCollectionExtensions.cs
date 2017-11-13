@@ -14,6 +14,7 @@ using OpenIddict.Core;
 using OpenIddict.Models;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -91,7 +92,10 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.AllowPasswordFlow()
                        .AllowRefreshTokenFlow()
                        .AllowImplicitFlow(); // To enable external logins to authenticate
-
+                       
+                options.SetAccessTokenLifetime(TimeSpan.FromMinutes(30));
+                options.SetIdentityTokenLifetime(TimeSpan.FromMinutes(30));
+                options.SetRefreshTokenLifetime(TimeSpan.FromMinutes(60));
                 // During development, you can disable the HTTPS requirement.
                 options.DisableHttpsRequirement();
 
