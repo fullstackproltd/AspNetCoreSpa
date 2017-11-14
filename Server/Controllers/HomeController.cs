@@ -39,7 +39,8 @@ namespace AspNetCoreSpa.Server.Controllers
             var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
             // Culture contains the information of the requested culture
             var culture = requestCulture.RequestCulture.Culture;
-            ViewBag.conent = _stringLocalizer.WithCulture(culture);
+            var result = _stringLocalizer.WithCulture(culture).GetAllStrings();
+            ViewBag.conent = result;
             return View();
         }
 

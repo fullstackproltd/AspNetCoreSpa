@@ -86,6 +86,8 @@ namespace AspNetCoreSpa
         }
         public void Configure(IApplicationBuilder app)
         {
+            app.AddCustomLocalization();
+            
             app.AddDevMiddlewares();
 
             if (_hostingEnv.IsProduction())
@@ -98,8 +100,6 @@ namespace AspNetCoreSpa
             app.UseAuthentication();
 
             app.UseStaticFiles();
-
-            app.AddCustomLocalization();
 
             app.UseSignalR(routes =>
             {

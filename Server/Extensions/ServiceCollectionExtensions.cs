@@ -248,12 +248,12 @@ namespace AspNetCoreSpa.Server.Extensions
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
         {
             // New instance every time, only configuration class needs so its ok
-            services.AddTransient<IStringLocalizerFactory, EFStringLocalizerFactory>();
-            services.AddTransient<UserResolverService>();
+            services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<ApplicationDbContext>();
+            services.AddScoped<UserResolverService>();
             services.AddScoped<ApiExceptionFilter>();
-            services.AddScoped<ApplicationDbContext>();
             return services;
         }
 
