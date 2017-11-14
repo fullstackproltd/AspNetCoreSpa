@@ -20,12 +20,7 @@ namespace AspNetCoreSpa.Server.Filters
                 else
                 {
                     var result = new ContentResult();
-                    string content = JsonConvert.SerializeObject(new ApiError(filterContext.ModelState),
-                        new JsonSerializerSettings
-                        {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                            ContractResolver = new CamelCasePropertyNamesContractResolver()
-                        });
+                    string content = Helpers.JsonSerialize(new ApiError(filterContext.ModelState));
                     result.Content = content;
                     result.ContentType = "application/json";
 

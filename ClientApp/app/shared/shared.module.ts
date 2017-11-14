@@ -17,7 +17,7 @@ import { FormControlService } from './forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
+    NgbModule.forRoot(),
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [

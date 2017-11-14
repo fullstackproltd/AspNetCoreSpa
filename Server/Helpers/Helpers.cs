@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Events;
 using static Microsoft.AspNetCore.ResponseCompression.ResponseCompressionDefaults;
@@ -8,6 +10,15 @@ namespace AspNetCoreSpa.Server
 {
     public static class Helpers
     {
+        public static string JsonSerialize(object obj)
+        {
+            return JsonConvert.SerializeObject(obj,
+                        new JsonSerializerSettings
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        });
+        }
         public static void SetupSerilog()
         {
             // Configure Serilog

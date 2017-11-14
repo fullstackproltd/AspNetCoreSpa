@@ -9,22 +9,19 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using AspNetCoreSpa.Server.Services;
 using Microsoft.AspNetCore.Localization;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using System;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IContentService _contentService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IHostingEnvironment _env;
 
-        public HomeController(
-            IContentService contentService,
-            UserManager<ApplicationUser> userManager,
-             IHostingEnvironment env
-             )
+        public HomeController(UserManager<ApplicationUser> userManager, IHostingEnvironment env)
         {
-            _contentService = contentService;
             _userManager = userManager;
             _env = env;
         }
@@ -39,9 +36,18 @@ namespace AspNetCoreSpa.Server.Controllers
             var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
             // Culture contains the information of the requested culture
             var culture = requestCulture.RequestCulture.Culture;
-            ViewBag.languages = _contentService.GetLanguages();
-            ViewBag.content = _contentService.GetContent(culture.Name);
+
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)), new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
 
         private bool ConfirmEmailRequest()

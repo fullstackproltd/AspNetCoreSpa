@@ -29,7 +29,7 @@ namespace AspNetCoreSpa.Server
             _context = context;
             CreateRoles(); // Add roles
             CreateUsers(); // Add users
-            AddLanguagesAndContent();
+            AddLocalisedData();
             AddOpenIdConnectOptions(serviceScope, CancellationToken.None).GetAwaiter().GetResult();
         }
 
@@ -59,54 +59,31 @@ namespace AspNetCoreSpa.Server
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("user@user.com").GetAwaiter().GetResult(), "User").Result.ToString();
             }
         }
-        private void AddLanguagesAndContent()
+        private void AddLocalisedData()
         {
-            if (!_context.Languages.Any())
+            if (!_context.Cultures.Any())
             {
-                _context.Languages.Add(new Language { Locale = "en-GB", Description = "English" });
-                _context.SaveChanges();
-                _context.Languages.Add(new Language { Locale = "fr-FR", Description = "Frensh" });
+                _context.Cultures.AddRange(
+                    new Culture
+                    {
+                        Name = "en-US",
+                        Resources = new List<Resource>() { new Resource { Key = "Hello", Value = "Hello" } }
+                    },
+                    new Culture
+                    {
+                        Name = "en-GB",
+                        Resources = new List<Resource>() { new Resource { Key = "Hello", Value = "Hi" } }
+                    },
+                    new Culture
+                    {
+                        Name = "fr-FR",
+                        Resources = new List<Resource>() { new Resource { Key = "Hello", Value = "Bonjour" } }
+                    }
+                    );
+
                 _context.SaveChanges();
             }
 
-            if (!_context.Content.Any())
-            {
-                _context.Content.Add(new Content { Key = "APP_TITLE" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_HOME" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_EXAMPLES" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_LOGIN" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_LOGOUT" });
-                _context.SaveChanges();
-                _context.Content.Add(new Content { Key = "APP_NAV_REGISTER" });
-                _context.SaveChanges();
-            }
-
-            if (!_context.ContentText.Any())
-            {
-                _context.ContentText.Add(new ContentText { Text = "AspNetCoreSpa", LanguageId = 1, ContentId = 1 });
-                _context.ContentText.Add(new ContentText { Text = "AspNetCoreSpa", LanguageId = 2, ContentId = 1 });
-
-                _context.ContentText.Add(new ContentText { Text = "Home", LanguageId = 1, ContentId = 2 });
-                _context.ContentText.Add(new ContentText { Text = "Accueil", LanguageId = 2, ContentId = 2 });
-
-                _context.ContentText.Add(new ContentText { Text = "Examples", LanguageId = 1, ContentId = 3 });
-                _context.ContentText.Add(new ContentText { Text = "Exemples", LanguageId = 2, ContentId = 3 });
-
-                _context.ContentText.Add(new ContentText { Text = "Login", LanguageId = 1, ContentId = 4 });
-                _context.ContentText.Add(new ContentText { Text = "S'identifier", LanguageId = 2, ContentId = 4 });
-
-                _context.ContentText.Add(new ContentText { Text = "Logout", LanguageId = 1, ContentId = 5 });
-                _context.ContentText.Add(new ContentText { Text = "Connectez - Out", LanguageId = 2, ContentId = 5 });
-
-                _context.ContentText.Add(new ContentText { Text = "Register", LanguageId = 1, ContentId = 6 });
-                _context.ContentText.Add(new ContentText { Text = "registre", LanguageId = 2, ContentId = 6 });
-
-                _context.SaveChanges();
-            }
         }
 
         private async Task AddOpenIdConnectOptions(IServiceScope services, CancellationToken cancellationToken)

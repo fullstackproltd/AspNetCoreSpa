@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     var host = Context.Request.Scheme + "://" + Context.Request.Host;
 }
 
@@ -7,15 +8,15 @@
 
 <head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8" />
-    <title>@ViewData["Title"]</title>
+    <title>@Localizer["AspNetCoreSpa"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1" />
-    <meta name="description" content="@ViewData["Description"]" />
+    <meta name="description" content="@Localizer["Description"]" />
     <base href="~/" />
     <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="@ViewData["Title"]" />
-    <meta property="og:description" content="@ViewData["Description"]" />
+    <meta property="og:title" content="@Localizer["AspNetCoreSpa"]" />
+    <meta property="og:description" content="@Localizer["Single page application using aspnet core and angular"]" />
     <meta property="og:url" content="@(host + Context.Request.Path)" />
     <meta property="og:image" content="@host/img/icon180x180.png" />
     <meta property="og:image:width" content="180" />

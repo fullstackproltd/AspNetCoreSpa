@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TranslateLoader, MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
-import { ContentService } from './content.service';
-
 @Injectable()
 export class ApiTranslationLoader implements TranslateLoader {
 
-    constructor(public contentService: ContentService) { }
+    constructor() { }
 
     public getTranslation(lang: string): Observable<any> {
-        return this.contentService.get(lang);
+        return Observable.of((<any>window).content);
     }
 }
 

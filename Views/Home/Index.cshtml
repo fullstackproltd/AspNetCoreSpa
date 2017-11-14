@@ -1,8 +1,9 @@
-@using Microsoft.AspNetCore.Identity;
-@using AspNetCoreSpa.Server.Entities;
-@inject SignInManager<ApplicationUser> SignInManager;
 
 <div class="container">
+     <div class="col-md-6 text-right">
+        @await Html.PartialAsync("_SelectLanguagePartial")
+    </div>
+
     <appc-root>
         <style>
             appc-root {
@@ -57,16 +58,11 @@
         </style>
         <h1>
             <div class="loader"></div>
-            Loading...
+            @Localizer["Loading..."]
         </h1>
     </appc-root>
 
 </div>
-
-<script>
-    window.languages = '@ViewBag.languages';
-    window.content = '@ViewBag.content';
-</script>
 
 <script src="~/dist/vendor.js" asp-append-version="true"></script> 
 

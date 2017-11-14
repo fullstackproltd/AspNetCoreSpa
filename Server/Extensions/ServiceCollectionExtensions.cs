@@ -18,6 +18,7 @@ using System;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -43,7 +44,9 @@ namespace AspNetCoreSpa.Server.Extensions
             .AddJsonOptions(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            })
+            .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+            .AddDataAnnotationsLocalization();
 
             return services;
         }
@@ -236,6 +239,8 @@ namespace AspNetCoreSpa.Server.Extensions
                     opts.SupportedUICultures = supportedCultures;
                 });
 
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
             return services;
         }
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
@@ -244,7 +249,6 @@ namespace AspNetCoreSpa.Server.Extensions
             services.AddTransient<UserResolverService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddTransient<IContentService, ContentService>();
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }

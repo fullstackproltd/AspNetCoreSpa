@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AspNetCoreSpa" xml:space="preserve">
+    <value>AspNetCoreSpa (fr)</value>
+  </data>
+  <data name="Single page application using aspnet core and angular" xml:space="preserve">
+    <value>Application d'une seule page utilisant aspnet core et angular</value>
+  </data>
 </root>

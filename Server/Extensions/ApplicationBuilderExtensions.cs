@@ -66,6 +66,7 @@ namespace AspNetCoreSpa.Server.Extensions
         {
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
+
             return app;
         }
 

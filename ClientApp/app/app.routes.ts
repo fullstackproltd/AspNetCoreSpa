@@ -1,7 +1,7 @@
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
   // Lazy async modules
   {
     path: 'login', loadChildren: './account/+login/login.module#LoginModule'

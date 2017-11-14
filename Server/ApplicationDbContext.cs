@@ -8,9 +8,8 @@ namespace AspNetCoreSpa.Server
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
-        public DbSet<Language> Languages { get; set; }
-        public DbSet<Content> Content { get; set; }
-        public DbSet<ContentText> ContentText { get; set; }
+        public DbSet<Culture> Cultures { get; set; }
+        public DbSet<Resource> Resources { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         { }
