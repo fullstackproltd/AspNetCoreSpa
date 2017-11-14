@@ -11,11 +11,11 @@ namespace AspNetCoreSpa.Server.Middlewares.EntityFrameworkLocalizer
 {
     public class EFStringLocalizer<T> : IStringLocalizer<T>
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _context;
 
-        public EFStringLocalizer(ApplicationDbContext _db)
+        public EFStringLocalizer(ApplicationDbContext context)
         {
-            db = _db;
+            _context = context;
         }
 
         public LocalizedString this[string name]
@@ -40,12 +40,12 @@ namespace AspNetCoreSpa.Server.Middlewares.EntityFrameworkLocalizer
         public IStringLocalizer WithCulture(CultureInfo culture)
         {
             CultureInfo.DefaultThreadCurrentCulture = culture;
-            return new EFStringLocalizer(db);
+            return new EFStringLocalizer(_context);
         }
 
         public IEnumerable<LocalizedString> GetAllStrings(bool includeAncestorCultures)
         {
-            return db.Resources
+            return _context.Resources
                 .Include(r => r.Culture)
                 .Where(r => r.Culture.Name == CultureInfo.CurrentCulture.Name)
                 .Select(r => new LocalizedString(r.Key, r.Value, true));
@@ -53,7 +53,7 @@ namespace AspNetCoreSpa.Server.Middlewares.EntityFrameworkLocalizer
 
         private string GetString(string name)
         {
-            return db.Resources
+            return _context.Resources
                 .Include(r => r.Culture)
                 .Where(r => r.Culture.Name == CultureInfo.CurrentCulture.Name)
                 .FirstOrDefault(r => r.Key == name)?.Value;

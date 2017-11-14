@@ -11,7 +11,7 @@ using System;
 namespace AspNetCoreSpa.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171110114144_Initial")]
+    [Migration("20171114092149_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -106,57 +106,34 @@ namespace AspNetCoreSpa.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Content", b =>
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Culture", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Key")
-                        .IsRequired()
-                        .HasMaxLength(250);
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Content");
+                    b.ToTable("Cultures");
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ContentText", b =>
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Resource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ContentId");
+                    b.Property<int?>("CultureId");
 
-                    b.Property<int>("LanguageId");
+                    b.Property<string>("Key");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(2048);
+                    b.Property<string>("Value");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContentId");
+                    b.HasIndex("CultureId");
 
-                    b.HasIndex("LanguageId");
-
-                    b.ToTable("ContentText");
-                });
-
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Language", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Locale")
-                        .IsRequired()
-                        .HasMaxLength(7);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Languages");
+                    b.ToTable("Resources");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -356,17 +333,11 @@ namespace AspNetCoreSpa.Migrations
                     b.ToTable("OpenIddictTokens");
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ContentText", b =>
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Resource", b =>
                 {
-                    b.HasOne("AspNetCoreSpa.Server.Entities.Content", "Content")
-                        .WithMany("ContentTexts")
-                        .HasForeignKey("ContentId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AspNetCoreSpa.Server.Entities.Language", "Language")
-                        .WithMany("ContentTexts")
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("AspNetCoreSpa.Server.Entities.Culture", "Culture")
+                        .WithMany("Resources")
+                        .HasForeignKey("CultureId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

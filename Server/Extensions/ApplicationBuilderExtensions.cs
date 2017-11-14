@@ -75,8 +75,8 @@ namespace AspNetCoreSpa.Server.Extensions
             // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
             try
             {
-                var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
-                serviceScope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+                var context = app.ApplicationServices.GetService<ApplicationDbContext>();
+                context.Database.Migrate();
             }
             catch (Exception) { }
             return app;

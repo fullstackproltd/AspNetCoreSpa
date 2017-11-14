@@ -12,17 +12,20 @@ using Microsoft.AspNetCore.Localization;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using System;
+using Microsoft.Extensions.Localization;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IStringLocalizer<HomeController> _stringLocalizer;
         private readonly IHostingEnvironment _env;
 
-        public HomeController(UserManager<ApplicationUser> userManager, IHostingEnvironment env)
+        public HomeController(UserManager<ApplicationUser> userManager, IHostingEnvironment env, IStringLocalizer<HomeController> stringLocalizer)
         {
             _userManager = userManager;
+            _stringLocalizer = stringLocalizer;
             _env = env;
         }
 
@@ -36,7 +39,7 @@ namespace AspNetCoreSpa.Server.Controllers
             var requestCulture = HttpContext.Features.Get<IRequestCultureFeature>();
             // Culture contains the information of the requested culture
             var culture = requestCulture.RequestCulture.Culture;
-
+            ViewBag.conent = _stringLocalizer.WithCulture(culture);
             return View();
         }
 

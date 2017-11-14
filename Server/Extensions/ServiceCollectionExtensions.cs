@@ -19,6 +19,8 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.Extensions.Localization;
+using AspNetCoreSpa.Server.Middlewares.EntityFrameworkLocalizer;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -246,10 +248,12 @@ namespace AspNetCoreSpa.Server.Extensions
         public static IServiceCollection RegisterCustomServices(this IServiceCollection services)
         {
             // New instance every time, only configuration class needs so its ok
+            services.AddTransient<IStringLocalizerFactory, EFStringLocalizerFactory>();
             services.AddTransient<UserResolverService>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ApiExceptionFilter>();
+            services.AddScoped<ApplicationDbContext>();
             return services;
         }
 

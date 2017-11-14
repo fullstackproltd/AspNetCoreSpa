@@ -7,21 +7,21 @@ namespace AspNetCoreSpa.Server.Middlewares.EntityFrameworkLocalizer
 {
     public class EFStringLocalizerFactory : IStringLocalizerFactory
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _context;
 
-        public EFStringLocalizerFactory(ApplicationDbContext _db)
+        public EFStringLocalizerFactory(ApplicationDbContext context)
         {
-            db = _db;
+            _context = context;
         }
 
         public IStringLocalizer Create(Type resourceSource)
         {
-            return new EFStringLocalizer(db);
+            return new EFStringLocalizer(_context);
         }
 
         public IStringLocalizer Create(string baseName, string location)
         {
-            return new EFStringLocalizer(db);
+            return new EFStringLocalizer(_context);
         }
     }
 }

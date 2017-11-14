@@ -55,30 +55,16 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Content",
+                name: "Cultures",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(type: "TEXT", maxLength: 250, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Content", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Languages",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
-                    Locale = table.Column<string>(type: "TEXT", maxLength: 7, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Languages", x => x.Id);
+                    table.PrimaryKey("PK_Cultures", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -220,30 +206,24 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContentText",
+                name: "Resources",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ContentId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LanguageId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Text = table.Column<string>(type: "TEXT", maxLength: 2048, nullable: false)
+                    CultureId = table.Column<int>(type: "INTEGER", nullable: true),
+                    Key = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContentText", x => x.Id);
+                    table.PrimaryKey("PK_Resources", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContentText_Content_ContentId",
-                        column: x => x.ContentId,
-                        principalTable: "Content",
+                        name: "FK_Resources_Cultures_CultureId",
+                        column: x => x.CultureId,
+                        principalTable: "Cultures",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ContentText_Languages_LanguageId",
-                        column: x => x.LanguageId,
-                        principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -340,16 +320,6 @@ namespace AspNetCoreSpa.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContentText_ContentId",
-                table: "ContentText",
-                column: "ContentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ContentText_LanguageId",
-                table: "ContentText",
-                column: "LanguageId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OpenIddictApplications_ClientId",
                 table: "OpenIddictApplications",
                 column: "ClientId",
@@ -375,6 +345,11 @@ namespace AspNetCoreSpa.Migrations
                 table: "OpenIddictTokens",
                 column: "Hash",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Resources_CultureId",
+                table: "Resources",
+                column: "CultureId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -395,13 +370,13 @@ namespace AspNetCoreSpa.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ContentText");
-
-            migrationBuilder.DropTable(
                 name: "OpenIddictScopes");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictTokens");
+
+            migrationBuilder.DropTable(
+                name: "Resources");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -410,13 +385,10 @@ namespace AspNetCoreSpa.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Content");
-
-            migrationBuilder.DropTable(
-                name: "Languages");
-
-            migrationBuilder.DropTable(
                 name: "OpenIddictAuthorizations");
+
+            migrationBuilder.DropTable(
+                name: "Cultures");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");
