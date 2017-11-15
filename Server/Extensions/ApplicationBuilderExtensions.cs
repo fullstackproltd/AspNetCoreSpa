@@ -17,7 +17,9 @@ using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
-using AspNetCoreSpa.Server.Middlewares.Csp;
+using Joonasw.AspNetCore.SecurityHeaders;
+using Microsoft.AspNetCore.Hosting.Server.Features;
+using System.Linq;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -39,26 +41,84 @@ namespace AspNetCoreSpa.Server.Extensions
         }
         public static IApplicationBuilder UseCustomisedCsp(this IApplicationBuilder app)
         {
-            app.UseCsp(builder =>
-                        {
-                            builder.Defaults
-                                   .AllowSelf();
+            var URLS = app.ServerFeatures.Get<IServerAddressesFeature>().Addresses;
+            var socketUrl = "ws" + URLS.ToList().First().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
 
-                            builder.Scripts
-                                   .AllowSelf()
-                                   .Allow("'unsafe-inline' 'unsafe-eval'");
+            // TODO: Implement HSTS once SSL is implemented
+            // Enable Strict Transport Security with a 30-day caching period
+            // Do not include subdomains
+            // Do not allow preload
+            // app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
 
-                            builder.Styles
-                                   .AllowSelf()
-                                   .Allow("'unsafe-inline'");
+            // // Use certificate pinning with:
+            // // - 30-day caching period
+            // // - One pin in SHA-256 form
+            // // - Report-Only = Invalid certificate should not be reported, but:
+            // // - Report problems to /hpkp-report
+            // app.UseHpkp(hpkp =>
+            // {
+            //     hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
+            //         .AddSha256Pin("nrmpk4ZI3wbRBmUZIT5aKAgP0LlKHRgfA2Snjzeg9iY=")
+            //         .SetReportOnly()
+            //         .ReportViolationsTo("/hpkp-report");
+            // });
 
-                            builder.Fonts
-                                   .AllowSelf()
-                                   .Allow("font-src: data:");
+            // Content Security Policy
+            app.UseCsp(csp =>
+            {
+                // If nothing is mentioned for a resource class, allow from this domain
+                csp.ByDefaultAllow
+                                .FromSelf();
 
-                            builder.Images
-                                   .AllowSelf();
-                        });
+                // Allow JavaScript from:
+                csp.AllowScripts
+                                .FromSelf() //This domain
+                                .AllowUnsafeEval()
+                                .AllowUnsafeInline();
+
+                // CSS allowed from:
+                csp.AllowStyles
+                                .FromSelf()
+                                .AllowUnsafeInline();
+
+                csp.AllowImages
+                    .FromSelf()
+                    .From("data:");
+
+                // HTML5 audio and video elemented sources can be from:
+                csp.AllowAudioAndVideo
+                                .FromNowhere();
+
+                // Contained iframes can be sourced from:
+                csp.AllowChildren
+                                .FromNowhere(); //Nowhere, no iframes allowed
+
+                // Allow AJAX, WebSocket and EventSource connections to:
+                csp.AllowConnections
+                                .To(socketUrl)
+                                .ToSelf();
+
+                // Allow fonts to be downloaded from:
+                csp.AllowFonts
+                                .FromSelf()
+                                .From("data:");
+
+                // Allow object, embed, and applet sources from:
+                csp.AllowPlugins
+                                .FromNowhere();
+
+                // Allow other sites to put this in an iframe?
+                csp.AllowFraming
+                                .FromNowhere(); // Block framing on other sites, equivalent to X-Frame-Options: DENY
+
+                // Do not block violations, only report
+                // This is a good idea while testing your CSP
+                // Remove it when you know everything will work
+                // csp.SetReportOnly();
+                // Where should the violation reports be sent to?
+                // csp.ReportViolationsTo("/csp-report");
+            });
+
             return app;
         }
 
