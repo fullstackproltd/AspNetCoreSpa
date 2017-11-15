@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NotificationsService } from '../../../core';
-import { ControlBase, ControlTextbox } from '../../../shared';
+import { NotificationsService } from '@app/core';
+import { ControlBase, ControlTextbox } from '@app/shared';
 
 import { UserInfoModel } from '../profile.models';
 import { ProfileService } from '../profile.service';

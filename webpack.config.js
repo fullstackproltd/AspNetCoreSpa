@@ -1,8 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const ATL = require('awesome-typescript-loader');
 const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
+const CheckerPlugin = ATL.CheckerPlugin;
+const TsConfigPathsPlugin = ATL.TsConfigPathsPlugin;
+
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = (env) => {
@@ -11,7 +14,11 @@ module.exports = (env) => {
     const sharedConfig = {
         stats: { modules: false },
         context: __dirname,
-        resolve: { extensions: ['.js', '.ts', 'scss', 'css'] },
+        resolve: {
+            extensions: ['.js', '.ts', 'scss', 'css'], plugins: [
+                new TsConfigPathsPlugin(/* { tsconfig, compiler } */)
+            ]
+        },
         output: {
             filename: '[name].js',
             publicPath: 'dist/' // Webpack dev middleware, if enabled, handles requests for this URL prefix

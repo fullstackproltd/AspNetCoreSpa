@@ -10,6 +10,7 @@
         "**/obj": true,
         ".vs": true,
         "*.sln": true,
+        "package-lock.json": true,
         "*.csproj.user": true,
         "compodoc.jpg": true,
         "Properties": true,

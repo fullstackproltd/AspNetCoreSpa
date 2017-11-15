@@ -7,6 +7,7 @@ ClientApp/dist
 /doc
 /documentation
 /logs
+package-lock.json
 stats.json
 ClientApp/**/*.js.map
 npm-debug.log*

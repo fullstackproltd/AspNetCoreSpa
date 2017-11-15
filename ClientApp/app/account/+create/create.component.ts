@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { ControlBase, ControlTextbox } from '../../shared';
+import { ControlBase, ControlTextbox } from '@app/shared';
 
 @Component({
   selector: 'appc-create',

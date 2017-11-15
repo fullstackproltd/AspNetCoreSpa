@@ -2,8 +2,8 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DataService, RegisterModel } from '../../../core';
-import { ControlBase, ControlTextbox } from '../../../shared';
+import { DataService, RegisterModel } from '@app/core';
+import { ControlBase, ControlTextbox } from '@app/shared';
 
 
 @Component({

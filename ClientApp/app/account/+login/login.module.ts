@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '../../shared';
+import { SharedModule } from '@app/shared';
 
 import { SocialLoginComponent } from './sociallogin/social-login.component';
 import { LoginComponent } from './login.component';

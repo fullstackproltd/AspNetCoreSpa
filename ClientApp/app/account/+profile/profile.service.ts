@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { DataService } from '../../core';
+import { DataService } from '@app/core';
 import { UserInfoModel, UpdatePasswordModel } from './profile.models';
 
 @Injectable()

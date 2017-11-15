@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('en');
 
-    this.configureWithNewConfigApi();
+    this.configureOidc();
 
   }
 
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     return outlet.activatedRouteData.state;
   }
 
-  private configureWithNewConfigApi() {
+  private configureOidc() {
     const url = `${this.document.location.protocol}//${this.document.location.host}`;
     this.oauthService.configure(authConfig(url));
     this.oauthService.setStorage(localStorage);
