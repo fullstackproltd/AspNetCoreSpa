@@ -19,6 +19,7 @@
     "protractor": "protractor",
     "clean": "rimraf AspNetCoreSpa.db bin ClientApp/dist wwwroot/dist",
     "dev:watch": "set ASPNETCORE_ENVIRONMENT=Development && dotnet watch run",
+    "prod:watch": "set ASPNETCORE_ENVIRONMENT=Production && dotnet watch run",
     "test": "node_modules/.bin/ng test",
     "lint": "npm run tslint \"ClientApp/**/*.ts\"",
     "postinstall": "npm run webdriver:update",
