@@ -17,7 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'chat', loadChildren: './+chat/chat.module#ChatModule'
+  },
+  {
+    path: 'examples', loadChildren: './+examples/examples.module#ExamplesModule'
   }
 ];
 
-export const routing = RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules });
+export const routing = RouterModule.forRoot(routes, {
+  preloadingStrategy: PreloadAllModules,
+  // enableTracing: true
+});
