@@ -16,6 +16,7 @@ namespace AspNetCoreSpa.Server
                         new JsonSerializerSettings
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                            StringEscapeHandling =  StringEscapeHandling.EscapeHtml,
                             ContractResolver = new CamelCasePropertyNamesContractResolver()
                         });
         }

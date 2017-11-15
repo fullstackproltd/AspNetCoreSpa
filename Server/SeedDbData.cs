@@ -67,17 +67,28 @@ namespace AspNetCoreSpa.Server
                     new Culture
                     {
                         Name = "en-US",
-                        Resources = new List<Resource>() { new Resource { Key = "Hello", Value = "Hello" } }
-                    },
-                    new Culture
-                    {
-                        Name = "en-GB",
-                        Resources = new List<Resource>() { new Resource { Key = "Hello", Value = "Hi" } }
+                        Resources = new List<Resource>() {
+                            new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
+                            new Resource { Key = "app_nav_home", Value = "Home" },
+                            new Resource { Key = "app_nav_chat", Value = "Chat" },
+                            new Resource { Key = "app_nav_examples", Value = "Examples" },
+                            new Resource { Key = "app_nav_register", Value = "Register" },
+                            new Resource { Key = "app_nav_login", Value = "Login" },
+                            new Resource { Key = "app_nav_logout", Value = "Logout" },
+                        }
                     },
                     new Culture
                     {
                         Name = "fr-FR",
-                        Resources = new List<Resource>() { new Resource { Key = "Hello", Value = "Bonjour" } }
+                        Resources = new List<Resource>() {
+                            new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
+                            new Resource { Key = "app_nav_home", Value = "Accueil" },
+                            new Resource { Key = "app_nav_chat", Value = "Bavarder" },
+                            new Resource { Key = "app_nav_examples", Value = "Exemples" },
+                            new Resource { Key = "app_nav_register", Value = "registre" },
+                            new Resource { Key = "app_nav_login", Value = "S'identifier" },
+                            new Resource { Key = "app_nav_logout", Value = "Connectez - Out" },
+                        }
                     }
                     );
 

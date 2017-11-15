@@ -49,6 +49,9 @@ namespace AspNetCoreSpa
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCustomHeaders();
+
             if (_hostingEnv.IsDevelopment())
             {
                 services.AddSslCertificate(_hostingEnv);
@@ -86,8 +89,10 @@ namespace AspNetCoreSpa
         }
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCustomisedHeadersMiddleware();
+
             app.AddCustomLocalization();
-            
+
             app.AddDevMiddlewares();
 
             if (_hostingEnv.IsProduction())

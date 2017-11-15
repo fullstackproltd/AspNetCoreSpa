@@ -16,11 +16,26 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
+using NetEscapades.AspNetCore.SecurityHeaders;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
+        public static IApplicationBuilder UseCustomisedHeadersMiddleware(this IApplicationBuilder app)
+        {
+            var policyCollection = new HeaderPolicyCollection()
+                   .AddFrameOptionsDeny()
+                   .AddXssProtectionBlock()
+                   .AddContentTypeOptionsNoSniff()
+                   .AddStrictTransportSecurityMaxAge(maxAge: 60 * 60 * 24 * 365) // maxage = one year in seconds
+                   .AddReferrerPolicyOriginWhenCrossOrigin()
+                   .RemoveServerHeader();
+                //    .AddCustomHeader("X-My-Test-Header", "Header value");
+
+            app.UseCustomHeadersMiddleware(policyCollection);
+            return app;
+        }
         public static IApplicationBuilder UseCustomWebpackDevMiddleware(this IApplicationBuilder app)
         {
             app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions

@@ -8,7 +8,7 @@ export class ApiTranslationLoader implements TranslateLoader {
     constructor() { }
 
     public getTranslation(lang: string): Observable<any> {
-        return Observable.of((<any>window).content);
+        return Observable.of(JSON.parse((<any>window).content));
     }
 }
 

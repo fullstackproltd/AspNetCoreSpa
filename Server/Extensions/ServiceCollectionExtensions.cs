@@ -230,7 +230,6 @@ namespace AspNetCoreSpa.Server.Extensions
                     var supportedCultures = new List<CultureInfo>
                     {
                                 new CultureInfo("en-US"),
-                                new CultureInfo("en-GB"),
                                 new CultureInfo("fr-FR")
                     };
 

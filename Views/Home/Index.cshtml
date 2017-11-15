@@ -64,10 +64,10 @@
 
 </div>
 
-<script>
-    console.log('@Html.Raw(ViewBag.content)');
+ <script>
+        // Line breaks were breaking json.parse
+        window.content = '@Html.Raw(ViewBag.content)';
 </script>
-
 <script src="~/dist/vendor.js" asp-append-version="true"></script> 
 
 @section scripts {
