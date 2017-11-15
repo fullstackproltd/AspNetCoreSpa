@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { LoginModel, UtilityService } from '../../core';
+import { LoginModel, UtilityService, NotificationsService } from '../../core';
 import { ControlBase, ControlTextbox } from '../../shared';
 
 
@@ -15,14 +15,18 @@ export class LoginComponent implements OnInit {
     public loginModel: LoginModel;
     public controls: any;
 
-    constructor(public oAuthService: OAuthService, public us: UtilityService) { }
+    constructor(
+        public oAuthService: OAuthService,
+        public us: UtilityService,
+        private ns: NotificationsService) { }
     public login(model: LoginModel): void {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {
                 localStorage.setItem('id_token', x.id_token);
                 this.oAuthService.setupAutomaticSilentRefresh();
                 this.us.navigate('');
-            });
+            })
+            .catch(err => this.ns.error('Error getting token', err));
     }
 
     public ngOnInit() {
