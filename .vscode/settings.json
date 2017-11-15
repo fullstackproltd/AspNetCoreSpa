@@ -14,6 +14,8 @@
         "compodoc.jpg": true,
         "Properties": true,
         ".awcache": true,
+        "extra": true,
+        "deploy.azure.ps1": true,
         "*.PublishSettings": true,
         "logs": true,
         "npm-debug.log.*": true,
