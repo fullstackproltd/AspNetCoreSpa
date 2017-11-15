@@ -89,6 +89,8 @@ namespace AspNetCoreSpa
         }
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCustomisedCsp();
+            
             app.UseCustomisedHeadersMiddleware();
 
             app.AddCustomLocalization();

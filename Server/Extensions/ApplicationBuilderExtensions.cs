@@ -17,6 +17,7 @@ using System.Globalization;
 using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
+using AspNetCoreSpa.Server.Middlewares.Csp;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -31,11 +32,36 @@ namespace AspNetCoreSpa.Server.Extensions
                    .AddStrictTransportSecurityMaxAge(maxAge: 60 * 60 * 24 * 365) // maxage = one year in seconds
                    .AddReferrerPolicyOriginWhenCrossOrigin()
                    .RemoveServerHeader();
-                //    .AddCustomHeader("X-My-Test-Header", "Header value");
+            //    .AddCustomHeader("X-My-Test-Header", "Header value");
 
             app.UseCustomHeadersMiddleware(policyCollection);
             return app;
         }
+        public static IApplicationBuilder UseCustomisedCsp(this IApplicationBuilder app)
+        {
+            app.UseCsp(builder =>
+                        {
+                            builder.Defaults
+                                   .AllowSelf();
+
+                            builder.Scripts
+                                   .AllowSelf()
+                                   .Allow("'unsafe-inline' 'unsafe-eval'");
+
+                            builder.Styles
+                                   .AllowSelf()
+                                   .Allow("'unsafe-inline'");
+
+                            builder.Fonts
+                                   .AllowSelf()
+                                   .Allow("font-src: data:");
+
+                            builder.Images
+                                   .AllowSelf();
+                        });
+            return app;
+        }
+
         public static IApplicationBuilder UseCustomWebpackDevMiddleware(this IApplicationBuilder app)
         {
             app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
