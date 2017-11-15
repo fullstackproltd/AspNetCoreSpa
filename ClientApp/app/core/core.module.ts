@@ -2,7 +2,7 @@ import { NgModule, Optional, SkipSelf, ModuleWithProviders, ErrorHandler } from 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OAuthModule } from 'angular-oauth2-oidc';
@@ -29,7 +29,6 @@ import { SimpleNotificationsModule } from './simple-notifications';
         CommonModule,
         HttpModule,
         HttpClientModule,
-        HttpClientXsrfModule,
         NgbModule,
         RouterModule,
         OAuthModule.forRoot(),
