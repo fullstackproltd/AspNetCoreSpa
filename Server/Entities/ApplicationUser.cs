@@ -16,6 +16,9 @@ namespace AspNetCoreSpa.Server.Entities
         public string FirstName { get; set; }
         [StringLength(250)]
         public string LastName { get; set; }
+
+        public ApplicationUserPhoto ProfilePhoto { get; set; }
+
         [NotMapped]
         public string Name
         {

@@ -105,6 +105,25 @@ namespace AspNetCoreSpa.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationUserPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationUserId");
+
+                    b.Property<byte[]>("Content");
+
+                    b.Property<string>("ContentType");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
+                    b.ToTable("ApplicationUserPhotos");
+                });
+
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Culture", b =>
                 {
                     b.Property<int>("Id")
@@ -330,6 +349,14 @@ namespace AspNetCoreSpa.Migrations
                         .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationUserPhoto", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.ApplicationUser", "ApplicationUser")
+                        .WithOne("ProfilePhoto")
+                        .HasForeignKey("AspNetCoreSpa.Server.Entities.ApplicationUserPhoto", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Resource", b =>

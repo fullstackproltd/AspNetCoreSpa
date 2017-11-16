@@ -106,56 +106,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return BadRequest(new ApiError(ModelState));
         }
 
-        // [HttpGet("ExternalLogin")]
-        // [AllowAnonymous]
-        // public IActionResult ExternalLogin(string provider, string returnUrl = null)
-        // {
-        //     // Request a redirect to the external login provider.
-        //     var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
-        //     var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-        //     return Challenge(properties, provider);
-        // }
-
-        // [HttpGet("ExternalLoginCallback")]
-        // [AllowAnonymous]
-        // public IActionResult ExternalLoginCallback(string returnUrl = null, string remoteError = null)
-        // {
-        //     if (remoteError != null)
-        //     {
-        //         return Render(ExternalLoginStatus.Error);
-        //     }
-        //     return LocalRedirect(IMPLICIT_AUTHORISATION_URL);
-        // }
-
-        // [HttpGet("ExternalLoginCreateAccount")]
-        // [AllowAnonymous]
-        // public async Task<IActionResult> ExternalLoginCreateAccount([FromQuery]ExternalLoginConfirmationViewModel model, string returnUrl = null)
-        // {
-        //     // Get the information about the user from the external login provider
-        //     var info = await _signInManager.GetExternalLoginInfoAsync();
-        //     if (info == null)
-        //     {
-        //         return BadRequest(new ApiError("External login information cannot be accessed, try again."));
-        //     }
-        //     var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-        //     var result = await _userManager.CreateAsync(user);
-        //     if (result.Succeeded)
-        //     {
-        //         result = await _userManager.AddLoginAsync(user, info);
-        //         if (result.Succeeded)
-        //         {
-        //             _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-        //             return LocalRedirect(IMPLICIT_AUTHORISATION_URL);
-        //         }
-        //     }
-        //     else
-        //     {
-        //         return BadRequest(new ApiError("Email already exists"));
-        //     }
-
-        //     return BadRequest(new ApiError("Something went wrong with creating account, please try again later"));
-        // }
-
         [HttpGet("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)

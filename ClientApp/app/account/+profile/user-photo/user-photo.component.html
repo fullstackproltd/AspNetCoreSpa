@@ -1,0 +1,17 @@
+<div class="row justify-content-center">
+  <figure class="figure">
+    <img [src]="selectedImage?.url ? selectedImage.url : profilePicture" class="figure-img img-fluid rounded" style="width: 200px;height: 200px;">
+    <figcaption class="figure-caption text-right">{{selectedImage?.name}}</figcaption>
+  </figure>
+</div>
+
+<div class="row justify-content-center">
+  <input type="file" id="file" *ngIf="!selectedImage" (change)="fileChange($event)">
+</div>
+
+<div class="row justify-content-center" *ngIf="selectedImage">
+  <button type="button" class="btn btn-warning" (click)="cancel()">Cancel</button>
+  <button type="button" class="btn btn-primary" (click)="upload()">Use this</button>
+</div>
+
+{{selectedImage | json}}

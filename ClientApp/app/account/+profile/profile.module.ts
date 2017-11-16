@@ -7,13 +7,17 @@ import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
 import { UserInfoComponent } from './user-info';
 import { UpdatePasswordComponent } from './update-password';
+import { UserPhotoComponent } from './user-photo';
+import { OtherAccountsComponent } from './other-accounts';
 
 @NgModule({
     imports: [routing, SharedModule],
     declarations: [
         ProfileComponent,
         UserInfoComponent,
-        UpdatePasswordComponent
+        UpdatePasswordComponent,
+        UserPhotoComponent,
+        OtherAccountsComponent
     ],
     providers: [ProfileService]
 })

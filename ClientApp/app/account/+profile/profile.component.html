@@ -1,18 +1,27 @@
 <div class="row justify-content-center">
     <div class="col-12 col-lg-6">
 
-        <ngb-tabset>
-            <ngb-tab title="Change user info">
-                <ng-template ngbTabContent>
-                    <appc-user-info></appc-user-info>
-                </ng-template>
-            </ngb-tab>
+        <nav class="navbar navbar-expand navbar-light bg-faded">
 
-            <ngb-tab title="Change password">
-                <ng-template ngbTabContent>
-                    <appc-update-password></appc-update-password>
-                </ng-template>
-            </ngb-tab>
-        </ngb-tabset>
+            <div class="collapse navbar-collapse" id="navbarNav" [class.show]="!isCollapsed">
+                <!--Left nav-->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="userinfo">User info</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="updatepassword">Update password</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="userphoto">User photo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLinkActive="active" routerLink="otheraccounts">Other accounts</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <router-outlet></router-outlet>
     </div>
 </div>

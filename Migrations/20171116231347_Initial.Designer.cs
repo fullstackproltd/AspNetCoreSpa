@@ -11,7 +11,7 @@ using System;
 namespace AspNetCoreSpa.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171114092149_Initial")]
+    [Migration("20171116231347_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,6 +104,25 @@ namespace AspNetCoreSpa.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationUserPhoto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationUserId");
+
+                    b.Property<byte[]>("Content");
+
+                    b.Property<string>("ContentType");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
+                    b.ToTable("ApplicationUserPhotos");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Culture", b =>
@@ -331,6 +350,14 @@ namespace AspNetCoreSpa.Migrations
                         .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationUserPhoto", b =>
+                {
+                    b.HasOne("AspNetCoreSpa.Server.Entities.ApplicationUser", "ApplicationUser")
+                        .WithOne("ProfilePhoto")
+                        .HasForeignKey("AspNetCoreSpa.Server.Entities.ApplicationUserPhoto", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.Resource", b =>

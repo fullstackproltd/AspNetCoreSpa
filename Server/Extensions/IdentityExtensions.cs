@@ -14,11 +14,5 @@ namespace AspNetCoreSpa.Server.Extensions
 
             return Convert.ToInt32(id);
         }
-        public static int GetCompanyId(this ClaimsPrincipal principal)
-        {
-            var companyId = principal.FindFirst("CompanyId")?.Value;
-
-            return Convert.ToInt32(companyId);
-        }
     }
 }

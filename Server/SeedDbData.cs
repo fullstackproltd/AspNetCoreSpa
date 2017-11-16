@@ -83,6 +83,7 @@ namespace AspNetCoreSpa.Server
                         Name = "fr-FR",
                         Resources = new List<Resource>() {
                             new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
+                            new Resource { Key = "app_description", Value = "Application d'une seule page utilisant aspnet core et angular" },
                             new Resource { Key = "app_nav_home", Value = "Accueil" },
                             new Resource { Key = "app_nav_chat", Value = "Bavarder" },
                             new Resource { Key = "app_nav_examples", Value = "Exemples" },

@@ -121,6 +121,27 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ApplicationUserPhotos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ApplicationUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Content = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    ContentType = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationUserPhotos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApplicationUserPhotos_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -283,6 +304,12 @@ namespace AspNetCoreSpa.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ApplicationUserPhotos_ApplicationUserId",
+                table: "ApplicationUserPhotos",
+                column: "ApplicationUserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -354,6 +381,9 @@ namespace AspNetCoreSpa.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApplicationUserPhotos");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

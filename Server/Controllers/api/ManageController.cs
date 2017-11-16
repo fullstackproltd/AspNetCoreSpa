@@ -8,12 +8,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AspNetCoreSpa.Server.Services;
 using AspNetCoreSpa.Server.Filters;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System;
+using AspNetCoreSpa.Server.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
     [Route("api/[controller]")]
     public class ManageController : BaseController
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
@@ -21,12 +27,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
         private readonly ILogger _logger;
 
         public ManageController(
+        ApplicationDbContext context,
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
         IEmailSender emailSender,
         ISmsSender smsSender,
         ILoggerFactory loggerFactory)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -186,7 +194,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return NoContent();
             }
             return BadRequest(new ApiError("Unable to link login"));
-            
+
         }
 
         [HttpGet("userinfo")]
@@ -238,6 +246,57 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return NoContent();
             }
             return BadRequest(new ApiError("Unable to set password"));
+        }
+
+        [HttpGet("photo")]
+        public IActionResult UserPhoto()
+        {
+
+            var profileImage = _context.ApplicationUserPhotos.Include(i => i.ApplicationUser).FirstOrDefault(i => i.ApplicationUser.Id == User.GetUserId());
+
+            if (profileImage == null)
+            {
+                return NotFound();
+            }
+
+            return File(profileImage.Content, profileImage.ContentType);
+        }
+
+        [HttpPost("photo")]
+        public async Task<IActionResult> UserPhoto(IFormFile file)
+        {
+            if (string.IsNullOrEmpty(file?.ContentType) || (file.Length == 0)) return BadRequest(new ApiError("Image provided is invalid"));
+
+            var size = file.Length;
+
+            if (size > Convert.ToInt64(Startup.Configuration["MaxImageUploadSize"])) return BadRequest(new ApiError("Image size greater than allowed size"));
+
+            using (var memoryStream = new MemoryStream())
+            {
+                var existingImage = _context.ApplicationUserPhotos.FirstOrDefault(i => i.ApplicationUserId == User.GetUserId());
+
+                await file.CopyToAsync(memoryStream);
+
+                if (existingImage == null)
+                {
+                    var userImage = new ApplicationUserPhoto
+                    {
+                        ContentType = file.ContentType,
+                        Content = memoryStream.ToArray(),
+                        ApplicationUserId = User.GetUserId()
+                    };
+                    _context.ApplicationUserPhotos.Add(userImage);
+                }
+                else
+                {
+                    existingImage.ContentType = file.ContentType;
+                    existingImage.Content = memoryStream.ToArray();
+                    _context.ApplicationUserPhotos.Update(existingImage);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            return NoContent();
         }
 
         #region Helpers
