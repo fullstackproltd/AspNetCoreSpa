@@ -19,6 +19,7 @@ import { ApiTranslationLoader } from './services/api-translation-loader.service'
 import { AuthInterceptor, TimingInterceptor } from './services/interceptors';
 import { GlobalErrorHandler } from './services/global-error.service';
 import { SimpleNotificationsModule } from './simple-notifications';
+import { GlobalRef, BrowserGlobalRef } from './global-ref';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,7 @@ import { SimpleNotificationsModule } from './simple-notifications';
         CommonModule,
         HttpModule,
         HttpClientModule,
-        NgbModule,
+        NgbModule.forRoot(),
         RouterModule,
         OAuthModule.forRoot(),
         // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
@@ -59,7 +60,8 @@ export class CoreModule {
                 UtilityService,
                 { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
                 { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
-                { provide: ErrorHandler, useClass: GlobalErrorHandler }
+                { provide: ErrorHandler, useClass: GlobalErrorHandler },
+                { provide: GlobalRef, useClass: BrowserGlobalRef }
             ]
         };
     }

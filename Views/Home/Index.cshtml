@@ -1,8 +1,15 @@
+@{
+    // Currently setup cultures
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = Helpers.JsonSerialize(LocOptions.Value.SupportedUICultures
+        .Select(c => new { Value = c.Name, Text = c.DisplayName, Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name) })
+        .ToList());
+    
+    // Currently setup external logins
+    var loginProviders = Helpers.JsonSerialize((await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name));
+}
 
 <div class="container">
-     <div class="col-md-6 text-right">
-        @await Html.PartialAsync("_SelectLanguagePartial")
-    </div>
 
     <appc-root>
         @await Html.PartialAsync("_LoadingSpinnerPartial")
@@ -11,7 +18,11 @@
 </div>
 
  <script>
-        window.content = '@Html.Raw(ViewBag.content)';
+        var appData = {
+            cultures: JSON.parse('@Html.Raw(cultureItems)'),
+            content : JSON.parse('@Html.Raw(ViewBag.content)'),
+            loginProviders: JSON.parse('@Html.Raw(loginProviders)')
+        };
 </script>
 <script src="~/dist/vendor.js" asp-append-version="true"></script> 
 

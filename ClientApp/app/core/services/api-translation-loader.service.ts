@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TranslateLoader, MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
+import { GlobalRef } from '../global-ref';
 
 @Injectable()
 export class ApiTranslationLoader implements TranslateLoader {
 
-    constructor() { }
+    constructor(private globalRef: GlobalRef) { }
 
-    public getTranslation(lang: string): Observable<any> {
-        return Observable.of(JSON.parse((<any>window).content));
+    public getTranslation(lang: string): Observable<StringMap[]> {
+        return Observable.of(this.globalRef.nativeGlobal.appData.content);
     }
 }
 

@@ -1,53 +1,5 @@
-<button class="btn social-login-button google" (click)="redirect('Google')">
-    <div layout="row" layout-align="center center">
-        <span>
-            <i class="fa fa-google" aria-hidden="true"></i>
-            <span>Log in with Google</span>
-        </span>
-    </div>
-</button>
-
-<button class="btn social-login-button facebook" (click)="redirect('Facebook')">
-    <div layout="row" layout-align="center center">
-        <span>
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-            <span>Log in with Facebook</span>
-        </span>
-    </div>
-</button>
-
-<button class="btn social-login-button microsoft" (click)="redirect('Microsoft')">
-    <div layout="row" layout-align="center center">
-        <span>
-            <i class="fa fa-windows" aria-hidden="true"></i>
-            <span>Log in with Microsoft</span>
-        </span>
-    </div>
-</button>
-
-<button class="btn social-login-button twitter" (click)="redirect('Twitter')">
-    <div layout="row" layout-align="center center">
-        <span>
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-            <span>Log in with Twitter</span>
-        </span>
-    </div>
-</button>
-
-<button class="btn social-login-button github" (click)="redirect('GitHub')">
-    <div layout="row" layout-align="center center">
-        <span>
-            <i class="fa fa-github" aria-hidden="true"></i>
-            <span>Log in with Github</span>
-        </span>
-    </div>
-</button>
-
-<button class="btn social-login-button linkedin" (click)="redirect('LinkedIn')">
-    <div layout="row" layout-align="center center">
-        <span>
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-            <span>Log in with LinkedIn</span>
-        </span>
+<button class="btn social-login-button {{login.toLowerCase()}}" (click)="redirect(login)" *ngFor="let login of socialLogins">
+    <div layout="row" layout-align="center">
+        <span>Log in with {{login}}</span>
     </div>
 </button>
