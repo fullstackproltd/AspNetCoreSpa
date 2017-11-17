@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
+using AspNet.Security.OpenIdConnect.Primitives;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -10,7 +11,7 @@ namespace AspNetCoreSpa.Server.Extensions
             if (principal == null)
                 throw new ArgumentNullException(nameof(principal));
 
-            var id = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var id = principal.FindFirst(OpenIdConnectConstants.Claims.Subject)?.Value;
 
             return Convert.ToInt32(id);
         }

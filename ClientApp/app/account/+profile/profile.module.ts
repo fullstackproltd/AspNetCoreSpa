@@ -17,7 +17,7 @@ import { OtherAccountsComponent } from './other-accounts';
         UserInfoComponent,
         UpdatePasswordComponent,
         UserPhotoComponent,
-        OtherAccountsComponent
+        OtherAccountsComponent,
     ],
     providers: [ProfileService]
 })

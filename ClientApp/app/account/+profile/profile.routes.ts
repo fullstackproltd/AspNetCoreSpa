@@ -9,6 +9,7 @@ import { OtherAccountsComponent } from './other-accounts';
 const routes: Routes = [
   {
     path: '', component: ProfileComponent, children: [
+      { path: '', redirectTo: 'userinfo' },
       { path: 'userinfo', component: UserInfoComponent },
       { path: 'updatepassword', component: UpdatePasswordComponent },
       { path: 'userphoto', component: UserPhotoComponent },

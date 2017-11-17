@@ -259,44 +259,46 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 return NotFound();
             }
 
-            return File(profileImage.Content, profileImage.ContentType);
+            return Ok(Convert.ToBase64String(profileImage.Content));
         }
 
         [HttpPost("photo")]
         public async Task<IActionResult> UserPhoto(IFormFile file)
         {
-            if (string.IsNullOrEmpty(file?.ContentType) || (file.Length == 0)) return BadRequest(new ApiError("Image provided is invalid"));
-
-            var size = file.Length;
-
-            if (size > Convert.ToInt64(Startup.Configuration["MaxImageUploadSize"])) return BadRequest(new ApiError("Image size greater than allowed size"));
-
-            using (var memoryStream = new MemoryStream())
             {
-                var existingImage = _context.ApplicationUserPhotos.FirstOrDefault(i => i.ApplicationUserId == User.GetUserId());
+                if (string.IsNullOrEmpty(file?.ContentType) || (file.Length == 0)) return BadRequest(new ApiError("Image provided is invalid"));
 
-                await file.CopyToAsync(memoryStream);
+                var size = file.Length;
 
-                if (existingImage == null)
+                if (size > Convert.ToInt64(Startup.Configuration["MaxImageUploadSize"])) return BadRequest(new ApiError("Image size greater than allowed size"));
+
+                using (var memoryStream = new MemoryStream())
                 {
-                    var userImage = new ApplicationUserPhoto
+                    var existingImage = _context.ApplicationUserPhotos.FirstOrDefault(i => i.ApplicationUserId == User.GetUserId());
+
+                    await file.CopyToAsync(memoryStream);
+
+                    if (existingImage == null)
                     {
-                        ContentType = file.ContentType,
-                        Content = memoryStream.ToArray(),
-                        ApplicationUserId = User.GetUserId()
-                    };
-                    _context.ApplicationUserPhotos.Add(userImage);
+                        var userImage = new ApplicationUserPhoto
+                        {
+                            ContentType = file.ContentType,
+                            Content = memoryStream.ToArray(),
+                            ApplicationUserId = User.GetUserId()
+                        };
+                        _context.ApplicationUserPhotos.Add(userImage);
+                    }
+                    else
+                    {
+                        existingImage.ContentType = file.ContentType;
+                        existingImage.Content = memoryStream.ToArray();
+                        _context.ApplicationUserPhotos.Update(existingImage);
+                    }
+                    await _context.SaveChangesAsync();
                 }
-                else
-                {
-                    existingImage.ContentType = file.ContentType;
-                    existingImage.Content = memoryStream.ToArray();
-                    _context.ApplicationUserPhotos.Update(existingImage);
-                }
-                await _context.SaveChangesAsync();
-            }
 
-            return NoContent();
+                return NoContent();
+            }
         }
 
         #region Helpers
