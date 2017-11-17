@@ -1,4 +1,4 @@
-interface ApplicationConfig {
+interface IApplicationConfig {
     cultures: ICulture[];
     content: StringMap[];
     loginProviders: string[];
@@ -16,4 +16,10 @@ interface StringMap {
 interface KeyValuePair<T> {
     key: string;
     value: T;
+}
+
+interface ISocialLogins {
+    loginProvider: string;
+    providerKey: string;
+    providerDisplayName: string;
 }

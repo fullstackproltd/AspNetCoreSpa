@@ -60,14 +60,20 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 HasPassword = await _userManager.HasPasswordAsync(user),
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
-                Logins = await _userManager.GetLoginsAsync(user),
                 BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
             };
             return View(model);
         }
 
+        [HttpGet("getlogins")]
+        public async Task<IActionResult> GetLogins()
+        {
+            var user = await GetCurrentUserAsync();
+            return Ok(await _userManager.GetLoginsAsync(user));
+        }
+
         [HttpPost("removelogin")]
-        public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
+        public async Task<IActionResult> RemoveLogin([FromBody]RemoveLoginViewModel account)
         {
             var user = await GetCurrentUserAsync();
             var result = await _userManager.RemoveLoginAsync(user, account.LoginProvider, account.ProviderKey);

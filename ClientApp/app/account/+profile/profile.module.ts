@@ -11,7 +11,10 @@ import { UserPhotoComponent } from './user-photo';
 import { OtherAccountsComponent } from './other-accounts';
 
 @NgModule({
-    imports: [routing, SharedModule],
+    imports: [
+        routing,
+        SharedModule
+    ],
     declarations: [
         ProfileComponent,
         UserInfoComponent,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '@app/core';
 
 @Component({
   selector: 'appc-other-accounts',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OtherAccountsComponent implements OnInit {
 
-  constructor() { }
+  public logins: ISocialLogins[];
+  constructor(private dataService: DataService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getLogins();
+  }
+
+  private getLogins() {
+    this.dataService.get<ISocialLogins[]>('api/manage/getlogins')
+      .subscribe(logins => this.logins = logins);
+  }
 }

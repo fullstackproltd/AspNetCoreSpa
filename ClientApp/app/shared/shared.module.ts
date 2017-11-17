@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Components
 import { DynamicFormComponent, DynamicFormControlComponent, ErrorSummaryComponent } from './forms';
+import { SocialLoginComponent } from './components';
 // Directives
 import { PageHeadingComponent } from './directives';
 // Pipes
@@ -21,6 +22,7 @@ import { FormControlService } from './forms';
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
+    SocialLoginComponent,
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,
@@ -34,6 +36,7 @@ import { FormControlService } from './forms';
     ReactiveFormsModule,
     NgbModule,
     // Providers, Components, directive, pipes
+    SocialLoginComponent,
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,

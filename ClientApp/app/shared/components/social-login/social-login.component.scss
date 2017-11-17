@@ -1,0 +1,47 @@
+a.fa {
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+
+    &:hover {
+      opacity: 0.7;
+  }
+  
+    &.fa-facebook {
+      background: #3B5998;
+      color: white;
+    }
+    
+    &.fa-twitter {
+      background: #55ACEE;
+      color: white;
+    }
+    
+    &.fa-google {
+      background: #dd4b39;
+      color: white;
+    }
+    
+    &.fa-linkedin {
+      background: #007bb5;
+      color: white;
+    }
+
+    &.fa-github {
+      background: #000000;
+      color: white;
+    }
+
+    &.fa-windows {
+      background: #2672EC;
+      color: white;
+    }
+
+    &.active {
+      border: 5px solid #b4dab4;
+    }
+  }
+  
+  

@@ -1,5 +1,5 @@
 export interface AppGlobalRef {
-    appData: ApplicationConfig;
+    appData: IApplicationConfig;
 }
 
 export abstract class GlobalRef {

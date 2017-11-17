@@ -23,9 +23,9 @@ const treeShakableModules = [
     'zone.js',
 ];
 const nonTreeShakableModules = [
-    // 'font-awesome/css/font-awesome.css',
     'bootstrap/dist/css/bootstrap.css',
-    './wwwroot/flags/flags.css'
+    'font-awesome/css/font-awesome.css',
+    './wwwroot/css/flags.css'
 ];
 const allModules = treeShakableModules.concat(nonTreeShakableModules);
 
