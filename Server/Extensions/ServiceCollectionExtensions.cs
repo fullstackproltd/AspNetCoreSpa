@@ -195,6 +195,12 @@ namespace AspNetCoreSpa.Server.Extensions
                    options.ClientId = Startup.Configuration["Authentication:Github:ClientId"];
                    options.ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"];
 
+               })
+               // https://developer.paypal.com/developer/applications
+               .AddPaypal(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
                });
 
             return services;
