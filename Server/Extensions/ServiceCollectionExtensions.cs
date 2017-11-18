@@ -201,6 +201,12 @@ namespace AspNetCoreSpa.Server.Extensions
                {
                    options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
                    options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
+               })
+               // https://developer.yahoo.com/app
+               .AddYahoo(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
                });
 
             return services;

@@ -11,6 +11,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="AspNet.Security.OAuth.Yahoo" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.Paypal" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="2.0.0-*" />
