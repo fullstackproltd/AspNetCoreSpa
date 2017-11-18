@@ -48,36 +48,36 @@
 ```
 1. Clone the repo
     git clone https://github.com/asadsahi/AspNetCoreSpa
-2. Change directory to our repo
+2. Change directory
     cd AspNetCoreSpa
 3. dotnet restore
 4. Install global dependencies
     npm install protractor rimraf http-server @angular/cli -g
 5. npm install
-6. Run the app (Development mode):
-    * If you are running the project for first time:
-      dotnet run migratedb seeddb (this will create database, apply migrations and seed the data)
-    Subsequently
-    i) One way (from VScode or Visual studio IDE):
+6. Two ways to run the app (Development mode):
+    i) First: (F5 from VScode or Visual studio IDE):
         F5 (This will automatically launch browser)
-    ii) Another way (from command line)
-        set ASPNETCORE_ENVIRONMENT=Development
-        `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
+    ii) Second: (from command line)
+        Dev mode:
+        npm run dev:watch
         Browse using http://localhost:5000 or https://localhost:5001 
-7. Run the app (Production mode):
-    npm run build:prod
-    set ASPNETCORE_ENVIRONMENT=Production
-    `dotnet run` (for single run) OR `dotnet watch run` (in watch mode)
-    Browse using http://localhost:5000 (Note: https://localhost:5001 will not work for production as private SSL certificate only added as Dev middleware)
-8. Notes on setting up database
-    * This project supports both sql server and sql lite databases
-    * Currently this project is configured to run under sqllite to speedup development cycle and the migrations added in this project are W.R.T sql lite
+        Prod mode:
+        npm run prod:watch
+
+7. Point to Sqllite or SqlServer
+    
+This project supports both sql server and sql lite databases
+
+* Run with Sqlite:
+    * Project is configured to run with sqlite by default and there is an 'Initial' migration already added (see Migrations folder)
+    * After changing you models, you can add additional migrations 
+    [see docs](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
+
+* Run with SqlServer:
     * To run under sql server:
-        * delete bin & Migrations folders
-        * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup   as default instance.
-        * Run `dotnet ef migrations add "MigrationName"`
-        
-    * CAUTION: If you want to drop database while in development, you can run command `dotnet run dropdb`
+        * npm run clean
+        * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup   as default instance. (See appsettings.json file for connection string)
+        * Run `dotnet ef migrations add "InitialMigrationName"`
 
 ```
 
@@ -100,11 +100,6 @@ Module    | `ng g module my-module`
 ### run Angular tests
 ```bash
 npm test
-# this will also create coverage remaped to typescript files in coverage folder after test run completes
-```
-### watch and run Angular tests
-```bash
-npm run test:watch
 ```
 ### Compodoc Angular documentation
  * Steps to generate:
@@ -121,47 +116,22 @@ Compodoc documentation: ![alt text](compodoc.jpg "compodoc documentation")
 # make sure you have your server running in another terminal (i.e run "dotnet run" command)
 npm run e2e
 ```
-
-### run webdriver (for end-to-end)
-```bash
-npm run webdriver:update
-npm run webdriver:start
-```
-
 ### run Protractor's elementExplorer (for end-to-end)
 ```bash
 npm run webdriver:start
 # in another terminal
 npm run e2e:live
 ```
-
-# [AOT - Ahead of time](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html) compilation DON'TS
-
-## The following are some things that will make AOT compile fail.
-
-* Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
-* Don’t use default exports.
-* Don’t use form.controls.controlName, use form.get(‘controlName’)
-* Don’t use control.errors?.someError, use control.hasError(‘someError’)
-* Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
-* Inputs, Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
-
-# How to run in docker on windows: [more info](http://www.hanselman.com/blog/ExploringASPNETCoreWithDockerInBothLinuxAndWindowsContainers.aspx)
-* Install docker for windows (this will install HyperV linux host on windows)
-* npm run build:prod
-* dotnet publish
-* docker build bin\Debug\netcoreapp2.0\publish -t aspnetcorespa
-* docker run -it -d -p 85:80 aspnetcorespa
-* Navigate http://localhost:85
-
 # Compatability
  * This project is supported in everygreen browsers and IE10+
  * IE8 & IE9 aren't supported since Bootstrap 4 is supported in IE10+ [explained here](http://v4-alpha.getbootstrap.com/getting-started/browsers-devices/).
 
-# Azure MSDeploy command
-* Use your site url, username, password
+# Azure Deploy
+* You can set an environment variable for azure app deployment password
+Set-Item -path env:AzureAppPass -value passwordhere
 ```
-"C:\\Program Files\\IIS\\Microsoft Web Deploy V3\\msdeploy.exe" -verb:sync -enableRule:AppOffline -source:contentPath="%USERPROFILE%\AspNetCoreSpa\bin\release\netcoreapp2.0\publish" -dest:contentPath="aspnetcorespa",ComputerName="https://yoursitename.scm.azurewebsites.net/msdeploy.axd",UserName='yourusername',Password='yourpassword',AuthType='Basic'
+From powershell:
+./deploy-azure.ps1
 ```
 
 ---
