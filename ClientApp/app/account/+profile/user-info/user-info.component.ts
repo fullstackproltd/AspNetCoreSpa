@@ -30,6 +30,15 @@ export class UserInfoComponent implements OnInit {
       type: 'textbox',
       required: true,
       order: 2
+    }),
+    new ControlTextbox({
+      key: 'phoneNumber',
+      label: 'Phone number',
+      placeholder: 'Phone number',
+      value: '',
+      type: 'textbox',
+      required: false,
+      order: 3
     })
   ];
 

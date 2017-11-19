@@ -9,6 +9,7 @@ import { UserInfoComponent } from './user-info';
 import { UpdatePasswordComponent } from './update-password';
 import { UserPhotoComponent } from './user-photo';
 import { OtherAccountsComponent } from './other-accounts';
+import { TwoFactorAuthComponent } from './two-factor-auth';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { OtherAccountsComponent } from './other-accounts';
         UpdatePasswordComponent,
         UserPhotoComponent,
         OtherAccountsComponent,
+        TwoFactorAuthComponent,
     ],
     providers: [ProfileService]
 })

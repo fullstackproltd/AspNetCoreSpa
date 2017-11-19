@@ -1,6 +1,7 @@
 export interface UserInfoModel {
     firstName: string;
     lastName: string;
+    phoneNumber: string;
 }
 
 export interface UpdatePasswordModel {

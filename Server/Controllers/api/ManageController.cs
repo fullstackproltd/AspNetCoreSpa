@@ -50,19 +50,19 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                // : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+                // : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
             var user = await GetCurrentUserAsync();
             var model = new IndexViewModel
             {
                 HasPassword = await _userManager.HasPasswordAsync(user),
-                PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
+                // PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
             };
-            return View(model);
+            return Ok(model);
         }
 
         [HttpGet("getlogins")]
@@ -84,15 +84,15 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return BadRequest(new ApiError("Login cannot be removed"));
         }
 
-        [HttpPost("addphonenumber")]
-        public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
-        {
-            // Generate the token and send it
-            var user = await GetCurrentUserAsync();
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
-            await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
-            return NoContent();
-        }
+        // [HttpPost("addphonenumber")]
+        // public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
+        // {
+        //     // Generate the token and send it
+        //     var user = await GetCurrentUserAsync();
+        //     var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
+        //     await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
+        //     return NoContent();
+        // }
 
         [HttpPost("enabletwofactorauthentication")]
         public async Task<IActionResult> EnableTwoFactorAuthentication()
@@ -115,42 +115,42 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return NoContent();
         }
 
-        [HttpGet("verifyphonenumber")]
-        public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
-        {
-            var code = await _userManager.GenerateChangePhoneNumberTokenAsync(await GetCurrentUserAsync(), phoneNumber);
-            // Send an SMS to verify the phone number
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                return BadRequest(new ApiError("Unable to verify phone number"));
-            }
-            return NoContent();
-        }
+        // [HttpGet("verifyphonenumber")]
+        // public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
+        // {
+        //     var code = await _userManager.GenerateChangePhoneNumberTokenAsync(await GetCurrentUserAsync(), phoneNumber);
+        //     // Send an SMS to verify the phone number
+        //     if (string.IsNullOrEmpty(phoneNumber))
+        //     {
+        //         return BadRequest(new ApiError("Unable to verify phone number"));
+        //     }
+        //     return NoContent();
+        // }
 
-        [HttpPost("verifyphonenumber")]
-        public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
-        {
-            var user = await GetCurrentUserAsync();
-            var result = await _userManager.ChangePhoneNumberAsync(user, model.PhoneNumber, model.Code);
-            if (result.Succeeded)
-            {
-                return NoContent();
-            }
-            // If we got this far, something failed, redisplay the form
-            return BadRequest(new ApiError("Failed to verify phone number"));
-        }
+        // [HttpPost("verifyphonenumber")]
+        // public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
+        // {
+        //     var user = await GetCurrentUserAsync();
+        //     var result = await _userManager.ChangePhoneNumberAsync(user, model.PhoneNumber, model.Code);
+        //     if (result.Succeeded)
+        //     {
+        //         return NoContent();
+        //     }
+        //     // If we got this far, something failed, redisplay the form
+        //     return BadRequest(new ApiError("Failed to verify phone number"));
+        // }
 
-        [HttpPost("removephonenumber")]
-        public async Task<IActionResult> RemovePhoneNumber()
-        {
-            var user = await GetCurrentUserAsync();
-            var result = await _userManager.SetPhoneNumberAsync(user, null);
-            if (result.Succeeded)
-            {
-                return NoContent();
-            }
-            return BadRequest(new ApiError("Failed to remove phone number"));
-        }
+        // [HttpPost("removephonenumber")]
+        // public async Task<IActionResult> RemovePhoneNumber()
+        // {
+        //     var user = await GetCurrentUserAsync();
+        //     var result = await _userManager.SetPhoneNumberAsync(user, null);
+        //     if (result.Succeeded)
+        //     {
+        //         return NoContent();
+        //     }
+        //     return BadRequest(new ApiError("Failed to remove phone number"));
+        // }
 
         [HttpGet("managelogins")]
         public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
@@ -208,7 +208,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         {
             var user = await GetCurrentUserAsync();
 
-            return Ok(new { FirstName = user.FirstName, LastName = user.LastName });
+            return Ok(new { FirstName = user.FirstName, LastName = user.LastName, PhoneNumber = user.PhoneNumber });
         }
 
         [HttpPost("userinfo")]
@@ -219,11 +219,12 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
+            user.PhoneNumber = model.PhoneNumber;
 
             var result = await _userManager.UpdateAsync(user);
             if (result == IdentityResult.Success)
             {
-                return Ok(new { FirstName = model.FirstName, LastName = model.LastName });
+                return Ok(new { FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber });
             }
 
             return BadRequest(new ApiError("Unable to update user info"));
@@ -311,13 +312,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         public enum ManageMessageId
         {
-            AddPhoneSuccess,
+            // AddPhoneSuccess,
             AddLoginSuccess,
             ChangePasswordSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
-            RemovePhoneSuccess,
+            // RemovePhoneSuccess,
             Error
         }
 
