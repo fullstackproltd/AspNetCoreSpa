@@ -22,7 +22,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
 
         public AccountController(
@@ -30,14 +29,12 @@ namespace AspNetCoreSpa.Server.Controllers.api
             IOptions<IdentityOptions> identityOptions,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ISmsSender smsSender,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _identityOptions = identityOptions;
             _signInManager = signInManager;
             _emailSender = emailSender;
-            _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -200,10 +197,10 @@ namespace AspNetCoreSpa.Server.Controllers.api
             {
                 await _emailSender.SendEmailAsync(user.Email, "Security Code", message);
             }
-            else if (model.SelectedProvider == "Phone")
-            {
-                await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
-            }
+            // else if (model.SelectedProvider == "Phone")
+            // {
+            //     await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
+            // }
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }

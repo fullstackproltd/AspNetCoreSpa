@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import '../../../../../wwwroot/js/qrcode.js';
+
+import { DataService } from '@app/core';
+
 
 @Component({
   selector: 'appc-two-factor-auth',
@@ -8,9 +10,15 @@ import '../../../../../wwwroot/js/qrcode.js';
 })
 export class TwoFactorAuthComponent implements OnInit {
 
-  constructor() { }
+  public model: ITwoFactorModel;
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    this.get2fModel();
   }
 
+  private get2fModel() {
+    this.dataService.get<ITwoFactorModel>('api/manage/twofactorauthentication')
+      .subscribe(model => this.model = model);
+  }
 }

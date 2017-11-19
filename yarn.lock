@@ -267,6 +267,12 @@
   version "0.0.32"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-0.0.32.tgz#bd284e57c84f1325da702babfc82a5328190c0c5"
 
+"@types/qrcode@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@types/qrcode/-/qrcode-0.8.0.tgz#20dea3679ac83a9bebd0c55f747eced9511707b6"
+  dependencies:
+    "@types/node" "*"
+
 "@types/selenium-webdriver@3.0.8":
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-3.0.8.tgz#83de9dd7aaf25f7fbd967c0d4fcc8112746dbf31"

@@ -1,0 +1,46 @@
+<p>
+  To use an authenticator app go through the following steps:</p>
+<ol class="list">
+  <li>
+    <p>
+      Download a two-factor authenticator app like Microsoft Authenticator for
+      <a href="https://go.microsoft.com/fwlink/?Linkid=825071">Windows Phone</a>,
+      <a href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> and
+      <a href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> or Google Authenticator for
+      <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a> and
+      <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
+    </p>
+  </li>
+  <li>
+    <p>Scan the QR Code or enter this key
+      <kbd>{{model?.sharedKey}}</kbd> into your two factor authenticator app. Spaces and casing do not matter.</p>
+    <div class="alert alert-info">To enable QR code generation please read our
+      <a href="https://go.microsoft.com/fwlink/?Linkid=852423">documentation</a>.</div>
+    <div id="qrCode"></div>
+    <div id="qrCodeData" [attr.data-url]="model?.authenticatorUri"></div>
+  </li>
+  <li>
+    <p>
+      Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique
+      code. Enter the code in the confirmation box below.
+    </p>
+    <div class="row">
+      <div class="col-md-6">
+
+        <form (ngSubmit)="verify(verifyForm)" #verifyForm="ngForm">
+          <div class="form-group">
+            <label for="code">Code</label>
+            <input type="text" class="form-control" id="code" required [(ngModel)]="verifyCode" name="code" #code="ngModel">
+            <div [hidden]="code.valid || code.pristine" class="alert alert-danger">
+              Code is required
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success" [disabled]="!verifyForm.form.valid">Verify</button>
+        </form>
+
+      </div>
+    </div>
+  </li>
+</ol>
+
+<appc-reset-authenticator></appc-reset-authenticator>

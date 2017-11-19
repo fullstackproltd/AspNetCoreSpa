@@ -23,3 +23,18 @@ interface ISocialLogins {
     providerKey: string;
     providerDisplayName: string;
 }
+
+interface ITwoFactorModel {
+    hasAuthenticator: boolean;
+
+    recoveryCodesLeft: number;
+
+    is2faEnabled: boolean;
+}
+
+
+interface IEnableAuthenticatorModel {
+    code: string;
+    sharedKey: string;
+    authenticatorUri: string;
+}
