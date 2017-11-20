@@ -16,22 +16,22 @@
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="2.0.0-*" />
-    <PackageReference Include="Joonasw.AspNetCore.SecurityHeaders" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha1-final" />
+    <PackageReference Include="Joonasw.AspNetCore.SecurityHeaders" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
     <PackageReference Include="OpenIddict" Version="2.0.0-*" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.0-*" />
     <PackageReference Include="OpenIddict.Mvc" Version="2.0.0-*" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.1.0" />
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.4.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="Serilog" Version="2.5.1-dev-00869" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="3.4.0" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
 
   </ItemGroup>
 
