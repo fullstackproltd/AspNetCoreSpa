@@ -10,6 +10,7 @@ import { DataService } from '@app/core';
 })
 export class TwoFactorAuthComponent implements OnInit {
 
+  public enableAuthenticator: boolean;
   public model: ITwoFactorModel;
   constructor(private dataService: DataService) { }
 

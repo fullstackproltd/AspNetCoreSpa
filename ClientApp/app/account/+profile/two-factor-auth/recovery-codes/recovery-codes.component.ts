@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService, NotificationsService } from '@app/core';
 
 @Component({
@@ -7,6 +7,7 @@ import { DataService, NotificationsService } from '@app/core';
   styleUrls: ['./recovery-codes.component.scss']
 })
 export class RecoveryCodesComponent implements OnInit {
+  @Input() model: ITwoFactorModel;
 
   constructor(private dataService: DataService, private ns: NotificationsService) { }
 

@@ -5,7 +5,7 @@
 
 {{model | json}}
 
-<appc-recovery-codes *ngIf="model?.is2faEnabled"></appc-recovery-codes>
+<appc-recovery-codes [model]="model" *ngIf="model?.is2faEnabled"></appc-recovery-codes>
 
 <h5>Authenticator app</h5>
 
