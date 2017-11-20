@@ -1,1 +1,2 @@
-<a class="fa" [ngClass]="loginCss(login)" *ngFor="let login of socialLogins" (click)="redirect(login)"></a>
+<a class="fa" [class.active]="login.active" [ngClass]="loginCss(login.loginProvider)" *ngFor="let login of socialLogins"
+    (click)="redirect(login.loginProvider)"></a>

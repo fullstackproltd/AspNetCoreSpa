@@ -22,6 +22,7 @@ interface ISocialLogins {
     loginProvider: string;
     providerKey: string;
     providerDisplayName: string;
+    active: boolean;
 }
 
 interface ITwoFactorModel {

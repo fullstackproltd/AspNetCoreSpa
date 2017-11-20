@@ -12,26 +12,28 @@ export class SocialLoginComponent {
     @Input() activeLogins: ISocialLogins[];
     constructor(private oAuthService: OAuthService, private globalRef: GlobalRef) { }
 
-    public get socialLogins(): string[] {
-        return [...this.globalRef.nativeGlobal.appData.loginProviders];
+    public get socialLogins(): ISocialLogins[] {
+        return [...this.globalRef.nativeGlobal.appData.loginProviders].map(login => {
+            return {
+                loginProvider: login,
+                providerKey: login,
+                providerDisplayName: login,
+                active: this.activeLogins && this.isActive(login)
+            };
+        });
     }
     public loginCss(login: string): string {
-        login = login.toLowerCase();
-        if (login === 'microsoft') {
-            login = 'windows';
+        if (login.toLowerCase() === 'microsoft') {
+            return 'fa-windows';
         }
 
-        return `fa-${login} ${this.activeClass(login)}`;
+        return `fa-${login.toLowerCase()}`;
     }
     public redirect(provider: string): void {
         this.oAuthService.initImplicitFlow(null, { provider: provider });
     }
 
-    private activeClass(login: string) {
-        if (this.activeLogins) {
-            const matchedLogin = this.activeLogins.filter(l => l.loginProvider.toLowerCase() === login);
-            return matchedLogin && matchedLogin.length > 0 ? 'active' : '';
-        }
-        return '';
+    isActive(login: string): boolean {
+        return this.activeLogins.some(l => l.loginProvider === login);
     }
 }
