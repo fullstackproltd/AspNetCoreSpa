@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from '@app/core';
 declare var QRCode: any;
 @Component({
@@ -8,6 +8,7 @@ declare var QRCode: any;
 })
 export class EnableAuthenticatorComponent implements OnInit {
 
+  @ViewChild('qrcode') private qrCode: ElementRef;
   public model: IEnableAuthenticatorModel;
   constructor(private dataService: DataService) { }
 
@@ -25,15 +26,17 @@ export class EnableAuthenticatorComponent implements OnInit {
 
   public verify(form: any) {
     if (form.valid) {
-      this.dataService.post('api/manage/enableauthenticator', form.value)
-        .subscribe(x => {
-          console.log(x);
-        });
-
+      this.dataService.post('api/manage/enableauthenticator', form.value).subscribe();
     }
   }
+
+  public onReset() {
+    this.enableauthenticator();
+  }
+
   private setupQr() {
-    const qr = new QRCode(document.getElementById('qrCode'),
+    this.qrCode.nativeElement.innerHTML = '';
+    const qr = new QRCode(this.qrCode.nativeElement,
       {
         text: this.model.authenticatorUri,
         width: 150,

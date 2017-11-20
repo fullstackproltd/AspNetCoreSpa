@@ -230,7 +230,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
         }
 
-        [HttpGet("twofactorauthentication")]
+        [HttpPost("twofactorauthentication")]
         public async Task<IActionResult> TwoFactorAuthentication()
         {
             var user = await GetCurrentUserAsync();
@@ -243,19 +243,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
             };
 
             return Ok(model);
-        }
-
-        [HttpGet("disable2fawarning")]
-        public async Task<IActionResult> Disable2faWarning()
-        {
-            var user = await GetCurrentUserAsync();
-
-            if (!user.TwoFactorEnabled)
-            {
-                return BadRequest(new ApiError($"Unexpected error occured disabling 2FA for user with ID '{user.Id}'."));
-            }
-
-            return NoContent();
         }
 
         [HttpPost("disable2fa")]
@@ -330,7 +317,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             return NoContent();
         }
 
-        [HttpGet("generaterecoverycodes")]
+        [HttpPost("generaterecoverycodes")]
         public async Task<IActionResult> GenerateRecoveryCodes()
         {
             var user = await GetCurrentUserAsync();

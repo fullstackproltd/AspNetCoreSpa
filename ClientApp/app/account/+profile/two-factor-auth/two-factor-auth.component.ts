@@ -18,7 +18,7 @@ export class TwoFactorAuthComponent implements OnInit {
   }
 
   private get2fModel() {
-    this.dataService.get<ITwoFactorModel>('api/manage/twofactorauthentication')
-      .subscribe(model => this.model = model);
+    this.dataService.post<ITwoFactorModel>('api/manage/twofactorauthentication')
+      .subscribe(res => this.model = res);
   }
 }

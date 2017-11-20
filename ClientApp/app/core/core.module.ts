@@ -1,7 +1,6 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders, ErrorHandler } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -28,7 +27,6 @@ import { GlobalRef, BrowserGlobalRef } from './global-ref';
     ],
     imports: [
         CommonModule,
-        HttpModule,
         HttpClientModule,
         NgbModule.forRoot(),
         RouterModule,
