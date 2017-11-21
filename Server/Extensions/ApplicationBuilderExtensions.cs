@@ -89,9 +89,9 @@ namespace AspNetCoreSpa.Server.Extensions
                 csp.AllowAudioAndVideo
                                 .FromNowhere();
 
-                // Contained iframes can be sourced from:
-                csp.AllowChildren
-                                .FromNowhere(); //Nowhere, no iframes allowed
+               // Contained iframes can be sourced from:
+                csp.AllowFrames
+                    .FromNowhere(); //Nowhere, no iframes allowed
 
                 // Allow AJAX, WebSocket and EventSource connections to:
                 csp.AllowConnections

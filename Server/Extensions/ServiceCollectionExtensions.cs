@@ -202,11 +202,23 @@ namespace AspNetCoreSpa.Server.Extensions
                    options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
                    options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
                })
-               // https://developer.yahoo.com/app
+               // https://developer.yahoo.com
                .AddYahoo(options =>
                {
-                   options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
-                   options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
+                   options.ClientId = Startup.Configuration["Authentication:Yahoo:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Yahoo:ClientSecret"];
+               })
+               // https://stackapps.com/apps/oauth/
+               .AddStackExchange(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:StackExchange:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:StackExchange:ClientSecret"];
+               })
+               // https://stackapps.com/apps/oauth/
+               .AddAmazon(options =>
+               {
+                   options.ClientId = Startup.Configuration["Authentication:Amazon:ClientId"];
+                   options.ClientSecret = Startup.Configuration["Authentication:Amazon:ClientSecret"];
                });
 
             return services;
