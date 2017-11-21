@@ -21,8 +21,7 @@
         "logs": true,
         "npm-debug.log.*": true,
         "runtimeconfig.template.json": true,
-        "LICENSE": true,
-        "NuGet.config": true
+        "LICENSE": true
     },
     "search.exclude": {
         "**/node_modules": true,

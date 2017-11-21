@@ -122,14 +122,14 @@ namespace AspNetCoreSpa.Server.Extensions
             return app;
         }
 
-        public static IApplicationBuilder UseCustomWebpackDevMiddleware(this IApplicationBuilder app)
-        {
-            app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-            {
-                HotModuleReplacement = true
-            });
-            return app;
-        }
+        // public static IApplicationBuilder UseCustomWebpackDevMiddleware(this IApplicationBuilder app)
+        // {
+        //     app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+        //     {
+        //         HotModuleReplacement = true
+        //     });
+        //     return app;
+        // }
         public static IApplicationBuilder UseCustomSwaggerApi(this IApplicationBuilder app)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint
@@ -153,7 +153,7 @@ namespace AspNetCoreSpa.Server.Extensions
                 loggerFactory.AddDebug();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                app.UseCustomWebpackDevMiddleware();
+                // app.UseCustomWebpackDevMiddleware();
                 // NOTE: For SPA swagger needs adding before MVC
                 app.UseCustomSwaggerApi();
             }

@@ -1,0 +1,10 @@
+C:\Users\asahi\AspNetCoreSpa
+--output-path=obj\release\netcoreapp2.0\
+--application-name=AspNetCoreSpa
+--content-root=C:\Users\asahi\AspNetCoreSpa
+--file=C:\Users\asahi\AspNetCoreSpa\Views\Home\Index.cshtml
+--file=C:\Users\asahi\AspNetCoreSpa\Views\Shared\_Layout.cshtml
+--file=C:\Users\asahi\AspNetCoreSpa\Views\Shared\_LoadingSpinnerPartial.cshtml
+--file=C:\Users\asahi\AspNetCoreSpa\Views\Shared\_SelectLanguagePartial.cshtml
+--file=C:\Users\asahi\AspNetCoreSpa\Views\_ViewImports.cshtml
+--file=C:\Users\asahi\AspNetCoreSpa\Views\_ViewStart.cshtml
