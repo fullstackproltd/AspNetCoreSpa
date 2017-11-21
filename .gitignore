@@ -8,8 +8,8 @@ ClientApp/dist
 /doc
 /documentation
 /logs
-bin
-obj
+/bin
+/obj
 package-lock.json
 stats.json
 ClientApp/**/*.js.map
