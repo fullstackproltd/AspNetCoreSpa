@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OAuthModule } from 'angular-oauth2-oidc';
 
 // App level components
 import { HeaderComponent } from './components/header/header.component';
@@ -37,7 +36,6 @@ export * from './simple-notifications';
         HttpClientModule,
         NgbModule.forRoot(),
         RouterModule,
-        OAuthModule.forRoot(),
         // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
         SimpleNotificationsModule.forRoot(),
         TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } }),

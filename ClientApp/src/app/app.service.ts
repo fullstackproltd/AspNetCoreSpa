@@ -8,7 +8,7 @@ export class AppService {
         return new Promise((resolve) => {
             this.httpClient.get<any>('http://localhost:5000/api/applicationdata')
                 .subscribe(res => {
-                    console.log(res);
+                    // console.log(res);
                     (<any>window).appData = {
                         content: JSON.parse(res.content),
                         cultures: res.cultureItems,

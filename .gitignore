@@ -3,9 +3,7 @@
 
 AspNetCoreSpa.db
 coverage/**/**
-ClientApp/**/*.js
-!ClientApp/src/assets/js/**/*.js
-ClientApp/dist
+ClientApp/dist-server
 /doc
 /documentation
 /logs

@@ -1,6 +1,7 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { CoreModule } from '@app/core';
 
@@ -21,6 +22,7 @@ export function getAppData(appService: AppService) {
         BrowserModule,
         BrowserAnimationsModule,
         routing,
+        OAuthModule.forRoot(),
         CoreModule.forRoot(),
         HomeModule,
     ],
