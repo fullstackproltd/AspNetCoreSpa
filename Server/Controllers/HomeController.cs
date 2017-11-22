@@ -16,27 +16,37 @@ using Microsoft.Extensions.Localization;
 using AspNetCoreSpa.Server.ViewModels;
 using System.Globalization;
 using Microsoft.Extensions.Caching.Memory;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+using System.Threading;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Builder;
 
 namespace AspNetCoreSpa.Server.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IOptions<RequestLocalizationOptions> _locOptions;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IStringLocalizer<HomeController> _stringLocalizer;
         private readonly IHostingEnvironment _env;
         private readonly IMemoryCache _cache;
 
         public HomeController(
+            IOptions<RequestLocalizationOptions> locOptions,
+            SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
             IHostingEnvironment env,
             IStringLocalizer<HomeController> stringLocalizer,
             IMemoryCache memoryCache
             )
         {
+            _signInManager = signInManager;
             _userManager = userManager;
             _stringLocalizer = stringLocalizer;
             _env = env;
             _cache = memoryCache;
+            _locOptions = locOptions;
         }
 
         public async Task<IActionResult> Index()
@@ -46,11 +56,11 @@ namespace AspNetCoreSpa.Server.Controllers
                 await ConfirmEmail();
             }
 
-            var content = GetContentByCulture();
+            var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
 
-            ViewBag.content = content;
+            var url = location.AbsoluteUri;
 
-            return View();
+            return RedirectPermanent(url);
         }
 
         [HttpPost]
@@ -63,6 +73,21 @@ namespace AspNetCoreSpa.Server.Controllers
             return LocalRedirect("~/");
         }
 
+        [HttpGet("api/applicationdata")]
+        public async Task<IActionResult> Get()
+        {
+            var data = Helpers.JsonSerialize(new
+            {
+                Content = GetContentByCulture(),
+                RequestCulture = HttpContext.Features.Get<IRequestCultureFeature>(),
+                CultureItems = _locOptions.Value.SupportedUICultures
+                .Select(c => new { Value = c.Name, Text = c.DisplayName, Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name) })
+                .ToList(),
+                LoginProviders = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name)
+            });
+
+            return Ok(data);
+        }
         private bool ConfirmEmailRequest()
         {
             return Request.Query.ContainsKey("emailConfirmCode") && Request.Query.ContainsKey("userId");
