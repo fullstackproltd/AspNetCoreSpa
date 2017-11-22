@@ -6,6 +6,8 @@
     "aspnetcore",
     "entityframework core",
     "angular",
+    "oauth",
+    "angular-cli",
     "webpack",
     "typescript",
     "bootstrap4",
@@ -49,7 +51,7 @@
     "zone.js": "0.8.18"
   },
   "devDependencies": {
-    "@angular/cli": "1.5.2",
+    "@angular/cli": "1.5.3",
     "@angular/compiler-cli": "5.0.2",
     "@compodoc/compodoc": "1.0.4",
     "@ngtools/webpack": "1.8.2",
