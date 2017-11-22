@@ -16,7 +16,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         }
         public IActionResult Render(ExternalLoginStatus status = ExternalLoginStatus.Ok)
         {
-            if (status != ExternalLoginStatus.Ok)
+            if (status == ExternalLoginStatus.Ok)
             {
                 return LocalRedirect("~/");
             }
