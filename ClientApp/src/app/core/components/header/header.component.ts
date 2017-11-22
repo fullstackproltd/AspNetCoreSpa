@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AccountService } from '../../services/account.service';
+import { DataService } from '../../services/data.service';
+import { UtilityService } from '../../services/utility.service';
 import { ProfileModel } from '../../models/profile-model';
 import { GlobalRef } from '../../../core/global-ref';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
     selector: 'appc-header',
@@ -16,7 +19,12 @@ export class HeaderComponent implements OnInit {
         lastOnBottom: true
     };
     public isCollapsed = true;
-    constructor(public accountService: AccountService, private globalRef: GlobalRef) { }
+    constructor(
+        public oAuthService: OAuthService,
+        public dataService: DataService,
+        public utilityService: UtilityService,
+        public accountService: AccountService,
+        private globalRef: GlobalRef) { }
 
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
@@ -38,6 +46,11 @@ export class HeaderComponent implements OnInit {
         this.isCollapsed = !this.isCollapsed;
     }
 
-
+    public logout() {
+        this.dataService.post('api/account/logout').subscribe((res) => {
+            this.oAuthService.logOut();
+            this.utilityService.navigateToSignIn();
+        });
+    }
 
 }

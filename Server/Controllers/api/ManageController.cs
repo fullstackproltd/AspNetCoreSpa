@@ -69,8 +69,8 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
-            user.UserName = model.Username;
-            user.Email = model.Email;
+            user.UserName = string.IsNullOrEmpty(model.Username) ? user.UserName : model.Username;
+            user.Email = string.IsNullOrEmpty(model.Email) ? user.Email : model.Email;
             user.PhoneNumber = model.PhoneNumber;
 
             var result = await _userManager.UpdateAsync(user);

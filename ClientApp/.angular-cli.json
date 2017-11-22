@@ -20,16 +20,35 @@
       "styles": [
         "styles.scss",
         "../node_modules/bootstrap/scss/bootstrap.scss",
-        "../node_modules/font-awesome/scss/font-awesome.scss"
+        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "assets/css/flags.css"
       ],
       "scripts": [
-        "qrcode.min.js"
+        "assets/js/qrcode.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+      "name": "ssr",
+      "root": "src",
+      "outDir": "dist-server",
+      "assets": [
+        "assets"
+      ],
+      "main": "main.server.ts",
+      "tsconfig": "tsconfig.app-ssr.json",
+      "prefix": "app",
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      },
+      "platform": "server"
     }
   ],
   "e2e": {

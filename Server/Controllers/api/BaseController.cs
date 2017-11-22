@@ -14,9 +14,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
         public BaseController()
         {
         }
-        public IActionResult Render(ExternalLoginStatus status)
+        public IActionResult Render(ExternalLoginStatus status = ExternalLoginStatus.Ok)
         {
-            return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
+            if (status != ExternalLoginStatus.Ok)
+            {
+                return LocalRedirect("~/");
+            }
+            return LocalRedirect($"~/?externalLoginStatus={(int)status}");
+            // return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
         }
     }
 

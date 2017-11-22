@@ -56,11 +56,7 @@ namespace AspNetCoreSpa.Server.Controllers
                 await ConfirmEmail();
             }
 
-            var location = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}{Request.QueryString}");
-
-            var url = location.AbsoluteUri;
-
-            return RedirectPermanent(url);
+            return View();
         }
 
         [HttpPost]
