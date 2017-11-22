@@ -3,7 +3,7 @@ import { LogPublisher, LogConsole, LogLocalStorage, LogWebApi, LogPublisherConfi
 import { Observable } from 'rxjs/Observable';
 import { DataService } from '../data.service';
 
-const PUBLISHERS_FILE = 'assets/log-publishers.json';
+const PUBLISHERS_FILE = 'dist/assets/log-publishers.json';
 
 @Injectable()
 export class LogPublishersService {
