@@ -80,6 +80,12 @@ namespace AspNetCoreSpa
 
             services.AddCustomizedMvc();
 
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+            
             // Node services are to execute any arbitrary nodejs code from .net
             services.AddNodeServices();
 
