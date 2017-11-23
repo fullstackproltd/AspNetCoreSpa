@@ -19,7 +19,7 @@ export function getAppData(appService: AppService) {
     bootstrap: [AppComponent],
     declarations: [AppComponent],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         BrowserAnimationsModule,
         routing,
         OAuthModule.forRoot(),
@@ -32,6 +32,9 @@ export function getAppData(appService: AppService) {
 
     ],
     exports: [
+        OAuthModule,
+        CoreModule,
+        HomeModule
     ]
 })
 export class AppModule { }

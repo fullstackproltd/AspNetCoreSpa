@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit {
   constructor(
     public translate: TranslateService,
     private router: Router,
-    @Inject(DOCUMENT) private document: Document,
+    @Inject('BASE_URL') private baseUrl: string,
     private route: ActivatedRoute,
     private oauthService: OAuthService) {
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -53,8 +52,8 @@ export class AppComponent implements OnInit {
   }
 
   private configureOidc() {
-    const url = `${this.document.location.protocol}//${this.document.location.host}`;
-    this.oauthService.configure(authConfig(url));
+    console.log(this.baseUrl);
+    this.oauthService.configure(authConfig(this.baseUrl));
     this.oauthService.setStorage(localStorage);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();

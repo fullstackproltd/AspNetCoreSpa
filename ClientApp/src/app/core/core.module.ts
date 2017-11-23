@@ -12,7 +12,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AccountService } from './services/account.service';
 import { DataService } from './services/data.service';
 import { UtilityService } from './services/utility.service';
-import { ContentService } from './services/content.service';
 import { LogService, LogPublishersService } from './services/log';
 import { ApiTranslationLoader } from './services/api-translation-loader.service';
 import { AuthInterceptor, TimingInterceptor } from './services/interceptors';
@@ -56,7 +55,6 @@ export class CoreModule {
             ngModule: CoreModule,
             providers: [
                 AccountService,
-                ContentService,
                 DataService,
                 LogService,
                 LogPublishersService,
