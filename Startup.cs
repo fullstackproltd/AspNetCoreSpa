@@ -68,7 +68,7 @@ namespace AspNetCoreSpa
 
             services.AddCustomIdentity();
 
-            services.AddCustomOpenIddict();
+            services.AddCustomOpenIddict(_hostingEnv);
 
             services.AddMemoryCache();
 
