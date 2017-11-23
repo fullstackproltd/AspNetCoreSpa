@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit {
     public translate: TranslateService,
     private router: Router,
     @Inject('BASE_URL') private baseUrl: string,
+    @Inject(PLATFORM_ID) private platformId: string,
     private route: ActivatedRoute,
     private oauthService: OAuthService) {
     // this language will be used as a fallback when a translation isn't found in the current language
@@ -26,7 +28,9 @@ export class AppComponent implements OnInit {
     // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.use('en');
 
-    this.configureOidc();
+    if (isPlatformBrowser(this.platformId)) {
+      this.configureOidc();
+    }
 
   }
 
@@ -52,7 +56,6 @@ export class AppComponent implements OnInit {
   }
 
   private configureOidc() {
-    console.log(this.baseUrl);
     this.oauthService.configure(authConfig(this.baseUrl));
     this.oauthService.setStorage(localStorage);
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();

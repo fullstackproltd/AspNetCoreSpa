@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 import { AccountService } from '../../services/account.service';
 import { DataService } from '../../services/data.service';
 import { UtilityService } from '../../services/utility.service';
 import { ProfileModel } from '../../models/profile-model';
 import { GlobalRef } from '../../../core/global-ref';
-import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
     selector: 'appc-header',

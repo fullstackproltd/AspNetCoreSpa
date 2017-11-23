@@ -10,7 +10,7 @@ import { AppModule } from './app.module';
         AppModule,
         ServerModule,
         ModuleMapLoaderModule,
-        NoopAnimationsModule,
+        NoopAnimationsModule
     ],
     bootstrap: [AppComponent]
 })

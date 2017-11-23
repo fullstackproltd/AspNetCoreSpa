@@ -1,9 +1,9 @@
-﻿import { Injectable, Injector } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { AccountService } from './account.service';
+// import { AccountService } from './account.service';
 
 @Injectable()
 export class DataService {
@@ -15,7 +15,10 @@ export class DataService {
     // Provide the *public* Observable that clients can subscribe to
     public pendingCommands$: Observable<number>;
 
-    constructor(public http: HttpClient, private inj: Injector) {
+    constructor(
+        public http: HttpClient,
+        // private inj: Injector
+    ) {
         this.pendingCommands$ = this.pendingCommandsSubject.asObservable();
     }
 
@@ -30,7 +33,7 @@ export class DataService {
                 }
             };
 
-            req.setRequestHeader('Authorization', `Bearer ${this.inj.get(AccountService).accessToken}`);
+            // req.setRequestHeader('Authorization', `Bearer ${this.inj.get(AccountService).accessToken}`);
             req.send();
         });
     }

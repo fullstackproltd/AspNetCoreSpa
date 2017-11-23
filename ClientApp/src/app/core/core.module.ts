@@ -1,8 +1,6 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders, ErrorHandler } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // App level components
@@ -13,7 +11,6 @@ import { AccountService } from './services/account.service';
 import { DataService } from './services/data.service';
 import { UtilityService } from './services/utility.service';
 import { LogService, LogPublishersService } from './services/log';
-import { ApiTranslationLoader } from './services/api-translation-loader.service';
 import { AuthInterceptor, TimingInterceptor } from './services/interceptors';
 import { GlobalErrorHandler } from './services/global-error.service';
 import { SimpleNotificationsModule } from './simple-notifications';
@@ -31,13 +28,11 @@ export * from './simple-notifications';
         FooterComponent
     ],
     imports: [
-        CommonModule,
         HttpClientModule,
         NgbModule.forRoot(),
         RouterModule,
         // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
         SimpleNotificationsModule.forRoot(),
-        TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } }),
     ],
     exports: [
         RouterModule,

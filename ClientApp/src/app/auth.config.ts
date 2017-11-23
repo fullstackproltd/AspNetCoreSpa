@@ -4,7 +4,7 @@ export function authConfig(url: string): AuthConfig {
 
     return {
         // Url of the Identity Provider
-        issuer: url + '/',
+        issuer: url,
         // URL of the SPA to redirect the user to after login
         redirectUri: url,
         // The SPA's id. The SPA is registered with this id at the auth-server

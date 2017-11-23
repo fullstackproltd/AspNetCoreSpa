@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AppService {
-    constructor(private httpClient: HttpClient, ) { }
+    constructor(private httpClient: HttpClient) { }
     getData(): Promise<any> {
         return new Promise((resolve) => {
             this.httpClient.get<any>('http://localhost:5000/api/applicationdata')

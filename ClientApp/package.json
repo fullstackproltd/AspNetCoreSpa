@@ -50,6 +50,7 @@
     "core-js": "2.5.1",
     "font-awesome": "4.7.0",
     "msgpack5": "3.6.0",
+    "preboot": "5.1.7",
     "rxjs": "5.5.2",
     "zone.js": "0.8.18"
   },
