@@ -85,7 +85,7 @@ namespace AspNetCoreSpa
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-            
+
             // Node services are to execute any arbitrary nodejs code from .net
             services.AddNodeServices();
 
@@ -136,7 +136,6 @@ namespace AspNetCoreSpa
 
             app.UseSpa(spa =>
                       {
-                          spa.Options.DefaultPage = "/dist/index.html";
                           spa.Options.SourcePath = "ClientApp";
 
                           /*
@@ -146,11 +145,11 @@ namespace AspNetCoreSpa
                           // [2] Uncomment this code block
                           */
                           spa.UseSpaPrerendering(options =>
-                          {
-                              options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                              options.BootModuleBuilder = _hostingEnv.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                              options.ExcludeUrls = new[] { "/sockjs-node" };
-                          });
+                         {
+                             options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                             options.BootModuleBuilder = _hostingEnv.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                             options.ExcludeUrls = new[] { "/sockjs-node" };
+                         });
 
                           if (_hostingEnv.IsDevelopment())
                           {
