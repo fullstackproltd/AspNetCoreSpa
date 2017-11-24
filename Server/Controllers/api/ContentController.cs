@@ -14,10 +14,10 @@ namespace AspNetCoreSpa.Server.Controllers.api
     [AllowAnonymous]
     public class ContentController : BaseController
     {
-        private readonly IStringLocalizer _stringLocalizer;
+        private readonly IStringLocalizer<ContentController> _stringLocalizer;
         private readonly IMemoryCache _cache;
 
-        public ContentController(IStringLocalizer stringLocalizer, IMemoryCache memoryCache)
+        public ContentController(IStringLocalizer<ContentController> stringLocalizer, IMemoryCache memoryCache)
         {
             _stringLocalizer = stringLocalizer;
             _cache = memoryCache;

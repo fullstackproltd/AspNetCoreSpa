@@ -28,7 +28,7 @@
                         <div ngbDropdownMenu aria-labelledby="cultures">
                             <div *ngFor="let culture of cultures">
                                 <button id="{{culture.value}}" name="culture" type="submit" [value]="culture.value" class="dropdown-item">
-                                    <img src="/dist/assets/img/blank.gif" class="flag flag-{{culture.value.split('-')[1].toLowerCase()}}" alt="culture"> {{culture.value}}
+                                    <img src="/assets/img/blank.gif" class="flag flag-{{culture.value.split('-')[1].toLowerCase()}}" alt="culture"> {{culture.value}}
                                 </button>
                             </div>
                         </div>

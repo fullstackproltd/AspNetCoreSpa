@@ -5,6 +5,7 @@ import {
     AccountService,
     DataService,
     UtilityService,
+    GlobalRef
 } from '@app/services';
 
 @Component({
@@ -20,10 +21,12 @@ export class HeaderComponent implements OnInit {
     };
     public isCollapsed = true;
     constructor(
-        public oAuthService: OAuthService,
+        public accountService: AccountService,
         public dataService: DataService,
+        public globalRef: GlobalRef,
+        public oAuthService: OAuthService,
         public utilityService: UtilityService,
-        public accountService: AccountService) { }
+    ) { }
 
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
@@ -34,7 +37,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public get cultures(): ICulture[] {
-        return []; // this.globalRef.nativeGlobal.appData.cultures;
+        return this.globalRef.nativeGlobal.appData.cultures;
     }
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];

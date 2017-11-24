@@ -21,7 +21,9 @@ import {
     LogPublishersService,
     LogService,
     TimingInterceptor,
-    UtilityService
+    UtilityService,
+    BrowserGlobalRef,
+    GlobalRef
 } from './services';
 
 // App level components
@@ -61,7 +63,7 @@ export function getAppData(appService: AppService) {
         UtilityService,
         { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true },
         { provide: ErrorHandler, useClass: GlobalErrorHandler },
-        // { provide: GlobalRef, useClass: BrowserGlobalRef },
+        { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
 
