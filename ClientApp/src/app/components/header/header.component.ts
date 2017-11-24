@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { AccountService } from '../../services/account.service';
-import { DataService } from '../../services/data.service';
-import { UtilityService } from '../../services/utility.service';
-import { ProfileModel } from '../../models/profile-model';
-import { GlobalRef } from '../../../core/global-ref';
+import {
+    AccountService,
+    DataService,
+    GlobalRef,
+    UtilityService,
+} from '@app/services';
 
 @Component({
     selector: 'appc-header',
@@ -29,7 +30,7 @@ export class HeaderComponent implements OnInit {
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
     }
-    public get user(): ProfileModel | undefined {
+    public get user(): IProfileModel | undefined {
         return this.accountService.user;
 
     }

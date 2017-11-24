@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { GlobalRef } from '@app/core';
+import { GlobalRef } from '@app/services';
 
 @Component({
     selector: 'appc-social-login',

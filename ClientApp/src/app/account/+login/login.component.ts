@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { LoginModel, UtilityService, NotificationsService } from '@app/core';
+import { LoginModel, UtilityService, NotificationsService } from '@app/services';
 import { ControlBase, ControlTextbox } from '@app/shared';
 
 @Component({

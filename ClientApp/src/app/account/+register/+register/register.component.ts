@@ -2,7 +2,7 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DataService, RegisterModel } from '@app/core';
+import { DataService } from '@app/services';
 import { ControlBase, ControlTextbox } from '@app/shared';
 
 
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
     constructor(public dataService: DataService, public router: Router, public route: ActivatedRoute) { }
 
-    public register(model: RegisterModel): void {
+    public register(model: IRegisterModel): void {
         this.dataService.post('api/account/register', model)
             .subscribe((res: Response) => {
                 this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });

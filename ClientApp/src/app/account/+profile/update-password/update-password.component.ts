@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
-import { NotificationsService } from '@app/core';
+import { NotificationsService } from '@app/services';
 import { ControlBase, ControlTextbox } from '@app/shared';
 
 import { ProfileService } from '../profile.service';

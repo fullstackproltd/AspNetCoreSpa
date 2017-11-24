@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from '@app/core';
+import { DataService } from '@app/services';
 declare var QRCode: any;
 @Component({
   selector: 'appc-enable-authenticator',
