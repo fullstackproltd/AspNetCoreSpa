@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
-import { NotificationsService } from '@app/services';
+import { NotificationsService } from '@app/notifications';
 import { ControlBase, ControlTextbox } from '@app/shared';
 
 import { ProfileService } from '../profile.service';
@@ -48,7 +48,7 @@ export class UpdatePasswordComponent implements OnInit {
 
   public save(model: UpdatePasswordModel): void {
     this.profileService.changePassword(model)
-      .subscribe(res => {
+      .subscribe(() => {
         this.reset.emit(true);
         this.ns.success('Password changed successfully');
       });

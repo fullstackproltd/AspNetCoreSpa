@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataService, NotificationsService } from '@app/services';
+import { DataService } from '@app/services';
+import { NotificationsService } from '@app/notifications';
 
 @Component({
   selector: 'appc-recovery-codes',
@@ -22,7 +23,7 @@ export class RecoveryCodesComponent implements OnInit {
 
   generateRecoveryCodes() {
     this.dataService.post<string[]>('api/manage/generaterecoverycodes')
-      .subscribe(codes => {
+      .subscribe((codes: string[]) => {
         this.ns.success('Recovery codes are', codes.join('|'));
       });
   }

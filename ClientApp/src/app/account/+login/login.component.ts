@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { LoginModel, UtilityService, NotificationsService } from '@app/services';
+import { UtilityService } from '@app/services';
+import { NotificationsService } from '@app/notifications';
 import { ControlBase, ControlTextbox } from '@app/shared';
 
 @Component({
@@ -10,14 +11,14 @@ import { ControlBase, ControlTextbox } from '@app/shared';
     templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
-    public loginModel: LoginModel;
+    public loginModel: ILoginModel;
     public controls: any;
 
     constructor(
         public oAuthService: OAuthService,
         public us: UtilityService,
         private ns: NotificationsService) { }
-    public login(model: LoginModel): void {
+    public login(model: ILoginModel): void {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {
                 localStorage.setItem('id_token', x.id_token);

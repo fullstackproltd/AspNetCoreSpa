@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 // import { OAuthService } from 'angular-oauth2-oidc';
 import { JwtHelper } from 'angular2-jwt';
 
-import { ProfileModel } from '../models/profile-model';
-
 @Injectable()
 export class AccountService {
     public jwtHelper: JwtHelper = new JwtHelper();
@@ -16,7 +14,7 @@ export class AccountService {
         // return this.oAuthService.hasValidAccessToken();
         return false;
     }
-    public get user(): ProfileModel | undefined {
+    public get user(): IProfileModel | undefined {
         if (this.idToken) {
             return this.jwtHelper.decodeToken(this.idToken);
         }

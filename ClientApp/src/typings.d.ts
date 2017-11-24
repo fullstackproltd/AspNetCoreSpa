@@ -4,7 +4,7 @@ interface NodeModule {
     id: string;
 }
 
-export interface IAppGlobalRef {
+interface IAppGlobalRef {
     appData: IApplicationConfig;
 }
 interface IApplicationConfig {

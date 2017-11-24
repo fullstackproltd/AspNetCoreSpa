@@ -4,7 +4,6 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import {
     AccountService,
     DataService,
-    GlobalRef,
     UtilityService,
 } from '@app/services';
 
@@ -24,8 +23,7 @@ export class HeaderComponent implements OnInit {
         public oAuthService: OAuthService,
         public dataService: DataService,
         public utilityService: UtilityService,
-        public accountService: AccountService,
-        private globalRef: GlobalRef) { }
+        public accountService: AccountService) { }
 
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
@@ -36,7 +34,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public get cultures(): ICulture[] {
-        return this.globalRef.nativeGlobal.appData.cultures;
+        return []; // this.globalRef.nativeGlobal.appData.cultures;
     }
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];
@@ -48,7 +46,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public logout() {
-        this.dataService.post('api/account/logout').subscribe((res) => {
+        this.dataService.post('api/account/logout').subscribe(() => {
             this.oAuthService.logOut();
             this.utilityService.navigateToSignIn();
         });

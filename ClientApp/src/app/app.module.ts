@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { SimpleNotificationsModule } from './simple-notifications';
+import { SimpleNotificationsModule } from './notifications';
 import { HomeModule } from './home/home.module';
 
 import { routing } from './app.routes';

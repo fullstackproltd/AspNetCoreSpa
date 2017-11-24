@@ -1,6 +1,6 @@
 import { ErrorHandler, Injectable, ApplicationRef, Injector } from '@angular/core';
 
-import { NotificationsService } from '../simple-notifications';
+import { NotificationsService } from '@app/notifications';
 import { UtilityService } from './utility.service';
 
 @Injectable()

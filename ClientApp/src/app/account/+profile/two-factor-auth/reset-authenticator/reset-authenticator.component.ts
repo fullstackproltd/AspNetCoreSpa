@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { DataService, NotificationsService } from '@app/services';
+import { DataService } from '@app/services';
+import { NotificationsService } from '@app/notifications';
 
 @Component({
   selector: 'appc-reset-authenticator',
@@ -12,8 +13,7 @@ export class ResetAuthenticatorComponent implements OnInit {
 
   constructor(private dataService: DataService, private ns: NotificationsService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   public resetAuthenticator() {
     this.dataService.post('api/manage/resetauthenticator')
