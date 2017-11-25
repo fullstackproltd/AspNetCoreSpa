@@ -1,6 +1,5 @@
 import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
-import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { TransferHttpCacheModule } from '@nguniversal/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -46,7 +45,6 @@ export function getAppData(appService: AppService) {
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         BrowserAnimationsModule,
-        BrowserTransferStateModule,
         HomeModule,
         HttpClientModule,
         NgbModule.forRoot(),
@@ -54,7 +52,6 @@ export function getAppData(appService: AppService) {
         routing,
         // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
         SimpleNotificationsModule.forRoot(),
-        TransferHttpCacheModule,
         TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } })
     ],
     providers: [
