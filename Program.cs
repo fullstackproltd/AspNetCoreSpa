@@ -20,14 +20,13 @@ namespace AspNetCoreSpa
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-          WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args)
                     .UseConfiguration(new ConfigurationBuilder()
-                  .SetBasePath(Directory.GetCurrentDirectory())
-                  .AddJsonFile("hosting.json", optional: true)
-                  .Build()
-              )
-              .UseStartup<Startup>()
-              .UseKestrel(a => a.AddServerHeader = false)
-              .Build();
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("hosting.json", optional: true)
+                    .Build())
+                    .UseStartup<Startup>()
+                    .UseKestrel(a => a.AddServerHeader = false)
+                    .Build();
     }
 }

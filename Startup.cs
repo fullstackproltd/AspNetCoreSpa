@@ -23,11 +23,9 @@ namespace AspNetCoreSpa
         //2) Configure services
         //3) Configure
 
-        public static IHostingEnvironment _hostingEnv;
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _hostingEnv = env;
 
             Helpers.SetupSerilog();
 
@@ -53,10 +51,8 @@ namespace AspNetCoreSpa
 
             services.AddCustomHeaders();
 
-            if (_hostingEnv.IsDevelopment())
-            {
-                services.AddSslCertificate(_hostingEnv);
-            }
+            services.AddSslCertificate();
+
             services.AddOptions();
 
             services.AddResponseCompression(options =>
@@ -68,7 +64,7 @@ namespace AspNetCoreSpa
 
             services.AddCustomIdentity();
 
-            services.AddCustomOpenIddict(_hostingEnv);
+            services.AddCustomOpenIddict();
 
             services.AddMemoryCache();
 
@@ -94,7 +90,7 @@ namespace AspNetCoreSpa
                 c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
             });
         }
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseCustomisedCsp();
 
@@ -104,7 +100,7 @@ namespace AspNetCoreSpa
 
             app.AddDevMiddlewares();
 
-            if (_hostingEnv.IsProduction())
+            if (env.IsProduction())
             {
                 app.UseResponseCompression();
             }
@@ -144,16 +140,15 @@ namespace AspNetCoreSpa
                           //     value to 'true', so that the SSR bundle is built during publish
                           // [2] Uncomment this code block
                           */
-                        //   spa.UseSpaPrerendering(options =>
-                        //  {
-                        //      options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                        //      options.BootModuleBuilder = _hostingEnv.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                        //      options.ExcludeUrls = new[] { "/sockjs-node" };
-                        //  });
+                          //   spa.UseSpaPrerendering(options =>
+                          //  {
+                          //      options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                          //      options.BootModuleBuilder = _hostingEnv.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                          //      options.ExcludeUrls = new[] { "/sockjs-node" };
+                          //  });
 
-                          if (_hostingEnv.IsDevelopment())
+                          if (env.IsDevelopment())
                           {
-                              //   spa.UseAngularCliServer(npmScript: "start");
                               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });

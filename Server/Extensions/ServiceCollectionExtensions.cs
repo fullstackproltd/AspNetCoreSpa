@@ -26,7 +26,7 @@ namespace AspNetCoreSpa.Server.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddSslCertificate(this IServiceCollection services, IHostingEnvironment hostingEnv)
+        public static IServiceCollection AddSslCertificate(this IServiceCollection services)
         {
             // var cert = new X509Certificate2(Path.Combine(hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
 
@@ -65,7 +65,7 @@ namespace AspNetCoreSpa.Server.Extensions
 
             return services;
         }
-        public static IServiceCollection AddCustomOpenIddict(this IServiceCollection services, IHostingEnvironment hostingEnv)
+        public static IServiceCollection AddCustomOpenIddict(this IServiceCollection services)
         {
             // Configure Identity to use the same JWT claims as OpenIddict instead
             // of the legacy WS-Federation claims it uses by default (ClaimTypes),
@@ -201,12 +201,12 @@ namespace AspNetCoreSpa.Server.Extensions
                   {
                       options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
                       options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
-                      if (hostingEnv.IsDevelopment())
-                      {
-                          options.AuthorizationEndpoint = "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize";
-                          options.TokenEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice";
-                          options.UserInformationEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo?schema=openid";
-                      }
+#if DEBUG
+                      options.AuthorizationEndpoint = "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize";
+                      options.TokenEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice";
+                      options.UserInformationEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo?schema=openid";
+#else
+#endif
                   })
                // https://developer.yahoo.com
                .AddYahoo(options =>
