@@ -1,4 +1,4 @@
 FROM microsoft/aspnetcore
 WORKDIR /app
 COPY . .
-ENTRYPOINT ["dotnet", "AspNetCoreSpa.dll"]
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet AspNetCoreSpa.dll

@@ -133,6 +133,19 @@ Set-Item -path env:AzureAppPass -value passwordhere
 From powershell:
 ./deploy-azure.ps1
 ```
+# Heroku Deploy (replace your app name where it is aspnetcorespa)
+* dotnet publish -c release
+* docker build -t aspnetcorespa ./bin/release/netcoreapp2.0/publish
+* heroku login
+* heroku container:login
+* docker tag aspnetcorespa registry.heroku.com/aspnetcorespa/web
+* docker push registry.heroku.com/aspnetcorespa/web
+
+Set-Item -path env:AzureAppPass -value passwordhere
+```
+From powershell:
+./deploy-azure.ps1
+```
 
 ---
 
