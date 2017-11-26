@@ -111,6 +111,8 @@ namespace AspNetCoreSpa
 
             app.UseStaticFiles();
 
+            app.UseSpaStaticFiles();
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<Chat>("chathub");
