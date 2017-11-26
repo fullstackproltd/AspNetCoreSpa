@@ -1,6 +1,7 @@
 import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +10,7 @@ import { SimpleNotificationsModule } from './notifications';
 import { HomeModule } from './home/home.module';
 
 import { routing } from './app.routes';
+import { environment } from '../environments/environment';
 
 // App level services
 import { AppService } from './app.service';
@@ -49,6 +51,7 @@ export function getAppData(appService: AppService) {
         HttpClientModule,
         NgbModule.forRoot(),
         OAuthModule.forRoot(),
+        environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
         routing,
         // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
         SimpleNotificationsModule.forRoot(),
