@@ -4,7 +4,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SimpleNotificationsModule } from './notifications';
 import { HomeModule } from './home/home.module';
@@ -49,7 +49,7 @@ export function getAppData(appService: AppService) {
         BrowserAnimationsModule,
         HomeModule,
         HttpClientModule,
-        // NgbModule.forRoot(),
+        NgbModule.forRoot(),
         OAuthModule.forRoot(),
         environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
         routing,
