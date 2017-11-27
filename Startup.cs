@@ -13,6 +13,8 @@ using System;
 using System.Threading;
 using OpenIddict.Models;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using AspNetCoreSpa.Server.Controllers;
+using AspNetCoreSpa.Server.Services;
 
 namespace AspNetCoreSpa
 {
@@ -90,7 +92,7 @@ namespace AspNetCoreSpa
                 c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
             });
         }
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
         {
             app.UseCustomisedCsp();
 
@@ -142,12 +144,18 @@ namespace AspNetCoreSpa
                           //     value to 'true', so that the SSR bundle is built during publish
                           // [2] Uncomment this code block
                           */
-                        //     spa.UseSpaPrerendering(options =>
-                        //    {
-                        //        options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                        //        options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                        //        options.ExcludeUrls = new[] { "/sockjs-node" };
-                        //    });
+                          spa.UseSpaPrerendering(options =>
+                         {
+                             options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                             options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                             options.ExcludeUrls = new[] { "/sockjs-node" };
+                             options.SupplyData = (requestContext, obj) =>
+                             {
+                                 var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
+                                 obj.Add("appData", result);
+                             };
+
+                         });
 
                           if (env.IsDevelopment())
                           {

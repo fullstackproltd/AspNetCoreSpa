@@ -279,6 +279,7 @@ namespace AspNetCoreSpa.Server.Extensions
             // New instance every time, only configuration class needs so its ok
             services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<IApplicationDataService, ApplicationDataService>();
             services.AddTransient<ApplicationDbContext>();
             services.AddScoped<UserResolverService>();
             services.AddScoped<ApiExceptionFilter>();
