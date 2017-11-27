@@ -25,7 +25,8 @@ import {
     TimingInterceptor,
     UtilityService,
     BrowserGlobalRef,
-    GlobalRef
+    GlobalRef,
+    HeadService
 } from './services';
 
 // App level components
@@ -62,6 +63,7 @@ export function getAppData(appService: AppService) {
         AccountService,
         AppService,
         DataService,
+        HeadService,
         LogService,
         LogPublishersService,
         UtilityService,

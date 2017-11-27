@@ -3,7 +3,10 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class AppService {
-    constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
+    constructor(
+        @Inject('BASE_URL') private baseUrl: string,
+        private httpClient: HttpClient
+    ) { }
     getData(): Promise<any> {
         return new Promise((resolve) => {
             this.httpClient.get<any>(`${this.baseUrl}api/applicationdata`)

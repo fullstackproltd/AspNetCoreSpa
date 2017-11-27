@@ -57,6 +57,6 @@ function WriteSuccess($text)
 
 # -----------
 
-# DeletePublishFolder
-# Publish
+DeletePublishFolder
+Publish
 Deploy
