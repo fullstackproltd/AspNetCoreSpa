@@ -44,7 +44,7 @@
     {
       "name": "api-freshness",
       "urls": [
-        "/timeline"
+        "/setlanguage"
       ],
       "cacheConfig": {
         "strategy": "freshness",
