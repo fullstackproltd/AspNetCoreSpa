@@ -88,7 +88,7 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.SetIdentityTokenLifetime(TimeSpan.FromMinutes(30));
                 options.SetRefreshTokenLifetime(TimeSpan.FromMinutes(60));
                 // During development, you can disable the HTTPS requirement.
-                if (env.IsDevelopment() && Convert.ToBoolean(Startup.Configuration["DevHttpsOnly"]))
+                if (env.IsDevelopment())
                 {
                     options.DisableHttpsRequirement();
                 }

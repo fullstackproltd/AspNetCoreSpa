@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore;
 using System.Net;
+using System;
 
 namespace AspNetCoreSpa
 {
@@ -29,7 +30,7 @@ namespace AspNetCoreSpa
                         var hostingEnv = (IHostingEnvironment)options.ApplicationServices.GetService(typeof(IHostingEnvironment));
                         options.Listen(IPAddress.Loopback, 5000);
 
-                        if (hostingEnv.IsDevelopment())
+                        if (hostingEnv.IsDevelopment() || Convert.ToBoolean(Startup.Configuration["DevHttps"]))
                         {
                             options.Listen(IPAddress.Loopback, 5001, listenOptions =>
                             {

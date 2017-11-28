@@ -105,12 +105,12 @@ namespace AspNetCoreSpa.Server
 
             if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
             {
-                var host = _hostingEnv.IsDevelopment() ? "http://127.0.0.1:5000/" : "https://aspnetcorespa.herokuapp.com/";
+                var host = Startup.Configuration["HostUrl"].ToString();
                 var descriptor = new OpenIddictApplicationDescriptor
                 {
                     ClientId = "aspnetcorespa",
                     DisplayName = "AspnetCoreSpa",
-                    PostLogoutRedirectUris = { new Uri($"{host}/signout-oidc") },
+                    PostLogoutRedirectUris = { new Uri($"{host}signout-oidc") },
                     RedirectUris = { new Uri(host) }
                     // RedirectUris = { new Uri($"{host}/signin-oidc") }
                 };

@@ -80,8 +80,9 @@ namespace AspNetCoreSpa.Server.Extensions
                     .FromNowhere(); //Nowhere, no iframes allowed
 
                 // Allow AJAX, WebSocket and EventSource connections to:
+                var socketUrl = "ws" + Startup.Configuration["HostUrl"].ToString().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
                 csp.AllowConnections
-                                .To(Startup.Configuration["SocketUrl"])
+                                .To(socketUrl)
                                 .ToSelf();
 
                 // Allow fonts to be downloaded from:

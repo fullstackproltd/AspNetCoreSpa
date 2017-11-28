@@ -86,11 +86,11 @@ namespace AspNetCoreSpa
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
         {
-            if (env.IsProduction())
-            {
-                var options = new RewriteOptions().AddRedirectToHttps();
-                app.UseRewriter(options);
-            }
+            // if (env.IsProduction())
+            // {
+            //     var options = new RewriteOptions().AddRedirectToHttps();
+            //     app.UseRewriter(options);
+            // }
 
             app.UseCustomisedCsp();
 
