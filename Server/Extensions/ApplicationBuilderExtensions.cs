@@ -1,24 +1,13 @@
-﻿using System;
-using Microsoft.AspNetCore.Antiforgery;
+﻿using Joonasw.AspNetCore.SecurityHeaders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.Webpack;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Serilog;
-using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
-using Microsoft.AspNetCore.Authentication.Facebook;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authentication.Twitter;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
-using System.Collections.Generic;
 using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
-using Joonasw.AspNetCore.SecurityHeaders;
-using Microsoft.AspNetCore.Hosting.Server.Features;
+using System;
 using System.Linq;
 
 namespace AspNetCoreSpa.Server.Extensions

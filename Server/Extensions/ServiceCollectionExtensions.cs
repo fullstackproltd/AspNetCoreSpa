@@ -1,26 +1,19 @@
-﻿using System.IO;
-using System.Security.Cryptography.X509Certificates;
+﻿using AspNet.Security.OpenIdConnect.Primitives;
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Filters;
-using AspNetCoreSpa.Server.Services;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using AspNet.Security.OpenIdConnect.Primitives;
-using Microsoft.AspNetCore.Identity;
-using OpenIddict.Core;
-using OpenIddict.Models;
-using System.Net;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System;
-using Microsoft.AspNetCore.Localization;
-using System.Globalization;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.Extensions.Localization;
 using AspNetCoreSpa.Server.Middlewares.EntityFrameworkLocalizer;
+using AspNetCoreSpa.Server.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -105,8 +98,9 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.SetIdentityTokenLifetime(TimeSpan.FromMinutes(30));
                 options.SetRefreshTokenLifetime(TimeSpan.FromMinutes(60));
                 // During development, you can disable the HTTPS requirement.
+                //options.DisableHttpsRequirement();
 #if DEBUG
-                options.DisableHttpsRequirement();
+
 #else
 #endif
 

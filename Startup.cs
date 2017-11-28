@@ -1,20 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AspNetCoreSpa.Server;
+using AspNetCoreSpa.Server.Extensions;
+using AspNetCoreSpa.Server.Services;
+using AspNetCoreSpa.Server.SignalR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using AspNetCoreSpa.Server;
-using AspNetCoreSpa.Server.Extensions;
 using Swashbuckle.AspNetCore.Swagger;
-using System.Threading.Tasks;
-using System.Net;
-using AspNetCoreSpa.Server.SignalR;
-using OpenIddict.Core;
-using System;
-using System.Threading;
-using OpenIddict.Models;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
-using AspNetCoreSpa.Server.Controllers;
-using AspNetCoreSpa.Server.Services;
 
 namespace AspNetCoreSpa
 {
@@ -57,10 +50,7 @@ namespace AspNetCoreSpa
 
             services.AddOptions();
 
-            services.AddResponseCompression(options =>
-            {
-                options.MimeTypes = Helpers.DefaultMimeTypes;
-            });
+            services.AddResponseCompression();
 
             services.AddCustomDbContext();
 
@@ -108,6 +98,12 @@ namespace AspNetCoreSpa
             }
 
             app.SetupMigrations();
+
+            // https://github.com/openiddict/openiddict-core/issues/518
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseAuthentication();
 
