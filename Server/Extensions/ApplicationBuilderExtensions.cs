@@ -30,9 +30,6 @@ namespace AspNetCoreSpa.Server.Extensions
         }
         public static IApplicationBuilder UseCustomisedCsp(this IApplicationBuilder app)
         {
-            var URLS = app.ServerFeatures.Get<IServerAddressesFeature>().Addresses;
-            var socketUrl = "ws" + URLS.ToList().First().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
-
             // TODO: Implement HSTS once SSL is implemented
             // Enable Strict Transport Security with a 30-day caching period
             // Do not include subdomains
@@ -78,13 +75,13 @@ namespace AspNetCoreSpa.Server.Extensions
                 csp.AllowAudioAndVideo
                                 .FromNowhere();
 
-               // Contained iframes can be sourced from:
+                // Contained iframes can be sourced from:
                 csp.AllowFrames
                     .FromNowhere(); //Nowhere, no iframes allowed
 
                 // Allow AJAX, WebSocket and EventSource connections to:
                 csp.AllowConnections
-                                .To(socketUrl)
+                                .To(Startup.Configuration["SocketUrl"])
                                 .ToSelf();
 
                 // Allow fonts to be downloaded from:

@@ -105,7 +105,7 @@ namespace AspNetCoreSpa.Server
 
             if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
             {
-                var host = _hostingEnv.IsDevelopment() ? "http://localhost:5000/" : "https://aspnetcorespa.herokuapp.com/";
+                var host = _hostingEnv.IsDevelopment() ? "http://127.0.0.1:5000/" : "https://aspnetcorespa.herokuapp.com/";
                 var descriptor = new OpenIddictApplicationDescriptor
                 {
                     ClientId = "aspnetcorespa",

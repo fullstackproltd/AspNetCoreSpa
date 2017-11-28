@@ -3,6 +3,7 @@ using AspNetCoreSpa.Server;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore;
+using System.Net;
 
 namespace AspNetCoreSpa
 {
@@ -21,12 +22,23 @@ namespace AspNetCoreSpa
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                    .UseConfiguration(new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("hosting.json", optional: true)
-                    .Build())
                     .UseStartup<Startup>()
-                    .UseKestrel(a => a.AddServerHeader = false)
+                    .UseKestrel(options =>
+                    {
+                        options.AddServerHeader = false;
+                        var hostingEnv = (IHostingEnvironment)options.ApplicationServices.GetService(typeof(IHostingEnvironment));
+                        options.Listen(IPAddress.Loopback, 5000);
+
+                        if (hostingEnv.IsDevelopment())
+                        {
+                            options.Listen(IPAddress.Loopback, 5001, listenOptions =>
+                            {
+                                // A self-signed certificate can be generated from this project
+                                // https://www.pluralsight.com/blog/software-development/selfcert-create-a-self-signed-certificate-interactively-gui-or-programmatically-in-net
+                                listenOptions.UseHttps("extra/aspnetcorespa.pfx", "aspnetcorespa");
+                            });
+                        }
+                    })
                     .Build();
     }
 }

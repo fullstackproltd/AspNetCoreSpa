@@ -14,22 +14,12 @@ using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddSslCertificate(this IServiceCollection services)
-        {
-            // var cert = new X509Certificate2(Path.Combine(hostingEnv.ContentRootPath, "extra", "cert.pfx"), "game123");
-
-            //services.Configure<KestrelServerOptions>(options =>
-            //{
-            //    options.UseHttps(cert);
-            //});
-
-            return services;
-        }
         public static IServiceCollection AddCustomizedMvc(this IServiceCollection services)
         {
             services.AddMvc(options =>
@@ -58,7 +48,7 @@ namespace AspNetCoreSpa.Server.Extensions
 
             return services;
         }
-        public static IServiceCollection AddCustomOpenIddict(this IServiceCollection services)
+        public static IServiceCollection AddCustomOpenIddict(this IServiceCollection services, IHostingEnvironment env)
         {
             // Configure Identity to use the same JWT claims as OpenIddict instead
             // of the legacy WS-Federation claims it uses by default (ClaimTypes),
@@ -98,10 +88,10 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.SetIdentityTokenLifetime(TimeSpan.FromMinutes(30));
                 options.SetRefreshTokenLifetime(TimeSpan.FromMinutes(60));
                 // During development, you can disable the HTTPS requirement.
-#if DEBUG
-                options.DisableHttpsRequirement();
-#else
-#endif
+                if (env.IsDevelopment() && Convert.ToBoolean(Startup.Configuration["DevHttpsOnly"]))
+                {
+                    options.DisableHttpsRequirement();
+                }
 
                 // Note: to use JWT access tokens instead of the default
                 // encrypted format, the following lines are required:
@@ -197,12 +187,12 @@ namespace AspNetCoreSpa.Server.Extensions
                   {
                       options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
                       options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
-#if DEBUG
-                      options.AuthorizationEndpoint = "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize";
-                      options.TokenEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice";
-                      options.UserInformationEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo?schema=openid";
-#else
-#endif
+                      if (env.IsDevelopment())
+                      {
+                          options.AuthorizationEndpoint = "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize";
+                          options.TokenEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice";
+                          options.UserInformationEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo?schema=openid";
+                      }
                   })
                // https://developer.yahoo.com
                .AddYahoo(options =>

@@ -5,6 +5,8 @@ using AspNetCoreSpa.Server.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Rewrite;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -17,9 +19,12 @@ namespace AspNetCoreSpa
         //1) Constructor
         //2) Configure services
         //3) Configure
+        private IHostingEnvironment HostingEnvironment { get; }
+        public static IConfiguration Configuration { get; set; }
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            HostingEnvironment = env;
             Configuration = configuration;
 
             Helpers.SetupSerilog();
@@ -38,15 +43,12 @@ namespace AspNetCoreSpa
             // Configuration = builder.Build();
         }
 
-        public static IConfiguration Configuration { get; set; }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddCustomHeaders();
-
-            services.AddSslCertificate();
 
             services.AddOptions();
 
@@ -56,7 +58,7 @@ namespace AspNetCoreSpa
 
             services.AddCustomIdentity();
 
-            services.AddCustomOpenIddict();
+            services.AddCustomOpenIddict(HostingEnvironment);
 
             services.AddMemoryCache();
 
@@ -84,6 +86,12 @@ namespace AspNetCoreSpa
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
         {
+            if (env.IsProduction())
+            {
+                var options = new RewriteOptions().AddRedirectToHttps();
+                app.UseRewriter(options);
+            }
+
             app.UseCustomisedCsp();
 
             app.UseCustomisedHeadersMiddleware();
@@ -140,18 +148,18 @@ namespace AspNetCoreSpa
                           //     value to 'true', so that the SSR bundle is built during publish
                           // [2] Uncomment this code block
                           */
-                        //   spa.UseSpaPrerendering(options =>
-                        //  {
-                        //      options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                        //      options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                        //      options.ExcludeUrls = new[] { "/sockjs-node" };
-                        //      options.SupplyData = (requestContext, obj) =>
-                        //      {
-                        //          var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
-                        //          obj.Add("appData", result);
-                        //      };
+                          //   spa.UseSpaPrerendering(options =>
+                          //  {
+                          //      options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                          //      options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                          //      options.ExcludeUrls = new[] { "/sockjs-node" };
+                          //      options.SupplyData = (requestContext, obj) =>
+                          //      {
+                          //          var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
+                          //          obj.Add("appData", result);
+                          //      };
 
-                        //  });
+                          //  });
 
                           if (env.IsDevelopment())
                           {
