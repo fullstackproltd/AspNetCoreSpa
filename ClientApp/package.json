@@ -26,7 +26,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json",
-    "bundle:analyze": "webpack-bundle-analyzer dist/stats.json"
+    "bundle:analyze": "npm run build -- --prod --stats-json && webpack-bundle-analyzer dist/stats.json"
   },
   "dependencies": {
     "@angular/animations": "5.0.3",
