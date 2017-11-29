@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core
 import { Meta, Title } from '@angular/platform-browser';
 import { isPlatformBrowser } from '@angular/common';
 import { Params, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { Subscription } from 'rxjs/Subscription';
 import { authConfig } from './auth.config';
@@ -27,17 +26,11 @@ export class AppComponent implements OnInit, OnDestroy {
     private title: Title,
     private meta: Meta,
     private linkService: HeadService,
-    public translate: TranslateService,
     private router: Router,
     @Inject('BASE_URL') private baseUrl: string,
     @Inject(PLATFORM_ID) private platformId: string,
     private activatedRoute: ActivatedRoute,
     private oauthService: OAuthService) {
-    // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang('en');
-
-    // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('en');
 
     if (isPlatformBrowser(this.platformId)) {
       this.configureOidc();

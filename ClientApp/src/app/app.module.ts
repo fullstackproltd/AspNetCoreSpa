@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { SimpleNotificationsModule } from './notifications';
@@ -16,7 +15,6 @@ import { environment } from '../environments/environment';
 import { AppService } from './app.service';
 import {
     AccountService,
-    ApiTranslationLoader,
     AuthInterceptor,
     DataService,
     GlobalErrorHandler,
@@ -33,6 +31,7 @@ import {
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { TranslatePipe } from './translate.pipe';
 
 export function getAppData(appService: AppService) {
     return () => appService.getData();
@@ -43,7 +42,8 @@ export function getAppData(appService: AppService) {
     declarations: [
         AppComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        TranslatePipe
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,10 +56,8 @@ export function getAppData(appService: AppService) {
         routing,
         // https://github.com/flauc/angular2-notifications/blob/master/docs/toastNotifications.md
         SimpleNotificationsModule.forRoot(),
-        TranslateModule.forRoot({ loader: { provide: TranslateLoader, useClass: ApiTranslationLoader } })
     ],
     providers: [
-        TranslateModule,
         AccountService,
         AppService,
         DataService,

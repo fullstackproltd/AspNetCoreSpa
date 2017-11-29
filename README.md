@@ -14,7 +14,6 @@
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
 * [ng-bootstrap](https://ng-bootstrap.github.io/)
-* [@ngx-translate](http://www.ngx-translate.com/)
 * [Typescript](http://www.typescriptlang.org/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.

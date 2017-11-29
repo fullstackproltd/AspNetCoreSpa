@@ -1,5 +1,4 @@
 export * from './account.service';
-export * from './api-translation-loader.service';
 export * from './data.service';
 export * from './global-error.service';
 export * from './head.service';
