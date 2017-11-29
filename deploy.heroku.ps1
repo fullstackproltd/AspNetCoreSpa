@@ -22,8 +22,6 @@ function Deploy()
 {
 	# Build image
 	& docker build -t $appName $packOutput
-	# Login heroku
-	& heroku login
 	# Login heroku container service
 	& heroku container:login
 	# Tag image to be deployed

@@ -27,17 +27,23 @@ namespace AspNetCoreSpa
                     .UseKestrel(options =>
                     {
                         options.AddServerHeader = false;
-                        var hostingEnv = (IHostingEnvironment)options.ApplicationServices.GetService(typeof(IHostingEnvironment));
-                        options.Listen(IPAddress.Loopback, 5000);
 
-                        if (hostingEnv.IsDevelopment() || Convert.ToBoolean(Startup.Configuration["DevHttps"]))
+                        var hostingEnv = (IHostingEnvironment)options.ApplicationServices.GetService(typeof(IHostingEnvironment));
+                        // These bindings are overritten by IIS if that is the hosted server
+                        // But if deployed using Docker then in production default address (http://localhost:5000) is used i.e with localhost rather IP address
+                        // This is the reason why IPAddress (127.0.0.1) is only used for local dev only and https address is enabled by explicitly setting flag EnableDevHttps
+                        if (hostingEnv.IsDevelopment())
                         {
-                            options.Listen(IPAddress.Loopback, 5001, listenOptions =>
+                            options.Listen(IPAddress.Loopback, 5000);
+                            if (Convert.ToBoolean(Startup.Configuration["EnableDevHttps"]))
                             {
-                                // A self-signed certificate can be generated from this project
-                                // https://www.pluralsight.com/blog/software-development/selfcert-create-a-self-signed-certificate-interactively-gui-or-programmatically-in-net
-                                listenOptions.UseHttps("extra/aspnetcorespa.pfx", "aspnetcorespa");
-                            });
+                                options.Listen(IPAddress.Loopback, 5001, listenOptions =>
+                                    {
+                                        // A self-signed certificate can be generated from this project
+                                        // https://www.pluralsight.com/blog/software-development/selfcert-create-a-self-signed-certificate-interactively-gui-or-programmatically-in-net
+                                        listenOptions.UseHttps("extra/aspnetcorespa.pfx", "aspnetcorespa");
+                                    });
+                            }
                         }
                     })
                     .Build();

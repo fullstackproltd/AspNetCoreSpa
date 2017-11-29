@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Primitives;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace AspNetCoreSpa
@@ -96,10 +97,13 @@ namespace AspNetCoreSpa
             app.SetupMigrations();
 
             // https://github.com/openiddict/openiddict-core/issues/518
-            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            var options = new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
+            };
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+            app.UseForwardedHeaders(options);
 
             app.UseAuthentication();
 
