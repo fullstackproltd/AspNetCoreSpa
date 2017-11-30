@@ -28,6 +28,7 @@ namespace AspNetCoreSpa.Server.Extensions
             app.UseCustomHeadersMiddleware(policyCollection);
             return app;
         }
+        // https://github.com/juunas11/aspnetcore-security-headers
         public static IApplicationBuilder UseCustomisedCsp(this IApplicationBuilder app)
         {
             // TODO: Implement HSTS once SSL is implemented
