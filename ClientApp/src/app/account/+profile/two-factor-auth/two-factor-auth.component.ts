@@ -20,6 +20,6 @@ export class TwoFactorAuthComponent implements OnInit {
 
   private get2fModel() {
     this.dataService.post<ITwoFactorModel>('api/manage/twofactorauthentication')
-      .subscribe(res => this.model = res);
+      .subscribe((res: ITwoFactorModel) => this.model = res);
   }
 }

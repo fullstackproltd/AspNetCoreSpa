@@ -35,7 +35,8 @@
       "resources": {
         "urls": [
           "https://fonts.googleapis.com/**",
-          "https://fonts.gstatic.com/**"
+          "https://fonts.gstatic.com/**",
+          "/fontawesome-webfont.*"
         ]
       }
     }
@@ -44,7 +45,7 @@
     {
       "name": "api-freshness",
       "urls": [
-        "/setlanguage"
+        "/SetLanguage"
       ],
       "cacheConfig": {
         "strategy": "freshness",
