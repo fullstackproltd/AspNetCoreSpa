@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-
-import {
-    AccountService,
-    DataService,
-    UtilityService,
-    GlobalRef
-} from '@app/services';
+import { AccountService } from '../../services/account.service';
+import { DataService } from '../../services/data.service';
+import { GlobalRef } from '../../services/global-ref';
+import { UtilityService } from '../../services/utility.service';
 
 @Component({
     selector: 'appc-header',
@@ -37,7 +34,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public get cultures(): ICulture[] {
-        return this.globalRef.nativeGlobal.appData.cultures;
+        return []; // this.globalRef.nativeGlobal.appData.cultures;
     }
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];

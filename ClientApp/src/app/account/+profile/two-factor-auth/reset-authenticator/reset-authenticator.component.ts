@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { DataService } from '@app/services';
-import { NotificationsService } from '@app/notifications';
+import { DataService } from '../../../../services/data.service';
+import { NotificationsService } from '../../../../notifications/simple-notifications.module';
 
 @Component({
   selector: 'appc-reset-authenticator',

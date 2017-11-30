@@ -1,9 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-
-import { UtilityService } from '@app/services';
-import { NotificationsService } from '@app/notifications';
-import { ControlBase, ControlTextbox } from '@app/shared';
+import { UtilityService } from '../../services/utility.service';
+import { NotificationsService } from '../../notifications/simple-notifications.module';
+import { ControlTextbox, ControlBase } from '../../shared/index';
 
 @Component({
     selector: 'appc-login',

@@ -18,7 +18,8 @@ export class AccountService {
         return undefined;
     }
     public get accessToken(): string {
-        return this.oAuthService.getAccessToken();
+        // return this.oAuthService.getAccessToken();
+        return '';
     }
     // Used to access user information
     public get idToken(): string {

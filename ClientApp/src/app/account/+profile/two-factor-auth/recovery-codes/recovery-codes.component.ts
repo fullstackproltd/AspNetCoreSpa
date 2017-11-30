@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DataService } from '@app/services';
-import { NotificationsService } from '@app/notifications';
+import { NotificationsService } from '../../../../notifications/simple-notifications.module';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
   selector: 'appc-recovery-codes',

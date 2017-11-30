@@ -1,4 +1,4 @@
-import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -13,23 +13,19 @@ import { environment } from '../environments/environment';
 
 // App level services
 import { AppService } from './app.service';
-import {
-    AccountService,
-    AuthInterceptor,
-    DataService,
-    GlobalErrorHandler,
-    TimingInterceptor,
-    UtilityService,
-    BrowserGlobalRef,
-    GlobalRef,
-    HeadService
-} from './services';
 
 // App level components
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TranslatePipe } from './translate.pipe';
+import { AccountService } from './services/account.service';
+import { DataService } from './services/data.service';
+import { UtilityService } from './services/utility.service';
+import { GlobalRef, BrowserGlobalRef } from './services/global-ref';
+import { GlobalErrorHandler } from './services/global-error.service';
+import { AuthInterceptor } from './services/interceptors/auth-interceptor';
+import { TimingInterceptor } from './services/interceptors/timing-interceptor';
 
 export function getAppData(appService: AppService) {
     return () => appService.getData();
@@ -59,9 +55,8 @@ export function getAppData(appService: AppService) {
         AccountService,
         AppService,
         DataService,
-        HeadService,
         UtilityService,
-        { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true },
+        // { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true },
         { provide: ErrorHandler, useClass: GlobalErrorHandler },
         { provide: GlobalRef, useClass: BrowserGlobalRef },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

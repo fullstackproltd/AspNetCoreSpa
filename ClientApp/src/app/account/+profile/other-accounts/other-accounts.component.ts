@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '@app/services';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'appc-other-accounts',
