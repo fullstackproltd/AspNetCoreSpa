@@ -161,7 +161,9 @@ namespace AspNetCoreSpa
 
                           if (env.IsDevelopment())
                           {
-                              spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                              spa.UseAngularCliServer(npmScript: "start");
+                              //   OR
+                              //   spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
 

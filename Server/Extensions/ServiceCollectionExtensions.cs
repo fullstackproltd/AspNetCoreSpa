@@ -51,11 +51,11 @@ namespace AspNetCoreSpa.Server.Extensions
         }
         public static IServiceCollection AddCustomIdentity(this IServiceCollection services)
         {
-            // For api unauthorised calls return 401 with no body
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
-                options.Password.RequiredLength = 4;
-                options.Password.RequireNonAlphanumeric = false;
+                // options for user and password can be set here
+                // options.Password.RequiredLength = 4;
+                // options.Password.RequireNonAlphanumeric = false;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
