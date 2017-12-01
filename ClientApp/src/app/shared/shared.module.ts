@@ -2,25 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from '@angular/common/http';
 
 // Components
-import { DynamicFormComponent, DynamicFormControlComponent, ErrorSummaryComponent } from './forms';
-import { SocialLoginComponent } from './components';
-// Directives
-import { PageHeadingComponent } from './directives';
-// Pipes
-import { UppercasePipe } from './pipes';
+import { DynamicFormComponent, DynamicFormControlComponent, ErrorSummaryComponent, FormControlService } from './forms';
+import { SocialLoginComponent } from './components/social-login/social-login.component';
 // Services
-import { FormControlService } from './forms';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    ReactiveFormsModule,
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
@@ -28,32 +21,23 @@ import { FormControlService } from './forms';
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,
-    PageHeadingComponent,
-    UppercasePipe
   ],
   exports: [
-    // Modules
     CommonModule,
     FormsModule,
-    HttpClientModule,
-    NgbModule,
     ReactiveFormsModule,
     // Providers, Components, directive, pipes
     SocialLoginComponent,
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,
-    PageHeadingComponent,
-    UppercasePipe,
   ],
   providers: [
+    NgbModule,
     FormControlService
   ]
 
 })
 export class SharedModule { }
 
-export * from './components';
-export * from './directives';
 export * from './forms';
-export * from './pipes';

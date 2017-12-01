@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../../shared/shared.module';
-
 import { LoginComponent } from './login.component';
-import { routing } from './login.routes';
 
 @NgModule({
-    imports: [routing, SharedModule],
+    imports: [
+        SharedModule,
+        RouterModule.forChild([
+            { path: '', component: LoginComponent, data: { state: 'login' } }
+        ])
+    ],
     declarations: [LoginComponent]
 })
 export class LoginModule { }

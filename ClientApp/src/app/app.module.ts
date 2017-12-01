@@ -18,7 +18,6 @@ import { HomeComponent } from './home/home.component';
 import { AppService } from './app.service';
 import { DataService } from './services/data.service';
 import { AccountService } from './services/account.service';
-import { UtilityService } from './services/utility.service';
 import { GlobalErrorHandler } from './services/global-error.service';
 import { GlobalRef, BrowserGlobalRef } from './services/global-ref';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor';
@@ -50,18 +49,18 @@ export function getAppData(appService: AppService) {
       {
         path: 'login', loadChildren: './account/+login/login.module#LoginModule'
       },
-      {
-        path: 'register', loadChildren: './account/+register/register.module#RegisterModule'
-      },
-      {
-        path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule'
-      },
-      {
-        path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule'
-      },
-      {
-        path: 'chat', loadChildren: './+chat/chat.module#ChatModule'
-      }
+      // {
+      //   path: 'register', loadChildren: './account/+register/register.module#RegisterModule'
+      // },
+      // {
+      //   path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule'
+      // },
+      // {
+      //   path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule'
+      // },
+      // {
+      //   path: 'chat', loadChildren: './+chat/chat.module#ChatModule'
+      // }
     ]),
     NgbModule.forRoot(),
     OAuthModule.forRoot(),
@@ -72,7 +71,6 @@ export function getAppData(appService: AppService) {
     AccountService,
     DataService,
     GlobalErrorHandler,
-    UtilityService,
     { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
@@ -80,6 +78,7 @@ export function getAppData(appService: AppService) {
     { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
 
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

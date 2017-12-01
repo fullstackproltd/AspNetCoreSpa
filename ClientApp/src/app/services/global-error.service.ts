@@ -1,7 +1,6 @@
 import { ErrorHandler, Injectable, ApplicationRef, Injector } from '@angular/core';
 
 // import { NotificationsService } from '../shared/notifications';
-import { UtilityService } from './utility.service';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
@@ -14,10 +13,10 @@ export class GlobalErrorHandler implements ErrorHandler {
     if (errorResponse.status === 401) {
       // this.ns.error('Unauthorised', 'Pleae login again.');
       this.inj.get(ApplicationRef).tick();
-      this.inj.get(UtilityService).navigateToSignIn();
+      // this.inj.get(UtilityService).navigateToSignIn();
     } else if (errorResponse.status === 400) {
       console.log('***** HANDLE ERROR *****');
-      const us = this.inj.get(UtilityService);
+      // const us = this.inj.get(UtilityService);
       // this.ns.error(errorResponse.error.message, us.formatErrors(errorResponse.error.errors));
       this.inj.get(ApplicationRef).tick();
     }

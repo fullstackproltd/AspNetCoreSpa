@@ -3,7 +3,6 @@ import { OAuthService } from 'angular-oauth2-oidc';
 import { AccountService } from '../../services/account.service';
 import { DataService } from '../../services/data.service';
 import { GlobalRef } from '../../services/global-ref';
-import { UtilityService } from '../../services/utility.service';
 
 @Component({
     selector: 'appc-header',
@@ -21,8 +20,7 @@ export class HeaderComponent implements OnInit {
         public accountService: AccountService,
         public dataService: DataService,
         public globalRef: GlobalRef,
-        public oAuthService: OAuthService,
-        public utilityService: UtilityService,
+        public oAuthService: OAuthService
     ) { }
 
     public get isLoggedIn(): boolean {
@@ -48,7 +46,6 @@ export class HeaderComponent implements OnInit {
     public logout() {
         this.dataService.post('api/account/logout').subscribe(() => {
             this.oAuthService.logOut();
-            this.utilityService.navigateToSignIn();
         });
     }
 

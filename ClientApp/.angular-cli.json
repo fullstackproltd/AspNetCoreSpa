@@ -27,7 +27,6 @@
         "assets/css/flags.css"
       ],
       "scripts": [
-        "assets/js/qrcode.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
