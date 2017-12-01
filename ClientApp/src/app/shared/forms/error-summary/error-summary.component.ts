@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotificationsService, NotificationEvent, Notification } from '@app/notifications';
+// import { NotificationsService, NotificationEvent, Notification } from '../shared/notifications';
 
 @Component({
     selector: 'appc-error-summary',
@@ -8,21 +8,20 @@ import { NotificationsService, NotificationEvent, Notification } from '@app/noti
 export class ErrorSummaryComponent implements OnInit, OnDestroy {
     notification: Notification;
     sub: any;
-    constructor(private ns: NotificationsService) {
-    }
+    // constructor(private ns: NotificationsService) { }
 
     ngOnInit() {
-        this.sub = this.ns.getChangeEmitter()
-            .subscribe((x: NotificationEvent) => {
-                if (x.add) {
-                    this.notification = x.notification;
-                } else {
-                    this.notification = null;
-                }
-            });
+        // this.sub = this.ns.getChangeEmitter()
+        //     .subscribe((x: NotificationEvent) => {
+        //         if (x.add) {
+        //             this.notification = x.notification;
+        //         } else {
+        //             this.notification = null;
+        //         }
+        //     });
     }
 
     ngOnDestroy() {
-        this.sub.unsubscribe();
+        // this.sub.unsubscribe();
     }
 }

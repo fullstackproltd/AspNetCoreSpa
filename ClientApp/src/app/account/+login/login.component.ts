@@ -1,8 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { UtilityService } from '../../services/utility.service';
-import { NotificationsService } from '../../notifications/simple-notifications.module';
-import { ControlTextbox, ControlBase } from '../../shared/index';
+import { ControlBase, ControlTextbox } from '../../shared/shared.module';
 
 @Component({
     selector: 'appc-login',
@@ -15,16 +14,15 @@ export class LoginComponent implements OnInit {
 
     constructor(
         public oAuthService: OAuthService,
-        public us: UtilityService,
-        private ns: NotificationsService) { }
+        public us: UtilityService
+    ) { }
     public login(model: ILoginModel): void {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {
                 localStorage.setItem('id_token', x.id_token);
                 this.oAuthService.setupAutomaticSilentRefresh();
                 this.us.navigate('');
-            })
-            .catch(err => this.ns.error('Error getting token', err));
+            });
     }
 
     public ngOnInit() {

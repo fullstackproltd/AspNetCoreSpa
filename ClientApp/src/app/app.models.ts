@@ -1,8 +1,3 @@
-export interface IGlobals {
-    window: Window;
-    document: Document;
-}
-
 export enum ExternalLoginStatus {
     Ok = 0,
     Error = 1,

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from '@app/shared';
+import { SharedModule } from '../../shared/shared.module';
 
 import { RegisterComponent } from './+register/register.component';
 import { RegisterConfirmationComponent } from './+confirmation/register-confirmation.component';

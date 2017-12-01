@@ -10,7 +10,7 @@ export function getBaseUrl() {
 
 const providers = [
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: <any>[] },
-    { provide: 'APP_DATA', useValue: (<any>window).params }
+    { provide: 'APP_DATA', useValue: (<any>global).appData }
 ];
 
 if (environment.production) {

@@ -1,5 +1,5 @@
 import { PipeTransform, Pipe, Injectable } from '@angular/core';
-// import { GlobalRef } from './services/global-ref';
+import { GlobalRef } from './services/global-ref';
 
 @Injectable()
 @Pipe({
@@ -7,8 +7,7 @@ import { PipeTransform, Pipe, Injectable } from '@angular/core';
 })
 export class TranslatePipe implements PipeTransform {
     constructor(
-        // private globalRef: GlobalRef
-        // private globalRef: GlobalRef
+        private globalRef: GlobalRef
     ) { }
     transform(query: string, ...args: any[]): any {
         if (!query || query.length === 0) {

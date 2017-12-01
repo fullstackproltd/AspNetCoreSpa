@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NotificationsService } from '../../../../notifications/simple-notifications.module';
+// import { NotificationsService } from '../../../../notifications/simple-notifications.module';
 import { DataService } from '../../../../services/data.service';
 
 @Component({
@@ -10,21 +10,24 @@ import { DataService } from '../../../../services/data.service';
 export class RecoveryCodesComponent implements OnInit {
   @Input() model: ITwoFactorModel;
 
-  constructor(private dataService: DataService, private ns: NotificationsService) { }
+  constructor(
+    private dataService: DataService,
+    // private ns: NotificationsService
+  ) { }
 
   ngOnInit() { }
 
   disableTwoFactorWarning() {
     this.dataService.post('api/manage/disable2fa')
       .subscribe(() => {
-        this.ns.success('Two factor authentication disabled');
+        // this.ns.success('Two factor authentication disabled');
       });
   }
 
   generateRecoveryCodes() {
     this.dataService.post<string[]>('api/manage/generaterecoverycodes')
       .subscribe((codes: string[]) => {
-        this.ns.success('Recovery codes are', codes.join('|'));
+        // this.ns.success('Recovery codes are', codes.join('|'));
       });
   }
 

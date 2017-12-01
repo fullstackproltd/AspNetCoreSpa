@@ -1,12 +1,16 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
 import { authConfig } from './auth.config';
 
 import { routerTransition } from './router.animations';
 import { ExternalLoginStatus } from './app.models';
+import { TransferState, makeStateKey } from '@angular/platform-browser';
 
+const APP_DATA_KEY = makeStateKey('appData');
 @Component({
   selector: 'appc-root',
   animations: [routerTransition],
@@ -14,13 +18,16 @@ import { ExternalLoginStatus } from './app.models';
 })
 export class AppComponent implements OnInit {
   // This will go at the END of your title for example "Home - Angular Universal..." <-- after the dash (-)
+  appData: IApplicationConfig;
+
   constructor(
     private router: Router,
-    @Inject('APP_DATA') private appData: string,
+    private state: TransferState,
     @Inject('BASE_URL') private baseUrl: string,
     @Inject(PLATFORM_ID) private platformId: string,
     private activatedRoute: ActivatedRoute,
-    private oauthService: OAuthService) {
+    private oauthService: OAuthService,
+    private http: HttpClient) {
 
     if (isPlatformBrowser(this.platformId)) {
       this.configureOidc();
@@ -29,7 +36,17 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
+    if (!this.appData) {
+      // this.http
+      //   .get<IApplicationConfig>(`${this.baseUrl}/api/applicationdata`)
+      //   .subscribe(data => {
+      //     this.appData = data;
+      //     this.state.set(APP_DATA_KEY, data as any);
+      //   });
+    }
+
     console.log(this.appData);
+
     // Change "Title" on every navigationEnd event
     // Titles come from the data.title property on all Routes (see app.routes.ts)
     this.activatedRoute.queryParams.subscribe((params: Params) => {

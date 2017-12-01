@@ -11,14 +11,13 @@ export class AppService {
         return new Promise((resolve) => {
             this.httpClient.get<any>(`${this.baseUrl}api/applicationdata`)
                 .subscribe(res => {
-                    // console.log(res);
-                    (<any>window).appData = {
-                        content: JSON.parse(res.content),
-                        cultures: res.cultureItems,
-                        loginProviders: res.loginProviders
-                    };
                     resolve(res);
-
+                    // console.log(res);
+                    // (<any>window).appData = {
+                    //     content: JSON.parse(res.content),
+                    //     cultures: res.cultureItems,
+                    //     loginProviders: res.loginProviders
+                    // };
                 });
         });
     }

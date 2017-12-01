@@ -2,7 +2,7 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ControlBase, ControlTextbox } from '../../../shared';
+import { ControlBase, ControlTextbox } from '../../../shared/shared.module';
 import { DataService } from '../../../services/data.service';
 
 
