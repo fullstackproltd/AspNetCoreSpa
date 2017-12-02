@@ -22,7 +22,7 @@
                 <a class="nav-link" routerLinkActive="active" routerLink="examples">{{'app_nav_examples' | translate}}</a>
             </li> -->
             <li class="nav-item dropdown">
-                <form action="SetLanguage" method="POST">
+                <form action="SetLanguage" method="POST" ngNoForm>
                     <div ngbDropdown>
                         <a class="nav-link" id="cultures" ngbDropdownToggle>{{currentCulture.text}}</a>
                         <div ngbDropdownMenu aria-labelledby="cultures">
@@ -60,7 +60,7 @@
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="isLoggedIn">
-                    <a class="nav-link" (click)="accountService.logout()" routerLinkActive="active" href="javascript:void(null);">
+                    <a class="nav-link" (click)="logout()" routerLinkActive="active" href="javascript:void(null);">
                         {{'app_nav_logout' | translate}}
                     </a>
                 </li>
