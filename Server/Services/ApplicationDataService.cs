@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,8 +42,8 @@ namespace AspNetCoreSpa.Server.Services
             var data = Helpers.JsonSerialize(new
             {
                 Content = GetContentByCulture(context),
-                RequestCulture = context.Features.Get<IRequestCultureFeature>(),
-                CultureItems = _locOptions.Value.SupportedUICultures
+                // RequestCulture = context.Features.Get<IRequestCultureFeature>(),
+                Cultures = _locOptions.Value.SupportedUICultures
                         .Select(c => new { Value = c.Name, Text = c.DisplayName, Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name) })
                         .ToList(),
                 LoginProviders = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name)
@@ -51,7 +52,7 @@ namespace AspNetCoreSpa.Server.Services
             return data;
         }
 
-        private string GetContentByCulture(HttpContext context)
+        private Dictionary<string, string> GetContentByCulture(HttpContext context)
         {
             var requestCulture = context.Features.Get<IRequestCultureFeature>();
             // Culture contains the information of the requested culture
@@ -60,7 +61,7 @@ namespace AspNetCoreSpa.Server.Services
             var CACHE_KEY = $"Content-{culture.Name}";
 
 
-            string cacheEntry;
+            Dictionary<string, string> cacheEntry;
 
             // Look for cache key.
             if (!_cache.TryGetValue(CACHE_KEY, out cacheEntry))
@@ -74,7 +75,7 @@ namespace AspNetCoreSpa.Server.Services
                                             Value = c.Value
                                         })
                                         .ToDictionary(x => x.Key, x => x.Value);
-                cacheEntry = Helpers.JsonSerialize(culturalContent);
+                cacheEntry = culturalContent;
 
                 // Set cache options.
                 var cacheEntryOptions = new MemoryCacheEntryOptions()

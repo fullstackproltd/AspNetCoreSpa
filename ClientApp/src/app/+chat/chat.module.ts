@@ -1,11 +1,18 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
-import { SharedModule } from '../shared/shared.module';
 import { ChatComponent } from './chat.component';
-import { routing } from './chat.routes';
 
 @NgModule({
-    imports: [routing, SharedModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterModule.forChild([
+            { path: '', component: ChatComponent, data: { state: 'chat' } }
+        ])
+    ],
     declarations: [ChatComponent]
 })
 export class ChatModule { }

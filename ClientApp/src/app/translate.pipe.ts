@@ -14,7 +14,6 @@ export class TranslatePipe implements PipeTransform {
             return query;
         }
 
-        return query;
-        // return (<any>this.globalRef.nativeGlobal.appData.content)[query] || query;
+        return (<any>this.globalRef.nativeGlobal.appData.content)[query] || query;
     }
 }

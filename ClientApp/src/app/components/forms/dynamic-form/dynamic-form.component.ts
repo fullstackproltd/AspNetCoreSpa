@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ViewChild } 
 import { FormGroup, NgForm } from '@angular/forms';
 import { Subject } from 'rxjs/Subject';
 
-import { ControlBase } from '../controls';
+import { ControlBase } from '../controls/control-base';
 import { FormControlService } from '../form-control.service';
 
 @Component({
@@ -22,8 +22,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
     @Input() public formClass = 'form-horizontal';
     // Note: don't keep name of output events as same as native events such as submit etc.
-    @Output() public onSubmit: EventEmitter<any> = new EventEmitter<any>();
-    @Output() public onCancel: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public submit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() public cancel: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild('formDir') public formDir: NgForm;
     public form: FormGroup;
@@ -51,14 +51,14 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
     }
 
-    public submit() {
+    public onSubmit() {
         if (this.form.valid) {
             this.formatDateToSave(this.form);
-            this.onSubmit.emit(this.form.value);
+            this.submit.emit(this.form.value);
         }
     }
-    public cancel() {
-        this.onCancel.next();
+    public onCancel() {
+        this.cancel.next();
     }
 
     private formatDateToDisplay(model: any, controls: Array<ControlBase<any>>) {

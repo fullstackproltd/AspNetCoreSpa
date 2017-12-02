@@ -36,17 +36,6 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit() {
-    if (!this.appData) {
-      // this.http
-      //   .get<IApplicationConfig>(`${this.baseUrl}/api/applicationdata`)
-      //   .subscribe(data => {
-      //     this.appData = data;
-      //     this.state.set(APP_DATA_KEY, data as any);
-      //   });
-    }
-
-    console.log(this.appData);
-
     // Change "Title" on every navigationEnd event
     // Titles come from the data.title property on all Routes (see app.routes.ts)
     this.activatedRoute.queryParams.subscribe((params: Params) => {

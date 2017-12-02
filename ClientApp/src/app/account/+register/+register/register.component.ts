@@ -2,8 +2,9 @@
 import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ControlBase, ControlTextbox } from '../../../shared/shared.module';
 import { DataService } from '../../../services/data.service';
+import { ControlBase } from '../../../components/forms/controls/control-base';
+import { ControlTextbox } from '../../../components/forms/controls/control-textbox';
 
 
 @Component({

@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SharedModule } from '../../shared/shared.module';
 import { LoginComponent } from './login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
-        SharedModule,
+        CommonModule,
+        ReactiveFormsModule,
+        FormsModule,
         RouterModule.forChild([
             { path: '', component: LoginComponent, data: { state: 'login' } }
         ])

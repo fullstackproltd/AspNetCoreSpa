@@ -1,20 +1,31 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { SharedModule } from '../../shared/shared.module';
-
-import { routing } from './profile.routes';
 import { ProfileComponent } from './profile.component';
 import { ProfileService } from './profile.service';
-import { UserInfoComponent } from './user-info';
-import { UpdatePasswordComponent } from './update-password';
-import { UserPhotoComponent } from './user-photo';
-import { OtherAccountsComponent } from './other-accounts';
-import { TwoFactorAuthComponent, EnableAuthenticatorComponent, ResetAuthenticatorComponent, RecoveryCodesComponent } from './two-factor-auth';
+import { UserInfoComponent } from './user-info/user-info.component';
+import { UpdatePasswordComponent } from './update-password/update-password.component';
+import { UserPhotoComponent } from './user-photo/user-photo.component';
+import { OtherAccountsComponent } from './other-accounts/other-accounts.component';
+import { TwoFactorAuthComponent } from './two-factor-auth/two-factor-auth.component';
+import { EnableAuthenticatorComponent } from './two-factor-auth/enable-authenticator/enable-authenticator.component';
+import { ResetAuthenticatorComponent } from './two-factor-auth/reset-authenticator/reset-authenticator.component';
+import { RecoveryCodesComponent } from './two-factor-auth/recovery-codes/recovery-codes.component';
 
 @NgModule({
     imports: [
-        routing,
-        SharedModule
+        RouterModule.forChild([
+            {
+                path: '', component: ProfileComponent, children: [
+                    { path: '', redirectTo: 'userinfo' },
+                    { path: 'userinfo', component: UserInfoComponent },
+                    { path: 'updatepassword', component: UpdatePasswordComponent },
+                    { path: 'userphoto', component: UserPhotoComponent },
+                    { path: 'otheraccounts', component: OtherAccountsComponent },
+                    { path: 'twofactorauth', component: TwoFactorAuthComponent }
+                ]
+            },
+        ])
     ],
     declarations: [
         ProfileComponent,

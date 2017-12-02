@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 
 import { ValidationService } from '../validation.service';
-import { ControlBase } from '../controls';
+import { ControlBase } from '../controls/control-base';
 
 @Component({
     selector: 'appc-dynamic-control',

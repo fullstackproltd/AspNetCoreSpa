@@ -12,6 +12,7 @@ const { AppServerModule, AppServerModuleNgFactory, LAZY_MODULE_MAP } = (module a
 enableProdMode();
 
 export default createServerRenderer(params => {
+    (<any>global).appData = params.data.appData;
     const options = {
         document: params.data.originalHtml,
         url: params.url,
@@ -20,7 +21,6 @@ export default createServerRenderer(params => {
             { provide: APP_BASE_HREF, useValue: params.baseUrl },
             { provide: GlobalRef, useValue: NodeGlobalRef },
             { provide: 'BASE_URL', useValue: params.origin + params.baseUrl },
-            { provide: 'APP_DATA', useValue: params.data.appData }
         ]
     };
 
@@ -28,5 +28,11 @@ export default createServerRenderer(params => {
         ? /* AoT */ renderModuleFactory(AppServerModuleNgFactory, options)
         : /* dev */ renderModule(AppServerModule, options);
 
-    return renderPromise.then(html => ({ html }));
+    return renderPromise.then(html => {
+        html = html.replace('$$script$$', `<script type="text/javascript">window.appData = ${params.data.appData}</script>`);
+        return {
+            html
+        };
+    });
+
 });

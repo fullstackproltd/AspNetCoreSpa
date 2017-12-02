@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
     }
 
     public get cultures(): ICulture[] {
-        return []; // this.globalRef.nativeGlobal.appData.cultures;
+        return this.globalRef.nativeGlobal.appData.cultures;
     }
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];

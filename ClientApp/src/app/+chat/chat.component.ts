@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HubConnection } from '@aspnet/signalr-client';
 
 @Component({
   selector: 'appc-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ControlBase, ControlTextbox } from '../../../shared/shared.module';
-
 import { UserInfoModel } from '../profile.models';
 import { ProfileService } from '../profile.service';
+import { ControlBase } from '../../../components/forms/controls/control-base';
+import { ControlTextbox } from '../../../components/forms/controls/control-textbox';
 
 @Component({
   selector: 'appc-user-info',
