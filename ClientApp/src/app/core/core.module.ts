@@ -69,7 +69,3 @@ export class CoreModule {
         }
     }
 }
-
-export * from './services/account.service';
-export * from './services/data.service';
-export * from './simple-notifications/simple-notifications.module';

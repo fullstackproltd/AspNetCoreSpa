@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../core/core.module';
+import { DataService } from '../../../core/services/data.service';
 
 @Component({
   selector: 'appc-two-factor-auth',

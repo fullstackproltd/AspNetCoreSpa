@@ -147,23 +147,23 @@ namespace AspNetCoreSpa
                           //     value to 'true', so that the SSR bundle is built during publish
                           // [2] Uncomment this code block
                           */
-                        //   spa.UseSpaPrerendering(options =>
-                        //  {
-                        //      options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                        //      options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                        //      options.ExcludeUrls = new[] { "/sockjs-node" };
-                        //      options.SupplyData = (requestContext, obj) =>
-                        //      {
-                        //          var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
-                        //          obj.Add("appData", result);
-                        //      };
-                        //  });
+                          spa.UseSpaPrerendering(options =>
+                         {
+                             options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                             options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                             options.ExcludeUrls = new[] { "/sockjs-node" };
+                             options.SupplyData = (requestContext, obj) =>
+                             {
+                                 var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
+                                 obj.Add("appData", result);
+                             };
+                         });
 
                           if (env.IsDevelopment())
                           {
-                              //   spa.UseAngularCliServer(npmScript: "start");
+                              spa.UseAngularCliServer(npmScript: "start");
                               //   OR
-                              spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                              //   spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
 

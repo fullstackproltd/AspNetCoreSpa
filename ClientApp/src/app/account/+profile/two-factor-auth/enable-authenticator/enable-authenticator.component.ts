@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DataService } from '../../../../core/core.module';
+import { DataService } from '../../../../core/services/data.service';
 
 declare var QRCode: any;
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { UserInfoModel, UpdatePasswordModel } from './profile.models';
-import { DataService } from '../../core/core.module';
+import { DataService } from '../../core/services/data.service';
 
 @Injectable()
 export class ProfileService {

@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DataService } from '../../../core/core.module';
 import { ControlBase } from '../../../shared/forms/controls/control-base';
 import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
+import { DataService } from '../../../core/services/data.service';
 
 
 @Component({
@@ -13,7 +13,11 @@ import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
 export class RegisterComponent implements OnInit {
     public controls: Array<ControlBase<any>>;
 
-    constructor(public dataService: DataService, public router: Router, public route: ActivatedRoute) { }
+    constructor(
+        public dataService: DataService,
+        public router: Router,
+        public route: ActivatedRoute
+    ) { }
 
     public register(model: IRegisterModel): void {
         this.dataService.post('api/account/register', model)

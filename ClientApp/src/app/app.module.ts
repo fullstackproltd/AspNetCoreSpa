@@ -33,11 +33,11 @@ export function getAppData(appService: AppService) {
     OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'login', loadChildren: './account/+login/login.module#LoginModule' },
-      { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
-      { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
-      { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
-      { path: 'chat', loadChildren: './+chat/chat.module#ChatModule' }
+      // { path: 'login', loadChildren: './account/+login/login.module#LoginModule' },
+      // { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
+      // { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
+      // { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
+      // { path: 'chat', loadChildren: './+chat/chat.module#ChatModule' }
     ]),
     environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
   ],

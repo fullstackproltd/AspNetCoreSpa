@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { JwtHelper } from 'angular2-jwt';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()
 export class AccountService {
-    public jwtHelper: JwtHelper = new JwtHelper();
+    public jwtHelper: JwtHelper = isPlatformBrowser(PLATFORM_ID) && new JwtHelper();
 
     constructor(private oAuthService: OAuthService) { }
 
@@ -18,10 +19,14 @@ export class AccountService {
         return undefined;
     }
     public get accessToken(): string {
-        return this.oAuthService.getAccessToken();
+        if (isPlatformBrowser(PLATFORM_ID)) {
+            return this.oAuthService.getAccessToken();
+        }
     }
     // Used to access user information
     public get idToken(): string {
-        return this.oAuthService.getIdToken();
+        if (isPlatformBrowser(PLATFORM_ID)) {
+            return this.oAuthService.getIdToken();
+        }
     }
 }
