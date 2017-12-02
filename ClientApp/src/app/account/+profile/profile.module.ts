@@ -11,9 +11,11 @@ import { TwoFactorAuthComponent } from './two-factor-auth/two-factor-auth.compon
 import { EnableAuthenticatorComponent } from './two-factor-auth/enable-authenticator/enable-authenticator.component';
 import { ResetAuthenticatorComponent } from './two-factor-auth/reset-authenticator/reset-authenticator.component';
 import { RecoveryCodesComponent } from './two-factor-auth/recovery-codes/recovery-codes.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     imports: [
+        SharedModule,
         RouterModule.forChild([
             {
                 path: '', component: ProfileComponent, children: [

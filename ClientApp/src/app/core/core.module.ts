@@ -2,9 +2,8 @@ import { NgModule, Optional, SkipSelf, ModuleWithProviders, ErrorHandler } from 
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { OAuthModule } from 'angular-oauth2-oidc';
 
 // App level components
 import { HeaderComponent } from './components/header/header.component';
@@ -28,10 +27,9 @@ import { TranslatePipe } from '../translate.pipe';
     imports: [
         CommonModule,
         FormsModule,
+        NgbModule,
         ReactiveFormsModule,
         HttpClientModule,
-        NgbModule.forRoot(),
-        OAuthModule.forRoot(),
         RouterModule,
         SimpleNotificationsModule.forRoot(),
     ],
