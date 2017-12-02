@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 import { AccountService } from '../../services/account.service';
+import { DataService } from '../../services/data.service';
+import { UtilityService } from '../../services/utitlity.service';
 import { GlobalRef } from '../../../global-ref';
 
 @Component({
@@ -15,7 +18,13 @@ export class HeaderComponent implements OnInit {
         lastOnBottom: true
     };
     public isCollapsed = true;
-    constructor(public accountService: AccountService, private globalRef: GlobalRef) { }
+    constructor(
+        private accountService: AccountService,
+        private dataService: DataService,
+        private oAuthService: OAuthService,
+        private utilityService: UtilityService,
+        private globalRef: GlobalRef
+    ) { }
 
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
@@ -24,7 +33,6 @@ export class HeaderComponent implements OnInit {
         return this.accountService.user;
 
     }
-
     public get cultures(): ICulture[] {
         return this.globalRef.nativeGlobal.appData.cultures;
     }
@@ -35,6 +43,13 @@ export class HeaderComponent implements OnInit {
 
     public toggleNav() {
         this.isCollapsed = !this.isCollapsed;
+    }
+
+    public logout() {
+        this.dataService.post('api/account/logout').subscribe(() => {
+            this.oAuthService.logOut();
+            this.utilityService.navigateToSignIn();
+        });
     }
 
 }
