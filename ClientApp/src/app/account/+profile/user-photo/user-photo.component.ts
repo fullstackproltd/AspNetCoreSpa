@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../services/data.service';
-// import { NotificationsService } from '../../../notifications/simple-notifications.module';
+import { DataService, NotificationsService } from '../../../core/core.module';
 
 @Component({
   selector: 'appc-user-photo',
@@ -15,7 +14,7 @@ export class UserPhotoComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    // private ns: NotificationsService
+    private ns: NotificationsService
   ) { }
 
   ngOnInit() {
@@ -41,8 +40,8 @@ export class UserPhotoComponent implements OnInit {
 
     this.dataService
       .post(this.URL, file)
-      .subscribe(res => {
-        // this.ns.success('Success', 'Image changed successfully');
+      .subscribe(() => {
+        this.ns.success('Success', 'Image changed successfully');
         this.existingImage = this.selectedImage.url;
         this.selectedImage = undefined;
       });

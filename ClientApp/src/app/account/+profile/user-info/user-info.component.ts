@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserInfoModel } from '../profile.models';
 import { ProfileService } from '../profile.service';
-import { ControlBase } from '../../../components/forms/controls/control-base';
-import { ControlTextbox } from '../../../components/forms/controls/control-textbox';
+import { NotificationsService } from '../../../core/core.module';
+import { ControlBase } from '../../../shared/forms/controls/control-base';
+import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
 
 @Component({
   selector: 'appc-user-info',
@@ -43,7 +44,7 @@ export class UserInfoComponent implements OnInit {
 
   constructor(
     public profileService: ProfileService,
-    // private ns: NotificationsService
+    private ns: NotificationsService
   ) { }
 
   public ngOnInit() { }
@@ -51,7 +52,7 @@ export class UserInfoComponent implements OnInit {
   public save(model: UserInfoModel): void {
     this.profileService.userInfo(model)
       .subscribe((res: UserInfoModel) => {
-        // this.ns.success(`Name changed to ${res.firstName} ${res.lastName}`);
+        this.ns.success(`Name changed to ${res.firstName} ${res.lastName}`);
       });
 
   }

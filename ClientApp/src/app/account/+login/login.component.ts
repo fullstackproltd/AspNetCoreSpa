@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { ControlBase } from '../../components/forms/controls/control-base';
-import { ControlTextbox } from '../../components/forms/controls/control-textbox';
+import { ControlBase } from '../../shared/forms/controls/control-base';
+import { ControlTextbox } from '../../shared/forms/controls/control-textbox';
 
 @Component({
     selector: 'appc-login',
@@ -12,9 +12,7 @@ export class LoginComponent implements OnInit {
     public loginModel: ILoginModel;
     public controls: any;
 
-    constructor(
-        public oAuthService: OAuthService
-    ) { }
+    constructor(public oAuthService: OAuthService) { }
     public login(model: ILoginModel): void {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {

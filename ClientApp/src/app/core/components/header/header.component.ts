@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OAuthService } from 'angular-oauth2-oidc';
+
 import { AccountService } from '../../services/account.service';
-import { DataService } from '../../services/data.service';
-import { GlobalRef } from '../../services/global-ref';
+import { GlobalRef } from '../../../global-ref';
 
 @Component({
     selector: 'appc-header',
@@ -16,12 +15,7 @@ export class HeaderComponent implements OnInit {
         lastOnBottom: true
     };
     public isCollapsed = true;
-    constructor(
-        public accountService: AccountService,
-        public dataService: DataService,
-        public globalRef: GlobalRef,
-        public oAuthService: OAuthService
-    ) { }
+    constructor(public accountService: AccountService, private globalRef: GlobalRef) { }
 
     public get isLoggedIn(): boolean {
         return this.accountService.isLoggedIn;
@@ -41,12 +35,6 @@ export class HeaderComponent implements OnInit {
 
     public toggleNav() {
         this.isCollapsed = !this.isCollapsed;
-    }
-
-    public logout() {
-        this.dataService.post('api/account/logout').subscribe(() => {
-            this.oAuthService.logOut();
-        });
     }
 
 }

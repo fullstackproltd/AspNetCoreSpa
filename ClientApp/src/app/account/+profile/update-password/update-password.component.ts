@@ -1,11 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
-// import { NotificationsService } from '../shared/notifications';
-
 import { ProfileService } from '../profile.service';
 import { UpdatePasswordModel } from '../profile.models';
-import { ControlBase } from '../../../components/forms/controls/control-base';
-import { ControlTextbox } from '../../../components/forms/controls/control-textbox';
+import { NotificationsService } from '../../../core/core.module';
+import { ControlBase } from '../../../shared/forms/controls/control-base';
+import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
 
 @Component({
   selector: 'appc-update-password',
@@ -45,7 +44,7 @@ export class UpdatePasswordComponent implements OnInit {
   public reset = new EventEmitter<boolean>();
   constructor(
     public profileService: ProfileService,
-    // private ns: NotificationsService
+    private ns: NotificationsService
   ) { }
 
   public ngOnInit() { }
@@ -54,7 +53,7 @@ export class UpdatePasswordComponent implements OnInit {
     this.profileService.changePassword(model)
       .subscribe(() => {
         this.reset.emit(true);
-        // this.ns.success('Password changed successfully');
+        this.ns.success('Password changed successfully');
       });
   }
 }

@@ -5,8 +5,8 @@ import { APP_BASE_HREF } from '@angular/common';
 import { enableProdMode } from '@angular/core';
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import { createServerRenderer } from 'aspnet-prerendering';
+import { GlobalRef, NodeGlobalRef } from './app/global-ref';
 export { AppServerModule } from './app/app.server.module';
-import { GlobalRef, NodeGlobalRef } from './app/services/global-ref';
 const { AppServerModule, AppServerModuleNgFactory, LAZY_MODULE_MAP } = (module as any).exports;
 
 enableProdMode();

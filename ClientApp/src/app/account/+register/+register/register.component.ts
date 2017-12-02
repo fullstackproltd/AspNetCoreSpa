@@ -1,10 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { DataService } from '../../../services/data.service';
-import { ControlBase } from '../../../components/forms/controls/control-base';
-import { ControlTextbox } from '../../../components/forms/controls/control-textbox';
+import { DataService } from '../../../core/core.module';
+import { ControlBase } from '../../../shared/forms/controls/control-base';
+import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
 
 
 @Component({
@@ -18,7 +17,7 @@ export class RegisterComponent implements OnInit {
 
     public register(model: IRegisterModel): void {
         this.dataService.post('api/account/register', model)
-            .subscribe((res: Response) => {
+            .subscribe(() => {
                 this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });
             });
     }

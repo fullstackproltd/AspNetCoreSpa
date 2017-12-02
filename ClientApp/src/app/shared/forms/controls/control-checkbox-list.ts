@@ -10,7 +10,7 @@ export class ControlCheckboxList extends ControlBase<string> {
         this.value = options.value;
     }
 
-    public updateCheckedOptions(option: any, event: any, form: NgForm) {
+    public updateCheckedOptions(option: any, form: NgForm) {
         const val: string[] = form.value[this.options.key];
         // Check if item already exists, then remove it
         if (val.indexOf(option) > -1) {

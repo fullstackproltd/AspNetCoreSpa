@@ -47,11 +47,11 @@ export class DataService {
     }
 
     public post<T>(url: string, data?: any, params?: any): Observable<T> {
-        return this.http.post<T>(url, data);
+        return this.http.post<T>(url, data, { params: params });
     }
 
     public put<T>(url: string, data?: any, params?: any): Observable<T> {
-        return this.http.put<T>(url, data);
+        return this.http.put<T>(url, data, { params: params });
     }
 
     public delete<T>(url: string): Observable<T> {

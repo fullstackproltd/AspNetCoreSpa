@@ -22,11 +22,12 @@
       "prefix": "appc",
       "styles": [
         "styles.scss",
-        "../node_modules/bootstrap/scss/bootstrap.scss",
-        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "../../node_modules/bootstrap/scss/bootstrap.scss",
+        "../../node_modules/font-awesome/scss/font-awesome.scss",
         "assets/css/flags.css"
       ],
       "scripts": [
+        "assets/js/qrcode.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

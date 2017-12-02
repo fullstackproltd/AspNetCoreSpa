@@ -1,4 +1,3 @@
-
 <!--tslint:disable-->
 <div #f="ngForm" [formGroup]="form" [ngSwitch]="control.type" class="form-group {{control.class}}" [class.has-danger]="invalid"
     [class.has-success]="valid" [class.form-check]="control.type === 'checkbox'">
@@ -43,7 +42,7 @@
         <div class="form-check form-check-inline" *ngFor="let item of control.options.options">
             <label class="custom-control custom-checkbox">
                 <input class="custom-control-input" type="checkbox" [id]="item.key" [value]="item.key" [checked]="f.value[control.key].indexOf(item.key)> -1"
-                    (change)="control.updateCheckedOptions(item.key, $event, f)">
+                    (change)="control.updateCheckedOptions(item.key,f)">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">{{item.value}}</span>
             </label>
