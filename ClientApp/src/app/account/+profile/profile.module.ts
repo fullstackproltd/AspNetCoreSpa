@@ -17,7 +17,7 @@ import { RecoveryCodesComponent } from './two-factor-auth/recovery-codes/recover
         RouterModule.forChild([
             {
                 path: '', component: ProfileComponent, children: [
-                    { path: '', redirectTo: 'userinfo' },
+                    { path: '', redirectTo: 'userinfo', pathMatch: 'full' },
                     { path: 'userinfo', component: UserInfoComponent },
                     { path: 'updatepassword', component: UpdatePasswordComponent },
                     { path: 'userphoto', component: UserPhotoComponent },

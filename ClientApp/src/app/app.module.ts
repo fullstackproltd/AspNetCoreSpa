@@ -73,7 +73,7 @@ export function getAppData(appService: AppService) {
     DataService,
     FormControlService,
     GlobalErrorHandler,
-    // { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true },
+    { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: GlobalRef, useClass: BrowserGlobalRef },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
@@ -81,7 +81,6 @@ export function getAppData(appService: AppService) {
 
   ],
   exports: [
-    CommonModule,
     FormsModule,
     NgbModule,
     ReactiveFormsModule,

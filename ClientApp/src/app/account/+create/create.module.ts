@@ -6,7 +6,7 @@ import { CreateAccountComponent } from './create.component';
 @NgModule({
     imports: [
         RouterModule.forChild([
-            { path: '', component: CreateAccountComponent, data: { state: 'login' } }
+            { path: '', component: CreateAccountComponent, pathMatch: 'full', data: { state: 'create' } }
         ])
     ],
     declarations: [CreateAccountComponent]

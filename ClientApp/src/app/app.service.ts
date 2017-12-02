@@ -13,11 +13,11 @@ export class AppService {
                 .subscribe(res => {
                     resolve(res);
                     // console.log(res);
-                    // (<any>window).appData = {
-                    //     content: JSON.parse(res.content),
-                    //     cultures: res.cultureItems,
-                    //     loginProviders: res.loginProviders
-                    // };
+                    (<any>window).appData = {
+                        content: res.content,
+                        cultures: res.cultures,
+                        loginProviders: res.loginProviders
+                    };
                 });
         });
     }

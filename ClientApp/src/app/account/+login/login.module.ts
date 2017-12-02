@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
         ReactiveFormsModule,
         FormsModule,
         RouterModule.forChild([
-            { path: '', component: LoginComponent, data: { state: 'login' } }
+            { path: '', component: LoginComponent, pathMatch: 'full', data: { state: 'login' } }
         ])
     ],
     declarations: [LoginComponent]
