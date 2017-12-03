@@ -12,7 +12,7 @@ const { AppServerModule, AppServerModuleNgFactory, LAZY_MODULE_MAP } = (module a
 enableProdMode();
 
 export default createServerRenderer(params => {
-    (<any>global).appData = params.data.appData;
+    global.appData = params.data.appData;
     const options = {
         document: params.data.originalHtml,
         url: params.url,

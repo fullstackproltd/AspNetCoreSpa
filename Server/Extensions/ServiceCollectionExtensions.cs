@@ -21,6 +21,8 @@ namespace AspNetCoreSpa.Server.Extensions
     public static class ServiceCollectionExtensions
     {
         // https://github.com/aspnet/JavaScriptServices/tree/dev/src/Microsoft.AspNetCore.SpaServices#debugging-your-javascripttypescript-code-when-it-runs-on-the-server
+        // Url to visit:
+        // chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9229/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         public static IServiceCollection AddPreRenderDebugging(this IServiceCollection services, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

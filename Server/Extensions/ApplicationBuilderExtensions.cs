@@ -141,7 +141,6 @@ namespace AspNetCoreSpa.Server.Extensions
                 loggerFactory.AddDebug();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                // app.UseCustomWebpackDevMiddleware();
                 // NOTE: For SPA swagger needs adding before MVC
                 app.UseCustomSwaggerApi();
             }
