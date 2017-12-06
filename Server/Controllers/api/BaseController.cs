@@ -1,7 +1,6 @@
 using AspNetCoreSpa.Server.Entities;
 using AspNetCoreSpa.Server.Filters;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreSpa.Server.Controllers.api
@@ -13,12 +12,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
     {
         public BaseController()
         {
+
         }
+
+        [HttpPost]
         public IActionResult Render(ExternalLoginStatus status)
         {
             return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
         }
     }
-
-
 }
