@@ -26,7 +26,7 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "dist/assets/**"
+          "/assets/**"
         ]
       }
     },
@@ -34,35 +34,8 @@
       "name": "fonts",
       "resources": {
         "urls": [
-          "https://fonts.googleapis.com/**",
-          "https://fonts.gstatic.com/**",
           "/fontawesome-webfont.*"
         ]
-      }
-    }
-  ],
-  "dataGroups": [
-    {
-      "name": "api-freshness",
-      "urls": [
-        "/SetLanguage"
-      ],
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 100,
-        "maxAge": "3d",
-        "timeout": "10s"
-      }
-    },
-    {
-      "name": "api-performance",
-      "urls": [
-        "/favorites"
-      ],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "3d"
       }
     }
   ]
