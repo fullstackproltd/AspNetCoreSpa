@@ -145,8 +145,6 @@ namespace AspNetCoreSpa.Server.Extensions
                 app.UseCustomSwaggerApi();
             }
 
-            // TODO loggerFactory.AddSerilog();
-
             return app;
         }
 

@@ -4,8 +4,6 @@ using AspNetCoreSpa.Server.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Serilog;
-using Serilog.Events;
 
 namespace AspNetCoreSpa.Server
 {
@@ -20,16 +18,6 @@ namespace AspNetCoreSpa.Server
                             StringEscapeHandling = StringEscapeHandling.EscapeHtml,
                             ContractResolver = new CamelCasePropertyNamesContractResolver()
                         });
-        }
-        public static void SetupSerilog()
-        {
-            // Configure Serilog
-            Log.Logger = new LoggerConfiguration()
-            .MinimumLevel
-            .Information()
-            .WriteTo.RollingFile("logs/log-{Date}.txt", LogEventLevel.Information) // Uncomment if logging required on text file
-            .WriteTo.Seq("http://localhost:5341/")
-            .CreateLogger();
         }
 
         public static IActionResult Render(this Controller ctrl, ExternalLoginStatus status = ExternalLoginStatus.Ok)
