@@ -5,6 +5,8 @@
 
 ## Features
 
+[![Join the chat at https://gitter.im/asadsahi-AspNetCoreSpa/Lobby](https://badges.gitter.im/asadsahi-AspNetCoreSpa/Lobby.svg)](https://gitter.im/asadsahi-AspNetCoreSpa/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
     * Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
