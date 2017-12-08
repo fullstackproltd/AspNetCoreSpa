@@ -10,6 +10,7 @@
     {
       "serviceWorker": true,
       "root": "src",
+      "outDir": "dist",
       "assets": [
         "assets"
       ],

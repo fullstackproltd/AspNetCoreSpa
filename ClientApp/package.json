@@ -28,6 +28,7 @@
     "bundle:analyze": "npm run build -- --prod --stats-json && webpack-bundle-analyzer dist/stats.json"
   },
   "dependencies": {
+    "@angular-devkit/schematics": "0.0.40",
     "@angular/animations": "5.1.0",
     "@angular/common": "5.1.0",
     "@angular/compiler": "5.1.0",
