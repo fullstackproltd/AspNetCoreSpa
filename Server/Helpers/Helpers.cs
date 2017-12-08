@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Serilog;
@@ -28,6 +30,16 @@ namespace AspNetCoreSpa.Server
             .WriteTo.RollingFile("logs/log-{Date}.txt", LogEventLevel.Information) // Uncomment if logging required on text file
             .WriteTo.Seq("http://localhost:5341/")
             .CreateLogger();
+        }
+
+        public static IActionResult Render(this Controller ctrl, ExternalLoginStatus status = ExternalLoginStatus.Ok)
+        {
+            if (status == ExternalLoginStatus.Ok)
+            {
+                return ctrl.LocalRedirect("~/");
+            }
+            return ctrl.LocalRedirect($"~/?externalLoginStatus={(int)status}");
+            // return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
         }
 
     }

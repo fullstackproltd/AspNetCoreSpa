@@ -142,7 +142,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
                     return Challenge(properties, provider);
                 }
 
-                return Render(ExternalLoginStatus.Error);
+                return this.Render(ExternalLoginStatus.Error);
             }
 
             // Sign in the user with this external login provider if the user already has a login.
@@ -155,7 +155,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
 
                 if (user == null)
                 {
-                    return Render(ExternalLoginStatus.Error);
+                    return this.Render(ExternalLoginStatus.Error);
                 }
 
                 _logger.LogInformation(5, $"User logged in with ${info.LoginProvider} provider.");
@@ -189,13 +189,13 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 else
                 {
                     // External account doesn't have a local account so ask to create one
-                    return Render(ExternalLoginStatus.CreateAccount);
+                    return this.Render(ExternalLoginStatus.CreateAccount);
                 }
 
             }
 
 
-            return Render(ExternalLoginStatus.Error);
+            return this.Render(ExternalLoginStatus.Error);
 
             // if (result.RequiresTwoFactor)
             // {
