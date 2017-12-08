@@ -39,7 +39,7 @@ export function getAppData(appService: AppService) {
       { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
       { path: 'chat', loadChildren: './+chat/chat.module#ChatModule' }
     ]),
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     AppService,
