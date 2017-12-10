@@ -19,7 +19,6 @@
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
 * Testing Angular code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
 * E2E testing with [Protractor](http://www.protractortest.org).
-* [HMR](https://webpack.github.io/docs/hot-module-replacement.html) (Hot Module Replacement) with Webpack
 * Webpack DLL support for fast rebuilds (~ < 0.5 second), depends upon machine performance.
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)

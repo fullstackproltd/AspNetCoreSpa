@@ -1,16 +1,11 @@
-﻿using AspNetCoreSpa.Server;
-using AspNetCoreSpa.Server.Extensions;
+﻿using AspNetCoreSpa.Server.Extensions;
 using AspNetCoreSpa.Server.Services;
 using AspNetCoreSpa.Server.SignalR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Rewrite;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Primitives;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace AspNetCoreSpa
@@ -36,8 +31,6 @@ namespace AspNetCoreSpa
         {
 
             services.AddPreRenderDebugging(HostingEnvironment);
-
-            services.AddCustomHeaders();
 
             services.AddOptions();
 
@@ -65,9 +58,6 @@ namespace AspNetCoreSpa
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            // Node services are to execute any arbitrary nodejs code from .net
-            // services.AddNodeServices();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
@@ -75,15 +65,8 @@ namespace AspNetCoreSpa
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
         {
-            // if (env.IsProduction())
-            // {
-            //     var options = new RewriteOptions().AddRedirectToHttps();
-            //     app.UseRewriter(options);
-            // }
 
-            // app.UseCustomisedCsp();
-
-            app.UseCustomisedHeadersMiddleware();
+            // app.AddCustomSecurityHeaders();
 
             app.AddCustomLocalization();
 

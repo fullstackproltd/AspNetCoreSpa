@@ -1,5 +1,4 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
@@ -7,14 +6,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
+using NetEscapades.AspNetCore.SecurityHeaders.Infrastructure;
 using System;
-using System.Linq;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseCustomisedHeadersMiddleware(this IApplicationBuilder app)
+        // https://github.com/andrewlock/NetEscapades.AspNetCore.SecurityHeaders
+        public static IApplicationBuilder AddCustomSecurityHeaders(this IApplicationBuilder app)
         {
             var policyCollection = new HeaderPolicyCollection()
                    .AddFrameOptionsDeny()
@@ -22,102 +22,61 @@ namespace AspNetCoreSpa.Server.Extensions
                    .AddContentTypeOptionsNoSniff()
                    .AddStrictTransportSecurityMaxAge(maxAge: 60 * 60 * 24 * 365) // maxage = one year in seconds
                    .AddReferrerPolicyOriginWhenCrossOrigin()
-                   .RemoveServerHeader();
-            //    .AddCustomHeader("X-My-Test-Header", "Header value");
+                   .RemoveServerHeader()
+                   .AddContentSecurityPolicy(builder =>
+                    {
+                        builder.AddUpgradeInsecureRequests(); // upgrade-insecure-requests
 
-            app.UseCustomHeadersMiddleware(policyCollection);
+                        // builder.AddReportUri() // report-uri: https://report-uri.com
+                        //     .To("https://report-uri.com");
+
+                        builder.AddDefaultSrc()
+                            .Self();
+
+                        // Allow AJAX, WebSocket and EventSource connections to:
+                        var socketUrl = "ws" + Startup.Configuration["HostUrl"].ToString().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
+
+                        builder.AddConnectSrc()
+                            .Self()
+                            .From(socketUrl);
+
+                        builder.AddFontSrc() // font-src 'self'
+                            .Self()
+                            .Data();
+
+                        builder.AddObjectSrc() // object-src 'none'
+                            .None();
+
+                        builder.AddFormAction() // form-action 'self'
+                            .Self();
+
+                        builder.AddImgSrc() // img-src https:
+                            .Self()
+                            .Data();
+
+                        builder.AddScriptSrc() // script-src 'self'
+                            .Self();
+
+                        builder.AddStyleSrc() // style-src 'self'
+                            .Self();
+
+                        builder.AddMediaSrc()
+                            .Self();
+
+                        builder.AddFrameAncestors() // frame-ancestors 'none'
+                            .None();
+
+                        builder.AddFrameSource()
+                            .None();
+
+                        // You can also add arbitrary extra directives: plugin-types application/x-shockwave-flash"
+                        // builder.AddCustomDirective("plugin-types", "application/x-shockwave-flash");
+
+                    });
+
+            app.UseSecurityHeaders(policyCollection);
             return app;
         }
-        // https://github.com/juunas11/aspnetcore-security-headers
-        public static IApplicationBuilder UseCustomisedCsp(this IApplicationBuilder app)
-        {
-            // TODO: Implement HSTS once SSL is implemented
-            // Enable Strict Transport Security with a 30-day caching period
-            // Do not include subdomains
-            // Do not allow preload
-            // app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
-
-            // // Use certificate pinning with:
-            // // - 30-day caching period
-            // // - One pin in SHA-256 form
-            // // - Report-Only = Invalid certificate should not be reported, but:
-            // // - Report problems to /hpkp-report
-            // app.UseHpkp(hpkp =>
-            // {
-            //     hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
-            //         .AddSha256Pin("nrmpk4ZI3wbRBmUZIT5aKAgP0LlKHRgfA2Snjzeg9iY=")
-            //         .SetReportOnly()
-            //         .ReportViolationsTo("/hpkp-report");
-            // });
-
-            // Content Security Policy
-            app.UseCsp(csp =>
-            {
-                // If nothing is mentioned for a resource class, allow from this domain
-                csp.ByDefaultAllow
-                                .FromSelf();
-
-                // Allow JavaScript from:
-                csp.AllowScripts
-                                .FromSelf() //This domain
-                                .AllowUnsafeEval()
-                                .AllowUnsafeInline();
-
-                // CSS allowed from:
-                csp.AllowStyles
-                                .FromSelf()
-                                .AllowUnsafeInline();
-
-                csp.AllowImages
-                    .FromSelf()
-                    .From("data:");
-
-                // HTML5 audio and video elemented sources can be from:
-                csp.AllowAudioAndVideo
-                                .FromNowhere();
-
-                // Contained iframes can be sourced from:
-                csp.AllowFrames
-                    .FromNowhere(); //Nowhere, no iframes allowed
-
-                // Allow AJAX, WebSocket and EventSource connections to:
-                var socketUrl = "ws" + Startup.Configuration["HostUrl"].ToString().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
-                csp.AllowConnections
-                                .To(socketUrl)
-                                .ToSelf();
-
-                // Allow fonts to be downloaded from:
-                csp.AllowFonts
-                                .FromSelf()
-                                .From("data:");
-
-                // Allow object, embed, and applet sources from:
-                csp.AllowPlugins
-                                .FromNowhere();
-
-                // Allow other sites to put this in an iframe?
-                csp.AllowFraming
-                                .FromNowhere(); // Block framing on other sites, equivalent to X-Frame-Options: DENY
-
-                // Do not block violations, only report
-                // This is a good idea while testing your CSP
-                // Remove it when you know everything will work
-                // csp.SetReportOnly();
-                // Where should the violation reports be sent to?
-                // csp.ReportViolationsTo("/csp-report");
-            });
-
-            return app;
-        }
-
-        // public static IApplicationBuilder UseCustomWebpackDevMiddleware(this IApplicationBuilder app)
-        // {
-        //     app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-        //     {
-        //         HotModuleReplacement = true
-        //     });
-        //     return app;
-        // }
         public static IApplicationBuilder UseCustomSwaggerApi(this IApplicationBuilder app)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint

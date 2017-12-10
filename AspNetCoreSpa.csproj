@@ -9,7 +9,7 @@
     <SpaRoot>ClientApp\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <!-- Set this to true if you enable server-side prerendering -->
-    <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <BuildServerSideRenderer>true</BuildServerSideRenderer>
     <UserSecretsId>aspnetcorespa-c23d27a4-eb88-4b18-9b77-2a93f3b15119</UserSecretsId>
   </PropertyGroup>
 
@@ -22,7 +22,6 @@
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="2.0.0-*" />
-    <PackageReference Include="Joonasw.AspNetCore.SecurityHeaders" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.0.0-preview1-final" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
@@ -31,7 +30,7 @@
     <PackageReference Include="OpenIddict.Mvc" Version="2.0.0-*" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.1.0" />
-    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.4.1" />
+    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
