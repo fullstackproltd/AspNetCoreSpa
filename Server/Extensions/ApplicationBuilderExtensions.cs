@@ -54,11 +54,15 @@ namespace AspNetCoreSpa.Server.Extensions
                             .Self()
                             .Data();
 
-                        builder.AddScriptSrc() // script-src 'self'
-                            .Self();
+                        // builder.AddScriptSrc() // script-src 'self'
+                        //     .Self();
 
-                        builder.AddStyleSrc() // style-src 'self'
-                            .Self();
+                        // builder.AddStyleSrc() // style-src 'self'
+                        //     .Self();
+
+                        builder.AddUpgradeInsecureRequests(); // upgrade-insecure-requests
+                        builder.AddCustomDirective("script-src", "'self' 'unsafe-inline'"); 
+                        builder.AddCustomDirective("style-src", "'self' 'unsafe-inline'"); 
 
                         builder.AddMediaSrc()
                             .Self();
