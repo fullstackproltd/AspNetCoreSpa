@@ -8,6 +8,8 @@ using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
 using NetEscapades.AspNetCore.SecurityHeaders.Infrastructure;
 using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -16,6 +18,8 @@ namespace AspNetCoreSpa.Server.Extensions
         // https://github.com/andrewlock/NetEscapades.AspNetCore.SecurityHeaders
         public static IApplicationBuilder AddCustomSecurityHeaders(this IApplicationBuilder app)
         {
+            var env = app.ApplicationServices.GetRequiredService<IWebHostBuilder>();
+            
             var policyCollection = new HeaderPolicyCollection()
                    .AddFrameOptionsDeny()
                    .AddXssProtectionBlock()
@@ -34,7 +38,7 @@ namespace AspNetCoreSpa.Server.Extensions
                             .Self();
 
                         // Allow AJAX, WebSocket and EventSource connections to:
-                        var socketUrl = "ws" + Startup.Configuration["HostUrl"].ToString().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
+                        var socketUrl =  "ws" + Startup.Configuration["HostUrl"].ToString().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
 
                         builder.AddConnectSrc()
                             .Self()
@@ -61,8 +65,8 @@ namespace AspNetCoreSpa.Server.Extensions
                         //     .Self();
 
                         builder.AddUpgradeInsecureRequests(); // upgrade-insecure-requests
-                        builder.AddCustomDirective("script-src", "'self' 'unsafe-inline'"); 
-                        builder.AddCustomDirective("style-src", "'self' 'unsafe-inline'"); 
+                        builder.AddCustomDirective("script-src", "'self' 'unsafe-inline' 'unsafe-eval'"); 
+                        builder.AddCustomDirective("style-src", "'self' 'unsafe-inline' 'unsafe-eval'"); 
 
                         builder.AddMediaSrc()
                             .Self();

@@ -17,7 +17,7 @@ namespace AspNetCoreSpa.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationRole", b =>
                 {
@@ -320,8 +320,6 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("AuthorizationId");
 
-                    b.Property<string>("Ciphertext");
-
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken();
 
@@ -329,7 +327,9 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<DateTimeOffset?>("ExpirationDate");
 
-                    b.Property<string>("Hash");
+                    b.Property<string>("Payload");
+
+                    b.Property<string>("ReferenceId");
 
                     b.Property<string>("Status");
 
@@ -345,7 +345,7 @@ namespace AspNetCoreSpa.Migrations
 
                     b.HasIndex("AuthorizationId");
 
-                    b.HasIndex("Hash")
+                    b.HasIndex("ReferenceId")
                         .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
@@ -422,13 +422,11 @@ namespace AspNetCoreSpa.Migrations
                 {
                     b.HasOne("OpenIddict.Models.OpenIddictApplication", "Application")
                         .WithMany("Tokens")
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ApplicationId");
 
                     b.HasOne("OpenIddict.Models.OpenIddictAuthorization", "Authorization")
                         .WithMany("Tokens")
-                        .HasForeignKey("AuthorizationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AuthorizationId");
                 });
 #pragma warning restore 612, 618
         }
