@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { GlobalRef } from '../../../global-ref';
+import { APP_DATA } from '../../../appData';
 
 @Component({
     selector: 'appc-social-login',
@@ -9,10 +9,13 @@ import { GlobalRef } from '../../../global-ref';
 })
 export class SocialLoginComponent {
     @Input() activeLogins: ISocialLogins[];
-    constructor(private oAuthService: OAuthService, private globalRef: GlobalRef) { }
+    constructor(
+        private oAuthService: OAuthService,
+        @Inject(APP_DATA) private appData: IApplicationConfig
+    ) { }
 
     public get socialLogins(): ISocialLogins[] {
-        return [...this.globalRef.nativeGlobal.appData.loginProviders].map(login => {
+        return [...this.appData.loginProviders].map(login => {
             return {
                 loginProvider: login,
                 providerKey: login,

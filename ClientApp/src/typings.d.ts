@@ -10,9 +10,6 @@ interface NodeModule {
     id: string;
 }
 
-interface IAppGlobalRef {
-    appData: IApplicationConfig;
-}
 interface IApplicationConfig {
     cultures: ICulture[];
     content: StringMap[];

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // App level components
 import { HeaderComponent } from './components/header/header.component';
@@ -13,10 +12,8 @@ import { AccountService } from './services/account.service';
 import { SimpleNotificationsModule } from './simple-notifications/simple-notifications.module';
 import { DataService } from './services/data.service';
 import { GlobalErrorHandler } from './services/global-error.service';
-import { UtilityService } from './services/utitlity.service';
 import { TimingInterceptor } from './services/interceptors/timing-interceptor';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor';
-import { GlobalRef, BrowserGlobalRef } from '../global-ref';
 import { TranslatePipe } from '../translate.pipe';
 
 @NgModule({
@@ -28,7 +25,6 @@ import { TranslatePipe } from '../translate.pipe';
     imports: [
         CommonModule,
         FormsModule,
-        NgbModule,
         ReactiveFormsModule,
         HttpClientModule,
         RouterModule,
@@ -55,11 +51,9 @@ export class CoreModule {
             providers: [
                 AccountService,
                 DataService,
-                UtilityService,
                 { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
                 { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
-                { provide: ErrorHandler, useClass: GlobalErrorHandler },
-                { provide: GlobalRef, useClass: BrowserGlobalRef }
+                { provide: ErrorHandler, useClass: GlobalErrorHandler }
             ]
         };
     }

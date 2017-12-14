@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { Router } from '@angular/router';
 
-import { UtilityService } from '../../core/services/utitlity.service';
 import { ControlBase } from '../../shared/forms/controls/control-base';
 import { ControlTextbox } from '../../shared/forms/controls/control-textbox';
 
@@ -16,14 +16,14 @@ export class LoginComponent implements OnInit {
 
     constructor(
         public oAuthService: OAuthService,
-        private us: UtilityService
+        private router: Router
     ) { }
     public login(model: ILoginModel): void {
         this.oAuthService.fetchTokenUsingPasswordFlow(model.username, model.password)
             .then((x: any) => {
                 localStorage.setItem('id_token', x.id_token);
                 this.oAuthService.setupAutomaticSilentRefresh();
-                this.us.navigate('');
+                this.router.navigate(['']);
             });
     }
 

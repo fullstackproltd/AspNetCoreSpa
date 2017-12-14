@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Components
 import { SocialLoginComponent } from './components/social-login/social-login.component';
@@ -18,7 +17,6 @@ import { FormControlService } from './forms/form-control.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
@@ -33,7 +31,6 @@ import { FormControlService } from './forms/form-control.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule,
     // Providers, Components, directive, pipes
     SocialLoginComponent,
     DynamicFormComponent,

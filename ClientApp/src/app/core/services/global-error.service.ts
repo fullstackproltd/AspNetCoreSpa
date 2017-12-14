@@ -1,14 +1,12 @@
 import { ErrorHandler, Injectable, ApplicationRef, Injector } from '@angular/core';
 import { NotificationsService } from '../simple-notifications/simple-notifications.module';
-// import { UtilityService } from './utitlity.service';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
 
   constructor(
     private ns: NotificationsService,
-    private inj: Injector,
-    // private us: UtilityService
+    private inj: Injector
   ) { }
 
   handleError(errorResponse: any): void {
@@ -18,8 +16,8 @@ export class GlobalErrorHandler implements ErrorHandler {
     } else if (errorResponse.status === 400) {
       console.log('***** HANDLE ERROR *****');
       this.ns.error(errorResponse.error.message,
-        //  this.us.formatErrors(errorResponse.error.errors)
-        );
+        this.formatErrors(errorResponse.error.errors)
+      );
       this.inj.get(ApplicationRef).tick();
     }
     this.ns.error(errorResponse);
@@ -27,6 +25,10 @@ export class GlobalErrorHandler implements ErrorHandler {
     // IMPORTANT: Don't Rethrow the error otherwise it will not emit errors after once
     // https://stackoverflow.com/questions/44356040/angular-global-error-handler-working-only-once
     // throw errorResponse;
+  }
+
+  private formatErrors(errors: any) {
+    return errors ? errors.map((err: any) => err.message).join('/n') : '';
   }
 
 }

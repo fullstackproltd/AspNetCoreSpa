@@ -21,19 +21,10 @@
             <!-- <li class="nav-item">
                 <a class="nav-link" routerLinkActive="active" routerLink="examples">{{'app_nav_examples' | translate}}</a>
             </li> -->
-            <li class="nav-item dropdown">
-                <form action="SetLanguage" method="POST" ngNoForm>
-                    <div ngbDropdown>
-                        <a class="nav-link" id="cultures" ngbDropdownToggle>{{currentCulture.text}}</a>
-                        <div ngbDropdownMenu aria-labelledby="cultures">
-                            <div *ngFor="let culture of cultures">
-                                <button id="{{culture.value}}" name="culture" type="submit" [value]="culture.value" class="dropdown-item">
-                                    <img src="/assets/img/blank.gif" class="flag flag-{{culture.value.split('-')[1].toLowerCase()}}" alt="culture">
-                                    {{culture.value}}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            <li class="nav-item" *ngFor="let culture of cultures">
+                <form action="SetLanguage" method="POST" ngNoForm class="nav-link">
+                    <input id="{{culture.value}}" name="culture" type="submit" [value]="culture.value" type="image"
+                    src="/assets/img/blank.gif" class="flag flag-{{culture.value.split('-')[1].toLowerCase()}} rounded-circle" alt="culture" />
                 </form>
             </li>
         </ul>

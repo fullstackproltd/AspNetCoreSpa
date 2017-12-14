@@ -15,14 +15,14 @@
         [type]="control.type" [placeholder]="control.placeholder" [class.is-valid]="valid" [class.is-invalid]="invalid" class="form-control">
 
     <!--Calendar-->
-    <label *ngIf="control.type === 'calendar'" class="sr-only" [attr.for]="control.key">{{control.value}}</label>
+    <!-- <label *ngIf="control.type === 'calendar'" class="sr-only" [attr.for]="control.key">{{control.value}}</label>
     <div *ngIf="control.type === 'calendar'" class="input-group">
         <input type="text" class="form-control" [id]="control.key" [placeholder]="control.label" ngbDatepicker #d="ngbDatepicker"
             [formControlName]="control.key">
         <div class="input-group-addon" (click)="d.toggle()">
             <i class="fa fa-calendar"></i>
         </div>
-    </div>
+    </div> -->
 
     <!--Textarea-->
     <label *ngIf="control.type === 'textarea'" [for]="control.key">{{control.label}}</label>

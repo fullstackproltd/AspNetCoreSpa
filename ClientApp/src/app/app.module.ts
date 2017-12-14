@@ -3,7 +3,6 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { CoreModule } from './core/core.module';
 
@@ -12,11 +11,7 @@ import { environment } from '../environments/environment';
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-// Services
-import { AppService } from './app.service';
-export function getAppData(appService: AppService) {
-  return () => appService.getData();
-}
+import { APP_DATA } from './appData';
 
 @NgModule({
   declarations: [
@@ -29,7 +24,6 @@ export function getAppData(appService: AppService) {
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     CoreModule.forRoot(),
-    NgbModule.forRoot(),
     OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -42,11 +36,9 @@ export function getAppData(appService: AppService) {
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-    AppService,
-    { provide: APP_INITIALIZER, useFactory: getAppData, deps: [AppService], multi: true }
+    { provide: APP_DATA, useValue: (<any>window).appData }
   ],
   exports: [
-    NgbModule
   ],
   bootstrap: [AppComponent]
 })

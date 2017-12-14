@@ -1,13 +1,13 @@
-import { PipeTransform, Pipe, Injectable } from '@angular/core';
-import { GlobalRef } from './global-ref';
+import { PipeTransform, Pipe, Injectable, Inject } from '@angular/core';
+import { APP_DATA } from './appData';
 
 @Injectable()
 @Pipe({
     name: 'translate'
 })
 export class TranslatePipe implements PipeTransform {
-    constructor(private globalRef: GlobalRef) { }
+    constructor( @Inject(APP_DATA) private appData: IApplicationConfig) { }
     transform(query: string): any {
-        return (<any>this.globalRef.nativeGlobal.appData.content)[query] || query;
+        return this.appData.content[query] || query;
     }
 }

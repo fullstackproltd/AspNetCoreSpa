@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
 import { AccountService } from '../../services/account.service';
 import { DataService } from '../../services/data.service';
-import { UtilityService } from '../../services/utitlity.service';
-import { GlobalRef } from '../../../global-ref';
+import { APP_DATA } from '../../../appData';
 
 @Component({
     selector: 'appc-header',
@@ -21,9 +21,9 @@ export class HeaderComponent implements OnInit {
     constructor(
         private accountService: AccountService,
         private dataService: DataService,
+        @Inject(APP_DATA) private appData: IApplicationConfig,
         private oAuthService: OAuthService,
-        private utilityService: UtilityService,
-        private globalRef: GlobalRef
+        private router: Router
     ) { }
 
     public get isLoggedIn(): boolean {
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
     }
     public get cultures(): ICulture[] {
-        return this.globalRef.nativeGlobal.appData.cultures;
+        return this.appData.cultures;
     }
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];
@@ -48,7 +48,7 @@ export class HeaderComponent implements OnInit {
     public logout() {
         this.dataService.post('api/account/logout').subscribe(() => {
             this.oAuthService.logOut();
-            this.utilityService.navigateToSignIn();
+            this.router.navigate(['/login']);
         });
     }
 
