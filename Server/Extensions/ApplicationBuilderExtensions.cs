@@ -18,8 +18,8 @@ namespace AspNetCoreSpa.Server.Extensions
         // https://github.com/andrewlock/NetEscapades.AspNetCore.SecurityHeaders
         public static IApplicationBuilder AddCustomSecurityHeaders(this IApplicationBuilder app)
         {
-            var env = app.ApplicationServices.GetRequiredService<IWebHostBuilder>();
-            
+            var env = app.ApplicationServices.GetRequiredService<IHostingEnvironment>();
+
             var policyCollection = new HeaderPolicyCollection()
                    .AddFrameOptionsDeny()
                    .AddXssProtectionBlock()
@@ -29,7 +29,10 @@ namespace AspNetCoreSpa.Server.Extensions
                    .RemoveServerHeader()
                    .AddContentSecurityPolicy(builder =>
                     {
-                        builder.AddUpgradeInsecureRequests(); // upgrade-insecure-requests
+                        if (env.IsProduction())
+                        {
+                            builder.AddUpgradeInsecureRequests(); // upgrade-insecure-requests
+                        }
 
                         // builder.AddReportUri() // report-uri: https://report-uri.com
                         //     .To("https://report-uri.com");
@@ -38,7 +41,7 @@ namespace AspNetCoreSpa.Server.Extensions
                             .Self();
 
                         // Allow AJAX, WebSocket and EventSource connections to:
-                        var socketUrl =  "ws" + Startup.Configuration["HostUrl"].ToString().Replace("http", "", StringComparison.OrdinalIgnoreCase).Replace("https", "", StringComparison.OrdinalIgnoreCase);
+                        var socketUrl = Startup.Configuration["HostUrl"].ToString().Replace("http://", "ws://", StringComparison.OrdinalIgnoreCase).Replace("https://", "wss://", StringComparison.OrdinalIgnoreCase);
 
                         builder.AddConnectSrc()
                             .Self()
@@ -65,8 +68,8 @@ namespace AspNetCoreSpa.Server.Extensions
                         //     .Self();
 
                         builder.AddUpgradeInsecureRequests(); // upgrade-insecure-requests
-                        builder.AddCustomDirective("script-src", "'self' 'unsafe-inline' 'unsafe-eval'"); 
-                        builder.AddCustomDirective("style-src", "'self' 'unsafe-inline' 'unsafe-eval'"); 
+                        builder.AddCustomDirective("script-src", "'self' 'unsafe-inline' 'unsafe-eval'");
+                        builder.AddCustomDirective("style-src", "'self' 'unsafe-inline' 'unsafe-eval'");
 
                         builder.AddMediaSrc()
                             .Self();

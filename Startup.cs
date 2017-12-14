@@ -66,7 +66,7 @@ namespace AspNetCoreSpa
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
         {
 
-            app.AddCustomSecurityHeaders();
+            // app.AddCustomSecurityHeaders();
 
             app.AddCustomLocalization();
 
