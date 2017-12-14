@@ -1,3 +1,11 @@
 import { InjectionToken } from '@angular/core';
 
-export declare const APP_DATA: InjectionToken<IApplicationConfig>;
+export const APP_DATA = new InjectionToken<IApplicationConfig>('APPDATA');
+
+export function getAppData() {
+    const appData = (<any>(global || window)).appData;
+    if (typeof appData === 'string') {
+        return JSON.parse(appData);
+    }
+    return appData;
+}

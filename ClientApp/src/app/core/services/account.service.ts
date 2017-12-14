@@ -10,10 +10,11 @@ export class AccountService {
     constructor(private oAuthService: OAuthService, @Inject(PLATFORM_ID) private platformId: string) { }
 
     public get isLoggedIn(): boolean {
-        return this.oAuthService.hasValidAccessToken();
+        return isPlatformBrowser(this.platformId) &&
+            this.oAuthService.hasValidAccessToken();
     }
     public get user(): IProfileModel | undefined {
-        if (this.idToken) {
+        if (isPlatformBrowser(this.platformId) && this.idToken) {
             return this.jwtHelper.decodeToken(this.idToken);
         }
         return undefined;
@@ -22,11 +23,10 @@ export class AccountService {
         if (isPlatformBrowser(this.platformId)) {
             return this.oAuthService.getAccessToken();
         }
+        return '';
     }
     // Used to access user information
     public get idToken(): string {
-        if (isPlatformBrowser(this.platformId)) {
-            return this.oAuthService.getIdToken();
-        }
+        return this.oAuthService.getIdToken();
     }
 }

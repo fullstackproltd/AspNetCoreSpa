@@ -13,16 +13,13 @@ enableProdMode();
 
 
 export default createServerRenderer(params => {
-    // console.log('=========================================================================================================================');
-    // console.log(getAppData());
-    // console.log('=========================================================================================================================');
+    global.appData = params.data.appData;
     const options = {
         document: params.data.originalHtml,
         url: params.url,
         extraProviders: [
             provideModuleMap(LAZY_MODULE_MAP),
             { provide: APP_BASE_HREF, useValue: params.baseUrl },
-            { provide: APP_DATA, useValue: params.data.appData },
             { provide: 'BASE_URL', useValue: params.origin + params.baseUrl },
         ]
     };

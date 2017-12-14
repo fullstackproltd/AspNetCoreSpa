@@ -9,9 +9,7 @@
     "oauth",
     "angular-cli",
     "typescript",
-    "bootstrap4",
-    "ng-bootstrap",
-    "ngx-translate"
+    "bootstrap4"
   ],
   "repository": "git+https://github.com/asadsahi/AspNetCoreSpa.git",
   "author": "Asad Sahi <asadazmat@gmail.com>",
@@ -19,7 +17,7 @@
     "ng": "./node_modules/.bin/ng",
     "clean:install": "rimraf node_modules & npm i",
     "start": "ng serve --extract-css --aot",
-    "build": "ng build --extract-css",
+    "build": "ng build --extract-css --aot",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media --aot",
     "test": "ng test",
     "lint": "ng lint",
@@ -74,7 +72,7 @@
     "ts-node": "4.0.1",
     "tslib": "1.8.1",
     "tslint": "5.8.0",
-    "typescript": "2.5.3",
+    "typescript": "2.6.2",
     "webpack-bundle-analyzer": "2.9.1"
   },
   "license": "MIT"

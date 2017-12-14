@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { APP_DATA } from './appData';
+import { APP_DATA, getAppData } from './appData';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { APP_DATA } from './appData';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-    { provide: APP_DATA, useValue: (<any>window).appData }
+    { provide: APP_DATA, useFactory: getAppData, deps: [] }
   ],
   exports: [
   ],

@@ -12,7 +12,6 @@
 * Secure - with CSP and custom security headers
 * [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
-* [ng-bootstrap](https://ng-bootstrap.github.io/)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
 * [PWA support](https://developers.google.com/web/progressive-web-apps/)
