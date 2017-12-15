@@ -23,8 +23,8 @@
             </li> -->
             <li class="nav-item" *ngFor="let culture of cultures">
                 <form action="SetLanguage" method="POST" ngNoForm class="nav-link">
-                    <input id="{{culture.value}}" name="culture" type="submit" [value]="culture.value" type="image"
-                    src="/assets/img/blank.gif" class="flag flag-{{culture.value.split('-')[1].toLowerCase()}} rounded-circle" alt="culture" />
+                    <input id="{{culture.value}}" name="culture" type="submit" [value]="culture.value" type="image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAgFAAEACAgAOw=="
+                        class="flag flag-{{culture.value.split('-')[1].toLowerCase()}} rounded-circle" alt="culture" />
                 </form>
             </li>
         </ul>

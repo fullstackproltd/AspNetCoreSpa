@@ -44,7 +44,7 @@
         "assets"
       ],
       "main": "main.server.ts",
-      "tsconfig": "tsconfig.app-ssr.json",
+      "tsconfig": "tsconfig.server.json",
       "prefix": "app",
       "scripts": [],
       "environmentSource": "environments/environment.ts",

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { CoreModule } from './core/core.module';
+import { PrebootModule } from 'preboot';
 
 import { environment } from '../environments/environment';
 
@@ -21,6 +22,7 @@ import { APP_DATA, getAppData } from './appData';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    PrebootModule.withConfig({ appRoot: 'appc-root' }),
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     CoreModule.forRoot(),
@@ -32,7 +34,8 @@ import { APP_DATA, getAppData } from './appData';
       { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
       { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
       { path: 'chat', loadChildren: './+chat/chat.module#ChatModule' }
-    ]),
+    ],
+      { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
