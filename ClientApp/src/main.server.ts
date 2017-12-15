@@ -5,14 +5,15 @@ import { APP_BASE_HREF } from '@angular/common';
 import { enableProdMode } from '@angular/core';
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import { createServerRenderer } from 'aspnet-prerendering';
-import { APP_DATA } from './app/appData';
 export { AppServerModule } from './app/app.server.module';
-const { AppServerModule, AppServerModuleNgFactory, LAZY_MODULE_MAP } = (module as any).exports;
+
+import { APP_DATA } from './app/appData';
 
 enableProdMode();
 
-
 export default createServerRenderer(params => {
+    const { AppServerModule, AppServerModuleNgFactory, LAZY_MODULE_MAP } = (module as any).exports;
+
     global.appData = params.data.appData;
     const options = {
         document: params.data.originalHtml,
