@@ -28,14 +28,13 @@ import { APP_DATA, getAppData } from './appData';
     CoreModule.forRoot(),
     OAuthModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },
       { path: 'login', loadChildren: './account/+login/login.module#LoginModule' },
       { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
       { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
       { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
       { path: 'chat', loadChildren: './+chat/chat.module#ChatModule' }
-    ],
-      { initialNavigation: 'enabled' }),
+    ], { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [

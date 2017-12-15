@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { HubConnection } from '@aspnet/signalr-client';
 
 @Component({
@@ -13,8 +13,7 @@ export class ChatComponent implements OnInit {
   message = '';
   messages: string[] = [];
 
-  constructor() {
-  }
+  constructor( @Inject('BASE_URL') private baseUrl: string) { }
 
   public sendMessage(): void {
     const data = `Sent: ${this.message}`;
@@ -25,7 +24,7 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._hubConnection = new HubConnection('/chathub');
+    this._hubConnection = new HubConnection(`${this.baseUrl}chathub`);
 
     this._hubConnection.on('send', (data: any) => {
       const received = `Received: ${data}`;
