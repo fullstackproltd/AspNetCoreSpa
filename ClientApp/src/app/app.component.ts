@@ -11,6 +11,7 @@ import { ExternalLoginStatus } from './app.models';
 @Component({
   selector: 'appc-root',
   animations: [routerTransition],
+  styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -57,6 +58,5 @@ export class AppComponent implements OnInit {
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
-
 
 }
