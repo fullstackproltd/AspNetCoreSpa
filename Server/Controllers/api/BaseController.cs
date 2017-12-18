@@ -14,6 +14,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
         public BaseController()
         {
         }
+        [HttpGet("index")]
         public IActionResult Render(ExternalLoginStatus status)
         {
             return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
