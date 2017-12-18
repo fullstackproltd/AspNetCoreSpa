@@ -16,26 +16,27 @@ export class AuthInterceptor implements HttpInterceptor {
         // Get the auth header from the service.
         const auth = this.inj.get(AccountService);
 
-        const authHeader = auth.accessToken;
         // Clone the request to add the new header.
+        let headers = req.headers;
+        if (isPlatformServer(this.platformId)) {
+            headers = req.headers.set('Cookie', this.getCultureCookie());
+        } else {
+            headers = req.headers.set('Authorization', 'Bearer ' + auth.accessToken);
+        }
 
-        const authReq = req.clone({ headers: req.headers.set('Cookie', this.getCultureCookie()) });
-        // OR shortcut
-        // const authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authHeader } });
+        const authReq = req.clone({ headers });
         // Pass on the cloned request instead of the original request.
         return next.handle(authReq);
     }
 
     private getCultureCookie(): string {
-        if (isPlatformServer(this.platformId)) {
-            const cookies: any = this.inj.get(COOKIES);
-            let strCookie = '';
-            if (cookies) {
-                cookies.forEach((c: any) => {
-                    strCookie += c.value;
-                });
-            }
-            return '.AspNetCore.Culture=' + encodeURIComponent(strCookie);
+        const cookies: any = this.inj.get(COOKIES);
+        let strCookie = '';
+        if (cookies) {
+            cookies.forEach((c: any) => {
+                strCookie += c.value;
+            });
         }
+        return '.AspNetCore.Culture=' + encodeURIComponent(strCookie);
     }
 }
