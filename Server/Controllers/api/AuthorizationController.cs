@@ -20,6 +20,7 @@ using AspNetCoreSpa.Server.Filters;
 
 namespace AspNetCoreSpa.Server.Controllers.api
 {
+    [Route("connect/[controller]")]
     public class AuthorizationController : BaseController
     {
         private readonly IOptions<IdentityOptions> _identityOptions;
