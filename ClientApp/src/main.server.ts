@@ -12,6 +12,7 @@ import { COOKIES } from './app/app.models';
 // Only cookie used in this app is culture cookie
 import * as xhr2 from 'xhr2';
 xhr2.prototype._restrictedHeaders = {};
+
 enableProdMode();
 
 export default createServerRenderer(params => {

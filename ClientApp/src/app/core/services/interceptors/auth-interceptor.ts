@@ -30,13 +30,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     private getCultureCookie(): string {
-        const cookies: any = this.inj.get(COOKIES);
-        let strCookie = '';
+        const cookies: any[] = this.inj.get<any[]>(COOKIES);
         if (cookies) {
-            cookies.forEach((c: any) => {
-                strCookie += c.value;
-            });
+            const cultureCookie = cookies.find(c => c.key === '.AspNetCore.Culture');
+            return '.AspNetCore.Culture=' + encodeURIComponent(cultureCookie.value);
         }
-        return '.AspNetCore.Culture=' + encodeURIComponent(strCookie);
     }
 }
