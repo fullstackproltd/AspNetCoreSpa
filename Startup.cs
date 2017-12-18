@@ -128,17 +128,17 @@ namespace AspNetCoreSpa
                           // [2] Uncomment this code block
                           */
 
-                          spa.UseSpaPrerendering(options =>
-                         {
-                             options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                             options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                             options.ExcludeUrls = new[] { "/sockjs-node" };
-                             options.SupplyData = (requestContext, obj) =>
-                             {
-                                 //  var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
-                                 obj.Add("Cookies", requestContext.Request.Cookies);
-                             };
-                         });
+                          //   spa.UseSpaPrerendering(options =>
+                          //    {
+                          //        options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                          //        options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                          //        options.ExcludeUrls = new[] { "/sockjs-node" };
+                          //        options.SupplyData = (requestContext, obj) =>
+                          //        {
+                          //          //  var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
+                          //          obj.Add("Cookies", requestContext.Request.Cookies);
+                          //        };
+                          //    });
 
                           if (env.IsDevelopment())
                           {

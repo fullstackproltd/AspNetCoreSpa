@@ -5,7 +5,7 @@
     "scope": "/",
     "display": "standalone",
     "start_url": "./?utm_source=web_app_manifest",
-    "short_name": "AspNetCoreSpa",
+    "short_name": "AspNetNgSPA",
     "theme_color": "#105B63",
     "description": "A Single Page Application built using Asp.Net Core and Angular",
     "orientation": "portrait",
