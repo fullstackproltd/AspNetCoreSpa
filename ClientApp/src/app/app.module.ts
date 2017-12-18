@@ -4,15 +4,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { OAuthModule } from 'angular-oauth2-oidc';
-import { CoreModule } from './core/core.module';
 import { PrebootModule } from 'preboot';
+import { CoreModule } from './core/core.module';
 
 import { environment } from '../environments/environment';
 
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { APP_DATA, getAppData } from './appData';
+import { AppService } from './app.service';
+export function appServiceFactory(appService: AppService): Function {
+  return () => appService.getAppData();
+}
+export function getCookies() {
+  // the Request object only lives on the server
+}
 
 @NgModule({
   declarations: [
@@ -38,7 +44,8 @@ import { APP_DATA, getAppData } from './appData';
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
-    { provide: APP_DATA, useFactory: getAppData, deps: [] }
+    AppService,
+    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService], multi: true }
   ],
   exports: [
   ],

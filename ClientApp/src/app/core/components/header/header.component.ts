@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
+import { AppService } from '../../../app.service';
 import { AccountService } from '../../services/account.service';
 import { DataService } from '../../services/data.service';
-import { APP_DATA } from '../../../appData';
 
 @Component({
     selector: 'appc-header',
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     constructor(
         private accountService: AccountService,
         private dataService: DataService,
-        @Inject(APP_DATA) private appData: IApplicationConfig,
+        private appService: AppService,
         private oAuthService: OAuthService,
         private router: Router
     ) { }
@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
     }
     public get cultures(): ICulture[] {
-        return this.appData.cultures;
+        return this.appService.appData.cultures;
     }
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];

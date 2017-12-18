@@ -1,6 +1,7 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
-import { APP_DATA } from '../../../appData';
+
+import { AppService } from '../../../app.service';
 
 @Component({
     selector: 'appc-social-login',
@@ -10,12 +11,13 @@ import { APP_DATA } from '../../../appData';
 export class SocialLoginComponent {
     @Input() activeLogins: ISocialLogins[];
     constructor(
+        private appService: AppService,
         private oAuthService: OAuthService,
-        @Inject(APP_DATA) private appData: IApplicationConfig
+
     ) { }
 
     public get socialLogins(): ISocialLogins[] {
-        return [...this.appData.loginProviders].map(login => {
+        return [...this.appService.appData.loginProviders].map(login => {
             return {
                 loginProvider: login,
                 providerKey: login,

@@ -1,3 +1,7 @@
+import { InjectionToken } from '@angular/core';
+
+export const COOKIES = new InjectionToken<string>('COOKIES');
+
 export enum ExternalLoginStatus {
     Ok = 0,
     Error = 1,

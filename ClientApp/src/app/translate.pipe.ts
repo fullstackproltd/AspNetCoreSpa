@@ -1,13 +1,12 @@
-import { PipeTransform, Pipe, Injectable, Inject } from '@angular/core';
-import { APP_DATA } from './appData';
-
+import { PipeTransform, Pipe, Injectable } from '@angular/core';
+import { AppService } from './app.service';
 @Injectable()
 @Pipe({
     name: 'translate'
 })
 export class TranslatePipe implements PipeTransform {
-    constructor( @Inject(APP_DATA) private appData: IApplicationConfig) { }
+    constructor(private appService: AppService) { }
     transform(query: string): any {
-        return this.appData.content[query] || query;
+        return this.appService.appData.content[query] || query;
     }
 }

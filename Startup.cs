@@ -127,7 +127,7 @@ namespace AspNetCoreSpa
                           //     value to 'true', so that the SSR bundle is built during publish
                           // [2] Uncomment this code block
                           */
-                          
+
                           spa.UseSpaPrerendering(options =>
                          {
                              options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
@@ -135,8 +135,8 @@ namespace AspNetCoreSpa
                              options.ExcludeUrls = new[] { "/sockjs-node" };
                              options.SupplyData = (requestContext, obj) =>
                              {
-                                 var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
-                                 obj.Add("appData", result);
+                                 //  var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
+                                 obj.Add("Cookies", requestContext.Request.Cookies);
                              };
                          });
 

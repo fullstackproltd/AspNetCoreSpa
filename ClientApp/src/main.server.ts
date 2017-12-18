@@ -6,15 +6,17 @@ import { enableProdMode } from '@angular/core';
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import { createServerRenderer } from 'aspnet-prerendering';
 export { AppServerModule } from './app/app.server.module';
+import { COOKIES } from './app/app.models';
 
-import { APP_DATA } from './app/appData';
+import * as xhr2 from 'xhr2';
+xhr2.prototype._restrictedHeaders = {};
 
 enableProdMode();
 
 export default createServerRenderer(params => {
     const { AppServerModule, AppServerModuleNgFactory, LAZY_MODULE_MAP } = (module as any).exports;
 
-    global.appData = params.data.appData;
+    // global.appData = params.data.appData;
     const options = {
         document: params.data.originalHtml,
         url: params.url,
@@ -22,6 +24,7 @@ export default createServerRenderer(params => {
             provideModuleMap(LAZY_MODULE_MAP),
             { provide: APP_BASE_HREF, useValue: params.baseUrl },
             { provide: 'BASE_URL', useValue: params.origin + params.baseUrl },
+            { provide: COOKIES, useValue: params.data.cookies }
         ]
     };
 
@@ -30,7 +33,7 @@ export default createServerRenderer(params => {
         : /* dev */ renderModule(AppServerModule, options);
 
     return renderPromise.then(html => {
-        html = html.replace('$$script$$', `<script type="text/javascript">window.appData = ${params.data.appData}</script>`);
+        // html = html.replace('$$script$$', `<script type="text/javascript">window.appData = ${params.data.appData}</script>`);
         return {
             html
         };
