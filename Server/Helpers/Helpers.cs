@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Serilog;
@@ -16,7 +18,7 @@ namespace AspNetCoreSpa.Server
                         new JsonSerializerSettings
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                            StringEscapeHandling =  StringEscapeHandling.EscapeHtml,
+                            StringEscapeHandling = StringEscapeHandling.EscapeHtml,
                             ContractResolver = new CamelCasePropertyNamesContractResolver()
                         });
         }
@@ -36,5 +38,10 @@ namespace AspNetCoreSpa.Server
                                     "image/svg+xml",
                                     "application/font-woff2"
                                 });
+
+        public static IActionResult Render(this Controller ctrl, ExternalLoginStatus status)
+        {
+            return ctrl.RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
+        }
     }
 }

@@ -11,9 +11,6 @@ namespace AspNetCoreSpa.Server.ViewModels.ManageViewModels
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
-
-        [Required]
-        [EmailAddress]
         public string Email { get; set; }
 
         [Phone]
