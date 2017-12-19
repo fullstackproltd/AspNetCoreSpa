@@ -16,8 +16,8 @@ export class AppService {
         return this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
     }
     getAppData(): Promise<IApplicationConfig> {
-        const transferData = this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
-        if (!transferData) {
+        const transferredAppData = this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
+        if (!transferredAppData) {
             return this.dataService.get(`${this.baseUrl}api/applicationdata`).toPromise()
                 .then((data: IApplicationConfig) => {
                     this.transferState.set(APP_DATA_KEY, data);
@@ -25,7 +25,7 @@ export class AppService {
                 });
         }
         return new Promise((resolve, reject) => {
-            resolve(transferData);
+            resolve(transferredAppData);
         });
     }
 }

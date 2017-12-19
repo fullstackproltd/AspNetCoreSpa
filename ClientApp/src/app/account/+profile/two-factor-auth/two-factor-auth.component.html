@@ -1,9 +1,9 @@
 <div class="alert alert-danger">
-  <h1>Highly EXPERIMENTAL Feature: </h1>
+  <h1>EXPERIMENTAL Feature: </h1>
   <p>Don't enable two factor auth for a user yet, it isn't fully working.</p>
 </div>
 
-{{model | json}}
+<!-- {{model | json}} -->
 
 <appc-recovery-codes [model]="model" *ngIf="model?.is2faEnabled"></appc-recovery-codes>
 

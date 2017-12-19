@@ -16,10 +16,6 @@ import { AppService } from './app.service';
 export function appServiceFactory(appService: AppService): Function {
   return () => appService.getAppData();
 }
-export function getCookies() {
-  // the Request object only lives on the server
-}
-
 @NgModule({
   declarations: [
     // Components
