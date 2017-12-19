@@ -16,7 +16,6 @@ using Microsoft.Extensions.Localization;
 using AspNetCoreSpa.Server.ViewModels;
 using System.Globalization;
 using Microsoft.Extensions.Caching.Memory;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 using System.Threading;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Builder;
