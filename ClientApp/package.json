@@ -18,7 +18,7 @@
     "clean:install": "rimraf node_modules & npm i",
     "start": "ng serve --extract-css --aot",
     "build": "ng build --extract-css --aot",
-    "build:ssr": "npm run build -- --app=ssr --output-hashing=media --aot",
+    "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
