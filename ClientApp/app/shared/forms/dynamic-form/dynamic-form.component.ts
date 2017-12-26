@@ -74,10 +74,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     private formatDateToSave(form: FormGroup) {
         const dateField = this.sortedControls.filter(x => x.type === 'calendar');
         if (dateField && dateField.length > 0) {
-            const controlKey = dateField[0].key;
-            const objectDate = this.form.value[controlKey];
-            const date = new Date(objectDate.year, objectDate.month - 1, objectDate.day);
-            this.form.value[controlKey] = date;
+            for (const control of dateField) {
+                const controlKey = control.key;
+                const objectDate = this.form.value[controlKey];
+                const date = new Date(objectDate.year, objectDate.month - 1, objectDate.day);
+                this.form.value[controlKey] = date;
+            }
         }
     }
 
