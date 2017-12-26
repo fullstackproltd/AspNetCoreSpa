@@ -64,10 +64,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     private formatDateToDisplay(model: any, controls: Array<ControlBase<any>>) {
         const dateField = controls.filter(x => x.type === 'calendar');
         if (dateField && dateField.length > 0) {
-            const controlKey = dateField[0].key;
-            const stringDate = model[controlKey];
-            const date = new Date(stringDate);
-            model[controlKey] = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+            for (const control of dateField) {
+                const controlKey = control.key;
+                const stringDate = model[controlKey];
+                const date = new Date(stringDate);
+                model[controlKey] = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+            }
         }
     }
 
@@ -77,7 +79,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
             for (const control of dateField) {
                 const controlKey = control.key;
                 const objectDate = this.form.value[controlKey];
-                const date = new Date(objectDate.year, objectDate.month - 1, objectDate.day);
+                const date = Date.UTC(objectDate.year, objectDate.month - 1, objectDate.day);
+                console.log(date);
                 this.form.value[controlKey] = date;
             }
         }
