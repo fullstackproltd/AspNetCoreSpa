@@ -79,8 +79,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
             for (const control of dateField) {
                 const controlKey = control.key;
                 const objectDate = this.form.value[controlKey];
-                const date = Date.UTC(objectDate.year, objectDate.month - 1, objectDate.day);
-                console.log(date);
+                const date = new Date(objectDate.year, objectDate.month - 1, objectDate.day);
                 this.form.value[controlKey] = date;
             }
         }
