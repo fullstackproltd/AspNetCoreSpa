@@ -26,10 +26,8 @@ export class AccountService {
         return undefined;
     }
     public logout() {
-        this.dataService.post('api/account/logout').subscribe((res) => {
-            this.oAuthService.logOut();
-            this.utilityService.navigateToSignIn();
-        });
+        this.oAuthService.logOut();
+        this.utilityService.navigateToSignIn();
     }
 
     public get accessToken(): string {
