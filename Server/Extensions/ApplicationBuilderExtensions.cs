@@ -24,7 +24,7 @@ namespace AspNetCoreSpa.Server.Extensions
                    .AddFrameOptionsDeny()
                    .AddXssProtectionBlock()
                    .AddContentTypeOptionsNoSniff()
-                   .AddStrictTransportSecurityMaxAge(maxAge: 60 * 60 * 24 * 365) // maxage = one year in seconds
+                   .AddStrictTransportSecurityMaxAge(maxAgeInSeconds: 60 * 60 * 24 * 365) // maxage = one year in seconds
                    .AddReferrerPolicyOriginWhenCrossOrigin()
                    .RemoveServerHeader()
                    .AddContentSecurityPolicy(builder =>

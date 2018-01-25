@@ -22,7 +22,7 @@
     <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="2.0.0-*" />
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="2.0.0-*" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.0.0-preview1-final" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-alpha2-final" />
     <PackageReference Include="OpenIddict" Version="2.0.0-*" />
@@ -30,11 +30,11 @@
     <PackageReference Include="OpenIddict.Mvc" Version="2.0.0-*" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="1.1.0" />
-    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.6.0" />
+    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
 
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
 
   </ItemGroup>
 

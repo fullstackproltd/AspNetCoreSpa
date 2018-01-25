@@ -18,7 +18,6 @@
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
 * Testing Angular code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
 * E2E testing with [Protractor](http://www.protractortest.org).
-* Webpack DLL support for fast rebuilds (~ < 0.5 second), depends upon machine performance.
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
 * Token based authentication using [Openiddict](https://github.com/openiddict/openiddict-core)
@@ -45,16 +44,10 @@
 3. dotnet restore
 4. Install global dependencies
     npm install protractor rimraf http-server @angular/cli -g
-5. npm install
-6. Two ways to run the app (Development mode):
-    i) First: (F5 from VScode or Visual studio IDE):
-        F5 (This will automatically launch browser)
-    ii) Second: (from command line)
-        Dev mode:
-        npm run dev:watch
-        Browse using http://127.0.0.1:5000 or https://127.0.0.1:5001 
-        Prod mode:
-        npm run prod:watch
+5. npm install OR yarn
+6. Run 
+    i) Open terminal and run `npm start`
+    ii) F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
 
 7. Point to Sqllite or SqlServer
     
