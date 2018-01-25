@@ -1,0 +1,56 @@
+<!--tslint:disable-->
+<div #f="ngForm" [formGroup]="form" [ngSwitch]="control.type" class="form-group {{control.class}}" [class.has-danger]="invalid"
+    [class.has-success]="valid" [class.form-check]="control.type === 'checkbox'">
+
+    <label *ngSwitchCase="'dropdown'" [attr.for]="control.key" class="col-form-label">{{control.label}}</label>
+    <select *ngSwitchCase="'dropdown'" [id]="control.key" [formControlName]="control.key" [class.is-valid]="valid" [class.is-invalid]="invalid"
+        class="form-control">
+        <option *ngFor="let opt of control.options" [value]="opt.key">{{opt.value}}</option>
+    </select>
+
+    <!--This is not the switch case because of multiple control types-->
+    <label *ngIf="control.type === 'textbox' || control.type === 'email' || control.type === 'password'" [attr.for]="control.key"
+        class="col-form-label">{{control.label}}</label>
+    <input *ngIf="control.type === 'textbox' || control.type === 'email' || control.type === 'password'" [id]="control.key" [formControlName]="control.key"
+        [type]="control.type" [placeholder]="control.placeholder" [class.is-valid]="valid" [class.is-invalid]="invalid" class="form-control">
+
+    <!--Calendar-->
+    <!-- <label *ngIf="control.type === 'calendar'" class="sr-only" [attr.for]="control.key">{{control.value}}</label>
+    <div *ngIf="control.type === 'calendar'" class="input-group">
+        <input type="text" class="form-control" [id]="control.key" [placeholder]="control.label" ngbDatepicker #d="ngbDatepicker"
+            [formControlName]="control.key">
+        <div class="input-group-addon" (click)="d.toggle()">
+            <i class="fa fa-calendar"></i>
+        </div>
+    </div> -->
+
+    <!--Textarea-->
+    <label *ngIf="control.type === 'textarea'" [for]="control.key">{{control.label}}</label>
+    <textarea *ngIf="control.type === 'textarea'" class=" form-control" [id]="control.key" rows="3" [formControlName]="control.key"
+        [class.is-valid]="valid" [class.is-invalid]="invalid"></textarea>
+
+    <!--Checkbox-->
+    <label *ngSwitchCase="'checkbox'" [attr.for]="control.key" class="custom-control custom-checkbox">
+        <input #ck *ngSwitchCase="'checkbox'" (change)="control.value = ck.checked" [id]="control.key" [formControlName]="control.key"
+            [type]="control.type" class="custom-control-input">
+        <span class="custom-control-indicator"></span>
+        <span class="custom-control-description">{{control.label}}</span>
+    </label>
+
+    <!--Checkbox list-->
+    <div *ngIf="control.type === 'checkboxlist'">
+        <div class="form-check form-check-inline" *ngFor="let item of control.options.options">
+            <label class="custom-control custom-checkbox">
+                <input class="custom-control-input" type="checkbox" [id]="item.key" [value]="item.key" [checked]="f.value[control.key].indexOf(item.key)> -1"
+                    (change)="control.updateCheckedOptions(item.key,f)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{item.value}}</span>
+            </label>
+        </div>
+    </div>
+
+    <div *ngIf="errorMessage(control)" class="invalid-feedback"> {{ errorMessage(control) }} </div>
+
+    <!-- <appc-control-error-message [form]="f" [control]="control"></appc-control-error-message> -->
+
+</div>

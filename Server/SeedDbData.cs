@@ -111,7 +111,7 @@ namespace AspNetCoreSpa.Server
                 {
                     ClientId = "aspnetcorespa",
                     DisplayName = "AspnetCoreSpa",
-                    PostLogoutRedirectUris = { new Uri($"{host}/signout-oidc") },
+                    PostLogoutRedirectUris = { new Uri($"{host}signout-oidc") },
                     RedirectUris = { new Uri(host) }
                     // RedirectUris = { new Uri($"{host}/signin-oidc") }
                 };

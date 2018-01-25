@@ -9,10 +9,12 @@ namespace AspNetCoreSpa.Server.Filters
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {
         private ILogger<ApiExceptionFilter> _Logger;
+        private IHostingEnvironment _env;
 
-        public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger)
+        public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger, IHostingEnvironment env)
         {
             _Logger = logger;
+            _env = env;
         }
 
 
@@ -42,7 +44,7 @@ namespace AspNetCoreSpa.Server.Filters
                 // Unhandled errors
                 var msg = "";
                 var stack = "";
-                if (Startup._hostingEnv.IsDevelopment())
+                if (_env.IsDevelopment())
                 {
                     msg = context.Exception.GetBaseException().Message;
                     stack = context.Exception.StackTrace;
