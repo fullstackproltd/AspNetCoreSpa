@@ -38,7 +38,7 @@ bld/
 [Oo]bj/
 
 # Visual Studio 2015 cache/options directory
-.vs/
+.vs/*
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
