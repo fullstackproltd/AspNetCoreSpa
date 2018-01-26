@@ -27,6 +27,8 @@
 * [Angular dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.
 * [Swagger](http://swagger.io/) as Api explorer (Visit url **http://127.0.0.1:5000/swagger** after running the application). More [details](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
  
+## NOTE: (This is the new Angular cli based branch where ClientApp is completely managed by Angular cli. If you are interested in previous cli branch where integration of Angular cli was minimal (only for code generation), then switch to [angular-non-cli](https://github.com/asadsahi/AspNetCoreSpa/tree/angular-non-cli) branch)
+
 ## Pre-requisites
 
 1. [.Net core sdk](https://www.microsoft.com/net/core#windows)
@@ -44,12 +46,13 @@
 3. dotnet restore
 4. Install global dependencies
     npm install protractor rimraf http-server @angular/cli -g
-5. npm install OR yarn
-6. Run 
+5. cd ClientApp
+6. npm install OR yarn
+7. Run 
     i) Open terminal and run `npm start`
     ii) F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
 
-7. Point to Sqllite or SqlServer
+8. Point to Sqllite or SqlServer
     
 This project supports both sql server and sql lite databases
 
