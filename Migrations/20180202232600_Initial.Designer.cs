@@ -11,7 +11,7 @@ using System;
 namespace AspNetCoreSpa.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180125114941_Initial")]
+    [Migration("20180202232600_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,7 +251,11 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("DisplayName");
 
+                    b.Property<string>("Permissions");
+
                     b.Property<string>("PostLogoutRedirectUris");
+
+                    b.Property<string>("Properties");
 
                     b.Property<string>("RedirectUris");
 
@@ -275,6 +279,8 @@ namespace AspNetCoreSpa.Migrations
 
                     b.Property<string>("ConcurrencyToken")
                         .IsConcurrencyToken();
+
+                    b.Property<string>("Properties");
 
                     b.Property<string>("Scopes");
 
@@ -307,6 +313,8 @@ namespace AspNetCoreSpa.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<string>("Properties");
+
                     b.HasKey("Id");
 
                     b.ToTable("OpenIddictScopes");
@@ -329,6 +337,8 @@ namespace AspNetCoreSpa.Migrations
                     b.Property<DateTimeOffset?>("ExpirationDate");
 
                     b.Property<string>("Payload");
+
+                    b.Property<string>("Properties");
 
                     b.Property<string>("ReferenceId");
 
