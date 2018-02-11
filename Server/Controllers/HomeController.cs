@@ -33,16 +33,6 @@ namespace AspNetCoreSpa.Server.Controllers
             _applicationDataService = applicationDataService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            if (ConfirmEmailRequest())
-            {
-                await ConfirmEmail();
-            }
-
-            return View();
-        }
-
         [HttpPost]
         public IActionResult SetLanguage(string culture)
         {
