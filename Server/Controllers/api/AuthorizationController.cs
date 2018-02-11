@@ -54,22 +54,14 @@ namespace AspNetCoreSpa.Server.Controllers.api
                 var user = await _userManager.FindByNameAsync(request.Username);
                 if (user == null)
                 {
-                    return BadRequest(new OpenIdConnectResponse
-                    {
-                        Error = OpenIdConnectConstants.Errors.InvalidGrant,
-                        ErrorDescription = "The username/password couple is invalid."
-                    });
+                    return BadRequest("The username/password couple is invalid.");
                 }
 
                 // Validate the username/password parameters and ensure the account is not locked out.
                 var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, lockoutOnFailure: true);
                 if (!result.Succeeded)
                 {
-                    return BadRequest(new OpenIdConnectResponse
-                    {
-                        Error = OpenIdConnectConstants.Errors.InvalidGrant,
-                        ErrorDescription = "The username/password couple is invalid."
-                    });
+                    return BadRequest("The username/password couple is invalid.");
                 }
 
                 // Create a new authentication ticket.

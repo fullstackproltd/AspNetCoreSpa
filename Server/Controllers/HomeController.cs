@@ -50,27 +50,5 @@ namespace AspNetCoreSpa.Server.Controllers
 
             return Ok(appData);
         }
-        private bool ConfirmEmailRequest()
-        {
-            return Request.Query.ContainsKey("emailConfirmCode") && Request.Query.ContainsKey("userId");
-        }
-
-        private async Task ConfirmEmail()
-        {
-            var userId = Request.Query["userId"].ToString();
-            var code = Request.Query["emailConfirmCode"].ToString();
-            code = code.Replace(" ", "+");
-
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user != null && !user.EmailConfirmed)
-            {
-                var valid = await _userManager.ConfirmEmailAsync(user, code);
-                if (valid.Succeeded)
-                {
-                    ViewBag.emailConfirmed = true;
-                }
-            }
-        }
-
     }
 }

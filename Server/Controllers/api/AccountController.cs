@@ -228,7 +228,7 @@ namespace AspNetCoreSpa.Server.Controllers.api
             var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
             if (result.Succeeded)
             {
-                return RedirectToLocal(model.ReturnUrl);
+                // return RedirectToLocal(model.ReturnUrl);
             }
             if (result.IsLockedOut)
             {
@@ -263,18 +263,6 @@ namespace AspNetCoreSpa.Server.Controllers.api
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
             return _userManager.GetUserAsync(HttpContext.User);
-        }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
         }
 
         #endregion

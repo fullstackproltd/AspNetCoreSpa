@@ -1,4 +1,4 @@
-<div class="alert alert-{{notification.type || 'danger'}}" *ngIf="notification">
+<div class="alert alert-{{mapNotificationType(notification.type)}}" *ngIf="notification">
     <strong>{{notification?.title}}</strong>
     <p *ngFor="let error of notification?.content?.errors">
         {{error.message}}

@@ -3,6 +3,7 @@ import { NotificationsService, NotificationEvent, Notification } from '../../../
 
 @Component({
     selector: 'appc-error-summary',
+    styleUrls: ['./error-summary.component.scss'],
     templateUrl: './error-summary.component.html'
 })
 export class ErrorSummaryComponent implements OnInit, OnDestroy {
@@ -11,6 +12,12 @@ export class ErrorSummaryComponent implements OnInit, OnDestroy {
     constructor(private ns: NotificationsService) {
     }
 
+    mapNotificationType(type: string) {
+        if (type === 'error') {
+            return 'danger';
+        }
+        return type;
+    }
     ngOnInit() {
         this.sub = this.ns.getChangeEmitter()
             .subscribe((x: NotificationEvent) => {
