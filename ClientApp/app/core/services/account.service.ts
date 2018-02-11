@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { JwtHelper } from 'angular2-jwt';
 
-import { DataService } from './data.service';
-
 import { UtilityService } from '../../core/services/utility.service';
 import { ProfileModel } from '../models/profile-model';
 
@@ -12,7 +10,6 @@ export class AccountService {
     public jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(
-        private dataService: DataService,
         private utilityService: UtilityService,
         private oAuthService: OAuthService) { }
 
