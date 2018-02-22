@@ -147,8 +147,6 @@ namespace AspNetCoreSpa.Server
 
             //     await manager.CreateAsync(descriptor, cancellationToken);
             // }
-
         }
-
     }
 }

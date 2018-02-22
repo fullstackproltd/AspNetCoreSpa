@@ -16,6 +16,5 @@ namespace AspNetCoreSpa.Server.ViewModels.ManageViewModels
         [Phone]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
-
     }
 }

@@ -27,5 +27,4 @@ namespace AspNetCoreSpa.Server
             });
         }
     }
-
 }
