@@ -32,8 +32,6 @@ namespace AspNetCoreSpa.Server.Filters
 
         public void OnActionExecuted(ActionExecutedContext filterContext)
         {
-
         }
-
     }
 }

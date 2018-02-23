@@ -15,7 +15,5 @@ namespace AspNetCoreSpa.Server.ViewModels
         [Required]
         [StringLength(1024, MinimumLength = 5)]
         public string Message { get; set; }
-
     }
-
 }

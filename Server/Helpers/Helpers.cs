@@ -29,6 +29,5 @@ namespace AspNetCoreSpa.Server
             return ctrl.LocalRedirect($"~/?externalLoginStatus={(int)status}");
             // return RedirectToAction("Index", "Home", new { externalLoginStatus = (int)status });
         }
-
     }
 }

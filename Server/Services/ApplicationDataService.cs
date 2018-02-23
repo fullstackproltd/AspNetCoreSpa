@@ -88,6 +88,5 @@ namespace AspNetCoreSpa.Server.Services
 
             return cacheEntry;
         }
-
     }
 }
