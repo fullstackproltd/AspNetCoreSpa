@@ -10,7 +10,6 @@
 * [Angular](https://angular.io/)
 * [Angular CLI](https://cli.angular.io/)
 * Secure - with CSP and custom security headers
-* [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
@@ -113,10 +112,6 @@ npm run webdriver:start
 # in another terminal
 npm run e2e:live
 ```
-# Compatability
- * This project is supported in everygreen browsers and IE10+
- * IE8 & IE9 aren't supported since Bootstrap 4 is supported in IE10+ [explained here](http://v4-alpha.getbootstrap.com/getting-started/browsers-devices/).
-
 # Azure Deploy
 * You can set an environment variable for azure app deployment password
 Set-Item -path env:AzureAppPass -value passwordhere

@@ -12,8 +12,7 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "manifest.json"
+        "assets"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -23,12 +22,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "appc",
       "styles": [
-        "styles.scss",
-        "assets/css/flags.css"
+        "styles.scss"
       ],
-      "scripts": [
-        "assets/js/qrcode.js"
-      ],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
