@@ -419,10 +419,6 @@ angular-oauth2-oidc@3.1.4:
   dependencies:
     jsrsasign "^8.0.3"
 
-angular2-jwt@0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/angular2-jwt/-/angular2-jwt-0.2.3.tgz#54efdda3ceedba85f6a37b165f22ac22b8adf021"
-
 ansi-colors@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-1.1.0.tgz#6374b4dd5d4718ff3ce27a671a3b1cad077132a9"
