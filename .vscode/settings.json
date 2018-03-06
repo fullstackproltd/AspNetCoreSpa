@@ -13,7 +13,6 @@
         "package-lock.json": true,
         "*.csproj.user": true,
         "compodoc.jpg": true,
-        "Properties": true,
         ".awcache": true,
         "extra": true,
         "deploy.*.ps1": true,

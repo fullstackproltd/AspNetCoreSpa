@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <!-- <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish> -->
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
@@ -15,12 +14,6 @@
 
 
   <ItemGroup>
-    <PackageReference Include="AspNet.Security.OAuth.Amazon" Version="2.0.0-rc2-final" />
-    <PackageReference Include="AspNet.Security.OAuth.StackExchange" Version="2.0.0-rc2-final" />
-    <PackageReference Include="AspNet.Security.OAuth.Yahoo" Version="2.0.0-rc2-final" />
-    <PackageReference Include="AspNet.Security.OAuth.Paypal" Version="2.0.0-rc2-final" />
-    <PackageReference Include="AspNet.Security.OAuth.GitHub" Version="2.0.0-rc2-final" />
-    <PackageReference Include="AspNet.Security.OAuth.LinkedIn" Version="2.0.0-rc2-final" />
     <PackageReference Include="AspNet.Security.OAuth.Validation" Version="2.0.0-rc2-final" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0-preview1-final" />

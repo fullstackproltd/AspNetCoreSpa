@@ -31,10 +31,6 @@ export class SocialLoginComponent {
             return 'fa-windows';
         }
 
-        if (login.toLowerCase() === 'stackexchange') {
-            return 'fa-stack-exchange';
-        }
-
         return `fa-${login.toLowerCase()}`;
     }
     public redirect(provider: string): void {

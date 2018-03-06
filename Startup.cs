@@ -69,14 +69,17 @@ namespace AspNetCoreSpa
 
             // app.AddCustomSecurityHeaders();
 
-            app.AddCustomLocalization();
-
             app.AddDevMiddlewares();
+
+            app.AddCustomLocalization();
 
             if (env.IsProduction())
             {
+                app.UseHsts();
                 app.UseResponseCompression();
             }
+
+            app.UseHttpsRedirection();
 
             app.SetupMigrations();
 

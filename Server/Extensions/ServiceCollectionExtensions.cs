@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreSpa.Server.Extensions
 {
@@ -47,8 +48,8 @@ namespace AspNetCoreSpa.Server.Extensions
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             })
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-            .AddDataAnnotationsLocalization();
-
+            .AddDataAnnotationsLocalization()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             return services;
         }
         public static IServiceCollection AddCustomIdentity(this IServiceCollection services)
@@ -180,53 +181,6 @@ namespace AspNetCoreSpa.Server.Extensions
                {
                    options.ClientId = Startup.Configuration["Authentication:Microsoft:ClientId"];
                    options.ClientSecret = Startup.Configuration["Authentication:Microsoft:ClientSecret"];
-               })
-               // Note: Below social providers are supported through this open source library:
-               // https://github.com/aspnet-contrib/AspNet.Security.OAuth.Providers
-
-               // https://www.linkedin.com/secure/developer?newapp=
-               .AddLinkedIn(options =>
-               {
-                   options.ClientId = Startup.Configuration["Authentication:LinkedIn:ClientId"];
-                   options.ClientSecret = Startup.Configuration["Authentication:LinkedIn:ClientSecret"];
-
-               })
-               // https://github.com/settings/developers
-               .AddGitHub(options =>
-               {
-                   options.ClientId = Startup.Configuration["Authentication:Github:ClientId"];
-                   options.ClientSecret = Startup.Configuration["Authentication:Github:ClientSecret"];
-
-               })
-               // https://developer.paypal.com/developer/applications
-               .AddPaypal(options =>
-                  {
-                      options.ClientId = Startup.Configuration["Authentication:Paypal:ClientId"];
-                      options.ClientSecret = Startup.Configuration["Authentication:Paypal:ClientSecret"];
-                      if (env.IsDevelopment())
-                      {
-                          options.AuthorizationEndpoint = "https://www.sandbox.paypal.com/webapps/auth/protocol/openidconnect/v1/authorize";
-                          options.TokenEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice";
-                          options.UserInformationEndpoint = "https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo?schema=openid";
-                      }
-                  })
-               // https://developer.yahoo.com
-               .AddYahoo(options =>
-               {
-                   options.ClientId = Startup.Configuration["Authentication:Yahoo:ClientId"];
-                   options.ClientSecret = Startup.Configuration["Authentication:Yahoo:ClientSecret"];
-               })
-               // https://stackapps.com/apps/oauth/
-               .AddStackExchange(options =>
-               {
-                   options.ClientId = Startup.Configuration["Authentication:StackExchange:ClientId"];
-                   options.ClientSecret = Startup.Configuration["Authentication:StackExchange:ClientSecret"];
-               })
-               // https://stackapps.com/apps/oauth/
-               .AddAmazon(options =>
-               {
-                   options.ClientId = Startup.Configuration["Authentication:Amazon:ClientId"];
-                   options.ClientSecret = Startup.Configuration["Authentication:Amazon:ClientSecret"];
                });
 
             return services;
