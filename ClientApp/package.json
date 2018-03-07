@@ -18,9 +18,12 @@
     "start": "ng serve --extract-css --aot",
     "build": "ng build --extract-css --prod",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
-    "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand",
+    "test:coverage": "jest --coverage",
     "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json",
     "analyze": "npm run build -- --stats-json && webpack-bundle-analyzer dist/stats.json"
   },
@@ -60,16 +63,20 @@
     "codelyzer": "4.2.1",
     "jasmine-core": "2.8.0",
     "jasmine-spec-reporter": "4.2.1",
-    "karma": "2.0.0",
-    "karma-chrome-launcher": "2.2.0",
-    "karma-coverage-istanbul-reporter": "1.4.1",
-    "karma-jasmine": "1.1.1",
-    "karma-jasmine-html-reporter": "0.2.2",
+    "jest": "22.4.2",
+    "jest-preset-angular": "5.2.0",
     "protractor": "5.3.0",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
     "typescript": "2.6.2",
     "webpack-bundle-analyzer": "2.11.1"
+  },
+  "jest": {
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png)$": "<rootDir>/__mocks__/image.js"
+    }
   },
   "license": "MIT"
 }
