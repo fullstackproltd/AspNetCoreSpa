@@ -15,7 +15,7 @@
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
 * [PWA support](https://developers.google.com/web/progressive-web-apps/)
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
-* Testing Angular code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
+* Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
 * E2E testing with [Protractor](http://www.protractortest.org).
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
