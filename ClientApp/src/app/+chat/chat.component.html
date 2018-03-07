@@ -2,30 +2,26 @@
 
 <div class="row">
   <form class="form-inline" (ngSubmit)="sendMessage()" #messageForm="ngForm">
-    <div class="form-group">
-      <label class="sr-only" for="message">Message</label>
-      <input type="text" class="form-control" id="message" placeholder="your message..." name="message" [(ngModel)]="message" required>
-    </div>
+    <label class="sr-only" for="message">Message</label>
+    <input type="text" class="form-control" id="message" placeholder="your message..." name="message" [(ngModel)]="message" required>
     <button type="submit" class="btn btn-primary" [disabled]="!messageForm.valid">Send Message</button>
   </form>
 </div>
 <div class="row" *ngIf="messages.length > 0">
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Messages</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let message of messages; let i = index">
-          <td>{{i + 1}}</td>
-          <td>{{message}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Messages</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let message of messages; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{message}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="row" *ngIf="messages.length <= 0">
   <span>No messages</span>

@@ -62,3 +62,17 @@ input[type='radio'] {
     font-weight: normal;
     margin-left: .5rem;
 }
+
+form {
+    .buttons {
+        margin-top: 10px;
+    }
+}
+
+div.error {
+    margin-top: -12px;
+    font-size: .8em;
+    position: absolute;
+    width: 100%;
+    color: #a94442;
+}

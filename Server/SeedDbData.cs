@@ -70,6 +70,7 @@ namespace AspNetCoreSpa.Server
                         Resources = new List<Resource>() {
                             new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
                             new Resource { Key = "app_description", Value = "Single page application using aspnet core and angular" },
+                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
                             new Resource { Key = "app_nav_home", Value = "Home" },
                             new Resource { Key = "app_nav_chat", Value = "Chat" },
                             new Resource { Key = "app_nav_examples", Value = "Examples" },
@@ -84,6 +85,7 @@ namespace AspNetCoreSpa.Server
                         Resources = new List<Resource>() {
                             new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
                             new Resource { Key = "app_description", Value = "Application d'une seule page utilisant aspnet core et angular" },
+                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
                             new Resource { Key = "app_nav_home", Value = "Accueil" },
                             new Resource { Key = "app_nav_chat", Value = "Bavarder" },
                             new Resource { Key = "app_nav_examples", Value = "Exemples" },

@@ -11,7 +11,12 @@
         <a routerLinkActive="active" routerLink="chat" *ngIf="!isLoggedIn">{{'app_nav_chat' | translate}}</a>
         <a routerLinkActive="active" routerLink="register" *ngIf="!isLoggedIn">{{'app_nav_register' | translate}}</a>
         <a routerLinkActive="active" routerLink="login" *ngIf="!isLoggedIn">{{'app_nav_login' | translate}}</a>
-        <a class="github" href="https://github.com/asadsahi/aspnetcorespa" target="_blank" rel="noopener">
+
+        <form *ngFor="let c of cultures" action="/api/setlanguage" method="post" class="culture-form" ngNoForm [class.active]="c.current">
+            <input id={{c.value}} name="culture" value={{c.value}} type="submit" />
+        </form>
+
+        <a class="github" href="{{'app_repo_url' | translate}}" target="_blank" rel="noopener">
             {{'app_title' | translate}}
         </a>
     </nav>
