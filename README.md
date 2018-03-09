@@ -122,7 +122,7 @@ From powershell:
 # Deploy to heroku using its container service
 ### Replace your app name where it is `aspnetcorespa`
 * dotnet publish -c release
-* docker build -t aspnetcorespa ./bin/release/netcoreapp2.0/publish
+* docker build -t aspnetcorespa ./bin/release/netcoreapp2.1/publish
 * heroku login
 * heroku container:login
 * docker tag aspnetcorespa registry.heroku.com/aspnetcorespa/web
