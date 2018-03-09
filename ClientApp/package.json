@@ -57,8 +57,6 @@
     "@angular/language-service": "5.2.7",
     "@angular/service-worker": "5.2.7",
     "@compodoc/compodoc": "1.0.8",
-    "@types/jasmine": "2.8.6",
-    "@types/jasminewd2": "2.0.3",
     "@types/node": "9.4.6",
     "codelyzer": "4.2.1",
     "jasmine-core": "2.8.0",
@@ -75,7 +73,10 @@
     "preset": "jest-preset-angular",
     "setupTestFrameworkScriptFile": "<rootDir>/src/setupJest.ts",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png)$": "<rootDir>/__mocks__/image.js"
+      "\\.(jpg|jpeg|png)$": "<rootDir>/__mocks__/image.js",
+      "@app/(.*)": "<rootDir>/src/app/$1",
+      "assets/(.*)": "<rootDir>/src/assets/$1",
+      "environments/(.*)": "<rootDir>/src/environments/$1"
     }
   },
   "license": "MIT"
