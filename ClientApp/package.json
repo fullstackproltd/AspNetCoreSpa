@@ -14,7 +14,7 @@
   "repository": "git+https://github.com/asadsahi/AspNetCoreSpa.git",
   "author": "Asad Sahi <asadazmat@gmail.com>",
   "scripts": {
-    "ng": "./node_modules/.bin/ng",
+    "ng": "ng",
     "clean:install": "rimraf node_modules & npm i",
     "start": "ng serve --extract-css --aot",
     "build": "ng build --extract-css --aot",
