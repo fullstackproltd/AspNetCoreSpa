@@ -180,11 +180,15 @@
   dependencies:
     tslib "^1.7.1"
 
-"@aspnet/signalr-client@1.0.0-alpha2-final":
-  version "1.0.0-alpha2-final"
-  resolved "https://registry.yarnpkg.com/@aspnet/signalr-client/-/signalr-client-1.0.0-alpha2-final.tgz#6bcf7d0102875df8aa6f03a107487c93f4f1feb4"
+"@aspnet/signalr-protocol-msgpack@1.0.0-preview1-update1":
+  version "1.0.0-preview1-update1"
+  resolved "https://registry.yarnpkg.com/@aspnet/signalr-protocol-msgpack/-/signalr-protocol-msgpack-1.0.0-preview1-update1.tgz#cb7de760d330331bc092ca0c1d6f97223fa6d8e7"
   dependencies:
-    msgpack5 "^3.5.0"
+    msgpack5 "^4.0.1"
+
+"@aspnet/signalr@1.0.0-preview1-update1":
+  version "1.0.0-preview1-update1"
+  resolved "https://registry.yarnpkg.com/@aspnet/signalr/-/signalr-1.0.0-preview1-update1.tgz#f8f4b15674f668bc4bacc9f35eebe70f15912c6b"
 
 "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0-beta.42"
@@ -4519,18 +4523,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-msgpack5@4.0.2:
+msgpack5@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/msgpack5/-/msgpack5-4.0.2.tgz#88be70e432d142b7a379bfb170f433bd41447508"
-  dependencies:
-    bl "^1.2.1"
-    inherits "^2.0.3"
-    readable-stream "^2.3.3"
-    safe-buffer "^5.1.1"
-
-msgpack5@^3.5.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/msgpack5/-/msgpack5-3.6.0.tgz#13912ee47cb0ad037f70def7924ebf38afa19b4f"
   dependencies:
     bl "^1.2.1"
     inherits "^2.0.3"
