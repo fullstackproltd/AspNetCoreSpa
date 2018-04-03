@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnection } from '@aspnet/signalr-client';
 
 @Component({
   selector: 'appc-chat',
