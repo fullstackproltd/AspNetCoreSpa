@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 
 import { FormControlService } from '../form-control.service';
 import { ControlBase } from '../controls/control-base';
