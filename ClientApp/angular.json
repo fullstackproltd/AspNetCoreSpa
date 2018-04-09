@@ -104,8 +104,7 @@
           }
         }
       }
-    },
-
+    }
   },
   "schematics": {
     "@schematics/angular:component": {
