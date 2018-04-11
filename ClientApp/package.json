@@ -13,8 +13,8 @@
   "repository": "git+https://github.com/asadsahi/AspNetCoreSpa.git",
   "author": "Asad Sahi <asadazmat@gmail.com>",
   "scripts": {
-    "ng": "./node_modules/.bin/ng",
-    "clean:install": "rimraf node_modules & npm i",
+    "ng": "ng",
+    "clean:install": "rimraf node_modules & yarn",
     "start": "ng serve",
     "build": "ng build --prod",
     "build:ssr": "npm run build -- --app=ssr",
@@ -28,7 +28,7 @@
     "analyze": "npm run build -- --stats-json && webpack-bundle-analyzer dist/stats.json"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "0.5.4",
+    "@angular-devkit/schematics": "0.5.5",
     "@angular/animations": "6.0.0-rc.3",
     "@angular/common": "6.0.0-rc.3",
     "@angular/compiler": "6.0.0-rc.3",
@@ -40,8 +40,8 @@
     "@angular/platform-browser-dynamic": "6.0.0-rc.3",
     "@angular/platform-server": "6.0.0-rc.3",
     "@angular/router": "6.0.0-rc.3",
-    "@aspnet/signalr": "1.0.0-preview1-update1",
-    "@aspnet/signalr-protocol-msgpack": "1.0.0-preview1-update1",
+    "@aspnet/signalr": "1.0.0-preview2-final",
+    "@aspnet/signalr-protocol-msgpack": "1.0.0-preview2-final",
     "@nguniversal/module-map-ngfactory-loader": "5.0.0",
     "angular-oauth2-oidc": "3.1.4",
     "aspnet-prerendering": "3.0.1",
@@ -53,13 +53,13 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.5.4",
-    "@angular/cli": "6.0.0-rc.2",
+    "@angular-devkit/build-angular": "0.5.5",
+    "@angular/cli": "6.0.0-rc.3",
     "@angular/compiler-cli": "6.0.0-rc.3",
     "@angular/language-service": "6.0.0-rc.3",
     "@angular/service-worker": "6.0.0-rc.3",
-    "@compodoc/compodoc": "1.1.1",
-    "@types/node": "9.6.2",
+    "@compodoc/compodoc": "1.1.2",
+    "@types/node": "9.6.4",
     "codelyzer": "4.2.1",
     "jest": "22.4.3",
     "jest-preset-angular": "5.2.1",
