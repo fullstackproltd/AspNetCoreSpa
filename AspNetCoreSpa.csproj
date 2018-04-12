@@ -26,9 +26,6 @@
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
 
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0-preview2-final" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview2-final" PrivateAssets="All" />
-
   </ItemGroup>
 
   <ItemGroup>
