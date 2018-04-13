@@ -132,7 +132,7 @@ namespace AspNetCoreSpa.Server.Extensions
                 context.Database.Migrate();
                 new SeedDbData(context, app);
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
             return app;
         }
 
