@@ -69,15 +69,17 @@ namespace AspNetCoreSpa
 
             // app.AddCustomSecurityHeaders();
 
-            app.AddDevMiddlewares();
-
-            app.AddCustomLocalization();
-
-            if (env.IsProduction())
+            if (env.IsDevelopment())
+            {
+                app.AddDevMiddlewares();
+            }
+            else
             {
                 app.UseHsts();
                 app.UseResponseCompression();
             }
+
+            app.AddCustomLocalization();
 
             app.UseHttpsRedirection();
 
@@ -145,7 +147,7 @@ namespace AspNetCoreSpa
 
                           if (env.IsDevelopment())
                           {
-                              // spa.UseAngularCliServer(npmScript: "start");
+                              //   spa.UseAngularCliServer(npmScript: "start");
                               //   OR
                               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }

@@ -105,15 +105,12 @@ namespace AspNetCoreSpa.Server.Extensions
             var env = app.ApplicationServices.GetRequiredService<IHostingEnvironment>();
             var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
 
-            if (env.IsDevelopment())
-            {
-                loggerFactory.AddConsole(Startup.Configuration.GetSection("Logging"));
-                loggerFactory.AddDebug();
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-                // NOTE: For SPA swagger needs adding before MVC
-                app.UseCustomSwaggerApi();
-            }
+            loggerFactory.AddConsole(Startup.Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
+            // NOTE: For SPA swagger needs adding before MVC
+            app.UseCustomSwaggerApi();
 
             return app;
         }
