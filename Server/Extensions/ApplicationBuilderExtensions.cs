@@ -123,15 +123,16 @@ namespace AspNetCoreSpa.Server.Extensions
             return app;
         }
 
-        public static IApplicationBuilder SetupMigrations(this IApplicationBuilder app)
+        public static IApplicationBuilder SetupDb(this IApplicationBuilder app)
         {
             // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
             try
             {
                 var context = app.ApplicationServices.GetService<ApplicationDbContext>();
                 context.Database.Migrate();
+                new SeedDbData(context, app);
             }
-            catch (Exception) { }
+            catch (Exception ex) { }
             return app;
         }
 

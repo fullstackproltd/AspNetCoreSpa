@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,22 +16,19 @@ namespace AspNetCoreSpa.Server
     public class SeedDbData
     {
         readonly ApplicationDbContext _context;
-        private readonly IHostingEnvironment _hostingEnv;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public SeedDbData(IWebHost host, ApplicationDbContext context)
+        public SeedDbData(ApplicationDbContext context, IApplicationBuilder app)
         {
-            var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
-            var serviceScope = services.CreateScope();
-            _hostingEnv = serviceScope.ServiceProvider.GetService<IHostingEnvironment>();
-            _roleManager = serviceScope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
-            _userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
+            var scope = app.ApplicationServices.CreateScope();
+            _roleManager = scope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
+            _userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
             _context = context;
             CreateRoles(); // Add roles
             CreateUsers(); // Add users
             AddLocalisedData();
-            AddOpenIdConnectOptions(serviceScope, CancellationToken.None).GetAwaiter().GetResult();
+            AddOpenIdConnectOptions(scope, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         private void CreateRoles()
@@ -101,9 +99,9 @@ namespace AspNetCoreSpa.Server
 
         }
 
-        private async Task AddOpenIdConnectOptions(IServiceScope services, CancellationToken cancellationToken)
+        private async Task AddOpenIdConnectOptions(IServiceScope scope, CancellationToken cancellationToken)
         {
-            var manager = services.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
+            var manager = scope.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
 
             if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
             {

@@ -83,8 +83,6 @@ namespace AspNetCoreSpa
 
             app.UseHttpsRedirection();
 
-            app.SetupMigrations();
-
             // https://github.com/openiddict/openiddict-core/issues/518
             // And
             // https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
@@ -153,6 +151,8 @@ namespace AspNetCoreSpa
                           }
                       });
 
+            // Setup Migrations and seeding
+            app.SetupDb();
         }
 
     }
