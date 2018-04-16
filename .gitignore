@@ -185,7 +185,7 @@ ClientBin/
 AspNetCoreSpa.db
 *.dbmdl
 *.dbproj.schemaview
-#*.pfx
+*.pfx
 *.publishsettings
 node_modules/
 ClientApp/node_modules/
