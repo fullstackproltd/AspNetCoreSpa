@@ -17,7 +17,7 @@ COPY *.csproj ./
 COPY NuGet.config ./
 RUN dotnet restore
 
-COPY ClientApp/package.json ./ClientApp
+COPY ClientApp/package.json ./ClientApp/
 RUN cd ClientApp \
     && npm install
 
