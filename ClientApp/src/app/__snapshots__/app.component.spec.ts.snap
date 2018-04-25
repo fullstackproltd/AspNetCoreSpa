@@ -11,59 +11,37 @@ exports[`AppComponent snapshot created successfully 1`] = `
   router={[Function Router]}
   title={[Function Title]}
 >
-  
   <appc-header
     class="ng-tns-c3-0"
   >
     <appc-simple-notifications
       ng-reflect-options="[object Object]"
     >
-      
-          
       <div
         class="simple-notification-wrapper top right"
         ng-reflect-klass="simple-notification-wrapper"
         ng-reflect-ng-class="top,right"
       >
         
-              
-        
-        
-          
       </div>
-      
-      
     </appc-simple-notifications>
-    
-  
-  
     <header
       class="header"
     >
-      
-      
       <nav
         class="inner"
       >
-        
-          
         <a
           href="/"
           ng-reflect-router-link=""
           routerlink=""
         >
-          
-              
           <img
             alt="logo"
             class="logo"
             src="/assets/android-chrome-192x192.png"
           />
-          
-          
         </a>
-        
-          
         <a
           href="/"
           ng-reflect-router-link=""
@@ -74,13 +52,7 @@ exports[`AppComponent snapshot created successfully 1`] = `
           app_nav_home
         </a>
         
-          
         
-        
-          
-        
-        
-          
         
         <a
           class="ng-star-inserted"
@@ -93,8 +65,6 @@ exports[`AppComponent snapshot created successfully 1`] = `
           app_nav_chat
         </a>
         
-          
-        
         <a
           class="ng-star-inserted"
           href="/register"
@@ -105,8 +75,6 @@ exports[`AppComponent snapshot created successfully 1`] = `
         >
           app_nav_register
         </a>
-        
-          
         
         <a
           class="ng-star-inserted"
@@ -119,81 +87,47 @@ exports[`AppComponent snapshot created successfully 1`] = `
           app_nav_login
         </a>
         
-  
-          
-        
         <form
           action="/api/setlanguage"
           class="culture-form ng-star-inserted"
           method="post"
           ngnoform=""
         >
-          
-              
           <input
             id=""
             name="culture"
             type="submit"
             value=""
           />
-          
-          
         </form>
-        
-  
-          
         <a
           class="github"
           href="app_repo_url"
           rel="noopener"
           target="_blank"
         >
-          
-              app_title
-          
+           app_title 
         </a>
-        
-      
       </nav>
-      
-  
     </header>
-  </appc-header>
-  
-  
-  <main
+  </appc-header><main
     class="ng-tns-c3-0 ng-trigger ng-trigger-routerTransition"
   >
-    
-    
     <router-outlet
       class="ng-tns-c3-0"
     />
-    
-  
-  </main>
-  
-  
-  <appc-footer
+  </main><appc-footer
     class="ng-tns-c3-0"
   >
     <footer
       class="footer text-muted"
     >
-      
-      
       <p
         class="text-muted"
       >
-        
-          © 2018 app_title
-      
+         © 2018 app_title 
       </p>
-      
-  
     </footer>
-    
-  
   </appc-footer>
 </appc-root>
 `;
