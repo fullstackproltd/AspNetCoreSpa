@@ -3,21 +3,20 @@ using System;
 using AspNetCoreSpa.Server;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AspNetCoreSpa.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180411112025_initial")]
+    [Migration("20180507210527_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-preview2-30571");
+                .HasAnnotation("ProductVersion", "2.1.0-rc1-32029");
 
             modelBuilder.Entity("AspNetCoreSpa.Server.Entities.ApplicationRole", b =>
                 {
