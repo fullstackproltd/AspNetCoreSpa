@@ -69,16 +69,19 @@ namespace AspNetCoreSpa
 
             // app.AddCustomSecurityHeaders();
 
-            app.AddCustomLocalization();
-
-            app.AddDevMiddlewares();
-
-            if (env.IsProduction())
+            if (env.IsDevelopment())
             {
+                app.AddDevMiddlewares();
+            }
+            else
+            {
+                app.UseHsts();
                 app.UseResponseCompression();
             }
 
-            app.SetupMigrations();
+            app.AddCustomLocalization();
+
+            app.UseHttpsRedirection();
 
             // https://github.com/openiddict/openiddict-core/issues/518
             // And
@@ -142,12 +145,14 @@ namespace AspNetCoreSpa
 
                           if (env.IsDevelopment())
                           {
-                              //   spa.UseAngularCliServer(;npmScript: "start");
+                              //   spa.UseAngularCliServer(npmScript: "start");
                               //   OR
                               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
 
+            // Setup Migrations and seeding
+            app.SetupDb();
         }
 
     }

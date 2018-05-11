@@ -33,7 +33,7 @@ namespace AspNetCoreSpa.Server.Controllers
             _applicationDataService = applicationDataService;
         }
 
-        [HttpPost]
+        [HttpPost("api/setlanguage")]
         public IActionResult SetLanguage(string culture)
         {
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,

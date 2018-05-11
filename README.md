@@ -10,13 +10,12 @@
 * [Angular](https://angular.io/)
 * [Angular CLI](https://cli.angular.io/)
 * Secure - with CSP and custom security headers
-* [Bootstrap 4](http://v4-alpha.getbootstrap.com/)
 * [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
 * [PWA support](https://developers.google.com/web/progressive-web-apps/)
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
-* Testing Angular code with [Jasmine](http://jasmine.github.io/) and [Karma](https://karma-runner.github.io/0.13/index.html).
+* Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
 * E2E testing with [Protractor](http://www.protractortest.org).
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
@@ -113,10 +112,6 @@ npm run webdriver:start
 # in another terminal
 npm run e2e:live
 ```
-# Compatability
- * This project is supported in everygreen browsers and IE10+
- * IE8 & IE9 aren't supported since Bootstrap 4 is supported in IE10+ [explained here](http://v4-alpha.getbootstrap.com/getting-started/browsers-devices/).
-
 # Azure Deploy
 * You can set an environment variable for azure app deployment password
 Set-Item -path env:AzureAppPass -value passwordhere
@@ -127,7 +122,7 @@ From powershell:
 # Deploy to heroku using its container service
 ### Replace your app name where it is `aspnetcorespa`
 * dotnet publish -c release
-* docker build -t aspnetcorespa ./bin/release/netcoreapp2.0/publish
+* docker build -t aspnetcorespa ./bin/release/netcoreapp2.1/publish
 * heroku login
 * heroku container:login
 * docker tag aspnetcorespa registry.heroku.com/aspnetcorespa/web

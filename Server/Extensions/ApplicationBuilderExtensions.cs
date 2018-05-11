@@ -105,15 +105,12 @@ namespace AspNetCoreSpa.Server.Extensions
             var env = app.ApplicationServices.GetRequiredService<IHostingEnvironment>();
             var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
 
-            if (env.IsDevelopment())
-            {
-                loggerFactory.AddConsole(Startup.Configuration.GetSection("Logging"));
-                loggerFactory.AddDebug();
-                app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
-                // NOTE: For SPA swagger needs adding before MVC
-                app.UseCustomSwaggerApi();
-            }
+            loggerFactory.AddConsole(Startup.Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            app.UseDeveloperExceptionPage();
+            app.UseDatabaseErrorPage();
+            // NOTE: For SPA swagger needs adding before MVC
+            app.UseCustomSwaggerApi();
 
             return app;
         }
@@ -126,13 +123,14 @@ namespace AspNetCoreSpa.Server.Extensions
             return app;
         }
 
-        public static IApplicationBuilder SetupMigrations(this IApplicationBuilder app)
+        public static IApplicationBuilder SetupDb(this IApplicationBuilder app)
         {
             // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
             try
             {
                 var context = app.ApplicationServices.GetService<ApplicationDbContext>();
                 context.Database.Migrate();
+                new SeedDbData(context, app);
             }
             catch (Exception) { }
             return app;

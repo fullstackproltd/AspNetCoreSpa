@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Server.Entities;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,22 +16,19 @@ namespace AspNetCoreSpa.Server
     public class SeedDbData
     {
         readonly ApplicationDbContext _context;
-        private readonly IHostingEnvironment _hostingEnv;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public SeedDbData(IWebHost host, ApplicationDbContext context)
+        public SeedDbData(ApplicationDbContext context, IApplicationBuilder app)
         {
-            var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
-            var serviceScope = services.CreateScope();
-            _hostingEnv = serviceScope.ServiceProvider.GetService<IHostingEnvironment>();
-            _roleManager = serviceScope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
-            _userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
+            var scope = app.ApplicationServices.CreateScope();
+            _roleManager = scope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
+            _userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
             _context = context;
             CreateRoles(); // Add roles
             CreateUsers(); // Add users
             AddLocalisedData();
-            AddOpenIdConnectOptions(serviceScope, CancellationToken.None).GetAwaiter().GetResult();
+            AddOpenIdConnectOptions(scope, CancellationToken.None).GetAwaiter().GetResult();
         }
 
         private void CreateRoles()
@@ -70,6 +68,7 @@ namespace AspNetCoreSpa.Server
                         Resources = new List<Resource>() {
                             new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
                             new Resource { Key = "app_description", Value = "Single page application using aspnet core and angular" },
+                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
                             new Resource { Key = "app_nav_home", Value = "Home" },
                             new Resource { Key = "app_nav_chat", Value = "Chat" },
                             new Resource { Key = "app_nav_examples", Value = "Examples" },
@@ -84,6 +83,7 @@ namespace AspNetCoreSpa.Server
                         Resources = new List<Resource>() {
                             new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
                             new Resource { Key = "app_description", Value = "Application d'une seule page utilisant aspnet core et angular" },
+                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
                             new Resource { Key = "app_nav_home", Value = "Accueil" },
                             new Resource { Key = "app_nav_chat", Value = "Bavarder" },
                             new Resource { Key = "app_nav_examples", Value = "Exemples" },
@@ -99,9 +99,9 @@ namespace AspNetCoreSpa.Server
 
         }
 
-        private async Task AddOpenIdConnectOptions(IServiceScope services, CancellationToken cancellationToken)
+        private async Task AddOpenIdConnectOptions(IServiceScope scope, CancellationToken cancellationToken)
         {
-            var manager = services.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
+            var manager = scope.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
 
             if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
             {
