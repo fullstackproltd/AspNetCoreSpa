@@ -47,7 +47,8 @@ namespace AspNetCoreSpa
 
             services.RegisterCustomServices();
 
-            services.AddSignalR();
+            services.AddSignalR()
+                .AddMessagePackProtocol();
 
             services.AddCustomLocalization();
 
