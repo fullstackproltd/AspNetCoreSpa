@@ -1,26 +1,7 @@
-<div class="row">
-    <div class="column"></div>
-    <div class="column">
-        <ul class="sub-nav">
-            <li>
-                <a routerLinkActive="active" routerLink="userinfo">User info</a>
-            </li>
-            <li>
-                <a routerLinkActive="active" routerLink="updatepassword">Update password</a>
-            </li>
-            <li>
-                <a routerLinkActive="active" routerLink="userphoto">User photo</a>
-            </li>
-            <li>
-                <a routerLinkActive="active" routerLink="otheraccounts">Other accounts</a>
-            </li>
-        </ul>
-    </div>
-    <div class="column"></div>
-</div>
+<h1>User profile</h1>
 
-<div class="row">
-    <div class="column">
-        <router-outlet></router-outlet>
-    </div>
+<appc-sub-menu [menus]="menus"></appc-sub-menu>
+
+<div>
+    <router-outlet></router-outlet>
 </div>

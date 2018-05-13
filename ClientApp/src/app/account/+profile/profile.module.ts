@@ -15,7 +15,7 @@ import { SharedModule } from '../../shared/shared.module';
         RouterModule.forChild([
             {
                 path: '', component: ProfileComponent, children: [
-                    { path: '', redirectTo: 'userinfo', pathMatch: 'full' },
+                    { path: '', redirectTo: 'userinfo' },
                     { path: 'userinfo', component: UserInfoComponent },
                     { path: 'updatepassword', component: UpdatePasswordComponent },
                     { path: 'userphoto', component: UserPhotoComponent },
