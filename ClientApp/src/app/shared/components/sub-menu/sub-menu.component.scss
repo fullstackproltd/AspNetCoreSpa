@@ -1,0 +1,14 @@
+ul {
+    display: flex;
+    li {
+      display: inline-block;
+      margin: 10px;
+      list-style: none;  
+      a {
+          color: black;
+          &.active {
+              font-weight: bold;
+          }
+      }
+    }
+}

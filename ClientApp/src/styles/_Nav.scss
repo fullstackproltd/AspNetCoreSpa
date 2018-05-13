@@ -1,29 +1,14 @@
 @import 'Color';
-ul.sub-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    background: $color-primary;
-    li {
-        color: red;
-        height: 23.4px;
+
+header {
+    .inner {
         a {
-            border-bottom: 0.1rem solid #d1d1d1;
-            color: $color-font;
-            display: block;
-            font-size: 1.2rem;
-            padding: 0.8rem 2rem;
-            position: relative;
-            text-align: center;
-            &:hover {
-                border-bottom-color: $color-primary;
-                color: $color-initial;
+            &.active {
+                font-weight: bold;
             }
         }
     }
 }
-
 .culture-form {
     display: inline;
     &.active > input[type="submit"]{

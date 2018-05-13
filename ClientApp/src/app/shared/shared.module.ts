@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Components
@@ -11,11 +12,13 @@ import { ErrorSummaryComponent } from './forms/error-summary/error-summary.compo
 import { UppercasePipe } from './pipes/uppercase.pipe';
 // Services
 import { FormControlService } from './forms/form-control.service';
+import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     // No need to export as these modules don't expose any components/directive etc'
   ],
@@ -24,7 +27,8 @@ import { FormControlService } from './forms/form-control.service';
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,
-    UppercasePipe
+    UppercasePipe,
+    SubMenuComponent
   ],
   exports: [
     // Modules
@@ -36,6 +40,7 @@ import { FormControlService } from './forms/form-control.service';
     DynamicFormComponent,
     DynamicFormControlComponent,
     ErrorSummaryComponent,
+    SubMenuComponent,
     UppercasePipe,
   ],
   providers: [

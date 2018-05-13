@@ -35,7 +35,7 @@ export function appServiceFactory(appService: AppService): Function {
       { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
       { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
       { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
-      { path: 'chat', loadChildren: './+chat/chat.module#ChatModule' }
+      { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' }
     ], { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],

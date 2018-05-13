@@ -5,10 +5,10 @@
         <a routerLink="">
             <img class="logo" src="/assets/android-chrome-192x192.png" alt="logo">
         </a>
-        <a routerLinkActive="active" routerLink="">{{'app_nav_home' | translate}}</a>
+        <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="">{{'app_nav_home' | translate}}</a>
         <a routerLinkActive="active" routerLink="profile" *ngIf="isLoggedIn">{{user?.name}}</a>
         <a (click)="logout()" href="javascript:void(null);" *ngIf="isLoggedIn"> {{'app_nav_logout' | translate}} </a>
-        <a routerLinkActive="active" routerLink="chat" *ngIf="!isLoggedIn">{{'app_nav_chat' | translate}}</a>
+        <a routerLinkActive="active" routerLink="signalr" *ngIf="!isLoggedIn">{{'app_nav_signalr' | translate}}</a>
         <a routerLinkActive="active" routerLink="register" *ngIf="!isLoggedIn">{{'app_nav_register' | translate}}</a>
         <a routerLinkActive="active" routerLink="login" *ngIf="!isLoggedIn">{{'app_nav_login' | translate}}</a>
 
