@@ -10,12 +10,9 @@
       "resources": {
         "files": [
           "/favicon.ico",
-          "/index.html"
-        ],
-        "versionedFiles": [
-          "/*.bundle.css",
-          "/*.bundle.js",
-          "/*.chunk.js"
+          "/index.html",
+          "/*.css",
+          "/*.js"
         ]
       }
     },
@@ -43,8 +40,7 @@
   "dataGroups": [
     {
       "name": "api-freshness",
-      "urls": [
-      ],
+      "urls": [],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 100,
@@ -54,8 +50,7 @@
     },
     {
       "name": "api-performance",
-      "urls": [
-      ],
+      "urls": [],
       "cacheConfig": {
         "strategy": "performance",
         "maxSize": 100,
