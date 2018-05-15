@@ -17,7 +17,7 @@
     "clean:install": "rimraf node_modules & yarn",
     "start": "ng serve",
     "build": "ng build --prod",
-    "build:ssr": "npm run build -- --app=ssr",
+    "build:ssr": "npm run build --project=ssr",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test": "jest",
