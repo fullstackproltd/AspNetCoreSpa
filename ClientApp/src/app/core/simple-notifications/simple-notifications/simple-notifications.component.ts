@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, OnDestroy, ViewEncapsulation, Input, Output } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Options } from './interfaces/options.type';
 import { Notification } from './interfaces/notification.type';
 import { NotificationsService } from './notifications.service';
@@ -31,12 +31,12 @@ import { NotificationsService } from './notifications.service';
             width: 300px;
             z-index: 1000;
         }
-        
+
         .simple-notification-wrapper.left { left: 20px; }
         .simple-notification-wrapper.top { top: 20px; }
         .simple-notification-wrapper.right { right: 20px; }
         .simple-notification-wrapper.bottom { bottom: 20px; }
-        
+
         @media (max-width: 340px) {
             .simple-notification-wrapper {
                 width: auto;

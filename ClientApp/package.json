@@ -42,12 +42,11 @@
     "@aspnet/signalr": "1.0.0-rc1-update1",
     "@aspnet/signalr-protocol-msgpack": "1.0.0-rc1-update1",
     "@nguniversal/module-map-ngfactory-loader": "6.0.0",
-    "angular-oauth2-oidc": "3.1.4",
+    "angular-oauth2-oidc": "4.0.0",
     "aspnet-prerendering": "3.0.1",
     "core-js": "2.5.6",
-    "preboot": "6.0.0-beta.3",
+    "preboot": "6.0.0-beta.4",
     "rxjs": "6.1.0",
-    "rxjs-compat": "6.1.0",
     "sanitize.css": "5.0.0",
     "zone.js": "0.8.26"
   },
@@ -58,7 +57,7 @@
     "@angular/language-service": "6.0.1",
     "@angular/service-worker": "6.0.1",
     "@compodoc/compodoc": "1.1.2",
-    "@types/node": "10.0.8",
+    "@types/node": "10.0.9",
     "codelyzer": "4.3.0",
     "jest": "22.4.3",
     "jest-preset-angular": "5.2.2",
@@ -66,7 +65,7 @@
     "ts-node": "6.0.3",
     "tslint": "5.10.0",
     "typescript": "2.7.2",
-    "webpack-bundle-analyzer": "2.11.2"
+    "webpack-bundle-analyzer": "2.12.0"
   },
   "jest": {
     "preset": "jest-preset-angular",
