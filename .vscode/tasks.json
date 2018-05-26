@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/AspNetCoreSpa.csproj"
+                "${workspaceFolder}/AspNetCoreSpa.sln"
             ],
             "problemMatcher": "$msCompile"
         }

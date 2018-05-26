@@ -10,13 +10,13 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/bin/Debug/netcoreapp2.1/AspNetCoreSpa.dll",
+            "program": "${workspaceRoot}/src/AspNetCoreSpa.Web/bin/Debug/netcoreapp2.1/AspNetCoreSpa.Web.dll",
             "args": [
                 // "dropdb",
                 // "migratedb",
                 // "seeddb"
             ],
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceRoot}/src/AspNetCoreSpa.Web",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
