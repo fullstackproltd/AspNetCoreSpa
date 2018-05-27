@@ -14,6 +14,7 @@ using OpenIddict.Core;
 using Microsoft.Extensions.Logging;
 using AspNetCoreSpa.Web.Server.Filters;
 using AspNetCoreSpa.DAL.Models;
+using AspNetCoreSpa.Core;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 

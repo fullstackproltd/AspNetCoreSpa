@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using AspNetCoreSpa.DAL.Models;
+using AspNetCoreSpa.Core;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

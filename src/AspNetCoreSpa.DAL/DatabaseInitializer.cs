@@ -1,7 +1,8 @@
-using AspNetCoreSpa.DAL.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using AspNetCoreSpa.DAL.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using OpenIddict.Core;
 using OpenIddict.Models;
 using System;
@@ -12,23 +13,44 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreSpa.DAL
 {
-    public class SeedDbData
+    public interface IDatabaseInitializer
     {
-        readonly ApplicationDbContext _context;
+        Task SeedAsync(IConfiguration configuration);
+    }
+
+    public class DatabaseInitializer : IDatabaseInitializer
+    {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly OpenIddictApplicationManager<OpenIddictApplication> _openIddictApplicationManager;
+        private readonly ILogger _logger;
 
-        public SeedDbData(ApplicationDbContext context, IApplicationBuilder app)
+        public DatabaseInitializer(
+            ApplicationDbContext context, 
+            ILogger<DatabaseInitializer> logger, 
+            OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager,
+            RoleManager<ApplicationRole> roleManager,
+            UserManager<ApplicationUser> userManager
+            )
         {
-            var scope = app.ApplicationServices.CreateScope();
-            _roleManager = scope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
-            _userManager = scope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
             _context = context;
-            CreateRoles(); // Add roles
-            CreateUsers(); // Add users
-            AddLocalisedData();
-            AddOpenIdConnectOptions(scope, CancellationToken.None).GetAwaiter().GetResult();
+            _logger = logger;
+            _openIddictApplicationManager = openIddictApplicationManager;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
+
+        public async Task SeedAsync(IConfiguration configuration)
+        {
+            await _context.Database.MigrateAsync().ConfigureAwait(false);
+
+            CreateRoles();
+            CreateUsers();
+            AddLocalisedData();
+            await AddOpenIdConnectOptions(configuration);
+        }
+
 
         private void CreateRoles()
         {
@@ -98,13 +120,11 @@ namespace AspNetCoreSpa.DAL
 
         }
 
-        private async Task AddOpenIdConnectOptions(IServiceScope scope, CancellationToken cancellationToken)
+        private async Task AddOpenIdConnectOptions(IConfiguration configuration)
         {
-            var manager = scope.ServiceProvider.GetService<OpenIddictApplicationManager<OpenIddictApplication>>();
-
-            if (await manager.FindByClientIdAsync("aspnetcorespa", cancellationToken) == null)
+            if (await _openIddictApplicationManager.FindByClientIdAsync("aspnetcorespa") == null)
             {
-                var host = Startup.Configuration["HostUrl"].ToString();
+                var host = configuration["HostUrl"].ToString();
 
                 var descriptor = new OpenIddictApplicationDescriptor
                 {
@@ -122,7 +142,7 @@ namespace AspNetCoreSpa.DAL
                     }
                 };
 
-                await manager.CreateAsync(descriptor, cancellationToken);
+                await _openIddictApplicationManager.CreateAsync(descriptor);
             }
 
             // if (await manager.FindByClientIdAsync("resource-server-1", cancellationToken) == null)

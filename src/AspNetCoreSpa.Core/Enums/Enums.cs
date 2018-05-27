@@ -1,4 +1,4 @@
-namespace AspNetCoreSpa.DAL.Models
+namespace AspNetCoreSpa.Core
 {
     public enum ExternalLoginStatus
     {

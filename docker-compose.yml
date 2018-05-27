@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  aspnetcorespa.web:
+    image: ${DOCKER_REGISTRY}aspnetcorespaweb
+    build:
+      context: .
+      dockerfile: src/AspNetCoreSpa.Web/Dockerfile

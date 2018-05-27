@@ -1,16 +1,11 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
 using NetEscapades.AspNetCore.SecurityHeaders.Infrastructure;
 using System;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using AspNetCoreSpa.DAL;
 
 namespace AspNetCoreSpa.Web.Server.Extensions
 {
@@ -92,12 +87,12 @@ namespace AspNetCoreSpa.Web.Server.Extensions
         public static IApplicationBuilder UseCustomSwaggerApi(this IApplicationBuilder app)
         {
             // Enable middleware to serve generated Swagger as a JSON endpoint
-            //app.UseSwagger();
-            //// Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
-            //});
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+            });
 
             return app;
         }
@@ -123,19 +118,5 @@ namespace AspNetCoreSpa.Web.Server.Extensions
 
             return app;
         }
-
-        public static IApplicationBuilder SetupDb(this IApplicationBuilder app)
-        {
-            // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
-            try
-            {
-                var context = app.ApplicationServices.GetService<ApplicationDbContext>();
-                context.Database.Migrate();
-                new SeedDbData(context, app);
-            }
-            catch (Exception ex) { }
-            return app;
-        }
-
     }
 }

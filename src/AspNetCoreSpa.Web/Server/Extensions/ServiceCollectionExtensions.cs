@@ -241,6 +241,8 @@ namespace AspNetCoreSpa.Web.Server.Extensions
             services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<IApplicationDataService, ApplicationDataService>();
+            services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
+            services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
             services.AddTransient<ApplicationDbContext>();
             services.AddScoped<UserResolverService>();
             services.AddScoped<ApiExceptionFilter>();

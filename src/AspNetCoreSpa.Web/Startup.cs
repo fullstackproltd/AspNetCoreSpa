@@ -1,6 +1,8 @@
 ﻿using AspNetCoreSpa.Web.Server.Extensions;
 using AspNetCoreSpa.Web.Server.Services;
 using AspNetCoreSpa.Web.Server.SignalR;
+using AspNetCoreSpa.Web.Server.ViewModels;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -59,10 +61,23 @@ namespace AspNetCoreSpa
                 configuration.RootPath = "ClientApp/dist/aspnetcorespa";
             });
 
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
-            //});
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
+
+                c.AddSecurityDefinition("OpenID Connect", new OAuth2Scheme
+                {
+                    Type = "oauth2",
+                    Flow = "password",
+                    TokenUrl = "/connect/token"
+                });
+            });
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
+
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
         {
@@ -118,7 +133,6 @@ namespace AspNetCoreSpa
 
                 routes.MapRoute(name: "set-language", template: "setlanguage", defaults: new { controller = "Home", action = "SetLanguage" });
 
-                // routes.MapSpaFallbackRoute(name: "spa-fallback", defaults: new { controller = "Home", action = "Index" });
             });
 
             app.UseSpa(spa =>
@@ -152,8 +166,6 @@ namespace AspNetCoreSpa
                           }
                       });
 
-            // Setup Migrations and seeding
-            app.SetupDb();
         }
 
     }

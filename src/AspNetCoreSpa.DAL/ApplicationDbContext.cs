@@ -7,6 +7,7 @@ namespace AspNetCoreSpa.DAL
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
+        public string CurrentUserId { get; internal set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ApplicationUserPhoto> ApplicationUserPhotos { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
