@@ -40,7 +40,10 @@
   "dataGroups": [
     {
       "name": "api-freshness",
-      "urls": [],
+      "urls": [
+        "/api/setlanguage",
+        "/connect/authorize"
+      ],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 100,
