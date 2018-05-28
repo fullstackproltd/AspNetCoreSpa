@@ -1,4 +1,5 @@
-﻿using AspNetCoreSpa.Core.Entities;
+﻿using AspNet.Security.OpenIdConnect.Primitives;
+using AspNetCoreSpa.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -73,12 +74,12 @@ namespace AspNetCoreSpa.Infrastructure
             {
                 var adminUser = new ApplicationUser { UserName = "admin@admin.com", FirstName = "Admin first", LastName = "Admin last", Email = "admin@admin.com", Mobile = "0123456789", EmailConfirmed = true, CreatedDate = DateTime.Now, IsEnabled = true };
                 _userManager.CreateAsync(adminUser, "P@ssw0rd!").Result.ToString();
-                _userManager.AddClaimAsync(adminUser, new Claim("mobile", adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
+                _userManager.AddClaimAsync(adminUser, new Claim(OpenIdConnectConstants.Claims.PhoneNumber, adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("admin@admin.com").GetAwaiter().GetResult(), "Admin").Result.ToString();
 
                 var normalUser = new ApplicationUser { UserName = "user@user.com", FirstName = "First", LastName = "Last", Email = "user@user.com", Mobile = "0123456789", EmailConfirmed = true, CreatedDate = DateTime.Now, IsEnabled = true };
                 _userManager.CreateAsync(normalUser, "P@ssw0rd!").Result.ToString();
-                _userManager.AddClaimAsync(adminUser, new Claim("mobile", adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
+                _userManager.AddClaimAsync(adminUser, new Claim(OpenIdConnectConstants.Claims.PhoneNumber, adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("user@user.com").GetAwaiter().GetResult(), "User").Result.ToString();
             }
         }

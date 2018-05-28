@@ -212,7 +212,9 @@ namespace AspNetCoreSpa.Web.Controllers.api
                     OpenIdConnectConstants.Scopes.Email,
                     OpenIdConnectConstants.Scopes.Profile,
                     OpenIdConnectConstants.Scopes.OfflineAccess,
-                    OpenIddictConstants.Scopes.Roles
+                    OpenIdConnectConstants.Scopes.Phone,
+                    OpenIddictConstants.Scopes.Roles,
+                    
                 }.Intersect(request.GetScopes()));
             }
 
@@ -239,6 +241,7 @@ namespace AspNetCoreSpa.Web.Controllers.api
                 // The other claims will only be added to the access_token, which is encrypted when using the default format.
                 if ((claim.Type == OpenIdConnectConstants.Claims.Name && ticket.HasScope(OpenIdConnectConstants.Scopes.Profile)) ||
                     (claim.Type == OpenIdConnectConstants.Claims.Email && ticket.HasScope(OpenIdConnectConstants.Scopes.Email)) ||
+                    (claim.Type == OpenIdConnectConstants.Claims.PhoneNumber && ticket.HasScope(OpenIdConnectConstants.Scopes.Phone)) ||
                     (claim.Type == OpenIdConnectConstants.Claims.Role && ticket.HasScope(OpenIddictConstants.Claims.Roles)))
                 {
                     destinations.Add(OpenIdConnectConstants.Destinations.IdentityToken);

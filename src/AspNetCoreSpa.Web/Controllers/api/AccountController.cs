@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using AspNetCoreSpa.Web.Filters;
 using AspNetCoreSpa.Core.Entities;
 using System.Security.Claims;
+using AspNet.Security.OpenIdConnect.Primitives;
 
 namespace AspNetCoreSpa.Web.Controllers.api
 {
@@ -87,7 +88,7 @@ namespace AspNetCoreSpa.Web.Controllers.api
             {
                 // Add custom claim
                 // ASP.NET Identity does not remember claim value types. So, if it was important that the office claim be an integer(rather than a string)
-                var officeClaim = new Claim("mobile", currentUser.Mobile.ToString(), ClaimValueTypes.Integer);
+                var officeClaim = new Claim(OpenIdConnectConstants.Claims.PhoneNumber, currentUser.Mobile.ToString(), ClaimValueTypes.Integer);
                 await _userManager.AddClaimAsync(currentUser, officeClaim);
 
                 // Add to roles
