@@ -72,6 +72,15 @@ export class RegisterComponent implements OnInit {
                 type: 'password',
                 required: true,
                 order: 5
+            }),
+            new ControlTextbox({
+                key: 'mobile',
+                label: 'Mobile',
+                placeholder: 'Mobile',
+                value: '',
+                type: 'text',
+                required: true,
+                order: 6
             })
         ];
 

@@ -86,7 +86,7 @@ namespace AspNetCoreSpa
             });
 
         }
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationDataService appService)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
             // app.AddCustomSecurityHeaders();

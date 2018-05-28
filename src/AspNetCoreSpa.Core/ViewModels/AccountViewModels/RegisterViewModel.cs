@@ -30,5 +30,9 @@ namespace AspNetCoreSpa.Core.ViewModels.AccountViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required]
+        [Phone]
+        public string Mobile { get; set; }
+
     }
 }

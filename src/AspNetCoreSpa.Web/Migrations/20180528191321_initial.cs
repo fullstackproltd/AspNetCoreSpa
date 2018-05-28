@@ -46,7 +46,8 @@ namespace AspNetCoreSpa.Web.Migrations
                     IsEnabled = table.Column<bool>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
                     FirstName = table.Column<string>(maxLength: 250, nullable: true),
-                    LastName = table.Column<string>(maxLength: 250, nullable: true)
+                    LastName = table.Column<string>(maxLength: 250, nullable: true),
+                    Mobile = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

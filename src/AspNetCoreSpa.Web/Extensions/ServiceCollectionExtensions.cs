@@ -244,7 +244,7 @@ namespace AspNetCoreSpa.Web.Extensions
             services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
             services.AddTransient<ApplicationDbContext>();
-            services.AddScoped<UserResolverService>();
+            services.AddTransient<UserResolverService>();
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }

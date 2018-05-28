@@ -71,6 +71,8 @@ namespace AspNetCoreSpa.Web.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
+                    b.Property<string>("Mobile");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
 
