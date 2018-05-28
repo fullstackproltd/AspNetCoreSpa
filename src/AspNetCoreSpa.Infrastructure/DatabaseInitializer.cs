@@ -145,27 +145,6 @@ namespace AspNetCoreSpa.Infrastructure
                 await _openIddictApplicationManager.CreateAsync(descriptor);
             }
 
-            // if (await manager.FindByClientIdAsync("resource-server-1", cancellationToken) == null)
-            // {
-            //     var descriptor = new OpenIddictApplicationDescriptor
-            //     {
-            //         ClientId = "resource-server-1",
-            //         ClientSecret = "846B62D0-DEF9-4215-A99D-86E6B8DAB342"
-            //     };
-
-            //     await manager.CreateAsync(descriptor, cancellationToken);
-            // }
-
-            // if (await manager.FindByClientIdAsync("resource-server-2", cancellationToken) == null)
-            // {
-            //     var descriptor = new OpenIddictApplicationDescriptor
-            //     {
-            //         ClientId = "resource-server-2",
-            //         ClientSecret = "C744604A-CD05-4092-9CF8-ECB7DC3499A2"
-            //     };
-
-            //     await manager.CreateAsync(descriptor, cancellationToken);
-            // }
         }
     }
 }

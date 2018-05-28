@@ -189,46 +189,6 @@ namespace AspNetCoreSpa.Web.Controllers.api
 
             return Render(ExternalLoginStatus.Error);
 
-            // if (result.RequiresTwoFactor)
-            // {
-            //     return this.Render(ExternalLoginStatus.TwoFactor);
-            // }
-            // if (result.IsLockedOut)
-            // {
-            //     return this.Render(ExternalLoginStatus.Lockout);
-            // }
-            // else
-            // {
-            //     // If the user does not have an account, then ask the user to create an account.
-            //     // ViewData["ReturnUrl"] = returnUrl;
-            //     // ViewData["LoginProvider"] = info.LoginProvider;
-            //     // var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            //     // return RedirectToAction("Index", "Home", new ExternalLoginCreateAccountViewModel { Email = email });
-            //     return this.Render(ExternalLoginStatus.CreateAccount);
-            // }
-
-            // if (!User.Identity.IsAuthenticated)
-            // {
-            //     // If the client application request promptless authentication,
-            //     // return an error indicating that the user is not logged in.
-            //     if (request.HasPrompt(OpenIdConnectConstants.Prompts.None))
-            //     {
-            //         var properties = new AuthenticationProperties(new Dictionary<string, string>
-            //         {
-            //             [OpenIdConnectConstants.Properties.Error] = OpenIdConnectConstants.Errors.LoginRequired,
-            //             [OpenIdConnectConstants.Properties.ErrorDescription] = "The user is not logged in."
-            //         });
-
-            //         // Ask OpenIddict to return a login_required error to the client application.
-            //         return Forbid(properties, OpenIdConnectServerDefaults.AuthenticationScheme);
-            //     }
-
-            //     return Challenge();
-            // }
-
-
-
-
         }
 
         private async Task<AuthenticationTicket> CreateTicketAsync(OpenIdConnectRequest request, ApplicationUser user, AuthenticationProperties properties = null)
