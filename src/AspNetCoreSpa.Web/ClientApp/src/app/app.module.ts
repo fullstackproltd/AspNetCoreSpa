@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 // Components
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 import { AppService } from './app.service';
 export function appServiceFactory(appService: AppService): Function {
   return () => appService.getAppData();
@@ -20,7 +21,8 @@ export function appServiceFactory(appService: AppService): Function {
   declarations: [
     // Components
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +37,8 @@ export function appServiceFactory(appService: AppService): Function {
       { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
       { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
       { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
-      { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' }
+      { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' },
+      { path: 'privacy',  component: PrivacyComponent},
     ], { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
