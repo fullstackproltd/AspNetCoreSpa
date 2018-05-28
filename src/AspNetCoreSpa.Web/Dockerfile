@@ -16,7 +16,7 @@ FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
 COPY src/AspNetCoreSpa.Web/AspNetCoreSpa.Web.csproj src/AspNetCoreSpa.Web/
 COPY src/AspNetCoreSpa.Core/AspNetCoreSpa.Core.csproj src/AspNetCoreSpa.Core/
-COPY src/AspNetCoreSpa.DAL/AspNetCoreSpa.DAL.csproj src/AspNetCoreSpa.DAL/
+COPY src/AspNetCoreSpa.Infrastructure/AspNetCoreSpa.Infrastructure.csproj src/AspNetCoreSpa.Infrastructure/
 RUN dotnet restore src/AspNetCoreSpa.Web/AspNetCoreSpa.Web.csproj
 
 COPY src/AspNetCoreSpa.Web/ClientApp/package.json src/AspNetCoreSpa.Web/ClientApp/

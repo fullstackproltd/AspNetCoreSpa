@@ -1,7 +1,7 @@
-﻿using AspNetCoreSpa.Web.Server.Extensions;
-using AspNetCoreSpa.Web.Server.Services;
-using AspNetCoreSpa.Web.Server.SignalR;
-using AspNetCoreSpa.Web.Server.ViewModels;
+﻿using AspNetCoreSpa.Web.Extensions;
+using AspNetCoreSpa.Infrastructure.Services;
+using AspNetCoreSpa.Web.SignalR;
+using AspNetCoreSpa.Core.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Http;
 
 namespace AspNetCoreSpa
 {
@@ -31,6 +32,12 @@ namespace AspNetCoreSpa
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
 
             services.AddPreRenderDebugging(HostingEnvironment);
 
@@ -116,6 +123,8 @@ namespace AspNetCoreSpa
 
             app.UseSpaStaticFiles();
 
+            app.UseCookiePolicy();
+
             app.UseSignalR(routes =>
             {
                 routes.MapHub<Chat>("/chathub");
@@ -160,7 +169,7 @@ namespace AspNetCoreSpa
 
                           if (env.IsDevelopment())
                           {
-                              //   spa.UseAngularCliServer(npmScript: "start");
+                              //spa.UseAngularCliServer(npmScript: "start");
                               //   OR
                               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }

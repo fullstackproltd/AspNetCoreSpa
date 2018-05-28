@@ -39,6 +39,9 @@ export class HeaderComponent implements OnInit {
     public get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];
     }
+    public get cookieConsent(): ICookieConsent {
+        return this.appService.appData.cookieConsent;
+    }
     public ngOnInit(): void { }
 
     public toggleNav() {

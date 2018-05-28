@@ -1,7 +1,7 @@
 $webdeploy = "C:\Program Files (x86)\IIS\Microsoft Web Deploy V3\msdeploy.exe"
 $location = Get-Location | Select-Object $_.Path
 $packOutput = Join-Path $location "bin\Release\netcoreapp2.1\publish"
-$app_offline = Join-Path $location "extra\app_offline.htm"
+$app_offline = Join-Path $location "app_offline.htm"
 
 $iisApp = "aspnetcorespa"
 $computerName = "https://aspnetcorespa.scm.azurewebsites.net/msdeploy.axd"

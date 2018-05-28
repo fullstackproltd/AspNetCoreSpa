@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{604F21DF-7A37-4CC3-A0FF-E29F8CE3C2DC}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		app_offline.htm = app_offline.htm
 		compodoc.jpg = compodoc.jpg
 		deploy.azure.ps1 = deploy.azure.ps1
 		deploy.heroku.ps1 = deploy.heroku.ps1
@@ -15,11 +16,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		NuGet.config = NuGet.config
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.DAL", "src\AspNetCoreSpa.DAL\AspNetCoreSpa.DAL.csproj", "{BE7DCDF2-FD63-4C40-A5C2-4C285EA7A046}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web", "src\AspNetCoreSpa.Web\AspNetCoreSpa.Web.csproj", "{66CD6482-8A49-4D55-97E5-4E97935F8F92}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web.Tests", "tests\AspNetCoreSpa.Tests\AspNetCoreSpa.Web.Tests.csproj", "{51318656-FBE2-45B6-9BDD-188508884CD7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7} = {FE862C6C-F04A-4663-BDB2-5F62FC98DED7}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{70506EDC-51C6-4ED4-AF6C-B5FFA508972A}"
 EndProject
@@ -27,16 +29,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Core", "src\A
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A345DA20-825C-4494-9DC6-748C1192E135}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Infrastructure", "src\AspNetCoreSpa.Infrastructure\AspNetCoreSpa.Infrastructure.csproj", "{67B30E75-5595-4E7A-9907-91530038983D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BE7DCDF2-FD63-4C40-A5C2-4C285EA7A046}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE7DCDF2-FD63-4C40-A5C2-4C285EA7A046}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE7DCDF2-FD63-4C40-A5C2-4C285EA7A046}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE7DCDF2-FD63-4C40-A5C2-4C285EA7A046}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,15 +53,19 @@ Global
 		{A345DA20-825C-4494-9DC6-748C1192E135}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A345DA20-825C-4494-9DC6-748C1192E135}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A345DA20-825C-4494-9DC6-748C1192E135}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67B30E75-5595-4E7A-9907-91530038983D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67B30E75-5595-4E7A-9907-91530038983D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67B30E75-5595-4E7A-9907-91530038983D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67B30E75-5595-4E7A-9907-91530038983D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{BE7DCDF2-FD63-4C40-A5C2-4C285EA7A046} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
 		{51318656-FBE2-45B6-9BDD-188508884CD7} = {70506EDC-51C6-4ED4-AF6C-B5FFA508972A}
 		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
+		{67B30E75-5595-4E7A-9907-91530038983D} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F123A03-0D43-4228-8BEC-E1E3F53EC73B}

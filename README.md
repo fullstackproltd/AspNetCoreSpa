@@ -13,6 +13,7 @@
 * [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
 * [SASS](http://sass-lang.com/) support
 * [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
+* [Clean Architecture](https://github.com/ardalis/CleanArchitecture) for Asp.Net Core application.
 * [PWA support](https://developers.google.com/web/progressive-web-apps/)
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
 * Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
@@ -43,11 +44,12 @@
 3. dotnet restore
 4. Install global dependencies
     npm install protractor rimraf http-server @angular/cli -g
-5. cd ClientApp
-6. npm install OR yarn
-7. Run 
-    i) Open terminal and run `npm start`
-    ii) F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
+5. cd src/AspNetCoreSpa.Web/ClientApp
+6. Run Client
+    i) npm install OR yarn
+    ii) npm start OR yarn start
+7. Run Server
+    F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
 
 8. Point to Sqllite or SqlServer
     

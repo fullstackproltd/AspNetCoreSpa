@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspNetCoreSpa.Core\AspNetCoreSpa.Core.csproj" />
-    <ProjectReference Include="..\AspNetCoreSpa.DAL\AspNetCoreSpa.DAL.csproj" />
+    <ProjectReference Include="..\AspNetCoreSpa.Infrastructure\AspNetCoreSpa.Infrastructure.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

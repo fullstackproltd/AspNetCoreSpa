@@ -1,11 +1,7 @@
-﻿using System.IO;
-using AspNetCoreSpa.Web.Server;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
-using System.Net;
 using System;
-using AspNetCoreSpa.DAL;
+using AspNetCoreSpa.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
