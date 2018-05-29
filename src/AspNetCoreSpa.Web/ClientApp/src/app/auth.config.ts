@@ -14,7 +14,7 @@ export function authConfig(url: string): AuthConfig {
         requireHttps: environment.production,
         // set the scope for the permissions the client should request
         // The first three are defined by OIDC.
-        scope: 'openid profile email offline_access client_id roles'
+        scope: 'openid profile email offline_access client_id roles phone'
     };
 
 }
