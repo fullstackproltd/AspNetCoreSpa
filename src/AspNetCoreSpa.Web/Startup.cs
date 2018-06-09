@@ -1,5 +1,4 @@
 ﻿using AspNetCoreSpa.Web.Extensions;
-using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Web.SignalR;
 using AspNetCoreSpa.Core.ViewModels;
 using AutoMapper;
@@ -10,8 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
+using System.Collections.Generic;
 
-namespace AspNetCoreSpa
+namespace AspNetCoreSpa.Web
 {
     public class Startup
     {
@@ -72,12 +73,21 @@ namespace AspNetCoreSpa
             {
                 c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
 
-                c.AddSecurityDefinition("OpenID Connect", new OAuth2Scheme
+                // Swagger 2.+ support
+                var security = new Dictionary<string, IEnumerable<string>>
                 {
-                    Type = "oauth2",
-                    Flow = "password",
-                    TokenUrl = "/connect/token"
+                    {"Bearer", new string[] { }},
+                };
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
                 });
+                c.AddSecurityRequirement(security);
+
             });
 
             Mapper.Initialize(cfg =>
@@ -169,9 +179,9 @@ namespace AspNetCoreSpa
 
                           if (env.IsDevelopment())
                           {
-                              //spa.UseAngularCliServer(npmScript: "start");
+                              spa.UseAngularCliServer(npmScript: "start");
                               //   OR
-                              spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                              // spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
 

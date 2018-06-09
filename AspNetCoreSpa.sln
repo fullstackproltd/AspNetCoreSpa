@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		deploy.heroku.ps1 = deploy.heroku.ps1
 		LICENSE = LICENSE
 		NuGet.config = NuGet.config
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web", "src\AspNetCoreSpa.Web\AspNetCoreSpa.Web.csproj", "{66CD6482-8A49-4D55-97E5-4E97935F8F92}"

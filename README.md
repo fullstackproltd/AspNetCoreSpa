@@ -41,17 +41,10 @@
     git clone https://github.com/asadsahi/AspNetCoreSpa
 2. Change directory
     cd AspNetCoreSpa
-3. dotnet restore
-4. Install global dependencies
-    npm install protractor rimraf http-server @angular/cli -g
-5. cd src/AspNetCoreSpa.Web/ClientApp
-6. Run Client
-    i) npm install OR yarn
-    ii) npm start OR yarn start
-7. Run Server
+3. Run Server
     F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
 
-8. Point to Sqllite or SqlServer
+4. Point to Sqllite or SqlServer
     
 This project supports both sql server and sql lite databases
 

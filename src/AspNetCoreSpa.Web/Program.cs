@@ -5,7 +5,7 @@ using AspNetCoreSpa.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AspNetCoreSpa
+namespace AspNetCoreSpa.Web
 {
     public class Program
     {

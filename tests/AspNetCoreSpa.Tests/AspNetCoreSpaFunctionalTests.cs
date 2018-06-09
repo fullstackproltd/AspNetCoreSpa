@@ -6,14 +6,14 @@ using Xunit;
 
 namespace AspNetCoreSpa.Web.Tests
 {
-    public class AspNetCoreSpaFunctionalTests : IClassFixture<WebApplicationFactory<Program>>
+    public class AspNetCoreSpaFunctionalTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        public AspNetCoreSpaFunctionalTests(WebApplicationFactory<Program> factory)
+        public AspNetCoreSpaFunctionalTests(WebApplicationFactory<Startup> factory)
         {
             Factory = factory;
         }
 
-        public WebApplicationFactory<Program> Factory { get; }
+        public WebApplicationFactory<Startup> Factory { get; }
 
 
         public HttpClient Client { get; }
