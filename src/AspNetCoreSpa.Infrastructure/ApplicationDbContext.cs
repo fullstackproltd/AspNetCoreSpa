@@ -61,7 +61,7 @@ namespace AspNetCoreSpa.Infrastructure
             return base.SaveChanges();
         }
         /// <summary>
-        /// Override SaveChanges so we can call the new AuditEntities method.
+        /// Override SaveChangesAsync so we can call the new AuditEntities method.
         /// </summary>
         /// <returns></returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
