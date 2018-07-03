@@ -50,15 +50,25 @@ namespace AspNetCoreSpa.Infrastructure
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
         /// <summary>
         /// Override SaveChanges so we can call the new AuditEntities method.
         /// </summary>
         /// <returns></returns>
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public override int SaveChanges()
+        {
+            this.AuditEntities();
+            return base.SaveChanges();
+        }
+        /// <summary>
+        /// Override SaveChangesAsync so we can call the new AuditEntities method.
+        /// </summary>
+        /// <returns></returns>
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             this.AuditEntities();
 
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
