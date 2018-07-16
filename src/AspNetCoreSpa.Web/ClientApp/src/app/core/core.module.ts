@@ -16,7 +16,7 @@ import { DataService } from './services/data.service';
 import { GlobalErrorHandler } from './services/global-error.service';
 import { TimingInterceptor } from './services/interceptors/timing-interceptor';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor';
-import { TranslatePipe } from '../translate.pipe';
+import { TranslationModule } from '../translation/translation.module';
 
 @NgModule({
     declarations: [
@@ -24,7 +24,6 @@ import { TranslatePipe } from '../translate.pipe';
         FooterComponent,
         CookieConsentComponent,
         ModalComponent,
-        TranslatePipe
     ],
     imports: [
         CommonModule,
@@ -32,6 +31,7 @@ import { TranslatePipe } from '../translate.pipe';
         ReactiveFormsModule,
         HttpClientModule,
         RouterModule,
+        TranslationModule,
         SimpleNotificationsModule.forRoot(),
     ],
     exports: [
@@ -44,7 +44,7 @@ import { TranslatePipe } from '../translate.pipe';
         FooterComponent,
         CookieConsentComponent,
         ModalComponent,
-        TranslatePipe
+        TranslationModule
     ],
     providers: []
 })
