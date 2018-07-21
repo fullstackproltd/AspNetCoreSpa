@@ -21,6 +21,6 @@ namespace AspNetCoreSpa.Infrastructure.Repositories
         void Add(T entity);
         void Delete(T entity);
         void Edit(T entity);
-        void Commit();
+        Task Commit();
     }
 }
