@@ -1,0 +1,10 @@
+MachineName,English,French,Russian,Belarussian,Ukrainian,Kazakh
+app_title,AspNetCoreSpa,~fr~AspNetCoreSpa,~ru~AspNetCoreSpa,~by~AspNetCoreSpa,~ua~Taxi,~kz~AspNetCoreSpa
+app_description,Single page application using aspnet core and angular,~fr~Single page application using aspnet core and angular,~ru~Single page application using aspnet core and angular,~by~Single page application using aspnet core and angular,~ua~Single page application using aspnet core and angular,~kz~Single page application using aspnet core and angular
+app_repo_url,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa
+app_nav_home,Home,~fr~Home,~ru~Home,~by~Home,~ua~Home,~kz~Home
+app_nav_signalr,SignalR,~fr~SignalR,~ru~SignalR,~by~SignalR,~ua~SignalR,~kz~SignalR
+app_nav_examples,Examples,~fr~Examples,~ru~Examples,~by~Examples,~ua~Examples,~kz~Examples
+app_nav_register,Register,~fr~Register,~ru~Register,~by~Register,~ua~Register,~kz~Register
+app_nav_login,Login,~fr~Login,~ru~Login,~by~Login,~ua~Login,~kz~Login
+app_nav_logout,Logout,~fr~Logout,~ru~Logout,~by~Logout,~ua~Logout,~kz~Logout
