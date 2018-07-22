@@ -30,8 +30,8 @@ export class RegisterComponent implements OnInit {
         const controls: Array<ControlBase<any>> = [
             new ControlTextbox({
                 key: 'username',
-                label: 'Username',
-                placeholder: 'Username',
+                label: 'app_username',
+                placeholder: 'app_username',
                 value: '',
                 type: 'text',
                 required: true,
@@ -39,8 +39,8 @@ export class RegisterComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'firstname',
-                label: 'Firstname',
-                placeholder: 'Firstname',
+                label: 'app_firstname',
+                placeholder: 'app_firstname',
                 value: '',
                 type: 'text',
                 required: true,
@@ -48,8 +48,8 @@ export class RegisterComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'lastname',
-                label: 'Lastname',
-                placeholder: 'Lastname',
+                label: 'app_lastname',
+                placeholder: 'app_lastname',
                 value: '',
                 type: 'text',
                 required: true,
@@ -57,8 +57,8 @@ export class RegisterComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'email',
-                label: 'Email',
-                placeholder: 'Email',
+                label: 'app_email',
+                placeholder: 'app_email',
                 value: '',
                 type: 'email',
                 required: true,
@@ -66,8 +66,8 @@ export class RegisterComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'password',
-                label: 'Password',
-                placeholder: 'Password',
+                label: 'app_password',
+                placeholder: 'app_password',
                 value: '',
                 type: 'password',
                 required: true,
@@ -75,8 +75,8 @@ export class RegisterComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'mobile',
-                label: 'Mobile',
-                placeholder: 'Mobile',
+                label: 'app_mobile',
+                placeholder: 'app_mobile',
                 value: '',
                 type: 'text',
                 required: true,
