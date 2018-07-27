@@ -13,6 +13,7 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
 // Services
 import { FormControlService } from './forms/form-control.service';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
+import { TranslationModule } from '../translation/translation.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    TranslationModule,
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
@@ -42,6 +44,7 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     ErrorSummaryComponent,
     SubMenuComponent,
     UppercasePipe,
+    TranslationModule,
   ],
   providers: [
     FormControlService
