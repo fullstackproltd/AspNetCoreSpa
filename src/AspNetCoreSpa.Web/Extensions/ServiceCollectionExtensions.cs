@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreSpa.Core.Entities;
 using AspNetCoreSpa.Infrastructure;
+using Microsoft.Extensions.FileProviders;
 
 namespace AspNetCoreSpa.Web.Extensions
 {
@@ -214,14 +215,19 @@ namespace AspNetCoreSpa.Web.Extensions
             return services;
         }
 
-        public static IServiceCollection AddCustomLocalization(this IServiceCollection services)
+        public static IServiceCollection AddCustomLocalization(this IServiceCollection services, IFileProvider fileProvider)
         {
+            services.AddSingleton(fileProvider);
             services.Configure<RequestLocalizationOptions>(opts =>
                 {
                     var supportedCultures = new List<CultureInfo>
                     {
-                                new CultureInfo("en-US"),
-                                new CultureInfo("fr-FR")
+                        new CultureInfo("en-US"),
+                        new CultureInfo("fr-FR"),
+                        new CultureInfo("ru-RU"),
+                        new CultureInfo("be-BY"),
+                        new CultureInfo("uk-UA"),
+                        new CultureInfo("kk-KZ"),
                     };
 
                     opts.DefaultRequestCulture = new RequestCulture("en-US");
