@@ -4,9 +4,9 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { AppService } from '@app/app.service';
-import { CoreModule } from '@app/core';
-import { MockAppService } from '../../__mocks__/MockAppService';
+import { AppService } from './app.service';
+import { CoreModule } from './core';
+import { MockAppService } from '__mocks__/MockAppService';
 
 describe('AppComponent', () => {
   let fixture;

@@ -19,11 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web", "src\AspNetCoreSpa.Web\AspNetCoreSpa.Web.csproj", "{66CD6482-8A49-4D55-97E5-4E97935F8F92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web.Tests", "tests\AspNetCoreSpa.Tests\AspNetCoreSpa.Web.Tests.csproj", "{51318656-FBE2-45B6-9BDD-188508884CD7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7} = {FE862C6C-F04A-4663-BDB2-5F62FC98DED7}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{70506EDC-51C6-4ED4-AF6C-B5FFA508972A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Core", "src\AspNetCoreSpa.Core\AspNetCoreSpa.Core.csproj", "{FE862C6C-F04A-4663-BDB2-5F62FC98DED7}"
@@ -31,6 +26,8 @@ EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A345DA20-825C-4494-9DC6-748C1192E135}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Infrastructure", "src\AspNetCoreSpa.Infrastructure\AspNetCoreSpa.Infrastructure.csproj", "{67B30E75-5595-4E7A-9907-91530038983D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web.Tests", "tests\AspNetCoreSpa.Tests\AspNetCoreSpa.Web.Tests.csproj", "{B108BD65-6F78-4F53-998C-EE8CA6D34167}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +39,6 @@ Global
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51318656-FBE2-45B6-9BDD-188508884CD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51318656-FBE2-45B6-9BDD-188508884CD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51318656-FBE2-45B6-9BDD-188508884CD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51318656-FBE2-45B6-9BDD-188508884CD7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,15 +51,19 @@ Global
 		{67B30E75-5595-4E7A-9907-91530038983D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67B30E75-5595-4E7A-9907-91530038983D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67B30E75-5595-4E7A-9907-91530038983D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B108BD65-6F78-4F53-998C-EE8CA6D34167}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B108BD65-6F78-4F53-998C-EE8CA6D34167}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B108BD65-6F78-4F53-998C-EE8CA6D34167}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B108BD65-6F78-4F53-998C-EE8CA6D34167}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{66CD6482-8A49-4D55-97E5-4E97935F8F92} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
-		{51318656-FBE2-45B6-9BDD-188508884CD7} = {70506EDC-51C6-4ED4-AF6C-B5FFA508972A}
 		{FE862C6C-F04A-4663-BDB2-5F62FC98DED7} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
 		{67B30E75-5595-4E7A-9907-91530038983D} = {DE75BCFF-DB7E-48F6-BD0F-FBC5D36D560E}
+		{B108BD65-6F78-4F53-998C-EE8CA6D34167} = {70506EDC-51C6-4ED4-AF6C-B5FFA508972A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F123A03-0D43-4228-8BEC-E1E3F53EC73B}
