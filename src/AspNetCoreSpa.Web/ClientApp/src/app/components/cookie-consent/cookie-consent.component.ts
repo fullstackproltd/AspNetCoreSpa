@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppService } from '../../../app.service';
+import { AppService } from '../../app.service';
 
 @Component({
     selector: 'appc-cookie-consent',

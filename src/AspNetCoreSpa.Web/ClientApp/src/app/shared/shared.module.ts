@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppSharedModule } from '../appshared';
 // Components
 import { SocialLoginComponent } from './components/social-login/social-login.component';
 import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
@@ -20,6 +21,7 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    AppSharedModule
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
@@ -35,6 +37,7 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    AppSharedModule,
     // Providers, Components, directive, pipes
     SocialLoginComponent,
     DynamicFormComponent,

@@ -16,7 +16,6 @@
       "es2017",
       "dom"
     ],
-    "baseUrl": ".",
     "paths": {
       "@app/*": [
         "app/*"

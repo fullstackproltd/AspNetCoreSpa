@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../core/services/data.service';
-import { NotificationsService } from '../../../core/simple-notifications/simple-notifications.module';
+
+import { DataService } from '@app/core';
+import { NotificationsService } from '@app/simple-notifications';
 
 @Component({
   selector: 'appc-user-photo',

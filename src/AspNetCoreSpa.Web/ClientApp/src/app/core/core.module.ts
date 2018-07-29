@@ -4,47 +4,27 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-// App level components
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { ModalComponent } from './components/modal/modal.component';
-import { CookieConsentComponent } from './components/cookie-consent/cookie-consent.component';
 // App level services
 import { AccountService } from './services/account.service';
-import { SimpleNotificationsModule } from './simple-notifications/simple-notifications.module';
 import { DataService } from './services/data.service';
 import { GlobalErrorHandler } from './services/global-error.service';
 import { TimingInterceptor } from './services/interceptors/timing-interceptor';
 import { AuthInterceptor } from './services/interceptors/auth-interceptor';
-import { TranslatePipe } from '../translate.pipe';
 
 @NgModule({
-    declarations: [
-        HeaderComponent,
-        FooterComponent,
-        CookieConsentComponent,
-        ModalComponent,
-        TranslatePipe
-    ],
+    declarations: [],
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        RouterModule,
-        SimpleNotificationsModule.forRoot(),
+        RouterModule
     ],
     exports: [
         FormsModule,
         HttpClientModule,
         ReactiveFormsModule,
-        RouterModule,
-        // Components
-        HeaderComponent,
-        FooterComponent,
-        CookieConsentComponent,
-        ModalComponent,
-        TranslatePipe
+        RouterModule
     ],
     providers: []
 })
@@ -69,3 +49,5 @@ export class CoreModule {
         }
     }
 }
+
+export * from './services';

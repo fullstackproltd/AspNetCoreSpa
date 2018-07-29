@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NotificationsService } from '@app/simple-notifications';
 import { UserInfoModel } from '../profile.models';
 import { ProfileService } from '../profile.service';
 import { ControlBase } from '../../../shared/forms/controls/control-base';
 import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
-import { NotificationsService } from '../../../core/simple-notifications/simple-notifications.module';
 
 @Component({
   selector: 'appc-user-info',
