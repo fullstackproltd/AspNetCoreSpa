@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ControlBase } from '../../../shared/forms/controls/control-base';
 import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
 import { DataService } from '../../../core/services/data.service';
+import { AccountClient, RegisterViewModel } from '../../../../apiDefinition';
 
 
 @Component({
@@ -16,14 +17,19 @@ export class RegisterComponent implements OnInit {
     constructor(
         public dataService: DataService,
         public router: Router,
-        public route: ActivatedRoute
+        public route: ActivatedRoute,
+        public accountClient: AccountClient
     ) { }
 
-    public register(model: IRegisterModel): void {
-        this.dataService.post('api/account/register', model)
+    public register(model: RegisterViewModel): void {
+        this.accountClient.register(model, null)
             .subscribe(() => {
                 this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });
             });
+        // this.dataService.post('api/account/register', model)
+        //     .subscribe(() => {
+        //         this.router.navigate(['../registerconfirmation'], { relativeTo: this.route, queryParams: { emailConfirmed: true } });
+        //     });
     }
 
     public ngOnInit() {

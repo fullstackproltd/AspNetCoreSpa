@@ -45,7 +45,7 @@
   "codeGenerators": {
     "swaggerToTypeScriptClient": {
       "className": "{controller}Client",
-      "moduleName": "apiDefinition",
+      "moduleName": "",
       "namespace": "",
       "typeScriptVersion": 2.7,
       "template": "Angular",
