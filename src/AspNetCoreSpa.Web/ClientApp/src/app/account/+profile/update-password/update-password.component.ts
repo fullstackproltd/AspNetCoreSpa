@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 
+import { NotificationsService } from '@app/simple-notifications';
 import { ProfileService } from '../profile.service';
 import { UpdatePasswordModel } from '../profile.models';
 import { ControlBase } from '../../../shared/forms/controls/control-base';
 import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
-import { NotificationsService } from '../../../core/simple-notifications/simple-notifications.module';
 
 @Component({
   selector: 'appc-update-password',

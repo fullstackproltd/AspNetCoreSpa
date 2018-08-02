@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AppSharedModule } from '../appshared';
 // Components
 import { SocialLoginComponent } from './components/social-login/social-login.component';
 import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
@@ -13,7 +14,6 @@ import { UppercasePipe } from './pipes/uppercase.pipe';
 // Services
 import { FormControlService } from './forms/form-control.service';
 import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
-import { TranslationModule } from '../translation/translation.module';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { TranslationModule } from '../translation/translation.module';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    TranslationModule,
+    AppSharedModule
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
@@ -37,6 +37,7 @@ import { TranslationModule } from '../translation/translation.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    AppSharedModule,
     // Providers, Components, directive, pipes
     SocialLoginComponent,
     DynamicFormComponent,
@@ -44,7 +45,6 @@ import { TranslationModule } from '../translation/translation.module';
     ErrorSummaryComponent,
     SubMenuComponent,
     UppercasePipe,
-    TranslationModule,
   ],
   providers: [
     FormControlService

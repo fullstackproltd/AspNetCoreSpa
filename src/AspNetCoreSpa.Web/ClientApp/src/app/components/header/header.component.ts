@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { AppService } from '../../../app.service';
-import { AccountService } from '../../services/account.service';
-import { DataService } from '../../services/data.service';
+import { AccountService, DataService } from '@app/core';
+import { AppService } from '../../app.service';
 
 @Component({
     selector: 'appc-header',
@@ -12,11 +11,6 @@ import { DataService } from '../../services/data.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    public notificationOptions = {
-        position: ['top', 'right'],
-        timeOut: 5000,
-        lastOnBottom: true
-    };
     public isCollapsed = true;
     constructor(
         private accountService: AccountService,

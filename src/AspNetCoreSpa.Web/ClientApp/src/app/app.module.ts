@@ -5,14 +5,17 @@ import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { OAuthModule } from 'angular-oauth2-oidc';
 import { PrebootModule } from 'preboot';
-import { CoreModule } from './core/core.module';
 
 import { environment } from '../environments/environment';
 
+import { CoreModule } from './core';
+import { AppSharedModule } from './appshared';
+import { SimpleNotificationsModule } from './simple-notifications';
+
 // Components
 import { AppComponent } from './app.component';
+import { CookieConsentComponent, FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent } from './components';
 import { HomeComponent } from './home/home.component';
-import { PrivacyComponent } from './privacy/privacy.component';
 import { AppService } from './app.service';
 export function appServiceFactory(appService: AppService): Function {
   return () => appService.getAppData();
@@ -22,6 +25,10 @@ export function appServiceFactory(appService: AppService): Function {
     // Components
     AppComponent,
     HomeComponent,
+    CookieConsentComponent,
+    FooterComponent,
+    HeaderComponent,
+    ModalComponent,
     PrivacyComponent
   ],
   imports: [
@@ -30,6 +37,8 @@ export function appServiceFactory(appService: AppService): Function {
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     CoreModule.forRoot(),
+    AppSharedModule,
+    SimpleNotificationsModule.forRoot(),
     OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },
@@ -38,7 +47,7 @@ export function appServiceFactory(appService: AppService): Function {
       { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
       { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
       { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' },
-      { path: 'privacy',  component: PrivacyComponent},
+      { path: 'privacy', component: PrivacyComponent },
     ], { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
@@ -46,8 +55,7 @@ export function appServiceFactory(appService: AppService): Function {
     AppService,
     { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService], multi: true }
   ],
-  exports: [
-  ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
