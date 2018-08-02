@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="7.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="OpenIddict" Version="2.0.0-rc2-final" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.0-rc2-final" />
@@ -12,6 +13,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspNetCoreSpa.Core\AspNetCoreSpa.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EFLocalizer\Translation\translations.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
