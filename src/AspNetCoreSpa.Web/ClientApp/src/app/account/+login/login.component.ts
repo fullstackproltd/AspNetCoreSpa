@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
         const controls: Array<ControlBase<any>> = [
             new ControlTextbox({
                 key: 'username',
-                label: 'Email',
-                placeholder: 'Email',
+                label: 'app_email',
+                placeholder: 'app_email',
                 value: '',
                 type: 'email',
                 required: true,
@@ -40,8 +40,8 @@ export class LoginComponent implements OnInit {
             }),
             new ControlTextbox({
                 key: 'password',
-                label: 'Password',
-                placeholder: 'Password',
+                label: 'app_password',
+                placeholder: 'app_password',
                 value: '',
                 type: 'password',
                 required: true,

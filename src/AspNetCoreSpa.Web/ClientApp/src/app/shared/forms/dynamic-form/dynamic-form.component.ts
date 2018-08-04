@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 
 import { FormControlService } from '../form-control.service';
 import { ControlBase } from '../controls/control-base';
+import { AppService } from '../../../app.service';
 
 @Component({
     selector: 'appc-dynamic-form',
@@ -28,7 +29,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     @ViewChild('formDir') public formDir: NgForm;
     public form: FormGroup;
 
-    constructor(public _controlService: FormControlService) { }
+    constructor(
+        private _appService: AppService,
+        public _controlService: FormControlService,
+    ) { }
+
 
     public ngOnInit() {
         this.sortedControls = this.controls.sort((a, b) => a.order - b.order);
@@ -48,6 +53,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
                 this.formDir.resetForm();
             }
         });
+
+        this.translate();
 
     }
 
@@ -83,6 +90,23 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
                 this.form.value[controlKey] = date;
             }
         }
+    }
+
+    private translate() {
+        this.btnText = this._appService.appData.content[this.btnText];
+
+        if (this.displayCancel)
+            this.cancelText = this._appService.appData.content[this.cancelText];
+
+        const self = this;
+
+        this.controls.forEach(control => {
+            if (control.label)
+                control.label = self._appService.appData.content[control.label];
+
+            if (control.placeholder)
+                control.placeholder = self._appService.appData.content[control.placeholder];
+        });
     }
 
     ngOnDestroy() {

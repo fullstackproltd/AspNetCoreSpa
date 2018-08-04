@@ -1,16 +1,19 @@
 ﻿using AspNet.Security.OpenIdConnect.Primitives;
 using AspNetCoreSpa.Core.Entities;
+using AspNetCoreSpa.Infrastructure.EFLocalizer.Translation;
+using CsvHelper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using OpenIddict.Core;
 using OpenIddict.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace AspNetCoreSpa.Infrastructure
@@ -27,13 +30,15 @@ namespace AspNetCoreSpa.Infrastructure
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly OpenIddictApplicationManager<OpenIddictApplication> _openIddictApplicationManager;
         private readonly ILogger _logger;
+        private readonly IFileProvider _fileProvider;
 
         public DatabaseInitializer(
-            ApplicationDbContext context, 
-            ILogger<DatabaseInitializer> logger, 
+            ApplicationDbContext context,
+            ILogger<DatabaseInitializer> logger,
             OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager,
             RoleManager<ApplicationRole> roleManager,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            IFileProvider fileProvider
             )
         {
             _context = context;
@@ -41,6 +46,7 @@ namespace AspNetCoreSpa.Infrastructure
             _openIddictApplicationManager = openIddictApplicationManager;
             _roleManager = roleManager;
             _userManager = userManager;
+            _fileProvider = fileProvider;
         }
 
         public async Task SeedAsync(IConfiguration configuration)
@@ -49,7 +55,7 @@ namespace AspNetCoreSpa.Infrastructure
 
             CreateRoles();
             CreateUsers();
-            AddLocalisedData();
+            await AddLocalisedData();
             await AddOpenIdConnectOptions(configuration);
         }
 
@@ -83,46 +89,79 @@ namespace AspNetCoreSpa.Infrastructure
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("user@user.com").GetAwaiter().GetResult(), "User").Result.ToString();
             }
         }
-        private void AddLocalisedData()
+        private IEnumerable<string> GetTranslationByIndex(Translation[] translations, string language)
         {
-            if (!_context.Cultures.Any())
+            switch (language)
             {
-                _context.Cultures.AddRange(
-                    new Culture
-                    {
-                        Name = "en-US",
-                        Resources = new List<Resource>() {
-                            new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
-                            new Resource { Key = "app_description", Value = "Single page application using aspnet core and angular" },
-                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
-                            new Resource { Key = "app_nav_home", Value = "Home" },
-                            new Resource { Key = "app_nav_signalr", Value = "SignalR" },
-                            new Resource { Key = "app_nav_examples", Value = "Examples" },
-                            new Resource { Key = "app_nav_register", Value = "Register" },
-                            new Resource { Key = "app_nav_login", Value = "Login" },
-                            new Resource { Key = "app_nav_logout", Value = "Logout" },
-                        }
-                    },
-                    new Culture
-                    {
-                        Name = "fr-FR",
-                        Resources = new List<Resource>() {
-                            new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
-                            new Resource { Key = "app_description", Value = "Application d'une seule page utilisant aspnet core et angular" },
-                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
-                            new Resource { Key = "app_nav_home", Value = "Accueil" },
-                            new Resource { Key = "app_nav_signalr", Value = "SignalR" },
-                            new Resource { Key = "app_nav_examples", Value = "Exemples" },
-                            new Resource { Key = "app_nav_register", Value = "registre" },
-                            new Resource { Key = "app_nav_login", Value = "S'identifier" },
-                            new Resource { Key = "app_nav_logout", Value = "Connectez - Out" },
-                        }
-                    }
-                    );
-
-                _context.SaveChanges();
+                case "en-US": return translations.Select(x => x.English);
+                case "fr-FR": return translations.Select(x => x.French);
+                case "ru-RU": return translations.Select(x => x.Russian);
+                case "be-BY": return translations.Select(x => x.Belarussian);
+                case "uk-UA": return translations.Select(x => x.Ukrainian);
+                case "kk-KZ": return translations.Select(x => x.Kazakh);
+                default: break;
             }
 
+            return new string[0];
+        }
+        private async Task AddLocalisedData()
+        {
+            if (_context.Cultures.Any())
+                return;
+
+            var languages = new string[] {
+                    "en-US",
+                    "fr-FR",
+                    "ru-RU",
+                    "be-BY",
+                    "uk-UA",
+                    "kk-KZ"
+                };
+
+            // It should`ve work something like below
+            // var fileInfo = _fileProvider.GetDirectoryContents("/**/Translation/*.csv");
+            // (however, wildcards doesn't work fine in .net core 2.1 that`s why I`m using full path)
+            // TODO: find better solution
+            var fileInfo = _fileProvider
+#if DEBUG
+                .GetDirectoryContents("bin/Debug/netcoreapp2.1/EFLocalizer/Translation")
+#elif RELEASE
+                .GetDirectoryContents("bin/Release/netcoreapp2.1/EFLocalizer/Translation")
+#endif
+                .FirstOrDefault();
+
+            if (fileInfo == null)
+                throw new Exception("No csv translation file found");
+
+            var csvTranslations = new CsvReader(File.OpenText(fileInfo.PhysicalPath));
+            var translations = csvTranslations.GetRecords<Translation>().ToArray();
+
+            var machineNames = translations.Select(x => x.MachineName).ToArray();
+            var cultures = new Culture[languages.Length];
+
+            for (int i = 0; i < cultures.Length; i++)
+            {
+                var resources = new Resource[machineNames.Length];
+                var concreteTranslation = GetTranslationByIndex(translations, languages[i]).ToArray();
+
+                for (int j = 0; j < resources.Length; j++)
+                    resources[j] = new Resource
+                    {
+                        Key = machineNames[j],
+                        Value = concreteTranslation[j]
+                    };
+
+                cultures[i] = new Culture
+                {
+                    Name = languages[i],
+                    Resources = resources.ToList()
+                };
+            }
+
+            csvTranslations.Dispose();
+
+            _context.Cultures.AddRange(cultures);
+            await _context.SaveChangesAsync();
         }
 
         private async Task AddOpenIdConnectOptions(IConfiguration configuration)
