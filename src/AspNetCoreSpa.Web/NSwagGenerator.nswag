@@ -52,7 +52,7 @@
       "promiseType": "Promise",
       "httpClass": "HttpClient",
       "useSingletonProvider": true,
-      "injectionTokenType": "OpaqueToken",
+      "injectionTokenType": "InjectionToken",
       "rxJsVersion": 6.0,
       "dateTimeType": "Date",
       "nullValue": "Undefined",
@@ -92,7 +92,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": null
+      "output": "ClientApp/src/apiDefinitions.ts"
     }
   }
 }

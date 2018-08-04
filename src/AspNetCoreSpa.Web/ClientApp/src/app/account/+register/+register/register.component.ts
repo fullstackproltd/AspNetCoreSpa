@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ControlBase } from '../../../shared/forms/controls/control-base';
 import { ControlTextbox } from '../../../shared/forms/controls/control-textbox';
 import { DataService } from '../../../core/services/data.service';
-import { AccountClient, RegisterViewModel } from '../../../../apiDefinition';
+import { AccountClient, RegisterViewModel } from '../../../../apiDefinitions';
 
 
 @Component({
