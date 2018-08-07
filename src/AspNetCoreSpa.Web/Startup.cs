@@ -59,7 +59,7 @@ namespace AspNetCoreSpa.Web
             services.AddSignalR()
                 .AddMessagePackProtocol();
 
-            services.AddCustomLocalization();
+            services.AddCustomLocalization(HostingEnvironment);
 
             services.AddCustomizedMvc();
 

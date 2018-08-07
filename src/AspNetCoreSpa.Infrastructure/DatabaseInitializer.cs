@@ -1,5 +1,7 @@
 ﻿using AspNet.Security.OpenIdConnect.Primitives;
+using AspNetCoreSpa.Core;
 using AspNetCoreSpa.Core.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +10,7 @@ using OpenIddict.Core;
 using OpenIddict.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
@@ -27,13 +30,15 @@ namespace AspNetCoreSpa.Infrastructure
         private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly OpenIddictApplicationManager<OpenIddictApplication> _openIddictApplicationManager;
         private readonly ILogger _logger;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         public DatabaseInitializer(
-            ApplicationDbContext context, 
-            ILogger<DatabaseInitializer> logger, 
+            ApplicationDbContext context,
+            ILogger<DatabaseInitializer> logger,
             OpenIddictApplicationManager<OpenIddictApplication> openIddictApplicationManager,
             RoleManager<ApplicationRole> roleManager,
-            UserManager<ApplicationUser> userManager
+            UserManager<ApplicationUser> userManager,
+            IHostingEnvironment hostingEnvironment
             )
         {
             _context = context;
@@ -41,6 +46,7 @@ namespace AspNetCoreSpa.Infrastructure
             _openIddictApplicationManager = openIddictApplicationManager;
             _roleManager = roleManager;
             _userManager = userManager;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public async Task SeedAsync(IConfiguration configuration)
@@ -87,40 +93,38 @@ namespace AspNetCoreSpa.Infrastructure
         {
             if (!_context.Cultures.Any())
             {
-                _context.Cultures.AddRange(
-                    new Culture
-                    {
-                        Name = "en-US",
-                        Resources = new List<Resource>() {
-                            new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
-                            new Resource { Key = "app_description", Value = "Single page application using aspnet core and angular" },
-                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
-                            new Resource { Key = "app_nav_home", Value = "Home" },
-                            new Resource { Key = "app_nav_signalr", Value = "SignalR" },
-                            new Resource { Key = "app_nav_examples", Value = "Examples" },
-                            new Resource { Key = "app_nav_register", Value = "Register" },
-                            new Resource { Key = "app_nav_login", Value = "Login" },
-                            new Resource { Key = "app_nav_logout", Value = "Logout" },
-                        }
-                    },
-                    new Culture
-                    {
-                        Name = "fr-FR",
-                        Resources = new List<Resource>() {
-                            new Resource { Key = "app_title", Value = "AspNetCoreSpa" },
-                            new Resource { Key = "app_description", Value = "Application d'une seule page utilisant aspnet core et angular" },
-                            new Resource { Key = "app_repo_url", Value = "https://github.com/asadsahi/aspnetcorespa" },
-                            new Resource { Key = "app_nav_home", Value = "Accueil" },
-                            new Resource { Key = "app_nav_signalr", Value = "SignalR" },
-                            new Resource { Key = "app_nav_examples", Value = "Exemples" },
-                            new Resource { Key = "app_nav_register", Value = "registre" },
-                            new Resource { Key = "app_nav_login", Value = "S'identifier" },
-                            new Resource { Key = "app_nav_logout", Value = "Connectez - Out" },
-                        }
-                    }
-                    );
+                var translations = _hostingEnvironment.GetTranslationFile();
 
-                _context.SaveChanges();
+                var locales = translations.First().Split(",").Skip(1).ToList();
+
+                var currentLocale = 0;
+
+                locales.ForEach(locale =>
+                {
+                    currentLocale += 1;
+
+                    var culture = new Culture
+                    {
+                        Name = locale
+                    };
+                    var resources = new List<Resource>();
+                    translations.Skip(1).ToList().ForEach(t =>
+                    {
+                        var line = t.Split(",");
+                        resources.Add(new Resource
+                        {
+                            Culture = culture,
+                            Key = line[0],
+                            Value = line[currentLocale]
+                        });
+                    });
+
+                    culture.Resources = resources;
+
+                    _context.Cultures.Add(culture);
+
+                    _context.SaveChanges();
+                });
             }
 
         }
