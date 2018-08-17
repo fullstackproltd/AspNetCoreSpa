@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreSpa.Core.Entities;
 using AspNetCoreSpa.Infrastructure;
+using System.IO;
+using System.Linq;
+using AspNetCoreSpa.Core;
 
 namespace AspNetCoreSpa.Web.Extensions
 {
@@ -214,22 +217,22 @@ namespace AspNetCoreSpa.Web.Extensions
             return services;
         }
 
-        public static IServiceCollection AddCustomLocalization(this IServiceCollection services)
+        public static IServiceCollection AddCustomLocalization(this IServiceCollection services, IHostingEnvironment hostingEnvironment)
         {
-            services.Configure<RequestLocalizationOptions>(opts =>
-                {
-                    var supportedCultures = new List<CultureInfo>
-                    {
-                                new CultureInfo("en-US"),
-                                new CultureInfo("fr-FR")
-                    };
+            var translationFile = hostingEnvironment.GetTranslationFile();
 
-                    opts.DefaultRequestCulture = new RequestCulture("en-US");
-                    // Formatting numbers, dates, etc.
-                    opts.SupportedCultures = supportedCultures;
-                    // UI strings that we have localized.
-                    opts.SupportedUICultures = supportedCultures;
-                });
+            var cultures = translationFile.First().Split(",").Skip(1);
+
+            services.Configure<RequestLocalizationOptions>(opts =>
+            {
+                var supportedCultures = cultures.Select(c => new CultureInfo(c)).ToList();
+
+                opts.DefaultRequestCulture = new RequestCulture(cultures.First());
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
 
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 

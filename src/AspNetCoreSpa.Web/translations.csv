@@ -1,0 +1,19 @@
+ContentKey,en-US,fr-FR
+app_title,AspNetCoreSpa,fr-AspNetCoreSpa
+app_description,Single page application using aspnet core and angular,fr-Single page application using aspnet core and angular
+app_repo_url,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa
+app_nav_home,Home,fr-Home
+app_nav_signalr,SignalR,fr-SignalR
+app_nav_examples,Examples,fr-Examples
+app_nav_register,Register,fr-Register
+app_nav_login,Login,fr-Login
+app_nav_logout,Logout,fr-Logout
+app_login_btn,Login,fr-Login
+app_registry_btn,Register,fr-Register
+app_email,Email,fr-Email
+app_password,Password,fr-Password
+app_username,Username,fr-Username
+app_firstname,Firstname,fr-Firstname
+app_lastname,Lastname,fr-Lastname
+app_mobile,Mobile,fr-Mobile
+app_forget_password,Forget password? click here,fr-Forget password? click here
