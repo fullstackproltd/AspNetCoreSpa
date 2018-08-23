@@ -27,7 +27,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Infrastructure", "src\AspNetCoreSpa.Infrastructure\AspNetCoreSpa.Infrastructure.csproj", "{67B30E75-5595-4E7A-9907-91530038983D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web.Tests", "tests\AspNetCoreSpa.Tests\AspNetCoreSpa.Web.Tests.csproj", "{B108BD65-6F78-4F53-998C-EE8CA6D34167}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreSpa.Web.Integration", "tests\AspNetCoreSpa.Tests\AspNetCoreSpa.Web.Integration.csproj", "{B108BD65-6F78-4F53-998C-EE8CA6D34167}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

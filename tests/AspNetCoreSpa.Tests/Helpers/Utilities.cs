@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AspNetCoreSpa.Web.Tests
+namespace AspNetCoreSpa.Web.Integration
 {
     public static class Utilities
     {

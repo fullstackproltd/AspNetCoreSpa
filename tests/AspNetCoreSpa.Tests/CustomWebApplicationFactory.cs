@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace AspNetCoreSpa.Web.Tests
+namespace AspNetCoreSpa.Web.Integration
 {
     #region snippet1
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<AspNetCoreSpa.Web.Startup>

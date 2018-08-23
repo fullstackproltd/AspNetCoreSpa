@@ -4,7 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace AspNetCoreSpa.Web.Tests
+namespace AspNetCoreSpa.Web.Integration
 {
     #region snippet1
     public class BasicTests : IClassFixture<WebApplicationFactory<AspNetCoreSpa.Web.Startup>>
@@ -28,8 +28,8 @@ namespace AspNetCoreSpa.Web.Tests
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
-
+            var contentType = response.Content.Headers.ContentType.ToString();
+            Assert.Equal("text/html; charset=UTF-8", contentType);
         }
         #endregion
     }

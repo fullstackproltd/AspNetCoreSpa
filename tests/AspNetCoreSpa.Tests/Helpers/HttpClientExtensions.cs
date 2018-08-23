@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AngleSharp.Dom.Html;
 using Xunit;
 
-namespace AspNetCoreSpa.Web.Tests
+namespace AspNetCoreSpa.Web.Integration
 {
     public static class HttpClientExtensions
     {

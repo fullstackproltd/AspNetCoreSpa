@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AspNetCoreSpa.Web.Tests
+namespace AspNetCoreSpa.Web.Integration
 {
     public class HtmlHelpers
     {

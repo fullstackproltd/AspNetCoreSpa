@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AspNetCoreSpa.Web.Tests": {
+    "AspNetCoreSpa.Web.Integration": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
