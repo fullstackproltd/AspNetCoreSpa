@@ -18,6 +18,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "build:ssr": "npm run build --project=ssr",
+    "build:apiDef": "nswag run ../NSwagGenerator.nswag /runtime:NetCore21",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test": "jest",
@@ -65,7 +66,8 @@
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
     "typescript": "2.9.2",
-    "webpack-bundle-analyzer": "2.13.1"
+    "webpack-bundle-analyzer": "2.13.1",
+    "nswag": "11.18.1"
   },
   "jest": {
     "preset": "jest-preset-angular",

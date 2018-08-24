@@ -105,6 +105,10 @@ npm run webdriver:start
 # in another terminal
 npm run e2e:live
 ```
+### run client api definition generation
+```bash
+npm run build:apiDef
+```
 # Azure Deploy
 * You can set an environment variable for azure app deployment password
 Set-Item -path env:AzureAppPass -value passwordhere
