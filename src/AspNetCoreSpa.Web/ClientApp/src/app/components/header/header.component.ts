@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 
-import { AccountService, DataService } from '@app/core';
 import { AppService } from '../../app.service';
+import { AccountService, DataService } from '../../core';
+import { User } from 'oidc-client';
 
 @Component({
     selector: 'appc-header',
@@ -21,9 +22,9 @@ export class HeaderComponent implements OnInit {
     ) { }
 
     public get isLoggedIn(): boolean {
-        return this.accountService.isLoggedIn;
+        return this.accountService.isLoggedIn();
     }
-    public get user(): IProfileModel | undefined {
+    public get user(): User {
         return this.accountService.user;
 
     }
@@ -46,4 +47,7 @@ export class HeaderComponent implements OnInit {
         });
     }
 
+    public loginSts() {
+        this.accountService.login();
+    }
 }

@@ -14,7 +14,7 @@ namespace AspNetCoreSpa.Web.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rc1-32029");
+                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
 
             modelBuilder.Entity("AspNetCoreSpa.Core.Entities.ApplicationRole", b =>
                 {

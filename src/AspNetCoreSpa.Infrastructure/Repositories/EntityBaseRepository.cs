@@ -103,7 +103,7 @@ namespace AspNetCoreSpa.Infrastructure.Repositories
 
         public virtual void Commit()
         {
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
     }
 }

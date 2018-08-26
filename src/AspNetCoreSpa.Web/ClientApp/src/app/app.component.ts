@@ -9,6 +9,7 @@ import { authConfig } from './auth.config';
 import { routerTransition } from './router.animations';
 import { ExternalLoginStatus } from './app.models';
 import { AppService } from './app.service';
+import { AccountService } from './core';
 
 @Component({
   selector: 'appc-root',
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     lastOnBottom: true
   };
   constructor(
+    private accountService: AccountService,
     private router: Router,
     private title: Title,
     private meta: Meta,
@@ -41,6 +43,16 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.updateTitleAndMeta();
+    if (window.location.href.indexOf('?postLogout=true') > 0) {
+      this.accountService.signoutRedirectCallback().then(() => {
+        const url: string = this.router.url.substring(
+          0,
+          this.router.url.indexOf('?')
+        );
+        this.router.navigateByUrl(url);
+      });
+    }
+
     this.activatedRoute.queryParams.subscribe((params: Params) => {
       const param = params['externalLoginStatus'];
       if (param) {
