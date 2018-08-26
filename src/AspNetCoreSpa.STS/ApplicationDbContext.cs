@@ -1,23 +1,21 @@
-﻿
-
-using AspNetCoreSpa.Core.Entities;
-using AspNetCoreSpa.Infrastructure.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace AspNetCoreSpa.Infrastructure
+namespace AspNetCoreSpa.STS
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Culture> Cultures { get; set; }
-        public DbSet<Resource> Resources { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        //public DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
         {
         }
 
@@ -31,12 +29,6 @@ namespace AspNetCoreSpa.Infrastructure
 
                 modelBuilder.Entity(entityType.ClrType)
                     .Property<DateTime>("UpdatedAt");
-
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property<string>("CreatedBy");
-
-                modelBuilder.Entity(entityType.ClrType)
-                    .Property<string>("UpdatedBy");
             }
 
             base.OnModelCreating(modelBuilder);
@@ -73,7 +65,6 @@ namespace AspNetCoreSpa.Infrastructure
         {
 
             DateTime now = DateTime.Now;
-            // Get the authenticated user name 
 
             // For every changed entity marked as IAditable set the values for the audit properties
             foreach (EntityEntry<IAuditable> entry in ChangeTracker.Entries<IAuditable>())

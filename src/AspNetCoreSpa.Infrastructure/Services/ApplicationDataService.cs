@@ -20,26 +20,26 @@ namespace AspNetCoreSpa.Infrastructure.Services
     public class ApplicationDataService : IApplicationDataService
     {
         private readonly IOptions<RequestLocalizationOptions> _locOptions;
-        private readonly IHttpContextAccessor _context;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        //private readonly IHttpContextAccessor _context;
+        //private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IStringLocalizer<ApplicationDataService> _stringLocalizer;
         private readonly IMemoryCache _cache;
         public ApplicationDataService(
             IOptions<RequestLocalizationOptions> locOptions,
-            IHttpContextAccessor context,
-            SignInManager<ApplicationUser> signInManager,
+            //IHttpContextAccessor context,
+            //SignInManager<ApplicationUser> signInManager,
             IStringLocalizer<ApplicationDataService> stringLocalizer,
             IMemoryCache memoryCache
             )
         {
             _locOptions = locOptions;
-            _context = context;
-            _signInManager = signInManager;
+            //_context = context;
+            //_signInManager = signInManager;
             _stringLocalizer = stringLocalizer;
             _cache = memoryCache;
         }
 
-        public async Task<object> GetApplicationData(HttpContext context)
+        public object GetApplicationData(HttpContext context)
         {
             var data = Helpers.JsonSerialize(new
             {
@@ -48,7 +48,7 @@ namespace AspNetCoreSpa.Infrastructure.Services
                 Cultures = _locOptions.Value.SupportedUICultures
                         .Select(c => new { Value = c.Name, Text = c.DisplayName, Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name) })
                         .ToList(),
-                LoginProviders = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name)
+                //LoginProviders = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name)
             });
 
             return data;

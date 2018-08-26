@@ -5,11 +5,9 @@
         </a>
         <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="">{{'app_nav_home' | translate}}</a>
         <a routerLinkActive="active" routerLink="signalr">{{'app_nav_signalr' | translate}}</a>
-        <a routerLinkActive="active" routerLink="profile" *ngIf="isLoggedIn">{{user?.name}}</a>
+        <a href="javascript:void(0);" *ngIf="isLoggedIn">{{user?.profile.email}}</a>
         <a (click)="logout()" href="javascript:void(null);" *ngIf="isLoggedIn"> {{'app_nav_logout' | translate}} </a>
-        <a routerLinkActive="active" routerLink="register" *ngIf="!isLoggedIn">{{'app_nav_register' | translate}}</a>
-        <a routerLinkActive="active" routerLink="login" *ngIf="!isLoggedIn">{{'app_nav_login' | translate}}</a>
-        <a href="javascript:void(0);" (click)="loginSts()" *ngIf="!isLoggedIn">Login STS</a>
+        <a (click)="login()" href="javascript:void(0);" *ngIf="!isLoggedIn">{{'app_nav_login' | translate}}</a>
 
         <form *ngFor="let c of cultures" action="/api/setlanguage" method="post" class="culture-form" ngNoForm [class.active]="c.current">
             <input id={{c.value}} name="culture" value={{c.value}} type="submit" />

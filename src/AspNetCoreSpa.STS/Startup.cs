@@ -1,6 +1,4 @@
-﻿using AspNetCoreSpa.STS.Data;
-using AspNetCoreSpa.STS.Models;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using IdentityServer4.Services;
 using AspNetCoreSpa.STS.Quickstart.Account;
+using AspNetCoreSpa.STS.Quickstart;
+using System.Reflection;
+using IdentityServer4;
+using System;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace AspNetCoreSpa.STS
 {
@@ -24,8 +27,21 @@ namespace AspNetCoreSpa.STS
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.Configure<IISOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
+                options.AuthenticationDisplayName = "Windows";
+            });
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+
+            // Add framework services.
+            services.AddDbContextPool<ApplicationDbContext>(options =>
+            {
+                options.UseSqlite(connectionString);
+                options.UseSqlite(connectionString, b => b.MigrationsAssembly(migrationsAssembly));
+            });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -41,29 +57,78 @@ namespace AspNetCoreSpa.STS
                     .AllowCredentials();
                 });
             });
+
+            services.AddTransient<ISeedData, SeedData>();
             services.AddTransient<IProfileService, CustomProfileService>();
+            services.AddTransient<ApplicationDbContext>();
 
             services.AddMvc();
 
-            var builder = services.AddIdentityServer(options =>
+            var identityServer = services.AddIdentityServer(options =>
                 {
                     options.Events.RaiseErrorEvents = true;
                     options.Events.RaiseInformationEvents = true;
                     options.Events.RaiseFailureEvents = true;
                     options.Events.RaiseSuccessEvents = true;
                 })
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
+                  .AddTestUsers(TestUsers.Users)
+                // this adds the config data from DB (clients, resources, CORS)
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlite(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+                })
+                // this adds the operational data from DB (codes, tokens, consents)
+                .AddOperationalStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlite(connectionString,
+                            sql => sql.MigrationsAssembly(migrationsAssembly));
+
+                    // this enables automatic token cleanup. this is optional.
+                    options.EnableTokenCleanup = true;
+                    // options.TokenCleanupInterval = 15; // interval in seconds. 15 seconds useful for debugging
+                })
+                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
+                //.AddInMemoryApiResources(Config.GetApiResources())
+                //.AddInMemoryClients(Config.GetClients())
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddProfileService<CustomProfileService>();
 
+            services.AddAuthentication()
+               .AddGoogle(options =>
+               {
+                   options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
 
-                builder.AddDeveloperSigningCredential();
+                   options.ClientId = "476611152863-ltgqfk9jhq1vsenin5039n58ogkraltb.apps.googleusercontent.com";
+                   options.ClientSecret = "rSHvhgdOQUB4KMc5JS1alzhg";
+               });
+
+            if (Environment.IsDevelopment())
+            {
+                identityServer.AddDeveloperSigningCredential();
+            }
+            else
+            {
+                throw new Exception("need to configure key material");
+            }
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // https://github.com/openiddict/openiddict-core/issues/518
+            // And
+            // https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
+            var forwarOptions = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            };
+            forwarOptions.KnownNetworks.Clear();
+            forwarOptions.KnownProxies.Clear();
+
+            app.UseForwardedHeaders(forwarOptions);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,8 +136,11 @@ namespace AspNetCoreSpa.STS
             }
             else
             {
+                app.UseHsts();
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");

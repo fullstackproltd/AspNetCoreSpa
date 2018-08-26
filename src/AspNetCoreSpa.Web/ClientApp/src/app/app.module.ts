@@ -3,7 +3,6 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import { PrebootModule } from 'preboot';
 
 import { environment } from '../environments/environment';
@@ -39,13 +38,8 @@ export function appServiceFactory(appService: AppService): Function {
     CoreModule.forRoot(),
     AppSharedModule,
     SimpleNotificationsModule.forRoot(),
-    OAuthModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },
-      { path: 'login', loadChildren: './account/+login/login.module#LoginModule' },
-      { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
-      { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
-      { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
       { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' },
       { path: 'privacy', component: PrivacyComponent },
     ], { initialNavigation: 'enabled' }),

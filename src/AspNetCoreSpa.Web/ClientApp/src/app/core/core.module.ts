@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // App level services
-import { AccountService } from './services/account.service';
+import { AuthService } from './services/auth.service';
 import { DataService } from './services/data.service';
 import { GlobalErrorHandler } from './services/global-error.service';
 import { TimingInterceptor } from './services/interceptors/timing-interceptor';
@@ -35,7 +35,7 @@ export class CoreModule {
         return {
             ngModule: CoreModule,
             providers: [
-                AccountService,
+                AuthService,
                 DataService,
                 { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
                 { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },

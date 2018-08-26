@@ -34,10 +34,14 @@ namespace AspNetCoreSpa.STS
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
                         "projects-api"
                     },
-                    IdentityTokenLifetime=120,
-                    AccessTokenLifetime=120
+                    AllowOfflineAccess = true,
+                    
+                    // For testing purpose you can reduce the token lifetime to see silent renew happening
+                    // IdentityTokenLifetime=120,
+                    // AccessTokenLifetime=120
 
                 },
                 new Client
@@ -57,7 +61,8 @@ namespace AspNetCoreSpa.STS
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess
                     },
                     AllowOfflineAccess = true
 
@@ -66,12 +71,12 @@ namespace AspNetCoreSpa.STS
         }
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
-            {
-                return new List<IdentityResource>
+        {
+            return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
             };
-            }
         }
     }
+}

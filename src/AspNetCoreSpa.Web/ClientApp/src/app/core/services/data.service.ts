@@ -1,9 +1,8 @@
 ﻿import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
-import { AccountService } from './account.service';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class DataService {
@@ -33,7 +32,7 @@ export class DataService {
                 }
             };
 
-            req.setRequestHeader('Authorization', `Bearer ${this.inj.get(AccountService).accessToken}`);
+            req.setRequestHeader('Authorization', `Bearer ${this.inj.get(AuthService).getAccessToken()}`);
             req.send();
         });
     }
@@ -62,7 +61,7 @@ export class DataService {
         let searchParams = new HttpParams();
         for (const key in params) {
             if (params.hasOwnProperty(key)) {
-                searchParams= searchParams.append(key, params[key]);
+                searchParams = searchParams.append(key, params[key]);
             }
         }
         return searchParams;

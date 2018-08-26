@@ -5,6 +5,6 @@ namespace AspNetCoreSpa.Infrastructure.Services
 {
     public interface IApplicationDataService
     {
-        Task<object> GetApplicationData(HttpContext context);
+        object GetApplicationData(HttpContext context);
     }
 }

@@ -56,30 +56,3 @@ interface IEnableAuthenticatorModel {
     sharedKey: string;
     authenticatorUri: string;
 }
-interface ILoginModel {
-    username: string;
-    password: string;
-}
-
-interface IProfileModel {
-    sub: string | null;
-    jti: string | null;
-    useage: string | null;
-    at_hash: string | null;
-    nbf: number | null;
-    exp: number | null;
-    iat: number | null;
-    iss: string | null;
-    unique_name: string | null;
-    email_confirmed: boolean;
-    role: string[];
-}
-
-interface IRegisterModel {
-    userName: string;
-    password: string;
-    confirmPassword: string;
-    email: string;
-    firstname: string;
-    lastname: string;
-}

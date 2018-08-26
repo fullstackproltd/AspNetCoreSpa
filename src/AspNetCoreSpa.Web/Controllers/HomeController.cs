@@ -8,17 +8,16 @@ using Microsoft.AspNetCore.Http;
 using System;
 using AspNetCoreSpa.Core.Entities;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IApplicationDataService _applicationDataService;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager, IApplicationDataService applicationDataService)
+        public HomeController(IApplicationDataService applicationDataService)
         {
-            _userManager = userManager;
             _applicationDataService = applicationDataService;
         }
 
@@ -33,11 +32,11 @@ namespace AspNetCoreSpa.Web.Controllers
         }
 
         [HttpGet("api/applicationdata")]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var appData = await _applicationDataService.GetApplicationData(Request.HttpContext);
+            var appData = _applicationDataService.GetApplicationData(Request.HttpContext);
 
-            return Ok(appData);
+            return Ok(appData); 
         }
     }
 }

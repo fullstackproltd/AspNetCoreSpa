@@ -3,7 +3,7 @@ export class Constants {
     // public static stsAuthority = "https://securingangularappscourse-sts.azurewebsites.net/";
 
     public static apiRoot = 'http://localhost:2112/api/';
-    public static stsAuthority = 'http://localhost:4242/';
+    public static stsAuthority = 'https://localhost:5005/';
 
     // public static stsAuthority = 'https://softinsight.auth0.com/';
 

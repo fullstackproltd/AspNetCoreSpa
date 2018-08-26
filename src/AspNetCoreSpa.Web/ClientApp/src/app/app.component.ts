@@ -1,15 +1,12 @@
-import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 
 import { Params, ActivatedRoute, Router } from '@angular/router';
-import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
-import { authConfig } from './auth.config';
 
 import { routerTransition } from './router.animations';
 import { ExternalLoginStatus } from './app.models';
 import { AppService } from './app.service';
-import { AccountService } from './core';
+import { AuthService } from './core';
 
 @Component({
   selector: 'appc-root',
@@ -24,22 +21,13 @@ export class AppComponent implements OnInit {
     lastOnBottom: true
   };
   constructor(
-    private accountService: AccountService,
+    private accountService: AuthService,
     private router: Router,
     private title: Title,
     private meta: Meta,
     private appService: AppService,
-    @Inject('BASE_URL') private baseUrl: string,
-    @Inject(PLATFORM_ID) private platformId: string,
-    private activatedRoute: ActivatedRoute,
-    private oauthService: OAuthService,
-  ) {
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.configureOidc();
-    }
-
-  }
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   public ngOnInit() {
     this.updateTitleAndMeta();
@@ -70,13 +58,6 @@ export class AppComponent implements OnInit {
 
   public getState(outlet: any) {
     return outlet.activatedRouteData.state;
-  }
-
-  private configureOidc() {
-    this.oauthService.configure(authConfig(this.baseUrl));
-    this.oauthService.setStorage(localStorage);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
   private updateTitleAndMeta() {

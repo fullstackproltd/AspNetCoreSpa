@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { User } from 'oidc-client';
 
 import { AppService } from '../../app.service';
-import { AccountService, DataService } from '../../core';
-import { User } from 'oidc-client';
+import { AuthService } from '../../core';
 
 @Component({
     selector: 'appc-header',
@@ -12,42 +10,34 @@ import { User } from 'oidc-client';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    public isCollapsed = true;
+    isCollapsed = true;
     constructor(
-        private accountService: AccountService,
-        private dataService: DataService,
-        private appService: AppService,
-        private oAuthService: OAuthService,
-        private router: Router
+        private authService: AuthService,
+        private appService: AppService
     ) { }
 
-    public get isLoggedIn(): boolean {
-        return this.accountService.isLoggedIn();
+    get isLoggedIn(): boolean {
+        return this.authService.isLoggedIn();
     }
-    public get user(): User {
-        return this.accountService.user;
+    get user(): User {
+        return this.authService.user;
 
     }
-    public get cultures(): ICulture[] {
+    get cultures(): ICulture[] {
         return this.appService.appData.cultures;
     }
-    public get currentCulture(): ICulture {
+    get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];
     }
-    public ngOnInit(): void { }
+    ngOnInit(): void { }
 
-    public toggleNav() {
+    toggleNav() {
         this.isCollapsed = !this.isCollapsed;
     }
-
-    public logout() {
-        this.dataService.post('api/account/logout').subscribe(() => {
-            this.oAuthService.logOut();
-            this.router.navigate(['/login']);
-        });
+    login() {
+        this.authService.login();
     }
-
-    public loginSts() {
-        this.accountService.login();
+    logout() {
+        this.authService.logout();
     }
 }
