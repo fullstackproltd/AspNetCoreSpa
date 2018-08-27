@@ -27,8 +27,8 @@ namespace AspNetCoreSpa.STS
                     RequireConsent = false,
 
                     RedirectUris =           { "https://localhost:5001/oidc-login-redirect.html","https://localhost:5001/silent-redirect.html" },
-                    PostLogoutRedirectUris = { "https://localhost:5001/?postLogout=true" },
-                    AllowedCorsOrigins =     { "https://localhost:5001/" },
+                    PostLogoutRedirectUris = { "https://localhost:5001?postLogout=true" },
+                    AllowedCorsOrigins =     { "https://localhost:5001" },
 
                     AllowedScopes =
                     {
