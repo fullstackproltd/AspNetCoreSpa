@@ -19,6 +19,8 @@ using AspNetCoreSpa.Infrastructure;
 using System.IO;
 using System.Linq;
 using AspNetCoreSpa.Core;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AspNetCoreSpa.Web.Extensions
 {
@@ -110,10 +112,10 @@ namespace AspNetCoreSpa.Web.Extensions
             services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<IApplicationDataService, ApplicationDataService>();
-            services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             services.AddTransient<ApplicationDbContext>();
-            //services.AddTransient<UserResolverService>();
             services.AddScoped<ApiExceptionFilter>();
             return services;
         }

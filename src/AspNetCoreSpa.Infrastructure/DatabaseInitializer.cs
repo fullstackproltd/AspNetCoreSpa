@@ -20,7 +20,7 @@ namespace AspNetCoreSpa.Infrastructure
 {
     public interface IDatabaseInitializer
     {
-        void Seed();
+        void Initialise();
     }
 
     public class DatabaseInitializer : IDatabaseInitializer
@@ -40,11 +40,12 @@ namespace AspNetCoreSpa.Infrastructure
             _hostingEnvironment = hostingEnvironment;
         }
 
-        public void Seed()
+        public void Initialise()
         {
             _context.Database.Migrate();
 
             AddLocalisedData();
+            AddShopData();
         }
         private void AddLocalisedData()
         {
@@ -83,6 +84,81 @@ namespace AspNetCoreSpa.Infrastructure
                     _context.SaveChanges();
                 });
             }
+        }
+
+        private void AddShopData()
+        {
+            if (!_context.Customers.Any())
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    _context.Customers.Add(new Customer
+                    {
+                        Name = "John Doe " + i,
+                        Email = $"{i}test@test.com",
+                        PhoneNumber = "0123456789" + i,
+                        Address = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
+                    Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet",
+                        City = "Lorem Ipsum " + i,
+                        Gender = i % 2 == 0 ? Gender.Male : Gender.Female,
+                        UpdatedDate = DateTime.UtcNow,
+                        CreatedDate = DateTime.UtcNow
+                    });
+                }
+            }
+
+            if (!_context.ProductCategories.Any())
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    _context.ProductCategories.Add(new ProductCategory
+                    {
+                        Name = "Category " + 1,
+                        Description = "Category description " + i,
+                        UpdatedDate = DateTime.UtcNow,
+                        CreatedDate = DateTime.UtcNow
+                    });
+                }
+            }
+
+            if (!_context.Products.Any())
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    _context.Products.Add(new Product
+                    {
+                        Name = "Product " + i,
+                        Description = "Product description " + i,
+                        BuyingPrice = 100 + i,
+                        SellingPrice = 110 + i,
+                        UnitsInStock = 10 + i,
+                        IsActive = true,
+                        ProductCategoryId = new Random().Next(1, 11),
+                        CreatedDate = DateTime.UtcNow,
+                        UpdatedDate = DateTime.UtcNow
+                    });
+                }
+            }
+
+            if (!_context.Orders.Any())
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    _context.Orders.Add(new Order
+                    {
+                        Discount = 500,
+                        CustomerId = 1,
+                        CreatedDate = DateTime.UtcNow,
+                        UpdatedDate = DateTime.UtcNow,
+                        OrderDetails = new List<OrderDetail> {
+                        new OrderDetail() { UnitPrice = 101, Quantity = 1, ProductId = 1 },
+                        new OrderDetail() { UnitPrice = 100, Quantity = 1, ProductId = 2 }
+                    }
+                    });
+                }
+            }
+
+            _context.SaveChanges();
         }
     }
 }

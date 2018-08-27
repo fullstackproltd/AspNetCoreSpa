@@ -9,10 +9,10 @@ using System.Threading;
 
 namespace AspNetCoreSpa.STS
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        //public DbSet<ApplicationRole> ApplicationRoles { get; set; }
+        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -1,23 +1,17 @@
-//using System.Linq;
-//using System.Threading.Tasks;
-//using AspNetCoreSpa.Core.ViewModels.ManageViewModels;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.Extensions.Logging;
-//using AspNetCoreSpa.Web.Filters;
-//using Microsoft.AspNetCore.Http;
-//using System.IO;
-//using System;
-//using AspNetCoreSpa.Web.Extensions;
-//using Microsoft.EntityFrameworkCore;
-//using System.Text;
-//using System.Text.Encodings.Web;
-//using AspNetCoreSpa.Infrastructure;
-//using AspNetCoreSpa.Core.Entities;
-//using AspNetCoreSpa.Infrastructure.Services;
+// using System.Linq;
+// using System.Threading.Tasks;
+// using Microsoft.AspNetCore.Identity;
+// using Microsoft.AspNetCore.Mvc;
+// using Microsoft.Extensions.Logging;
+// using Microsoft.AspNetCore.Http;
+// using System.IO;
+// using System;
+// using Microsoft.EntityFrameworkCore;
+// using System.Text;
+// using System.Text.Encodings.Web;
 
-//namespace AspNetCoreSpa.Web.Controllers.api
-//{
+// namespace AspNetCoreSpa.STS.Account
+// {
 //    [Route("api/[controller]")]
 //    public class ManageController : BaseController
 //    {
@@ -369,4 +363,4 @@
 
 //        #endregion
 //    }
-//}
+// }

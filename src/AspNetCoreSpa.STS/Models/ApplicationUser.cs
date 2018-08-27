@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 namespace AspNetCoreSpa.STS
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<Guid>
     {
         public bool IsEnabled { get; set; }
         [DataType(DataType.DateTime)]

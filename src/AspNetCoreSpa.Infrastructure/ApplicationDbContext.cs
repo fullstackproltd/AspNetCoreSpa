@@ -14,6 +14,13 @@ namespace AspNetCoreSpa.Infrastructure
 {
     public class ApplicationDbContext : DbContext
     {
+        public string CurrentUserId { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
         public DbSet<Culture> Cultures { get; set; }
         public DbSet<Resource> Resources { get; set; }
 
@@ -24,7 +31,7 @@ namespace AspNetCoreSpa.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes()
-            .Where(e => typeof(IAuditable).IsAssignableFrom(e.ClrType)))
+            .Where(e => typeof(IAuditableEntity).IsAssignableFrom(e.ClrType)))
             {
                 modelBuilder.Entity(entityType.ClrType)
                     .Property<DateTime>("CreatedAt");
@@ -76,16 +83,18 @@ namespace AspNetCoreSpa.Infrastructure
             // Get the authenticated user name 
 
             // For every changed entity marked as IAditable set the values for the audit properties
-            foreach (EntityEntry<IAuditable> entry in ChangeTracker.Entries<IAuditable>())
+            foreach (EntityEntry<IAuditableEntity> entry in ChangeTracker.Entries<IAuditableEntity>())
             {
                 // If the entity was added.
                 if (entry.State == EntityState.Added)
                 {
                     entry.Property("CreatedAt").CurrentValue = now;
+                    entry.Property("CreatedBy").CurrentValue = CurrentUserId;
                 }
                 else if (entry.State == EntityState.Modified) // If the entity was updated
                 {
                     entry.Property("UpdatedAt").CurrentValue = now;
+                    entry.Property("UpdatedBy").CurrentValue = CurrentUserId;
                 }
             }
         }

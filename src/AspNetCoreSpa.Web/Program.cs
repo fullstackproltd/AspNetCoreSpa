@@ -33,7 +33,7 @@ namespace AspNetCoreSpa.Web
                 {
                     logger.LogCritical("Seeding API database");
                     var dbInitialiser = services.GetRequiredService<IDatabaseInitializer>();
-                    dbInitialiser.Seed();
+                    dbInitialiser.Initialise();
                 }
                 catch (Exception ex)
                 {

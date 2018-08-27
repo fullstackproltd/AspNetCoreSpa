@@ -43,7 +43,7 @@ namespace AspNetCoreSpa.STS
                 options.UseSqlite(connectionString, b => b.MigrationsAssembly(migrationsAssembly));
             });
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

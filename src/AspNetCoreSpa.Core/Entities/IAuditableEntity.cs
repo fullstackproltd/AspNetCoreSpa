@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AspNetCoreSpa.Core.Entities
 {
-    public interface IAuditable
+    public interface IAuditableEntity
     {
     }
 }
