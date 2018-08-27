@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-
 import { Params, ActivatedRoute, Router } from '@angular/router';
+import { OAuthService, JwksValidationHandler } from 'angular-oauth2-oidc';
 
+import { authConfig } from './auth.config';
 import { routerTransition } from './router.animations';
 import { ExternalLoginStatus } from './app.models';
 import { AppService } from './app.service';
 import { AuthService } from './core';
+import { isPlatformBrowser } from '@angular/common';
+import { Constants } from './Constants';
 
 @Component({
   selector: 'appc-root',
@@ -26,10 +29,16 @@ export class AppComponent implements OnInit {
     private title: Title,
     private meta: Meta,
     private appService: AppService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private oauthService: OAuthService,
+    @Inject(PLATFORM_ID) private platformId: string
   ) { }
 
   public ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.configureOidc();
+    }
+
     this.updateTitleAndMeta();
     if (window.location.href.indexOf('?postLogout=true') > 0) {
       this.accountService.signoutRedirectCallback().then(() => {
@@ -67,5 +76,13 @@ export class AppComponent implements OnInit {
       { property: 'og:title', content: this.appService.appData.content['app_title'] },
       { property: 'og:description', content: this.appService.appData.content['app_description'] }
     ]);
+  }
+
+  private configureOidc() {
+    const baseUrl = Constants.stsAuthority;
+    this.oauthService.configure(authConfig(baseUrl));
+    this.oauthService.setStorage(localStorage);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 }

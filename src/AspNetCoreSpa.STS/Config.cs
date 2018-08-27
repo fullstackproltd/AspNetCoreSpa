@@ -10,7 +10,7 @@ namespace AspNetCoreSpa.STS
         {
             return new List<ApiResource>
             {
-                new ApiResource("projects-api", "Projects API")
+                new ApiResource("aspnetcorespa-api", "AspNetCoreSpa API")
             };
         }
 
@@ -22,7 +22,7 @@ namespace AspNetCoreSpa.STS
                 {
                     ClientId = "spa-client",
                     ClientName = "AspNetCoreSpa",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = new [] { GrantType.Implicit, GrantType.ResourceOwnerPassword },
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
 
@@ -35,7 +35,7 @@ namespace AspNetCoreSpa.STS
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
-                        "projects-api"
+                        "aspnetcorespa-api"
                     },
                     AllowOfflineAccess = true,
                     

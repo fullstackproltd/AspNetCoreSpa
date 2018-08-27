@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { PrebootModule } from 'preboot';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 import { environment } from '../environments/environment';
 
@@ -37,6 +38,7 @@ export function appServiceFactory(appService: AppService): Function {
     BrowserTransferStateModule,
     CoreModule.forRoot(),
     AppSharedModule,
+    OAuthModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },
