@@ -1,8 +1,25 @@
 version: '3.6'
 
 services:
-  aspnetcorespa.web:
+  aspnetcorespaweb:
     image: ${DOCKER_REGISTRY}aspnetcorespaweb
     build:
       context: .
       dockerfile: src/AspNetCoreSpa.Web/Dockerfile
+    environment:
+      IDENTITY_SERVER_ENDPOINT: http://aspnetcorespasts
+    depends_on:
+      - aspnetcorespasts
+    networks:
+      - aspnetcorespanet
+  aspnetcorespasts:
+    image: ${DOCKER_REGISTRY}aspnetcorespasts
+    build:
+      context: .
+      dockerfile: src/AspNetCoreSpa.STS/Dockerfile
+    networks:
+      - aspnetcorespanet
+
+networks:
+  aspnetcorespanet:
+    driver: bridge

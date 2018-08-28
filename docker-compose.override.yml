@@ -1,7 +1,7 @@
 version: '3.6'
 
 services:
-  aspnetcorespa.web:
+  aspnetcorespaweb:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
