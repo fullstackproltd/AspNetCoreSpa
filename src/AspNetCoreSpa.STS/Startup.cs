@@ -105,14 +105,14 @@ namespace AspNetCoreSpa.STS
                    options.ClientSecret = "rSHvhgdOQUB4KMc5JS1alzhg";
                });
 
-            if (Environment.IsDevelopment())
-            {
-                identityServer.AddDeveloperSigningCredential();
-            }
-            else
-            {
-                throw new Exception("need to configure key material");
-            }
+            // if (Environment.IsDevelopment())
+            // {
+            identityServer.AddDeveloperSigningCredential();
+            // }
+            // else
+            // {
+            //     throw new Exception("need to configure key material");
+            // }
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

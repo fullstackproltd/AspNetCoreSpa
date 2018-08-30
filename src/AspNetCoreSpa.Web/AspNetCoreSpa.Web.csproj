@@ -11,6 +11,7 @@
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
     <UserSecretsId>aspnetcorespa-c23d27a4-eb88-4b18-9b77-2a93f3b15119</UserSecretsId>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerTargetOS>Linux</DockerTargetOS>
   </PropertyGroup>
 
 
@@ -21,6 +22,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.1916590" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="3.0.0" />
     <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.7.0" />
@@ -61,7 +63,7 @@
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**;Dockerfile;.\extra\**" />
+      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**;Dockerfile;translations.csv;" />
       <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>

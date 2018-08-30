@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NotificationsService, NotificationEvent, Notification } from '@app/simple-notifications';
+import { NotificationsService, NotificationEvent, Notification } from '../../../simple-notifications';
 
 @Component({
     selector: 'appc-error-summary',
