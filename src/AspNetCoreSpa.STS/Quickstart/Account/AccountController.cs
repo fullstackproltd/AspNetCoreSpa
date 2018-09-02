@@ -558,8 +558,13 @@ namespace IdentityServer4.Quickstart.UI
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, string button, string returnUrl = null)
         {
+            if (button != "register")
+            {
+                return Redirect(returnUrl);
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
@@ -567,15 +572,22 @@ namespace IdentityServer4.Quickstart.UI
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
                     return Redirect(returnUrl);
                 }
                 else
                 {
-                    return BadRequest(result.Errors);
+                    ModelState.AddModelError("", "Unable to create an account, please try again later.");
+                    return View(result.Errors);
                 }
             }
-            return BadRequest(ModelState);
+
+            var registerVm = new RegisterViewModel
+            {
+                Email = model.Email
+            };
+
+            return View(registerVm);
         }
 
     }

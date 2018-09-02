@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserManager, User, WebStorageStateStore, Log } from 'oidc-client';
+import { UserManager, User, WebStorageStateStore, Log, UserManagerSettings } from 'oidc-client';
 
 import { Constants } from '../../Constants';
 
@@ -9,7 +9,7 @@ export class AuthService {
     user: User;
     constructor() {
         Log.logger = console;
-        const config = {
+        const config: UserManagerSettings = {
             authority: Constants.stsAuthority,
             client_id: Constants.clientId,
             redirect_uri: `${Constants.clientRoot}/oidc-login-redirect.html`,
@@ -49,6 +49,9 @@ export class AuthService {
         // });
     }
 
+    register() {
+        location.href = `${Constants.stsAuthority}/account/register?returnUrl=${location.href}`;
+    }
     logout(): any {
         return this.userManager.signoutRedirect();
     }

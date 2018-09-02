@@ -45,6 +45,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" (click)="register()" href="javascript:void(0);" *ngIf="!isLoggedIn">
+                        {{'app_nav_register' | translate}}
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" (click)="login()" href="javascript:void(0);" *ngIf="!isLoggedIn">
                         {{'app_nav_login' | translate}}
                     </a>

@@ -1,16 +1,26 @@
 ﻿@model RegisterViewModel
-@{
-    ViewData["Title"] = "Register";
-}
 
-<h2>@ViewData["Title"]</h2>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div class="form-group">
+<div class="register-page">
+    <div class="page-header">
+        <h1>Register</h1>
+    </div>
+
+
+    <div class="row">
+            <div class="col-sm-6">
+        <partial name="_ValidationSummary" />
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Register</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <form asp-route="Register">
+                            <input type="hidden" asp-for="ReturnUrl" />
+
+                            <fieldset>
+                               <div class="form-group">
                 <label asp-for="Email"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
@@ -25,11 +35,29 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-default">Register</button>
-        </form>
-    </div>
-</div>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+                                <div class="form-group">
+                                    <button class="btn btn-primary" name="button" value="register">Register</button>
+                                    <button class="btn btn-default" name="button" value="cancel">Cancel</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+                    <div class="col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Login</h3>
+                    </div>
+                    <div class="panel-body">
+                        <a class="btn btn-default"
+                                       asp-action="Login"
+                                       asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                                        Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+</div>
