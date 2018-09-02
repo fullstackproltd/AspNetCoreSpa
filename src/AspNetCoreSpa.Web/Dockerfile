@@ -8,7 +8,6 @@ RUN apt-get update && \
 # End setup
 
 WORKDIR /app
-EXPOSE 53186
 EXPOSE 5001
 
 FROM microsoft/dotnet:2.1-sdk AS build
@@ -26,17 +25,17 @@ COPY ["src/AspNetCoreSpa.Core/AspNetCoreSpa.Core.csproj", "src/AspNetCoreSpa.Cor
 COPY ["src/AspNetCoreSpa.Infrastructure/AspNetCoreSpa.Infrastructure.csproj", "src/AspNetCoreSpa.Infrastructure/"]
 RUN dotnet restore "src/AspNetCoreSpa.Web/AspNetCoreSpa.Web.csproj"
 COPY ["src/AspNetCoreSpa.Web/ClientApp/package.json", "src/AspNetCoreSpa.Web/ClientApp/"]
-RUN npm i -g yarn
+#RUN npm i -g yarn
 RUN cd src/AspNetCoreSpa.Web/ClientApp \
-    && yarn
+    && npm i
 
 COPY . .
 WORKDIR "/src/src/AspNetCoreSpa.Web"
 RUN dotnet build "AspNetCoreSpa.Web.csproj" -c Release -o /app
 
 FROM build AS publish
-#WORKDIR "/src/src/AspNetCoreSpa.Web/ClientApp"
-#RUN npm rebuild node-sass --force
+WORKDIR "/src/src/AspNetCoreSpa.Web/ClientApp"
+RUN npm rebuild node-sass --force
 
 RUN dotnet publish "AspNetCoreSpa.Web.csproj" -c Release -o /app
 

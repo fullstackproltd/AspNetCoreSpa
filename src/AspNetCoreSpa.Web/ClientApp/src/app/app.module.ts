@@ -3,8 +3,9 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { PrebootModule } from 'preboot';
-import { OAuthModule } from 'angular-oauth2-oidc';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// import { PrebootModule } from 'preboot';
 
 import { environment } from '../environments/environment';
 
@@ -33,12 +34,13 @@ export function appServiceFactory(appService: AppService): Function {
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    PrebootModule.withConfig({ appRoot: 'appc-root' }),
+    // PrebootModule.withConfig({ appRoot: 'appc-root' }),
     BrowserAnimationsModule,
     BrowserTransferStateModule,
     CoreModule.forRoot(),
     AppSharedModule,
-    OAuthModule.forRoot(),
+    // OAuthModule.forRoot(),
+    NgbModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },

@@ -1,5 +1,7 @@
-<ul>
-  <li *ngFor="let menu of menus">
-    <a routerLinkActive="active" routerLink="{{menu.route}}">{{menu.text}}</a>
-  </li>
-</ul>
+<nav class="navbar navbar-expand-lg">
+  <ul class="navbar-nav">
+    <li *ngFor="let menu of menus" class="nav-item">
+      <a class="nav-link" routerLinkActive="active" routerLink="{{menu.route}}">{{menu.text}}</a>
+    </li>
+  </ul>
+</nav>

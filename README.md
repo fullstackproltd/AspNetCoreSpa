@@ -17,7 +17,7 @@
 * [PWA support](https://developers.google.com/web/progressive-web-apps/)
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
 * Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
-* E2E testing with [Protractor](http://www.protractortest.org).
+* E2E testing with [Protractor](http://www.protractortest.org).l
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 * Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
 * Token based authentication using [Openiddict](https://github.com/openiddict/openiddict-core)

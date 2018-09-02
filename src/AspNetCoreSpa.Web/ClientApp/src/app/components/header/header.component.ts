@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
     }
     ngOnInit(): void { }
 
-    toggleNav() {
+    toggleMenu() {
         this.isCollapsed = !this.isCollapsed;
     }
     login() {
