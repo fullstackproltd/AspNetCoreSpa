@@ -14,10 +14,11 @@ import { AppSharedModule } from './appshared';
 import { SimpleNotificationsModule } from './simple-notifications';
 
 // Components
+import { routes } from './app.routes';
 import { AppComponent } from './app.component';
+import { AppService } from './app.service';
 import { CookieConsentComponent, FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent } from './components';
 import { HomeComponent } from './home/home.component';
-import { AppService } from './app.service';
 export function appServiceFactory(appService: AppService): Function {
   return () => appService.getAppData();
 }
@@ -42,11 +43,7 @@ export function appServiceFactory(appService: AppService): Function {
     // OAuthModule.forRoot(),
     NgbModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },
-      { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' },
-      { path: 'privacy', component: PrivacyComponent },
-    ], { initialNavigation: 'enabled' }),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [

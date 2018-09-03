@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppSharedModule } from '../appshared';
 // Components
@@ -20,7 +21,8 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    AppSharedModule
+    AppSharedModule,
+    NgbModule
     // No need to export as these modules don't expose any components/directive etc'
   ],
   declarations: [
@@ -28,7 +30,8 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     DynamicFormControlComponent,
     ErrorSummaryComponent,
     UppercasePipe,
-    SubMenuComponent
+    SubMenuComponent,
+    NgbModule
   ],
   exports: [
     // Modules
