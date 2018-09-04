@@ -11,12 +11,12 @@
 
         @if (Model.EnableLocalLogin)
         {
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Local Login</h3>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Local Login
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
 
                         <form asp-route="Login">
                             <input type="hidden" asp-for="ReturnUrl" />
@@ -53,53 +53,56 @@
             </div>
         }
 
-        <div class="col-md-6 col-sm-6 external-providers">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Register</h3>
-                    </div>
-                    <div class="panel-body">
-                        <a class="btn btn-default"
-                                       asp-action="Register"
-                                       asp-route-returnUrl="@Model.ReturnUrl">
-                                        Register
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        @if (Model.VisibleExternalProviders.Any())
-        {
-            <div class="col-md-6 col-sm-6 external-providers">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">External Login</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list-inline">
-                            @foreach (var provider in Model.VisibleExternalProviders)
-                            {
-                                <li>
-                                    <a class="btn btn-default"
-                                       asp-action="ExternalLogin"
-                                       asp-route-provider="@provider.AuthenticationScheme"
-                                       asp-route-returnUrl="@Model.ReturnUrl">
-                                        @provider.DisplayName
-                                    </a>
-                                </li>
-                            }
-                        </ul>
+        <div class="col">
+            <div class="col external-providers">
+                    <div class="card">
+                        <div class="card-header">
+                            Register
+                        </div>
+                        <div class="card-body">
+                            <a class="btn btn-default"
+                                        asp-action="Register"
+                                        asp-route-returnUrl="@Model.ReturnUrl">
+                                            Register
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
 
-        @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
-        {
-            <div class="alert alert-warning">
-                <strong>Invalid login request</strong>
-                There are no login schemes configured for this client.
-            </div>
-        }
+            @if (Model.VisibleExternalProviders.Any())
+            {
+                <div class="col external-providers">
+                    <div class="card">
+                        <div class="card-header">
+                            External Login
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-inline">
+                                @foreach (var provider in Model.VisibleExternalProviders)
+                                {
+                                    <li>
+                                        <a class="btn btn-default"
+                                        asp-action="ExternalLogin"
+                                        asp-route-provider="@provider.AuthenticationScheme"
+                                        asp-route-returnUrl="@Model.ReturnUrl">
+                                            @provider.DisplayName
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
+            {
+                
+                <div class="alert alert-warning">
+                    <strong>Invalid login request</strong>
+                    There are no login schemes configured for this client.
+                </div>
+            }
+        </div>
     </div>
 </div>

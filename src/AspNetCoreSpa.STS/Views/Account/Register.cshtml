@@ -8,13 +8,13 @@
 
 
     <div class="row">
-            <div class="col-sm-6">
+            <div class="col">
         <partial name="_ValidationSummary" />
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Register</h3>
+                <div class="card">
+                    <div class="card-header">
+                        Register
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
 
                         <form asp-route="Register">
                             <input type="hidden" asp-for="ReturnUrl" />
@@ -46,12 +46,12 @@
                 </div>
             </div>
 
-                    <div class="col-md-6 col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Login</h3>
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Login
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <a class="btn btn-default"
                                        asp-action="Login"
                                        asp-route-returnUrl="@ViewData["ReturnUrl"]">

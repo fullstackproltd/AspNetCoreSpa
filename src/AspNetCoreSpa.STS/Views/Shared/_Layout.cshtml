@@ -19,22 +19,17 @@
     <link rel="stylesheet" href="~/site.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="~/">
-                    <span class="navbar-brand">
-                        <img src="~/icon.png" class="icon-banner">
-                        IdentityServer4
-                    </span>
-                </a>
-            </div>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="~/" target="_blank" rel="noopener">
+            <img src="~/icon.png" class="d-inline-block align-top" alt="Logo"> 
+            IdentityServer4
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
             @if (!string.IsNullOrWhiteSpace(name))
             {
@@ -48,9 +43,10 @@
                 </ul>
             }
         </div>
-    </div>
+    </nav>
+</header>
 
-    <div class="container body-content">
+    <div class="container">
         @RenderBody()
     </div>
 

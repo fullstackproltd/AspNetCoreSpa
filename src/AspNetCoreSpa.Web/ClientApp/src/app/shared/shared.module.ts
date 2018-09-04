@@ -30,8 +30,7 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     DynamicFormControlComponent,
     ErrorSummaryComponent,
     UppercasePipe,
-    SubMenuComponent,
-    NgbModule
+    SubMenuComponent
   ],
   exports: [
     // Modules
@@ -45,6 +44,7 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     ErrorSummaryComponent,
     SubMenuComponent,
     UppercasePipe,
+    NgbModule
   ],
   providers: [
     FormControlService
