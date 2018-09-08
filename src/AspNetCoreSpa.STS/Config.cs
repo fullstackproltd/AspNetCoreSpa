@@ -23,8 +23,8 @@ namespace AspNetCoreSpa.STS
 
             origins.ToList().ForEach(address =>
             {
-                allowedRedirectUrls.Add($"{address}/assets/login-redirect.html");
-                allowedRedirectUrls.Add($"{address}/assets/silent-renew.html");
+                allowedRedirectUrls.Add($"{address}/login-redirect.html");
+                allowedRedirectUrls.Add($"{address}/silent-renew.html");
                 allowedRedirectUrls.Add($"{address}"); // Logout redirect uri
             });
 

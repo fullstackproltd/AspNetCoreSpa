@@ -13,7 +13,7 @@ export class AuthService {
         const config: UserManagerSettings = {
             authority: Constants.stsAuthority,
             client_id: 'spa-client',
-            redirect_uri: `${location.origin}/assets/login-redirect.html`,
+            redirect_uri: `${location.origin}/login-redirect.html`,
             scope: 'openid aspnetcorespa-api profile offline_access',
             response_type: 'id_token token',
             post_logout_redirect_uri: `${location.origin}?postLogout=true`,

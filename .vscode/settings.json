@@ -28,5 +28,6 @@
         "compiled": false,
         "wwwroot": true,
         "bin": true
-    }
+    },
+    "appService.defaultWebAppToDeploy": "None"
 }
