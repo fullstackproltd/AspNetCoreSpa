@@ -49,7 +49,9 @@ namespace AspNetCoreSpa.STS
         {
             if (!context.Clients.Any())
             {
-                foreach (var client in Config.GetClients().ToList())
+                var clientUrls = Environment.GetEnvironmentVariable("ClientUrls") ?? Startup.Configuration["ClientUrls"];
+
+                foreach (var client in Config.GetClients(clientUrls).ToList())
                 {
                     context.Clients.Add(client.ToEntity());
                 }

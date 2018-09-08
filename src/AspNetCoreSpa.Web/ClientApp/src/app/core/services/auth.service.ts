@@ -8,17 +8,18 @@ export class AuthService {
     private userManager: UserManager;
     user: User;
     constructor() {
+        console.log(location.origin);
         Log.logger = console;
         const config: UserManagerSettings = {
             authority: Constants.stsAuthority,
-            client_id: Constants.clientId,
-            redirect_uri: `${Constants.clientRoot}/oidc-login-redirect.html`,
+            client_id: 'spa-client',
+            redirect_uri: `${location.origin}/assets/login-redirect.html`,
             scope: 'openid aspnetcorespa-api profile offline_access',
             response_type: 'id_token token',
-            post_logout_redirect_uri: `${Constants.clientRoot}?postLogout=true`,
+            post_logout_redirect_uri: `${location.origin}?postLogout=true`,
             userStore: new WebStorageStateStore({ store: window.localStorage }),
             automaticSilentRenew: true,
-            silent_redirect_uri: `${Constants.clientRoot}/silent-redirect.html`
+            silent_redirect_uri: `${location.origin}/assets/silent-renew.html`
         };
         this.userManager = new UserManager(config);
         this.userManager.getUser().then(user => {

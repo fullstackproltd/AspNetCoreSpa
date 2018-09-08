@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using IdentityServer4;
 using IdentityServer4.Models;
 
@@ -14,8 +16,18 @@ namespace AspNetCoreSpa.STS
             };
         }
 
-        public static IEnumerable<Client> GetClients()
+        public static IEnumerable<Client> GetClients(string clientAddresses)
         {
+            var origins = clientAddresses.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            var allowedRedirectUrls = new List<string>();
+
+            origins.ToList().ForEach(address =>
+            {
+                allowedRedirectUrls.Add($"{address}/assets/login-redirect.html");
+                allowedRedirectUrls.Add($"{address}/assets/silent-renew.html");
+                allowedRedirectUrls.Add($"{address}"); // Logout redirect uri
+            });
+
             return new List<Client>
             {
                 new Client
@@ -26,9 +38,9 @@ namespace AspNetCoreSpa.STS
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
 
-                    RedirectUris =           { "https://localhost:5001/oidc-login-redirect.html","https://localhost:5001/silent-redirect.html" },
-                    PostLogoutRedirectUris = { "https://localhost:5001?postLogout=true" },
-                    AllowedCorsOrigins =     { "https://localhost:5001" },
+                    RedirectUris =           allowedRedirectUrls,
+                    PostLogoutRedirectUris = origins.Select(o => $"{o}?postLogout=true").ToList(),
+                    AllowedCorsOrigins =     origins,
 
                     AllowedScopes =
                     {
@@ -55,8 +67,8 @@ namespace AspNetCoreSpa.STS
                         new Secret("secret".Sha256())
                     },
 
-                    RedirectUris           = { "https://localhost:4201/signin-oidc" },
-                    PostLogoutRedirectUris = { "https://localhost:4201/signout-callback-oidc" },
+                    RedirectUris           = allowedRedirectUrls,
+                    PostLogoutRedirectUris = origins.Select(o => $"{o}?postLogout=true").ToList(),
 
                     AllowedScopes =
                     {
