@@ -11,6 +11,13 @@ import { AuthService } from '../../core';
 })
 export class HeaderComponent implements OnInit {
     isCollapsed = true;
+
+    exampleMenus = [
+        { route: 'examples', text: 'Home' },
+        { route: 'examples/calendar', text: 'Calendar' },
+        { route: 'examples/datatable', text: 'Datatable' }
+    ];
+
     constructor(
         private authService: AuthService,
         private appService: AppService

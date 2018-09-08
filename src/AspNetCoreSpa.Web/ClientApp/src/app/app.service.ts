@@ -1,6 +1,7 @@
 import { TransferState, makeStateKey } from '@angular/platform-browser';
 import { Injectable, Inject } from '@angular/core';
 import { DataService } from './core/services/data.service';
+import { AuthService } from '@app/core';
 
 const APP_DATA_KEY = makeStateKey<string>('appData');
 
@@ -15,11 +16,12 @@ export class AppService {
     public get appData(): IApplicationConfig {
         return this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
     }
-    getAppData(): Promise<IApplicationConfig> {
+    getAppData(authService: AuthService): Promise<IApplicationConfig> {
         const transferredAppData = this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
         if (!transferredAppData) {
             return this.dataService.get(`${this.baseUrl}api/applicationdata`).toPromise()
                 .then((data: IApplicationConfig) => {
+                    authService.setupUserManager(data.stsAuthority);
                     this.transferState.set(APP_DATA_KEY, data);
                     return data;
                 });

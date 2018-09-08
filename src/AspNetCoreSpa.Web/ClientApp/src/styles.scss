@@ -1,3 +1,7 @@
+// Font awesome
+$fa-font-path : '../node_modules/font-awesome/fonts';
+@import '../node_modules/font-awesome/scss/font-awesome';
+
 // Your variable overrides
 // $body-bg: #000;
 // $body-color: #111;
@@ -22,3 +26,13 @@
 // @import "node_modules/bootstrap/scss/images";
 // @import "node_modules/bootstrap/scss/code";
 // @import "node_modules/bootstrap/scss/grid";
+
+// angular-calendar
+// https://github.com/mattlewis92/angular-calendar
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "../node_modules/flatpickr/dist/flatpickr.css";
+
+// ngx-datatable
+@import "./assets/styles/icons.css";
+@import "../node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css";
+// @import "../node_modules/@swimlane/ngx-datatable/release/themes/material.css";

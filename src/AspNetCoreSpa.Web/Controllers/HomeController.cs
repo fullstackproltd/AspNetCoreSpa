@@ -34,7 +34,7 @@ namespace AspNetCoreSpa.Web.Controllers
         [HttpGet("api/applicationdata")]
         public IActionResult Get()
         {
-            var appData = _applicationDataService.GetApplicationData(Request.HttpContext);
+            var appData = _applicationDataService.GetApplicationData(Request.HttpContext, Startup.Configuration["StsAuthority"]);
 
             return Ok(appData); 
         }

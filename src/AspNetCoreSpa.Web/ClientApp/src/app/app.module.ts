@@ -9,7 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '../environments/environment';
 
-import { CoreModule } from './core';
+import { CoreModule, AuthService } from './core';
 import { AppSharedModule } from './appshared';
 import { SimpleNotificationsModule } from './simple-notifications';
 
@@ -19,8 +19,8 @@ import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { CookieConsentComponent, FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent } from './components';
 import { HomeComponent } from './home/home.component';
-export function appServiceFactory(appService: AppService): Function {
-  return () => appService.getAppData();
+export function appServiceFactory(appService: AppService, authService: AuthService): Function {
+  return () => appService.getAppData(authService);
 }
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ export function appServiceFactory(appService: AppService): Function {
   ],
   providers: [
     AppService,
-    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService, AuthService], multi: true }
   ],
   exports: [],
   bootstrap: [AppComponent]

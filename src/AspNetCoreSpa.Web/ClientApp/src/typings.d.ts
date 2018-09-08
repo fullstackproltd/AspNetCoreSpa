@@ -15,6 +15,7 @@ interface IApplicationConfig {
     content: StringMap[];
     loginProviders: string[];
     cookieConsent: ICookieConsent;
+    stsAuthority: string;
 }
 
 interface ICulture {

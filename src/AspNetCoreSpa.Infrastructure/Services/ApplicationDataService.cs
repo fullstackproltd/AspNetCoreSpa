@@ -39,7 +39,7 @@ namespace AspNetCoreSpa.Infrastructure.Services
             _cache = memoryCache;
         }
 
-        public object GetApplicationData(HttpContext context)
+        public object GetApplicationData(HttpContext context, string stsAuthority)
         {
             var data = Helpers.JsonSerialize(new
             {
@@ -49,6 +49,7 @@ namespace AspNetCoreSpa.Infrastructure.Services
                         .Select(c => new { Value = c.Name, Text = c.DisplayName, Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name) })
                         .ToList(),
                 //LoginProviders = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name)
+                StsAuthority = stsAuthority
             });
 
             return data;
