@@ -49,7 +49,7 @@ namespace AspNetCoreSpa.STS
         {
             if (!context.Clients.Any())
             {
-                var clientUrls = Environment.GetEnvironmentVariable("ClientUrls") ?? Startup.Configuration["ClientUrls"];
+                var clientUrls = Startup.Configuration["ClientUrls"];
 
                 foreach (var client in Config.GetClients(clientUrls).ToList())
                 {
