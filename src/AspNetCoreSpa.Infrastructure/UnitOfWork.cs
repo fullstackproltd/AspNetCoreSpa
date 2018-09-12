@@ -6,6 +6,7 @@
         readonly ApplicationDbContext _context;
 
         ICustomerRepository _customers;
+        IProductCategoryRepository _productsCategories;
         IProductRepository _products;
         IOrdersRepository _orders;
 
@@ -39,6 +40,17 @@
                     _products = new ProductRepository(_context);
 
                 return _products;
+            }
+        }
+
+        public IProductCategoryRepository ProductCategories
+        {
+            get
+            {
+                if (_productsCategories == null)
+                    _productsCategories = new ProductCategoryRepository(_context);
+
+                return _productsCategories;
             }
         }
 

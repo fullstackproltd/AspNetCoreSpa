@@ -5,11 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // App level services
-import { AuthService } from './services/auth.service';
-import { DataService } from './services/data.service';
+import { AuthService, DataService, ModalService, ModalStateService, AuthInterceptor, TimingInterceptor } from './services';
 import { GlobalErrorHandler } from './services/global-error.service';
-import { TimingInterceptor } from './services/interceptors/timing-interceptor';
-import { AuthInterceptor } from './services/interceptors/auth-interceptor';
 
 @NgModule({
     declarations: [],
@@ -37,6 +34,8 @@ export class CoreModule {
             providers: [
                 AuthService,
                 DataService,
+                ModalService,
+                ModalStateService,
                 { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
                 { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
                 { provide: ErrorHandler, useClass: GlobalErrorHandler }

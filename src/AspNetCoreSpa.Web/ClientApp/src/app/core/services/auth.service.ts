@@ -52,7 +52,7 @@ export class AuthService {
             post_logout_redirect_uri: `${location.origin}?postLogout=true`,
             userStore: new WebStorageStateStore({ store: window.localStorage }),
             automaticSilentRenew: true,
-            silent_redirect_uri: `${location.origin}/assets/silent-renew.html`
+            silent_redirect_uri: `${location.origin}/silent-renew.html`
         };
         this.userManager = new UserManager(config);
         this.userManager.getUser().then(user => {

@@ -1,0 +1,69 @@
+<h3>
+  {{options?.title}}
+</h3>
+
+<div>
+  <small>
+    <a href="javascript:void(0)" (click)="table.rowDetail.expandAllRows()">Expand All</a> |
+    <a href="javascript:void(0)" (click)="table.rowDetail.collapseAllRows()">Collapse All</a>
+  </small>
+</div>
+
+<ngx-datatable #appTable class="bootstrap expandable " [rows]="options?.rows" [loadingIndicator]="true" [columnMode]="'force'"
+  [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [scrollbarV]="true">
+
+  <!-- row details -->
+  <!-- <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+      <div style="padding-left:35px;">
+        <div><strong>Address</strong></div>
+        <div>{{row.address}}</div>
+      </div>
+    </ng-template>
+  </ngx-datatable-row-detail>
+  <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+      <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+      </a>
+    </ng-template>
+  </ngx-datatable-column> -->
+  <!-- row details -->
+
+  <!-- Repeated columns -->
+  <ngx-datatable-column *ngFor="let column of options?.columns" name="{{column.name}}">
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <strong>{{value}}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Edit/delete -->
+  <ngx-datatable-column *ngIf="!options?.disableEditing" name="Actions" sortable="false" prop="id">
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-primary" (click)="onEdit(row)">
+          <i class="fa fa-pencil"></i> &nbsp; Edit
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="onDelete(row)">
+          <i class="fa fa-trash"></i> &nbsp; Delete
+        </button>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Footer template -->
+  <ngx-datatable-footer>
+    <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-selectedCount="selectedCount"
+      let-curPage="curPage" let-offset="offset">
+      <div style="padding: 5px 10px">
+        <div>
+          Total rows: {{rowCount}} |
+          Page size: {{pageSize}} |
+          Current page: {{curPage}} |
+          Offset pages: {{offset}}
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-footer>
+
+</ngx-datatable>

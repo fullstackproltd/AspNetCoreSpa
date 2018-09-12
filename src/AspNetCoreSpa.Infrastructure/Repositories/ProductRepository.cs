@@ -14,9 +14,6 @@ namespace AspNetCoreSpa.Infrastructure
         public ProductRepository(DbContext context) : base(context)
         { }
 
-
-
-
         private ApplicationDbContext _appContext => (ApplicationDbContext)_context;
     }
 }

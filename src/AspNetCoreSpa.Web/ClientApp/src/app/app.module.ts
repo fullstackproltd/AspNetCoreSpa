@@ -17,7 +17,7 @@ import { SimpleNotificationsModule } from './simple-notifications';
 import { routes } from './app.routes';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
-import { CookieConsentComponent, FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent } from './components';
+import { FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent, ModalTemplateDirective } from './components';
 import { HomeComponent } from './home/home.component';
 export function appServiceFactory(appService: AppService, authService: AuthService): Function {
   return () => appService.getAppData(authService);
@@ -27,10 +27,10 @@ export function appServiceFactory(appService: AppService, authService: AuthServi
     // Components
     AppComponent,
     HomeComponent,
-    CookieConsentComponent,
     FooterComponent,
     HeaderComponent,
     ModalComponent,
+    ModalTemplateDirective,
     PrivacyComponent
   ],
   imports: [

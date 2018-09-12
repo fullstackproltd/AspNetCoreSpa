@@ -57,3 +57,18 @@ interface IEnableAuthenticatorModel {
     sharedKey: string;
     authenticatorUri: string;
 }
+
+/**
+ * Options passed when opening a confirmation modal
+ */
+interface IModalOptions {
+    /**
+     * The title of the confirmation modal
+     */
+    title: string;
+
+    /**
+     * The message in the confirmation modal
+     */
+    message: string;
+}

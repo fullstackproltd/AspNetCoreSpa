@@ -1,11 +1,13 @@
-<!-- cookie consent component -->
-<appc-cookie-consent></appc-cookie-consent>
+<!-- app modal component -->
+<ng-template modal>
+  <appc-modal-component></appc-modal-component>
+</ng-template>
 
 <!-- header component -->
 <appc-header></appc-header>
 
 <!-- component routing placeholder -->
-<main [@routerTransition]="getState(o)" role="main">
+<main role="main">
   <router-outlet #o="outlet"></router-outlet>
 </main>
 

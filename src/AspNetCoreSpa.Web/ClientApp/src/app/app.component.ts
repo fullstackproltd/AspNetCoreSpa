@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 
-import { routerTransition } from './router.animations';
+import { AuthService, ModalService } from './core';
+// import { routerTransition } from './router.animations';
 import { ExternalLoginStatus } from './app.models';
 import { AppService } from './app.service';
-import { AuthService } from './core';
 @Component({
   selector: 'appc-root',
-  animations: [routerTransition],
+  // animations: [routerTransition],
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html'
 })
@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     private title: Title,
     private meta: Meta,
     private appService: AppService,
+    private modalService: ModalService,
     private activatedRoute: ActivatedRoute
   ) { }
 
@@ -52,6 +53,19 @@ export class AppComponent implements OnInit {
         }
       }
     });
+
+    // Check cookie consent
+    setTimeout(() => {
+      if (this.appService.appData.cookieConsent.showConsent) {
+        this.modalService.confirm({
+          title: 'Cookie consent',
+          message: 'Use this space to summarize your privacy and cookie use policy.'
+        }).then(() => {
+          document.cookie = this.appService.appData.cookieConsent.cookieString;
+        }, () => { });
+      }
+    }, 0);
+
   }
 
   public getState(outlet: any) {

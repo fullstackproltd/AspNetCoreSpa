@@ -62,9 +62,9 @@ namespace AspNetCoreSpa.Web
                             .AddJwtBearer(options =>
                             {
                                 // base-address of your identityserver
-                                options.Authority = "https://localhost:5005/";
+                                options.Authority = Configuration["StsAuthority"];
                                 // name of the API resource
-                                options.Audience = "projects-api";
+                                options.Audience = "aspnetcorespa-api";
                             });
 
             services.AddCustomizedMvc();
@@ -184,7 +184,7 @@ namespace AspNetCoreSpa.Web
 
                           if (env.IsDevelopment())
                           {
-                            //   spa.UseAngularCliServer(npmScript: "start");
+                              //   spa.UseAngularCliServer(npmScript: "start");
                               //   OR
                               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }

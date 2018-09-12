@@ -4,7 +4,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
-import { SharedModule } from '@app/shared/shared.module';
+import { SharedModule } from '@app/shared';
 import { AppCalendarComponent } from './calendar/calendar.component';
 import { AppCalendarHeaderComponent } from './calendar-header/calendar-header.component';
 

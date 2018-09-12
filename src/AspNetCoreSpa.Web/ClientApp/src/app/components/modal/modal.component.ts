@@ -1,35 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
+import { ModalStateService } from '@app/core';
+
+/**
+ * The component displayed in the confirmation modal opened by the ModalService.
+ */
 @Component({
-    selector: 'appc-modal',
+    selector: 'appc-modal-component',
     templateUrl: './modal.component.html',
-    styleUrls: ['./modal.component.scss'],
-    animations: [
-        trigger('modal', [
-            transition('void => *', [
-                style({ transform: 'scale3d(.3, .3, .3)' }),
-                animate(100)
-            ]),
-            transition('* => void', [
-                animate(100, style({ transform: 'scale3d(.0, .0, .0)' }))
-            ])
-        ])
-    ]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ModalComponent implements OnInit {
-    @Input() visible: boolean;
-    @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+export class ModalComponent {
+    options: IModalOptions;
 
-    constructor() { }
-
-    ngOnInit() { }
-
-    close() {
-        this.visible = false;
-        this.visibleChange.emit(this.visible);
+    constructor(private state: ModalStateService) {
+        this.options = state.options;
     }
-    dismiss() {
-        this.visible = false;
+
+    yes() {
+        this.state.modal.close('confirmed');
+    }
+
+    no() {
+        this.state.modal.dismiss('not confirmed');
     }
 }

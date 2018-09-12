@@ -4,6 +4,8 @@ import { User } from 'oidc-client';
 import { AppService } from '../../app.service';
 import { AuthService } from '../../core';
 
+import { routes } from '../../+examples/examples.routes';
+
 @Component({
     selector: 'appc-header',
     templateUrl: './header.component.html',
@@ -12,11 +14,7 @@ import { AuthService } from '../../core';
 export class HeaderComponent implements OnInit {
     isCollapsed = true;
 
-    exampleMenus = [
-        { route: 'examples', text: 'Home' },
-        { route: 'examples/calendar', text: 'Calendar' },
-        { route: 'examples/datatable', text: 'Datatable' }
-    ];
+    exampleRoutes = [...routes];
 
     constructor(
         private authService: AuthService,

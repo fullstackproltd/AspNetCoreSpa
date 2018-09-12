@@ -18,18 +18,13 @@
                         {{'app_nav_home' | translate}}
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" routerLink="signalr">
-                        {{'app_nav_signalr' | translate}}
-                    </a>
-                </li>
 
                 <li class="nav-item dropdown">
                     <div ngbDropdown class="d-inline-block">
-                        <a href="javascript:void(0);"  class="nav-link" id="dropdownBasic3" ngbDropdownToggle>{{'app_nav_examples'
+                        <a href="javascript:void(0);" class="nav-link" id="dropdownBasic3" ngbDropdownToggle>{{'app_nav_examples'
                             | translate}}</a>
                         <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
-                            <a *ngFor="let menu of exampleMenus" [routerLink]="menu.route" class="dropdown-item">{{menu.text}}</a>
+                            <a *ngFor="let route of exampleRoutes" routerLink="examples/{{route.path}}" class="dropdown-item">{{route.data.displayText}}</a>
                         </div>
                     </div>
                 </li>

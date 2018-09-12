@@ -14,12 +14,10 @@ namespace AspNetCoreSpa.Infrastructure
         public CustomerRepository(ApplicationDbContext context) : base(context)
         { }
 
-
         public IEnumerable<Customer> GetTopActiveCustomers(int count)
         {
             throw new NotImplementedException();
         }
-
 
         public IEnumerable<Customer> GetAllCustomersData()
         {
