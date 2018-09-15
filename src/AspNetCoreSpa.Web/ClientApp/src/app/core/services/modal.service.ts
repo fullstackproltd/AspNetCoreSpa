@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ModalStateService } from './modal-state.service';
+import { IModalOptions } from '@app/models';
 
 /**
  * A confirmation service, allowing to open a confirmation modal from anywhere and get back a promise.
@@ -21,6 +22,7 @@ export class ModalService {
         this.state.options = options;
         this.state.modal = this.modalService.open(this.state.template, {
             centered: true,
+            size: this.state.options.template ? 'lg' : 'sm'
             // Whether a backdrop element should be created for a given modal (true by default).
             // Alternatively, specify 'static' for a backdrop which doesn't close the modal on click.
             // backdrop: options.sticky ? "static" : true,
@@ -28,5 +30,9 @@ export class ModalService {
         });
 
         return this.state.modal.result;
+    }
+
+    dismiss() {
+        this.state.modal.dismiss();
     }
 }

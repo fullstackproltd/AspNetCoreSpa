@@ -6,7 +6,7 @@ import { enableProdMode } from '@angular/core';
 import { provideModuleMap } from '@nguniversal/module-map-ngfactory-loader';
 import { createServerRenderer } from 'aspnet-prerendering';
 export { AppServerModule } from './app/app.server.module';
-import { COOKIES } from './app/app.models';
+import { COOKIES } from '@app/models';
 
 // This allows to set cookies on server
 // Only cookie used in this app is culture cookie

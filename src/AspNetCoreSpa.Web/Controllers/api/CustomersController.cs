@@ -48,11 +48,19 @@ namespace AspNetCoreSpa.Web.Controllers.api
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] CustomerViewModel customer)
         {
-            _uow.Customers.Update(_uow.Customers.Get(customer.Id));
+            var cust = _uow.Customers.Get(id);
+            cust.Name = customer.Name;
+            cust.DateOfBirth = customer.DateOfBirth;
+            cust.Gender = customer.Gender;
+            cust.Address = customer.Address;
+            cust.City = customer.City;
+            cust.Email = customer.Email;
+            cust.PhoneNumber = customer.PhoneNumber;
+            _uow.Customers.Update(cust);
             var result = _uow.SaveChanges();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/Customers/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

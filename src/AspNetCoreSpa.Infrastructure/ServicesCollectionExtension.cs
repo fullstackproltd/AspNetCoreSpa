@@ -13,7 +13,7 @@ namespace AspNetCoreSpa.Infrastructure
             services.AddTransient<IApplicationDataService, ApplicationDataService>();
             services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
             services.AddTransient<ApplicationDbContext>();
-            services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+            services.AddTransient<ISeedData, SeedData>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IOrdersRepository, OrdersRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();

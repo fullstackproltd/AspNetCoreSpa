@@ -1,0 +1,23 @@
+<div [formGroup]="formGroup" class="form-group">
+
+    <label for="{{config.name}}">
+        {{ config.label }}
+        <ng-container *ngIf="showAsterisk(config)">
+            *
+        </ng-container>
+    </label>
+
+    <div class="input-group">
+        <input class="form-control" [attr.placeholder]="config.placeholder" [id]="config.name" [formControlName]="config.name"
+            ngbDatepicker #d="ngbDatepicker">
+        <div class="input-group-prepend" (click)="d.toggle()">
+            <span class="input-group-text" [id]="config.name">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+
+    </div>
+
+    <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+
+</div>

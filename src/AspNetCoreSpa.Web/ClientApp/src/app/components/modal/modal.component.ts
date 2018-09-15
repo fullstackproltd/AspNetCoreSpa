@@ -1,14 +1,14 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ModalStateService } from '@app/core';
+import { IModalOptions } from '@app/models';
 
 /**
  * The component displayed in the confirmation modal opened by the ModalService.
  */
 @Component({
     selector: 'appc-modal-component',
-    templateUrl: './modal.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './modal.component.html'
 })
 export class ModalComponent {
     options: IModalOptions;

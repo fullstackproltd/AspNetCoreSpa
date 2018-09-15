@@ -2,7 +2,7 @@
   {{options?.title}}
 </h3>
 
-<div>
+<div *ngIf="options?.detailsTemplate">
   <small>
     <a href="javascript:void(0)" (click)="table.rowDetail.expandAllRows()">Expand All</a> |
     <a href="javascript:void(0)" (click)="table.rowDetail.collapseAllRows()">Collapse All</a>
@@ -39,12 +39,12 @@
 
   <!-- Edit/delete -->
   <ngx-datatable-column *ngIf="!options?.disableEditing" name="Actions" sortable="false" prop="id">
-    <ng-template let-row="row" ngx-datatable-cell-template>
+    <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
       <div class="btn-group">
-        <button class="btn btn-sm btn-primary" (click)="onEdit(row)">
+        <button class="btn btn-sm btn-primary" (click)="onEdit(row, rowIndex)">
           <i class="fa fa-pencil"></i> &nbsp; Edit
         </button>
-        <button class="btn btn-sm btn-danger" (click)="onDelete(row)">
+        <button class="btn btn-sm btn-danger" (click)="onDelete(row, rowIndex)">
           <i class="fa fa-trash"></i> &nbsp; Delete
         </button>
       </div>
@@ -67,3 +67,8 @@
   </ngx-datatable-footer>
 
 </ngx-datatable>
+
+
+<ng-template #formTemplate let-formConfig="formConfig" let-formModel="formModel">
+  <app-form [config]="formConfig" [model]="formModel" #form="appForm"></app-form>
+</ng-template>

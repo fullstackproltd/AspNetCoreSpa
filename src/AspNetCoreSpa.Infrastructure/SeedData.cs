@@ -18,20 +18,20 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreSpa.Infrastructure
 {
-    public interface IDatabaseInitializer
+    public interface ISeedData
     {
         void Initialise();
     }
 
-    public class DatabaseInitializer : IDatabaseInitializer
+    public class SeedData : ISeedData
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger _logger;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public DatabaseInitializer(
+        public SeedData(
             ApplicationDbContext context,
-            ILogger<DatabaseInitializer> logger,
+            ILogger<SeedData> logger,
             IHostingEnvironment hostingEnvironment
             )
         {
@@ -96,6 +96,7 @@ namespace AspNetCoreSpa.Infrastructure
                     {
                         Name = "John Doe " + i,
                         Email = $"{i}test@test.com",
+                        DateOfBirth = DateTime.Now.AddDays(i),
                         PhoneNumber = "0123456789" + i,
                         Address = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
                     Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet",

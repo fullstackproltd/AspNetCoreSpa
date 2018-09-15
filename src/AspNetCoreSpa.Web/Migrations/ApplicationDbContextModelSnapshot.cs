@@ -14,7 +14,7 @@ namespace AspNetCoreSpa.Web.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065");
 
             modelBuilder.Entity("AspNetCoreSpa.Core.Entities.Culture", b =>
                 {
@@ -43,6 +43,8 @@ namespace AspNetCoreSpa.Web.Migrations
                         .HasMaxLength(256);
 
                     b.Property<DateTime>("CreatedDate");
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email");
 

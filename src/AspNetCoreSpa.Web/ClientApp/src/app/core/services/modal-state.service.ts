@@ -1,5 +1,6 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { IModalOptions } from '@app/models';
 
 /**
  * An internal service allowing to access, from the confirm modal component, the options and the modal reference.

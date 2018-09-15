@@ -1,0 +1,17 @@
+<div [formGroup]="formGroup" class="form-group">
+    <label for="{{config.name}}">
+        {{ config.label }}
+        <ng-container *ngIf="showAsterisk(config)">
+            *
+        </ng-container>
+    </label>
+    <select [formControlName]="config.name" [id]="config.name" class="form-control">
+        <option value="">{{ config.placeholder || 'Please select...' }}</option>
+        <option [value]="option.key" *ngFor="let option of config.options">
+            {{ option.value }}
+        </option>
+    </select>
+
+    <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+
+</div>

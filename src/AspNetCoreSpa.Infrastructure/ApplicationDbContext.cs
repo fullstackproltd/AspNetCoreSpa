@@ -1,10 +1,10 @@
-﻿
-
-using AspNetCoreSpa.Core.Entities;
+﻿using AspNetCoreSpa.Core.Entities;
 using AspNetCoreSpa.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Linq;
 using System.Threading;
@@ -27,7 +27,10 @@ namespace AspNetCoreSpa.Infrastructure
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ReplaceService<IEntityMaterializerSource, EfCoreMaterializerSource>();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes()

@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup" class="form-group">
+
+    <label for="{{config.name}}">
+        {{ config.label }}
+        
+        <ng-container *ngIf="showAsterisk(config)">
+            *
+        </ng-container>
+    </label>
+
+    <input type="{{config.type === 'email' ? 'email' : config.type === 'number'? 'number': config.type === 'password' ? 'password': 'text'}}"
+        [attr.placeholder]="config.placeholder" [formControlName]="config.name" class="form-control" [id]="config.name">
+
+    <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+
+</div>

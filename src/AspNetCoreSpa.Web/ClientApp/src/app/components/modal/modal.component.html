@@ -8,10 +8,15 @@
 </div>
 
 <div class="modal-body">
-    <p>{{ options.message }}</p>
+    <div *ngIf="options.message" [innerHTML]="options.message"></div>
+
+    <div *ngIf="options.template">
+        <ng-container *ngTemplateOutlet="options.template;context:options.template.data"></ng-container>
+    </div>
+
 </div>
 
-<div class="modal-footer">
+<div class="modal-footer" *ngIf="!options.template">
     <button type="button" class="btn btn-secondary" (click)="no()">No</button>
     <button type="button" class="btn btn-primary" (click)="yes()">Yes</button>
 </div>

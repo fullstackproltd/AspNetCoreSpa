@@ -1,0 +1,12 @@
+<div [formGroup]="formGroup" class="form-group">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" [formControlName]="config.name" [id]="config.name" [name]="config.name">
+        <label class="form-check-label" for="{{config.name}}">
+            {{config.label}}
+        </label>
+
+        <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+        
+    </div>
+
+</div>

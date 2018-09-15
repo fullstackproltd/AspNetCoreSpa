@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { Params, ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { AuthService, ModalService } from './core';
 // import { routerTransition } from './router.animations';
-import { ExternalLoginStatus } from './app.models';
 import { AppService } from './app.service';
 @Component({
   selector: 'appc-root',
@@ -24,8 +23,7 @@ export class AppComponent implements OnInit {
     private title: Title,
     private meta: Meta,
     private appService: AppService,
-    private modalService: ModalService,
-    private activatedRoute: ActivatedRoute
+    private modalService: ModalService
   ) { }
 
   public ngOnInit() {
@@ -39,21 +37,6 @@ export class AppComponent implements OnInit {
         this.router.navigateByUrl(url);
       });
     }
-
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-      const param = params['externalLoginStatus'];
-      if (param) {
-        const status = <ExternalLoginStatus>+param;
-        switch (status) {
-          case ExternalLoginStatus.CreateAccount:
-            this.router.navigate(['createaccount']);
-            break;
-          default:
-            break;
-        }
-      }
-    });
-
     // Check cookie consent
     setTimeout(() => {
       if (this.appService.appData.cookieConsent.showConsent) {

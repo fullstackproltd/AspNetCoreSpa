@@ -1,0 +1,14 @@
+<h1>Dynamic forms</h1>
+<p>This demonstrates all the dynamic form field usage</p>
+
+<div class="row">
+  <div class="col-md-6">
+    <app-form [config]="config" #form="appForm"></app-form>
+  </div>
+
+  <div class="col-md-6">
+    <pre>
+      {{ form.value | json}}
+    </pre>
+  </div>
+</div>

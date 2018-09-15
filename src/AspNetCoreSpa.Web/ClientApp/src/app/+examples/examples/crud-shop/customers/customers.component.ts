@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Validators } from '@angular/forms';
 
 import { CustomersService } from './customers.service';
-import { IAppTableOptions } from '@app/shared';
-import { ICustomer } from '../crud-shop.models';
+import { ICustomer, Gender } from '../crud-shop.models';
+import { FieldTypes, IAppTableOptions } from '@app/models';
 
 @Component({
   selector: 'appc-customers',
@@ -11,8 +12,9 @@ import { ICustomer } from '../crud-shop.models';
 })
 export class CustomersComponent implements OnInit {
   options: IAppTableOptions<ICustomer>;
-
-  constructor(private customerService: CustomersService) { }
+  constructor(
+    private customerService: CustomersService,
+  ) { }
 
   ngOnInit() {
     this.customerService.get().subscribe((data: ICustomer[]) => {
@@ -21,10 +23,21 @@ export class CustomersComponent implements OnInit {
         rows: data,
         apiUrl: 'api/customers',
         columns: [
-          { name: 'Name' },
-          { name: 'Email' },
-          { name: 'Phone number' },
-          { name: 'Address', sortable: false }
+          { prop: 'name', name: 'Name', fieldType: FieldTypes.Textbox, fieldValidations: [Validators.required] },
+          { prop: 'email', name: 'Email', fieldType: FieldTypes.Email, fieldValidations: [Validators.required] },
+          { prop: 'dateOfBirth', name: 'Date of birth', fieldType: FieldTypes.Date, fieldValidations: [Validators.required] },
+          { prop: 'phoneNumber', name: 'Phone number', fieldType: FieldTypes.Number },
+          { prop: 'address', name: 'Address', fieldType: FieldTypes.Textarea },
+          { prop: 'city', name: 'City', fieldType: FieldTypes.Textbox },
+          {
+            prop: 'gender',
+            name: 'Gender',
+            fieldType: FieldTypes.Select,
+            fieldOptions: [
+              { key: Gender.Male, value: 'Male' },
+              { key: Gender.Female, value: 'Female' }
+            ]
+          },
         ]
       };
     });

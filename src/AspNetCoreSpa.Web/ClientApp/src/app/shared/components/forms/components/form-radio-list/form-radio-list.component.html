@@ -1,0 +1,19 @@
+<div [formGroup]="formGroup" class="form-group">
+    <label for="{{config.name}}">
+        {{config.label}}
+        <ng-container *ngIf="showAsterisk(config)">
+            *
+        </ng-container>
+    </label>
+
+    <div class="form-check" *ngFor="let item of config.options; let i = index;">
+        <input class="form-check-input" [formControlName]="config.name" type="radio" name="{{config.name}}" id="{{config.name + i}}"
+            [value]="item.key">
+        <label class="form-check-label" for="{{config.name + i}}">
+            {{item.value}}
+        </label>
+    </div>
+
+    <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+
+</div>
