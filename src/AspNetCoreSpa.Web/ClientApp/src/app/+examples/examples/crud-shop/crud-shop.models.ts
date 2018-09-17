@@ -13,3 +13,25 @@ export interface ICustomer {
     city: string;
     gender: Gender;
 }
+export interface IProduct {
+    id: string;
+    name: string;
+    description: string;
+    icon: string;
+    buyingPrice: number;
+    sellingPrice: number;
+    unitsInStock: number;
+    isActive: boolean;
+    isDiscontinued: boolean;
+}
+export interface IProductCategory {
+    id: string;
+    name: string;
+    description: string;
+    icon: string;
+}
+export interface IOrder {
+    id: string;
+    discount: string;
+    comments: string;
+}

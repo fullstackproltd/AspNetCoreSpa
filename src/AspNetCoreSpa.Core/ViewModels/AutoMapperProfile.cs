@@ -13,6 +13,9 @@ namespace AspNetCoreSpa.Core.ViewModels
             CreateMap<Product, ProductViewModel>()
                 .ReverseMap();
 
+            CreateMap<ProductCategory, ProductCategoryViewModel>()
+                .ReverseMap();
+
             CreateMap<Order, OrderViewModel>()
                 .ReverseMap();
         }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, ChangeDetectionStrategy, TemplateRef } from '@angular/core';
+import { Component, ViewChild, Input, ChangeDetectionStrategy, TemplateRef, OnInit, ChangeDetectorRef } from '@angular/core';
 
 import { DataService, ModalService } from '@app/core';
 import { IFieldConfig, IAppTableOptions, FieldTypes } from '@app/models';
@@ -11,13 +11,20 @@ import { DatatableComponent } from '@swimlane/ngx-datatable';
   styleUrls: ['./app-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppTableComponent {
+export class AppTableComponent implements OnInit {
 
   @ViewChild('appTable') table: DatatableComponent;
   @ViewChild('formTemplate') formTemplate: TemplateRef<any>;
   @ViewChild('form') formRef: AppFormComponent;
   @Input() options: IAppTableOptions<any>;
-  constructor(private dataService: DataService, private modalService: ModalService) { }
+  constructor(private dataService: DataService, private modalService: ModalService, private cd: ChangeDetectorRef) { }
+  ngOnInit() {
+    this.dataService.get<Array<any>>(this.options.apiUrl)
+      .subscribe(data => {
+        this.options.rows = data;
+        this.cd.markForCheck();
+      });
+  }
   toggleExpandRow(row) {
     console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);

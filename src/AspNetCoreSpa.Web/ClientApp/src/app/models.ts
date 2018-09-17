@@ -38,7 +38,7 @@ export interface ITableColumn extends TableColumn {
 
 export interface IAppTableOptions<T> {
     title?: string;
-    rows: Array<T>;
+    rows?: Array<T>;
     columns?: ITableColumn[];
     disableEditing?: boolean;
     apiUrl?: string;

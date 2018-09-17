@@ -114,7 +114,7 @@ namespace AspNetCoreSpa.Infrastructure
                 {
                     _context.ProductCategories.Add(new ProductCategory
                     {
-                        Name = "Category " + 1,
+                        Name = "Category " + i,
                         Description = "Category description " + i,
                         UpdatedDate = DateTime.UtcNow,
                         CreatedDate = DateTime.UtcNow
@@ -148,6 +148,7 @@ namespace AspNetCoreSpa.Infrastructure
                     _context.Orders.Add(new Order
                     {
                         Discount = 500,
+                        Comments = "Lorem ipsum is just a dummy text e.g the quick brown fox jumps over the lazy dog.",
                         CustomerId = 1,
                         CreatedDate = DateTime.UtcNow,
                         UpdatedDate = DateTime.UtcNow,

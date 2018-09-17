@@ -11,12 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreSpa.Web.Controllers.api
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CustomersController : BaseController
+    public class CustomerController : BaseController
     {
         private readonly IUnitOfWork _uow;
-        public CustomersController(IUnitOfWork uow)
+        public CustomerController(IUnitOfWork uow)
         {
             _uow = uow;
         }
@@ -29,7 +27,7 @@ namespace AspNetCoreSpa.Web.Controllers.api
         }
 
         // GET: api/Customers/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var customer = _uow.Customers.Get(id);

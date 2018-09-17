@@ -12,28 +12,30 @@
 <ngx-datatable #appTable class="bootstrap expandable " [rows]="options?.rows" [loadingIndicator]="true" [columnMode]="'force'"
   [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [scrollbarV]="true">
 
-  <!-- row details -->
-  <!-- <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
-    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-      <div style="padding-left:35px;">
-        <div><strong>Address</strong></div>
-        <div>{{row.address}}</div>
-      </div>
+  <!-- Details row -->
+  <ngx-datatable-row-detail *ngIf="options?.detailsTemplate" [rowHeight]="100" (toggle)="onDetailToggle($event)">
+    <ng-template ngx-datatable-row-detail-template let-expanded="expanded" let-row="row">
+      <ng-container *ngTemplateOutlet="options?.detailsTemplate;context:{row: row};"></ng-container>
     </ng-template>
   </ngx-datatable-row-detail>
-  <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+
+  <ngx-datatable-column *ngIf="options?.detailsTemplate" [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+    [canAutoResize]="false">
     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
       <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
         title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
       </a>
     </ng-template>
-  </ngx-datatable-column> -->
-  <!-- row details -->
+  </ngx-datatable-column>
+  <!-- Details row -->
 
-  <!-- Repeated columns -->
+  <!-- Main rows -->
   <ngx-datatable-column *ngFor="let column of options?.columns" name="{{column.name}}">
-    <ng-template let-value="value" ngx-datatable-cell-template>
-      <strong>{{value}}</strong>
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      <ng-container *ngIf="column.cellTemplate">
+        <ng-container *ngTemplateOutlet="column.cellTemplate;context:{row: row, value: value};"></ng-container>
+      </ng-container>
+      <strong *ngIf="!column.cellTemplate">{{value}}</strong>
     </ng-template>
   </ngx-datatable-column>
 
