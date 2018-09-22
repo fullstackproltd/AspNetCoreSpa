@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using AspNetCoreSpa.Core.Entities;
-using Microsoft.AspNetCore.Mvc;
-
 namespace AspNetCoreSpa.Web.Controllers.api
 {
     public class AppUtils

@@ -1,20 +1,11 @@
-﻿using AspNet.Security.OpenIdConnect.Primitives;
-using AspNetCoreSpa.Core;
+﻿using AspNetCoreSpa.Core;
 using AspNetCoreSpa.Core.Entities;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OpenIddict.Core;
-using OpenIddict.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace AspNetCoreSpa.Infrastructure
 {
@@ -106,6 +97,8 @@ namespace AspNetCoreSpa.Infrastructure
                         CreatedDate = DateTime.UtcNow
                     });
                 }
+
+                _context.SaveChanges();
             }
 
             if (!_context.ProductCategories.Any())
@@ -120,6 +113,8 @@ namespace AspNetCoreSpa.Infrastructure
                         CreatedDate = DateTime.UtcNow
                     });
                 }
+
+                _context.SaveChanges();
             }
 
             if (!_context.Products.Any())
@@ -139,28 +134,28 @@ namespace AspNetCoreSpa.Infrastructure
                         UpdatedDate = DateTime.UtcNow
                     });
                 }
+
+                _context.SaveChanges();
             }
 
             if (!_context.Orders.Any())
             {
+                var customer = _context.Customers.First();
                 for (int i = 0; i < 10; i++)
                 {
                     _context.Orders.Add(new Order
                     {
-                        Discount = 500,
-                        Comments = "Lorem ipsum is just a dummy text e.g the quick brown fox jumps over the lazy dog.",
-                        CustomerId = 1,
+                        Discount = 500 + 1m,
+                        Comments = i + " Lorem ipsum is just a dummy text e.g the quick brown fox jumps over the lazy dog.",
+                        CustomerId = customer.Id,
                         CreatedDate = DateTime.UtcNow,
                         UpdatedDate = DateTime.UtcNow,
-                        OrderDetails = new List<OrderDetail> {
-                        new OrderDetail() { UnitPrice = 101, Quantity = 1, ProductId = 1 },
-                        new OrderDetail() { UnitPrice = 100, Quantity = 1, ProductId = 2 }
-                    }
+                        OrderDetails = null
                     });
                 }
+                _context.SaveChanges();
             }
 
-            _context.SaveChanges();
         }
     }
 }

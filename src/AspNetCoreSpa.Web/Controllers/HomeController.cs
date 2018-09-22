@@ -1,14 +1,9 @@
 ﻿// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreSpa.Infrastructure.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using System;
-using AspNetCoreSpa.Core.Entities;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AspNetCoreSpa.Web.Controllers
 {

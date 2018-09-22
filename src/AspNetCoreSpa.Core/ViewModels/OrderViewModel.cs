@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace AspNetCoreSpa.Core.ViewModels
+﻿namespace AspNetCoreSpa.Core.ViewModels
 {
     public class OrderViewModel
     {

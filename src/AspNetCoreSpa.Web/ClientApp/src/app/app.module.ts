@@ -12,7 +12,6 @@ import { environment } from '../environments/environment';
 
 import { AppSharedModule } from './appshared';
 import { ToastrModule } from './toastr';
-import { SimpleNotificationsModule } from './simple-notifications';
 
 import { routes } from './app.routes';
 // Components
@@ -44,7 +43,6 @@ export function appServiceFactory(appService: AppService, authService: AuthServi
     AppSharedModule,
     // OAuthModule.forRoot(),
     NgbModule.forRoot(),
-    SimpleNotificationsModule.forRoot(),
     ToastrModule.forRoot(),
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),

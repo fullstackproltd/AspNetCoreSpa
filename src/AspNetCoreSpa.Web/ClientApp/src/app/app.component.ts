@@ -11,11 +11,6 @@ import { AppService, AuthService, ModalService } from '@app/services';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  public notificationOptions = {
-    position: ['top', 'right'],
-    timeOut: 5000,
-    lastOnBottom: true
-  };
   constructor(
     private authService: AuthService,
     private router: Router,

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
-using AspNetCoreSpa.STS.Models;
 using Microsoft.AspNetCore.Identity;
-using IdentityServer4;
 
 namespace AspNetCoreSpa.STS
 {

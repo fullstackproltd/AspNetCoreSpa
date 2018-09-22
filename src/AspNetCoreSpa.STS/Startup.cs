@@ -10,8 +10,6 @@ using IdentityServer4;
 using System;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Security.Cryptography.X509Certificates;
-using System.IO;
-using AspNetCoreSpa.STS.Services.Certificate;
 using AspNetCoreSpa.STS.Models;
 using AspNetCoreSpa.STS.Resources;
 using Microsoft.IdentityModel.Tokens;

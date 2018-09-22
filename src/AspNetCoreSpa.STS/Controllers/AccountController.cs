@@ -14,7 +14,6 @@ using IdentityServer4.Models;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Extensions;
-using System.Globalization;
 using AspNetCoreSpa.STS.Services;
 using Microsoft.Extensions.Localization;
 using AspNetCoreSpa.STS.Resources;

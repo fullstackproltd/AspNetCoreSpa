@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Localization;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
-using Microsoft.AspNetCore.WebUtilities;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using System.Net;

@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using AspNetCoreSpa.Core;
-using AspNetCoreSpa.Core.Entities;
 using AspNetCoreSpa.Core.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
@@ -19,20 +16,16 @@ namespace AspNetCoreSpa.Infrastructure.Services
 {
     public class ApplicationDataService : IApplicationDataService
     {
-        private readonly IOptions<RequestLocalizationOptions> _locOptions;
-        //private readonly IHttpContextAccessor _context;
-        //private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RequestLocalizationOptions _locOptions;
         private readonly IStringLocalizer<ApplicationDataService> _stringLocalizer;
         private readonly IMemoryCache _cache;
         public ApplicationDataService(
             IOptions<RequestLocalizationOptions> locOptions,
-            //IHttpContextAccessor context,
-            //SignInManager<ApplicationUser> signInManager,
             IStringLocalizer<ApplicationDataService> stringLocalizer,
             IMemoryCache memoryCache
             )
         {
-            _locOptions = locOptions;
+            _locOptions = locOptions.Value;
             //_context = context;
             //_signInManager = signInManager;
             _stringLocalizer = stringLocalizer;
@@ -45,10 +38,9 @@ namespace AspNetCoreSpa.Infrastructure.Services
             {
                 Content = GetContentByCulture(context),
                 CookieConsent = GetCookieConsent(context),
-                Cultures = _locOptions.Value.SupportedUICultures
+                Cultures = _locOptions.SupportedUICultures
                         .Select(c => new { Value = c.Name, Text = c.DisplayName, Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name) })
                         .ToList(),
-                //LoginProviders = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList().Select(a => a.Name)
                 StsAuthority = stsAuthority
             });
 

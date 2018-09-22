@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace AspNetCoreSpa.Core.Entities
+﻿namespace AspNetCoreSpa.Core.Entities
 {
     public class OrderDetail : AuditableEntity
     {
