@@ -44,6 +44,12 @@ namespace AspNetCoreSpa.Web.Extensions
         }
         public static IServiceCollection AddCustomizedMvc(this IServiceCollection services)
         {
+            // https://stackoverflow.com/a/51241314/1190512
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(ModelValidationFilter));

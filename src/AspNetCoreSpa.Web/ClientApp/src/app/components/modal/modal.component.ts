@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ModalStateService } from '@app/core';
+import { ModalStateService } from '@app/services';
 import { IModalOptions } from '@app/models';
 
 /**

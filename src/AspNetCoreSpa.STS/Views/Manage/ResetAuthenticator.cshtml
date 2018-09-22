@@ -1,0 +1,22 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("RESET_AUTHENTICATOR_KEY");
+    ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
+}
+
+<h4>@ViewData["Title"]</h4>
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>@SharedLocalizer.GetLocalizedHtmlString("RESET_AUTHENTICATOR_INFO")</strong>
+    </p>
+    <p>
+        @SharedLocalizer.GetLocalizedHtmlString("RESET_AUTHENTICATOR_TEXT")
+    </p>
+</div>
+<div>
+    <form asp-action="ResetAuthenticator" method="post" class="form-group">
+        <button class="btn btn-danger" type="submit">@SharedLocalizer.GetLocalizedHtmlString("RESET_AUTHENTICATOR_KEY")</button>
+    </form>
+</div>

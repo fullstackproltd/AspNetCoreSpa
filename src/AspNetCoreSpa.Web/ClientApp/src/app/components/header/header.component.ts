@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'oidc-client';
 
-import { AppService } from '../../app.service';
-import { AuthService } from '../../core';
+import { AppService, AuthService } from '@app/services';
 
 import { routes } from '../../+examples/examples.routes';
 
@@ -44,6 +43,9 @@ export class HeaderComponent implements OnInit {
     }
     register() {
         this.authService.register();
+    }
+    profile() {
+        this.authService.profile();
     }
     logout() {
         this.authService.logout();

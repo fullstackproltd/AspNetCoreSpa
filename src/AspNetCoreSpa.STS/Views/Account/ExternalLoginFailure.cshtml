@@ -1,0 +1,9 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = "Login Failure";
+}
+<header>
+    <h2>@ViewData["Title"].</h2>
+    <p class="text-danger">@SharedLocalizer.GetLocalizedHtmlString("UNSUCCESSFUL_LOGIN_WITH_SERVICE")</p>
+</header>

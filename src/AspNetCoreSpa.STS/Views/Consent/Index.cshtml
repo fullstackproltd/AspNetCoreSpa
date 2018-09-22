@@ -1,4 +1,6 @@
-﻿@model ConsentViewModel
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model AspNetCoreSpa.STS.Models.ConsentViewModel
 
 <div class="page-consent">
     <div class="row page-header">
@@ -9,7 +11,7 @@
             }
             <h1>
                 @Model.ClientName
-                <small>is requesting your permission</small>
+                <small>@SharedLocalizer.GetLocalizedHtmlString("CONSENT_IS_REQUESTING_YOUR_PERMISSION")</small>
             </h1>
         </div>
     </div>
@@ -21,14 +23,14 @@
             <form asp-action="Index" class="consent-form">
                 <input type="hidden" asp-for="ReturnUrl" />
 
-                <div>Uncheck the permissions you do not wish to grant.</div>
-                
+                <div>@SharedLocalizer.GetLocalizedHtmlString("CONSENT_IS_CHECK_UNREQUIRED")</div>
+
                 @if (Model.IdentityScopes.Any())
                 {
                     <div class="panel panel-default consent-buttons">
                         <div class="panel-heading">
-                            <span class="glyphicon glyphicon-user"></span>
-                            Personal Information
+                            <i class="fa fa-user"></i>
+                            @SharedLocalizer.GetLocalizedHtmlString("CONSENT_PERSONAL_INFORMATION")
                         </div>
                         <ul class="list-group">
                             @foreach (var scope in Model.IdentityScopes)
@@ -43,8 +45,8 @@
                 {
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <span class="glyphicon glyphicon-tasks"></span>
-                            Application Access
+                            <i class="fa fa-task"></i>
+                            @SharedLocalizer.GetLocalizedHtmlString("CONSENT_APPLICATION_ACCESS")
                         </div>
                         <ul class="list-group">
                             @foreach (var scope in Model.ResourceScopes)
@@ -59,19 +61,19 @@
                 {
                     <div class="consent-remember">
                         <label>
-                            <input class="consent-scopecheck" asp-for="RememberConsent" />
-                            <strong>Remember My Decision</strong>
+                            <input class="consent-scopecheck big_checkbox" asp-for="RememberConsent" />
+                            <strong>@SharedLocalizer.GetLocalizedHtmlString("CONSENT_REMEMBER_MY_DECISION")</strong>
                         </label>
                     </div>
                 }
 
                 <div class="consent-buttons">
-                    <button name="button" value="yes" class="btn btn-primary" autofocus>Yes, Allow</button>
-                    <button name="button" value="no" class="btn">No, Do Not Allow</button>
+                    <button name="button" value="yes" class="btn btn-primary" autofocus>@SharedLocalizer.GetLocalizedHtmlString("CONSENT_YES_ALLOWED")</button>
+                    <button name="button" value="no" class="btn">@SharedLocalizer.GetLocalizedHtmlString("CONSENT_NO_NOT_ALLOWED")</button>
                     @if (Model.ClientUrl != null)
                     {
-                        <a class="pull-right btn btn-default" target="_blank" href="@Model.ClientUrl">
-                            <span class="glyphicon glyphicon-info-sign"></span>
+                        <a class="pull-right btn btn-primary" target="_blank" href="@Model.ClientUrl">
+                            <i class="fa fa-info"></i>
                             <strong>@Model.ClientName</strong>
                         </a>
                     }

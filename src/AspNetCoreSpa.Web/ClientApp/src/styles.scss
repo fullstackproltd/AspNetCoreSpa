@@ -27,6 +27,11 @@ $fa-font-path : '../node_modules/font-awesome/fonts';
 // @import "node_modules/bootstrap/scss/code";
 // @import "node_modules/bootstrap/scss/grid";
 
+// Toastr
+// @import "../src/app/toastr/toastr.css";
+// Or bootstrap style alerts
+@import "../src/app/toastr/toastr-bs4.scss";
+
 // angular-calendar
 // https://github.com/mattlewis92/angular-calendar
 @import "../node_modules/angular-calendar/css/angular-calendar.css";

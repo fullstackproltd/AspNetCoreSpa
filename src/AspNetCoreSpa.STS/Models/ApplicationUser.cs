@@ -29,5 +29,8 @@ namespace AspNetCoreSpa.STS
                 return this.FirstName + " " + this.LastName;
             }
         }
+        public bool IsAdmin { get; set; }
+        public string DataEventRecordsRole { get; set; }
+        public string SecuredFilesRole { get; set; }
     }
 }

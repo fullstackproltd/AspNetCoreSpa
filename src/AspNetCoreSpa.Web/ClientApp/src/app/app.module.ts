@@ -1,7 +1,8 @@
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -9,16 +10,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from '../environments/environment';
 
-import { CoreModule, AuthService } from './core';
 import { AppSharedModule } from './appshared';
+import { ToastrModule } from './toastr';
 import { SimpleNotificationsModule } from './simple-notifications';
 
-// Components
 import { routes } from './app.routes';
+// Components
+import { FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent, ModalTemplateDirective } from '@app/components';
 import { AppComponent } from './app.component';
-import { AppService } from './app.service';
-import { FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent, ModalTemplateDirective } from './components';
 import { HomeComponent } from './home/home.component';
+// Services
+import { AppService, AuthService, DataService, GlobalErrorHandler, ModalService, ModalStateService, AuthInterceptor, TimingInterceptor } from '@app/services';
 export function appServiceFactory(appService: AppService, authService: AuthService): Function {
   return () => appService.getAppData(authService);
 }
@@ -38,17 +40,25 @@ export function appServiceFactory(appService: AppService, authService: AuthServi
     // PrebootModule.withConfig({ appRoot: 'appc-root' }),
     BrowserAnimationsModule,
     BrowserTransferStateModule,
-    CoreModule.forRoot(),
+    HttpClientModule,
     AppSharedModule,
     // OAuthModule.forRoot(),
     NgbModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
+    ToastrModule.forRoot(),
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     AppService,
-    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService, AuthService], multi: true }
+    AuthService,
+    DataService,
+    ModalService,
+    ModalStateService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
+    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService, AuthService], multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   exports: [],
   bootstrap: [AppComponent]

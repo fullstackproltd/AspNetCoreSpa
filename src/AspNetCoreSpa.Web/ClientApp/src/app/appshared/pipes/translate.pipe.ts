@@ -1,6 +1,6 @@
 import { PipeTransform, Pipe, Injectable } from '@angular/core';
 
-import { AppService } from '../../app.service';
+import { AppService } from '@app/services';
 
 @Injectable()
 @Pipe({

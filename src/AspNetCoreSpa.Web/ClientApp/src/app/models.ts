@@ -47,7 +47,7 @@ export interface IAppTableOptions<T> {
 
 export interface IModalOptions {
     title: string;
-    message: string;
+    message?: string;
     template?: any;
 }
 export enum FieldTypes {

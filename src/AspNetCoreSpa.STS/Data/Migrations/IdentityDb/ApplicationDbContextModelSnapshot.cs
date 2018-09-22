@@ -14,7 +14,7 @@ namespace AspNetCoreSpa.STS.Data.Migrations.IdentityDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.2-rtm-30932");
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065");
 
             modelBuilder.Entity("AspNetCoreSpa.STS.ApplicationRole", b =>
                 {
@@ -54,6 +54,8 @@ namespace AspNetCoreSpa.STS.Data.Migrations.IdentityDb
 
                     b.Property<DateTime>("CreatedDate");
 
+                    b.Property<string>("DataEventRecordsRole");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -61,6 +63,8 @@ namespace AspNetCoreSpa.STS.Data.Migrations.IdentityDb
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(250);
+
+                    b.Property<bool>("IsAdmin");
 
                     b.Property<bool>("IsEnabled");
 
@@ -84,6 +88,8 @@ namespace AspNetCoreSpa.STS.Data.Migrations.IdentityDb
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecuredFilesRole");
 
                     b.Property<string>("SecurityStamp");
 

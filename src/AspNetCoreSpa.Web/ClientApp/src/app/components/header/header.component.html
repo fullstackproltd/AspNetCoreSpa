@@ -46,7 +46,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="javascript:void(0);" *ngIf="isLoggedIn">{{user?.profile.email}}</a>
+                    <a class="nav-link" href="javascript:void(0);" (click)="profile()" *ngIf="isLoggedIn">{{user?.profile.email}}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" (click)="logout()" href="javascript:void(null);" *ngIf="isLoggedIn">

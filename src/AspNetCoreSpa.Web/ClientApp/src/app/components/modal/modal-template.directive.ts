@@ -1,6 +1,6 @@
 import { Directive, TemplateRef } from '@angular/core';
 
-import { ModalStateService } from '@app/core';
+import { ModalStateService } from '@app/services';
 
 /**
  * Directive allowing to get a reference to the template containing the modal component,

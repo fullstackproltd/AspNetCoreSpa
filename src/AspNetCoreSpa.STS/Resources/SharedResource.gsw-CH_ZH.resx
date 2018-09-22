@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACCESS_DENIED" xml:space="preserve">
+    <value>Da chunnsch nöd ine!</value>
+  </data>
+  <data name="ACCESS_DENIED_TEXT" xml:space="preserve">
+    <value>Die Ressource chunnsch nöd über, ätsch!.</value>
+  </data>
+  <data name="ACCOUNT_LOGIN" xml:space="preserve">
+    <value>Iilogge</value>
+  </data>
+  <data name="ACCOUNT_NO_EXTERNAL_LOGINS" xml:space="preserve">
+    <value>Es sind e kei externi Authentifizierigsdienscht konfiguriert. Wännd nöd weisch wie iirichte, findsches da: https://go.microsoft.com/fwlink/?LinkID=532715. </value>
+  </data>
+  <data name="ACCOUNT_USE_ANOTHER_SERVICE_LOG_IN" xml:space="preserve">
+    <value>Muesch en andere Dienscht nää zum di aamälde, Tubel!.</value>
+  </data>
+  <data name="ACCOUNT_USE_LOCAL_ACCOUNT_TO_LOG_IN" xml:space="preserve">
+    <value>Muesch en lokale Benutzer näh.</value>
+  </data>
+  <data name="CONFIRM_EMAIL" xml:space="preserve">
+    <value>E-Mail-Adresse Beschtätigung</value>
+  </data>
+  <data name="CONFIRM_EMAIL_TEXT" xml:space="preserve">
+    <value>Danke tuusig fürd Beschtätigung vode Email Adrässe.</value>
+  </data>
+  <data name="CONFIRM_PASSWORD" xml:space="preserve">
+    <value>Passwort beschtäätige</value>
+  </data>
+  <data name="CONFIRM_PASSWORD_NOT_MATCHING" xml:space="preserve">
+    <value>Passwort und Passwortbeschtäätigung stimmed nöd überii.</value>
+  </data>
+  <data name="CONFIRM_YOUR_EMAIL" xml:space="preserve">
+    <value>Tuen bitte dini Emailadrässe beschtätige</value>
+  </data>
+  <data name="CONFIRM_YOUR_EMAIL_TEXT" xml:space="preserve">
+    <value>Bitte tuen dis Konto bestäätige, indem'd da &lt;a href='{0}'&gt;klicksch&lt;/a&gt;. </value>
+  </data>
+  <data name="CREATE_A_NEW_ACCOUNT" xml:space="preserve">
+    <value>Nigelnagelneus Konto erstellä</value>
+  </data>
+  <data name="EMAIL" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>E-Mail-Adresse ungültig.</value>
+  </data>
+  <data name="EMAIL_REQUIRED" xml:space="preserve">
+    <value>E-Mail-Adresse bruuchts uu huere, im Fall</value>
+  </data>
+  <data name="FORGOT_PASSWORD_CONFIRMATION" xml:space="preserve">
+    <value>Beschtätigung Passwort vesifft</value>
+  </data>
+  <data name="FORGOT_PASSWORD_CONFIRMATION_TEXT" xml:space="preserve">
+    <value>Bitte chegg dini email adrässe zums passwort prüefe. Verschtaasch?.</value>
+  </data>
+  <data name="FORGOT_YOUR_PASSWORD" xml:space="preserve">
+    <value>Passwort vesifft</value>
+  </data>
+  <data name="FORGOT_YOUR_PASSWORD_ENTER_EMAIL" xml:space="preserve">
+    <value>Bitte dini Email Adrässe inetöggele. Aber dali.</value>
+  </data>
+  <data name="INVALID_LOGIN_ATTEMPT" xml:space="preserve">
+    <value>Ungültige Amäldeversuech. Probier namal!</value>
+  </data>
+  <data name="LOCKED_OUT" xml:space="preserve">
+    <value>Isch zue!</value>
+  </data>
+  <data name="LOCKED_OUT_TEXT" xml:space="preserve">
+    <value>Dieses Konto isch zue. Probier doch spöter namal, Köbi.</value>
+  </data>
+  <data name="LOGOUT" xml:space="preserve">
+    <value>Uuslogge</value>
+  </data>
+  <data name="PASSWORD" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="PASSWORD_REQUIRED" xml:space="preserve">
+    <value>Es bruucht dänk es Passwort! Logisch, oder?</value>
+  </data>
+  <data name="REGISTER" xml:space="preserve">
+    <value>Regischtriere</value>
+  </data>
+  <data name="REGISTER_AS_NEW_USER" xml:space="preserve">
+    <value>Als neuer Benutzer/-in regischtriere</value>
+  </data>
+  <data name="REMEMBER_ME" xml:space="preserve">
+    <value>Login merke</value>
+  </data>
+  <data name="RESET" xml:space="preserve">
+    <value>zruggsetze</value>
+  </data>
+  <data name="RESET_YOUR_PASSWORD" xml:space="preserve">
+    <value>Setz diis Passwort zrugg</value>
+  </data>
+  <data name="RESET_PASSWORD" xml:space="preserve">
+    <value>Passwort zruggsetze</value>
+  </data>
+  <data name="RESET_PASSWORD_EMAIL_TEXT" xml:space="preserve">
+    <value>Bitte setz diis Passwort zrugg, indem'd genau daa &lt;a href='{0}'&gt;tusch klicke&lt;/a&gt;.</value>
+  </data>
+  <data name="SUBMIT" xml:space="preserve">
+    <value>Bestätige</value>
+  </data>
+  <data name="EXTERNAL_LOGIN_ASSOCIATE_ACCOUNT" xml:space="preserve">
+    <value>Verbind diis {0} Konto</value>
+  </data>
+  <data name="EXTERNAL_LOGIN_TEXT" xml:space="preserve">
+    <value>Du häsch di erfolgriich mit {0} authentifiziert. Bravo! Gib bitte unde e Email Adrässe für die Siite ii und klick uf de Registrierchnopf zum d'Amäldig abschlüüsse.</value>
+  </data>
+  <data name="EXTERNAL_PROVIDER_ERROR" xml:space="preserve">
+    <value>Fehler vom externe Aabüüter: {0}</value>
+  </data>
+  <data name="EXTERNAL_PROVIDER_ERROR_CONFIRMATION" xml:space="preserve">
+    <value>Fehler bim lade vode externe Aamäldeinfos während de Beschtätigung.</value>
+  </data>
+  <data name="EXTERNAL_PROVIDER_ERROR_INFO" xml:space="preserve">
+    <value>Fehler bim lade vode externe Aamäldeinfos</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_2FA" xml:space="preserve">
+    <value>Zwei-Faktor-Authentifizierig</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_2FA_NO_AUTHENTICATOR_DEVICE" xml:space="preserve">
+    <value>Häsch e kei Zuegriff uf dis Authentifizierigsgrät? Du chasch</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_2FA_RECOVERY_CODE_TEXT" xml:space="preserve">
+    <value>Iilogge mit eme Widerherstelligscode</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_2FA_REMEMBER_MC" xml:space="preserve">
+    <value>Grät merkä</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_2FA_TEXT" xml:space="preserve">
+    <value>Diin Login isch mit ere Authentifizierigsäpp gschützt. Muesch dänk une s nümmerli iigäh, du Hose!</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_AUTHENTICATOR_CODE" xml:space="preserve">
+    <value>Authentifizierigscode</value>
+  </data>
+  <data name="ACCOUNT_RECOVERY_CODE" xml:space="preserve">
+    <value>Wiederherschtelligscode</value>
+  </data>
+  <data name="ACCOUNT_RECOVERY_CODE_REQUIRED" xml:space="preserve">
+    <value>Es bruucht en Wiederherschtelligscode</value>
+  </data>
+  <data name="ACCOUNT_RECOVERY_CODE_VERIFICATION" xml:space="preserve">
+    <value>Prüefig vom Wiederherschtelligscode</value>
+  </data>
+  <data name="ACCOUNT_RECOVERY_CODE_VERIFICATION_TEXT" xml:space="preserve">
+    <value>Du häsch Dich mit eme Widerherstelligscode aagmolde. Die Aamäldig wird nöd gschpeicheret, bis du bim Aamälde en Authenticatoräpp-Code aagisch oder 2FA deaktiviersch und dich neu tuesch aamälde.</value>
+  </data>
+  <data name="INVALID_AUTHENTICATOR_CODE" xml:space="preserve">
+    <value>Ungültige Authentifizierigscode</value>
+  </data>
+  <data name="INVALID_RECOVERY_CODE" xml:space="preserve">
+    <value>Ungültige Wiederherschtelligscode iigäh</value>
+  </data>
+  <data name="LOGOUT_TEXT" xml:space="preserve">
+    <value>Du häsch Dich erfolgriich abgmolde. Huere schaad. :-(</value>
+  </data>
+  <data name="RESET_PASSWORD_CONFIRMATION" xml:space="preserve">
+    <value>Beschtätigung für Passwort zruggsetze</value>
+  </data>
+  <data name="RESET_PASSWORD_CONFIRMATION_CLICK_HERE" xml:space="preserve">
+    <value>Klick da zum di aamälde</value>
+  </data>
+  <data name="RESET_PASSWORD_CONFIRMATION_TEXT1" xml:space="preserve">
+    <value>Diis Passwort isch zrugggsetzt. Gern gscheh.</value>
+  </data>
+  <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
+    <value>S {0} mues mindischtens {2} und dörf höchschtens {1} Zeiche lang sii.</value>
+  </data>
+  <data name="2FA" xml:space="preserve">
+    <value>Zwei-Faktor-Authentifizierig</value>
+  </data>
+  <data name="CHANGE_PASSWORD" xml:space="preserve">
+    <value>Passwort ändere</value>
+  </data>
+  <data name="CHANGE_PASSWORD_STATUS" xml:space="preserve">
+    <value>Diis Passwort isch gänderet worde.</value>
+  </data>
+  <data name="CURRENT_PASSWORD" xml:space="preserve">
+    <value>Aktuells Passwort</value>
+  </data>
+  <data name="CURRENT_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>Ich bruuche dis aktuelle Passwort</value>
+  </data>
+  <data name="EXTERNAL_LOGINS" xml:space="preserve">
+    <value>Externi Logins</value>
+  </data>
+  <data name="MANAGE_CHANGE_ACCOUNT_SETTINGS" xml:space="preserve">
+    <value>I dine Kontoiistelige umeschrüüble</value>
+  </data>
+  <data name="MANAGE_YOUR_ACCOUNT" xml:space="preserve">
+    <value>I dine Kontoiistelige umeschrüüble</value>
+  </data>
+  <data name="NEW_PASSWORD" xml:space="preserve">
+    <value>Neus Passwort</value>
+  </data>
+  <data name="NEW_PASSWORD_REQUIRED" xml:space="preserve">
+    <value>Du bruuchsch es neus Passwort</value>
+  </data>
+  <data name="PERSONAL_DATA" xml:space="preserve">
+    <value>Persönlichi Daate</value>
+  </data>
+  <data name="PROFILE" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="TWOFACTORCODE_REQUIRED" xml:space="preserve">
+    <value>Bruuchsch en Zwei-Faktor-Code</value>
+  </data>
+  <data name="UPDATE_PASSWORD" xml:space="preserve">
+    <value>Passwort aktualisiere</value>
+  </data>
+  <data name="VERIFICATION_CODE_REQUIRED" xml:space="preserve">
+    <value>Bruuchsch en Bestätigungscode, Du Habasch</value>
+  </data>
+  <data name="AND" xml:space="preserve">
+    <value>und</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP" xml:space="preserve">
+    <value>Konfiguriere vode Authentifikator-Äpp</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_DOWNLOAD_TEXT" xml:space="preserve">
+    <value>Lad der e Zwei-Faktor-Authentifizierigsäpp wie de Microsoft Authenticator für</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_GOOGLE_TEXT" xml:space="preserve">
+    <value>Google Authenticator für</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_SCAN1" xml:space="preserve">
+    <value>Scän de QR Code oder gib de Schlüssel </value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_SCAN2" xml:space="preserve">
+    <value>i diini Zwei-Faktor-Authenticator-Äpp ii. Leerzeiche, Groß- und Chliischriibig spiled kei Rolle.</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_SCAN_ALERT" xml:space="preserve">
+    <value>Zude Aktivierig vode QR-Code Generierig, lies bitte eusi </value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_SCAN_ALERT_DETAILS" xml:space="preserve">
+    <value>Nachdem Du de QR-Code iigscännt oder de Schlüssel vo obe iigäh häsch, chunnsch vode 2FA-Äpp en Code über. De muesch iigäh.</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_SCAN_ALERT_LINK" xml:space="preserve">
+    <value>Doku</value>
+  </data>
+  <data name="CONFIGURE_AUTHENTICATOR_APP_STEPS" xml:space="preserve">
+    <value>Jetzt muesch lose. Das muesch mache wännd wettsch d 2FA-Äpp konfiguriere: </value>
+  </data>
+  <data name="DELETE_PERSONAL_DATA" xml:space="preserve">
+    <value>Persönlichi Daate lösche</value>
+  </data>
+  <data name="DELETE_PERSONAL_DATA_AND_CLOSE" xml:space="preserve">
+    <value>Daate lösche und Konto schlüüsse</value>
+  </data>
+  <data name="DELETE_PERSONAL_DATA_TEXT" xml:space="preserve">
+    <value>Dur s lösche vo dene Daate wird dis Konto ändgültig glöscht. Furt isch furt.</value>
+  </data>
+  <data name="DISABLE_2FA" xml:space="preserve">
+    <value>2FA deaktiviere</value>
+  </data>
+  <data name="DISABLE_2FA_BUTTON" xml:space="preserve">
+    <value>2FA deaktiviere</value>
+  </data>
+  <data name="DISABLE_2FA_STATUS" xml:space="preserve">
+    <value>2FA isch deaktiviert worde. Du chasch 2FA aktiviere, wännd e Authenticatoräpp iirichtisch.</value>
+  </data>
+  <data name="DISABLE_2FA_TEXT_DETAILS" xml:space="preserve">
+    <value>Dur s deaktiviere vo 2FA werded d ide Äpp verwändete Schlüssel nöd gänderet. Wänn d Schlüssel vode Äpp wotsch ändere, dänn muesch diin Authentifizierigsschlüssel</value>
+  </data>
+  <data name="DISABLE_2FA_TEXT_DETAILS_LINK" xml:space="preserve">
+    <value>zruggsetze.</value>
+  </data>
+  <data name="DISABLE_2FA_TEXT_HEADER" xml:space="preserve">
+    <value>Die Aktion stellt nume 2FA ab.</value>
+  </data>
+  <data name="DOWNLOAD_YOUR_DATA" xml:space="preserve">
+    <value>Diini Date abelade</value>
+  </data>
+  <data name="INCORRECT_PASSWORD" xml:space="preserve">
+    <value>Das Passwort isch Chääs</value>
+  </data>
+  <data name="INVALID_VERFICATION_CODE" xml:space="preserve">
+    <value>Dä Beschtätigungscode isch falsch.</value>
+  </data>
+  <data name="OR" xml:space="preserve">
+    <value>oder</value>
+  </data>
+  <data name="USER_NOTFOUND" xml:space="preserve">
+    <value>Dä Köbi mit de Id  '{0}' hät nöd chöne glade werde. Sorryyyy.</value>
+  </data>
+  <data name="VERIFICATION_CODE" xml:space="preserve">
+    <value>Beschtätigungscode</value>
+  </data>
+  <data name="2FA_AUTHENTICATION_ADD_AUTHENTICATOR_APP" xml:space="preserve">
+    <value>E Authenticatoräpp hinzuefüege</value>
+  </data>
+  <data name="2FA_AUTHENTICATION_ADD_RESET_APP" xml:space="preserve">
+    <value>Authenticatoräpp zruggsetze</value>
+  </data>
+  <data name="2FA_AUTHENTICATION_ADD_SETUP_APP" xml:space="preserve">
+    <value>Authenticatoräpp iirichte</value>
+  </data>
+  <data name="2FA_AUTHENTICATION_TITLE" xml:space="preserve">
+    <value>Zwei-Faktor-Authentifizierig (2FA)</value>
+  </data>
+  <data name="2FA_NO_CODES_LEFT" xml:space="preserve">
+    <value>Du häsch kei Widerherstelligscodes me. So en Seich.</value>
+  </data>
+  <data name="2FA_NO_CODES_LEFT_TEXT" xml:space="preserve">
+    <value>Du muesch neui Widerherstelligscodes generiere lah, bevor d dich wieder demit chasch aamälde.</value>
+  </data>
+  <data name="2FA_N_CODES_LEFT" xml:space="preserve">
+    <value>Du häsch ha {0} Widerherstelligscodes vorig.</value>
+  </data>
+  <data name="2FA_N_CODES_LEFT_TEXT" xml:space="preserve">
+    <value>Du söttsch hurti es Paar neui Widerherstelligscodes generiere.</value>
+  </data>
+  <data name="2FA_ONE_CODES_LEFT" xml:space="preserve">
+    <value>Du häsch na 1 Widerherstelligscodes vorig.</value>
+  </data>
+  <data name="2FA_ONE_CODES_LEFT_TEXT" xml:space="preserve">
+    <value>Du chasch en neue Satz Widerherstelligscodes generiere lah.</value>
+  </data>
+  <data name="2FA_STATUS_BROWSER_FORGET" xml:space="preserve">
+    <value>De aktuelli Browser isch vegässe. Wännd dich vo dem Browser uus neu aamäldisch muesch wieder en 2FA Code iigäh.</value>
+  </data>
+  <data name="AUTHENTICATOR_APP" xml:space="preserve">
+    <value>Authenticator-Äpp</value>
+  </data>
+  <data name="DELETE" xml:space="preserve">
+    <value>Lösche</value>
+  </data>
+  <data name="DOWNLOAD" xml:space="preserve">
+    <value>Abelade</value>
+  </data>
+  <data name="EXTERNAL_LOGINS_REGISTERED_LOGIN" xml:space="preserve">
+    <value>Registrierti Aamäldige</value>
+  </data>
+  <data name="EXTERNAL_LOGINS_TITLE" xml:space="preserve">
+    <value>Diini externe Logins verwalte</value>
+  </data>
+  <data name="GENERATE" xml:space="preserve">
+    <value>Generiere</value>
+  </data>
+  <data name="GENERATE_2FA_RECOVERY_CODES" xml:space="preserve">
+    <value>Codes für 2FA generiere.</value>
+  </data>
+  <data name="GENERATE_2FA_RECOVERY_CODES_INFO_LOSE" xml:space="preserve">
+    <value>Wänn dis Grät d'Schiisi abeschpüelsch und kei Widerherstelligscodes meh häsch, dänn bisch veloore.</value>
+  </data>
+  <data name="GENERATE_2FA_RECOVERY_CODES_SAFE_PLACE" xml:space="preserve">
+    <value>Tuen de Code ame sichere Ort ablege. Nöd nur im Hirni.</value>
+  </data>
+  <data name="GENERATE_2FA_RECOVERY_CODES_TEXT" xml:space="preserve">
+    <value>Wännd neui Widerherstelligscodes erschtellsch, werded d Schlüssel ide Authenticatoräpp nöd gänderet. Wännd d Äpp-Schlüssel wetsch ändere, muesch din Authentifizierigsschlüssel zruggsetze.</value>
+  </data>
+  <data name="GENERATE_2FA_RECOVERY_CODES_TEXT_LINK" xml:space="preserve">
+    <value>zruggsetze.</value>
+  </data>
+  <data name="GENERATE_RECOVERY_CODES" xml:space="preserve">
+    <value>Wiederherschtelligscodes generiere</value>
+  </data>
+  <data name="PERSONAL_DATA_DELETEINFO" xml:space="preserve">
+    <value>Wännd die Daate löschisch is diis Konto weg. Chasch nüme zrugg.</value>
+  </data>
+  <data name="PERSONAL_DATA_INFO" xml:space="preserve">
+    <value>Diis Konto hät persönlichi Daate wo Du usegruckt häsch. Uf dere Siite chasch die abelade oder lösche.</value>
+  </data>
+  <data name="PHONE_NUMBER" xml:space="preserve">
+    <value>Telefonnummero</value>
+  </data>
+  <data name="REMOVE" xml:space="preserve">
+    <value>Lösche</value>
+  </data>
+  <data name="RESET_AUTHENTICATOR_INFO" xml:space="preserve">
+    <value>Wännd diin Authentifizierigsschlüssel tuesch ändere muesch dini Authentifizierigsäpp neu konfiguriere</value>
+  </data>
+  <data name="RESET_AUTHENTICATOR_KEY" xml:space="preserve">
+    <value>Authentifizierigsschlüssel zruggsetze</value>
+  </data>
+  <data name="RESET_AUTHENTICATOR_STATUS" xml:space="preserve">
+    <value>Diin Authentifizierigsäpp-Schlüssel isch zrugggsetzt. Chasch Dini App neu konfiguriere.</value>
+  </data>
+  <data name="RESET_AUTHENTICATOR_TEXT" xml:space="preserve">
+    <value>De Prozäss stellt 2FA ab, bis du diini Authenticatoräpp überprüeft häsch. Wännd diini Konfiguration nöd fertig machsch, gheisch villicht für immer use.</value>
+  </data>
+  <data name="RESET_RECOVERY_CODES" xml:space="preserve">
+    <value>Setz diini Widerherstelligscodes zrugg</value>
+  </data>
+  <data name="SAVE" xml:space="preserve">
+    <value>Schpeichere</value>
+  </data>
+  <data name="SEND_VERIFICATION_EMAIL" xml:space="preserve">
+    <value>E-Mail-Verifizierig schicke</value>
+  </data>
+  <data name="SET_PASSWORD" xml:space="preserve">
+    <value>Passwort festlege</value>
+  </data>
+  <data name="SET_PASSWORD_STATUS" xml:space="preserve">
+    <value>Diis Passwort isch festgleit.</value>
+  </data>
+  <data name="SET_PASSWORD_TEXT" xml:space="preserve">
+    <value>Du häsch im Fall kein lokale Benutzer / keis Passwort für die Siite. Tuen es lokals Konto dezue, damit Dich ohni externi Aamäldig chasch aamälde.</value>
+  </data>
+  <data name="SET_YOUR_PASSWORD" xml:space="preserve">
+    <value>Leg es Passwort fescht</value>
+  </data>
+  <data name="STATUS_EXTERNAL_LOGIN_ADDED" xml:space="preserve">
+    <value>Di externi Aamäldig isch dinne.</value>
+  </data>
+  <data name="STATUS_EXTERNAL_LOGIN_REMOVED" xml:space="preserve">
+    <value>Di externi Aamäldig isch wieder dusse.</value>
+  </data>
+  <data name="STATUS_GENERATE_CODES" xml:space="preserve">
+    <value>Du häsch neui Widerherstelligscodes generiert.</value>
+  </data>
+  <data name="STATUS_PROFILE_UPDATED" xml:space="preserve">
+    <value>Dis Profil isch öp-to-date</value>
+  </data>
+  <data name="STATUS_UPDATE_PROFILE_EMAIL_SEND" xml:space="preserve">
+    <value>Beschtätigungsemail veschickt. Bitte läse.</value>
+  </data>
+  <data name="USERNAME" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="VERIFY" xml:space="preserve">
+    <value>Prüefe</value>
+  </data>
+  <data name="ACCOUNT_CLICK_LOGIN_LINK" xml:space="preserve">
+    <value>Klick uf de Login-Link</value>
+  </data>
+  <data name="ACCOUNT_LOGIN_WITH_AZURE_AD" xml:space="preserve">
+    <value>Iilogge mitem Azure AD</value>
+  </data>
+  <data name="REMEMBER_BROWSER" xml:space="preserve">
+    <value>Browser merke</value>
+  </data>
+  <data name="YES" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="CONSENT_APPLICATION_ACCESS" xml:space="preserve">
+    <value>Applikationszuegriff</value>
+  </data>
+  <data name="CONSENT_IS_CHECK_UNREQUIRED" xml:space="preserve">
+    <value>Chasch Berechtigunge wegnäh wod nöd wotsch gäh.</value>
+  </data>
+  <data name="CONSENT_IS_REQUESTING_YOUR_PERMISSION" xml:space="preserve">
+    <value>bruucht diini Berächtigung</value>
+  </data>
+  <data name="CONSENT_NO_NOT_ALLOWED" xml:space="preserve">
+    <value>Nei, nöd erlaubt.</value>
+  </data>
+  <data name="CONSENT_PERSONAL_INFORMATION" xml:space="preserve">
+    <value>Persönlichi Informatione</value>
+  </data>
+  <data name="CONSENT_REMEMBER_MY_DECISION" xml:space="preserve">
+    <value>Iistellige merken</value>
+  </data>
+  <data name="CONSENT_REQUIRED" xml:space="preserve">
+    <value>(Pflichtfäld)</value>
+  </data>
+  <data name="CONSENT_YES_ALLOWED" xml:space="preserve">
+    <value>Ja, erlaube</value>
+  </data>
+  <data name="LOGOUT_RETURN_TO" xml:space="preserve">
+    <value>Zrugg zu</value>
+  </data>
+  <data name="WOULD_YOU_LIKE_TO_LOGOUT" xml:space="preserve">
+    <value>Wettsch di öppe vom IdentityServer abmälde?</value>
+  </data>
+  <data name="EXTERNAL_LOGINS_ADD_ANOTHER_SERVICE_TO_LOGIN" xml:space="preserve">
+    <value>En andere Dienscht zum aamälde dezue tue.</value>
+  </data>
+  <data name="LANGUAGE" xml:space="preserve">
+    <value>Spraach</value>
+  </data>
+  <data name="RESET_PASSWORD_CLICK_HERE_TO_LOGIN" xml:space="preserve">
+    <value>Klick da zum di aamälde</value>
+  </data>
+  <data name="RESET_PASSWORD_YOUR_PASSWORD_HAS_BEEN_RESET" xml:space="preserve">
+    <value>Diis Passwort isch zrugggsetzt.</value>
+  </data>
+  <data name="SEND_VERIFICATION_CODE" xml:space="preserve">
+    <value>Beschtätigungscode schicke</value>
+  </data>
+  <data name="SEND_VERIFICATION_CODE_SELECT" xml:space="preserve">
+    <value>Wähl de Zwei-Faktor-Authentifizierungsaanbüter uus:</value>
+  </data>
+  <data name="UNSUCCESSFUL_LOGIN_WITH_SERVICE" xml:space="preserve">
+    <value>Nöd chöne aamälde mitem Dienscht.</value>
+  </data>
+  <data name="CODE_REQUIRED" xml:space="preserve">
+    <value>Musch en Code haa</value>
+  </data>
+  <data name="INVALID_CODE" xml:space="preserve">
+    <value>Ungültige Code</value>
+  </data>
+  <data name="INVALID_CONSENT_PERMISSION" xml:space="preserve">
+    <value>Muesch mindischtens ei Berächtigung uuswähle.</value>
+  </data>
+  <data name="INVALID_CONSENT_SELECTION" xml:space="preserve">
+    <value>Ungültigi Uuswahl</value>
+  </data>
+  <data name="STATUS_MESSAGE_PROFILE_HAS_BEEN_RESET" xml:space="preserve">
+    <value>Diis Profil isch öp-to-date</value>
+  </data>
+  <data name="CANCEL_BUTTON" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+</root>

@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import { AuthService, ModalService } from './core';
 // import { routerTransition } from './router.animations';
-import { AppService } from './app.service';
+import { AppService, AuthService, ModalService } from '@app/services';
 @Component({
   selector: 'appc-root',
   // animations: [routerTransition],
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit {
     lastOnBottom: true
   };
   constructor(
-    private accountService: AuthService,
+    private authService: AuthService,
     private router: Router,
     private title: Title,
     private meta: Meta,
@@ -29,7 +28,7 @@ export class AppComponent implements OnInit {
   public ngOnInit() {
     this.updateTitleAndMeta();
     if (window.location.href.indexOf('?postLogout=true') > 0) {
-      this.accountService.signoutRedirectCallback().then(() => {
+      this.authService.signoutRedirectCallback().then(() => {
         const url: string = this.router.url.substring(
           0,
           this.router.url.indexOf('?')

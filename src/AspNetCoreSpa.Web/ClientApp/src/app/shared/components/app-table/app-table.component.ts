@@ -1,9 +1,10 @@
 import { Component, ViewChild, Input, ChangeDetectionStrategy, TemplateRef, OnInit, ChangeDetectorRef } from '@angular/core';
-
-import { DataService, ModalService } from '@app/core';
-import { IFieldConfig, IAppTableOptions, FieldTypes } from '@app/models';
-import { AppFormComponent } from '@app/shared/components/forms';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { clone } from 'lodash';
+
+import { DataService, ModalService } from '@app/services';
+import { IFieldConfig, IAppTableOptions, FieldTypes } from '@app/models';
+import { ToastrService } from '@app/toastr';
 
 @Component({
   selector: 'appc-table',
@@ -15,15 +16,48 @@ export class AppTableComponent implements OnInit {
 
   @ViewChild('appTable') table: DatatableComponent;
   @ViewChild('formTemplate') formTemplate: TemplateRef<any>;
-  @ViewChild('form') formRef: AppFormComponent;
   @Input() options: IAppTableOptions<any>;
-  constructor(private dataService: DataService, private modalService: ModalService, private cd: ChangeDetectorRef) { }
+  constructor(
+    private dataService: DataService,
+    private toastr: ToastrService,
+    private modalService: ModalService,
+    private cd: ChangeDetectorRef) { }
   ngOnInit() {
+    this.getData();
+  }
+  getData() {
     this.dataService.get<Array<any>>(this.options.apiUrl)
       .subscribe(data => {
         this.options.rows = data;
+        this.toastr.info('Data loaded.', 'Info');
         this.cd.markForCheck();
       });
+  }
+  create() {
+    this.createOrEdit()
+      .then(() => {
+        this.getData();
+      }, () => { });
+  }
+  edit(row, rowIndex) {
+    // Form Template
+    this.createOrEdit(row, rowIndex)
+      .then(() => {
+
+      }, () => { });
+  }
+  delete(row, rowIndex) {
+    this.modalService.confirm({
+      title: 'Delete',
+      message: 'Are you sure you want to delete this data?'
+    }).then(() => {
+      this.dataService.delete(`${this.options.apiUrl}/${row.id}`)
+        .subscribe(() => {
+          this.options.rows = this.options.rows.filter(x => x.id !== row.id);
+          this.toastr.success('Deleted successfully.', 'Info');
+          this.cd.markForCheck();
+        });
+    }, () => { });
   }
   toggleExpandRow(row) {
     console.log('Toggled Expand Row!', row);
@@ -35,35 +69,8 @@ export class AppTableComponent implements OnInit {
   onPage(event) {
     console.log('Page event', event);
   }
-  onNew(row) {
-    console.log('New', row);
-  }
-  onEdit(row, rowIndex) {
-    // Form Template
-    const template = <any>this.formTemplate;
-    const formConfig = this.getFormFields(row, rowIndex);
-    template.data = { formConfig, formModel: row };
-
-    this.modalService.confirm({
-      title: 'Edit',
-      message: 'Edit the row',
-      template,
-    }).then(() => { }, () => { });
-
-  }
-  onDelete(row, rowIndex) {
-    this.modalService.confirm({
-      title: 'Delete',
-      message: 'Are you sure you want to delete this data?'
-    }).then(() => {
-      this.dataService.delete(`${this.options.apiUrl}/${row.id}`)
-        .subscribe(() => {
-          this.options.rows = this.options.rows.filter(x => x.id !== row.id);
-        });
-    }, () => { });
-  }
-
-  private getFormFields(row, rowIndex): IFieldConfig[] {
+  private createOrEdit(row = null, rowIndex = null): Promise<any> {
+    const title = row ? 'Update' : 'Create';
     const fields = this.options.columns
       .filter(f => f.fieldType)
       .map(x => {
@@ -80,22 +87,42 @@ export class AppTableComponent implements OnInit {
     fields.push({
       name: 'button',
       type: FieldTypes.Button,
-      label: 'Submit',
-      onSubmit: update.bind(this)
+      label: title,
+      onSubmit: row ? update.bind(this) : create.bind(this)
     });
 
-    function update() {
-      if (this.formRef.valid) {
-        this.dataService.put(`${this.options.apiUrl}/${row.id}`, { ...this.formRef.value })
+    function update(form) {
+      if (form.valid) {
+        this.dataService.put(`${this.options.apiUrl}/${row.id}`, { ...form.value })
           .subscribe(res => {
-            row = Object.assign({}, row, this.formRef.value);
+            row = Object.assign({}, row, form.value);
             this.options.rows[rowIndex] = row;
             this.options.rows = this.options.rows.slice();
-            this.modalService.dismiss();
+            this.toastr.success('Updated successfully.', 'Success');
+            this.modalService.close();
+            this.cd.markForCheck();
           });
       }
     }
 
-    return fields;
+    function create(form) {
+      if (form.valid) {
+        this.dataService.post(this.options.apiUrl, { ...form.value })
+          .subscribe(res => {
+            this.toastr.success('Created successfully.', 'Success');
+            this.modalService.close();
+          });
+      }
+    }
+
+    const template = clone(<any>this.formTemplate);
+    template.data = { formConfig: fields, formModel: (row || {}) };
+
+    return this.modalService.confirm({
+      title,
+      template,
+    });
+
   }
+
 }

@@ -1,0 +1,62 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model EnableAuthenticatorViewModel
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP");
+    ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
+}
+
+<h4>@ViewData["Title"]</h4>
+<div>
+    <p>@SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_STEPS")</p>
+    <ol class="list">
+        <li>
+            <p>
+                @SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_DOWNLOAD_TEXT")
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825071">Windows Phone</a>,
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825072">Android</a> @SharedLocalizer.GetLocalizedHtmlString("AND")
+                <a href="https://go.microsoft.com/fwlink/?Linkid=825073">iOS</a> @SharedLocalizer.GetLocalizedHtmlString("OR")
+                @SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_GOOGLE_TEXT")
+                <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&amp;hl=en">Android</a> @SharedLocalizer.GetLocalizedHtmlString("AND")
+                <a href="https://itunes.apple.com/us/app/google-authenticator/id388497605?mt=8">iOS</a>.
+            </p>
+        </li>
+        <li>
+            <p>@SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_SCAN1")<kbd>@Model.SharedKey</kbd> @SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_SCAN1")</p>
+            <div class="alert alert-info">@SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_SCAN_ALERT")<a href="https://go.microsoft.com/fwlink/?Linkid=852423">@SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_SCAN_ALERT_LINK")</a>.</div>
+            <div id="qrCode"></div>
+            <div id="qrCodeData" data-url="@Html.Raw(Model.AuthenticatorUri)"></div>
+        </li>
+        <li>
+            <p>
+                @SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP_SCAN_ALERT_DETAILS")
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="Code" class="control-label">@SharedLocalizer.GetLocalizedHtmlString("VERIFICATION_CODE")</label>
+                            <input asp-for="Code" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString("VERIFY")</button>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    </form>
+                </div>
+            </div>
+        </li>
+    </ol>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+<script src="~/js/qrcode.min.js"></script>
+<script type="text/javascript">
+        new QRCode(document.getElementById("qrCode"),
+            {
+                text: "@Html.Raw(Model.AuthenticatorUri)",
+                width: 150,
+                height: 150
+            });
+</script>

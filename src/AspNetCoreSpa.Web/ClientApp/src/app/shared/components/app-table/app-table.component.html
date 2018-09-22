@@ -19,8 +19,8 @@
     </ng-template>
   </ngx-datatable-row-detail>
 
-  <ngx-datatable-column *ngIf="options?.detailsTemplate" [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
-    [canAutoResize]="false">
+  <ngx-datatable-column *ngIf="options?.detailsTemplate" [width]="50" [resizeable]="false" [sortable]="false"
+    [draggable]="false" [canAutoResize]="false">
     <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
       <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
         title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
@@ -41,12 +41,17 @@
 
   <!-- Edit/delete -->
   <ngx-datatable-column *ngIf="!options?.disableEditing" name="Actions" sortable="false" prop="id">
+    <ng-template ngx-datatable-header-template>
+      <button class="btn btn-sm btn-sucess" (click)="create()">
+        <i class="fa fa-plus"></i> &nbsp; New
+      </button>
+    </ng-template>
     <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
       <div class="btn-group">
-        <button class="btn btn-sm btn-primary" (click)="onEdit(row, rowIndex)">
+        <button class="btn btn-sm btn-primary" (click)="edit(row, rowIndex)">
           <i class="fa fa-pencil"></i> &nbsp; Edit
         </button>
-        <button class="btn btn-sm btn-danger" (click)="onDelete(row, rowIndex)">
+        <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
           <i class="fa fa-trash"></i> &nbsp; Delete
         </button>
       </div>
@@ -67,10 +72,10 @@
       </div>
     </ng-template>
   </ngx-datatable-footer>
+  
+  <ng-template #formTemplate let-formConfig="formConfig" let-formModel="formModel">
+    <app-form [config]="formConfig" [model]="formModel" #form="appForm"></app-form>
+  </ng-template>
 
 </ngx-datatable>
 
-
-<ng-template #formTemplate let-formConfig="formConfig" let-formModel="formModel">
-  <app-form [config]="formConfig" [model]="formModel" #form="appForm"></app-form>
-</ng-template>
