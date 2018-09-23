@@ -9,6 +9,13 @@
   </small>
 </div>
 
+<!-- Filter -->
+<div class="row">
+  <div class="col-md-4">
+    <input type='text' class="form-control" *ngIf="!options?.disableFilter" placeholder='Filter...' (keyup)='updateFilter($event)' />
+  </div>
+</div>
+
 <ngx-datatable #appTable class="bootstrap expandable " [rows]="options?.rows" [loadingIndicator]="true" [columnMode]="'force'"
   [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [scrollbarV]="true">
 
@@ -72,10 +79,9 @@
       </div>
     </ng-template>
   </ngx-datatable-footer>
-  
+
   <ng-template #formTemplate let-formConfig="formConfig" let-formModel="formModel">
     <app-form [config]="formConfig" [model]="formModel" #form="appForm"></app-form>
   </ng-template>
 
 </ngx-datatable>
-

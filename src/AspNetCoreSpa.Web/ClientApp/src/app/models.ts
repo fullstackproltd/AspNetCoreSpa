@@ -41,6 +41,7 @@ export interface IAppTableOptions<T> {
     rows?: Array<T>;
     columns?: ITableColumn[];
     disableEditing?: boolean;
+    disableFilter?: boolean;
     apiUrl?: string;
     detailsTemplate?: TemplateRef<any>;
 }

@@ -10,6 +10,7 @@ import { AppSharedModule } from '../appshared';
 import {
   SubMenuComponent,
   AppTableComponent,
+  AppTableFilteringDirective,
   // Forms
   AppFormComponent,
   FormFieldDirective,
@@ -61,6 +62,7 @@ import { CustomDateFormatter, CustomNgbDateNativeUTCAdapter } from './services';
     UppercasePipe,
     SubMenuComponent,
     AppTableComponent,
+    AppTableFilteringDirective,
     // Forms
     // directives
     FormFieldDirective,
