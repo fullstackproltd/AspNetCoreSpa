@@ -12,7 +12,7 @@ namespace AspNetCoreSpa.STS
         {
             return new List<ApiResource>
             {
-                new ApiResource("aspnetcorespa-api", "AspNetCoreSpa API")
+                new ApiResource("spa-api", "SPA API")
             };
         }
 
@@ -24,7 +24,9 @@ namespace AspNetCoreSpa.STS
             origins.ToList().ForEach(address =>
             {
                 allowedRedirectUrls.Add($"{address}/login-redirect.html");
+                allowedRedirectUrls.Add($"{address}/assets/login-redirect.html");
                 allowedRedirectUrls.Add($"{address}/silent-renew.html");
+                allowedRedirectUrls.Add($"{address}/assets/silent-renew.html");
                 allowedRedirectUrls.Add($"{address}"); // Logout redirect uri
             });
 
@@ -33,7 +35,7 @@ namespace AspNetCoreSpa.STS
                 new Client
                 {
                     ClientId = "spa-client",
-                    ClientName = "AspNetCoreSpa",
+                    ClientName = "SPA-App",
                     AllowedGrantTypes = new [] { GrantType.Implicit, GrantType.ResourceOwnerPassword },
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
@@ -47,7 +49,7 @@ namespace AspNetCoreSpa.STS
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OfflineAccess,
-                        "aspnetcorespa-api"
+                        "spa-api"
                     },
                     AllowOfflineAccess = true,
                     

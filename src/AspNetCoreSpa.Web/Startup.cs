@@ -63,7 +63,7 @@ namespace AspNetCoreSpa.Web
                                 // base-address of your identityserver
                                 options.Authority = Configuration["StsAuthority"];
                                 // name of the API resource
-                                options.Audience = "aspnetcorespa-api";
+                                options.Audience = "spa-api";
                             });
 
             services.AddCustomizedMvc();
