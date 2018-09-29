@@ -1,22 +1,25 @@
 FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
 # Setup NodeJs
-RUN apt-get update && \
-    apt-get install -y wget && \
-    apt-get install -y gnupg2 && \
+RUN apt-get update -qq && \
+    apt-get install -qq -y wget && \
+    apt-get install -qq -y gnupg2 && \
     wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get install -y build-essential nodejs
+    apt-get install -qq -y build-essential nodejs && \
+    apt-get install -qq -y nginx
 # End setup
 
 WORKDIR /app
-EXPOSE 5001
+
+EXPOSE 5050
 
 FROM microsoft/dotnet:2.1-sdk AS build
 # Setup NodeJs
-RUN apt-get update && \
-    apt-get install -y wget && \
-    apt-get install -y gnupg2 && \
+RUN apt-get update -qq && \
+    apt-get install -qq -y wget && \
+    apt-get install -qq -y gnupg2 && \
     wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
-    apt-get install -y build-essential nodejs
+    apt-get install -qq -y build-essential nodejs && \
+    apt-get install -qq -y nginx
 # End setup
 
 WORKDIR /src
@@ -25,17 +28,15 @@ COPY ["src/AspNetCoreSpa.Core/AspNetCoreSpa.Core.csproj", "src/AspNetCoreSpa.Cor
 COPY ["src/AspNetCoreSpa.Infrastructure/AspNetCoreSpa.Infrastructure.csproj", "src/AspNetCoreSpa.Infrastructure/"]
 RUN dotnet restore "src/AspNetCoreSpa.Web/AspNetCoreSpa.Web.csproj"
 COPY ["src/AspNetCoreSpa.Web/ClientApp/package.json", "src/AspNetCoreSpa.Web/ClientApp/"]
-#RUN npm i -g yarn
+
 RUN cd src/AspNetCoreSpa.Web/ClientApp \
-    && npm i
+    && npm i --silent
 
 COPY . .
 WORKDIR "/src/src/AspNetCoreSpa.Web"
 RUN dotnet build "AspNetCoreSpa.Web.csproj" -c Release -o /app
 
 FROM build AS publish
-WORKDIR "/src/src/AspNetCoreSpa.Web/ClientApp"
-RUN npm rebuild node-sass --force
 
 RUN dotnet publish "AspNetCoreSpa.Web.csproj" -c Release -o /app
 

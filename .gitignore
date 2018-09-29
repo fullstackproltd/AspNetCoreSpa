@@ -231,5 +231,3 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/Properties/PublishProfiles/*
-/src/AspNetCoreSpa.Web/Properties/PublishProfiles/aspnetcorespa - Web Deploy.pubxml

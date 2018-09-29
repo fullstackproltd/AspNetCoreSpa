@@ -7,4 +7,8 @@ import { FieldBaseComponent } from '../field-base';
     styleUrls: ['form-checkbox-list.component.scss'],
     templateUrl: 'form-checkbox-list.component.html'
 })
-export class FormCheckboxListComponent extends FieldBaseComponent { }
+export class FormCheckboxListComponent extends FieldBaseComponent {
+    get controls() {
+        return (<any>this.formGroup.controls[this.config.name]).controls;
+    }
+}

@@ -32,7 +32,8 @@ import { ProductCategoriesComponent } from './product-categories/product-categor
     CustomersComponent,
     ProductsComponent,
     OrdersComponent,
-    ProductCategoriesComponent
+    ProductCategoriesComponent,
+    GenderPipe
   ]
 })
 export class CrudShopModule { }

@@ -7,19 +7,12 @@ services:
       context: .
       dockerfile: src/AspNetCoreSpa.Web/Dockerfile
     environment:
-      IDENTITY_SERVER_ENDPOINT: http://aspnetcorespasts
-    depends_on:
-      - aspnetcorespasts
+       - IDENTITY_SERVER_ENDPOINT=https://aspnetcorests.azurewebsites.net
+    ports:
+      - 5050:80
     networks:
-      - aspnetcorespanet
-  aspnetcorespasts:
-    image: ${DOCKER_REGISTRY}aspnetcorespasts
-    build:
-      context: .
-      dockerfile: src/AspNetCoreSpa.STS/Dockerfile
-    networks:
-      - aspnetcorespanet
-
+      - app-network
+      
 networks:
-  aspnetcorespanet:
+  app-network:
     driver: bridge
