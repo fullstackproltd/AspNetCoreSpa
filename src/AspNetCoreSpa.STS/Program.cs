@@ -30,7 +30,7 @@ namespace AspNetCoreSpa.STS
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 try
                 {
-                    logger.LogCritical("Seeding STS database");
+                    logger.LogInformation("Seeding STS database");
                     var seedData = services.GetRequiredService<ISeedData>();
                     seedData.Seed(services);
                 }

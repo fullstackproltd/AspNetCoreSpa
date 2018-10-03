@@ -145,6 +145,12 @@ namespace AspNetCoreSpa.STS
                         builder.UseSqlite(connectionString,
                             sql => sql.MigrationsAssembly(migrationsAssembly));
                 })
+
+                // OR In memory config store
+                //.AddInMemoryApiResources(Config.GetApiResources())
+                //.AddInMemoryClients(Config.GetClients(Configuration["ClientUrls"]))
+                //.AddInMemoryIdentityResources(Config.GetIdentityResources())
+
                 // this adds the operational data from DB (codes, tokens, consents)
                 .AddOperationalStore(options =>
                 {
