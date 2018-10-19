@@ -52,8 +52,8 @@
     "date-fns": "1.29.0",
     "flatpickr": "4.5.2",
     "font-awesome": "4.7.0",
-    "oidc-client": "1.5.3",
     "lodash": "4.17.11",
+    "oidc-client": "1.5.3",
     "preboot": "6.0.0-beta.6",
     "rxjs": "6.3.3",
     "zone.js": "0.8.26"
@@ -63,6 +63,7 @@
     "@angular/cli": "7.0.1",
     "@angular/compiler-cli": "7.0.0",
     "@angular/language-service": "7.0.0",
+    "@angular/pwa": "0.10.1",
     "@angular/service-worker": "7.0.0",
     "@compodoc/compodoc": "1.1.5",
     "@types/node": "10.12.0",
