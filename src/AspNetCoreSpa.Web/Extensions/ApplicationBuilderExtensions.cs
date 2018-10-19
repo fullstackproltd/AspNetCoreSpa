@@ -38,9 +38,12 @@ namespace AspNetCoreSpa.Web.Extensions
 
                         // Allow AJAX, WebSocket and EventSource connections to:
                         var socketUrl = Startup.Configuration["HostUrl"].ToString().Replace("http://", "ws://", StringComparison.OrdinalIgnoreCase).Replace("https://", "wss://", StringComparison.OrdinalIgnoreCase);
+                        var stsUrl = Startup.Configuration["StsAuthority"];
+
 
                         builder.AddConnectSrc()
                             .Self()
+                            .From(stsUrl)
                             .From(socketUrl);
 
                         builder.AddFontSrc() // font-src 'self'
@@ -70,11 +73,12 @@ namespace AspNetCoreSpa.Web.Extensions
                         builder.AddMediaSrc()
                             .Self();
 
-                        builder.AddFrameAncestors() // frame-ancestors 'none'
+                        // frame-ancestors 'none'
+                        builder.AddFrameAncestors()
                             .None();
 
                         builder.AddFrameSource()
-                            .None();
+                            .From(stsUrl);
 
                         // You can also add arbitrary extra directives: plugin-types application/x-shockwave-flash"
                         // builder.AddCustomDirective("plugin-types", "application/x-shockwave-flash");

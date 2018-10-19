@@ -7,6 +7,7 @@
 * [ASP.NET Core](http://www.dot.net/)
 * [Entity Framework Core](https://docs.efproject.net/en/latest/)
     * Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
+* [Identity Server](http://identityserver.io/)
 * [Angular](https://angular.io/)
 * [Angular CLI](https://cli.angular.io/)
 * Secure - with CSP and custom security headers
@@ -19,13 +20,11 @@
 * Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
 * E2E testing with [Protractor](http://www.protractortest.org).l
 * [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
-* Login and Registration functionality using [Asp.Net Identity & JWT](https://docs.asp.net/en/latest/security/authentication/identity.html)
-* Token based authentication using [Openiddict](https://github.com/openiddict/openiddict-core)
-     * Get public key access using: http://127.0.0.1:5000/.well-known/jwks
+* Login and Registration functionality using [Identity Server implicit flow](http://identityserver.io/)
 * Extensible User/Role identity implementation
-* Social logins support with token based authentication, Follow [this](https://github.com/asadsahi/AspNetCoreSpa/wiki/Social-Login-Setup) wiki page to see how it will work.
-* [Angular dynamic forms](https://angular.io/docs/ts/latest/cookbook/dynamic-form.html) for reusability and to keep html code DRY.
-* [Swagger](http://swagger.io/) as Api explorer (Visit url **http://127.0.0.1:5000/swagger** OR whatever port visual studio has launched the website.). More [details](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
+* Social logins support with token based authentication, using [Identity Server](http://identityserver.io/)
+* [Angular dynamic forms] for reusable and DRY code.
+* [Swagger](http://swagger.io/) as Api explorer (Visit url **https://127.0.0.1:5050/swagger** OR whatever port visual studio has launched the website.). More [details](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
  
 ## Pre-requisites
 
@@ -37,14 +36,19 @@
 
 ## Installation
 ```
-1. Clone the repo
+1. Clone the repo:
     git clone https://github.com/asadsahi/AspNetCoreSpa
-2. Change directory
+2. Change directory:
     cd AspNetCoreSpa
-3. Run Server
+3. Restore packages:
+    dotnet restore AspNetCoreSpa.sln
+4. Run client project
+    cd AspNetCoreSpa.Web/ClientApp:
+    npm start
+5. Run .Net project:
     F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
 
-4. Point to Sqllite or SqlServer
+6. Point to Sqllite or SqlServer
     
 This project supports both sql server and sql lite databases
 
@@ -60,6 +64,8 @@ This project supports both sql server and sql lite databases
         * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup as default instance. (See appsettings.json file for connection string)
         * Run `dotnet ef migrations add "InitialMigrationName"`
 
+7. Point to identity server:
+    For ease project is using hosted idenitty serve at url (https://aspnetcorests.azurewebsites.net/). Alternatively, you can run local version of identity server by running AspNetCoreSpa.STS project and change appsettings.Development.json or appsettings.json file's StsAuthority config to identity server's url for appropriate environment.
 ```
 
 ## Other commands
@@ -80,13 +86,14 @@ Module    | `ng g module my-module`
 
 ### run Angular tests
 ```bash
-cd ClientApp
+cd src/AspNetCoreSpa.Web/ClientApp
 
 npm test
 ```
 ### Compodoc Angular documentation
  * Steps to generate:
     * npm i compodoc -g
+    * cd src/AspNetCoreSpa.Web/ClientApp
     * npm run compodoc
     * cd documentation
     * http-server
