@@ -1,0 +1,58 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Identity server</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico?v1" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico?v1" />
+    <link rel="stylesheet" href="~/css/vendor.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand">
+            <img src="~/icon.jpg" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+                <em>Identity server</em>
+            </a>
+            <button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#topNavbarCollapse" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbarCollapse">
+                <ul class="mr-auto navbar-nav">
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">@SharedLocalizer.GetLocalizedHtmlString("HOME")</a>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <footer class="footer">
+        <hr />
+        <div class="container">
+            
+            &copy; 2018 - Identity server
+
+            <div class="float-right">
+                        @await Html.PartialAsync("_SelectLanguagePartial")
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/vendor.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

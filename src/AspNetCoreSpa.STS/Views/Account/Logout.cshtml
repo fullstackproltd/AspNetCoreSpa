@@ -1,0 +1,24 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model AspNetCoreSpa.STS.Models.LogoutViewModel
+
+<div class="logout-page">
+    <div class="page-header">
+        <h1>@SharedLocalizer.GetLocalizedHtmlString("LOGOUT")</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <p>@SharedLocalizer.GetLocalizedHtmlString("WOULD_YOU_LIKE_TO_LOGOUT")</p>
+            <form asp-action="Logout">
+                <input type="hidden" name="logoutId" value="@Model.LogoutId" />
+                <fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString("YES")</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>

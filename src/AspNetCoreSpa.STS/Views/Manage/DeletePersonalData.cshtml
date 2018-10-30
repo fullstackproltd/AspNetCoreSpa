@@ -1,0 +1,35 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model DeletePersonalDataViewModel
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("DELETE_PERSONAL_DATA");
+    ViewData["ActivePage"] = ManageNavPages.DeletePersonalData;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>@SharedLocalizer.GetLocalizedHtmlString("DELETE_PERSONAL_DATA_TEXT")</strong>
+    </p>
+</div>
+
+<div>
+    <form id="delete-user" method="post" class="form-group">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        @if (Model.RequirePassword)
+        {
+            <div class="form-group">
+                <label asp-for="Password">@SharedLocalizer.GetLocalizedHtmlString("PASSWORD")</label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        }
+        <button class="btn btn-danger" type="submit">@SharedLocalizer.GetLocalizedHtmlString("DELETE_PERSONAL_DATA_AND_CLOSE")</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

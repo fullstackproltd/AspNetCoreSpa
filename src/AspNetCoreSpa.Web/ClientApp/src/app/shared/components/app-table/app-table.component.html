@@ -1,0 +1,87 @@
+<h3>
+  {{options?.title}}
+</h3>
+
+<div *ngIf="options?.detailsTemplate">
+  <small>
+    <a href="javascript:void(0)" (click)="table.rowDetail.expandAllRows()">Expand All</a> |
+    <a href="javascript:void(0)" (click)="table.rowDetail.collapseAllRows()">Collapse All</a>
+  </small>
+</div>
+
+<!-- Filter -->
+<div class="row">
+  <div class="col-md-4">
+    <input type='text' class="form-control" *ngIf="!options?.disableFilter" placeholder='Filter...' (keyup)='updateFilter($event)' />
+  </div>
+</div>
+
+<ngx-datatable #appTable class="bootstrap expandable " [rows]="options?.rows" [loadingIndicator]="true" [columnMode]="'force'"
+  [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [reorderable]="true" [scrollbarV]="true">
+
+  <!-- Details row -->
+  <ngx-datatable-row-detail *ngIf="options?.detailsTemplate" [rowHeight]="100" (toggle)="onDetailToggle($event)">
+    <ng-template ngx-datatable-row-detail-template let-expanded="expanded" let-row="row">
+      <ng-container *ngTemplateOutlet="options?.detailsTemplate;context:{row: row};"></ng-container>
+    </ng-template>
+  </ngx-datatable-row-detail>
+
+  <ngx-datatable-column *ngIf="options?.detailsTemplate" [width]="50" [resizeable]="false" [sortable]="false"
+    [draggable]="false" [canAutoResize]="false">
+    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+      <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+        title="Expand/Collapse Row" (click)="toggleExpandRow(row)">
+      </a>
+    </ng-template>
+  </ngx-datatable-column>
+  <!-- Details row -->
+
+  <!-- Main rows -->
+  <ngx-datatable-column *ngFor="let column of options?.columns" name="{{column.name}}">
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      <ng-container *ngIf="column.cellTemplate">
+        <ng-container *ngTemplateOutlet="column.cellTemplate;context:{row: row, value: value};"></ng-container>
+      </ng-container>
+      <strong *ngIf="!column.cellTemplate">{{value}}</strong>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Edit/delete -->
+  <ngx-datatable-column *ngIf="!options?.disableEditing" name="Actions" sortable="false" prop="id">
+    <ng-template ngx-datatable-header-template>
+      <button class="btn btn-sm btn-sucess" (click)="create()">
+        <i class="fa fa-plus"></i> &nbsp; New
+      </button>
+    </ng-template>
+    <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+      <div class="btn-group">
+        <button class="btn btn-sm btn-primary" (click)="edit(row, rowIndex)">
+          <i class="fa fa-pencil"></i> &nbsp; Edit
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="delete(row, rowIndex)">
+          <i class="fa fa-trash"></i> &nbsp; Delete
+        </button>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <!-- Footer template -->
+  <ngx-datatable-footer>
+    <ng-template ngx-datatable-footer-template let-rowCount="rowCount" let-pageSize="pageSize" let-selectedCount="selectedCount"
+      let-curPage="curPage" let-offset="offset">
+      <div style="padding: 5px 10px">
+        <div>
+          Total rows: {{rowCount}} |
+          Page size: {{pageSize}} |
+          Current page: {{curPage}} |
+          Offset pages: {{offset}}
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-footer>
+
+  <ng-template #formTemplate let-formConfig="formConfig" let-formModel="formModel">
+    <app-form [config]="formConfig" [model]="formModel" #form="appForm"></app-form>
+  </ng-template>
+
+</ngx-datatable>

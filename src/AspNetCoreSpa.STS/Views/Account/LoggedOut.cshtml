@@ -1,0 +1,29 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model AspNetCoreSpa.STS.Models.LoggedOutViewModel
+
+<div class="page-header">
+    <h1>
+        <small>@SharedLocalizer.GetLocalizedHtmlString("LOGOUT_TEXT")</small>
+    </h1>
+
+    @if (Model.PostLogoutRedirectUri != null)
+    {
+        <div>
+            @SharedLocalizer.GetLocalizedHtmlString("LOGOUT_RETURN_TO") <a href="@Model.PostLogoutRedirectUri">@Model.ClientName</a>
+        </div>
+    }
+
+    @if (Model.SignOutIframeUrl != null)
+    {
+        <iframe style="display:none" width="0" height="0" class="signout" src="@Model.SignOutIframeUrl"></iframe>
+    }
+</div>
+
+@section scripts
+{
+    @if (Model.AutomaticRedirectAfterSignOut)
+    {
+        <script src="~/js/signout-redirect.js"></script>
+    }
+}

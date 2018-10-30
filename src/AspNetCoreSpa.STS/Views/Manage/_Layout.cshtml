@@ -1,0 +1,25 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@SharedLocalizer.GetLocalizedHtmlString("MANAGE_YOUR_ACCOUNT")</h2>
+
+<div>
+    <h4>@SharedLocalizer.GetLocalizedHtmlString("MANAGE_CHANGE_ACCOUNT_SETTINGS")</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("_ManageNav")
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}
+

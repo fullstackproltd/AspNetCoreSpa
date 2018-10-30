@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { User } from 'oidc-client';
 
-import { AccountService, DataService } from '@app/core';
-import { AppService } from '../../app.service';
+import { AppService, AuthService } from '@app/services';
+
+import { routes } from '../../+examples/examples.routes';
 
 @Component({
     selector: 'appc-header',
@@ -11,39 +11,43 @@ import { AppService } from '../../app.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-    public isCollapsed = true;
+    isCollapsed = true;
+
+    exampleRoutes = [...routes];
+
     constructor(
-        private accountService: AccountService,
-        private dataService: DataService,
-        private appService: AppService,
-        private oAuthService: OAuthService,
-        private router: Router
+        private authService: AuthService,
+        private appService: AppService
     ) { }
 
-    public get isLoggedIn(): boolean {
-        return this.accountService.isLoggedIn;
+    get isLoggedIn(): boolean {
+        return this.authService.isLoggedIn();
     }
-    public get user(): IProfileModel | undefined {
-        return this.accountService.user;
+    get user(): User {
+        return this.authService.user;
 
     }
-    public get cultures(): ICulture[] {
+    get cultures(): ICulture[] {
         return this.appService.appData.cultures;
     }
-    public get currentCulture(): ICulture {
+    get currentCulture(): ICulture {
         return this.cultures.filter(x => x.current)[0];
     }
-    public ngOnInit(): void { }
+    ngOnInit(): void { }
 
-    public toggleNav() {
+    toggleMenu() {
         this.isCollapsed = !this.isCollapsed;
     }
-
-    public logout() {
-        this.dataService.post('api/account/logout').subscribe(() => {
-            this.oAuthService.logOut();
-            this.router.navigate(['/login']);
-        });
+    login() {
+        this.authService.login();
     }
-
+    register() {
+        this.authService.register();
+    }
+    profile() {
+        this.authService.profile();
+    }
+    logout() {
+        this.authService.logout();
+    }
 }

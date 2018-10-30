@@ -1,0 +1,27 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("PERSONAL_DATA");
+    ViewData["ActivePage"] = ManageNavPages.PersonalData;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<div class="row">
+    <div class="col-md-6">
+        <p>@SharedLocalizer.GetLocalizedHtmlString("PERSONAL_DATA_INFO")</p>
+        <p>
+            <strong>@SharedLocalizer.GetLocalizedHtmlString("PERSONAL_DATA_DELETEINFO")</strong>
+        </p>
+        <form asp-action="DownloadPersonalData" method="post" class="form-group">
+            <button class="btn btn-primary" type="submit">@SharedLocalizer.GetLocalizedHtmlString("DOWNLOAD")</button>
+        </form>
+        <p>
+            <a asp-action="DeletePersonalData" class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString("DELETE")</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

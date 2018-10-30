@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetCoreSpa.Core.Entities;
+using AutoMapper;
 
 namespace AspNetCoreSpa.Core.ViewModels
 {
@@ -6,6 +7,17 @@ namespace AspNetCoreSpa.Core.ViewModels
     {
         public AutoMapperProfile()
         {
+            CreateMap<Customer, CustomerViewModel>()
+                .ReverseMap();
+
+            CreateMap<Product, ProductViewModel>()
+                .ReverseMap();
+
+            CreateMap<ProductCategory, ProductCategoryViewModel>()
+                .ReverseMap();
+
+            CreateMap<Order, OrderViewModel>()
+                .ReverseMap();
         }
     }
 }

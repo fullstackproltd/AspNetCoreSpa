@@ -2,18 +2,36 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule, NgbDateParserFormatter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppSharedModule } from '../appshared';
 // Components
-import { SocialLoginComponent } from './components/social-login/social-login.component';
-import { DynamicFormComponent } from './forms/dynamic-form/dynamic-form.component';
-import { DynamicFormControlComponent } from './forms/dynamic-form-control/dynamic-form-control.component';
-import { ErrorSummaryComponent } from './forms/error-summary/error-summary.component';
+import {
+  SubMenuComponent,
+  AppTableComponent,
+  AppTableFilteringDirective,
+  // Forms
+  AppFormComponent,
+  FormFieldDirective,
+  FormButtonComponent,
+  FormInputComponent,
+  FormFileComponent,
+  FormDateComponent,
+  FormTimeComponent,
+  FormTextareaComponent,
+  FormCheckboxComponent,
+  FormCheckboxListComponent,
+  FormRadioListComponent,
+  FormSelectComponent,
+  FormFieldErrorComponent,
+  FormsService,
+  FieldColorValidationDirective,
+} from './components';
 // Pipes
 import { UppercasePipe } from './pipes/uppercase.pipe';
 // Services
-import { FormControlService } from './forms/form-control.service';
-import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
+import { CustomDateFormatter, CustomNgbDateNativeUTCAdapter } from './services';
 
 @NgModule({
   imports: [
@@ -21,16 +39,47 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    AppSharedModule
+    AppSharedModule,
+    NgbModule,
+    NgxDatatableModule
     // No need to export as these modules don't expose any components/directive etc'
   ],
+  entryComponents: [
+    AppFormComponent,
+    FormButtonComponent,
+    FormInputComponent,
+    FormFileComponent,
+    FormDateComponent,
+    FormTimeComponent,
+    FormTextareaComponent,
+    FormCheckboxComponent,
+    FormCheckboxListComponent,
+    FormRadioListComponent,
+    FormSelectComponent
+  ]
+  ,
   declarations: [
-    SocialLoginComponent,
-    DynamicFormComponent,
-    DynamicFormControlComponent,
-    ErrorSummaryComponent,
     UppercasePipe,
-    SubMenuComponent
+    SubMenuComponent,
+    AppTableComponent,
+    AppTableFilteringDirective,
+    // Forms
+    // directives
+    FormFieldDirective,
+    FieldColorValidationDirective,
+    // components
+    AppFormComponent,
+    FormButtonComponent,
+    FormInputComponent,
+    FormFileComponent,
+    FormDateComponent,
+    FormTimeComponent,
+    FormTextareaComponent,
+    FormCheckboxComponent,
+    FormCheckboxListComponent,
+    FormRadioListComponent,
+    FormSelectComponent,
+    FormFieldErrorComponent
   ],
   exports: [
     // Modules
@@ -38,17 +87,34 @@ import { SubMenuComponent } from './components/sub-menu/sub-menu.component';
     FormsModule,
     ReactiveFormsModule,
     AppSharedModule,
-    // Providers, Components, directive, pipes
-    SocialLoginComponent,
-    DynamicFormComponent,
-    DynamicFormControlComponent,
-    ErrorSummaryComponent,
-    SubMenuComponent,
+    NgxDatatableModule,
+    NgbModule,
+    // Components, directive, pipes
     UppercasePipe,
+    SubMenuComponent,
+    AppTableComponent,
+    // Forms
+    AppFormComponent,
+    FormButtonComponent,
+    FormInputComponent,
+    FormFileComponent,
+    FormDateComponent,
+    FormTimeComponent,
+    FormTextareaComponent,
+    FormCheckboxComponent,
+    FormCheckboxListComponent,
+    FormRadioListComponent,
+    FormSelectComponent,
+    FormFieldErrorComponent
   ],
   providers: [
-    FormControlService
+    FormsService,
+    { provide: NgbDateParserFormatter, useClass: CustomDateFormatter },
+    { provide: NgbDateAdapter, useClass: CustomNgbDateNativeUTCAdapter },
   ]
 
 })
 export class SharedModule { }
+
+export * from './components';
+export * from './pipes';

@@ -1,0 +1,22 @@
+<div [formGroup]="formGroup" class="form-group">
+    <label for="{{config.name}}">
+        {{config.label}}
+
+        <ng-container *ngIf="showAsterisk(config)">
+            *
+        </ng-container>
+    </label>
+
+    <div [formArrayName]="config.name">
+        <div class="form-check" *ngFor="let contro of controls; let i = index;">
+            <input class="form-check-input checkbox-list-item" [formControlName]="i" type="checkbox" name="{{config.name + i}}"
+                id="{{config.name + i}}" [value]="config.options[i].key" [checked]="config.options[i].checked" (change)="config.options[i].checked = $event.target.checked">
+            <label class="form-check-label" for="{{config.name + i}}">
+                {{config.options[i].value}}
+            </label>
+        </div>
+    </div>
+
+    <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+
+</div>

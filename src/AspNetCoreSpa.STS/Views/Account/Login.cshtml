@@ -1,0 +1,102 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@model AspNetCoreSpa.STS.Models.LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN");
+}
+
+<div class="row">
+
+    @if (Model.EnableLocalLogin)
+    {
+        <div class="col">
+            <partial name="_ValidationSummary" />
+            
+            <div class="card">
+                <div class="card-header">
+                    @ViewData["Title"]
+                </div>
+
+                <div class="card-body">
+                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@Model.ReturnUrl" method="post">
+
+                        <div class="form-group">
+                            <label asp-for="Email">@SharedLocalizer.GetLocalizedHtmlString("EMAIL")</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password">@SharedLocalizer.GetLocalizedHtmlString("PASSWORD")</label>
+                            <input asp-for="Password" class="form-control" type="password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        @if (Model.AllowRememberLogin)
+                        {
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" asp-for="RememberLogin">
+                                <label class="form-check-label" asp-for="RememberLogin">@SharedLocalizer.GetLocalizedHtmlString("REMEMBER_ME")</label>
+                            </div>
+                        }
+
+
+                        <button class="btn btn-primary" name="button" value="login">@SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN")</button>
+                        <button class="btn btn-default cancel" name="button" value="cancel">@SharedLocalizer.GetLocalizedHtmlString("CANCEL_BUTTON")</button>
+
+                        <p>
+                            <a asp-action="Register" asp-route-returnurl="@Model.ReturnUrl">@SharedLocalizer.GetLocalizedHtmlString("REGISTER_AS_NEW_USER")</a>
+                        </p>
+                        <p>
+                            <a asp-action="ForgotPassword">@SharedLocalizer.GetLocalizedHtmlString("FORGOT_YOUR_PASSWORD")</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Register
+                </div>
+                <div class="card-body">
+                    <a class="btn btn-default"
+                       asp-action="Register"
+                       asp-route-returnUrl="@Model.ReturnUrl">
+                        Register
+                    </a>
+
+                    @if (Model.ExternalProviders.Any())
+                    {
+                        @foreach (var provider in Model.ExternalProviders)
+                        {
+                            <a class="btn btn-default"
+                               asp-action="ExternalLogin"
+                               asp-route-provider="@provider.AuthenticationScheme"
+                               asp-route-returnUrl="@Model.ReturnUrl">
+                                @provider.DisplayName
+                            </a>
+                        }
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+@if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
+{
+
+    <div class="alert alert-warning">
+        <strong>Invalid login request</strong>
+        There are no login schemes configured for this client.
+    </div>
+}
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,42 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model LoginWith2faViewModel
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN_2FA");
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<p>@SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN_2FA_TEXT")</p>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+            <input asp-for="RememberMe" type="hidden" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TwoFactorCode">@SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN_AUTHENTICATOR_CODE")</label>
+                <input asp-for="TwoFactorCode" class="form-control" autocomplete="off" />
+                <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label asp-for="RememberMachine">
+                        <input asp-for="RememberMachine" />
+                        @SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN_2FA_REMEMBER_MC")
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN")</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>
+    @SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN_2FA_NO_AUTHENTICATOR_DEVICE")
+    <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">@SharedLocalizer.GetLocalizedHtmlString("ACCOUNT_LOGIN_2FA_RECOVERY_CODE_TEXT")</a>.
+</p>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

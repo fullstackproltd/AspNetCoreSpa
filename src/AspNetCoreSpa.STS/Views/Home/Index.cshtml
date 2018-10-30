@@ -1,0 +1,56 @@
+﻿@using Microsoft.Extensions.Options
+@using AspNetCoreSpa.STS.Models
+@{
+    ViewData["Title"] = "Identity server";
+}
+@inject IOptions<StsConfig> OptionsStsConfig
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h1>Hi @User.Identity.Name</h1>
+}
+else
+{
+    <br />
+}
+
+
+<div class="welcome-page">
+    <div class="row page-header">
+        <div class="col-sm-10">
+            <h1>
+                <img class="icon" src="~/icon.jpg">
+                Welcome to @ViewData["Title"]
+                @*<small>(build {version})</small>*@
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <p>
+                IdentityServer publishes a
+                <a href="~/.well-known/openid-configuration">discovery document</a>
+                where you can find metadata and links to all the endpoints, key material, etc.
+            </p>
+        </div>
+        <div class="col-sm-8">
+            <p>
+                Click <a href="~/grants">here</a> to manage your stored grants.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8">
+            <p>
+                Here are links to the
+                <a href="https://github.com/identityserver/IdentityServer4">source code repository</a>,
+                and <a href="https://github.com/identityserver/IdentityServer4.Samples">ready to use samples</a>.
+            </p>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="@OptionsStsConfig.Value.ClientUrl">
+        Back to client
+    </a>
+</div>

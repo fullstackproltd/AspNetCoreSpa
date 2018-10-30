@@ -1,0 +1,12 @@
+<appc-table [options]="options"></appc-table>
+
+<ng-template #addressTemplate let-row="row">
+    <div style="padding-left:35px;">
+        <div><strong>Details</strong></div>
+        <div>{{row.address}}</div>
+    </div>
+</ng-template>
+
+<ng-template #genderTemplate let-row="row" let-value="value">
+    {{value == 1 ? 'Female' : 'Male'}}
+</ng-template>

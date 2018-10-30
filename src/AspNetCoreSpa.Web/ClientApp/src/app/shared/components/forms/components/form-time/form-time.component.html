@@ -1,0 +1,14 @@
+<div [formGroup]="formGroup" class="form-group">
+
+    <label for="{{config.name}}">
+        {{ config.label }}
+        <ng-container *ngIf="showAsterisk(config)">
+            *
+        </ng-container>
+    </label>
+
+    <ngb-timepicker [id]="config.name" [formControlName]="config.name"></ngb-timepicker>
+
+    <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+
+</div>

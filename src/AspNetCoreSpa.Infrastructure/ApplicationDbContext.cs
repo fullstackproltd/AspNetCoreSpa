@@ -1,9 +1,7 @@
-﻿
-using AspNetCoreSpa.Core.Entities;
-using AspNetCoreSpa.Infrastructure.Services;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using AspNetCoreSpa.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Linq;
 using System.Threading;
@@ -11,26 +9,29 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreSpa.Infrastructure
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
+    public class ApplicationDbContext : DbContext
     {
-        private readonly UserResolverService _userService;
+        public string CurrentUserId { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
-        public string CurrentUserId { get; internal set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<ApplicationUserPhoto> ApplicationUserPhotos { get; set; }
-        public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<Culture> Cultures { get; set; }
         public DbSet<Resource> Resources { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, UserResolverService userService) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            _userService = userService;
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.ReplaceService<IEntityMaterializerSource, EfCoreMaterializerSource>();
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes()
-            .Where(e => typeof(IAuditable).IsAssignableFrom(e.ClrType)))
+            .Where(e => typeof(IAuditableEntity).IsAssignableFrom(e.ClrType)))
             {
                 modelBuilder.Entity(entityType.ClrType)
                     .Property<DateTime>("CreatedAt");
@@ -80,21 +81,20 @@ namespace AspNetCoreSpa.Infrastructure
 
             DateTime now = DateTime.Now;
             // Get the authenticated user name 
-            string userName = _userService.GetUser();
 
             // For every changed entity marked as IAditable set the values for the audit properties
-            foreach (EntityEntry<IAuditable> entry in ChangeTracker.Entries<IAuditable>())
+            foreach (EntityEntry<IAuditableEntity> entry in ChangeTracker.Entries<IAuditableEntity>())
             {
                 // If the entity was added.
                 if (entry.State == EntityState.Added)
                 {
-                    entry.Property("CreatedBy").CurrentValue = userName;
                     entry.Property("CreatedAt").CurrentValue = now;
+                    entry.Property("CreatedBy").CurrentValue = CurrentUserId;
                 }
                 else if (entry.State == EntityState.Modified) // If the entity was updated
                 {
-                    entry.Property("UpdatedBy").CurrentValue = userName;
                     entry.Property("UpdatedAt").CurrentValue = now;
+                    entry.Property("UpdatedBy").CurrentValue = CurrentUserId;
                 }
             }
         }

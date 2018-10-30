@@ -1,0 +1,6 @@
+<div [formGroup]="formGroup">
+    <button class="btn btn-primary" (click)="config.onSubmit(formGroup)" [disabled]="config.disabled"
+        type="submit">
+        {{ config.label }}
+    </button>
+</div>

@@ -6,7 +6,7 @@
     <ProjectGuid>a345da20-825c-4494-9dc6-748c1192e135</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>aspnetcorespa.web</DockerServiceName>
+    <DockerServiceName>aspnetcorespaweb</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

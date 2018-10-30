@@ -6,5 +6,9 @@
 .vscode
 docker-compose.yml
 docker-compose.*.yml
-*/bin
-*/obj
+bin
+obj
+tests
+src/**/node_modules
+src/**/bin
+src/**/obj

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AspNetCoreSpa.Core.ViewModels.ManageViewModels
+﻿namespace AspNetCoreSpa.Core.ViewModels.ManageViewModels
 {
     public class GenerateRecoveryCodesViewModel
     {

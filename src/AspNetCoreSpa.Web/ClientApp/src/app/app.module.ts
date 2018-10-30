@@ -1,59 +1,62 @@
 import { BrowserModule, BrowserTransferStateModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { OAuthModule } from 'angular-oauth2-oidc';
-import { PrebootModule } from 'preboot';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+// import { PrebootModule } from 'preboot';
 
 import { environment } from '../environments/environment';
 
-import { CoreModule } from './core';
 import { AppSharedModule } from './appshared';
-import { SimpleNotificationsModule } from './simple-notifications';
+import { ToastrModule } from './toastr';
 
+import { routes } from './app.routes';
 // Components
+import { FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent, ModalTemplateDirective } from '@app/components';
 import { AppComponent } from './app.component';
-import { CookieConsentComponent, FooterComponent, HeaderComponent, ModalComponent, PrivacyComponent } from './components';
 import { HomeComponent } from './home/home.component';
-import { AppService } from './app.service';
-export function appServiceFactory(appService: AppService): Function {
-  return () => appService.getAppData();
+// Services
+import { AppService, AuthService, DataService, GlobalErrorHandler, ModalService, ModalStateService, AuthInterceptor, TimingInterceptor } from '@app/services';
+export function appServiceFactory(appService: AppService, authService: AuthService): Function {
+  return () => appService.getAppData(authService);
 }
 @NgModule({
   declarations: [
     // Components
     AppComponent,
     HomeComponent,
-    CookieConsentComponent,
     FooterComponent,
     HeaderComponent,
     ModalComponent,
+    ModalTemplateDirective,
     PrivacyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    PrebootModule.withConfig({ appRoot: 'appc-root' }),
+    // PrebootModule.withConfig({ appRoot: 'appc-root' }),
     BrowserAnimationsModule,
     BrowserTransferStateModule,
-    CoreModule.forRoot(),
+    HttpClientModule,
     AppSharedModule,
-    SimpleNotificationsModule.forRoot(),
-    OAuthModule.forRoot(),
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full', data: { state: 'home' } },
-      { path: 'login', loadChildren: './account/+login/login.module#LoginModule' },
-      { path: 'register', loadChildren: './account/+register/register.module#RegisterModule' },
-      { path: 'createaccount', loadChildren: './account/+create/create.module#CreateAccountModule' },
-      { path: 'profile', loadChildren: './account/+profile/profile.module#ProfileModule' },
-      { path: 'signalr', loadChildren: './+signalr/signalr.module#SignalrModule' },
-      { path: 'privacy', component: PrivacyComponent },
-    ], { initialNavigation: 'enabled' }),
-    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
+    // OAuthModule.forRoot(),
+    NgbModule.forRoot(),
+    ToastrModule.forRoot(),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     AppService,
-    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService], multi: true }
+    AuthService,
+    DataService,
+    ModalService,
+    ModalStateService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
+    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService, AuthService], multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   exports: [],
   bootstrap: [AppComponent]

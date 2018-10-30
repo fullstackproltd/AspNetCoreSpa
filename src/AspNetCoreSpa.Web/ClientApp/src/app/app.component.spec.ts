@@ -1,12 +1,10 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed, async } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { OAuthModule } from 'angular-oauth2-oidc';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { AppService } from './app.service';
-import { CoreModule } from './core';
-import { MockAppService } from '__mocks__/MockAppService';
+import { AppService } from '@app/services';
+import { MockAppService } from '../../__mocks__/MockAppService';
 
 describe('AppComponent', () => {
   let fixture;
@@ -16,8 +14,6 @@ describe('AppComponent', () => {
       TestBed.configureTestingModule({
         declarations: [AppComponent],
         imports: [
-          CoreModule.forRoot(),
-          OAuthModule.forRoot(),
           NoopAnimationsModule,
           RouterTestingModule.withRoutes([])
         ],

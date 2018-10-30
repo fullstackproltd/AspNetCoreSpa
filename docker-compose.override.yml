@@ -1,14 +1,15 @@
 version: '3.6'
 
 services:
-  aspnetcorespa.web:
+  aspnetcorespaweb:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_HTTPS_PORT=44364
+      - ASPNETCORE_HTTPS_PORT=5050
     ports:
       - "64356:80"
-      - "44392:443"
+      - "5050:443"
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+

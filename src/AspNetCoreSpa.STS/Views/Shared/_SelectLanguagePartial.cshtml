@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Options
+
+@inject IViewLocalizer Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .ToList();
+}
+
+<div title="@Localizer["Request culture provider:"] @requestCulture?.Provider?.GetType().Name">
+    @{ 
+        var location = new Uri($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}");
+
+        var url = location.AbsoluteUri;
+        var returnUrlForLanguageSwitch = Context.Request.Path;
+
+        if (Context.Request.QueryString.HasValue)
+        {
+            returnUrlForLanguageSwitch = $"{Context.Request.Path}{Context.Request.QueryString.Value}";
+        }
+    }
+
+    <form class="form-inline" id="selectLanguage" asp-controller="SetLanguage" asp-action="SetLanguage" asp-route-returnUrl="@returnUrlForLanguageSwitch" method="post" role="form">
+        <label class="form-label paddingright5px" >@SharedLocalizer.GetLocalizedHtmlString("LANGUAGE"):&nbsp;</label>
+        <div class="input-group">
+            <select class="custom-select" name="culture" asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"></select>
+            <input type="hidden" name="returnUrlForLanguageSwitch" id="returnUrlForLanguageSwitch" value="@url"/>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-outline-secondary">@SharedLocalizer.GetLocalizedHtmlString("SAVE")</button>
+            </div>
+        </div>
+    </form>
+    
+</div>

@@ -5,17 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Core Launch (web)",
+            "name": "AspNetCoreSpa.Web",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceRoot}/src/AspNetCoreSpa.Web/bin/Debug/netcoreapp2.1/AspNetCoreSpa.Web.dll",
-            "args": [
-                // "dropdb",
-                // "migratedb",
-                // "seeddb"
-            ],
+            "args": [],
             "cwd": "${workspaceRoot}/src/AspNetCoreSpa.Web",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
@@ -45,6 +41,46 @@
             "type": "coreclr",
             "request": "attach",
             "processId": "${command:pickProcess}"
+        },
+        {
+            "name": "AspNetCoreSpa.STS",
+            "type": "coreclr",
+            "request": "launch",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceRoot}/src/AspNetCoreSpa.STS/bin/Debug/netcoreapp2.1/AspNetCoreSpa.STS.dll",
+            "args": [],
+            "cwd": "${workspaceRoot}/src/AspNetCoreSpa.STS",
+            "stopAtEntry": false,
+            "internalConsoleOptions": "openOnSessionStart",
+            "launchBrowser": {
+                "enabled": false,
+                "args": "${auto-detect-url}",
+                "windows": {
+                    "command": "cmd.exe",
+                    "args": "/C start ${auto-detect-url}"
+                },
+                "osx": {
+                    "command": "open"
+                },
+                "linux": {
+                    "command": "xdg-open"
+                }
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Web/STS",
+            "configurations": [
+                "AspNetCoreSpa.Web",
+                "AspNetCoreSpa.STS"
+            ]
         }
     ]
 }

@@ -1,24 +1,18 @@
 ﻿// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using AspNetCoreSpa.Infrastructure.Services;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using System;
-using AspNetCoreSpa.Core.Entities;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IApplicationDataService _applicationDataService;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager, IApplicationDataService applicationDataService)
+        public HomeController(IApplicationDataService applicationDataService)
         {
-            _userManager = userManager;
             _applicationDataService = applicationDataService;
         }
 
@@ -33,11 +27,11 @@ namespace AspNetCoreSpa.Web.Controllers
         }
 
         [HttpGet("api/applicationdata")]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
-            var appData = await _applicationDataService.GetApplicationData(Request.HttpContext);
+            var appData = _applicationDataService.GetApplicationData(Request.HttpContext, Startup.Configuration["StsAuthority"]);
 
-            return Ok(appData);
+            return Ok(appData); 
         }
     }
 }

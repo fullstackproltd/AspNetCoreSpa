@@ -1,0 +1,25 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("DISABLE_2FA");
+    ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="alert alert-warning" role="alert">
+    <p>
+        <span class="glyphicon glyphicon-warning-sign"></span>
+        <strong>@SharedLocalizer.GetLocalizedHtmlString("DISABLE_2FA_TEXT_HEADER")</strong>
+    </p>
+    <p>
+        @SharedLocalizer.GetLocalizedHtmlString("DISABLE_2FA_TEXT_DETAILS")
+        <a asp-action="ResetAuthenticatorWarning">@SharedLocalizer.GetLocalizedHtmlString("DISABLE_2FA_TEXT_DETAILS_LINK")</a>
+    </p>
+</div>
+
+<div>
+    <form asp-action="Disable2fa" method="post" class="form-group">
+        <button class="btn btn-danger" type="submit">@SharedLocalizer.GetLocalizedHtmlString("DISABLE_2FA_BUTTON")</button>
+    </form>
+</div>

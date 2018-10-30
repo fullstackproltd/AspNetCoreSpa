@@ -9,8 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace AspNetCoreSpa.Web
 {
@@ -48,10 +48,6 @@ namespace AspNetCoreSpa.Web
 
             services.AddCustomDbContext();
 
-            services.AddCustomIdentity();
-
-            services.AddCustomOpenIddict(HostingEnvironment);
-
             services.AddMemoryCache();
 
             services.RegisterCustomServices();
@@ -60,6 +56,15 @@ namespace AspNetCoreSpa.Web
                 .AddMessagePackProtocol();
 
             services.AddCustomLocalization(HostingEnvironment);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options =>
+                            {
+                                // base-address of your identityserver
+                                options.Authority = Configuration["StsAuthority"];
+                                // name of the API resource
+                                options.Audience = "spa-api";
+                            });
 
             services.AddCustomizedMvc();
 
@@ -151,7 +156,6 @@ namespace AspNetCoreSpa.Web
                 // routes.MapRoute(name: "signin-google", template: "signin-google", defaults: new { controller = "Account", action = "ExternalLoginCallback" });
 
                 routes.MapRoute(name: "set-language", template: "setlanguage", defaults: new { controller = "Home", action = "SetLanguage" });
-
             });
 
             app.UseSpa(spa =>
@@ -179,13 +183,11 @@ namespace AspNetCoreSpa.Web
 
                           if (env.IsDevelopment())
                           {
-                            //   spa.UseAngularCliServer(npmScript: "start");
+                              //   spa.UseAngularCliServer(npmScript: "start");
                               //   OR
                               spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
-
         }
-
     }
 }

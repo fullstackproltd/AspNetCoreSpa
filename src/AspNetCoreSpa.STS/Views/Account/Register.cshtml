@@ -1,0 +1,65 @@
+﻿@using AspNetCoreSpa.STS.Resources
+@inject LocService SharedLocalizer
+@model RegisterViewModel
+@{
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("REGISTER");
+}
+
+<div class="row">
+
+    <div class="col">
+        <partial name="_ValidationSummary" />
+        <div class="card">
+            <div class="card-header">
+                @ViewData["Title"]
+            </div>
+            <div class="card-body">
+                <div class="card-subtitle">
+                    @SharedLocalizer.GetLocalizedHtmlString("CREATE_A_NEW_ACCOUNT")
+                </div>
+                <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                   
+                    <div class="form-group">
+                        <label asp-for="Email">@SharedLocalizer.GetLocalizedHtmlString("EMAIL")</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">@SharedLocalizer.GetLocalizedHtmlString("PASSWORD")</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">@SharedLocalizer.GetLocalizedHtmlString("CONFIRM_PASSWORD")</label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <button class="btn btn-primary" name="button" value="register">@SharedLocalizer.GetLocalizedHtmlString("REGISTER")</button>
+                    <button class="btn btn-default cancel" name="button" value="cancel">@SharedLocalizer.GetLocalizedHtmlString("CANCEL_BUTTON")</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                Login
+            </div>
+            <div class="card-body">
+                <a class="btn btn-default"
+                   asp-action="Login"
+                   asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                    Login
+                </a>
+            </div>
+        </div> 
+    </div>
+
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
