@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCoreSpa.Web.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -24,13 +24,13 @@ namespace AspNetCoreSpa.Web.Migrations
                 name: "Customers",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
@@ -50,13 +50,13 @@ namespace AspNetCoreSpa.Web.Migrations
                 name: "ProductCategories",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Icon = table.Column<string>(nullable: true),
@@ -93,13 +93,13 @@ namespace AspNetCoreSpa.Web.Migrations
                 name: "Orders",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     Discount = table.Column<decimal>(nullable: false),
                     Comments = table.Column<string>(nullable: true),
                     CustomerId = table.Column<int>(nullable: false),
@@ -121,13 +121,13 @@ namespace AspNetCoreSpa.Web.Migrations
                 name: "Products",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Icon = table.Column<string>(nullable: true),
@@ -162,13 +162,13 @@ namespace AspNetCoreSpa.Web.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<Guid>(nullable: false),
                     CreatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedBy = table.Column<string>(maxLength: 256, nullable: true),
                     UpdatedDate = table.Column<DateTime>(nullable: false),
                     CreatedDate = table.Column<DateTime>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
                     UnitPrice = table.Column<decimal>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     Discount = table.Column<decimal>(nullable: false),

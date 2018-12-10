@@ -51,7 +51,7 @@ namespace AspNetCoreSpa.Web.Extensions
             })
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             return services;
         }
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services)

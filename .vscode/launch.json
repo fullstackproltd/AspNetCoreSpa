@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/src/AspNetCoreSpa.Web/bin/Debug/netcoreapp2.1/AspNetCoreSpa.Web.dll",
+            "program": "${workspaceRoot}/src/AspNetCoreSpa.Web/bin/Debug/netcoreapp2.2/AspNetCoreSpa.Web.dll",
             "args": [],
             "cwd": "${workspaceRoot}/src/AspNetCoreSpa.Web",
             "stopAtEntry": false,
@@ -47,7 +47,7 @@
             "type": "coreclr",
             "request": "launch",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceRoot}/src/AspNetCoreSpa.STS/bin/Debug/netcoreapp2.1/AspNetCoreSpa.STS.dll",
+            "program": "${workspaceRoot}/src/AspNetCoreSpa.STS/bin/Debug/netcoreapp2.2/AspNetCoreSpa.STS.dll",
             "args": [],
             "cwd": "${workspaceRoot}/src/AspNetCoreSpa.STS",
             "stopAtEntry": false,
