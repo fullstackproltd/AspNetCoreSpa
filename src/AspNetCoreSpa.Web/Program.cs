@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using Microsoft.AspNetCore.Mvc;
+
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
 namespace AspNetCoreSpa.Web
 {
@@ -46,11 +49,14 @@ namespace AspNetCoreSpa.Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
                   WebHost.CreateDefaultBuilder(args)
-                        .ConfigureLogging(builder =>
+                        .ConfigureLogging((hostingContext, logging) =>
                         {
-                            builder.ClearProviders();
-                            builder.AddSerilog();
+                            logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                            logging.AddConsole();
+                            logging.AddDebug();
+                            logging.AddEventSourceLogger();
+                            logging.AddSerilog();
                         })
-                      .UseStartup<Startup>();
+                        .UseStartup<Startup>();
     }
 }

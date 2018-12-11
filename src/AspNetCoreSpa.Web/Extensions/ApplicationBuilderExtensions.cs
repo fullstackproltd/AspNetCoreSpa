@@ -102,11 +102,6 @@ namespace AspNetCoreSpa.Web.Extensions
         }
         public static IApplicationBuilder AddDevMiddlewares(this IApplicationBuilder app)
         {
-            var env = app.ApplicationServices.GetRequiredService<IHostingEnvironment>();
-            var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
-
-            loggerFactory.AddConsole(Startup.Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
             app.UseDeveloperExceptionPage();
             app.UseDatabaseErrorPage();
             // NOTE: For SPA swagger needs adding before MVC
