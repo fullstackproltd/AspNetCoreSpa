@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 # Setup NodeJs
 RUN apt-get update -qq && \
     apt-get install -qq -y wget && \
@@ -12,7 +12,7 @@ WORKDIR /app
 
 EXPOSE 5050
 
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 # Setup NodeJs
 RUN apt-get update -qq && \
     apt-get install -qq -y wget && \

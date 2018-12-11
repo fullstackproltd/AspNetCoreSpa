@@ -12,7 +12,7 @@ namespace AspNetCoreSpa.Infrastructure
     /// </summary>
     /// <remarks>
     /// See https://volosoft.com/datetime-specifykind-in-entity-framework-core-while-querying/
-    /// See also https://github.com/aspnet/EntityFrameworkCore/issues/4711#issuecomment-358695190 for changes in EF core 2.1
+    /// See also https://github.com/aspnet/EntityFrameworkCore/issues/4711#issuecomment-358695190 for changes in EF core 2.2
     /// </remarks>
     /// <example>
     /// protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
