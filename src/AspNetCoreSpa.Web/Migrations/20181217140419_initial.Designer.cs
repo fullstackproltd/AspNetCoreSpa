@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreSpa.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181210150238_Initial")]
-    partial class Initial
+    [Migration("20181217140419_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -4,17 +4,17 @@
 
 ## Features
 
-* [ASP.NET Core](http://www.dot.net/)
-* [Entity Framework Core](https://docs.efproject.net/en/latest/)
+* [ASP.NET Core 2.2](http://www.dot.net/)
+* [Entity Framework Core 2.2](https://docs.efproject.net/en/latest/)
     * Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
-* [Identity Server](http://identityserver.io/)
-* [Angular](https://angular.io/)
-* [Angular CLI](https://cli.angular.io/)
+* [Identity Server 4](http://identityserver.io/)
+* [Angular 7](https://angular.io/)
+* [Angular CLI 7](https://cli.angular.io/)
 * Secure - with CSP and custom security headers
-* [SignalR](https://github.com/aspnet/SignalR/) (Chat example)
-* [SASS](http://sass-lang.com/) support
-* [Best practices](https://angular.io/docs/ts/latest/guide/style-guide.html) in file and application organization for Angular.
-* [Clean Architecture](https://github.com/ardalis/CleanArchitecture) for Asp.Net Core application.
+* [SignalR](https://github.com/aspnet/SignalR/)
+* [SASS](http://sass-lang.com/)
+* Best [practices](https://angular.io/docs/ts/latest/guide/style-guide.html) for Angular code organisation.
+* [Clean Architecture](https://github.com/ardalis/CleanArchitecture) for ASP.Net Core code.
 * [PWA support](https://developers.google.com/web/progressive-web-apps/)
 * [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
 * Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
@@ -28,11 +28,11 @@
  
 ## Pre-requisites
 
-1. [.Net core sdk](https://www.microsoft.com/net/core#windows)
-2. Either [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension OR [Visual studio 2017](https://www.visualstudio.com/)
-3. [Nodejs](https://nodejs.org/en/)
-
-**Make sure you have Node version >= latest LTS and NPM >= latest LTS
+1. [.Net core 2.2 SDK](https://www.microsoft.com/net/core#windows)
+2. [Visual studio 2017](https://www.visualstudio.com/) OR [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension
+3. [NodeJs](https://nodejs.org/en/) (Latest LTS)
+4. [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) (Optional: If MS SQL server required instead of Sqlite during development)
+5. [Docker](https://www.docker.com/) (Optional: If application will run inside docker container)
 
 ## Installation
 ```
@@ -43,48 +43,39 @@
 3. Restore packages:
     dotnet restore AspNetCoreSpa.sln
 4. Run client project
-    cd AspNetCoreSpa.Web/ClientApp:
-    npm start
+    cd src/AspNetCoreSpa.Web/ClientApp:
+    4.1. npm install
+    4.2. npm start
 5. Run .Net project:
-    F5 from either [VScode] (https://code.visualstudio.com/) or [Visual Studio IDE](https://www.visualstudio.com/):
+    F5 from either [Visual Studio IDE](https://www.visualstudio.com/) OR [VScode] (https://code.visualstudio.com/):
 
-6. Point to Sqllite or SqlServer
+6. Target either Sqlite or Microsoft SQL Server
     
-This project supports both sql server and sql lite databases
+This project supports both databases OOTB.
 
-* Run with Sqlite:
-    * Project is configured to run with sqlite by default and there is an 'Initial' migration already added (see Migrations folder)
-    * After changing you models, you can add additional migrations 
-    [see docs](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
+* Run with Sqlite: (Already configured to quickly run the project)
+    * Project is already setup with Sqlite specific database migrations
 
-* Run with SqlServer:
-    * To run under sql server:
-        * npm run clean
-        * Delete `Migrations` folder
-        * Flip the switch in appsettings.json called `useSqLite` to `false`, this should point to use local sql server setup as default instance. (See appsettings.json file for connection string)
-        * Run `dotnet ef migrations add "InitialMigrationName"`
+* Run with Microsoft SQL Server:
+    * Delete `Migrations` folder from src/AspNetCoreSpa.Web
+    * Change setting in appsettings.json called `useSqLite` from `true` to `false`
+    * This will use `SqlServerConnectionString` connection string pointing to default instance of SQL server installed on local machine
 
-7. Point to identity server:
-    For ease project is using hosted idenitty serve at url (https://aspnetcorests.azurewebsites.net/). Alternatively, you can run local version of identity server by running AspNetCoreSpa.STS project and change appsettings.Development.json or appsettings.json file's StsAuthority config to identity server's url for appropriate environment.
+7. Identity server for authentication:
+    This project by default uses a hosted version of Identity Server at this url: (https://aspnetcorests.azurewebsites.net/).
+    
+    Alternatively, you can run local version of identity server:
+    a. Run `AspNetCoreSpa.STS` project from this solution
+    b. Change  `StsAuthority` configuration in `appsettings.Development.json` or `appsettings.json` file inside `src/AspNetCoreSpa.Web` to the local running Identity Server URL.
 ```
 
 ## Other commands
 
-### Scaffold Angular components using Angular CLI
+### Angular component scaffolding
 
-Scaffold  | Usage
----       | ---
-Component | `ng g component my-new-component`
-Directive | `ng g directive my-new-directive`
-Pipe      | `ng g pipe my-new-pipe`
-Service   | `ng g service my-new-service`
-Class     | `ng g class my-new-class`
-Guard     | `ng g guard my-new-guard`
-Interface | `ng g interface my-new-interface`
-Enum      | `ng g enum my-new-enum`
-Module    | `ng g module my-module`
+Note: You need to run commands from `src/AspNetCoreSpa.Web/ClientApp` directory: More information [here](https://angular.io/cli)
 
-### run Angular tests
+### Angular tests - Using [Jest](https://jestjs.io/en/) and Angular jest [preset](https://github.com/thymikee/jest-preset-angular)
 ```bash
 cd src/AspNetCoreSpa.Web/ClientApp
 

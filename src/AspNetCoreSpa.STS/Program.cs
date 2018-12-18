@@ -3,9 +3,6 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Serilog;
-using Serilog.Events;
-using Serilog.Sinks.SystemConsole.Themes;
 
 namespace AspNetCoreSpa.STS
 {
@@ -14,15 +11,6 @@ namespace AspNetCoreSpa.STS
         public static void Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-
-            Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-            .MinimumLevel.Override("System", LogEventLevel.Warning)
-            .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Information)
-            .Enrich.FromLogContext()
-            .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Literate)
-            .CreateLogger();
 
             using (var scope = host.Services.CreateScope())
             {
@@ -51,7 +39,6 @@ namespace AspNetCoreSpa.STS
                      logging.AddConsole();
                      logging.AddDebug();
                      logging.AddEventSourceLogger();
-                     logging.AddSerilog();
                  })
                  .UseStartup<Startup>();
     }

@@ -68,17 +68,15 @@ namespace AspNetCoreSpa.Web.Extensions
                 else if (useSqLite.ToLower() == "true")
                 {
                     var connection = Startup.Configuration["Data:SqlLiteConnectionString"];
-                    options.UseSqlite(connection);
                     options.UseSqlite(connection, b =>
                     {
                         b.MigrationsAssembly("AspNetCoreSpa.Web");
-                        b.UseNetTopologySuite();
+                        //b.UseNetTopologySuite();
                     });
                 }
                 else
                 {
                     var connection = Startup.Configuration["Data:SqlServerConnectionString"];
-                    options.UseSqlServer(connection);
                     options.UseSqlServer(connection, b =>
                     {
                         b.MigrationsAssembly("AspNetCoreSpa.Web");
