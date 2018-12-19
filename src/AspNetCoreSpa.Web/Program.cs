@@ -22,13 +22,13 @@ namespace AspNetCoreSpa.Web
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 try
                 {
-                    logger.LogCritical("Seeding API database");
+                    logger.LogInformation("Seeding API database");
                     var dbInitialiser = services.GetRequiredService<ISeedData>();
                     dbInitialiser.Initialise();
                 }
                 catch (Exception ex)
                 {
-                    logger.LogCritical("Error creating/seeding API database - " + ex);
+                    logger.LogError("Error creating/seeding API database - " + ex);
                 }
             }
 

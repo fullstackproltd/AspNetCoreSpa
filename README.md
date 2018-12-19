@@ -63,6 +63,13 @@ This project supports both databases OOTB.
 
 7. Identity server for authentication:
     This project by default uses a hosted version of Identity Server at this url: (https://aspnetcorests.azurewebsites.net/).
+
+	2 Test users:
+	Username: admin@admin.com
+	Password: P@ssw0rd!
+	OR
+	Username: user@user.com
+	Password: P@ssw0rd!
     
     Alternatively, you can run local version of identity server:
     a. Run `AspNetCoreSpa.STS` project from this solution
