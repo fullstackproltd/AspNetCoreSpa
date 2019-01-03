@@ -68,15 +68,22 @@ namespace AspNetCoreSpa.Web.Extensions
                 else if (useSqLite.ToLower() == "true")
                 {
                     var connection = Startup.Configuration["Data:SqlLiteConnectionString"];
-                    options.UseSqlite(connection);
-                    options.UseSqlite(connection, b => b.MigrationsAssembly("AspNetCoreSpa.Web"));
-
+                    options.UseSqlite(connection, b =>
+                    {
+                        b.MigrationsAssembly("AspNetCoreSpa.Web");
+                        //b.UseNetTopologySuite();
+                    });
                 }
                 else
                 {
                     var connection = Startup.Configuration["Data:SqlServerConnectionString"];
-                    options.UseSqlServer(connection);
-                    options.UseSqlServer(connection, b => b.MigrationsAssembly("AspNetCoreSpa.Web"));
+                    options.UseSqlServer(connection, b =>
+                    {
+                        b.MigrationsAssembly("AspNetCoreSpa.Web");
+                        // Add foolowing package to enable net topology suite for sql server:
+                        // <PackageReference Include = "Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version = "2.2.0" />
+                        //b.UseNetTopologySuite();
+                    });
                 }
             });
             return services;

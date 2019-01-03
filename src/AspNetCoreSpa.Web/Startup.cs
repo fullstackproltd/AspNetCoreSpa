@@ -50,6 +50,8 @@ namespace AspNetCoreSpa.Web
 
             services.AddMemoryCache();
 
+            services.AddHealthChecks();
+
             services.RegisterCustomServices();
 
             services.AddSignalR()
@@ -103,6 +105,7 @@ namespace AspNetCoreSpa.Web
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseHealthChecks("/health");
 
             // app.AddCustomSecurityHeaders();
 
