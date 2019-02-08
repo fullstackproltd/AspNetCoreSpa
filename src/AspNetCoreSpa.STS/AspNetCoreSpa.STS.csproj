@@ -9,16 +9,16 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
-    <PackageReference Include="IdentityModel" Version="3.10.4" />
+    <PackageReference Include="IdentityModel" Version="3.10.6" />
     <PackageReference Include="IdentityServer4" Version="2.3.2" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.3.0" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="2.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.2" />
-    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="4.4.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.4" />
+    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.3" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="4.5.0" />
     <PackageReference Include="Sendgrid" Version="9.10.0" />
 
   </ItemGroup>
