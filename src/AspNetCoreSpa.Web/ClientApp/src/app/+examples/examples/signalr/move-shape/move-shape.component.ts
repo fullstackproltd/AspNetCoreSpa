@@ -9,7 +9,7 @@ import { map, takeUntil, flatMap } from 'rxjs/operators';
   styleUrls: ['./move-shape.component.scss']
 })
 export class MoveShapeComponent implements AfterViewInit {
-  @ViewChild('draggable') element: ElementRef;
+  @ViewChild('draggable', { static: true }) element: ElementRef;
   private _hubConnection: HubConnection;
   constructor(@Inject('BASE_URL') private baseUrl: string) { }
 

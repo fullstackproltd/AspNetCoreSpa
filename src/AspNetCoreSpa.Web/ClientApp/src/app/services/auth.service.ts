@@ -52,6 +52,7 @@ export class AuthService {
             redirect_uri: `${location.origin}/login-redirect.html`,
             scope: 'openid spa-api profile offline_access',
             response_type: 'id_token token',
+            client_secret: 'srcret',
             post_logout_redirect_uri: `${location.origin}?postLogout=true`,
             userStore: new WebStorageStateStore({ store: window.localStorage }),
             automaticSilentRenew: true,

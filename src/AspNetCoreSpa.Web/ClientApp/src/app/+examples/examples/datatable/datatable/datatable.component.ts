@@ -6,7 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./datatable.component.scss']
 })
 export class DatatableComponent implements OnInit {
-  @ViewChild('myTable') table: any;
+  @ViewChild('myTable', { static: true }) table: any;
 
   rows: any[] = [];
   expanded: any = {};

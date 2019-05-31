@@ -6,8 +6,8 @@ import { FormsPlaygroundComponent } from './examples/forms-playground/forms-play
 export const routes: Routes = [
     { path: '', component: ExamplesComponent, data: { displayText: 'Home' } },
     { path: 'forms-playground', component: FormsPlaygroundComponent, data: { displayText: 'Forms playground' } },
-    { path: 'signalr', loadChildren: './examples/signalr/signalr.module#SignalrModule', data: { displayText: 'SignalR' } },
-    { path: 'calendar', loadChildren: './examples/calendar/calendar.module#AppCalendarModule', data: { displayText: 'Calendar' } },
-    { path: 'datatable', loadChildren: './examples/datatable/datatable.module#DatatableModule', data: { displayText: 'Datatable' } },
-    { path: 'crud-shop', loadChildren: './examples/crud-shop/crud-shop.module#CrudShopModule', data: { displayText: 'CRUD Shop' } },
+    { path: 'signalr', loadChildren: () => import('./examples/signalr/signalr.module').then(m => m.SignalrModule), data: { displayText: 'SignalR' } },
+    { path: 'calendar', loadChildren: () => import('./examples/calendar/calendar.module').then(m => m.AppCalendarModule), data: { displayText: 'Calendar' } },
+    { path: 'datatable', loadChildren: () => import('./examples/datatable/datatable.module').then(m => m.DatatableModule), data: { displayText: 'Datatable' } },
+    { path: 'crud-shop', loadChildren: () => import('./examples/crud-shop/crud-shop.module').then(m => m.CrudShopModule), data: { displayText: 'CRUD Shop' } },
 ];

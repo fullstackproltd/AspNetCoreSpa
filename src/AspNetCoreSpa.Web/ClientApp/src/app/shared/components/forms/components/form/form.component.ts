@@ -10,7 +10,7 @@ import { FieldTypes, IFieldConfig } from '@app/models';
     templateUrl: './form.component.html'
 })
 export class AppFormComponent implements OnChanges, OnInit, AfterViewInit {
-    @ViewChild('formRef') ngForm: NgForm;
+    @ViewChild('formRef', { static: true }) ngForm: NgForm;
     @Input() config: IFieldConfig[] = [];
     @Input() model: any;
     @Input() fullWidth: boolean;

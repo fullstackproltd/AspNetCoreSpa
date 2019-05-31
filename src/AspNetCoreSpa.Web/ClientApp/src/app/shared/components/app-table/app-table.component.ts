@@ -14,8 +14,8 @@ import { ToastrService } from '@app/toastr';
 })
 export class AppTableComponent implements OnInit {
 
-    @ViewChild('appTable') table: DatatableComponent;
-    @ViewChild('formTemplate') formTemplate: TemplateRef<any>;
+    @ViewChild('appTable', { static: true }) table: DatatableComponent;
+    @ViewChild('formTemplate', { static: true }) formTemplate: TemplateRef<any>;
     @Input() options: IAppTableOptions<any>;
     // to preserve data after filter
     tempRows: any[];

@@ -10,7 +10,7 @@ import { IFieldConfig, FieldTypes } from '@app/models';
   styleUrls: ['./forms-playground.component.scss']
 })
 export class FormsPlaygroundComponent implements OnInit {
-  @ViewChild(AppFormComponent) form: AppFormComponent;
+  @ViewChild(AppFormComponent, { static: true }) form: AppFormComponent;
   config: IFieldConfig[];
   constructor(private formsService: FormsService) { }
 

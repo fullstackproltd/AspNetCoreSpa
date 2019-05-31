@@ -39,11 +39,13 @@ namespace AspNetCoreSpa.STS
                     AllowedGrantTypes = new [] { GrantType.Implicit, GrantType.ResourceOwnerPassword },
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
-
                     RedirectUris =           allowedRedirectUrls,
                     PostLogoutRedirectUris = origins.Select(o => $"{o}?postLogout=true").ToList(),
                     AllowedCorsOrigins =     origins,
-
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,

@@ -26,7 +26,7 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppCalendarComponent {
-  @ViewChild('modalContent')
+  @ViewChild('modalContent', { static: true })
   modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;

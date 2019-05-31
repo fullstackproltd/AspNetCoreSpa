@@ -10,8 +10,8 @@ import { FieldTypes, IAppTableOptions } from '@app/models';
   styleUrls: ['./customers.component.scss']
 })
 export class CustomersComponent implements OnInit {
-  @ViewChild('addressTemplate') addressTemplate: TemplateRef<any>;
-  @ViewChild('genderTemplate') genderTemplate: TemplateRef<any>;
+  @ViewChild('addressTemplate', { static: true }) addressTemplate: TemplateRef<any>;
+  @ViewChild('genderTemplate', { static: true }) genderTemplate: TemplateRef<any>;
   options: IAppTableOptions<ICustomer>;
   constructor() { }
 
