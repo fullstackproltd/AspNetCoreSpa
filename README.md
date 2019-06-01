@@ -48,7 +48,8 @@
     4.2. npm start
 5. Run .Net project:
     F5 from either [Visual Studio IDE](https://www.visualstudio.com/) OR [VScode] (https://code.visualstudio.com/):
-
+    Note: If you are running using Visual Studio Code, install dev certificates using command:
+    dotnet dev-certs https --trust
 6. Target either Sqlite or Microsoft SQL Server
     
 This project supports both databases OOTB.
