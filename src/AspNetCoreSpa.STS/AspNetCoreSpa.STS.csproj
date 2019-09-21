@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>aspnet-IdentityServerWithAspNetIdentity-04C6939F-E672-4E56-B4A5-5F064EB67F23</UserSecretsId>
     <DockerTargetOS>Linux</DockerTargetOS>
   </PropertyGroup>

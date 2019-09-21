@@ -42,7 +42,7 @@ export function appServiceFactory(appService: AppService, authService: AuthServi
     HttpClientModule,
     AppSharedModule,
     // OAuthModule.forRoot(),
-    NgbModule.forRoot(),
+    NgbModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),

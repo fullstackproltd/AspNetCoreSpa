@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbDateAdapter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { parse } from 'date-fns';
+import { parseISO } from 'date-fns';
 
 @Injectable()
 export class CustomNgbDateNativeUTCAdapter extends NgbDateAdapter<Date> {
@@ -11,7 +11,7 @@ export class CustomNgbDateNativeUTCAdapter extends NgbDateAdapter<Date> {
         }
 
         if (typeof date === 'string') {
-            const parsedDate = parse(date);
+            const parsedDate = parseISO(date);
             return { year: parsedDate.getUTCFullYear(), month: parsedDate.getUTCMonth() + 1, day: parsedDate.getUTCDate() };
         }
 
