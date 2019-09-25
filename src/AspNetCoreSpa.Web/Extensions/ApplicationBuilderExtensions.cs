@@ -103,7 +103,6 @@ namespace AspNetCoreSpa.Web.Extensions
         public static IApplicationBuilder AddDevMiddlewares(this IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
-            app.UseDatabaseErrorPage();
             // NOTE: For SPA swagger needs adding before MVC
             app.UseCustomSwaggerApi();
 

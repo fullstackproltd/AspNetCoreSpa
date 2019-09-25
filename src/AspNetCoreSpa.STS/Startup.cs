@@ -200,7 +200,6 @@ namespace AspNetCoreSpa.STS
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {

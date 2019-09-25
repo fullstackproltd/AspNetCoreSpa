@@ -40,7 +40,7 @@ namespace AspNetCoreSpa.Infrastructure
         /// This API supports the Entity Framework Core infrastructure and is not intended to be used
         /// directly from your code. This API may change or be removed in future releases.
         /// </remarks>
-        public override Expression CreateReadValueExpression(Expression valueBuffer, Type type, int index, IPropertyBase property)
+        public override Expression CreateReadValueExpression(Expression valueBuffer, Type type, int index, IProperty property)
         {
             if (type == typeof(DateTime))
             {

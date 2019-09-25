@@ -45,13 +45,13 @@ namespace AspNetCoreSpa.Web.Extensions
             {
                 options.Filters.Add(typeof(ModelValidationFilter));
             })
-            .AddJsonOptions(options =>
+            .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             })
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             return services;
         }
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services)
