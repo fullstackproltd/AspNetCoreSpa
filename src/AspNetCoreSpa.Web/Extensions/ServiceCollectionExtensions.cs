@@ -12,27 +12,13 @@ using System.Linq;
 using AspNetCoreSpa.Core;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace AspNetCoreSpa.Web.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        // https://github.com/aspnet/JavaScriptServices/tree/dev/src/Microsoft.AspNetCore.SpaServices#debugging-your-javascripttypescript-code-when-it-runs-on-the-server
-        // Url to visit:
-        // chrome-devtools://devtools/bundled/inspector.html?experiments=true&v8only=true&ws=127.0.0.1:9229/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-        public static IServiceCollection AddPreRenderDebugging(this IServiceCollection services, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                services.AddNodeServices(options =>
-                {
-                    options.LaunchWithDebugging = true;
-                    options.DebuggingPort = 9229;
-                });
-            }
-
-            return services;
-        }
         public static IServiceCollection AddCustomizedMvc(this IServiceCollection services)
         {
             // https://stackoverflow.com/a/51241314/1190512
@@ -41,17 +27,18 @@ namespace AspNetCoreSpa.Web.Extensions
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddMvc(options =>
+            services.AddControllersWithViews(options =>
             {
                 options.Filters.Add(typeof(ModelValidationFilter));
-            })
+            });
+            services.AddRazorPages()
             .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             })
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-            .AddDataAnnotationsLocalization()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            .AddDataAnnotationsLocalization();
+
             return services;
         }
         public static IServiceCollection AddCustomDbContext(this IServiceCollection services)
@@ -89,9 +76,9 @@ namespace AspNetCoreSpa.Web.Extensions
             return services;
         }
 
-        public static IServiceCollection AddCustomLocalization(this IServiceCollection services, IHostingEnvironment hostingEnvironment)
+        public static IServiceCollection AddCustomLocalization(this IServiceCollection services, IWebHostEnvironment hostingEnvironment)
         {
-            var translationFile = hostingEnvironment.GetTranslationFile();
+            var translationFile = File.ReadAllLines(Path.Combine(hostingEnvironment.ContentRootPath, "translations.csv"));
 
             var cultures = translationFile.First().Split(",").Skip(1);
 

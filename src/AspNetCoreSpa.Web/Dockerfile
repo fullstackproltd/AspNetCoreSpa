@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
 
 WORKDIR /app
 
-EXPOSE 5050
+EXPOSE 5005
 
 FROM microsoft/dotnet:2.2-sdk AS build
 # Setup NodeJs

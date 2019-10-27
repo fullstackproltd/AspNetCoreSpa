@@ -1,6 +1,5 @@
 ﻿using AspNetCoreSpa.Web.Extensions;
 using AspNetCoreSpa.Web.SignalR;
-using AspNetCoreSpa.Core.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +10,9 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Hosting;
+using AspNetCoreSpa.Core.ViewModels;
+using Microsoft.OpenApi.Models;
 
 namespace AspNetCoreSpa.Web
 {
@@ -20,10 +22,10 @@ namespace AspNetCoreSpa.Web
         //1) Constructor
         //2) Configure services
         //3) Configure
-        private IHostingEnvironment HostingEnvironment { get; }
+        private IWebHostEnvironment HostingEnvironment { get; }
         public static IConfiguration Configuration { get; set; }
 
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             HostingEnvironment = env;
             Configuration = configuration;
@@ -39,8 +41,6 @@ namespace AspNetCoreSpa.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services.AddPreRenderDebugging(HostingEnvironment);
 
             services.AddOptions();
 
@@ -78,32 +78,27 @@ namespace AspNetCoreSpa.Web
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "AspNetCoreSpa", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspNetCoreSpa", Version = "v1" });
 
-                // Swagger 2.+ support
                 var security = new Dictionary<string, IEnumerable<string>>
                 {
                     {"Bearer", new string[] { }},
                 };
 
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
-                c.AddSecurityRequirement(security);
+                // c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                // {
+                //     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                //     Name = "Authorization",
+                //     In = "header",
+                //     Type = "apiKey"
+                // });
+                // c.AddSecurityRequirement(security);
 
             });
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-            });
-
+            services.AddAutoMapper(typeof(Startup));
         }
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseHealthChecks("/health");
 
@@ -141,24 +136,21 @@ namespace AspNetCoreSpa.Web
 
             app.UseSpaStaticFiles();
 
+            app.UseRouting();
+
             app.UseCookiePolicy();
 
-            app.UseSignalR(routes =>
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapHub<Chat>("/chathub");
-                routes.MapHub<ShapeHub>("/shapeHub");
-            });
+                endpoints.MapControllerRoute(
+                                   name: "default",
+                                   pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                   name: "default",
-                   template: "{controller}/{action=Index}/{id?}");
-
-                // http://stackoverflow.com/questions/25982095/using-googleoauth2authenticationoptions-got-a-redirect-uri-mismatch-error
-                // routes.MapRoute(name: "signin-google", template: "signin-google", defaults: new { controller = "Account", action = "ExternalLoginCallback" });
-
-                routes.MapRoute(name: "set-language", template: "setlanguage", defaults: new { controller = "Home", action = "SetLanguage" });
+                endpoints.MapHub<Chat>("/chathub");
+                endpoints.MapHub<ShapeHub>("/shapeHub");
             });
 
             app.UseSpa(spa =>

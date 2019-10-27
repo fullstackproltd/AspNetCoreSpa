@@ -29,5 +29,6 @@
         "wwwroot": true,
         "bin": true
     },
-    "appService.defaultWebAppToDeploy": "None"
+    "appService.defaultWebAppToDeploy": "None",
+    "sqltools.useNodeRuntime": true
 }

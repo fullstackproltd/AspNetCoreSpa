@@ -3,15 +3,16 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace AspNetCoreSpa.Web.Filters
 {
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {
         private ILogger<ApiExceptionFilter> _Logger;
-        private IHostingEnvironment _env;
+        private IWebHostEnvironment _env;
 
-        public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger, IHostingEnvironment env)
+        public ApiExceptionFilter(ILogger<ApiExceptionFilter> logger, IWebHostEnvironment env)
         {
             _Logger = logger;
             _env = env;

@@ -10,16 +10,20 @@ namespace AspNetCoreSpa.Web.Controllers.api
     public class ProductController : BaseController
     {
         private readonly IUnitOfWork _uow;
-        public ProductController(IUnitOfWork uow)
+
+        private readonly IMapper _mapper;
+
+        public ProductController(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
+            _mapper = mapper;
         }
         // GET: api/Product
         [HttpGet]
         public IActionResult Get()
         {
             var allProduct = _uow.Products.GetAll();
-            return Ok(Mapper.Map<IEnumerable<ProductViewModel>>(allProduct));
+            return Ok(_mapper.Map<IEnumerable<ProductViewModel>>(allProduct));
         }
 
         // GET: api/Product/5
@@ -27,14 +31,14 @@ namespace AspNetCoreSpa.Web.Controllers.api
         public IActionResult Get(int id)
         {
             var product = _uow.Products.Get(id);
-            return Ok(Mapper.Map<ProductViewModel>(product));
+            return Ok(_mapper.Map<ProductViewModel>(product));
         }
 
         // POST: api/Product
         [HttpPost]
         public void Post([FromBody] ProductViewModel product)
         {
-            _uow.Products.Add(Mapper.Map<Product>(product));
+            _uow.Products.Add(_mapper.Map<Product>(product));
             _uow.SaveChanges();
         }
 

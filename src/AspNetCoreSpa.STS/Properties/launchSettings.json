@@ -18,11 +18,11 @@
     },
     "AspNetCoreSpa.STS": {
       "commandName": "Project",
-      "launchUrl": "https://localhost:5005",
+      "launchUrl": "https://localhost:5006",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5005/;http://localhost:5004/"
+      "applicationUrl": "https://localhost:5006/"
     },
     "Docker": {
       "commandName": "Docker",

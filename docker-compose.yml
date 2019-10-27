@@ -1,4 +1,4 @@
-version: '3.6'
+version: "3.6"
 
 services:
   aspnetcorespaweb:
@@ -7,12 +7,12 @@ services:
       context: .
       dockerfile: src/AspNetCoreSpa.Web/Dockerfile
     environment:
-       - IDENTITY_SERVER_ENDPOINT=https://aspnetcorests.azurewebsites.net
+      - IDENTITY_SERVER_ENDPOINT=https://aspnetcorests.azurewebsites.net
     ports:
-      - 5050:80
+      - 5005:80
     networks:
       - app-network
-      
+
 networks:
   app-network:
     driver: bridge

@@ -7,7 +7,7 @@ using System;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         private readonly IApplicationDataService _applicationDataService;
 
@@ -31,7 +31,7 @@ namespace AspNetCoreSpa.Web.Controllers
         {
             var appData = _applicationDataService.GetApplicationData(Request.HttpContext, Startup.Configuration["StsAuthority"]);
 
-            return Ok(appData); 
+            return Ok(appData);
         }
     }
 }

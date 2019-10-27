@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreSpa.STS
 {
-    [SecurityHeaders]
     [Authorize]
+    [SecurityHeaders]
     public class DiagnosticsController : Controller
     {
         public async Task<IActionResult> Index()

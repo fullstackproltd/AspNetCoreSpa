@@ -16,18 +16,18 @@ using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using AspNetCoreSpa.STS.Services;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace AspNetCoreSpa.STS
 {
     public class Startup
     {
         public static IConfiguration Configuration { get; set; }
-        public IHostingEnvironment Environment { get; }
+        public IWebHostEnvironment Environment { get; }
 
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
             Environment = environment;
@@ -106,8 +106,7 @@ namespace AspNetCoreSpa.STS
                 {
                     corsBuilder.AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowAnyOrigin()
-                    .AllowCredentials();
+                    .AllowAnyOrigin();
                 });
             });
 
@@ -115,9 +114,10 @@ namespace AspNetCoreSpa.STS
             services.AddTransient<IProfileService, CustomProfileService>();
             services.AddTransient<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                           .AddViewLocalization()
-                           .AddDataAnnotationsLocalization(options =>
+            services.AddControllersWithViews();
+            services.AddRazorPages()
+            .AddViewLocalization()
+            .AddDataAnnotationsLocalization(options =>
                            {
                                options.DataAnnotationLocalizerProvider = (type, factory) =>
                                {
@@ -183,7 +183,7 @@ namespace AspNetCoreSpa.STS
                 });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // https://github.com/openiddict/openiddict-core/issues/518
             // And
@@ -216,11 +216,24 @@ namespace AspNetCoreSpa.STS
             //     Configuration["AdminSafeList"]);
 
             app.UseStaticFiles();
+
+            app.UseRouting();
+
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
 
             app.UseIdentityServer();
 
-            app.UseMvcWithDefaultRoute();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
+            });
         }
     }
 }

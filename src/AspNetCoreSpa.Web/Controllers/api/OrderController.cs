@@ -10,16 +10,20 @@ namespace AspNetCoreSpa.Web.Controllers.api
     public class OrderController : BaseController
     {
         private readonly IUnitOfWork _uow;
-        public OrderController(IUnitOfWork uow)
+
+        private readonly IMapper _mapper;
+
+        public OrderController(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
+            _mapper = mapper;
         }
         // GET: api/Order
         [HttpGet]
         public IActionResult Get()
         {
             var allOrder = _uow.Orders.GetAll();
-            return Ok(Mapper.Map<IEnumerable<OrderViewModel>>(allOrder));
+            return Ok(_mapper.Map<IEnumerable<OrderViewModel>>(allOrder));
         }
 
         // GET: api/Order/5
@@ -27,14 +31,14 @@ namespace AspNetCoreSpa.Web.Controllers.api
         public IActionResult Get(int id)
         {
             var Order = _uow.Orders.Get(id);
-            return Ok(Mapper.Map<OrderViewModel>(Order));
+            return Ok(_mapper.Map<OrderViewModel>(Order));
         }
 
         // POST: api/Order
         [HttpPost]
         public void Post([FromBody] OrderViewModel Order)
         {
-            _uow.Orders.Add(Mapper.Map<Order>(Order));
+            _uow.Orders.Add(_mapper.Map<Order>(Order));
             _uow.SaveChanges();
         }
 

@@ -18,12 +18,12 @@ namespace AspNetCoreSpa.Infrastructure
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger _logger;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
         public SeedData(
             ApplicationDbContext context,
             ILogger<SeedData> logger,
-            IHostingEnvironment hostingEnvironment
+            IWebHostEnvironment hostingEnvironment
             )
         {
             _context = context;

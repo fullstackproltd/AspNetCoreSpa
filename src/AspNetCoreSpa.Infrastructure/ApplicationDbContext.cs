@@ -26,7 +26,7 @@ namespace AspNetCoreSpa.Infrastructure
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.ReplaceService<IEntityMaterializerSource, EfCoreMaterializerSource>();
+            //optionsBuilder.ReplaceService<IEntityMaterializerSource, EfCoreMaterializerSource>();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

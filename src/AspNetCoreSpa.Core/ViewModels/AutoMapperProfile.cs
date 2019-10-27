@@ -1,4 +1,5 @@
-﻿using AspNetCoreSpa.Core.Entities;
+﻿using System.Collections.Generic;
+using AspNetCoreSpa.Core.Entities;
 using AutoMapper;
 
 namespace AspNetCoreSpa.Core.ViewModels
@@ -8,6 +9,9 @@ namespace AspNetCoreSpa.Core.ViewModels
         public AutoMapperProfile()
         {
             CreateMap<Customer, CustomerViewModel>()
+                .ReverseMap();
+
+            CreateMap<IEnumerable<Customer>, IEnumerable<CustomerViewModel>>()
                 .ReverseMap();
 
             CreateMap<Product, ProductViewModel>()

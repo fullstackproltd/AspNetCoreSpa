@@ -14,32 +14,38 @@ namespace AspNetCoreSpa.STS.Data.Migrations.IdentityServer.PersistedGrantDb
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
+                .HasAnnotation("ProductVersion", "3.0.0");
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
-                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientId")
                         .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
-                    b.Property<DateTime>("CreationTime");
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Data")
                         .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(50000);
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
                     b.Property<DateTime?>("Expiration")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SubjectId")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
                     b.HasKey("UserCode");
@@ -47,34 +53,45 @@ namespace AspNetCoreSpa.STS.Data.Migrations.IdentityServer.PersistedGrantDb
                     b.HasIndex("DeviceCode")
                         .IsUnique();
 
+                    b.HasIndex("Expiration");
+
                     b.ToTable("DeviceCodes");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
                     b.Property<string>("ClientId")
                         .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
-                    b.Property<DateTime>("CreationTime");
+                    b.Property<DateTime>("CreationTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Data")
                         .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(50000);
 
-                    b.Property<DateTime?>("Expiration");
+                    b.Property<DateTime?>("Expiration")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SubjectId")
+                        .HasColumnType("TEXT")
                         .HasMaxLength(200);
 
                     b.Property<string>("Type")
                         .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasMaxLength(50);
 
                     b.HasKey("Key");
+
+                    b.HasIndex("Expiration");
 
                     b.HasIndex("SubjectId", "ClientId", "Type");
 

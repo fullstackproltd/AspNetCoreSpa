@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NetEscapades.AspNetCore.SecurityHeaders;
@@ -14,7 +15,7 @@ namespace AspNetCoreSpa.Web.Extensions
         // https://github.com/andrewlock/NetEscapades.AspNetCore.SecurityHeaders
         public static IApplicationBuilder AddCustomSecurityHeaders(this IApplicationBuilder app)
         {
-            var env = app.ApplicationServices.GetRequiredService<IHostingEnvironment>();
+            var env = app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
 
             var policyCollection = new HeaderPolicyCollection()
                    .AddFrameOptionsDeny()

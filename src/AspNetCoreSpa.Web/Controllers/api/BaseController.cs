@@ -9,7 +9,7 @@ namespace AspNetCoreSpa.Web.Controllers.api
     [ServiceFilter(typeof(ApiExceptionFilter))]
     [Route("api/[controller]")]
     [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-    public class BaseController : Controller
+    public class BaseController : ControllerBase
     {
         public BaseController()
         {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using AspNetCoreSpa.Core.Entities;
 using AspNetCoreSpa.Core.ViewModels;
 using AspNetCoreSpa.Infrastructure;
@@ -10,16 +11,21 @@ namespace AspNetCoreSpa.Web.Controllers.api
     public class CustomerController : BaseController
     {
         private readonly IUnitOfWork _uow;
-        public CustomerController(IUnitOfWork uow)
+
+        public IMapper _mapper { get; }
+
+        public CustomerController(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
+            _mapper = mapper;
         }
         // GET: api/Customers
         [HttpGet]
         public IActionResult Get()
         {
             var allCustomers = _uow.Customers.GetAll();
-            return Ok(Mapper.Map<IEnumerable<CustomerViewModel>>(allCustomers));
+
+            return Ok(_mapper.Map<IEnumerable<CustomerViewModel>>(allCustomers));
         }
 
         // GET: api/Customers/5
@@ -27,14 +33,14 @@ namespace AspNetCoreSpa.Web.Controllers.api
         public IActionResult Get(int id)
         {
             var customer = _uow.Customers.Get(id);
-            return Ok(Mapper.Map<CustomerViewModel>(customer));
+            return Ok(_mapper.Map<CustomerViewModel>(customer));
         }
 
         // POST: api/Customers
         [HttpPost]
         public void Post([FromBody] CustomerViewModel customer)
         {
-            _uow.Customers.Add(Mapper.Map<Customer>(customer));
+            _uow.Customers.Add(_mapper.Map<Customer>(customer));
             _uow.SaveChanges();
         }
 
