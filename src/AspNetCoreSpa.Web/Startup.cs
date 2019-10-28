@@ -85,18 +85,27 @@ namespace AspNetCoreSpa.Web
                     {"Bearer", new string[] { }},
                 };
 
-                // c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                // {
-                //     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                //     Name = "Authorization",
-                //     In = "header",
-                //     Type = "apiKey"
-                // });
-                // c.AddSecurityRequirement(security);
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+                        },
+                        new[] { "readAccess", "writeAccess" }
+                    }
+                });
 
             });
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(AutoMapperProfile));
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
