@@ -62,7 +62,7 @@ namespace AspNetCoreSpa.Web
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>
                             {
-                                // base-address of your identityserver
+                                // base-address of your identity server
                                 options.Authority = Configuration["StsAuthority"];
                                 // name of the API resource
                                 options.Audience = "spa-api";
@@ -107,13 +107,13 @@ namespace AspNetCoreSpa.Web
 
             services.AddAutoMapper(typeof(AutoMapperProfile));
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseHealthChecks("/health");
 
             // app.AddCustomSecurityHeaders();
 
-            if (env.IsDevelopment())
+            if (HostingEnvironment.IsDevelopment())
             {
                 app.AddDevMiddlewares();
             }
@@ -185,7 +185,7 @@ namespace AspNetCoreSpa.Web
                           //        };
                           //    });
 
-                          if (env.IsDevelopment())
+                          if (HostingEnvironment.IsDevelopment())
                           {
                               //   spa.UseAngularCliServer(npmScript: "start");
                               //   OR
