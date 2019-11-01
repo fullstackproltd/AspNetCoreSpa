@@ -8,8 +8,8 @@
 - [Entity Framework Core 3.0](https://docs.efproject.net/en/latest/)
   - Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 - [Identity Server 4](http://identityserver.io/)
-- [Angular 7](https://angular.io/)
-- [Angular CLI 7](https://cli.angular.io/)
+- [Angular 8](https://angular.io/)
+- [Angular CLI 8](https://cli.angular.io/)
 - Secure - with CSP and custom security headers
 - [SignalR](https://github.com/aspnet/SignalR/)
 - [SASS](http://sass-lang.com/)
@@ -29,7 +29,7 @@
 ## Pre-requisites
 
 1. [.Net core 3.0 SDK](https://www.microsoft.com/net/core#windows)
-2. [Visual studio 2017](https://www.visualstudio.com/) OR [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension
+2. [Visual studio 2019](https://www.visualstudio.com/) OR [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension
 3. [NodeJs](https://nodejs.org/en/) (Latest LTS)
 4. [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) (Optional: If MS SQL server required instead of Sqlite during development)
 5. [Docker](https://www.docker.com/) (Optional: If application will run inside docker container)
