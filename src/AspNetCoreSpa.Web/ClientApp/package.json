@@ -72,7 +72,7 @@
     "ts-node": "8.4.1",
     "tslint": "5.20.0",
     "typescript": "3.5.3",
-    "webpack-bundle-analyzer": "3.6.0"
+    "webpack-bundle-analyzer": "3.3.2"
   },
   "jest": {
     "preset": "jest-preset-angular",
