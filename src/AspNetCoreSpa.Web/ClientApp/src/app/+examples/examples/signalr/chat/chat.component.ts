@@ -1,19 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 @Component({
   selector: 'appc-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit {
-
   private _hubConnection: HubConnection;
   public async: any;
   message = '';
   messages: string[] = [];
 
-  constructor(@Inject('BASE_URL') private baseUrl: string) { }
+  constructor(@Inject('BASE_URL') private baseUrl: string) {}
 
   public sendMessage(): void {
     const data = `Sent: ${this.message}`;
@@ -24,7 +23,6 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this._hubConnection = new HubConnectionBuilder().withUrl(`${this.baseUrl}chathub`).build();
 
     this._hubConnection.on('send', (data: any) => {
@@ -32,7 +30,8 @@ export class ChatComponent implements OnInit {
       this.messages.push(received);
     });
 
-    this._hubConnection.start()
+    this._hubConnection
+      .start()
       .then(() => {
         console.log('Hub connection started');
       })
@@ -40,5 +39,4 @@ export class ChatComponent implements OnInit {
         console.log('Error while establishing connection: ' + err);
       });
   }
-
 }
