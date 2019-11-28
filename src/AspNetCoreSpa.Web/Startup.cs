@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Hosting;
 using AspNetCoreSpa.Core.ViewModels;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 
 namespace AspNetCoreSpa.Web
 {
@@ -187,9 +188,9 @@ namespace AspNetCoreSpa.Web
 
                           if (HostingEnvironment.IsDevelopment())
                           {
-                              //   spa.UseAngularCliServer(npmScript: "start");
+                              spa.UseAngularCliServer(npmScript: "start");
                               //   OR
-                              spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                              //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
         }

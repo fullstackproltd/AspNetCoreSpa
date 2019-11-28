@@ -1,23 +1,24 @@
-FROM microsoft/dotnet:3.0-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-buster-slim AS base
 # Setup NodeJs
 RUN apt-get update -qq && \
     apt-get install -qq -y wget && \
     apt-get install -qq -y gnupg2 && \
-    wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
+    wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -qq -y build-essential nodejs && \
     apt-get install -qq -y nginx
 # End setup
 
 WORKDIR /app
 
-EXPOSE 5005
+EXPOSE 80
+EXPOSE 443
 
-FROM microsoft/dotnet:3.0-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-buster AS build
 # Setup NodeJs
 RUN apt-get update -qq && \
     apt-get install -qq -y wget && \
     apt-get install -qq -y gnupg2 && \
-    wget -qO- https://deb.nodesource.com/setup_8.x | bash - && \
+    wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
     apt-get install -qq -y build-essential nodejs && \
     apt-get install -qq -y nginx
 # End setup

@@ -1,5 +1,5 @@
 // Font awesome
-$fa-font-path : '../node_modules/font-awesome/fonts';
+$fa-font-path: '../node_modules/font-awesome/fonts';
 @import '../node_modules/font-awesome/scss/font-awesome';
 
 // Your variable overrides
@@ -30,14 +30,9 @@ $fa-font-path : '../node_modules/font-awesome/fonts';
 // Toastr
 // @import "../src/app/toastr/toastr.css";
 // Or bootstrap style alerts
-@import "../src/app/toastr/toastr-bs4.scss";
-
-// angular-calendar
-// https://github.com/mattlewis92/angular-calendar
-@import "../node_modules/angular-calendar/css/angular-calendar.css";
-@import "../node_modules/flatpickr/dist/flatpickr.css";
+@import '../src/app/toastr/toastr-bs4.scss';
 
 // ngx-datatable
-@import "./assets/styles/icons.css";
-@import "../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css";
+@import './assets/styles/icons.css';
+@import '../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css';
 // @import "../node_modules/@swimlane/ngx-datatable/release/themes/material.css";

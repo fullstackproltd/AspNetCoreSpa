@@ -43,10 +43,9 @@
     cd AspNetCoreSpa
 3. Restore packages:
     dotnet restore AspNetCoreSpa.sln
-4. Run client project
+4. Install npm packages:
     cd src/AspNetCoreSpa.Web/ClientApp:
-    4.1. npm install
-    4.2. npm start
+    - npm install
 5. Run .Net project:
     F5 from either [Visual Studio IDE](https://www.visualstudio.com/) OR [VScode] (https://code.visualstudio.com/):
     Note: If you are running using Visual Studio Code, install dev certificates using command:

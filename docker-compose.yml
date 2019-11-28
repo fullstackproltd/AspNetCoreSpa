@@ -1,15 +1,19 @@
 version: "3.6"
 
 services:
-  aspnetcorespaweb:
-    image: ${DOCKER_REGISTRY}aspnetcorespaweb
+  aspnetcorespa:
+    image: ${DOCKER_REGISTRY-}aspnetcorespa
     build:
       context: .
       dockerfile: src/AspNetCoreSpa.Web/Dockerfile
-    environment:
-      - IDENTITY_SERVER_ENDPOINT=https://aspnetcorests.azurewebsites.net
-    ports:
-      - 5005:80
+    networks:
+      - app-network
+
+  aspnetcorests:
+    image: ${DOCKER_REGISTRY-}aspnetcorests
+    build:
+      context: .
+      dockerfile: src/AspNetCoreSpa.STS/Dockerfile
     networks:
       - app-network
 
