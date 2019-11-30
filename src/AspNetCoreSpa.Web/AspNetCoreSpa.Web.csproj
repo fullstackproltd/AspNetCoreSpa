@@ -11,6 +11,8 @@
     <UserSecretsId>aspnetcorespa-c23d27a4-eb88-4b18-9b77-2a93f3b15119</UserSecretsId>
     <DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
     <DockerTargetOS>Linux</DockerTargetOS>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
 
@@ -20,11 +22,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />

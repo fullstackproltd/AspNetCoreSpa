@@ -9,22 +9,31 @@
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.435" />
-    <PackageReference Include="IdentityModel" Version="4.0.0" />
+    <PackageReference Include="IdentityModel" Version="4.1.1" />
     <PackageReference Include="IdentityServer4" Version="3.0.2" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.0.2" />
     <PackageReference Include="IdentityServer4.EntityFramework" Version="3.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.4" />
-    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.3" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.4" />
     <PackageReference Include="Sendgrid" Version="9.12.0" />
 
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="sts_dev_cert.pfx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
