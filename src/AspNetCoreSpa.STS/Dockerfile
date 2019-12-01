@@ -9,7 +9,7 @@ WORKDIR /src
 COPY ["src/AspNetCoreSpa.STS/AspNetCoreSpa.STS.csproj", "src/AspNetCoreSpa.STS/"]
 RUN dotnet restore "src/AspNetCoreSpa.STS/AspNetCoreSpa.STS.csproj"
 COPY . .
-WORKDIR "/src/src/AspNetCoreSpa.STS"
+WORKDIR /src/src/AspNetCoreSpa.STS
 RUN dotnet build "AspNetCoreSpa.STS.csproj" -c Release -o /app
 
 FROM build AS publish

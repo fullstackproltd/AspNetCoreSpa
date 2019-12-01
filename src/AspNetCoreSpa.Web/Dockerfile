@@ -34,7 +34,7 @@ RUN cd src/AspNetCoreSpa.Web/ClientApp \
     && npm i --silent
 
 COPY . .
-WORKDIR "/src/src/AspNetCoreSpa.Web"
+WORKDIR /src/src/AspNetCoreSpa.Web
 RUN dotnet build "AspNetCoreSpa.Web.csproj" -c Release -o /app
 
 FROM build AS publish
