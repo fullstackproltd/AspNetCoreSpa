@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreSpa.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191027153340_initial")]
+    [Migration("20191204195138_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "3.1.0");
 
             modelBuilder.Entity("AspNetCoreSpa.Core.Entities.Culture", b =>
                 {

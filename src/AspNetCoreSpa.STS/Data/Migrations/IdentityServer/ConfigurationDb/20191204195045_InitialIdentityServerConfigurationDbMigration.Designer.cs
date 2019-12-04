@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreSpa.STS.Data.Migrations.IdentityServer.ConfigurationDb
 {
     [DbContext(typeof(ConfigurationDbContext))]
-    [Migration("20191027181311_InitialIdentityServerConfigurationDbMigration")]
+    [Migration("20191204195045_InitialIdentityServerConfigurationDbMigration")]
     partial class InitialIdentityServerConfigurationDbMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0");
+                .HasAnnotation("ProductVersion", "3.1.0");
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResource", b =>
                 {
