@@ -15,7 +15,7 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         APP_NAME: ${{ 'aspnetcorespa' }}
       run: |
-        cd ./src/AspNetCoreSpa.Web
+        docker build -t registry.heroku.com/aspnetcorespa -f src/AspNetCoreSpa/Dockerfile .
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
         heroku container:push web -a $APP_NAME
         heroku container:release web -a $APP_NAME
