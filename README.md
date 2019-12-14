@@ -1,5 +1,6 @@
-[![Build status](https://asadsahi.visualstudio.com/_apis/public/build/definitions/a1519ab8-9104-47eb-96cc-6c37519c8b69/7/badge)](https://asadsahi.visualstudio.com/playground/_build/index?context=allDefinitions&path=%5C&definitionId=7&_a=completed)
-[![Join the chat at https://gitter.im/asadsahi-AspNetCoreSpa/Lobby](https://badges.gitter.im/asadsahi-AspNetCoreSpa/Lobby.svg)](https://gitter.im/asadsahi-AspNetCoreSpa/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Actions Status Web](https://github.com/asadsahi/aspnetcorespa/workflows/Web/badge.svg)](https://github.com/asadsahi/aspnetcorespa/actions?query=workflow%3AWEB)
+[![Actions Status STS](https://github.com/asadsahi/aspnetcorespa/workflows/STS/badge.svg)](https://github.com/asadsahi/aspnetcorespa/actions?query=workflow%3ASTS)
+[![AzureDevOps status](https://asadsahi.visualstudio.com/_apis/public/build/definitions/a1519ab8-9104-47eb-96cc-6c37519c8b69/7/badge)](https://asadsahi.visualstudio.com/playground/_build/index?context=allDefinitions&path=%5C&definitionId=7&_a=completed)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 ## Features
