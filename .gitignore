@@ -186,6 +186,7 @@ ClientBin/
 *.dbmdl
 *.dbproj.schemaview
 *.pfx
+!sts_dev_cert.pfx
 *.publishsettings
 node_modules/
 ClientApp/node_modules/
