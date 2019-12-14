@@ -16,6 +16,7 @@ jobs:
         APP_NAME: ${{ 'aspnetcorespa' }}
       run: |
         docker build -t $APP_NAME -f src/AspNetCoreSpa.Web/Dockerfile .
+        docker tag $APP_NAME registry.heroku.com/$APP_NAME/web
         docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-        heroku container:push web -a $APP_NAME
+        docker push registry.heroku.com/$APP_NAME/web
         heroku container:release web -a $APP_NAME
