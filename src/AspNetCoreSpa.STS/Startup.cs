@@ -226,11 +226,13 @@ namespace AspNetCoreSpa.STS
     
         private static X509Certificate2 GetCertificate(IWebHostEnvironment environment, IConfiguration configuration)
             {
-                X509Certificate2 cert;
                 var useLocalCertStore = Convert.ToBoolean(configuration["UseLocalCertStore"]);
                 var certificateThumbprint = configuration["CertificateThumbprint"];
+                var useDevCertificate = bool.Parse(configuration["UseDevCertificate"]);
 
-                if (environment.IsProduction())
+                X509Certificate2 cert = new X509Certificate2(Path.Combine(environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
+
+                if (environment.IsProduction() && !useDevCertificate)
                 {
                     if (useLocalCertStore)
                     {
@@ -250,11 +252,6 @@ namespace AspNetCoreSpa.STS
                         cert = keyVaultService.GetCertificateFromKeyVault(vaultConfigSection["CertificateName"]);
                     }
                 }
-                else
-                {
-                    cert = new X509Certificate2(Path.Combine(environment.ContentRootPath, "sts_dev_cert.pfx"), "1234");
-                }
-
                 return cert;
             }
         }
