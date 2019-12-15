@@ -12,10 +12,7 @@ RUN apt-get update -qq && \
 
 WORKDIR /app
 
-# To avoid conflict with port 80 on some platforms
-# https://github.com/aspnet/AspNetCore/issues/4699
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://*:8080
+EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
