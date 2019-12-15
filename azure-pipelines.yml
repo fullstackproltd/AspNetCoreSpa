@@ -16,25 +16,32 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@1
+  displayName: Install Nuget
 
 - task: UseDotNet@2
+  displayName: Install 3.1.x
   inputs:
     version: '3.1.x'
 
 - task: NuGetCommand@2
+  displayName: Restore
   inputs:
     restoreSolution: '$(solution)'
+
 - task: DotNetCoreCLI@2
+  displayName: Build
   inputs:
     command: 'build'
     arguments: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  displayName: Test
   inputs:
     command: 'test'
     arguments: '$(solution)'
 
 - task: DotNetCoreCLI@2
+  displayName: Publish
   inputs:
     command: 'publish'
     publishWebProjects: true
