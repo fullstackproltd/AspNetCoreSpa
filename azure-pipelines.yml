@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  solution: '**/*.sln'
+  solution: 'AspNetCoreSpa.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
