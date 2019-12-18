@@ -2,12 +2,12 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 # Setup NodeJs
-RUN apt-get update -qq && \
-    apt-get install -qq -y wget && \
-    apt-get install -qq -y gnupg2 && \
+RUN apt-get -qq update && \
+    apt-get -qq install -y wget && \
+    apt-get -qq install -y gnupg2 && \
     wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get install -qq -y build-essential nodejs && \
-    apt-get install -qq -y nginx
+    apt-get -qq install -y build-essential nodejs && \
+    apt-get -qq install -y nginx
 # End setup
 
 WORKDIR /app
@@ -17,12 +17,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 # Setup NodeJs
-RUN apt-get update -qq && \
-    apt-get install -qq -y wget && \
-    apt-get install -qq -y gnupg2 && \
+RUN apt-get -qq update && \
+    apt-get -qq install -y wget && \
+    apt-get -qq install -y gnupg2 && \
     wget -qO- https://deb.nodesource.com/setup_12.x | bash - && \
-    apt-get install -qq -y build-essential nodejs && \
-    apt-get install -qq -y nginx
+    apt-get -qq install -y build-essential nodejs && \
+    apt-get -qq install -y nginx
 # End setup
 
 WORKDIR /src
