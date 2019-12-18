@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using AspNetCoreSpa.Application.Enums;
 using AspNetCoreSpa.Domain.Entities;
@@ -42,7 +43,8 @@ namespace Infrastructure
         {
             if (!_context.Cultures.Any())
             {
-                var translations = _hostingEnvironment.GetTranslationFile();
+                var translations = File.ReadAllLines(Path.Combine(_hostingEnvironment.ContentRootPath, "translations.csv"));
+                ;
 
                 var locales = translations.First().Split(",").Skip(1).ToList();
 
@@ -92,7 +94,8 @@ namespace Infrastructure
                         Address = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
                     Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet",
                         City = "Lorem Ipsum " + i,
-                        Gender = i % 2 == 0 ? Gender.Male : Gender.Female,
+                        // TODO: fix gender
+                        //Gender = i % 2 == 0 ? Gender.Male : Gender.Female,
                         UpdatedDate = DateTime.UtcNow,
                         CreatedDate = DateTime.UtcNow
                     });

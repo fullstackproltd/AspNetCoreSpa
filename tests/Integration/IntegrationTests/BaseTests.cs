@@ -5,11 +5,11 @@ using Xunit;
 namespace Integration.IntegrationTests
 {
     #region snippet1
-    public class BasicTests : IClassFixture<WebApplicationFactory<AspNetCoreSpa.Web.Startup>>
+    public class BasicTests : IClassFixture<WebApplicationFactory<Web.Startup>>
     {
-        private readonly WebApplicationFactory<AspNetCoreSpa.Web.Startup> _factory;
+        private readonly WebApplicationFactory<Web.Startup> _factory;
 
-        public BasicTests(WebApplicationFactory<AspNetCoreSpa.Web.Startup> factory)
+        public BasicTests(WebApplicationFactory<Web.Startup> factory)
         {
             _factory = factory;
         }

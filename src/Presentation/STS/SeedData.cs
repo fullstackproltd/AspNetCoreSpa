@@ -38,7 +38,7 @@ namespace STS
                 SeedIdentityServerConfigData(configContext);
 
                 // Seeding Users and roles
-                var appContext = scope.ServiceProvider.GetService<ApplicationDbContext>();
+                var appContext = scope.ServiceProvider.GetService<IdentityServerDbContext>();
                 appContext.Database.Migrate();
                 CreateRoles();
                 CreateUsers(appContext);
@@ -92,7 +92,7 @@ namespace STS
                 }
             }
         }
-        private void CreateUsers(ApplicationDbContext context)
+        private void CreateUsers(IdentityServerDbContext context)
         {
             if (!context.ApplicationUsers.Any())
             {

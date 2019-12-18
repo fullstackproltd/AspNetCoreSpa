@@ -9,12 +9,12 @@ using STS.Models;
 
 namespace STS
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
+    public class IdentityServerDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
     {
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public IdentityServerDbContext(DbContextOptions<IdentityServerDbContext> options)
             : base(options)
         {
         }

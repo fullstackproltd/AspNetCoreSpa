@@ -1,4 +1,4 @@
-namespace AspNetCoreSpa.Application.Enums
+namespace Web.ViewModels
 {
     public enum Gender
     {

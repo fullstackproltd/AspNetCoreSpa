@@ -1,4 +1,7 @@
-﻿namespace Integration.Helpers
+﻿using Infrastructure;
+using Persistence;
+
+namespace Integration.Helpers
 {
     public static class Utilities
     {

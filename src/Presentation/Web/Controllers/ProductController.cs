@@ -5,7 +5,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using ProductViewModel = Web.ViewModels.ProductViewModel;
 
-namespace Web.Controllers.api
+namespace Web.Controllers
 {
     public class ProductController : BaseController
     {

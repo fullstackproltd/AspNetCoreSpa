@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using AspNetCoreSpa.Core;
-using AspNetCoreSpa.Core.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
@@ -14,7 +12,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace AspNetCoreSpa.Infrastructure.Services
+namespace Infrastructure.Services
 {
     public class ApplicationDataService : IApplicationDataService
     {
@@ -72,7 +70,7 @@ namespace AspNetCoreSpa.Infrastructure.Services
                 // Key not in cache, so get & set data.
                 var culturalContent = _stringLocalizer.WithCulture(culture)
                                         .GetAllStrings()
-                                        .Select(c => new ContentVm
+                                        .Select(c => new
                                         {
                                             Key = c.Name,
                                             Value = c.Value

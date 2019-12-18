@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using AspNetCoreSpa.Domain.Enums;
+using AspNetCoreSpa.Application.Enums;
 
 namespace AspNetCoreSpa.Domain.Entities
 {

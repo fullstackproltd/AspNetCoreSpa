@@ -1,4 +1,5 @@
-﻿using Infrastructure.Repositories.Interfaces;
+﻿using AspNetCoreSpa.Domain.Entities;
+using Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories

@@ -5,7 +5,7 @@ using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using CustomerViewModel = Web.ViewModels.CustomerViewModel;
 
-namespace Web.Controllers.api
+namespace Web.Controllers
 {
     public class CustomerController : BaseController
     {
@@ -50,7 +50,7 @@ namespace Web.Controllers.api
             var cust = _uow.Customers.Get(id);
             cust.Name = customer.Name;
             cust.DateOfBirth = customer.DateOfBirth;
-            cust.Gender = customer.Gender;
+            //cust.Gender = (Gender)customer.Gender;
             cust.Address = customer.Address;
             cust.City = customer.City;
             cust.Email = customer.Email;

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using AspNetCoreSpa.Domain.Entities;
 using AutoMapper;
 using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using OrderViewModel = Web.ViewModels.OrderViewModel;
 
-namespace Web.Controllers.api
+namespace Web.Controllers
 {
     public class OrderController : BaseController
     {

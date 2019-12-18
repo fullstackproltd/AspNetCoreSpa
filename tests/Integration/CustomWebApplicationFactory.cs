@@ -1,14 +1,17 @@
 ﻿using System;
+using Infrastructure;
 using Integration.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Persistence;
 
 namespace Integration
 {
     #region snippet1
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<AspNetCoreSpa.Web.Startup>
+    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Web.Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

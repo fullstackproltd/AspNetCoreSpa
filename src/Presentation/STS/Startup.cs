@@ -78,14 +78,14 @@ namespace STS
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             // Add framework services.
-            services.AddDbContextPool<ApplicationDbContext>(options =>
+            services.AddDbContextPool<IdentityServerDbContext>(options =>
             {
                 options.UseSqlite(connectionString);
                 options.UseSqlite(connectionString, b => b.MigrationsAssembly(migrationsAssembly));
             });
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<IdentityServerDbContext>()
                 .AddDefaultTokenProviders();
 
             services.AddCors(options =>
@@ -100,7 +100,7 @@ namespace STS
 
             services.AddTransient<ISeedData, SeedData>();
             services.AddTransient<IProfileService, CustomProfileService>();
-            services.AddTransient<ApplicationDbContext>();
+            services.AddTransient<IdentityServerDbContext>();
 
             services.AddControllersWithViews();
             services.AddRazorPages()
