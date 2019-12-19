@@ -170,14 +170,14 @@ namespace AspNetCoreSpa.Web
             // https://github.com/openiddict/openiddict-core/issues/518
             // And
             // https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
-            var forwarOptions = new ForwardedHeadersOptions
+            var forwardOptions = new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             };
-            forwarOptions.KnownNetworks.Clear();
-            forwarOptions.KnownProxies.Clear();
+            forwardOptions.KnownNetworks.Clear();
+            forwardOptions.KnownProxies.Clear();
 
-            app.UseForwardedHeaders(forwarOptions);
+            app.UseForwardedHeaders(forwardOptions);
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
