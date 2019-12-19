@@ -1,5 +1,6 @@
 ﻿using System;
-using Infrastructure;
+using AspNetCoreSpa.Infrastructure;
+using AspNetCoreSpa.Infrastructure.Services.SeedData;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;

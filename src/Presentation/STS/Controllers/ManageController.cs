@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Infrastructure.Identity.Entities;
+using AspNetCoreSpa.Infrastructure.Services;
+using AspNetCoreSpa.Infrastructure.Services.Email;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,7 +18,6 @@ using Newtonsoft.Json;
 using STS.Models;
 using STS.Models.ManageViewModels;
 using STS.Resources;
-using STS.Services;
 
 namespace STS.Controllers
 {
@@ -25,7 +27,7 @@ namespace STS.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailService;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
 
@@ -37,14 +39,14 @@ namespace STS.Controllers
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
-          IEmailSender emailSender,
+          IEmailService emailService,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder,
           IStringLocalizerFactory factory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
+            _emailService = emailService;
             _logger = logger;
             _urlEncoder = urlEncoder;
 
@@ -134,7 +136,7 @@ namespace STS.Controllers
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
             var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-            await _emailSender.SendEmail(
+            await _emailService.SendEmail(
                model.Email,
                "AspNetCoreSpa.STS Verification Email",
                $"Please verify by clicking here: {callbackUrl}",

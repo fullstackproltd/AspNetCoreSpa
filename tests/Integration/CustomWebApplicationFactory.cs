@@ -1,5 +1,5 @@
 ﻿using System;
-using Infrastructure;
+using AspNetCoreSpa.Infrastructure;
 using Integration.Helpers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

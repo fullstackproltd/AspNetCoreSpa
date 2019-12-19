@@ -1,8 +1,7 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Linq;
-using AspNetCoreSpa.Web.Filters;
-using Infrastructure;
+using AspNetCoreSpa.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,8 +44,8 @@ namespace Web.Extensions
             // Add framework services.
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
-                string useSqLite = Startup.Configuration["Data:useSqLite"];
-                string useInMemory = Startup.Configuration["Data:useInMemory"];
+                var useSqLite = Startup.Configuration["Data:useSqLite"];
+                var useInMemory = Startup.Configuration["Data:useInMemory"];
                 if (useInMemory.ToLower() == "true")
                 {
                     options.UseInMemoryDatabase("AspNetCoreSpa"); // Takes database name
@@ -101,7 +100,7 @@ namespace Web.Extensions
             // New instance every time, only configuration class needs so its ok
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ApiExceptionFilter>();
-            services.AddInfrastructurServices();
+            services.AddInfrastructure();
             return services;
         }
 

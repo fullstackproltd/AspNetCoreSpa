@@ -1,6 +1,6 @@
 ﻿using AspNetCoreSpa.Domain.Entities;
 
-namespace Infrastructure.Repositories.Interfaces
+namespace AspNetCoreSpa.Infrastructure.Repositories.Interfaces
 {
     public interface IProductRepository : IRepository<Product>
     {

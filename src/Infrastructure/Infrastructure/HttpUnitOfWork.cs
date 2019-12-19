@@ -1,7 +1,8 @@
 ﻿using AspNet.Security.OpenIdConnect.Primitives;
+using AspNetCoreSpa.Infrastructure.Services.Uow;
 using Microsoft.AspNetCore.Http;
 
-namespace Infrastructure
+namespace AspNetCoreSpa.Infrastructure
 {
     public class HttpUnitOfWork : UnitOfWork
     {

@@ -1,7 +1,9 @@
 ﻿using System;
+using AspNetCoreSpa.Application;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace STS
@@ -33,13 +35,7 @@ namespace STS
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                 .ConfigureLogging((hostingContext, logging) =>
-                 {
-                     logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                     logging.AddConsole();
-                     logging.AddDebug();
-                     logging.AddEventSourceLogger();
-                 })
-                 .UseStartup<Startup>();
+                .ConfigureAppConfiguration((host, configuration) => configuration.AddCustomAppSettings(host.HostingEnvironment.ContentRootPath, host.HostingEnvironment.EnvironmentName))
+                .UseStartup<Startup>();
     }
 }

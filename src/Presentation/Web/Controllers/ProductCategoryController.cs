@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AspNetCoreSpa.Domain.Entities;
+using AspNetCoreSpa.Infrastructure.Services.Uow;
 using AutoMapper;
-using Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using ProductCategoryViewModel = Web.ViewModels.ProductCategoryViewModel;
 

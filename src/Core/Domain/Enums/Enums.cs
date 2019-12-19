@@ -1,4 +1,4 @@
-namespace AspNetCoreSpa.Application.Enums
+namespace AspNetCoreSpa.Domain.Enums
 {
     public enum Gender
     {

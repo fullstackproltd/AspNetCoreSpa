@@ -6,7 +6,7 @@ using AspNetCoreSpa.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Infrastructure
+namespace AspNetCoreSpa.Infrastructure
 {
     public class ApplicationDbContext : DbContext
     {

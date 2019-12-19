@@ -1,4 +1,4 @@
-﻿using Infrastructure;
+﻿using AspNetCoreSpa.Infrastructure;
 using Persistence;
 
 namespace Integration.Helpers

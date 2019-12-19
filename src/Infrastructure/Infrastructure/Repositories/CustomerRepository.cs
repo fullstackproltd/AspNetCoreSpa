@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using AspNetCoreSpa.Domain.Entities;
-using Infrastructure.Repositories.Interfaces;
+using AspNetCoreSpa.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories
+namespace AspNetCoreSpa.Infrastructure.Repositories
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {

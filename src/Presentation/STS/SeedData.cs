@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using AspNetCoreSpa.Infrastructure.Identity;
+using AspNetCoreSpa.Infrastructure.Identity.Entities;
 using IdentityServer4;
 using IdentityServer4.EntityFramework.DbContexts;
-using IdentityServer4.EntityFramework.Interfaces;
-using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using STS.Models;
 
 namespace STS
 {
@@ -29,53 +28,13 @@ namespace STS
         }
         public void Seed(IServiceProvider serviceProvider)
         {
-            using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider.GetService<PersistedGrantDbContext>().Database.Migrate();
+            using var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-                var configContext = scope.ServiceProvider.GetService<ConfigurationDbContext>();
-                configContext.Database.Migrate();
-                SeedIdentityServerConfigData(configContext);
-
-                // Seeding Users and roles
-                var appContext = scope.ServiceProvider.GetService<IdentityServerDbContext>();
-                appContext.Database.Migrate();
-                CreateRoles();
-                CreateUsers(appContext);
-
-            }
-        }
-
-        private void SeedIdentityServerConfigData(IConfigurationDbContext context)
-        {
-            if (!context.Clients.Any())
-            {
-                var clientUrls = Startup.Configuration["ClientUrls"];
-
-                foreach (var client in Config.GetClients(clientUrls).ToList())
-                {
-                    context.Clients.Add(client.ToEntity());
-                }
-                context.SaveChanges();
-            }
-
-            if (!context.IdentityResources.Any())
-            {
-                foreach (var resource in Config.GetIdentityResources().ToList())
-                {
-                    context.IdentityResources.Add(resource.ToEntity());
-                }
-                context.SaveChanges();
-            }
-
-            if (!context.ApiResources.Any())
-            {
-                foreach (var resource in Config.GetApiResources().ToList())
-                {
-                    context.ApiResources.Add(resource.ToEntity());
-                }
-                context.SaveChanges();
-            }
+            // Seeding Users and roles
+            var appContext = scope.ServiceProvider.GetService<IdentityServerDbContext>();
+            appContext.Database.Migrate();
+            CreateRoles();
+            CreateUsers(appContext);
         }
 
         private void CreateRoles()
@@ -94,14 +53,14 @@ namespace STS
         }
         private void CreateUsers(IdentityServerDbContext context)
         {
-            if (!context.ApplicationUsers.Any())
+            if (!context.Users.Any())
             {
-                var adminUser = new ApplicationUser { UserName = "admin@admin.com", FirstName = "Admin first", LastName = "Admin last", Email = "admin@admin.com", Mobile = "0123456789", EmailConfirmed = true, CreatedDate = DateTime.Now, IsEnabled = true };
+                var adminUser = new ApplicationUser { UserName = "admin@admin.com", FirstName = "Admin first", LastName = "Admin last", Email = "admin@admin.com", Mobile = "0123456789", EmailConfirmed = true, CreatedDate = DateTime.Now };
                 _userManager.CreateAsync(adminUser, "P@ssw0rd!").Result.ToString();
                 _userManager.AddClaimAsync(adminUser, new Claim(IdentityServerConstants.StandardScopes.Phone, adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("admin@admin.com").GetAwaiter().GetResult(), "Admin").Result.ToString();
 
-                var normalUser = new ApplicationUser { UserName = "user@user.com", FirstName = "First", LastName = "Last", Email = "user@user.com", Mobile = "0123456789", EmailConfirmed = true, CreatedDate = DateTime.Now, IsEnabled = true };
+                var normalUser = new ApplicationUser { UserName = "user@user.com", FirstName = "First", LastName = "Last", Email = "user@user.com", Mobile = "0123456789", EmailConfirmed = true, CreatedDate = DateTime.Now };
                 _userManager.CreateAsync(normalUser, "P@ssw0rd!").Result.ToString();
                 _userManager.AddClaimAsync(adminUser, new Claim(IdentityServerConstants.StandardScopes.Phone, adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("user@user.com").GetAwaiter().GetResult(), "User").Result.ToString();

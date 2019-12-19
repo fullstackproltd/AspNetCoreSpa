@@ -1,7 +1,8 @@
 ﻿// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 using System;
-using Infrastructure.Services;
+using AspNetCoreSpa.Infrastructure.Services;
+using AspNetCoreSpa.Infrastructure.Services.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,11 +11,11 @@ namespace Web.Controllers
 {
     public class HomeController : ControllerBase
     {
-        private readonly IApplicationDataService _applicationDataService;
+        private readonly IApplicationService _applicationService;
 
-        public HomeController(IApplicationDataService applicationDataService)
+        public HomeController(IApplicationService applicationService)
         {
-            _applicationDataService = applicationDataService;
+            _applicationService = applicationService;
         }
 
         [HttpPost("api/setlanguage")]
@@ -30,7 +31,7 @@ namespace Web.Controllers
         [HttpGet("api/applicationdata")]
         public IActionResult Get()
         {
-            var appData = _applicationDataService.GetApplicationData(Request.HttpContext, Startup.Configuration["StsAuthority"]);
+            var appData = _applicationService.GetApplicationData(Request.HttpContext, Startup.Configuration["StsAuthority"]);
 
             return Ok(appData);
         }

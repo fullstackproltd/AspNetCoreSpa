@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Identity server";
 }
-@inject IOptions<StsConfig> OptionsStsConfig
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -50,7 +49,4 @@ else
         </div>
     </div>
 
-    <a class="btn btn-primary" href="@OptionsStsConfig.Value.ClientUrl">
-        Back to client
-    </a>
 </div>

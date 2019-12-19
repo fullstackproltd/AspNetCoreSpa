@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Infrastructure.Identity.Entities;
+using AspNetCoreSpa.Infrastructure.Services;
+using AspNetCoreSpa.Infrastructure.Services.Email;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;
@@ -24,7 +27,6 @@ using Microsoft.Extensions.Options;
 using STS.Models;
 using STS.Models.AccountViewModels;
 using STS.Resources;
-using STS.Services;
 
 namespace STS.Controllers
 {
@@ -33,8 +35,7 @@ namespace STS.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly StsConfig _stsConfig;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailService _emailService;
         private readonly ILogger _logger;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
@@ -46,23 +47,21 @@ namespace STS.Controllers
             UserManager<ApplicationUser> userManager,
             IPersistedGrantService persistedGrantService,
             SignInManager<ApplicationUser> signInManager,
-            IEmailSender emailSender,
+            IEmailService emailService,
             ILoggerFactory loggerFactory,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IStringLocalizerFactory factory,
-            IOptions<StsConfig> stsConfig,
             IEventService events)
         {
             _userManager = userManager;
             _persistedGrantService = persistedGrantService;
             _signInManager = signInManager;
-            _emailSender = emailSender;
+            _emailService = emailService;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _interaction = interaction;
             _clientStore = clientStore;
             _events = events;
-            _stsConfig = stsConfig.Value;
 
             var type = typeof(SharedResource);
             var assemblyName = new AssemblyName(type.GetTypeInfo().Assembly.FullName);
@@ -129,7 +128,7 @@ namespace STS.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberLogin, lockoutOnFailure: _stsConfig.EnableAccountLockout);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberLogin, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
@@ -197,8 +196,8 @@ namespace STS.Controllers
 
             return new LoginViewModel
             {
-                EnableLocalLogin = allowLocal && _stsConfig.AllowLocalLogin,
-                AllowRememberLogin = _stsConfig.AllowRememberLogin,
+                EnableLocalLogin = allowLocal,
+                AllowRememberLogin = true,
                 ReturnUrl = returnUrl,
                 Email = context?.LoginHint,
                 ExternalProviders = providers.ToArray()
@@ -235,7 +234,7 @@ namespace STS.Controllers
         }
         private async Task<LogoutViewModel> BuildLogoutViewModelAsync(string logoutId)
         {
-            var vm = new LogoutViewModel { LogoutId = logoutId, ShowLogoutPrompt = _stsConfig.ShowLogoutPrompt };
+            var vm = new LogoutViewModel { LogoutId = logoutId, ShowLogoutPrompt = false };
 
             if (User?.Identity.IsAuthenticated != true)
             {
@@ -264,7 +263,7 @@ namespace STS.Controllers
 
             var vm = new LoggedOutViewModel
             {
-                AutomaticRedirectAfterSignOut = _stsConfig.AutomaticRedirectAfterSignOut,
+                AutomaticRedirectAfterSignOut = true,
                 PostLogoutRedirectUri = logout?.PostLogoutRedirectUri,
                 ClientName = string.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
                 SignOutIframeUrl = logout?.SignOutIFrameUrl,
@@ -372,7 +371,7 @@ namespace STS.Controllers
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    await _emailSender.SendEmail(
+                    await _emailService.SendEmail(
                         model.Email,
                         "Confirm your account",
                        $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>",
@@ -397,72 +396,18 @@ namespace STS.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLogin(string provider, string returnUrl = null)
         {
-            if (_stsConfig.WindowsAuthenticationSchemeName == provider)
+
+            // start challenge and roundtrip the return URL and 
+            var props = new AuthenticationProperties()
             {
-                // windows authentication needs special handling
-                return await ProcessWindowsLoginAsync(returnUrl);
-            }
-            else
-            {
-                // start challenge and roundtrip the return URL and 
-                var props = new AuthenticationProperties()
-                {
-                    RedirectUri = Url.Action(nameof(ExternalLoginCallback)),
-                    Items =
+                RedirectUri = Url.Action(nameof(ExternalLoginCallback)),
+                Items =
                     {
                         { "returnUrl", returnUrl },
                         { "scheme", provider },
                     }
-                };
-                return Challenge(props, provider);
-            }
-        }
-
-        private async Task<IActionResult> ProcessWindowsLoginAsync(string returnUrl)
-        {
-            // see if windows auth has already been requested and succeeded
-            var result = await HttpContext.AuthenticateAsync(_stsConfig.WindowsAuthenticationSchemeName);
-            if (result?.Principal is WindowsPrincipal wp)
-            {
-                // we will issue the external cookie and then redirect the
-                // user back to the external callback, in essence, tresting windows
-                // auth the same as any other external authentication mechanism
-                var props = new AuthenticationProperties()
-                {
-                    RedirectUri = Url.Action("ExternalLoginCallback"),
-                    Items =
-                    {
-                        { "returnUrl", returnUrl },
-                        { "scheme", _stsConfig.WindowsAuthenticationSchemeName },
-                    }
-                };
-
-                var id = new ClaimsIdentity(_stsConfig.WindowsAuthenticationSchemeName);
-                id.AddClaim(new Claim(JwtClaimTypes.Subject, wp.Identity.Name));
-                id.AddClaim(new Claim(JwtClaimTypes.Name, wp.Identity.Name));
-
-                // add the groups as claims -- be careful if the number of groups is too large
-                if (_stsConfig.IncludeWindowsGroups)
-                {
-                    var wi = wp.Identity as WindowsIdentity;
-                    var groups = wi.Groups.Translate(typeof(NTAccount));
-                    var roles = groups.Select(x => new Claim(JwtClaimTypes.Role, x.Value));
-                    id.AddClaims(roles);
-                }
-
-                await HttpContext.SignInAsync(
-                    IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme,
-                    new ClaimsPrincipal(id),
-                    props);
-                return Redirect(props.RedirectUri);
-            }
-            else
-            {
-                // trigger windows auth
-                // since windows auth don't support the redirect uri,
-                // this URL is re-triggered when we call challenge
-                return Challenge(_stsConfig.WindowsAuthenticationSchemeName);
-            }
+            };
+            return Challenge(props, provider);
         }
 
         /// <summary>
@@ -717,7 +662,7 @@ namespace STS.Controllers
                 // Send an email with this link
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                await _emailSender.SendEmail(
+                await _emailService.SendEmail(
                    model.Email,
                    "Reset Password",
                    $"Please reset your password by clicking here: {callbackUrl}",
@@ -832,7 +777,7 @@ namespace STS.Controllers
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email")
             {
-                await _emailSender.SendEmail(await _userManager.GetEmailAsync(user), "Security Code", message, "Hi Sir");
+                await _emailService.SendEmail(await _userManager.GetEmailAsync(user), "Security Code", message, "Hi Sir");
             }
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });

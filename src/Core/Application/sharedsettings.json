@@ -1,0 +1,16 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "EmailSettings": {
+    "SmtpHost": "smtp.mailtrap.io",
+    "SmtpPort": "587",
+    "SmtpUsername": "eb922fffb57515",
+    "SmtpPassword": "ae511b57f934c6",
+    "SmtpSenderName": "SmartrCriteria",
+    "SmtpSenderAddress": "admin@example.com"
+  },
+  "AllowedHosts": "*"
+}
