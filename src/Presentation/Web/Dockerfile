@@ -26,24 +26,26 @@ RUN apt-get -qq update && \
 # End setup
 
 WORKDIR /src
-COPY ["src/AspNetCoreSpa.Web/AspNetCoreSpa.Web.csproj", "src/AspNetCoreSpa.Web/"]
-COPY ["src/AspNetCoreSpa.Core/AspNetCoreSpa.Core.csproj", "src/AspNetCoreSpa.Core/"]
-COPY ["src/AspNetCoreSpa.Infrastructure/AspNetCoreSpa.Infrastructure.csproj", "src/AspNetCoreSpa.Infrastructure/"]
-RUN dotnet restore "src/AspNetCoreSpa.Web/AspNetCoreSpa.Web.csproj"
-COPY ["src/AspNetCoreSpa.Web/ClientApp/package.json", "src/AspNetCoreSpa.Web/ClientApp/"]
+COPY ["src/Presentation/Web/Web.csproj", "src/Presentation/Web/"]
+COPY ["src/Infrastructure/Infrastructure/Infrastructure.csproj", "src/Infrastructure/Infrastructure/"]
+COPY ["src/Core/Application/Application.csproj", "src/Core/Application/"]
+COPY ["src/Core/Domain/Domain.csproj", "src/Core/Domain/"]
+COPY ["src/Core/Common/Common.csproj", "src/Core/Common/"]
+COPY ["src/Infrastructure/Persistence/Persistence.csproj", "src/Infrastructure/Persistence/"]
+RUN dotnet restore "src/Presentation/Web/Web.csproj"
+COPY ["src/Presentation/Web/ClientApp/package.json", "src/Presentation/Web/ClientApp/"]
 
-RUN cd src/AspNetCoreSpa.Web/ClientApp \
+RUN cd src/Presentation/Web/ClientApp \
     && npm i --silent
 
 COPY . .
-WORKDIR /src/src/AspNetCoreSpa.Web
-RUN dotnet build "AspNetCoreSpa.Web.csproj" -c Release -o /app
+WORKDIR /src/src/Presentation/Web
+RUN dotnet build "Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-
-RUN dotnet publish "AspNetCoreSpa.Web.csproj" -c Release -o /app
+RUN dotnet publish "Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "AspNetCoreSpa.Web.dll"]

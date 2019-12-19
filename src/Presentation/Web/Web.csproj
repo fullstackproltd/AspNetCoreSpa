@@ -13,6 +13,7 @@
     <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
     <RootNamespace>AspNetCoreSpa.Web</RootNamespace>
     <AssemblyName>AspNetCoreSpa.Web</AssemblyName>
+    <UserSecretsId>59517051-9d6b-4801-9469-232f804fdd0f</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

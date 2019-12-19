@@ -15,7 +15,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.0" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.4" />
-    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.4" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.5" />
     <PackageReference Include="OpenIddict" Version="2.0.1" />
     <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Sendgrid" Version="9.12.0" />
