@@ -1,12 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreSpa.STS.Filters;
+using AspNetCoreSpa.STS.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using STS.Filters;
-using STS.Models;
 
-namespace STS.Controllers
+namespace AspNetCoreSpa.STS.Controllers
 {
     [Authorize]
     [SecurityHeaders]

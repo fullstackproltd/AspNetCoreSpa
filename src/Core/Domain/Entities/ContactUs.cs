@@ -1,6 +1,6 @@
 namespace AspNetCoreSpa.Domain.Entities
 {
-    public class ContactUs : IEntityBase
+    public class ContactUs
     {
         public int Id { get; set; }
         public string Name { get; set; }

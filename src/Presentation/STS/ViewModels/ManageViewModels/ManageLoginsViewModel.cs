@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace STS.ViewModels.ManageViewModels
+namespace AspNetCoreSpa.STS.ViewModels.ManageViewModels
 {
     public class ManageLoginsViewModel
     {

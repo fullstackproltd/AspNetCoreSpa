@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace STS.Models.AccountViewModels
+namespace AspNetCoreSpa.STS.Models.AccountViewModels
 {
     public class LoginViewModel : LoginInputModel
     {

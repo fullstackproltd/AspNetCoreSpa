@@ -1,17 +1,17 @@
 ﻿using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AspNetCoreSpa.STS.Filters;
+using AspNetCoreSpa.STS.Models;
+using AspNetCoreSpa.STS.Resources;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using STS.Filters;
-using STS.Models;
-using STS.Resources;
 
-namespace STS.Controllers
+namespace AspNetCoreSpa.STS.Controllers
 {
     /// <summary>
     /// This controller implements the consent logic

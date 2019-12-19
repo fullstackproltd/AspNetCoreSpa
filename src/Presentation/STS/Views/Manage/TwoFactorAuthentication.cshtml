@@ -1,7 +1,7 @@
 @inject LocService SharedLocalizer
-@using STS.Resources
-@using STS.Views.Manage
-@model STS.Models.ManageViewModels.TwoFactorAuthenticationViewModel
+@using AspNetCoreSpa.STS.Resources
+@using AspNetCoreSpa.STS.Views.Manage
+@model AspNetCoreSpa.STS.Models.ManageViewModels.TwoFactorAuthenticationViewModel
 @{
     ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("2FA_AUTHENTICATION_TITLE");
     ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);

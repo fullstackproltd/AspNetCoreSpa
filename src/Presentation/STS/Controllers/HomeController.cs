@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AspNetCoreSpa.STS.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Mvc;
-using STS.Models;
 
-namespace STS.Controllers
+namespace AspNetCoreSpa.STS.Controllers
 {
     public class HomeController : Controller
     {

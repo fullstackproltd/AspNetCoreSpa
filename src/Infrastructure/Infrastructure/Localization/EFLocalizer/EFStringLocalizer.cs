@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AspNetCoreSpa.Application.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
@@ -8,9 +9,9 @@ namespace AspNetCoreSpa.Infrastructure.Localization.EFLocalizer
 {
     public class EFStringLocalizer : IStringLocalizer
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public EFStringLocalizer(ApplicationDbContext context)
+        public EFStringLocalizer(IApplicationDbContext context)
         {
             _context = context;
         }

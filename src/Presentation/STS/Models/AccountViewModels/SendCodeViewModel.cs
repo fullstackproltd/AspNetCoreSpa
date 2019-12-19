@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace STS.Models.AccountViewModels
+namespace AspNetCoreSpa.STS.Models.AccountViewModels
 {
     public class SendCodeViewModel
     {

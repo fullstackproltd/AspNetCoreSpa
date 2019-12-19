@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Web.SignalR
+namespace AspNetCoreSpa.Web.SignalR
 {
     public class Chat : Hub
     {

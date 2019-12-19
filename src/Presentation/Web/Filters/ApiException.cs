@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Web.Filters
+namespace AspNetCoreSpa.Web.Filters
 {
 
     public class ApiException : Exception

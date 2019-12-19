@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AspNetCoreSpa.Domain.Entities;
+﻿using AspNetCoreSpa.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistence.Configurations
+namespace AspNetCoreSpa.Persistence.Configurations
 {
     public class ContactUsConfiguration : IEntityTypeConfiguration<ContactUs>
     {

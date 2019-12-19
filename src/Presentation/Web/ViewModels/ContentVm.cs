@@ -1,4 +1,4 @@
-namespace Web.ViewModels
+namespace AspNetCoreSpa.Web.ViewModels
 {
     public class ContentVm
     {

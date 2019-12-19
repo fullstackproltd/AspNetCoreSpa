@@ -4,7 +4,7 @@ using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Newtonsoft.Json;
 
-namespace STS.Models
+namespace AspNetCoreSpa.STS.Models
 {
     public class DiagnosticsViewModel
     {

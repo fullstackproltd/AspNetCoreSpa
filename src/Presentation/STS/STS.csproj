@@ -5,6 +5,8 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
     <DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
+    <RootNamespace>AspNetCoreSpa.STS</RootNamespace>
+    <AssemblyName>AspNetCoreSpa.STS</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

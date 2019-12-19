@@ -1,32 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using AspNetCoreSpa.Application.Settings;
+﻿using System.Reflection;
 using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure;
-using AspNetCoreSpa.Infrastructure.Services;
-using AspNetCoreSpa.Infrastructure.Services.Email;
-using IdentityServer4;
+using AspNetCoreSpa.STS.Resources;
+using AspNetCoreSpa.STS.Seed;
 using IdentityServer4.Services;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using STS.Models;
-using STS.Resources;
 
-namespace STS
+namespace AspNetCoreSpa.STS
 {
     public class Startup
     {
@@ -42,7 +28,7 @@ namespace STS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IProfileService, CustomProfileService>();
-            services.AddTransient<ISeedData, SeedData>();
+            services.AddTransient<IIdentitySeedData, IdentitySeedData>();
             services.AddSingleton<LocService>();
 
             services.AddInfrastructure()

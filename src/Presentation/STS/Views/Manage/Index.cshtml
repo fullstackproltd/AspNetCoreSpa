@@ -1,7 +1,7 @@
 ﻿@inject LocService SharedLocalizer
-@using STS.Resources
-@using STS.Views.Manage
-@model STS.Models.ManageViewModels.IndexViewModel
+@using AspNetCoreSpa.STS.Resources
+@using AspNetCoreSpa.STS.Views.Manage
+@model AspNetCoreSpa.STS.Models.ManageViewModels.IndexViewModel
 @{
     ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("PROFILE");
     ViewData.AddActivePage(ManageNavPages.Index);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Extensions;
 using AspNetCoreSpa.Application.Settings;
 using AspNetCoreSpa.Common;
@@ -10,15 +11,8 @@ using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
 using AspNetCoreSpa.Infrastructure.Identity.Services;
 using AspNetCoreSpa.Infrastructure.Localization;
-using AspNetCoreSpa.Infrastructure.Localization.EFLocalizer;
-using AspNetCoreSpa.Infrastructure.Repositories;
-using AspNetCoreSpa.Infrastructure.Repositories.Interfaces;
-using AspNetCoreSpa.Infrastructure.Services;
-using AspNetCoreSpa.Infrastructure.Services.Application;
 using AspNetCoreSpa.Infrastructure.Services.Certificate;
 using AspNetCoreSpa.Infrastructure.Services.Email;
-using AspNetCoreSpa.Infrastructure.Services.SeedData;
-using AspNetCoreSpa.Infrastructure.Services.Uow;
 using IdentityServer4;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +22,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AspNetCoreSpa.Infrastructure
@@ -37,15 +30,12 @@ namespace AspNetCoreSpa.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            // TODO 
-            //services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
             services.AddTransient<IEmailService, EmailService>();
-            services.AddTransient<IApplicationService, ApplicationService>();
-            services.AddScoped<IUnitOfWork, HttpUnitOfWork>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-            services.AddTransient<IOrdersRepository, OrdersRepository>();
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddHttpContextAccessor()
+                .AddResponseCompression()
+                .AddMemoryCache()
+                .AddHealthChecks();
+
             return services;
         }
 
@@ -61,6 +51,14 @@ namespace AspNetCoreSpa.Infrastructure
                                 .AllowAnyHeader();
                         });
                 });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomSignalR(this IServiceCollection services)
+        {
+            services.AddSignalR()
+                .AddMessagePackProtocol();
 
             return services;
         }
@@ -102,7 +100,7 @@ namespace AspNetCoreSpa.Infrastructure
             services.AddDefaultIdentity<ApplicationUser>()
             .AddRoles<ApplicationRole>()
             .AddEntityFrameworkStores<IdentityServerDbContext>();
-            
+
             var x509Certificate2 = GetCertificate(environment, configuration);
 
             var identityBuilder = services.AddIdentityServer()

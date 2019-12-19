@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace STS.Models
+namespace AspNetCoreSpa.STS.Models
 {
     public class ConsentInputModel
     {

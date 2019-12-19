@@ -1,15 +1,16 @@
 ﻿using System.Threading.Tasks;
+using AspNetCoreSpa.Web;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
 
-namespace Integration.IntegrationTests
+namespace AspNetCoreSpa.Integration.Tests.IntegrationTests
 {
     #region snippet1
-    public class BasicTests : IClassFixture<WebApplicationFactory<Web.Startup>>
+    public class BasicTests : IClassFixture<WebApplicationFactory<Startup>>
     {
-        private readonly WebApplicationFactory<Web.Startup> _factory;
+        private readonly WebApplicationFactory<Startup> _factory;
 
-        public BasicTests(WebApplicationFactory<Web.Startup> factory)
+        public BasicTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }

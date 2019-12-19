@@ -2,12 +2,14 @@
 
 namespace AspNetCoreSpa.Domain.Entities
 {
-    public class AuditableEntity : IAuditableEntity
+    public class AuditableEntity
     {
-        public Guid UserId { get; set; }
         public string CreatedBy { get; set; }
-        public string UpdatedBy { get; set; }
-        public DateTime UpdatedDate { get; set; }
-        public DateTime CreatedDate { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public string LastModifiedBy { get; set; }
+
+        public DateTime? LastModified { get; set; }
     }
 }

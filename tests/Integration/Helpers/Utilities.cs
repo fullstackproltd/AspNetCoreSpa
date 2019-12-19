@@ -1,7 +1,6 @@
-﻿using AspNetCoreSpa.Infrastructure;
-using Persistence;
+﻿using AspNetCoreSpa.Persistence;
 
-namespace Integration.Helpers
+namespace AspNetCoreSpa.Integration.Tests.Helpers
 {
     public static class Utilities
     {

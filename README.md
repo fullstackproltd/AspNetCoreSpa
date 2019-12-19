@@ -78,6 +78,35 @@ This project supports both databases OOTB.
 
     Note: For production use Identity server hosted with appropriate configuration.
 ```
+# Managing Migrations
+## Make sure you have ef core global tools installed
+dotnet tool install --global dotnet-ef
+
+# Web Application Migrations
+## Using command line (from root of the project)
+### Create Migration
+dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Persistence --context ApplicationDbContext
+### Update database
+ dotnet ef database update  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Persistence --context ApplicationDbContext
+### Drop database
+ dotnet ef database drop  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Persistence --context ApplicationDbContext
+
+## Package Manager Console
+set Infrastructure as default project and STS as startup project
+Add-Migration migrationname -context IdentityServerDbContext -o Identity/Migrations
+
+# Identity Server Migrations
+## Using command line (from root of the project)
+### Create Migration
+dotnet ef migrations add migrationname --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext -o Identity/Migrations
+### Update database
+ dotnet ef database update  --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext
+### Drop database
+ dotnet ef database drop  --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext
+
+## Package Manager Console
+set Infrastructure as default project and STS as startup project
+Add-Migration migrationname -context IdentityServerDbContext -o Identity/Migrations
 
 ## Other commands
 

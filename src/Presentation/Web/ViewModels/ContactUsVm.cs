@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Web.ViewModels
+namespace AspNetCoreSpa.Web.ViewModels
 {
     public class ContactUsVm
     {        

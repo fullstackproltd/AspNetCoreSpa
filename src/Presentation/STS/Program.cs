@@ -1,12 +1,12 @@
 ﻿using System;
 using AspNetCoreSpa.Application;
+using AspNetCoreSpa.STS.Seed;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace STS
+namespace AspNetCoreSpa.STS
 {
     public class Program
     {
@@ -21,7 +21,7 @@ namespace STS
                 try
                 {
                     logger.LogInformation("Seeding STS database");
-                    var seedData = services.GetRequiredService<ISeedData>();
+                    var seedData = services.GetRequiredService<IIdentitySeedData>();
                     seedData.Seed(services);
                 }
                 catch (Exception ex)

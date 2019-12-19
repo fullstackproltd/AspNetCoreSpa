@@ -1,13 +1,14 @@
 ﻿using System;
+using AspNetCoreSpa.Application.Abstractions;
 using Microsoft.Extensions.Localization;
 
 namespace AspNetCoreSpa.Infrastructure.Localization.EFLocalizer
 {
     public class EFStringLocalizerFactory : IStringLocalizerFactory
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public EFStringLocalizerFactory(ApplicationDbContext context)
+        public EFStringLocalizerFactory(IApplicationDbContext context)
         {
             _context = context;
         }

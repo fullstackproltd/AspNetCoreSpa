@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace STS.ViewModels.ManageViewModels
+namespace AspNetCoreSpa.STS.ViewModels.ManageViewModels
 {
     public class SetPasswordViewModel
     {

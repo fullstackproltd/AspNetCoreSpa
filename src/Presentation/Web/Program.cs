@@ -1,6 +1,6 @@
 ﻿using System;
-using AspNetCoreSpa.Infrastructure;
-using AspNetCoreSpa.Infrastructure.Services.SeedData;
+using AspNetCoreSpa.Application;
+using AspNetCoreSpa.Web.SeedData;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 [assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
-namespace Web
+namespace AspNetCoreSpa.Web
 {
     public class Program
     {
@@ -24,7 +24,7 @@ namespace Web
                 try
                 {
                     logger.LogInformation("Seeding API database");
-                    var dbInitialiser = services.GetRequiredService<ISeedData>();
+                    var dbInitialiser = services.GetRequiredService<IWebSeedData>();
                     dbInitialiser.Initialise();
                 }
                 catch (Exception ex)
@@ -38,6 +38,7 @@ namespace Web
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
                   WebHost.CreateDefaultBuilder(args)
+                        .ConfigureAppConfiguration((host, configuration) => configuration.AddCustomAppSettings(host.HostingEnvironment.ContentRootPath, host.HostingEnvironment.EnvironmentName))
                         .UseStartup<Startup>();
     }
 }

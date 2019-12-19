@@ -4,22 +4,24 @@ namespace AspNetCoreSpa.Domain.Entities
 {
     public class Product : AuditableEntity
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Icon { get; set; }
-        public decimal BuyingPrice { get; set; }
-        public decimal SellingPrice { get; set; }
-        public int UnitsInStock { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsDiscontinued { get; set; }
-        public int? ParentId { get; set; }
-        public Product Parent { get; set; }
+        public Product()
+        {
+            OrderDetails = new HashSet<OrderDetail>();
+        }
 
-        public int ProductCategoryId { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public int? SupplierId { get; set; }
+        public int? CategoryId { get; set; }
+        public string QuantityPerUnit { get; set; }
+        public decimal? UnitPrice { get; set; }
+        public short? UnitsInStock { get; set; }
+        public short? UnitsOnOrder { get; set; }
+        public short? ReorderLevel { get; set; }
+        public bool Discontinued { get; set; }
 
-        public ICollection<Product> Children { get; set; }
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public Category Category { get; set; }
+        public Supplier Supplier { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; private set; }
     }
 }

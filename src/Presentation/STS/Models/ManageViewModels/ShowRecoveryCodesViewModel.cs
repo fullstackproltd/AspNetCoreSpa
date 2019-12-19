@@ -1,4 +1,4 @@
-﻿namespace STS.Models.ManageViewModels
+﻿namespace AspNetCoreSpa.STS.Models.ManageViewModels
 {
     public class ShowRecoveryCodesViewModel
     {

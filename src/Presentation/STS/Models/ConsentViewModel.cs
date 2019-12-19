@@ -3,7 +3,7 @@ using System.Linq;
 using IdentityServer4;
 using IdentityServer4.Models;
 
-namespace STS.Models
+namespace AspNetCoreSpa.STS.Models
 {
     public class ConsentViewModel : ConsentInputModel
     {

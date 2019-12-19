@@ -6,7 +6,7 @@ using AngleSharp;
 using AngleSharp.Html.Dom;
 using AngleSharp.Io;
 
-namespace Integration.Helpers
+namespace AspNetCoreSpa.Integration.Tests.Helpers
 {
     public class HtmlHelpers
     {

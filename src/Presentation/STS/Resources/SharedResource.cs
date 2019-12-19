@@ -1,4 +1,4 @@
-﻿namespace STS.Resources
+﻿namespace AspNetCoreSpa.STS.Resources
 {
     /// <summary>
     /// Dummy class to group shared resources

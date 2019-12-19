@@ -1,17 +1,17 @@
 ﻿using System;
-using AspNetCoreSpa.Infrastructure;
-using Integration.Helpers;
+using AspNetCoreSpa.Integration.Tests.Helpers;
+using AspNetCoreSpa.Persistence;
+using AspNetCoreSpa.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Persistence;
 
-namespace Integration
+namespace AspNetCoreSpa.Integration.Tests
 {
     #region snippet1
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Web.Startup>
+    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

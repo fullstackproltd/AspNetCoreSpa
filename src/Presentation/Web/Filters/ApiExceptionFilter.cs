@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Web.Filters
+namespace AspNetCoreSpa.Web.Filters
 {
     public class ApiExceptionFilter : ExceptionFilterAttribute
     {

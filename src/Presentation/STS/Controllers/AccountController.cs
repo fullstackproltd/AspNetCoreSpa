@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
-using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Infrastructure.Services.Email;
+using AspNetCoreSpa.STS.Models.AccountViewModels;
+using AspNetCoreSpa.STS.Resources;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;
@@ -23,12 +24,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using STS.Models;
-using STS.Models.AccountViewModels;
-using STS.Resources;
 
-namespace STS.Controllers
+namespace AspNetCoreSpa.STS.Controllers
 {
     [Authorize]
     public class AccountController : Controller

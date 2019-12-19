@@ -26,9 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{87BDAFCF-7697-4F9B-B8CF-7EF71EDA51D7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "tests\Web\Web.csproj", "{0E665079-35EA-4EC5-A65E-65D902BCFB3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Tests", "tests\Web\Web.Tests.csproj", "{0E665079-35EA-4EC5-A65E-65D902BCFB3F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration", "tests\Integration\Integration.csproj", "{996298CC-9581-4FD6-A673-8CB51C778759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Integration.Tests", "tests\Integration\Integration.Tests.csproj", "{996298CC-9581-4FD6-A673-8CB51C778759}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Presentation\Web\Web.csproj", "{87535772-3BC5-4565-85F3-DF2508936593}"
 EndProject

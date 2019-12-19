@@ -1,6 +1,6 @@
 ﻿namespace AspNetCoreSpa.Domain.Entities
 {
-    public class Resource : IEntityBase
+    public class Resource
     {
         public int Id { get; set; }
         public string Key { get; set; }

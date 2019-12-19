@@ -1,4 +1,4 @@
-﻿namespace STS.Models.AccountViewModels
+﻿namespace AspNetCoreSpa.STS.Models.AccountViewModels
 {
     public class LoggedOutViewModel
     {

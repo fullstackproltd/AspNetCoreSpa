@@ -5,9 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
-using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Infrastructure.Services.Email;
+using AspNetCoreSpa.STS.Models.ManageViewModels;
+using AspNetCoreSpa.STS.Resources;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +17,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using STS.Models;
-using STS.Models.ManageViewModels;
-using STS.Resources;
 
-namespace STS.Controllers
+namespace AspNetCoreSpa.STS.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

@@ -1,24 +1,38 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using AspNetCoreSpa.Application;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Infrastructure;
+using AspNetCoreSpa.Infrastructure.Localization.EFLocalizer;
+using AspNetCoreSpa.Persistence;
+using AspNetCoreSpa.Web.Extensions;
+using AspNetCoreSpa.Web.Filters;
+using AspNetCoreSpa.Web.SeedData;
+using AspNetCoreSpa.Web.Services;
+using AspNetCoreSpa.Web.SignalR;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using Web.Extensions;
-using Web.SignalR;
-using AutoMapperProfile = Web.ViewModels.AutoMapperProfile;
 
-namespace Web
+namespace AspNetCoreSpa.Web
 {
     public class Startup
     {
-        // Order or run
+        // Order to run
         //1) Constructor
         //2) Configure services
         //3) Configure
@@ -41,34 +55,52 @@ namespace Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            //services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
 
-            services.AddOptions();
+            services.AddTransient<IApplicationService, ApplicationService>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddTransient<IWebSeedData, WebSeedData>();
+            services.AddScoped<ApiExceptionFilter>();
 
-            services.AddResponseCompression();
+            services.AddInfrastructure()
+                .AddApplication()
+                .AddCustomConfiguration(Configuration)
+                .AddPersistence(Configuration)
+                .AddCustomSignalR();
 
-            services.AddCustomDbContext();
+            var translationFile = File.ReadAllLines(Path.Combine(HostingEnvironment.ContentRootPath, "translations.csv"));
+            var cultures = translationFile.First().Split(",").Skip(1);
+            services.Configure<RequestLocalizationOptions>(opts =>
+            {
+                var supportedCultures = cultures.Select(c => new CultureInfo(c)).ToList();
 
-            services.AddMemoryCache();
+                opts.DefaultRequestCulture = new RequestCulture(cultures.First());
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            services.AddHealthChecks();
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //                .AddJwtBearer(options =>
+            //                {
+            //                    // base-address of your identity server
+            //                    options.Authority = Configuration["StsAuthority"];
+            //                    // name of the API resource
+            //                    options.Audience = "spa-api";
+            //                });
 
-            services.RegisterCustomServices();
+            // https://stackoverflow.com/a/51241314/1190512
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
-            services.AddSignalR()
-                .AddMessagePackProtocol();
-
-            services.AddCustomLocalization(HostingEnvironment);
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                            .AddJwtBearer(options =>
-                            {
-                                // base-address of your identity server
-                                options.Authority = Configuration["StsAuthority"];
-                                // name of the API resource
-                                options.Audience = "spa-api";
-                            });
-
-            services.AddCustomizedMvc();
+            services.AddControllersWithViews();
+            services.AddRazorPages()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -105,7 +137,6 @@ namespace Web
 
             });
 
-            services.AddAutoMapper(typeof(AutoMapperProfile));
         }
         public void Configure(IApplicationBuilder app)
         {
@@ -115,7 +146,15 @@ namespace Web
 
             if (HostingEnvironment.IsDevelopment())
             {
-                app.AddDevMiddlewares();
+                app.UseDeveloperExceptionPage();
+
+                // Enable middleware to serve generated Swagger as a JSON endpoint
+                app.UseSwagger();
+                // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+                });
             }
             else
             {
@@ -123,7 +162,8 @@ namespace Web
                 app.UseResponseCompression();
             }
 
-            app.AddCustomLocalization();
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.UseHttpsRedirection();
 
@@ -138,19 +178,12 @@ namespace Web
             forwarOptions.KnownProxies.Clear();
 
             app.UseForwardedHeaders(forwarOptions);
-
             app.UseAuthentication();
-
             app.UseStaticFiles();
-
             app.UseSpaStaticFiles();
-
             app.UseRouting();
-
             app.UseCookiePolicy();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

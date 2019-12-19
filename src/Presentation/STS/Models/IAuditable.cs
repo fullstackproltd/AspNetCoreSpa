@@ -1,4 +1,4 @@
-﻿namespace STS.Models
+﻿namespace AspNetCoreSpa.STS.Models
 {
     public interface IAuditable
     {

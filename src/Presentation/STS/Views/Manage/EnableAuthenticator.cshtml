@@ -1,7 +1,7 @@
 ﻿@inject LocService SharedLocalizer
-@using STS.Resources
-@using STS.Views.Manage
-@model STS.Models.ManageViewModels.EnableAuthenticatorViewModel
+@using AspNetCoreSpa.STS.Resources
+@using AspNetCoreSpa.STS.Views.Manage
+@model AspNetCoreSpa.STS.Models.ManageViewModels.EnableAuthenticatorViewModel
 @{
     ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("CONFIGURE_AUTHENTICATOR_APP");
     ViewData.AddActivePage(ManageNavPages.TwoFactorAuthentication);
