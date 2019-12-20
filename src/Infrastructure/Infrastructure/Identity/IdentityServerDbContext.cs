@@ -15,7 +15,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity
     public class IdentityServerDbContext :
         IdentityDbContext<ApplicationUser, ApplicationRole, Guid,
             ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin,
-            ApplicationRoleClaim, ApplicationUserToken>, IPersistedGrantDbContext
+            ApplicationRoleClaim, ApplicationUserToken>, IPersistedGrantDbContext, IConfigurationDbContext
     {
         private readonly IOptions<OperationalStoreOptions> _operationalStoreOptions;
 
@@ -30,6 +30,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity
 
         public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
         Task<int> IPersistedGrantDbContext.SaveChangesAsync() => base.SaveChangesAsync();
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<IdentityResource> IdentityResources { get; set; }
+        public DbSet<ApiResource> ApiResources { get; set; }
+        Task<int> IConfigurationDbContext.SaveChangesAsync() => base.SaveChangesAsync();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

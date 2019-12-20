@@ -10,7 +10,6 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Entities
         [Required]
         [MaxLength(100)]
         public string FirstName { get; set; }
-
         [Required]
         [MaxLength(100)]
         public string LastName { get; set; }
@@ -19,7 +18,5 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Entities
         public virtual ICollection<ApplicationUserLogin> Logins { get; set; }
         public virtual ICollection<ApplicationUserToken> Tokens { get; set; }
         public virtual ICollection<ApplicationUserRole> UserRoles { get; set; }
-        public bool IsAdmin { get; set; }
-        public DateTime CreatedDate { get; set; }
     }
 }

@@ -9,8 +9,8 @@ using AspNetCoreSpa.Application.Settings;
 using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
-using AspNetCoreSpa.Infrastructure.Identity.Services;
 using AspNetCoreSpa.Infrastructure.Localization;
+using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Infrastructure.Services.Certificate;
 using AspNetCoreSpa.Infrastructure.Services.Email;
 using IdentityServer4;
@@ -82,13 +82,6 @@ namespace AspNetCoreSpa.Infrastructure
                     options.DefaultRequestCulture = new RequestCulture(culture: "de-DE", uiCulture: "de-DE");
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
-
-                    var providerQuery = new LocalizationQueryProvider
-                    {
-                        QureyParamterName = "ui_locales"
-                    };
-
-                    options.RequestCultureProviders.Insert(0, providerQuery);
                 });
 
             return services;
@@ -112,7 +105,6 @@ namespace AspNetCoreSpa.Infrastructure
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
                     options.ClientId = "476611152863-ltgqfk9jhq1vsenin5039n58ogkraltb.apps.googleusercontent.com";
                     options.ClientSecret = "rSHvhgdOQUB4KMc5JS1alzhg";
                 })

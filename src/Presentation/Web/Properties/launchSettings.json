@@ -16,7 +16,7 @@
       },
       "ancmHostingModel": "InProcess"
     },
-    "AspNetCoreSpa.Web": {
+    "Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

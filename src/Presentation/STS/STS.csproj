@@ -15,7 +15,6 @@
     <Content Include="..\..\Core\Application\sharedsettings.json" Link="sharedsettings.json" />
   </ItemGroup>
 
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
@@ -27,9 +26,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
-
   </ItemGroup>
-
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Common\Common.csproj" />
@@ -41,6 +38,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+ <ItemGroup>
+   <Folder Include="Models\" />
+ </ItemGroup>
    
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('node_modules') ">
     <!-- Ensure Node.js is installed -->

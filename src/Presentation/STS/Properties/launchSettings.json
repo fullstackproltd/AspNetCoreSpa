@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "AspNetCoreSpa.STS": {
+    "STS": {
       "commandName": "Project",
       "launchUrl": "https://localhost:5007",
       "environmentVariables": {

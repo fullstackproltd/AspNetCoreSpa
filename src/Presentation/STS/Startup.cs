@@ -1,7 +1,5 @@
-﻿using System.Reflection;
-using AspNetCoreSpa.Common;
+﻿using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure;
-using AspNetCoreSpa.STS.Resources;
 using AspNetCoreSpa.STS.Seed;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +27,6 @@ namespace AspNetCoreSpa.STS
         {
             services.AddTransient<IProfileService, CustomProfileService>();
             services.AddTransient<IIdentitySeedData, IdentitySeedData>();
-            services.AddSingleton<LocService>();
 
             services.AddInfrastructure()
                 .AddCustomLocalization()
@@ -43,14 +40,7 @@ namespace AspNetCoreSpa.STS
             var controllerWithViews = services.AddControllersWithViews();
             var razorPages = services.AddRazorPages()
             .AddViewLocalization()
-            .AddDataAnnotationsLocalization(options =>
-                           {
-                               options.DataAnnotationLocalizerProvider = (type, factory) =>
-                               {
-                                   var assemblyName = new AssemblyName(typeof(SharedResource).GetTypeInfo().Assembly.FullName);
-                                   return factory.Create("SharedResource", assemblyName.Name);
-                               };
-                           });
+            .AddDataAnnotationsLocalization();
 
             if (Environment.IsDevelopment())
             {
@@ -64,14 +54,14 @@ namespace AspNetCoreSpa.STS
             // https://github.com/openiddict/openiddict-core/issues/518
             // And
             // https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
-            var forwarOptions = new ForwardedHeadersOptions
+            var forwardOptions = new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             };
-            forwarOptions.KnownNetworks.Clear();
-            forwarOptions.KnownProxies.Clear();
+            forwardOptions.KnownNetworks.Clear();
+            forwardOptions.KnownProxies.Clear();
 
-            app.UseForwardedHeaders(forwarOptions);
+            app.UseForwardedHeaders(forwardOptions);
 
             if (env.IsDevelopment())
             {

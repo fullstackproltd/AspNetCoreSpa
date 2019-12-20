@@ -1,0 +1,101 @@
+﻿@using AspNetCoreSpa.Application.Abstractions
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Mvc.ViewEngines
+@inject IWebHostEnvironment Environment
+@inject ICompositeViewEngine Engine
+@inject IClientInfoService ClientInfoService
+@{
+    var appTitle = ClientInfoService.GetClient().ClientName;
+    var pageTitle = ViewData["Title"]?.ToString();
+    var returnLink = await Component.InvokeAsync("ReturnLink");
+    var query = ViewContext.HttpContext.Request.Query;
+    string returnUrl = null;
+    if (query.ContainsKey("returnUrl"))
+    {
+        returnUrl = query["returnUrl"];
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>
+        <if hide="string.IsNullOrEmpty(appTitle)">
+            @appTitle <if hide="string.IsNullOrEmpty(pageTitle)">- @pageTitle</if>
+        </if>
+    </title>
+
+    <partial name="_AppStyles"/>
+
+</head>
+<body>
+<header>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
+            <img class="header-image-img"
+                 src="~/icon.jpg"
+                 alt="STS"/>
+            <a class="nav-link text-dark" href="@returnLink" title="Return to @ClientInfoService.GetClient().ClientName">
+                <i class="fas fa-home"></i>
+                @appTitle
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                @{
+                    var result = Engine.FindView(ViewContext, "_LoginPartial", isMainPage: false);
+                }
+                @if (result.Success)
+                {
+                    await Html.RenderPartialAsync("_LoginPartial", returnUrl);
+                }
+                else
+                {
+                    throw new InvalidOperationException("The default Identity UI layout requires a partial view '_LoginPartial' " +
+                                                        "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
+                                                        $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
+                }
+            </div>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <partial name="_CookieConsentPartial" optional/>
+    <main role="main" class="pb-3">
+        <if hide="string.IsNullOrEmpty(pageTitle)">
+            <div class="row">
+                <div class="col">
+                    <h1>
+                        @pageTitle
+                    </h1>
+                    <hr/>
+                </div>
+            </div>
+        </if>
+        <div class="row">
+            <div class="col-md-6">
+                <h4>
+                    @ViewData["Subtitle"]
+                </h4>
+                @RenderBody()
+            </div>
+            <div class="col-md-6">
+                <vc:client-image></vc:client-image>
+            </div>
+        </div>
+    </main>
+</div>
+
+<partial name="_Footer"/>
+
+<partial name="_AppScripts"/>
+
+@RenderSection("Scripts", required: false)
+
+</body>
+</html>
