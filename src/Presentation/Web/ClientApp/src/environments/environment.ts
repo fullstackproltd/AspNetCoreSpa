@@ -5,4 +5,5 @@
 
 export const environment = {
   production: false,
+  stsUrl: 'https://localhost:5007/',
 };

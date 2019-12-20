@@ -1,3 +1,4 @@
+import { environment } from 'environments/environment';
 export const ApplicationName = 'Web';
 
 export const ReturnUrlType = 'returnUrl';
@@ -23,7 +24,7 @@ export const LoginActions = {
 
 let applicationPaths: ApplicationPathsType = {
   DefaultLoginRedirectPath: '/',
-  ApiAuthorizationClientConfigurationUrl: `https://localhost:5007/_configuration/${ApplicationName}`,
+  ApiAuthorizationClientConfigurationUrl: `${environment.stsUrl}_configuration/${ApplicationName}`,
   Login: `authentication/${LoginActions.Login}`,
   LoginFailed: `authentication/${LoginActions.LoginFailed}`,
   LoginCallback: `authentication/${LoginActions.LoginCallback}`,
@@ -40,8 +41,8 @@ let applicationPaths: ApplicationPathsType = {
   LogOutPathComponents: [],
   LoggedOutPathComponents: [],
   LogOutCallbackPathComponents: [],
-  IdentityRegisterPath: '/Identity/Account/Register',
-  IdentityManagePath: '/Identity/Account/ChangePassword',
+  IdentityRegisterPath: `${environment.stsUrl}Identity/Account/Register`,
+  IdentityManagePath: `${environment.stsUrl}Identity/Account/Manage`,
 };
 
 applicationPaths = {
