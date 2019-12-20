@@ -1,0 +1,20 @@
+<div [formGroup]="formGroup" class="form-group">
+  <label for="{{ config.name }}">
+    {{ config.label }}
+
+    <ng-container *ngIf="showAsterisk(config)">
+      *
+    </ng-container>
+  </label>
+
+  <div class="input-group">
+    <input type="text" [attr.placeholder]="config.placeholder" [formControlName]="config.name" class="form-control" [id]="config.name" />
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" (click)="config.inputGroupAddonHandler()">
+        {{ config.inputGroupAddonLabel }}
+      </button>
+    </div>
+  </div>
+
+  <div appFormFieldError class="invalid-feedback" [fieldConfig]="config"></div>
+</div>

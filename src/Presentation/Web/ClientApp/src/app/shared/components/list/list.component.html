@@ -1,0 +1,10 @@
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of list; trackBy: trackByFn">
+    <ng-container *ngIf="item.template">
+      <ng-container *ngTemplateOutlet="item.template; context: { $implicit: item }"> </ng-container>
+    </ng-container>
+    <ng-container *ngIf="!item.template">
+      {{ item.text }}
+    </ng-container>
+  </li>
+</ul>

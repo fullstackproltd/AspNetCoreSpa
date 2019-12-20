@@ -75,7 +75,7 @@ namespace AspNetCoreSpa.STS.Controllers
             if (context?.IdP != null)
             {
                 // if IdP is passed, then bypass showing the login screen
-                return await ExternalLogin(context.IdP, returnUrl);
+                return ExternalLogin(context.IdP, returnUrl);
             }
 
             var vm = await BuildLoginViewModelAsync(returnUrl, context);
@@ -83,7 +83,7 @@ namespace AspNetCoreSpa.STS.Controllers
             if (vm.EnableLocalLogin == false && vm.ExternalProviders.Count() == 1)
             {
                 // only one option for logging in
-                return await ExternalLogin(vm.ExternalProviders.First().AuthenticationScheme, returnUrl);
+                return ExternalLogin(vm.ExternalProviders.First().AuthenticationScheme, returnUrl);
             }
 
             return View(vm);
@@ -391,7 +391,7 @@ namespace AspNetCoreSpa.STS.Controllers
         [HttpPost]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ExternalLogin(string provider, string returnUrl = null)
+        public IActionResult ExternalLogin(string provider, string returnUrl = null)
         {
 
             // start challenge and roundtrip the return URL and 

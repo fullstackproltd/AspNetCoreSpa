@@ -1,0 +1,8 @@
+<label for="apptypeahead">{{ label || 'Search' }}</label>
+<input
+  id="apptypeahead"
+  type="text"
+  class="form-control"
+  [(ngModel)]="model"
+  [ngbTypeahead]="search"
+/>

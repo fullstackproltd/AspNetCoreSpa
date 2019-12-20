@@ -1,4 +1,5 @@
-<form [formGroup]="form" #formRef="ngForm">
-    <ng-container *ngFor="let field of config" appFormField [config]="field">
-    </ng-container>
-</form>
+<div class="container">
+  <form [formGroup]="form" #formRef="ngForm">
+    <ng-container *ngFor="let field of config" appFormField [config]="field"> </ng-container>
+  </form>
+</div>

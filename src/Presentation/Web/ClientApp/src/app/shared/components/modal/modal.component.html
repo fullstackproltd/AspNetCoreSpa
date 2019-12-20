@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title">
+    {{ options.title }}
+  </h4>
+  <button type="button" class="close" aria-label="Close" (click)="no()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div *ngIf="options.message" [innerHTML]="options.message"></div>
+
+  <div class="container-fluid" *ngIf="options.template">
+    <ng-container
+      *ngTemplateOutlet="options.template; context: options.template.data"
+    ></ng-container>
+  </div>
+</div>
+
+<div class="modal-footer" *ngIf="!options.template || options.showButtons">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="no()"
+    *ngIf="!options.hideCancel"
+  >
+    {{ options.cancelLabel || 'Cancel' }}
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="yes()"
+    *ngIf="!options.hideSubmit"
+  >
+    {{ options.okLabel || 'Save' }}
+  </button>
+</div>

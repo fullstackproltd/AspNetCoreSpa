@@ -1,0 +1,8 @@
+<div [formGroup]="formGroup">
+  <button class="btn btn-secondary btn-block" (click)="config.onCancel(formGroup)" [disabled]="config.disabled" type="button">
+    {{ config.cancelButtonLabel || 'Cancel' }}
+  </button>
+  <button class="btn btn-primary btn-block" (click)="submit($event)" [disabled]="config.disabled" type="submit">
+    {{ config.label || 'Submit' }}
+  </button>
+</div>

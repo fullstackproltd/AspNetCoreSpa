@@ -1,0 +1,9 @@
+.modal-body {
+  /* Restrict Modal width to 90% */
+  overflow-x: auto !important;
+}
+
+.modal-body ::ng-deep .list-group {
+  height: 60vh;
+  overflow: auto;
+}

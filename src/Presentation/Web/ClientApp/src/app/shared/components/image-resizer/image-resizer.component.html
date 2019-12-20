@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col">
+    <p *ngIf="title">
+      {{ title }}
+    </p>
+    <figure class="figure" *ngIf="imageSource">
+      <img [attr.src]="imageSource" class="figure-img img-fluid rounded" />
+    </figure>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <button class="btn btn-primary btn-sm" (click)="onSave(input)" *ngIf="showUploadButton && file_src">
+      Upload
+    </button>
+    <button class="btn btn-warning btn-sm" (click)="input.click()">
+      <input type="file" (change)="fileChange(input)" #input hidden />
+      Browse
+    </button>
+    <button class="btn btn-danger btn-sm" *ngIf="file_src || src" (click)="onRemove(input)">
+      Remove
+    </button>
+  </div>
+</div>

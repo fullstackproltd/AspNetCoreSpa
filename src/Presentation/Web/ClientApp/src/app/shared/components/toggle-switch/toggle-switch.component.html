@@ -1,0 +1,10 @@
+<label class="switch">
+  <input
+    type="checkbox"
+    [disabled]="disabled"
+    [checked]="checked"
+    (change)="changeHandler($event)"
+  />
+  <span class="slider round"></span>
+  <span class="label" *ngIf="label">{{ label }}</span>
+</label>

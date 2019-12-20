@@ -1,0 +1,15 @@
+<ngb-accordion [closeOthers]="true" #acc="ngbAccordion">
+  <ngb-panel *ngFor="let item of items; let i = index" id="{{ i }}">
+    <ng-template ngbPanelHeader let-opened="opened">
+      <div class="d-flex align-items-center justify-content-between">
+        <button class="btn btn-link p-0" ngbPanelToggle>
+          {{ item.title }}
+        </button>
+        <i class="fa a fa-angle-{{ opened ? 'up' : 'down' }}"></i>
+      </div>
+    </ng-template>
+    <ng-template ngbPanelContent>
+      {{ item.description }}
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

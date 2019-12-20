@@ -1,0 +1,9 @@
+<div class="ag-input-wrapper custom-date-filter">
+  <input id="date-filter" [container]="'body'" ngbDatepicker #dp="ngbDatepicker" (dateSelect)="onDateChanged($event)" />
+  <a class="cross" title="clear date" (click)="clear(dp)">
+    <i class="fas fa-times"></i>
+  </a>
+  <a class="calendar" title="open calendar" (click)="dp.toggle()">
+    <i class="fas fa-calendar-alt"></i>
+  </a>
+</div>

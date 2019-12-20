@@ -1,0 +1,6 @@
+<select (change)="valueChanged($event.target.value)">
+  <option value=""></option>
+  <option *ngFor="let option of dropdownFilterOptions" value="{{ option.key }}">
+    {{ option.value }}
+  </option>
+</select>

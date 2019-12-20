@@ -1,16 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, APP_INITIALIZER, ErrorHandler } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { NgbModule, NgbDateParserFormatter, NgbDateAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
 
-import { AppSharedModule } from '../appshared';
+import {
+  CustomDateFormatter,
+  CustomNgbDateNativeUTCAdapter,
+  AuthInterceptor,
+  LoadingInterceptor,
+  JwtInterceptor,
+  TimingInterceptor,
+  GlobalErrorHandler,
+  AppService,
+} from './services';
+
 // Components
 import {
-  SubMenuComponent,
-  AppTableComponent,
-  AppTableFilteringDirective,
   // Forms
   AppFormComponent,
   FormFieldDirective,
@@ -27,51 +35,77 @@ import {
   FormFieldErrorComponent,
   FormsService,
   FieldColorValidationDirective,
+  FormButtonGroupComponent,
+  FormInputGroupComponent,
+  FormFilePathComponent,
+  // Custom components
+  AccordionComponent,
+  PageHeadingComponent,
+  CardDeckComponent,
+  CardComponent,
+  ToggleSwitchComponent,
+  SearchInputComponent,
+  TypeaheadComponent,
+  ListComponent,
+  ModalComponent,
+  ModalTemplateDirective,
+  ToastComponent,
+  AppFileInputDirective,
+  ImageResizerComponent,
+  LoadingComponent,
+  LoginComponent,
+  LogoutComponent,
+  LoginMenuComponent,
+  // Grid
+  GridComponent,
+  ActionButtonsComponent,
+  ActionButtonComponent,
+  DateFilterComponent,
+  DropdownFloatingFilterComponent,
 } from './components';
+import { ApplicationPaths } from './constants';
 // Pipes
-import { UppercasePipe } from './pipes/uppercase.pipe';
-// Services
-import { CustomDateFormatter, CustomNgbDateNativeUTCAdapter } from './services';
+import { UppercasePipe, TranslatePipe } from './pipes';
 
+export function appServiceFactory(appService: AppService): () => Promise<any> {
+  return () => appService.getAppData();
+}
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule,
-    RouterModule,
     ReactiveFormsModule,
-    AppSharedModule,
     NgbModule,
-    NgxDatatableModule
+    NgbModule,
+    AgGridModule.withComponents([ActionButtonsComponent, ActionButtonComponent, DateFilterComponent, DropdownFloatingFilterComponent]),
+    RouterModule.forChild([
+      { path: ApplicationPaths.Register, component: LoginComponent },
+      { path: ApplicationPaths.Profile, component: LoginComponent },
+      { path: ApplicationPaths.Login, component: LoginComponent },
+      { path: ApplicationPaths.LoginFailed, component: LoginComponent },
+      { path: ApplicationPaths.LoginCallback, component: LoginComponent },
+      { path: ApplicationPaths.LogOut, component: LogoutComponent },
+      { path: ApplicationPaths.LoggedOut, component: LogoutComponent },
+      { path: ApplicationPaths.LogOutCallback, component: LogoutComponent },
+    ]),
     // No need to export as these modules don't expose any components/directive etc'
   ],
-  entryComponents: [
-    AppFormComponent,
-    FormButtonComponent,
-    FormInputComponent,
-    FormFileComponent,
-    FormDateComponent,
-    FormTimeComponent,
-    FormTextareaComponent,
-    FormCheckboxComponent,
-    FormCheckboxListComponent,
-    FormRadioListComponent,
-    FormSelectComponent
-  ]
-  ,
   declarations: [
+    // pipes
     UppercasePipe,
-    SubMenuComponent,
-    AppTableComponent,
-    AppTableFilteringDirective,
+    TranslatePipe,
     // Forms
-    // directives
     FormFieldDirective,
     FieldColorValidationDirective,
-    // components
     AppFormComponent,
     FormButtonComponent,
+    FormButtonGroupComponent,
     FormInputComponent,
+    FormInputGroupComponent,
     FormFileComponent,
+    AppFileInputDirective,
+    FormFilePathComponent,
     FormDateComponent,
     FormTimeComponent,
     FormTextareaComponent,
@@ -79,25 +113,51 @@ import { CustomDateFormatter, CustomNgbDateNativeUTCAdapter } from './services';
     FormCheckboxListComponent,
     FormRadioListComponent,
     FormSelectComponent,
-    FormFieldErrorComponent
+    FormFieldErrorComponent,
+    // Custom comonents
+    LoginComponent,
+    LogoutComponent,
+    LoginMenuComponent,
+    AccordionComponent,
+    PageHeadingComponent,
+    CardDeckComponent,
+    CardComponent,
+    ToggleSwitchComponent,
+    SearchInputComponent,
+    TypeaheadComponent,
+    ListComponent,
+    ModalComponent,
+    ModalTemplateDirective,
+    ToastComponent,
+    ImageResizerComponent,
+    LoadingComponent,
+    // Grid
+    GridComponent,
+    DateFilterComponent,
+    DropdownFloatingFilterComponent,
+    ActionButtonsComponent,
+    ActionButtonComponent,
   ],
   exports: [
     // Modules
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AppSharedModule,
-    NgxDatatableModule,
     NgbModule,
-    // Components, directive, pipes
+    // pipes
     UppercasePipe,
-    SubMenuComponent,
-    AppTableComponent,
+    TranslatePipe,
     // Forms
+    FormFieldDirective,
+    FieldColorValidationDirective,
     AppFormComponent,
     FormButtonComponent,
+    FormButtonGroupComponent,
     FormInputComponent,
+    FormInputGroupComponent,
     FormFileComponent,
+    AppFileInputDirective,
+    FormFilePathComponent,
     FormDateComponent,
     FormTimeComponent,
     FormTextareaComponent,
@@ -105,16 +165,78 @@ import { CustomDateFormatter, CustomNgbDateNativeUTCAdapter } from './services';
     FormCheckboxListComponent,
     FormRadioListComponent,
     FormSelectComponent,
-    FormFieldErrorComponent
+    FormFieldErrorComponent,
+    // Custom comonents
+    LoginComponent,
+    LogoutComponent,
+    LoginMenuComponent,
+    AccordionComponent,
+    PageHeadingComponent,
+    CardDeckComponent,
+    CardComponent,
+    ToggleSwitchComponent,
+    SearchInputComponent,
+    TypeaheadComponent,
+    ListComponent,
+    ModalComponent,
+    ModalTemplateDirective,
+    ToastComponent,
+    ImageResizerComponent,
+    LoadingComponent,
+    // Grid
+    GridComponent,
+    DateFilterComponent,
+    DropdownFloatingFilterComponent,
+    ActionButtonsComponent,
+    ActionButtonComponent,
+  ],
+  entryComponents: [
+    AppFormComponent,
+    FormButtonComponent,
+    FormButtonGroupComponent,
+    FormInputComponent,
+    FormInputGroupComponent,
+    FormFileComponent,
+    FormFilePathComponent,
+    FormDateComponent,
+    FormTimeComponent,
+    FormTextareaComponent,
+    FormCheckboxComponent,
+    FormCheckboxListComponent,
+    FormRadioListComponent,
+    FormSelectComponent,
   ],
   providers: [
+    CurrencyPipe,
+    DatePipe,
     FormsService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true },
+    { provide: APP_INITIALIZER, useFactory: appServiceFactory, deps: [AppService], multi: true },
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: NgbDateParserFormatter, useClass: CustomDateFormatter },
     { provide: NgbDateAdapter, useClass: CustomNgbDateNativeUTCAdapter },
-  ]
-
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
 
+// Public apis
 export * from './components';
+export * from './constants';
+export * from './models';
 export * from './pipes';
+export * from './services';

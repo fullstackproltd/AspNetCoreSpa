@@ -1,54 +1,54 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Web",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            "program": "${workspaceFolder}/src/AspNetCoreSpa.Web/bin/Debug/netcoreapp3.1/AspNetCoreSpa.Web.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/AspNetCoreSpa.Web",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        }, 
-        {
-            "name": "STS",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "buildsts",
-            "program": "${workspaceFolder}/src/AspNetCoreSpa.STS/bin/Debug/netcoreapp3.1/AspNetCoreSpa.STS.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/src/AspNetCoreSpa.STS",
-            "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        }
-    ],
-    "compounds": [
-        {
-          "name": "Web/STS",
-          "configurations": ["Web", "STS"]
-        }
-      ]
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Web",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/src/Presentation/Web/bin/Debug/netcoreapp3.1/AspNetCoreSpa.Web.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Presentation/Web",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    },
+    {
+      "name": "STS",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "buildsts",
+      "program": "${workspaceFolder}/src/Presentation/STS/bin/Debug/netcoreapp3.1/AspNetCoreSpa.STS.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/src/Presentation/STS",
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Web/STS",
+      "configurations": ["Web", "STS"]
+    }
+  ]
 }

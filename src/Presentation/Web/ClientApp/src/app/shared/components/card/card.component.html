@@ -1,0 +1,22 @@
+<div class="col-12 col-md-4 mt-2">
+  <div class="card h-100" (click)="onClick.next($event)">
+    <div class="card-header  {{ headerClass }}">
+      <div class="card-title" [title]="title">
+        {{ title }}
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-info" [title]="body">
+        {{ body }}
+      </div>
+    </div>
+    <div
+      class="card-footer"
+      [title]="title"
+      [hidden]="!showFooter"
+      #footerTemplate
+    >
+      <ng-content select="[footer]"></ng-content>
+    </div>
+  </div>
+</div>

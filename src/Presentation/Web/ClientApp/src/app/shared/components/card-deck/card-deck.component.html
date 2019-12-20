@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col col-12 col-md-{{ hasSidebar ? '4' : '3' }} mb-3" *ngFor="let item of items">
+    <a href="javascript: void(0);" (click)="onClickHandler($event, item)">
+      <div class="card h-100">
+        <div class="card-header {{ headerClass && headerClass(item) }}">
+          <div class="card-title" [title]="item[titleKey]">
+            {{ item[titleKey] }}
+          </div>
+        </div>
+        <div class="card-body">
+          <div *ngIf="!bodyTemplate" class="card-info" [title]="item[descriptionKey]">
+            {{ item[descriptionKey] }}
+          </div>
+          <div *ngIf="bodyTemplate" class="card-info">
+            <ng-container [ngTemplateOutlet]="bodyTemplate" [ngTemplateOutletContext]="{ data: item }"></ng-container>
+          </div>
+        </div>
+        <div class="card-footer" [title]="item[titleKey]" *ngIf="footerTemplate">
+          <ng-container [ngTemplateOutlet]="footerTemplate" [ngTemplateOutletContext]="{ data: item }"></ng-container>
+          <i class="fas fa-arrow-right float-right"></i>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

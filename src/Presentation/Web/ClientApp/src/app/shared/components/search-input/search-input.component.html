@@ -1,0 +1,14 @@
+<div class="form-group">
+  <label for="{{ id || 'searchinput' }}">{{ label || 'Search' }}</label>
+  <input
+    id="{{ id || 'searchinput' }}"
+    [placeholder]="placeholder || ''"
+    type="text"
+    class="form-control"
+    [(ngModel)]="model"
+    (selectItem)="onSelectItem($event)"
+    [ngbTypeahead]="search"
+    [inputFormatter]="key && formatter"
+    [resultFormatter]="key && formatter"
+  />
+</div>
