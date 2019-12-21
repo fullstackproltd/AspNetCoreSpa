@@ -1,10 +1,10 @@
-﻿using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.CreateCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.CreateCustomer
 {
     public class CreateCustomerCommand : IRequest
     {

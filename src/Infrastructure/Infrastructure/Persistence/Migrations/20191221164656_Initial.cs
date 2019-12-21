@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AspNetCoreSpa.Persistence.Migrations
+namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
 {
     public partial class Initial : Migration
     {

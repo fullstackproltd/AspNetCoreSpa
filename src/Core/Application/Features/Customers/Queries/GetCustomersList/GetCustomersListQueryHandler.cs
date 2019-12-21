@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Common.Interfaces;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Application.Common.Interfaces;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace AspNetCoreSpa.Application.Customers.Queries.GetCustomersList
+namespace AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomersList
 {
     public class GetCustomersListQueryHandler : IRequestHandler<GetCustomersListQuery, CustomersListVm>
     {

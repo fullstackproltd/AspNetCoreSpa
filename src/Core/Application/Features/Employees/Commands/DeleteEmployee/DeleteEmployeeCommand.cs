@@ -4,6 +4,8 @@ using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using IApplicationDbContext = AspNetCoreSpa.Application.Common.Interfaces.IApplicationDbContext;
 
 namespace AspNetCoreSpa.Application.Employees.Commands.DeleteEmployee
 {

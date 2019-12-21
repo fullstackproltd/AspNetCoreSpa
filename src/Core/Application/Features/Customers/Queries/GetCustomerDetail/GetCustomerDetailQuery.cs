@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AspNetCoreSpa.Application.Customers.Queries.GetCustomerDetail
+namespace AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomerDetail
 {
     public class GetCustomerDetailQuery : IRequest<CustomerDetailVm>
     {

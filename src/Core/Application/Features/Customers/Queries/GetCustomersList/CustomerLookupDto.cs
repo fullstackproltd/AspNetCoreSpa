@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AspNetCoreSpa.Application.Common.Mappings;
+﻿using AspNetCoreSpa.Application.Common.Mappings;
 using AspNetCoreSpa.Domain.Entities;
+using AutoMapper;
 
-namespace AspNetCoreSpa.Application.Customers.Queries.GetCustomersList
+namespace AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomersList
 {
     public class CustomerLookupDto : IMapFrom<Customer>
     {

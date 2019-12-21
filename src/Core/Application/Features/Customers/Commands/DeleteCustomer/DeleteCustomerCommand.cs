@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.DeleteCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.DeleteCustomer
 {
     public class DeleteCustomerCommand : IRequest
     {

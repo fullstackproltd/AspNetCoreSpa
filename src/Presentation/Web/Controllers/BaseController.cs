@@ -1,4 +1,3 @@
-using AspNetCoreSpa.Web.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +7,6 @@ namespace AspNetCoreSpa.Web.Controllers
 {
     [Authorize]
     [ApiController]
-    [ServiceFilter(typeof(ApiExceptionFilter))]
     [Route("api/[controller]/[action]")]
     public class BaseController : ControllerBase
     {

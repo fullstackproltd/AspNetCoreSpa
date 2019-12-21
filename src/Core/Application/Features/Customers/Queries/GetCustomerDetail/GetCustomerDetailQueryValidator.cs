@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace AspNetCoreSpa.Application.Customers.Queries.GetCustomerDetail
+namespace AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomerDetail
 {
     public class GetCustomerDetailQueryValidator : AbstractValidator<GetCustomerDetailQuery>
     {

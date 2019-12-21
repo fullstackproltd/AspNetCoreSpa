@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Common.Exceptions;
 using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Customers.Queries.GetCustomerDetail
+namespace AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomerDetail
 {
     public class GetCustomerDetailQueryHandler : IRequestHandler<GetCustomerDetailQuery, CustomerDetailVm>
     {

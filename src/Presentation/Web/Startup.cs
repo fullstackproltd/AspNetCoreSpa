@@ -1,32 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Linq;
 using AspNetCoreSpa.Application;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Infrastructure;
-using AspNetCoreSpa.Infrastructure.Localization.EFLocalizer;
-using AspNetCoreSpa.Persistence;
-using AspNetCoreSpa.Web.Extensions;
-using AspNetCoreSpa.Web.Filters;
+using AspNetCoreSpa.Web.Middlewares;
 using AspNetCoreSpa.Web.SeedData;
 using AspNetCoreSpa.Web.Services;
 using AspNetCoreSpa.Web.SignalR;
-using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+using NSwag;
+using NSwag.Generation.Processors.Security;
 
 namespace AspNetCoreSpa.Web
 {
@@ -59,14 +54,22 @@ namespace AspNetCoreSpa.Web
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddTransient<IWebSeedData, WebSeedData>();
-            services.AddScoped<ApiExceptionFilter>();
 
-            services.AddInfrastructure()
-                .AddApplication()
+            services.AddApplication()
+                .AddInfrastructure()
                 .AddCustomConfiguration(Configuration)
                 .AddPersistence(Configuration)
                 .AddDbLocalization(Configuration, HostingEnvironment)
                 .AddCustomSignalR();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options =>
+                            {
+                                // base-address of your identity server
+                                options.Authority = Configuration["Auth:Authority"];
+                                // name of the API resource
+                                options.Audience = Configuration["Auth:Audience"];
+                            });
 
             var translationFile = File.ReadAllLines(Path.Combine(HostingEnvironment.ContentRootPath, "translations.csv"));
             var cultures = translationFile.First().Split(",").Skip(1);
@@ -82,21 +85,6 @@ namespace AspNetCoreSpa.Web
             });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
 
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //                .AddJwtBearer(options =>
-            //                {
-            //                    // base-address of your identity server
-            //                    options.Authority = Configuration["StsAuthority"];
-            //                    // name of the API resource
-            //                    options.Audience = "spa-api";
-            //                });
-
-            // https://stackoverflow.com/a/51241314/1190512
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
-
             services.AddCustomUi(HostingEnvironment);
 
             // In production, the Angular files will be served from this directory
@@ -105,65 +93,9 @@ namespace AspNetCoreSpa.Web
                 configuration.RootPath = "ClientApp/dist/aspnetcorespa";
             });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AspNetCoreSpa", Version = "v1" });
-
-                var security = new Dictionary<string, IEnumerable<string>>
-                {
-                    {"Bearer", new string[] { }},
-                };
-
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey
-                });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-                        },
-                        new[] { "readAccess", "writeAccess" }
-                    }
-                });
-
-            });
-
         }
         public void Configure(IApplicationBuilder app)
         {
-            app.UseHealthChecks("/health");
-
-            // app.AddCustomSecurityHeaders();
-
-            if (HostingEnvironment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-
-                // Enable middleware to serve generated Swagger as a JSON endpoint
-                app.UseSwagger();
-                // Enable middleware to serve swagger-ui assets (HTML, JS, CSS etc.)
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
-                });
-            }
-            else
-            {
-                app.UseHsts();
-                app.UseResponseCompression();
-            }
-
-            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(options.Value);
-
-            app.UseHttpsRedirection();
-
             // https://github.com/openiddict/openiddict-core/issues/518
             // And
             // https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
@@ -173,13 +105,42 @@ namespace AspNetCoreSpa.Web
             };
             forwardOptions.KnownNetworks.Clear();
             forwardOptions.KnownProxies.Clear();
-
             app.UseForwardedHeaders(forwardOptions);
-            app.UseAuthentication();
+
+            if (HostingEnvironment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+                app.UseResponseCompression();
+            }
+
+            app.UseCustomExceptionHandler();
+            //app.AddCustomSecurityHeaders();
+            app.UseHealthChecks("/health");
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
-            app.UseRouting();
+            if (!HostingEnvironment.IsDevelopment())
+            {
+                app.UseSpaStaticFiles();
+            }
+
+            app.UseSwaggerUi3(settings =>
+            {
+                settings.Path = "/api";
+                settings.DocumentPath = "/api/specification.json";
+            });
+
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
+
             app.UseCookiePolicy();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
@@ -217,9 +178,9 @@ namespace AspNetCoreSpa.Web
 
                           if (HostingEnvironment.IsDevelopment())
                           {
-                              spa.UseAngularCliServer(npmScript: "start");
+                              //spa.UseAngularCliServer(npmScript: "start");
                               //   OR
-                              //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                              spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                           }
                       });
         }

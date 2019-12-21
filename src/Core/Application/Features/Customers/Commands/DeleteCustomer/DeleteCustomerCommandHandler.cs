@@ -1,12 +1,12 @@
-﻿using MediatR;
+﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Common.Exceptions;
 using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Domain.Entities;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.DeleteCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.DeleteCustomer
 {
     public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommand>
     {

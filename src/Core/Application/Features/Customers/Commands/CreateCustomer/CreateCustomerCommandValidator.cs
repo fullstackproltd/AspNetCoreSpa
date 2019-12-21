@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.CreateCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.CreateCustomer
 {
     public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCommand>
     {

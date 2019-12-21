@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AspNetCoreSpa.Application.Common.Mappings;
+﻿using AspNetCoreSpa.Application.Common.Mappings;
 using AspNetCoreSpa.Domain.Entities;
+using AutoMapper;
 
-namespace AspNetCoreSpa.Application.Customers.Queries.GetCustomerDetail
+namespace AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomerDetail
 {
     public class CustomerDetailVm : IMapFrom<Customer>
     {

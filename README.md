@@ -85,14 +85,11 @@ dotnet tool install --global dotnet-ef
 # Web Migrations
 ## Using command line (from root of the project)
 ### Create Migration
-dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Persistence --context ApplicationDbContext
+dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext -o Persistence/Migrations
 ### Update database
- dotnet ef database update  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Persistence --context ApplicationDbContext
+ dotnet ef database update  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext
 ### Drop database
- dotnet ef database drop  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Persistence --context ApplicationDbContext
-## Package Manager Console
-set Infrastructure as default project and STS as startup project
-Add-Migration migrationname -context IdentityServerDbContext -o Identity/Migrations
+ dotnet ef database drop  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext
 
 # Localization Migrations
 ## Using command line (from root of the project)
@@ -102,9 +99,6 @@ dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web 
  dotnet ef database update  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext
 ### Drop database
  dotnet ef database drop  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext
-## Package Manager Console
-set Infrastructure as default project and STS as startup project
-Add-Migration migrationname -context LocalizationDbContext -o Localization/Migrations
 
 # Identity Migrations
 ## Using command line (from root of the project)
@@ -114,11 +108,9 @@ dotnet ef migrations add migrationname --startup-project ./src/Presentation/STS 
  dotnet ef database update  --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext
 ### Drop database
  dotnet ef database drop  --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext
-## Package Manager Console
-set Infrastructure as default project and STS as startup project
-Add-Migration migrationname -context IdentityServerDbContext -o Identity/Migrations
 
-## Other commands
+
+# Other commands
 
 ### Angular component scaffolding
 

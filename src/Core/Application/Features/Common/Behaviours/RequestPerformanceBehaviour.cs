@@ -4,6 +4,7 @@ using AspNetCoreSpa.Application.Common.Interfaces;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
 
 namespace AspNetCoreSpa.Application.Common.Behaviours
 {

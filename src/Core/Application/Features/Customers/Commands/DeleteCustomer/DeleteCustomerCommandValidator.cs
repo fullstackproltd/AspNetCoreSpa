@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.DeleteCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.DeleteCustomer
 {
     public class DeleteCustomerCommandValidator : AbstractValidator<DeleteCustomerCommand>
     {

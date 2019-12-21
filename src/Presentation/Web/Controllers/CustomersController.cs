@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreSpa.Application.Customers.Commands.CreateCustomer;
-using AspNetCoreSpa.Application.Customers.Commands.DeleteCustomer;
 using AspNetCoreSpa.Application.Customers.Commands.UpdateCustomer;
-using AspNetCoreSpa.Application.Customers.Queries.GetCustomerDetail;
-using AspNetCoreSpa.Application.Customers.Queries.GetCustomersList;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Features.Customers.Commands.CreateCustomer;
+using AspNetCoreSpa.Application.Features.Customers.Commands.DeleteCustomer;
+using AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomerDetail;
+using AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomersList;
 
 namespace AspNetCoreSpa.Web.Controllers
 {

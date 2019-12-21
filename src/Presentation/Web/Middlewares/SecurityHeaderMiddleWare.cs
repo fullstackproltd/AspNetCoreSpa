@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 
-namespace AspNetCoreSpa.Web.Extensions
+namespace AspNetCoreSpa.Web.Middlewares
 {
     public static class SecurityHeaderMiddleWare
     {

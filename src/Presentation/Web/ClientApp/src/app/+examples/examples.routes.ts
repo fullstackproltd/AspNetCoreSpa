@@ -11,4 +11,9 @@ export const routes: Routes = [
     loadChildren: () => import('./examples/signalr/signalr.module').then(m => m.SignalrModule),
     data: { displayText: 'SignalR' },
   },
+  {
+    path: 'shop',
+    loadChildren: () => import('./examples/shop/shop.module').then(m => m.ShopModule),
+    data: { displayText: 'Shop' },
+  },
 ];
