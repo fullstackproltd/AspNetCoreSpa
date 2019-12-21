@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreSpa.Application.Categories.Commands.UpsertCategory;
-using AspNetCoreSpa.Application.Categories.Queries.GetCategoriesList;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Features.Categories.Commands.DeleteCategory;
+using AspNetCoreSpa.Application.Features.Categories.Commands.UpsertCategory;
+using AspNetCoreSpa.Application.Features.Categories.Queries.GetCategoriesList;
 
 namespace AspNetCoreSpa.Web.Controllers
 {

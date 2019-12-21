@@ -1,4 +1,4 @@
-﻿using AspNetCoreSpa.Persistence;
+﻿using AspNetCoreSpa.Infrastructure.Persistence;
 
 namespace AspNetCoreSpa.Integration.Tests.Helpers
 {

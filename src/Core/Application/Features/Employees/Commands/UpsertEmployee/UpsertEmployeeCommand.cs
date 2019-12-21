@@ -1,11 +1,11 @@
-﻿using MediatR;
-using AspNetCoreSpa.Domain.Entities;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Domain.Entities;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Employees.Commands.UpsertEmployee
+namespace AspNetCoreSpa.Application.Features.Employees.Commands.UpsertEmployee
 {
     public class UpsertEmployeeCommand : IRequest<int>
     {

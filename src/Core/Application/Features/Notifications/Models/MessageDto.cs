@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreSpa.Application.Notifications.Models
+﻿namespace AspNetCoreSpa.Application.Features.Notifications.Models
 {
     public class MessageDto
     {

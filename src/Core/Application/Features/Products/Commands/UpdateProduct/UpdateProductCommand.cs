@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AspNetCoreSpa.Application.Products.Commands.UpdateProduct
+namespace AspNetCoreSpa.Application.Features.Products.Commands.UpdateProduct
 {
     public class UpdateProductCommand : IRequest
     {

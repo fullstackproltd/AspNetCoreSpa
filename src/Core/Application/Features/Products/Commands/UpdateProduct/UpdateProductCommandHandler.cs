@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Exceptions;
-using MediatR;
 using AspNetCoreSpa.Domain.Entities;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Products.Commands.UpdateProduct
+namespace AspNetCoreSpa.Application.Features.Products.Commands.UpdateProduct
 {
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
     {

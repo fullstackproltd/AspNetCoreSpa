@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AspNetCoreSpa.Application.Categories.Queries.GetCategoriesList
+namespace AspNetCoreSpa.Application.Features.Categories.Queries.GetCategoriesList
 {
     public class CategoriesListVm
     {

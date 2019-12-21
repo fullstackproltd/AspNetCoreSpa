@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AspNetCoreSpa.Application.Products.Queries.GetProductsList
+namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductsList
 {
     public class ProductsListVm
     {

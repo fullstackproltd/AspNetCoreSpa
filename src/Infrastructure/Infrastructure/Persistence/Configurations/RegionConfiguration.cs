@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AspNetCoreSpa.Persistence.Configurations
+namespace AspNetCoreSpa.Infrastructure.Persistence.Configurations
 {
     public class RegionConfiguration : IEntityTypeConfiguration<Region>
     {

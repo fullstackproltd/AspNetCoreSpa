@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Exceptions;
-using AspNetCoreSpa.Application.Products.Queries.GetProductDetail;
 using AspNetCoreSpa.Domain.Entities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;

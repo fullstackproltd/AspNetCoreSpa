@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		.gitignore = .gitignore
 		app_offline.htm = app_offline.htm
 		compodoc.jpg = compodoc.jpg
+		db.bat = db.bat
 		deploy.azure.ps1 = deploy.azure.ps1
 		deploy.heroku.ps1 = deploy.heroku.ps1
 		LICENSE = LICENSE

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
-using AspNetCoreSpa.Application.Notifications.Models;
+using AspNetCoreSpa.Application.Features.Notifications.Models;
 using MediatR;
 
 namespace AspNetCoreSpa.Application.Features.Customers.Commands.CreateCustomer

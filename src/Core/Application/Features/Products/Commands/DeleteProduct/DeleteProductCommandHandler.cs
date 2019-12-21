@@ -3,10 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Exceptions;
-using MediatR;
 using AspNetCoreSpa.Domain.Entities;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Products.Commands.DeleteProduct
+namespace AspNetCoreSpa.Application.Features.Products.Commands.DeleteProduct
 {
     public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand>
     {

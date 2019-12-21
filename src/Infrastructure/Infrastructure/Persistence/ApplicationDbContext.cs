@@ -1,14 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace AspNetCoreSpa.Persistence
+namespace AspNetCoreSpa.Infrastructure.Persistence
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
@@ -56,11 +53,11 @@ namespace AspNetCoreSpa.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreatedBy = _currentUserService.UserId.ToString();
                         entry.Entity.Created = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModifiedBy = _currentUserService.UserId.ToString();
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }

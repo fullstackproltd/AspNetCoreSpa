@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Notifications.Models;
+using AspNetCoreSpa.Application.Features.Notifications.Models;
 
 namespace AspNetCoreSpa.Application.Abstractions
 {

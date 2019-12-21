@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Common;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Common;
-using System.Threading;
-using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Abstractions;
 
-namespace AspNetCoreSpa.Application.Products.Queries.GetProductsFile
+namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductsFile
 {
     public class GetProductsFileQueryHandler : IRequestHandler<GetProductsFileQuery, ProductsFileVm>
     {

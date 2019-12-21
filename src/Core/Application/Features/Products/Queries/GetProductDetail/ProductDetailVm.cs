@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AspNetCoreSpa.Application.Common.Mappings;
+﻿using AspNetCoreSpa.Application.Common.Mappings;
 using AspNetCoreSpa.Domain.Entities;
+using AutoMapper;
 
-namespace AspNetCoreSpa.Application.Products.Queries.GetProductDetail
+namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductDetail
 {
     public class ProductDetailVm : IMapFrom<Product>
     {

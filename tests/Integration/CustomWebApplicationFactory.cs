@@ -1,6 +1,6 @@
 ﻿using System;
+using AspNetCoreSpa.Infrastructure.Persistence;
 using AspNetCoreSpa.Integration.Tests.Helpers;
-using AspNetCoreSpa.Persistence;
 using AspNetCoreSpa.Web;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

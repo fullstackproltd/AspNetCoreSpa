@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
-using MediatR;
 using AspNetCoreSpa.Domain.Entities;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Categories.Commands.UpsertCategory
+namespace AspNetCoreSpa.Application.Features.Categories.Commands.UpsertCategory
 {
     public class UpsertCategoryCommand : IRequest<int>
     {

@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
-using MediatR;
 using AspNetCoreSpa.Domain.Entities;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Products.Commands.CreateProduct
+namespace AspNetCoreSpa.Application.Features.Products.Commands.CreateProduct
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, int>
     {

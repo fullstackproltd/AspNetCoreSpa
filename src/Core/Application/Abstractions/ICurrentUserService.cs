@@ -1,8 +1,10 @@
-﻿namespace AspNetCoreSpa.Application.Abstractions
+﻿using System;
+
+namespace AspNetCoreSpa.Application.Abstractions
 {
     public interface ICurrentUserService
     {
-        string UserId { get; }
+        Guid UserId { get; }
 
         bool IsAuthenticated { get; }
     }

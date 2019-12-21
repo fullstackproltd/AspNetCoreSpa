@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreSpa.Application.Customers.Commands.UpdateCustomer;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Features.Customers.Commands.CreateCustomer;
 using AspNetCoreSpa.Application.Features.Customers.Commands.DeleteCustomer;

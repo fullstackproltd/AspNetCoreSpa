@@ -3,10 +3,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application;
 using AspNetCoreSpa.Application.Abstractions;
-using AspNetCoreSpa.Application.System.Commands.SeedSampleData;
-using AspNetCoreSpa.Infrastructure.Localization;
-using AspNetCoreSpa.Persistence;
-using AspNetCoreSpa.Web.SeedData;
+using AspNetCoreSpa.Application.Features.System.Commands.SeedLocalizationData;
+using AspNetCoreSpa.Application.Features.System.Commands.SeedWebData;
 using MediatR;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -31,19 +29,18 @@ namespace AspNetCoreSpa.Web
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 try
                 {
-                    var localizationDbContext = services.GetRequiredService<ILocalizationDbContext>();
-                    localizationDbContext.Database.Migrate();
-
-                    var applicationDbContext = services.GetRequiredService<IApplicationDbContext>();
-                    applicationDbContext.Database.Migrate();
-
                     logger.LogInformation("Seeding Web And Localization Databases");
 
                     var mediator = services.GetRequiredService<IMediator>();
-                    await mediator.Send(new SeedSampleDataCommand(), CancellationToken.None);
 
-                    var dbInitialiser = services.GetRequiredService<IWebSeedData>();
-                    dbInitialiser.Initialise();
+                    var localizationDbContext = services.GetRequiredService<ILocalizationDbContext>();
+                    localizationDbContext.Database.Migrate();
+                    var env = services.GetRequiredService<IWebHostEnvironment>();
+                    await mediator.Send(new LocalizationDataSeederCommand { ContentRoot = env.ContentRootPath }, CancellationToken.None);
+
+                    var applicationDbContext = services.GetRequiredService<IApplicationDbContext>();
+                    applicationDbContext.Database.Migrate();
+                    await mediator.Send(new WebDataSeederCommand(), CancellationToken.None);
                 }
                 catch (Exception ex)
                 {

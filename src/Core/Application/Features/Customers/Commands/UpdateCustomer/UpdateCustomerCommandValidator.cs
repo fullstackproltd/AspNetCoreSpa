@@ -1,8 +1,7 @@
-﻿using AspNetCoreSpa.Application.Features.Customers.Commands.UpdateCustomer;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Validators;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.UpdateCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.UpdateCustomer
 {
     public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCommand>
     {

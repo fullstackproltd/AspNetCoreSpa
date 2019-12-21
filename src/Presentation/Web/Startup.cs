@@ -5,7 +5,6 @@ using AspNetCoreSpa.Application;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Infrastructure;
 using AspNetCoreSpa.Web.Middlewares;
-using AspNetCoreSpa.Web.SeedData;
 using AspNetCoreSpa.Web.Services;
 using AspNetCoreSpa.Web.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -53,7 +52,6 @@ namespace AspNetCoreSpa.Web
 
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddTransient<IWebSeedData, WebSeedData>();
 
             services.AddApplication()
                 .AddInfrastructure()
@@ -135,7 +133,6 @@ namespace AspNetCoreSpa.Web
 
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
-
             app.UseCookiePolicy();
 
             app.UseRouting();

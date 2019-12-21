@@ -68,7 +68,7 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                     Created = table.Column<DateTime>(nullable: false),
                     LastModifiedBy = table.Column<string>(nullable: true),
                     LastModified = table.Column<DateTime>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: false),
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
                     FirstName = table.Column<string>(maxLength: 10, nullable: false),
                     Title = table.Column<string>(maxLength: 30, nullable: true),

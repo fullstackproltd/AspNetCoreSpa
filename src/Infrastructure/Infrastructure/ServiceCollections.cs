@@ -8,14 +8,14 @@ using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Extensions;
 using AspNetCoreSpa.Application.Settings;
 using AspNetCoreSpa.Common;
+using AspNetCoreSpa.Infrastructure.Files;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
 using AspNetCoreSpa.Infrastructure.Localization;
 using AspNetCoreSpa.Infrastructure.Localization.EFLocalizer;
+using AspNetCoreSpa.Infrastructure.Persistence;
 using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Infrastructure.Services.Certificate;
-using AspNetCoreSpa.Infrastructure.Services.Email;
-using AspNetCoreSpa.Persistence;
 using IdentityServer4;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +37,11 @@ namespace AspNetCoreSpa.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddTransient<IEmailService, EmailService>();
+            services.AddScoped<IUserManager, UserManagerService>();
+            services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IDateTime, MachineDateTime>();
+            services.AddTransient<ICsvFileBuilder, CsvFileBuilder>(); 
+            
             services.AddHttpContextAccessor()
                 .AddResponseCompression()
                 .AddMemoryCache()

@@ -1,33 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Domain.Entities.Localization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCoreSpa.Web.SeedData
+namespace AspNetCoreSpa.Application.Features.System.Commands.SeedLocalizationData
 {
-    public class WebSeedData : IWebSeedData
+    public class LocalizationDataSeeder
     {
         private readonly ILocalizationDbContext _context;
-        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public WebSeedData(ILocalizationDbContext context, IWebHostEnvironment hostingEnvironment)
+        public LocalizationDataSeeder(ILocalizationDbContext context)
         {
             _context = context;
-            _hostingEnvironment = hostingEnvironment;
         }
-
-        public void Initialise()
-        {
-            AddLocalisedData();
-        }
-        private void AddLocalisedData()
+        public async Task SeedAllAsync(string contentRoot, CancellationToken cancellationToken)
         {
             if (!_context.Cultures.Any())
             {
-                var translations = File.ReadAllLines(Path.Combine(_hostingEnvironment.ContentRootPath, "translations.csv"));
+                var translations = File.ReadAllLines(Path.Combine(contentRoot, "translations.csv"));
                 ;
 
                 var locales = translations.First().Split(",").Skip(1).ToList();
@@ -57,10 +50,11 @@ namespace AspNetCoreSpa.Web.SeedData
                     culture.Resources = resources;
 
                     _context.Cultures.Add(culture);
-
-                    _context.SaveChanges();
                 });
+
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
+
     }
 }

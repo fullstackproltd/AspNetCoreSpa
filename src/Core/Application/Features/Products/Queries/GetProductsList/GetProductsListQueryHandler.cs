@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCoreSpa.Application.Products.Queries.GetProductsList
+namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductsList
 {
     public class GetProductsListQueryHandler : IRequestHandler<GetProductsListQuery, ProductsListVm>
     {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AspNetCoreSpa.Application.Products.Queries.GetProductDetail
+namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductDetail
 {
     public class GetProductDetailQuery : IRequest<ProductDetailVm>
     {

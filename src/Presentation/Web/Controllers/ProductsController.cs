@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Features.Products.Commands.CreateProduct;
+using AspNetCoreSpa.Application.Features.Products.Commands.DeleteProduct;
+using AspNetCoreSpa.Application.Features.Products.Commands.UpdateProduct;
+using AspNetCoreSpa.Application.Features.Products.Queries.GetProductDetail;
+using AspNetCoreSpa.Application.Features.Products.Queries.GetProductsFile;
+using AspNetCoreSpa.Application.Features.Products.Queries.GetProductsList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreSpa.Application.Products.Commands.CreateProduct;
-using AspNetCoreSpa.Application.Products.Commands.DeleteProduct;
-using AspNetCoreSpa.Application.Products.Commands.UpdateProduct;
-using AspNetCoreSpa.Application.Products.Queries.GetProductsList;
-using AspNetCoreSpa.Application.Products.Queries.GetProductDetail;
 using Microsoft.AspNetCore.Http;
-using AspNetCoreSpa.Application.Products.Queries.GetProductsFile;
 
 namespace AspNetCoreSpa.Web.Controllers
 {

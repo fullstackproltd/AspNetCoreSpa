@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using AspNetCoreSpa.Application.Products.Queries.GetProductsFile;
+using AspNetCoreSpa.Application.Features.Products.Queries.GetProductsFile;
 
 namespace AspNetCoreSpa.Application.Abstractions
 {

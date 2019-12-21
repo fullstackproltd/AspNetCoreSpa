@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AspNetCoreSpa.Application.Common.Mappings;
+﻿using AspNetCoreSpa.Application.Common.Mappings;
 using AspNetCoreSpa.Domain.Entities;
+using AutoMapper;
 
-namespace AspNetCoreSpa.Application.Categories.Queries.GetCategoriesList
+namespace AspNetCoreSpa.Application.Features.Categories.Queries.GetCategoriesList
 {
     public class CategoryDto : IMapFrom<Category>
     {

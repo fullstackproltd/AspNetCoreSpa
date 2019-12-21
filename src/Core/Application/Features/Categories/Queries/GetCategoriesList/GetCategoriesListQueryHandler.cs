@@ -1,12 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Abstractions;
 
-namespace AspNetCoreSpa.Application.Categories.Queries.GetCategoriesList
+namespace AspNetCoreSpa.Application.Features.Categories.Queries.GetCategoriesList
 {
     public class GetCategoriesListQueryHandler : IRequestHandler<GetCategoriesListQuery, CategoriesListVm>
     {

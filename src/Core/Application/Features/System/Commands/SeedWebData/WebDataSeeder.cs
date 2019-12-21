@@ -7,12 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
 
-namespace AspNetCoreSpa.Persistence
+namespace AspNetCoreSpa.Application.Features.System.Commands.SeedWebData
 {
-    public class SampleDataSeeder
+    public class WebDataSeeder
     {
         private readonly IApplicationDbContext _context;
-        private readonly IUserManager _userManager;
+        //private readonly IUserManager _userManager;
 
         private readonly Dictionary<int, Employee> Employees = new Dictionary<int, Employee>();
         private readonly Dictionary<int, Supplier> Suppliers = new Dictionary<int, Supplier>();
@@ -20,10 +20,10 @@ namespace AspNetCoreSpa.Persistence
         private readonly Dictionary<int, Shipper> Shippers = new Dictionary<int, Shipper>();
         private readonly Dictionary<int, Product> Products = new Dictionary<int, Product>();
 
-        public SampleDataSeeder(IApplicationDbContext context, IUserManager userManager)
+        public WebDataSeeder(IApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
 
         public async Task SeedAllAsync(CancellationToken cancellationToken)
@@ -51,33 +51,34 @@ namespace AspNetCoreSpa.Persistence
 
             await SeedOrdersAsync(cancellationToken);
 
-            await SeedUsersAsync(cancellationToken);
+            // TODO revisit later
+            //await SeedUsersAsync(cancellationToken);
         }
 
-        private async Task SeedUsersAsync(CancellationToken cancellationToken)
-        {
-            var employees = await _context.Employees
-                .Include(e => e.DirectReports)
-                .Where(e => e.UserId == null)
-                .ToListAsync(cancellationToken);
+        //private async Task SeedUsersAsync(CancellationToken cancellationToken)
+        //{
+        //    var employees = await _context.Employees
+        //        .Include(e => e.DirectReports)
+        //        .Where(e => e.UserId == null)
+        //        .ToListAsync(cancellationToken);
 
-            if (employees.Any())
-            {
-                foreach (var employee in employees)
-                {
-                    var userName = $"{employee.FirstName}@shop".ToLower();
-                    var result = await _userManager.CreateUserAsync(userName, "P@ssw0r!");
-                    employee.UserId = result.UserId;
+        //    if (employees.Any())
+        //    {
+        //        foreach (var employee in employees)
+        //        {
+        //            var userName = $"{employee.FirstName}@shop".ToLower();
+        //            var result = await _userManager.CreateUserAsync(userName, "P@ssw0r!");
+        //            employee.UserId = result.UserId;
 
-                    if (employee.DirectReports.Any())
-                    {
-                        // TODO: Add to manager role
-                    }
-                }
+        //            if (employee.DirectReports.Any())
+        //            {
+        //                // TODO: Add to manager role
+        //            }
+        //        }
 
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-        }
+        //        await _context.SaveChangesAsync(cancellationToken);
+        //    }
+        //}
 
         private async Task SeedCustomersAsync(CancellationToken cancellationToken)
         {

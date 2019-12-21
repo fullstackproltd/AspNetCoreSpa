@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AspNetCoreSpa.Application.Employees.Queries.GetEmployeesList
+namespace AspNetCoreSpa.Application.Features.Employees.Queries.GetEmployeesList
 {
     public class EmployeesListVm
     {

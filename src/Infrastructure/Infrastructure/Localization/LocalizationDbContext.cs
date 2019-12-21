@@ -15,10 +15,9 @@ namespace AspNetCoreSpa.Infrastructure.Localization
 
         public DbSet<Culture> Cultures { get; set; }
         public DbSet<Resource> Resources { get; set; }
-
-        public override int SaveChanges()
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            return base.SaveChanges();
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

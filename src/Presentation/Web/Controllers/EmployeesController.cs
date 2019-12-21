@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreSpa.Application.Employees.Commands.UpsertEmployee;
-using AspNetCoreSpa.Application.Employees.Queries.GetEmployeeDetail;
-using AspNetCoreSpa.Application.Employees.Queries.GetEmployeesList;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Features.Employees.Commands.DeleteEmployee;
+using AspNetCoreSpa.Application.Features.Employees.Commands.UpsertEmployee;
+using AspNetCoreSpa.Application.Features.Employees.Queries.GetEmployeeDetail;
+using AspNetCoreSpa.Application.Features.Employees.Queries.GetEmployeesList;
 
 namespace AspNetCoreSpa.Web.Controllers
 {

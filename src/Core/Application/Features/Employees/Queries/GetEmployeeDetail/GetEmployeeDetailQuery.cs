@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCoreSpa.Application.Employees.Queries.GetEmployeeDetail
+namespace AspNetCoreSpa.Application.Features.Employees.Queries.GetEmployeeDetail
 {
     public class GetEmployeeDetailQuery : IRequest<EmployeeDetailVm>
     {

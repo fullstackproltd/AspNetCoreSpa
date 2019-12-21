@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreSpa.Application.Products.Queries.GetProductsFile
+﻿namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductsFile
 {
     public class ProductsFileVm
     {

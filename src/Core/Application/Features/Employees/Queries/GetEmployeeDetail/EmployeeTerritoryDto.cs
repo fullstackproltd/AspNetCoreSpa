@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using AspNetCoreSpa.Application.Common.Mappings;
+﻿using AspNetCoreSpa.Application.Common.Mappings;
 using AspNetCoreSpa.Domain.Entities;
+using AutoMapper;
 
-namespace AspNetCoreSpa.Application.Employees.Queries.GetEmployeeDetail
+namespace AspNetCoreSpa.Application.Features.Employees.Queries.GetEmployeeDetail
 {
     public class EmployeeTerritoryDto : IMapFrom<EmployeeTerritory>
     {

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace AspNetCoreSpa.Application.Products.Commands.DeleteProduct
+namespace AspNetCoreSpa.Application.Features.Products.Commands.DeleteProduct
 {
     public class DeleteProductCommand : IRequest
     {
