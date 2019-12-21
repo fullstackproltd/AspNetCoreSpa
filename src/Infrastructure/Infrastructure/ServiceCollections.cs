@@ -36,7 +36,9 @@ namespace AspNetCoreSpa.Infrastructure
             services.AddHttpContextAccessor()
                 .AddResponseCompression()
                 .AddMemoryCache()
-                .AddHealthChecks();
+                .AddHealthChecks()
+                .AddDbContextCheck<LocalizationDbContext>()
+                .AddDbContextCheck<IdentityServerDbContext>();
 
             return services;
         }

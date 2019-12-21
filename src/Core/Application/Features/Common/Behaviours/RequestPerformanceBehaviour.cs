@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+﻿using MediatR;
+using Microsoft.Extensions.Logging;
+using AspNetCoreSpa.Application.Common.Interfaces;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Abstractions;
-using MediatR;
-using Microsoft.Extensions.Logging;
 
-namespace AspNetCoreSpa.Application.Behaviours
+namespace AspNetCoreSpa.Application.Common.Behaviours
 {
     public class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

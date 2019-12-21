@@ -1,10 +1,10 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Abstractions;
-using MediatR.Pipeline;
+﻿using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
+using AspNetCoreSpa.Application.Common.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace AspNetCoreSpa.Application.Behaviours
+namespace AspNetCoreSpa.Application.Common.Behaviours
 {
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
     {
