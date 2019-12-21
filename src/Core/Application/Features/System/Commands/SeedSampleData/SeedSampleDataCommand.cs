@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Persistence;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
 
 namespace AspNetCoreSpa.Application.System.Commands.SeedSampleData
 {

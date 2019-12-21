@@ -1,13 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Exceptions;
+using AspNetCoreSpa.Application.Products.Queries.GetProductDetail;
+using AspNetCoreSpa.Domain.Entities;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Application.Common.Exceptions;
-using AspNetCoreSpa.Application.Common.Interfaces;
-using AspNetCoreSpa.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace AspNetCoreSpa.Application.Products.Queries.GetProductDetail
+namespace AspNetCoreSpa.Application.Features.Products.Queries.GetProductDetail
 {
     public class GetProductDetailQueryHandler : MediatR.IRequestHandler<GetProductDetailQuery, ProductDetailVm>
     {

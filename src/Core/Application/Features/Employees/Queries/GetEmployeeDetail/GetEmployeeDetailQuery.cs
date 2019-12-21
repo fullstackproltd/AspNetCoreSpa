@@ -2,10 +2,10 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Application.Common.Interfaces;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
 
 namespace AspNetCoreSpa.Application.Employees.Queries.GetEmployeeDetail
 {

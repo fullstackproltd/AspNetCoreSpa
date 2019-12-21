@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AspNetCoreSpa.Domain.Entities.Localization;
+﻿using AspNetCoreSpa.Domain.Entities.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -11,7 +9,6 @@ namespace AspNetCoreSpa.Application.Abstractions
         DbSet<Culture> Cultures { get; set; }
         DbSet<Resource> Resources { get; set; }
         DatabaseFacade Database { get; }
-
         int SaveChanges();
 
     }

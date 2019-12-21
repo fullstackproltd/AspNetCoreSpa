@@ -1,9 +1,17 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using AspNetCoreSpa.Application;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.System.Commands.SeedSampleData;
+using AspNetCoreSpa.Infrastructure.Localization;
+using AspNetCoreSpa.Persistence;
 using AspNetCoreSpa.Web.SeedData;
+using MediatR;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -13,7 +21,7 @@ namespace AspNetCoreSpa.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
 
@@ -23,7 +31,17 @@ namespace AspNetCoreSpa.Web
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 try
                 {
-                    logger.LogInformation("Seeding API database");
+                    var localizationDbContext = services.GetRequiredService<ILocalizationDbContext>();
+                    localizationDbContext.Database.Migrate();
+
+                    var applicationDbContext = services.GetRequiredService<IApplicationDbContext>();
+                    applicationDbContext.Database.Migrate();
+
+                    logger.LogInformation("Seeding Web And Localization Databases");
+
+                    var mediator = services.GetRequiredService<IMediator>();
+                    await mediator.Send(new SeedSampleDataCommand(), CancellationToken.None);
+
                     var dbInitialiser = services.GetRequiredService<IWebSeedData>();
                     dbInitialiser.Initialise();
                 }

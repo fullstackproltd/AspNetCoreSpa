@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using AspNetCoreSpa.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace AspNetCoreSpa.Application.Abstractions
 {
@@ -28,9 +29,9 @@ namespace AspNetCoreSpa.Application.Abstractions
         DbSet<Supplier> Suppliers { get; set; }
 
         DbSet<Territory> Territories { get; set; }
-        DbSet<ContactUs> ContactUs { get; set; }
+
+        DatabaseFacade Database { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-
     }
 }

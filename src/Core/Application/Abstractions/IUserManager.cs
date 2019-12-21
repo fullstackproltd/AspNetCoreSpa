@@ -1,7 +1,7 @@
-﻿using AspNetCoreSpa.Application.Common.Models;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Common.Models;
 
-namespace AspNetCoreSpa.Application.Common.Interfaces
+namespace AspNetCoreSpa.Application.Abstractions
 {
     public interface IUserManager
     {

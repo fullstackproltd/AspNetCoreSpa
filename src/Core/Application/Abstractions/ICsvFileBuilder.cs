@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AspNetCoreSpa.Application.Products.Queries.GetProductsFile;
 
-namespace AspNetCoreSpa.Application.Common.Interfaces
+namespace AspNetCoreSpa.Application.Abstractions
 {
     public interface ICsvFileBuilder
     {

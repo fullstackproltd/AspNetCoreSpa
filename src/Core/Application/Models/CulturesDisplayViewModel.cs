@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AspNetCoreSpa.Application.Models
+﻿namespace AspNetCoreSpa.Application.Models
 {
     public class CulturesDisplayViewModel
     {

@@ -1,13 +1,12 @@
-﻿using MediatR;
-using AspNetCoreSpa.Application.Common.Exceptions;
-using AspNetCoreSpa.Application.Common.Interfaces;
-using AspNetCoreSpa.Domain.Entities;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Abstractions;
-using IApplicationDbContext = AspNetCoreSpa.Application.Common.Interfaces.IApplicationDbContext;
+using AspNetCoreSpa.Application.Exceptions;
+using AspNetCoreSpa.Domain.Entities;
+using MediatR;
+using IApplicationDbContext = AspNetCoreSpa.Application.Abstractions.IApplicationDbContext;
 
-namespace AspNetCoreSpa.Application.Employees.Commands.DeleteEmployee
+namespace AspNetCoreSpa.Application.Features.Employees.Commands.DeleteEmployee
 {
     public class DeleteEmployeeCommand : IRequest
     {

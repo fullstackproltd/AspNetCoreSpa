@@ -21,8 +21,6 @@ namespace AspNetCoreSpa.Web.SeedData
 
         public void Initialise()
         {
-            _context.Database.Migrate();
-
             AddLocalisedData();
         }
         private void AddLocalisedData()

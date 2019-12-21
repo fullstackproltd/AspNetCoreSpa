@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Common.Interfaces;
+using AspNetCoreSpa.Application.Abstractions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;

@@ -1,12 +1,12 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using AspNetCoreSpa.Application.Common.Exceptions;
-using AspNetCoreSpa.Application.Common.Interfaces;
-using AspNetCoreSpa.Domain.Entities;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Exceptions;
+using AspNetCoreSpa.Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCoreSpa.Application.Customers.Commands.UpdateCustomer
+namespace AspNetCoreSpa.Application.Features.Customers.Commands.UpdateCustomer
 {
     public class UpdateCustomerCommand : IRequest
     {

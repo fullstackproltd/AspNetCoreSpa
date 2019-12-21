@@ -1,11 +1,11 @@
-﻿using MediatR;
-using AspNetCoreSpa.Application.Common.Exceptions;
-using AspNetCoreSpa.Application.Common.Interfaces;
-using AspNetCoreSpa.Domain.Entities;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Exceptions;
+using AspNetCoreSpa.Domain.Entities;
+using MediatR;
 
-namespace AspNetCoreSpa.Application.Categories.Commands.DeleteCategory
+namespace AspNetCoreSpa.Application.Features.Categories.Commands.DeleteCategory
 {
     public class DeleteCategoryCommand : IRequest
     {

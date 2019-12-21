@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Common.Exceptions;
-using AspNetCoreSpa.Application.Common.Interfaces;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Exceptions;
 using AspNetCoreSpa.Domain.Entities;
 using MediatR;
 

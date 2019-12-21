@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Exceptions;
 using MediatR;
-using AspNetCoreSpa.Application.Common.Exceptions;
-using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Domain.Entities;
 
 namespace AspNetCoreSpa.Application.Products.Commands.UpdateProduct

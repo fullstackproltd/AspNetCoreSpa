@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using AspNetCoreSpa.Application.Common.Interfaces;
 using AspNetCoreSpa.Domain.Entities;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AspNetCoreSpa.Application.Abstractions;
 
 namespace AspNetCoreSpa.Application.Employees.Commands.UpsertEmployee
 {
