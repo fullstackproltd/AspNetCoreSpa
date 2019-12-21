@@ -28,8 +28,6 @@ namespace AspNetCoreSpa.Application.Abstractions
         DbSet<Supplier> Suppliers { get; set; }
 
         DbSet<Territory> Territories { get; set; }
-        DbSet<Culture> Cultures { get; set; }
-        DbSet<Resource> Resources { get; set; }
         DbSet<ContactUs> ContactUs { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

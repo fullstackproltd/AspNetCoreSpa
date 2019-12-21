@@ -55,7 +55,6 @@ namespace AspNetCoreSpa.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
             });
-            //services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
 
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
@@ -66,6 +65,7 @@ namespace AspNetCoreSpa.Web
                 .AddApplication()
                 .AddCustomConfiguration(Configuration)
                 .AddPersistence(Configuration)
+                .AddDbLocalization(Configuration, HostingEnvironment)
                 .AddCustomSignalR();
 
             var translationFile = File.ReadAllLines(Path.Combine(HostingEnvironment.ContentRootPath, "translations.csv"));
@@ -97,10 +97,7 @@ namespace AspNetCoreSpa.Web
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddControllersWithViews();
-            services.AddRazorPages()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-                .AddDataAnnotationsLocalization();
+            services.AddCustomUi(HostingEnvironment);
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

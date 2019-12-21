@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace AspNetCoreSpa.Web.Services
 {
@@ -34,29 +32,23 @@ namespace AspNetCoreSpa.Web.Services
             _cache = memoryCache;
         }
 
-        public object GetApplicationData()
+        public ApplicationDataViewModel GetApplicationData()
         {
-            var data = JsonConvert.SerializeObject(new
+            var applicationData = new ApplicationDataViewModel
             {
-                Content =  new Dictionary<string, string>(), //GetContentByCulture(),
+                Content = GetContentByCulture(),
                 CookieConsent = GetCookieConsent(),
                 Cultures = _locOptions.SupportedUICultures
-                        .Select(c => new
+                        .Select(c => new CulturesDisplayViewModel
                         {
                             Value = c.Name,
                             Text = c.DisplayName,
                             Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name)
                         })
                         .ToList(),
-            },
-                new JsonSerializerSettings
-                {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    StringEscapeHandling = StringEscapeHandling.EscapeHtml,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+            };
 
-            return data;
+            return applicationData;
         }
 
         private Dictionary<string, string> GetContentByCulture()
@@ -64,9 +56,7 @@ namespace AspNetCoreSpa.Web.Services
             var requestCulture = _contextAccessor.HttpContext.Features.Get<IRequestCultureFeature>();
             // Culture contains the information of the requested culture
             var culture = requestCulture.RequestCulture.Culture;
-
             var CACHE_KEY = $"Content-{culture.Name}";
-
 
             Dictionary<string, string> cacheEntry;
 

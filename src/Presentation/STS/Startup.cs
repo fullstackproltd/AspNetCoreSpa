@@ -15,12 +15,12 @@ namespace AspNetCoreSpa.STS
     public class Startup
     {
         public static IConfiguration Configuration { get; set; }
-        public IWebHostEnvironment Environment { get; }
+        public IWebHostEnvironment HostingEnvironment { get; }
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
-            Environment = environment;
+            HostingEnvironment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -32,21 +32,10 @@ namespace AspNetCoreSpa.STS
                 .AddCustomLocalization()
                 .AddCustomCors(Configuration)
                 .AddCustomConfiguration(Configuration)
-                .AddIdentityDb(Configuration, Environment)
-                .AddCustomIdentity(Configuration, Environment);
+                .AddIdentityDb(Configuration, HostingEnvironment)
+                .AddCustomIdentity(Configuration, HostingEnvironment);
 
-        
-            
-            var controllerWithViews = services.AddControllersWithViews();
-            var razorPages = services.AddRazorPages()
-            .AddViewLocalization()
-            .AddDataAnnotationsLocalization();
-
-            if (Environment.IsDevelopment())
-            {
-                controllerWithViews.AddRazorRuntimeCompilation();
-                razorPages.AddRazorRuntimeCompilation();
-            }
+            services.AddCustomUi(HostingEnvironment);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

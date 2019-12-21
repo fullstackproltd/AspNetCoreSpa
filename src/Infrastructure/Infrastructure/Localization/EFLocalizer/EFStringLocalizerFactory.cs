@@ -6,9 +6,9 @@ namespace AspNetCoreSpa.Infrastructure.Localization.EFLocalizer
 {
     public class EFStringLocalizerFactory : IStringLocalizerFactory
     {
-        private readonly IApplicationDbContext _context;
+        private readonly ILocalizationDbContext _context;
 
-        public EFStringLocalizerFactory(IApplicationDbContext context)
+        public EFStringLocalizerFactory(ILocalizationDbContext context)
         {
             _context = context;
         }

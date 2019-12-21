@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AspNetCoreSpa.Domain.Entities
+namespace AspNetCoreSpa.Domain.Entities.Localization
 {
     public class Culture
     {

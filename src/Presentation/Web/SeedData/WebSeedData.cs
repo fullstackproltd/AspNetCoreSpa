@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using AspNetCoreSpa.Domain.Entities;
-using AspNetCoreSpa.Persistence;
+using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Domain.Entities.Localization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +10,10 @@ namespace AspNetCoreSpa.Web.SeedData
 {
     public class WebSeedData : IWebSeedData
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ILocalizationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public WebSeedData(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
+        public WebSeedData(ILocalizationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
             _hostingEnvironment = hostingEnvironment;

@@ -1,7 +1,9 @@
+using AspNetCoreSpa.Application.Models;
+
 namespace AspNetCoreSpa.Application.Abstractions
 {
     public interface IApplicationService
     {
-        object GetApplicationData();
+        ApplicationDataViewModel GetApplicationData();
     }
 }

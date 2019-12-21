@@ -10,6 +10,7 @@ using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
 using AspNetCoreSpa.Infrastructure.Localization;
+using AspNetCoreSpa.Infrastructure.Localization.EFLocalizer;
 using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Infrastructure.Services.Certificate;
 using AspNetCoreSpa.Infrastructure.Services.Email;
@@ -22,6 +23,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AspNetCoreSpa.Infrastructure
@@ -133,6 +135,43 @@ namespace AspNetCoreSpa.Infrastructure
                     options.EnableSensitiveDataLogging();
                 }
             });
+
+            return services;
+        }
+
+        public static IServiceCollection AddDbLocalization(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        {
+            services.AddDbContext<LocalizationDbContext>(options =>
+            {
+                options.UseSqlite(configuration["DatA:Localization"],
+                    b => b.MigrationsAssembly("AspNetCoreSpa.Infrastructure"));
+
+                if (environment.IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging();
+                }
+            },
+            ServiceLifetime.Singleton,
+            ServiceLifetime.Singleton);
+
+            services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
+            services.AddSingleton<ILocalizationDbContext>(provider => provider.GetService<LocalizationDbContext>());
+
+            return services;
+        }
+
+        public static IServiceCollection AddCustomUi(this IServiceCollection services, IWebHostEnvironment environment)
+        {
+            var controllerWithViews = services.AddControllersWithViews();
+            var razorPages = services.AddRazorPages()
+            .AddViewLocalization()
+            .AddDataAnnotationsLocalization();
+
+            if (environment.IsDevelopment())
+            {
+                controllerWithViews.AddRazorRuntimeCompilation();
+                razorPages.AddRazorRuntimeCompilation();
+            }
 
             return services;
         }

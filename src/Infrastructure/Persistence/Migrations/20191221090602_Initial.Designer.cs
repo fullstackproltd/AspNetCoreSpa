@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreSpa.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191219154138_Initial")]
+    [Migration("20191221090602_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,20 +65,6 @@ namespace AspNetCoreSpa.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactUs");
-                });
-
-            modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Culture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cultures");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Customer", b =>
@@ -452,28 +438,6 @@ namespace AspNetCoreSpa.Persistence.Migrations
                     b.ToTable("Region");
                 });
 
-            modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Resource", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CultureId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CultureId");
-
-                    b.ToTable("Resources");
-                });
-
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Shipper", b =>
                 {
                     b.Property<int>("ShipperId")
@@ -638,13 +602,6 @@ namespace AspNetCoreSpa.Persistence.Migrations
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Supplier", "Supplier")
                         .WithMany("Products")
                         .HasForeignKey("SupplierId");
-                });
-
-            modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Resource", b =>
-                {
-                    b.HasOne("AspNetCoreSpa.Domain.Entities.Culture", "Culture")
-                        .WithMany("Resources")
-                        .HasForeignKey("CultureId");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Territory", b =>

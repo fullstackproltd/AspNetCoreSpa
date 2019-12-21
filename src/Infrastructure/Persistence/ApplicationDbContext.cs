@@ -48,8 +48,6 @@ namespace AspNetCoreSpa.Persistence
         public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<Territory> Territories { get; set; }
-        public DbSet<Culture> Cultures { get; set; }
-        public DbSet<Resource> Resources { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

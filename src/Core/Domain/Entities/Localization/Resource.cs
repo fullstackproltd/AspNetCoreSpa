@@ -1,4 +1,4 @@
-﻿namespace AspNetCoreSpa.Domain.Entities
+﻿namespace AspNetCoreSpa.Domain.Entities.Localization
 {
     public class Resource
     {
