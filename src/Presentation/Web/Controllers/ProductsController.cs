@@ -5,31 +5,27 @@ using AspNetCoreSpa.Application.Features.Products.Commands.UpdateProduct;
 using AspNetCoreSpa.Application.Features.Products.Queries.GetProductDetail;
 using AspNetCoreSpa.Application.Features.Products.Queries.GetProductsFile;
 using AspNetCoreSpa.Application.Features.Products.Queries.GetProductsList;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
-    [Authorize]
     public class ProductsController : BaseController
     {
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<ProductsListVm>> GetAll()
         {
             var vm = await Mediator.Send(new GetProductsListQuery());
 
-            return base.Ok(vm);
+            return Ok(vm);
         }
 
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public async Task<ActionResult<ProductDetailVm>> Get(int id)
         {
             var vm = await Mediator.Send(new GetProductDetailQuery { Id = id });
 
-            return base.Ok(vm);
+            return Ok(vm);
         }
 
         [HttpPost]
@@ -61,7 +57,6 @@ namespace AspNetCoreSpa.Web.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<FileResult> Download()
         {
             var vm = await Mediator.Send(new GetProductsFileQuery());

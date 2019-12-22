@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Features.Categories.Commands.DeleteCategory;
@@ -8,11 +7,9 @@ using AspNetCoreSpa.Application.Features.Categories.Queries.GetCategoriesList;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
-    [Authorize]
     public class CategoriesController : BaseController
     {
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult<CategoriesListVm>> GetAll()
         {
             return Ok(await Mediator.Send(new GetCategoriesListQuery()));

@@ -1,14 +1,14 @@
-﻿// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
-using System;
+﻿using System;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
+    [AllowAnonymous]
     public class AppController : BaseController
     {
         private readonly IApplicationService _applicationService;
@@ -28,6 +28,7 @@ namespace AspNetCoreSpa.Web.Controllers
             return LocalRedirect("~/");
         }
 
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<ApplicationDataViewModel> GetApplicationData()
         {

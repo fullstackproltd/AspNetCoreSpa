@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ using AspNetCoreSpa.Application.Features.Customers.Queries.GetCustomersList;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
-    [Authorize]
     public class CustomersController : BaseController
     {
         [HttpGet]

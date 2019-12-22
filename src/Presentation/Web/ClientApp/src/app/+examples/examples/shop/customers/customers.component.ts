@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { DataService } from '@app/shared';
+import { CustomersClient } from '@app/api-client';
 
 @Component({
   selector: 'appc-customers',
@@ -7,9 +7,9 @@ import { DataService } from '@app/shared';
   styleUrls: ['./customers.component.scss'],
 })
 export class CustomersComponent implements OnInit {
-  constructor(private dataService: DataService) {}
+  constructor(private customerClient: CustomersClient) {}
 
   ngOnInit() {
-    this.dataService.get('customers/GetAll').subscribe(console.log);
+    this.customerClient.getAll().subscribe(res => console.log(res.customers));
   }
 }

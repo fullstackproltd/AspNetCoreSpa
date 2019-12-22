@@ -47,7 +47,7 @@
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
               <form
                 *ngFor="let c of cultures"
-                action="/api/setlanguage"
+                action="/api/app/setlanguage?culture={{c.value}}"
                 method="post"
                 class="culture-form"
                 ngNoForm
