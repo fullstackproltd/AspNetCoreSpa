@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCoreSpa.Application
 {
-    public static class DiExtensions
+    public static class ServicesExtensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {

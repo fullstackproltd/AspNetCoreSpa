@@ -10,7 +10,8 @@
     "SmtpUsername": "",
     "SmtpPassword": "",
     "SmtpSenderName": "",
-    "SmtpSenderAddress": "admin@example.com"
+    "SmtpSenderAddress": "admin@example.com",
+    "ApiKey": ""
   },
   "AllowedHosts": "*"
 }

@@ -34,7 +34,7 @@ using NSwag.Generation.Processors.Security;
 
 namespace AspNetCoreSpa.Infrastructure
 {
-    public static class DiExtensions
+    public static class ServicesExtensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -95,15 +95,15 @@ namespace AspNetCoreSpa.Infrastructure
                 .AddGoogle(options =>
                 {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    options.ClientId = "476611152863-ltgqfk9jhq1vsenin5039n58ogkraltb.apps.googleusercontent.com";
-                    options.ClientSecret = "rSHvhgdOQUB4KMc5JS1alzhg";
+                    options.ClientId = configuration["IdentityServer:ExternalAuth:Google:ClientId"];
+                    options.ClientSecret = configuration["IdentityServer:ExternalAuth:Google:ClientSecret"];
                 })
                 .AddOpenIdConnect("aad", "Login with Azure AD", options =>
                 {
-                    options.Authority = $"https://login.microsoftonline.com/common";
+                    options.Authority = configuration["IdentityServer:ExternalAuth:AzureAd:Authority"];
                     options.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
-                    options.ClientId = "99eb0b9d-ca40-476e-b5ac-6f4c32bfb530";
-                    options.CallbackPath = "/signin-oidc";
+                    options.ClientId = configuration["IdentityServer:ExternalAuth:AzureAd:ClientId"];
+                    options.CallbackPath = configuration["IdentityServer:ExternalAuth:AzureAd:CallbackPath"];
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                 })
                 .AddIdentityServerJwt();
