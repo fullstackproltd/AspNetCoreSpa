@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CustomersClient } from '@app/api-client';
+import { CustomersClient, CustomerLookupDto } from '@app/api-client';
+import { GridColumn } from '@app/shared';
 
 @Component({
   selector: 'appc-customers',
@@ -8,8 +9,19 @@ import { CustomersClient } from '@app/api-client';
 })
 export class CustomersComponent implements OnInit {
   constructor(private customerClient: CustomersClient) {}
-
+  customers: CustomerLookupDto[];
+  columns: GridColumn[];
   ngOnInit() {
-    this.customerClient.getAll().subscribe(res => console.log(res.customers));
+    this.customerClient.getAll().subscribe(res => {
+      this.customers = res.customers;
+      this.columns = [
+        {
+          field: 'id',
+        },
+        {
+          field: 'name',
+        },
+      ];
+    });
   }
 }

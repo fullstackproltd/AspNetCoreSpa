@@ -1,8 +1,4 @@
-﻿<environment include="Development">
-    <script src="~/Identity/lib/jquery/dist/jquery.js"></script>
-    <script src="~/Identity/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-</environment>
-<environment exclude="Development">
+﻿<environment exclude="Development">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
             asp-fallback-src="~/Identity/lib/jquery/dist/jquery.min.js"
             asp-fallback-test="window.jQuery"
@@ -17,11 +13,6 @@
     </script>
 </environment>
 
-
-<environment include="Development">
-    <script src="~/Identity/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/Identity/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-</environment>
 <environment exclude="Development">
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"
             asp-fallback-src="~/Identity/lib/jquery-validation/dist/jquery.validate.min.js"
@@ -38,5 +29,4 @@
 </environment>
 
 <script src="~/Identity/js/site.js" asp-append-version="true"></script>
-<script src="~/js/script.js" asp-append-version="true"></script>
 

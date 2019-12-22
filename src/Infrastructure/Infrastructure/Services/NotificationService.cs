@@ -30,7 +30,7 @@ namespace AspNetCoreSpa.Infrastructure.Services
 
             var subject = "Hello world email from Sendgrid ";
             var htmlContent = "<strong>Hello world with HTML content</strong>";
-            var displayRecipients = false; // set this to true if you want recipients to see each others mail id 
+            // var displayRecipients = false; // set this to true if you want recipients to see each others mail id 
             var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, "", htmlContent, false);
             var response = await client.SendEmailAsync(msg);
         }

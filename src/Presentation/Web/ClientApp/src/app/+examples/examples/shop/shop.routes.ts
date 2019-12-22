@@ -10,7 +10,7 @@ export const routes = [
     children: [
       { path: '', redirectTo: 'customers' },
       { path: 'customers', component: CustomersComponent, data: { state: 'customers', displayText: 'Customers' } },
-      { path: 'producst', component: ProductsComponent, data: { state: 'producst', displayText: 'Products' } },
+      { path: 'products', component: ProductsComponent, data: { state: 'products', displayText: 'Products' } },
     ],
   },
 ];

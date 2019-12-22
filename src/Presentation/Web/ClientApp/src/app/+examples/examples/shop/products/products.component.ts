@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '@app/shared';
+
+import { ProductsClient, ProductDto } from '@app/api-client';
+import { GridColumn } from '@app/shared';
 
 @Component({
   selector: 'appc-products',
@@ -7,9 +9,32 @@ import { DataService } from '@app/shared';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  constructor(private dataService: DataService) {}
-
+  constructor(private productsClient: ProductsClient) {}
+  products: ProductDto[];
+  columns: GridColumn[];
   ngOnInit() {
-    this.dataService.get('products/GetAll').subscribe(console.log);
+    this.productsClient.getAll().subscribe(res => {
+      this.products = res.products;
+      this.columns = [
+        {
+          field: 'productId',
+        },
+        {
+          field: 'productName',
+        },
+        {
+          field: 'unitPrice',
+        },
+        {
+          field: 'supplierCompanyName',
+        },
+        {
+          field: 'categoryName',
+        },
+        {
+          field: 'discontinued',
+        },
+      ];
+    });
   }
 }
