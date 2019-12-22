@@ -1,26 +1,17 @@
-﻿using System.Globalization;
-using System.IO;
-using System.Linq;
-using AspNetCoreSpa.Application;
+﻿using AspNetCoreSpa.Application;
 using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure;
-using AspNetCoreSpa.Web.Middlewares;
+using AspNetCoreSpa.Infrastructure.Localization;
+using AspNetCoreSpa.Infrastructure.Persistence;
 using AspNetCoreSpa.Web.Services;
 using AspNetCoreSpa.Web.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
-using NSwag;
-using NSwag.Generation.Processors.Security;
 
 namespace AspNetCoreSpa.Web
 {
@@ -43,22 +34,17 @@ namespace AspNetCoreSpa.Web
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-            });
-
             services.AddTransient<IApplicationService, ApplicationService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddApplication()
-                .AddInfrastructure()
-                .AddCustomConfiguration(Configuration)
-                .AddPersistence(Configuration)
-                .AddDbLocalization(Configuration, HostingEnvironment)
-                .AddCustomSignalR();
+                .AddInfrastructure(Configuration, HostingEnvironment)
+                .AddHealthChecks()
+                .AddDbContextCheck<LocalizationDbContext>()
+                .AddDbContextCheck<ApplicationDbContext>();
+
+            services.AddPersistence(Configuration)
+                .AddDbLocalization(Configuration, HostingEnvironment);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>
@@ -69,22 +55,6 @@ namespace AspNetCoreSpa.Web
                                 options.Audience = Configuration["Auth:Audience"];
                             });
 
-            var translationFile = File.ReadAllLines(Path.Combine(HostingEnvironment.ContentRootPath, "translations.csv"));
-            var cultures = translationFile.First().Split(",").Skip(1);
-            services.Configure<RequestLocalizationOptions>(opts =>
-            {
-                var supportedCultures = cultures.Select(c => new CultureInfo(c)).ToList();
-
-                opts.DefaultRequestCulture = new RequestCulture(cultures.First());
-                // Formatting numbers, dates, etc.
-                opts.SupportedCultures = supportedCultures;
-                // UI strings that we have localized.
-                opts.SupportedUICultures = supportedCultures;
-            });
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
-
-            services.AddCustomUi(HostingEnvironment);
-
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -94,32 +64,8 @@ namespace AspNetCoreSpa.Web
         }
         public void Configure(IApplicationBuilder app)
         {
-            // https://github.com/openiddict/openiddict-core/issues/518
-            // And
-            // https://github.com/aspnet/Docs/issues/2384#issuecomment-297980490
-            var forwardOptions = new ForwardedHeadersOptions
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            };
-            forwardOptions.KnownNetworks.Clear();
-            forwardOptions.KnownProxies.Clear();
-            app.UseForwardedHeaders(forwardOptions);
+            app.UseInfrastructure(HostingEnvironment);
 
-            if (HostingEnvironment.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-                app.UseResponseCompression();
-            }
-
-            app.UseCustomExceptionHandler();
-            //app.AddCustomSecurityHeaders();
-            app.UseHealthChecks("/health");
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
             if (!HostingEnvironment.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
@@ -131,12 +77,8 @@ namespace AspNetCoreSpa.Web
                 settings.DocumentPath = "/api/specification.json";
             });
 
-            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(options.Value);
-            app.UseCookiePolicy();
-
             app.UseRouting();
-
+            app.UseCors(Constants.DefaultCorsPolicy);
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

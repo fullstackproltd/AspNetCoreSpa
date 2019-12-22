@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading.Tasks;
 using AspNetCoreSpa.Application.Exceptions;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
-namespace AspNetCoreSpa.Web.Middlewares
+namespace AspNetCoreSpa.Infrastructure.Middlewares
 {
     public class CustomExceptionHandler
     {

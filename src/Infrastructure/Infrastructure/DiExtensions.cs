@@ -20,6 +20,7 @@ using IdentityServer4;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,75 +34,51 @@ using NSwag.Generation.Processors.Security;
 
 namespace AspNetCoreSpa.Infrastructure
 {
-    public static class ServiceCollections
+    public static class DiExtensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+            });
+
             services.AddScoped<IUserManager, UserManagerService>();
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IDateTime, MachineDateTime>();
-            services.AddTransient<ICsvFileBuilder, CsvFileBuilder>(); 
-            
+            services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
+
             services.AddHttpContextAccessor()
                 .AddResponseCompression()
                 .AddMemoryCache()
-                .AddHealthChecks()
-                .AddDbContextCheck<LocalizationDbContext>()
-                .AddDbContextCheck<IdentityServerDbContext>();
+                .AddHealthChecks();
+
+            // Shared configuration across apps
+            services.AddCustomConfiguration(configuration)
+                .AddCustomSignalR()
+                .AddCustomCors(configuration)
+                .AddCustomLocalization()
+                .AddCustomUi(environment);
 
             return services;
         }
 
-        public static IServiceCollection AddCustomCors(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddCors(options =>
-                {
-                    options.AddPolicy(Constants.DefaultCorsPolicy,
-                        builder =>
-                        {
-                            builder.WithOrigins(configuration["CorsOrigins"].Split(","))
-                                .AllowAnyMethod()
-                                .AllowAnyHeader();
-                        });
-                });
-
-            return services;
-        }
-
-        public static IServiceCollection AddCustomSignalR(this IServiceCollection services)
-        {
-            services.AddSignalR()
-                .AddMessagePackProtocol();
-
-            return services;
-        }
-
-        public static IServiceCollection AddCustomLocalization(this IServiceCollection services)
-        {
-            services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.Configure<RequestLocalizationOptions>(
-                options =>
-                {
-                    var supportedCultures = new List<CultureInfo>
-                    {
-                        new CultureInfo("en-US"),
-                        new CultureInfo("de-DE"),
-                        new CultureInfo("de-CH"),
-                        new CultureInfo("it-IT"),
-                        new CultureInfo("gsw-CH"),
-                        new CultureInfo("fr-FR")
-                    };
-
-                    options.DefaultRequestCulture = new RequestCulture(culture: "de-DE", uiCulture: "de-DE");
-                    options.SupportedCultures = supportedCultures;
-                    options.SupportedUICultures = supportedCultures;
-                });
-
-            return services;
-        }
-        public static IIdentityServerBuilder AddCustomIdentity(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        public static IIdentityServerBuilder AddStsServer(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
             services.AddTransient<IClientInfoService, ClientInfoService>();
+
+            services.AddDbContext<IdentityServerDbContext>(options =>
+            {
+                options.UseSqlite(configuration.GetConnectionString("Identity"),
+                    b => b.MigrationsAssembly(typeof(IdentityServerDbContext).Assembly.FullName));
+
+                if (environment.IsDevelopment())
+                {
+                    options.EnableSensitiveDataLogging();
+                }
+            });
 
             services.AddDefaultIdentity<ApplicationUser>()
             .AddRoles<ApplicationRole>()
@@ -133,23 +110,6 @@ namespace AspNetCoreSpa.Infrastructure
 
             return identityBuilder;
         }
-
-        public static IServiceCollection AddIdentityDb(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
-        {
-            services.AddDbContext<IdentityServerDbContext>(options =>
-            {
-                options.UseSqlite(configuration.GetConnectionString("Identity"),
-                    b => b.MigrationsAssembly(typeof(IdentityServerDbContext).Assembly.FullName));
-
-                if (environment.IsDevelopment())
-                {
-                    options.EnableSensitiveDataLogging();
-                }
-            });
-
-            return services;
-        }
-
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -207,8 +167,32 @@ namespace AspNetCoreSpa.Infrastructure
 
             return services;
         }
+        private static IServiceCollection AddCustomLocalization(this IServiceCollection services)
+        {
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+            services.Configure<RequestLocalizationOptions>(
+                options =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("en-GB"),
+                        new CultureInfo("en-US"),
+                        new CultureInfo("de-DE"),
+                        new CultureInfo("de-CH"),
+                        new CultureInfo("it-IT"),
+                        new CultureInfo("gsw-CH"),
+                        new CultureInfo("fr-FR")
+                    };
 
-        public static IServiceCollection AddCustomUi(this IServiceCollection services, IWebHostEnvironment environment)
+                    options.DefaultRequestCulture = new RequestCulture(culture: "en-GB", uiCulture: "en-GB");
+                    options.SupportedCultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
+                });
+
+            return services;
+        }
+
+        private static IServiceCollection AddCustomUi(this IServiceCollection services, IWebHostEnvironment environment)
         {
             services.AddOpenApiDocument(configure =>
             {
@@ -244,10 +228,33 @@ namespace AspNetCoreSpa.Infrastructure
             return services;
         }
 
-        public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
+        private static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             // Custom configuration
             services.ConfigurePoco<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
+
+            return services;
+        }
+        private static IServiceCollection AddCustomCors(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(Constants.DefaultCorsPolicy,
+                    builder =>
+                    {
+                        builder.WithOrigins(configuration["CorsOrigins"].Split(","))
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
+
+            return services;
+        }
+
+        private static IServiceCollection AddCustomSignalR(this IServiceCollection services)
+        {
+            services.AddSignalR()
+                .AddMessagePackProtocol();
 
             return services;
         }

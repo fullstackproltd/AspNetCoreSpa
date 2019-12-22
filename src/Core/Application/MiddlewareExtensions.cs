@@ -1,25 +1,10 @@
 ﻿using System.IO;
-using System.Reflection;
-using AspNetCoreSpa.Application.Behaviours;
-using AutoMapper;
-using MediatR;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace AspNetCoreSpa.Application
 {
-    public static class ServiceCollections
+    public static class MiddlewareExtensions
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
-        {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-
-            return services;
-        }
-
         public static IConfigurationBuilder AddCustomAppSettings(this IConfigurationBuilder configuration, string contentRoot, string environment)
         {
             var sharedFolder = Path.Combine(contentRoot, "..", "..", "Core", "Application");
