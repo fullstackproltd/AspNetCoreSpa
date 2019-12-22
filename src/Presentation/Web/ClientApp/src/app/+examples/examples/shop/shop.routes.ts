@@ -1,5 +1,6 @@
 import { ShopComponent } from './shop.component';
 import { CustomersComponent } from './customers/customers.component';
+import { ProductsComponent } from './products/products.component';
 
 export const routes = [
   {
@@ -9,6 +10,7 @@ export const routes = [
     children: [
       { path: '', redirectTo: 'customers' },
       { path: 'customers', component: CustomersComponent, data: { state: 'customers', displayText: 'Customers' } },
+      { path: 'producst', component: ProductsComponent, data: { state: 'producst', displayText: 'Products' } },
     ],
   },
 ];

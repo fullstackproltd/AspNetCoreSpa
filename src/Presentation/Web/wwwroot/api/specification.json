@@ -6,6 +6,68 @@
     "version": "1.0.0"
   },
   "paths": {
+    "/api/App/SetLanguage": {
+      "post": {
+        "tags": [
+          "App"
+        ],
+        "operationId": "App_SetLanguage",
+        "parameters": [
+          {
+            "name": "culture",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/App/GetApplicationData": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "operationId": "App_GetApplicationData",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApplicationDataViewModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
     "/api/Categories/GetAll": {
       "get": {
         "tags": [
@@ -454,59 +516,6 @@
         ]
       }
     },
-    "/api/setlanguage": {
-      "post": {
-        "tags": [
-          "Home"
-        ],
-        "operationId": "Home_SetLanguage",
-        "parameters": [
-          {
-            "name": "culture",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/applicationdata": {
-      "get": {
-        "tags": [
-          "Home"
-        ],
-        "operationId": "Home_Get",
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/Products/GetAll": {
       "get": {
         "tags": [
@@ -741,6 +750,46 @@
   },
   "components": {
     "schemas": {
+      "ApplicationDataViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "cookieConsent": {
+            "nullable": true
+          },
+          "cultures": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/CulturesDisplayViewModel"
+            }
+          }
+        }
+      },
+      "CulturesDisplayViewModel": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "current": {
+            "type": "boolean"
+          }
+        }
+      },
       "CategoriesListVm": {
         "type": "object",
         "additionalProperties": false,

@@ -109,7 +109,7 @@
             "enumNameGeneratorType": null,
             "serviceHost": null,
             "serviceSchemes": null,
-            "output": "ClientApp/src/app/aspnetcorespa-api.ts"
+            "output": "ClientApp/src/app/api-client.ts"
         }
     }
 }

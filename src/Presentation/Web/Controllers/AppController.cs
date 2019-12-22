@@ -2,22 +2,23 @@
 
 using System;
 using AspNetCoreSpa.Application.Abstractions;
+using AspNetCoreSpa.Application.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AspNetCoreSpa.Web.Controllers
 {
-    public class HomeController : ControllerBase
+    public class AppController : BaseController
     {
         private readonly IApplicationService _applicationService;
 
-        public HomeController(IApplicationService applicationService)
+        public AppController(IApplicationService applicationService)
         {
             _applicationService = applicationService;
         }
 
-        [HttpPost("api/setlanguage")]
+        [HttpPost]
         public IActionResult SetLanguage(string culture)
         {
             Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
@@ -27,8 +28,8 @@ namespace AspNetCoreSpa.Web.Controllers
             return LocalRedirect("~/");
         }
 
-        [HttpGet("api/applicationdata")]
-        public IActionResult Get()
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public ActionResult<ApplicationDataViewModel> GetApplicationData()
         {
             var appData = _applicationService.GetApplicationData();
 

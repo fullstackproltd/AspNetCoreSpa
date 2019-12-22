@@ -14,6 +14,121 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpResponseBase } from '@angula
 
 export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL');
 
+export interface IAppClient {
+    setLanguage(culture: string | null | undefined): Observable<FileResponse>;
+    getApplicationData(): Observable<ApplicationDataViewModel>;
+}
+
+@Injectable({
+    providedIn: 'root'
+})
+export class AppClient implements IAppClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    setLanguage(culture: string | null | undefined): Observable<FileResponse> {
+        let url_ = this.baseUrl + "/api/App/SetLanguage?";
+        if (culture !== undefined)
+            url_ += "culture=" + encodeURIComponent("" + culture) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/octet-stream"
+            })
+        };
+
+        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSetLanguage(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processSetLanguage(<any>response_);
+                } catch (e) {
+                    return <Observable<FileResponse>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<FileResponse>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processSetLanguage(response: HttpResponseBase): Observable<FileResponse> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<FileResponse>(<any>null);
+    }
+
+    getApplicationData(): Observable<ApplicationDataViewModel> {
+        let url_ = this.baseUrl + "/api/App/GetApplicationData";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",			
+            headers: new HttpHeaders({
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetApplicationData(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetApplicationData(<any>response_);
+                } catch (e) {
+                    return <Observable<ApplicationDataViewModel>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<ApplicationDataViewModel>><any>_observableThrow(response_);
+        }));
+    }
+
+    protected processGetApplicationData(response: HttpResponseBase): Observable<ApplicationDataViewModel> {
+        const status = response.status;
+        const responseBlob = 
+            response instanceof HttpResponse ? response.body : 
+            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ApplicationDataViewModel.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<ApplicationDataViewModel>(<any>null);
+    }
+}
+
 export interface ICategoriesClient {
     getAll(): Observable<CategoriesListVm>;
     upsert(command: UpsertCategoryCommand): Observable<void>;
@@ -704,119 +819,6 @@ export class EmployeesClient implements IEmployeesClient {
     }
 }
 
-export interface IHomeClient {
-    setLanguage(culture: string | null | undefined): Observable<FileResponse>;
-    get(): Observable<FileResponse>;
-}
-
-@Injectable({
-    providedIn: 'root'
-})
-export class HomeClient implements IHomeClient {
-    private http: HttpClient;
-    private baseUrl: string;
-    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
-
-    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http;
-        this.baseUrl = baseUrl ? baseUrl : "";
-    }
-
-    setLanguage(culture: string | null | undefined): Observable<FileResponse> {
-        let url_ = this.baseUrl + "/api/setlanguage?";
-        if (culture !== undefined)
-            url_ += "culture=" + encodeURIComponent("" + culture) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",			
-            headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
-            })
-        };
-
-        return this.http.request("post", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processSetLanguage(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processSetLanguage(<any>response_);
-                } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processSetLanguage(response: HttpResponseBase): Observable<FileResponse> {
-        const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<FileResponse>(<any>null);
-    }
-
-    get(): Observable<FileResponse> {
-        let url_ = this.baseUrl + "/api/applicationdata";
-        url_ = url_.replace(/[?&]$/, "");
-
-        let options_ : any = {
-            observe: "response",
-            responseType: "blob",			
-            headers: new HttpHeaders({
-                "Accept": "application/octet-stream"
-            })
-        };
-
-        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processGet(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processGet(<any>response_);
-                } catch (e) {
-                    return <Observable<FileResponse>><any>_observableThrow(e);
-                }
-            } else
-                return <Observable<FileResponse>><any>_observableThrow(response_);
-        }));
-    }
-
-    protected processGet(response: HttpResponseBase): Observable<FileResponse> {
-        const status = response.status;
-        const responseBlob = 
-            response instanceof HttpResponse ? response.body : 
-            (<any>response).error instanceof Blob ? (<any>response).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }};
-        if (status === 200 || status === 206) {
-            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
-            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
-            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
-            return _observableOf({ fileName: fileName, data: <any>responseBlob, status: status, headers: _headers });
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf<FileResponse>(<any>null);
-    }
-}
-
 export interface IProductsClient {
     getAll(): Observable<ProductsListVm>;
     get(id: number): Observable<ProductDetailVm>;
@@ -1152,6 +1154,114 @@ export class ProductsClient implements IProductsClient {
         }
         return _observableOf<FileResponse>(<any>null);
     }
+}
+
+export class ApplicationDataViewModel implements IApplicationDataViewModel {
+    content?: { [key: string]: string; } | undefined;
+    cookieConsent?: any | undefined;
+    cultures?: CulturesDisplayViewModel[] | undefined;
+
+    constructor(data?: IApplicationDataViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (_data["content"]) {
+                this.content = {} as any;
+                for (let key in _data["content"]) {
+                    if (_data["content"].hasOwnProperty(key))
+                        this.content![key] = _data["content"][key];
+                }
+            }
+            this.cookieConsent = _data["cookieConsent"];
+            if (Array.isArray(_data["cultures"])) {
+                this.cultures = [] as any;
+                for (let item of _data["cultures"])
+                    this.cultures!.push(CulturesDisplayViewModel.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ApplicationDataViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new ApplicationDataViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.content) {
+            data["content"] = {};
+            for (let key in this.content) {
+                if (this.content.hasOwnProperty(key))
+                    data["content"][key] = this.content[key];
+            }
+        }
+        data["cookieConsent"] = this.cookieConsent;
+        if (Array.isArray(this.cultures)) {
+            data["cultures"] = [];
+            for (let item of this.cultures)
+                data["cultures"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IApplicationDataViewModel {
+    content?: { [key: string]: string; } | undefined;
+    cookieConsent?: any | undefined;
+    cultures?: CulturesDisplayViewModel[] | undefined;
+}
+
+export class CulturesDisplayViewModel implements ICulturesDisplayViewModel {
+    value?: string | undefined;
+    text?: string | undefined;
+    current?: boolean;
+
+    constructor(data?: ICulturesDisplayViewModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.value = _data["value"];
+            this.text = _data["text"];
+            this.current = _data["current"];
+        }
+    }
+
+    static fromJS(data: any): CulturesDisplayViewModel {
+        data = typeof data === 'object' ? data : {};
+        let result = new CulturesDisplayViewModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["value"] = this.value;
+        data["text"] = this.text;
+        data["current"] = this.current;
+        return data; 
+    }
+}
+
+export interface ICulturesDisplayViewModel {
+    value?: string | undefined;
+    text?: string | undefined;
+    current?: boolean;
 }
 
 export class CategoriesListVm implements ICategoriesListVm {
