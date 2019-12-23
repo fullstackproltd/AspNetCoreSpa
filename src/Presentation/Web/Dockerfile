@@ -31,7 +31,6 @@ COPY ["src/Infrastructure/Infrastructure/Infrastructure.csproj", "src/Infrastruc
 COPY ["src/Core/Application/Application.csproj", "src/Core/Application/"]
 COPY ["src/Core/Domain/Domain.csproj", "src/Core/Domain/"]
 COPY ["src/Core/Common/Common.csproj", "src/Core/Common/"]
-COPY ["src/Infrastructure/Persistence/Persistence.csproj", "src/Infrastructure/Persistence/"]
 RUN dotnet restore "src/Presentation/Web/Web.csproj"
 COPY ["src/Presentation/Web/ClientApp/package.json", "src/Presentation/Web/ClientApp/"]
 
