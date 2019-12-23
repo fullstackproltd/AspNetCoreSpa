@@ -1,6 +1,6 @@
 ContentKey,en-US,en-GB,fr-FR
 app_title,AspNetCoreSpa,AspNetCoreSpa,fr-AspNetCoreSpa
-app_description,Single page application using aspnet core and angular,Single page application using aspnet core and angular,fr-Single page application using aspnet core and angular
+app_description,Single page application using ASP.NET Core and Angular,Single page application using ASP.NET Core and Angular,fr-Single page application using ASP.NET Core and Angular
 app_repo_url,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa,https://github.com/asadsahi/aspnetcorespa
 app_nav_home,Home,Home,fr-Home
 app_nav_examples,Examples,Examples,fr-Examples

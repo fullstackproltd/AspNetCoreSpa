@@ -48,7 +48,6 @@
     "bootstrap": "4.4.1",
     "date-fns": "2.8.1",
     "flatpickr": "4.6.3",
-    "font-awesome": "4.7.0",
     "lodash": "4.17.15",
     "oidc-client": "1.10.1",
     "preboot": "7.0.0",
