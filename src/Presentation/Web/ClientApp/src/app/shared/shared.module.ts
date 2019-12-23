@@ -65,7 +65,7 @@ import {
 } from './components';
 import { ApplicationPaths } from './constants';
 // Pipes
-import { UppercasePipe, TranslatePipe } from './pipes';
+import { UppercasePipe, TranslatePipe, GroupByPipe, SafePipe } from './pipes';
 
 export function appServiceFactory(appService: AppService): () => Promise<any> {
   return () => appService.getAppData();
@@ -95,6 +95,8 @@ export function appServiceFactory(appService: AppService): () => Promise<any> {
     // pipes
     UppercasePipe,
     TranslatePipe,
+    GroupByPipe,
+    SafePipe,
     // Forms
     FormFieldDirective,
     FieldColorValidationDirective,
@@ -147,6 +149,8 @@ export function appServiceFactory(appService: AppService): () => Promise<any> {
     // pipes
     UppercasePipe,
     TranslatePipe,
+    GroupByPipe,
+    SafePipe,
     // Forms
     FormFieldDirective,
     FieldColorValidationDirective,
