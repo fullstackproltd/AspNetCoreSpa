@@ -1,5 +1,8 @@
 import { environment } from 'environments/environment';
-export const ApplicationName = 'Web';
+export const ApplicationName = location.host
+  .replace(':', '')
+  .split('.')
+  .join('');
 
 export const ReturnUrlType = 'returnUrl';
 

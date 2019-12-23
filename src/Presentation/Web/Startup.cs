@@ -1,4 +1,5 @@
-﻿using AspNetCoreSpa.Application;
+﻿using System.Collections.Generic;
+using AspNetCoreSpa.Application;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AspNetCoreSpa.Web
 {
@@ -52,7 +54,11 @@ namespace AspNetCoreSpa.Web
                                 // base-address of your identity server
                                 options.Authority = Configuration["Auth:Authority"];
                                 // name of the API resource
-                                options.Audience = Configuration["Auth:Audience"];
+                                options.TokenValidationParameters = new TokenValidationParameters
+                                {
+                                    ValidateIssuer = true,
+                                    ValidAudiences = Configuration.GetSection("Auth:Audiences").Get<List<string>>(),
+                                };
                             });
 
             // In production, the Angular files will be served from this directory

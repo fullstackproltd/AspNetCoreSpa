@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Models;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
@@ -9,12 +11,11 @@ namespace AspNetCoreSpa.Infrastructure.Services
     public class ClientInfoService : IClientInfoService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IConfiguration _configuration;
-
-        public ClientInfoService(IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
+        private readonly IClientRequestParametersProvider _clientRequestParameters;
+        public ClientInfoService(IHttpContextAccessor httpContextAccessor, IClientRequestParametersProvider clientRequestParameters)
         {
             _httpContextAccessor = httpContextAccessor;
-            _configuration = configuration;
+            _clientRequestParameters = clientRequestParameters;
         }
         public ClientInfo GetClient()
         {
@@ -33,9 +34,11 @@ namespace AspNetCoreSpa.Infrastructure.Services
 
                 if (!string.IsNullOrEmpty(clientId.Value))
                 {
-                    var clientInfo = new ClientInfo {ClientId = clientId.Value};
+                    var clientParameters = _clientRequestParameters.GetClientParameters(_httpContextAccessor.HttpContext, clientId.Value);
+                    clientParameters.TryGetValue("redirect_uri", out var clientRedirectUri);
+                    var uri = new Uri(clientRedirectUri);
 
-                    _configuration.Bind($"IdentityServer:Clients:{clientId.Value}", clientInfo);
+                    var clientInfo = new ClientInfo { ClientId = clientId.Value, ClientUri = $"{uri.Scheme}://{uri.Authority}" };
 
                     return clientInfo;
                 }

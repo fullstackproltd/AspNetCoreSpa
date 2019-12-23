@@ -88,7 +88,25 @@ namespace AspNetCoreSpa.Infrastructure
 
             var identityBuilder = services.AddIdentityServer()
                 .AddSigningCredential(x509Certificate2)
-                .AddApiAuthorization<ApplicationUser, IdentityServerDbContext>();
+                .AddApiAuthorization<ApplicationUser, IdentityServerDbContext>(options =>
+                {
+                    var corsList = configuration.GetSection("CorsOrigins").Get<List<string>>();
+                    corsList.ForEach(host =>
+                    {
+                        var uri = new Uri(host);
+                        var hostElements = uri.Authority.Replace(":", string.Empty).Split(".");
+                        var clientId = string.Join(string.Empty, hostElements);
+
+                        options.Clients.AddSPA(clientId, spa => spa.WithRedirectUri($"{host}/authentication/login-callback")
+                                                                    .WithScopes(new string[] { clientId })
+                                                                    .WithLogoutRedirectUri($"{host}/authentication/logout-callback"));
+
+                        options.ApiResources.AddApiResource(clientId, resource =>
+                        {
+                            resource.WithScopes(clientId);
+                        });
+                    });
+                });
 
             // TODO: config
             services.AddAuthentication()
@@ -242,7 +260,8 @@ namespace AspNetCoreSpa.Infrastructure
                 options.AddPolicy(Constants.DefaultCorsPolicy,
                     builder =>
                     {
-                        builder.WithOrigins(configuration["CorsOrigins"].Split(","))
+                        var corsList = configuration.GetSection("CorsOrigins").Get<List<string>>().ToArray();
+                        builder.WithOrigins(corsList)
                             .AllowAnyMethod()
                             .AllowAnyHeader();
                     });

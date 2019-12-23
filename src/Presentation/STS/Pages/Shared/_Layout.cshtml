@@ -2,15 +2,9 @@
 @inject IClientInfoService ClientInfoService
 @{
     var client = ClientInfoService.GetClient();
-    var appTitle = client.ClientName ?? "AspNetCoreSTS";
+    var appTitle = client.ClientId ?? "Authentication Server";
     var returnLink = client.ClientUri ?? "/"; // await Component.InvokeAsync("ReturnLink");
     var pageTitle = ViewData["Title"]?.ToString();
-    //var query = ViewContext.HttpContext.Request.Query;
-    //string returnUrl = null;
-    //if (query.ContainsKey("returnUrl"))
-    //{
-    //    returnUrl = query["returnUrl"];
-    //}
 }
 <!DOCTYPE html>
 <html lang="en">
