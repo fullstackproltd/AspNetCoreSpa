@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  stsUrl: 'https://aspnetcorests.azurewebsites.net/',
+  stsUrl: 'https://aspnetcorests.herokuapp.com/',
 };
