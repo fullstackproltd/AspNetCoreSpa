@@ -3,20 +3,20 @@ name: STS
 on:
   push:
     branches:
-    - master
+      - ddd
 
 jobs:
   build_aspnetcorests:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Build and deploy the Docker image
-      env: 
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        APP_NAME: ${{ 'aspnetcorests' }}
-      run: |
-        docker build -t $APP_NAME -f src/AspNetCoreSpa.STS/Dockerfile .
-        docker tag $APP_NAME registry.heroku.com/$APP_NAME/web
-        docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-        docker push registry.heroku.com/$APP_NAME/web
-        heroku container:release web -a $APP_NAME
+      - uses: actions/checkout@v1
+      - name: Build and deploy the Docker image
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          APP_NAME: ${{ 'aspnetcorests' }}
+        run: |
+          docker build -t $APP_NAME -f src/Presentation/STS/Dockerfile.heroku .
+          docker tag $APP_NAME registry.heroku.com/$APP_NAME/web
+          docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+          docker push registry.heroku.com/$APP_NAME/web
+          heroku container:release web -a $APP_NAME
