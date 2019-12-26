@@ -8,6 +8,7 @@ using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Application.Extensions;
 using AspNetCoreSpa.Application.Settings;
 using AspNetCoreSpa.Common;
+using AspNetCoreSpa.Infrastructure.Email;
 using AspNetCoreSpa.Infrastructure.Files;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
@@ -16,8 +17,9 @@ using AspNetCoreSpa.Infrastructure.Localization.EFLocalizer;
 using AspNetCoreSpa.Infrastructure.Persistence;
 using AspNetCoreSpa.Infrastructure.Services;
 using AspNetCoreSpa.Infrastructure.Services.Certificate;
-using IdentityServer4;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -46,7 +48,7 @@ namespace AspNetCoreSpa.Infrastructure
             });
 
             services.AddScoped<IUserManager, UserManagerService>();
-            services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IDateTime, MachineDateTime>();
             services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
@@ -108,23 +110,61 @@ namespace AspNetCoreSpa.Infrastructure
                     });
                 });
 
-            // TODO: config
             services.AddAuthentication()
                 .AddGoogle(options =>
                 {
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                     options.ClientId = configuration["IdentityServer:ExternalAuth:Google:ClientId"];
                     options.ClientSecret = configuration["IdentityServer:ExternalAuth:Google:ClientSecret"];
                 })
-                .AddOpenIdConnect("aad", "Login with Azure AD", options =>
+                .AddFacebook(options =>
                 {
-                    options.Authority = configuration["IdentityServer:ExternalAuth:AzureAd:Authority"];
-                    options.TokenValidationParameters = new TokenValidationParameters { ValidateIssuer = false };
-                    options.ClientId = configuration["IdentityServer:ExternalAuth:AzureAd:ClientId"];
-                    options.CallbackPath = configuration["IdentityServer:ExternalAuth:AzureAd:CallbackPath"];
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.AppId = configuration["IdentityServer:ExternalAuth:Facebook:AppId"];
+                    options.AppSecret = configuration["IdentityServer:ExternalAuth:Facebook:AppSecret"];
+                })
+                .AddTwitter(options =>
+                {
+                    options.ConsumerKey = configuration["IdentityServer:ExternalAuth:Twitter:ConsumerKey"];
+                    options.ConsumerSecret = configuration["IdentityServer:ExternalAuth:Twitter:ConsumerSecret"];
                 })
                 .AddIdentityServerJwt();
+
+            // Azure AD
+            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
+                .AddAzureAD(options => configuration.Bind("IdentityServer:ExternalAuth:AzureAd", options));
+
+            services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+            {
+                options.Authority = options.Authority + "/v2.0/";
+
+                // Per the code below, this application signs in users in any Work and School
+                // accounts and any Microsoft Personal Accounts.
+                // If you want to direct Azure AD to restrict the users that can sign-in, change 
+                // the tenant value of the appsettings.json file in the following way:
+                // - only Work and School accounts => 'organizations'
+                // - only Microsoft Personal accounts => 'consumers'
+                // - Work and School and Personal accounts => 'common'
+
+                // If you want to restrict the users that can sign-in to only one tenant
+                // set the tenant value in the appsettings.json file to the tenant ID of this
+                // organization, and set ValidateIssuer below to true.
+
+                // If you want to restrict the users that can sign-in to several organizations
+                // Set the tenant value in the appsettings.json file to 'organizations', set
+                // ValidateIssuer, above to 'true', and add the issuers you want to accept to the
+                // options.TokenValidationParameters.ValidIssuers collection
+                options.SignInScheme = "Identity.External";
+                options.UsePkce = false; // live does not support this yet
+                options.Scope.Add("profile");
+                options.Scope.Add("email");
+                //options.TokenValidationParameters.ValidateIssuer = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    // ALWAYS VALIDATE THE ISSUER IF POSSIBLE !!!!
+                    ValidateIssuer = false,
+                    // ValidIssuers = new List<string> { "tenant..." },
+                    NameClaimType = "email",
+                };
+            });
 
             return identityBuilder;
         }

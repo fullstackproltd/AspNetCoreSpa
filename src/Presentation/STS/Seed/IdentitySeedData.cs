@@ -49,12 +49,12 @@ namespace AspNetCoreSpa.STS.Seed
         {
             if (!context.Users.Any())
             {
-                var adminUser = new ApplicationUser { UserName = "admin@admin.com", FirstName = "Admin first", LastName = "Admin last", Email = "admin@admin.com", Mobile = "0123456789", EmailConfirmed = true };
+                var adminUser = new ApplicationUser { UserName = "admin@admin.com", Email = "admin@admin.com", Mobile = "0123456789", EmailConfirmed = true };
                 _userManager.CreateAsync(adminUser, "P@ssw0rd!").Result.ToString();
                 _userManager.AddClaimAsync(adminUser, new Claim(IdentityServerConstants.StandardScopes.Phone, adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("admin@admin.com").GetAwaiter().GetResult(), "Admin").Result.ToString();
 
-                var normalUser = new ApplicationUser { UserName = "user@user.com", FirstName = "First", LastName = "Last", Email = "user@user.com", Mobile = "0123456789", EmailConfirmed = true };
+                var normalUser = new ApplicationUser { UserName = "user@user.com", Email = "user@user.com", Mobile = "0123456789", EmailConfirmed = true };
                 _userManager.CreateAsync(normalUser, "P@ssw0rd!").Result.ToString();
                 _userManager.AddClaimAsync(adminUser, new Claim(IdentityServerConstants.StandardScopes.Phone, adminUser.Mobile.ToString(), ClaimValueTypes.Integer)).Result.ToString();
                 _userManager.AddToRoleAsync(_userManager.FindByNameAsync("user@user.com").GetAwaiter().GetResult(), "User").Result.ToString();

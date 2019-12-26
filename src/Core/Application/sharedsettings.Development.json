@@ -5,5 +5,11 @@
       "System": "Information",
       "Microsoft": "Information"
     }
+  },
+  "EmailSettings": {
+    "SmtpHost": "smtp.mailtrap.io",
+    "SmtpPort": "587",
+    "SmtpUsername": "a6380407b5ee9e",
+    "SmtpPassword": "6ecd7c223d4fe3"
   }
 }

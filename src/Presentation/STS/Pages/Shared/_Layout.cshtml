@@ -1,4 +1,6 @@
 ﻿@using AspNetCoreSpa.Application.Abstractions
+@using Microsoft.AspNetCore.Hosting
+@inject IHostingEnvironment HostingEnvironment
 @inject IClientInfoService ClientInfoService
 @{
     var client = ClientInfoService.GetClient();
@@ -52,6 +54,13 @@
     <partial name="_AppScripts" />
 
     @RenderSection("Scripts", required: false)
+
+    <cache>
+        <!-- ViewType: @GetType().AssemblyQualifiedName -->
+        <!-- Environment: @HostingEnvironment.EnvironmentName -->
+        <!-- OS: @System.Runtime.InteropServices.RuntimeInformation.OSDescription @System.Runtime.InteropServices.RuntimeInformation.OSArchitecture -->
+        <!-- Machine: @Environment.MachineName -->
+    </cache>
 
 </body>
 </html>

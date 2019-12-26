@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
 {
     [DbContext(typeof(LocalizationDbContext))]
-    [Migration("20191221225128_Initial")]
+    [Migration("20191225170206_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

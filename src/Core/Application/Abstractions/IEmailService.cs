@@ -3,8 +3,9 @@ using AspNetCoreSpa.Application.Features.Notifications.Models;
 
 namespace AspNetCoreSpa.Application.Abstractions
 {
-    public interface INotificationService
+    public interface IEmailService
     {
-        Task SendAsync(MessageDto message);
+        Task RegistrationEmail(string to, string link);
+        Task SendCustomerCreatedEmail(EmailMessage emailMessage);
     }
 }

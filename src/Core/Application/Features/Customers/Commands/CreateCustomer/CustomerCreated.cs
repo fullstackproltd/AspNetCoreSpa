@@ -12,17 +12,17 @@ namespace AspNetCoreSpa.Application.Features.Customers.Commands.CreateCustomer
 
         public class CustomerCreatedHandler : INotificationHandler<CustomerCreated>
         {
-            private readonly INotificationService _notification;
+            private readonly IEmailService _email;
 
-            public CustomerCreatedHandler(INotificationService notification)
+            public CustomerCreatedHandler(IEmailService email)
             {
-                _notification = notification;
+                _email = email;
             }
 
             public async Task Handle(CustomerCreated notification, CancellationToken cancellationToken)
             {
-                await _notification.SendAsync(new MessageDto());
+                await _email.SendCustomerCreatedEmail(new EmailMessage());
             }
         }
-    }
+}
 }
