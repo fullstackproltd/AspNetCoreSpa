@@ -17,9 +17,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\Core\Application\sharedsettings.Development.json" Link="sharedsettings.Development.json" />
-    <Content Include="..\..\Core\Application\sharedsettings.json" Link="sharedsettings.json" />
-    <Content Include="..\..\Core\Application\sharedsettings.Production.json" Link="sharedsettings.Production.json" />
+    <Content Include="..\..\Core\Application\sharedsettings.Development.json" Link="sharedsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Core\Application\sharedsettings.json" Link="sharedsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Core\Application\sharedsettings.Production.json" Link="sharedsettings.Production.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
