@@ -1,0 +1,7 @@
+{
+  "EmailSettings": {
+    "SmtpHost": "smtp.sendgrid.net",
+    "SmtpUsername": "apikey",
+    "SmtpPassword": "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"
+  }
+}

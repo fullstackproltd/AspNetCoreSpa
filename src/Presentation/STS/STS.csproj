@@ -13,6 +13,7 @@
   <ItemGroup>
     <Content Include="..\..\Core\Application\sharedsettings.Development.json" Link="sharedsettings.Development.json" />
     <Content Include="..\..\Core\Application\sharedsettings.json" Link="sharedsettings.json" />
+    <Content Include="..\..\Core\Application\sharedsettings.Production.json" Link="sharedsettings.Production.json" />
   </ItemGroup>
 
   <ItemGroup>
