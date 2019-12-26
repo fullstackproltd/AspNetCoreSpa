@@ -1160,6 +1160,7 @@ export class ApplicationDataViewModel implements IApplicationDataViewModel {
     content?: { [key: string]: string; } | undefined;
     cookieConsent?: any | undefined;
     cultures?: CulturesDisplayViewModel[] | undefined;
+    environmentInfo?: EnvironmentInformation | undefined;
 
     constructor(data?: IApplicationDataViewModel) {
         if (data) {
@@ -1185,6 +1186,7 @@ export class ApplicationDataViewModel implements IApplicationDataViewModel {
                 for (let item of _data["cultures"])
                     this.cultures!.push(CulturesDisplayViewModel.fromJS(item));
             }
+            this.environmentInfo = _data["environmentInfo"] ? EnvironmentInformation.fromJS(_data["environmentInfo"]) : <any>undefined;
         }
     }
 
@@ -1210,6 +1212,7 @@ export class ApplicationDataViewModel implements IApplicationDataViewModel {
             for (let item of this.cultures)
                 data["cultures"].push(item.toJSON());
         }
+        data["environmentInfo"] = this.environmentInfo ? this.environmentInfo.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -1218,6 +1221,7 @@ export interface IApplicationDataViewModel {
     content?: { [key: string]: string; } | undefined;
     cookieConsent?: any | undefined;
     cultures?: CulturesDisplayViewModel[] | undefined;
+    environmentInfo?: EnvironmentInformation | undefined;
 }
 
 export class CulturesDisplayViewModel implements ICulturesDisplayViewModel {
@@ -1262,6 +1266,58 @@ export interface ICulturesDisplayViewModel {
     value?: string | undefined;
     text?: string | undefined;
     current?: boolean;
+}
+
+export class EnvironmentInformation implements IEnvironmentInformation {
+    os?: string | undefined;
+    machineName?: string | undefined;
+    environmentName?: string | undefined;
+    frameworkVersion?: string | undefined;
+    commitId?: string | undefined;
+
+    constructor(data?: IEnvironmentInformation) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            this.os = _data["os"];
+            this.machineName = _data["machineName"];
+            this.environmentName = _data["environmentName"];
+            this.frameworkVersion = _data["frameworkVersion"];
+            this.commitId = _data["commitId"];
+        }
+    }
+
+    static fromJS(data: any): EnvironmentInformation {
+        data = typeof data === 'object' ? data : {};
+        let result = new EnvironmentInformation();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["os"] = this.os;
+        data["machineName"] = this.machineName;
+        data["environmentName"] = this.environmentName;
+        data["frameworkVersion"] = this.frameworkVersion;
+        data["commitId"] = this.commitId;
+        return data; 
+    }
+}
+
+export interface IEnvironmentInformation {
+    os?: string | undefined;
+    machineName?: string | undefined;
+    environmentName?: string | undefined;
+    frameworkVersion?: string | undefined;
+    commitId?: string | undefined;
 }
 
 export class CategoriesListVm implements ICategoriesListVm {

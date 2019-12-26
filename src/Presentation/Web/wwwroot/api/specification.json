@@ -780,6 +780,14 @@
             "items": {
               "$ref": "#/components/schemas/CulturesDisplayViewModel"
             }
+          },
+          "environmentInfo": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/EnvironmentInformation"
+              }
+            ]
           }
         }
       },
@@ -797,6 +805,32 @@
           },
           "current": {
             "type": "boolean"
+          }
+        }
+      },
+      "EnvironmentInformation": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "os": {
+            "type": "string",
+            "nullable": true
+          },
+          "machineName": {
+            "type": "string",
+            "nullable": true
+          },
+          "environmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "frameworkVersion": {
+            "type": "string",
+            "nullable": true
+          },
+          "commitId": {
+            "type": "string",
+            "nullable": true
           }
         }
       },

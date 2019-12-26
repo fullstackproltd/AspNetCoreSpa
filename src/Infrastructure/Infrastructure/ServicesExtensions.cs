@@ -9,6 +9,7 @@ using AspNetCoreSpa.Application.Extensions;
 using AspNetCoreSpa.Application.Settings;
 using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure.Email;
+using AspNetCoreSpa.Infrastructure.Environment;
 using AspNetCoreSpa.Infrastructure.Files;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.Infrastructure.Identity.Entities;
@@ -47,9 +48,10 @@ namespace AspNetCoreSpa.Infrastructure
                 options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
             });
 
+            services.AddSingleton<IDeploymentEnvironment, DeploymentEnvironment>();
+            services.AddTransient<IDateTime, MachineDateTime>();
             services.AddScoped<IUserManager, UserManagerService>();
             services.AddTransient<IEmailService, EmailService>();
-            services.AddTransient<IDateTime, MachineDateTime>();
             services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
             services.AddHttpContextAccessor()

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 // import { routerTransition } from './router.animations';
 import { AppService, ModalService } from '@app/shared';
@@ -21,6 +21,12 @@ export class AppComponent implements OnInit {
 
   public ngOnInit() {
     this.updateTitleAndMeta();
+    this.router.events.subscribe(evt => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+      window.scrollTo(0, 0);
+    });
     // Check cookie consent
     setTimeout(() => {
       if (this.appService.appData.cookieConsent.showConsent) {

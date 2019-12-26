@@ -20,16 +20,19 @@ namespace AspNetCoreSpa.Web.Services
         private readonly IStringLocalizer<ApplicationService> _stringLocalizer;
         private readonly IHttpContextAccessor _contextAccessor;
         private readonly IMemoryCache _cache;
+        private readonly IDeploymentEnvironment _deploymentEnvironment;
         public ApplicationService(
             IOptions<RequestLocalizationOptions> locOptions,
             IStringLocalizer<ApplicationService> stringLocalizer,
             IHttpContextAccessor contextAccessor,
-            IMemoryCache memoryCache)
+            IMemoryCache memoryCache, 
+            IDeploymentEnvironment deploymentEnvironment)
         {
             _locOptions = locOptions.Value;
             _stringLocalizer = stringLocalizer;
             _contextAccessor = contextAccessor;
             _cache = memoryCache;
+            _deploymentEnvironment = deploymentEnvironment;
         }
 
         public ApplicationDataViewModel GetApplicationData()
@@ -46,6 +49,14 @@ namespace AspNetCoreSpa.Web.Services
                             Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name)
                         })
                         .ToList(),
+                EnvironmentInfo = new EnvironmentInformation
+                {
+                    OS = _deploymentEnvironment.OS,
+                    MachineName = _deploymentEnvironment.MachineName,
+                    EnvironmentName = _deploymentEnvironment.EnvironmentName,
+                    FrameworkVersion = _deploymentEnvironment.RuntimeFramework,
+                    CommitId = _deploymentEnvironment.DeploymentId
+                }
             };
 
             return applicationData;
