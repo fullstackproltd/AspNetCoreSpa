@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AspNetCoreSpa.Application.Abstractions;
+﻿using AspNetCoreSpa.Application.Abstractions;
 using AspNetCoreSpa.Domain.Entities.Localization;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +13,5 @@ namespace AspNetCoreSpa.Infrastructure.Localization
 
         public DbSet<Culture> Cultures { get; set; }
         public DbSet<Resource> Resources { get; set; }
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            return base.SaveChangesAsync(cancellationToken);
-        }
     }
 }

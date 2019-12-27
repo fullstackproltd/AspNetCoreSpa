@@ -53,6 +53,7 @@ namespace AspNetCoreSpa.Infrastructure
             services.AddScoped<IUserManager, UserManagerService>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddHttpContextAccessor()
                 .AddResponseCompression()
@@ -63,7 +64,7 @@ namespace AspNetCoreSpa.Infrastructure
             services.AddCustomConfiguration(configuration)
                 .AddCustomSignalR()
                 .AddCustomCors(configuration)
-                .AddCustomLocalization()
+                .AddCustomLocalization(configuration, environment)
                 .AddCustomUi(environment);
 
             return services;
@@ -195,8 +196,8 @@ namespace AspNetCoreSpa.Infrastructure
                     options.UseSqlServer(connectionString, b =>
                     {
                         b.MigrationsAssembly("AspNetCoreSpa.Infrastructure");
-                        // Add foolowing package to enable net topology suite for sql server:
-                        // <PackageReference Include = "Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version = "2.2.0" />
+                        // Add following package to enable net topology suite for sql server:
+                        // Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite
                         //b.UseNetTopologySuite();
                     });
                 }
@@ -207,27 +208,7 @@ namespace AspNetCoreSpa.Infrastructure
             return services;
         }
 
-        public static IServiceCollection AddDbLocalization(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
-        {
-            services.AddDbContext<LocalizationDbContext>(options =>
-                {
-                    options.UseSqlite(configuration["DatA:Localization"],
-                        b => b.MigrationsAssembly(typeof(LocalizationDbContext).Assembly.FullName));
-
-                    if (environment.IsDevelopment())
-                    {
-                        options.EnableSensitiveDataLogging();
-                    }
-                },
-            ServiceLifetime.Singleton,
-            ServiceLifetime.Singleton);
-
-            services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
-            services.AddSingleton<ILocalizationDbContext>(provider => provider.GetService<LocalizationDbContext>());
-
-            return services;
-        }
-        private static IServiceCollection AddCustomLocalization(this IServiceCollection services)
+        private static IServiceCollection AddCustomLocalization(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.Configure<RequestLocalizationOptions>(
@@ -237,10 +218,6 @@ namespace AspNetCoreSpa.Infrastructure
                     {
                         new CultureInfo("en-GB"),
                         new CultureInfo("en-US"),
-                        new CultureInfo("de-DE"),
-                        new CultureInfo("de-CH"),
-                        new CultureInfo("it-IT"),
-                        new CultureInfo("gsw-CH"),
                         new CultureInfo("fr-FR")
                     };
 
@@ -248,6 +225,22 @@ namespace AspNetCoreSpa.Infrastructure
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
                 });
+
+            services.AddDbContext<LocalizationDbContext>(options =>
+                {
+                    options.UseSqlite(configuration["Data:Localization"],
+                        b => b.MigrationsAssembly(typeof(LocalizationDbContext).Assembly.FullName));
+
+                    if (environment.IsDevelopment())
+                    {
+                        options.EnableSensitiveDataLogging();
+                    }
+                },
+                ServiceLifetime.Singleton,
+                ServiceLifetime.Singleton);
+
+            services.AddSingleton<IStringLocalizerFactory, EFStringLocalizerFactory>();
+            services.AddSingleton<ILocalizationDbContext>(provider => provider.GetService<LocalizationDbContext>());
 
             return services;
         }

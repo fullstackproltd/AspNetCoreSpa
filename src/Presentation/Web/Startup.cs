@@ -37,7 +37,6 @@ namespace AspNetCoreSpa.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IApplicationService, ApplicationService>();
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddApplication()
                 .AddInfrastructure(Configuration, HostingEnvironment)
@@ -45,8 +44,7 @@ namespace AspNetCoreSpa.Web
                 .AddDbContextCheck<LocalizationDbContext>()
                 .AddDbContextCheck<ApplicationDbContext>();
 
-            services.AddPersistence(Configuration)
-                .AddDbLocalization(Configuration, HostingEnvironment);
+            services.AddPersistence(Configuration);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                             .AddJwtBearer(options =>

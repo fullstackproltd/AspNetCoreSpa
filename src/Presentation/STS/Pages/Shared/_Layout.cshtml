@@ -1,10 +1,13 @@
 ﻿@using AspNetCoreSpa.Application.Abstractions
+@using Microsoft.Extensions.Localization
 @inject IDeploymentEnvironment DeploymentEnvironment
 @inject IClientInfoService ClientInfoService
+@inject IStringLocalizer<string> StringLocalizer
+
 @{
     var client = ClientInfoService.GetClient();
-    var appTitle = client.ClientId ?? "Authentication Server";
-    var returnLink = client.ClientUri ?? "/"; // await Component.InvokeAsync("ReturnLink");
+    var appTitle = StringLocalizer.GetString("app_title");
+    var returnLink = client.ClientUri ?? "/";
     var pageTitle = ViewData["Title"]?.ToString();
 }
 <!DOCTYPE html>

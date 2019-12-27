@@ -3,7 +3,7 @@ using System.Security.Claims;
 using AspNetCoreSpa.Application.Abstractions;
 using Microsoft.AspNetCore.Http;
 
-namespace AspNetCoreSpa.Web.Services
+namespace AspNetCoreSpa.Infrastructure.Services
 {
     public class CurrentUserService : ICurrentUserService
     {

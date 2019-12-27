@@ -72,3 +72,4 @@ namespace AspNetCoreSpa.Infrastructure.Persistence
         }
     }
 }
+

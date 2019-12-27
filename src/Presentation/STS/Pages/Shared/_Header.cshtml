@@ -2,8 +2,9 @@
 @inject ICompositeViewEngine Engine
 
 @{
-    string returnUrl = Model.ReturnUrl;
-    string appTitle = Model.AppTitle;
+    //https://stackoverflow.com/a/18853875/1190512
+    string returnUrl = ViewData.Eval("ReturnUrl").ToString();
+    string appTitle = ViewData.Eval("AppTitle").ToString();
 }
 <header>
     <nav class="navbar navbar-expand-sm navbar-light navbar-toggleable-sm bg-white border-bottom box-shadow mb-3">
@@ -33,6 +34,10 @@
                                                     "usually located at '/Pages/_LoginPartial' or at '/Views/Shared/_LoginPartial' to work. Based on your configuration " +
                                                     $"we have looked at it in the following locations: {System.Environment.NewLine}{string.Join(System.Environment.NewLine, result.SearchedLocations)}.");
             }
+
+            <partial name="_SelectLanguagePartial"/>
+
         </div>
+        
     </nav>
 </header>

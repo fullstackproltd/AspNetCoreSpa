@@ -1,4 +1,7 @@
 {
+  "Data": {
+    "Localization": "Data Source=Localization.db"
+  },
   "Logging": {
     "LogLevel": {
       "Default": "Warning"
@@ -7,7 +10,10 @@
   "EmailSettings": {
     "SmtpPort": "587",
     "SmtpSenderName": "Admin",
-    "SmtpSenderAddress": "admin@example.com"
+    "SmtpSenderAddress": "admin@example.com",
+    "SmtpHost": "smtp.sendgrid.net",
+    "SmtpUsername": "apikey",
+    "SmtpPassword": "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"
   },
   "AllowedHosts": "*"
 }

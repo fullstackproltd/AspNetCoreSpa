@@ -17,9 +17,6 @@
     <Content Include="..\..\Core\Application\sharedsettings.json" Link="sharedsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\Core\Application\sharedsettings.Production.json" Link="sharedsettings.Production.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

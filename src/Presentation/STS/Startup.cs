@@ -1,4 +1,5 @@
-﻿using AspNetCoreSpa.Common;
+﻿using AspNetCoreSpa.Application;
+using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.STS.Seed;
@@ -26,7 +27,9 @@ namespace AspNetCoreSpa.STS
             services.AddTransient<IProfileService, CustomProfileService>();
             services.AddTransient<IIdentitySeedData, IdentitySeedData>();
 
-            services.AddInfrastructure(Configuration, HostingEnvironment)
+            services
+                .AddApplication()
+                .AddInfrastructure(Configuration, HostingEnvironment)
                 .AddHealthChecks()
                 .AddDbContextCheck<IdentityServerDbContext>();
             
