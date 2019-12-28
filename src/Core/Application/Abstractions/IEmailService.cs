@@ -5,7 +5,8 @@ namespace AspNetCoreSpa.Application.Abstractions
 {
     public interface IEmailService
     {
-        Task RegistrationEmail(string to, string link);
+        Task RegistrationConfirmationEmail(string to, string link);
+        Task ForgottentPasswordEmail(string to, string link);
         Task SendCustomerCreatedEmail(EmailMessage emailMessage);
     }
 }

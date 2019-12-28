@@ -92,7 +92,7 @@ namespace AspNetCoreSpa.STS.Areas.Identity.Pages.Account
 
                     callbackUrl = HtmlEncoder.Default.Encode(callbackUrl);
 
-                    await _emailService.RegistrationEmail(Input.Email, callbackUrl);
+                    await _emailService.RegistrationConfirmationEmail(Input.Email, callbackUrl);
 
                     return RedirectToPage("RegisterConfirmation", new
                     {

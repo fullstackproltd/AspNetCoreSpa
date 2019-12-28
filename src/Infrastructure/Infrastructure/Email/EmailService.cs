@@ -25,17 +25,36 @@ namespace AspNetCoreSpa.Infrastructure.Email
             _logger = logger;
         }
 
-        public Task RegistrationEmail(string to, string link)
+        public Task RegistrationConfirmationEmail(string to, string link)
         {
             var registrationTemplate = GetBaseTemplate("RegistrationTemplate");
             
             registrationTemplate = registrationTemplate.Replace("@user@", to)
+                .Replace("@linktext@", "Activate account")
                 .Replace("@link@", link);
             var emailMessage = new EmailMessage
             {
                 To = to,
                 Body = registrationTemplate,
                 Subject = "Confirm your registration",
+                From = _emailSettings.SmtpSenderAddress
+            };
+            SendAsync(emailMessage);
+            return Task.CompletedTask;
+        }
+
+        public Task ForgottentPasswordEmail(string to, string link)
+        {
+            var registrationTemplate = GetBaseTemplate("RegistrationTemplate");
+
+            registrationTemplate = registrationTemplate.Replace("@user@", to)
+                .Replace("@linktext@", "Reset password")
+                .Replace("@link@", link);
+            var emailMessage = new EmailMessage
+            {
+                To = to,
+                Body = registrationTemplate,
+                Subject = "Reset password",
                 From = _emailSettings.SmtpSenderAddress
             };
             SendAsync(emailMessage);
