@@ -45,7 +45,7 @@ namespace AspNetCoreSpa.Web.Services
                         .Select(c => new CulturesDisplayViewModel
                         {
                             Value = c.Name,
-                            Text = c.DisplayName,
+                            Text = c.NativeName,
                             Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name)
                         })
                         .ToList(),
