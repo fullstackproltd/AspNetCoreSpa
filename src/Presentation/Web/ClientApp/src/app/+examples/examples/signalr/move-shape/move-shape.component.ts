@@ -10,13 +10,13 @@ import { map, takeUntil, flatMap } from 'rxjs/operators';
 })
 export class MoveShapeComponent implements AfterViewInit {
   @ViewChild('draggable', { static: true }) element: ElementRef;
-  private _hubConnection: HubConnection;
+  private hub: HubConnection;
   constructor(@Inject('BASE_URL') private baseUrl: string) {}
 
   ngAfterViewInit() {
     const target = this.element.nativeElement;
-    this._hubConnection = new HubConnectionBuilder().withUrl(`${this.baseUrl}shapeHub`).build();
-    this._hubConnection.on('shapeMoved', (x, y) => {
+    this.hub = new HubConnectionBuilder().withUrl(`${this.baseUrl}shapeHub`).build();
+    this.hub.on('shapeMoved', (x, y) => {
       target.style.left = x;
       target.style.top = y;
     });
@@ -27,10 +27,10 @@ export class MoveShapeComponent implements AfterViewInit {
 
     const mousedrag = mousedown.pipe(
       flatMap((md: any) => {
-        const startX = md.clientX + window.scrollX,
-          startY = md.clientY + window.scrollY,
-          startLeft = parseInt(md.target.style.left, 10) || 0,
-          startTop = parseInt(md.target.style.top, 10) || 0;
+        const startX = md.clientX + window.scrollX;
+        const startY = md.clientY + window.scrollY;
+        const startLeft = parseInt(md.target.style.left, 10) || 0;
+        const startTop = parseInt(md.target.style.top, 10) || 0;
 
         return mousemove.pipe(
           map((mm: any) => {
@@ -46,17 +46,15 @@ export class MoveShapeComponent implements AfterViewInit {
       }),
     );
 
-    this._hubConnection
+    this.hub
       .start()
       .then(() => {
         mousedrag.subscribe(pos => {
           target.style.top = pos.top + 'px';
           target.style.left = pos.left + 'px';
-          this._hubConnection.invoke('MoveShape', pos.left, pos.top || 0);
+          this.hub.invoke('MoveShape', pos.left, pos.top || 0);
         });
       })
-      .catch(err => {
-        console.log('Error while establishing connection: ' + err);
-      });
+      .catch(err => console.log('Error while establishing connection: ' + err));
   }
 }
