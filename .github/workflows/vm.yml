@@ -1,0 +1,33 @@
+name: VM
+
+on:
+  push:
+    branches:
+      - ddd
+
+jobs:
+  build-test-publish-ftp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.100
+      - name: Build
+        run: dotnet build AspNetCoreSpa.sln --configuration Release
+      - name: Test
+        run: dotnet test AspNetCoreSpa.sln
+      - name: Publish
+        run: dotnet publish src/Presentation/Web/Web.csproj -c Release -o publish
+      # https://github.com/SamKirkland/FTP-Deploy-Action
+      - name: FTP-Deploy-Action
+        uses: SamKirkland/FTP-Deploy-Action@2.0.0
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          LOCAL_DIR: publish
+          ARGS: --delete
+          # --delete arg will delete files on the server if you've deleted them in git
