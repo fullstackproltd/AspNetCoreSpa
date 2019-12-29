@@ -17,8 +17,8 @@ jobs:
           dotnet-version: 3.1.100
       - name: Build
         run: dotnet build AspNetCoreSpa.sln --configuration Release
-      - name: Test
-        run: dotnet test AspNetCoreSpa.sln
+      #   - name: Test
+      #     run: dotnet test AspNetCoreSpa.sln
       - name: Publish
         run: dotnet publish src/Presentation/Web/Web.csproj -c Release -o publish
       # https://github.com/SamKirkland/FTP-Deploy-Action
