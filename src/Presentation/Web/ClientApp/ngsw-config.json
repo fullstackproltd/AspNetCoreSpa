@@ -29,12 +29,11 @@
   "dataGroups": [
     {
       "name": "api-freshness",
-      "urls": ["/api/app/setlanguage", "/connect/authorize"],
+      "urls": ["/api", "/connect/authorize"],
       "cacheConfig": {
         "strategy": "freshness",
-        "maxSize": 100,
-        "maxAge": "3d",
-        "timeout": "10s"
+        "maxSize": 0,
+        "maxAge": "0u"
       }
     },
     {
