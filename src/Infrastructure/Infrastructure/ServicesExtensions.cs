@@ -129,11 +129,8 @@ namespace AspNetCoreSpa.Infrastructure
                     options.ConsumerKey = configuration["IdentityServer:ExternalAuth:Twitter:ConsumerKey"];
                     options.ConsumerSecret = configuration["IdentityServer:ExternalAuth:Twitter:ConsumerSecret"];
                 })
+                .AddAzureAD(options => { configuration.Bind("IdentityServer:ExternalAuth:AzureAd", options); })
                 .AddIdentityServerJwt();
-
-            // Azure AD
-            services.AddAuthentication(AzureADDefaults.AuthenticationScheme)
-                .AddAzureAD(options => configuration.Bind("IdentityServer:ExternalAuth:AzureAd", options));
 
             services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
             {
