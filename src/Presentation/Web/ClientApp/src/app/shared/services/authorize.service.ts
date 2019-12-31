@@ -95,7 +95,7 @@ export class AuthorizeService {
     let user: User = null;
     try {
       user = await this.userManager.signinSilent(this.createArguments());
-      this.userSubject.next(<any>user.profile);
+      this.userSubject.next(user.profile as any);
       return this.success(state);
     } catch (silentError) {
       // User might not be authenticated, fallback to popup authentication
@@ -106,7 +106,7 @@ export class AuthorizeService {
           throw new Error("Popup disabled. Change 'authorize.service.ts:AuthorizeService.popupDisabled' to false to enable it.");
         }
         user = await this.userManager.signinPopup(this.createArguments());
-        this.userSubject.next(<any>user.profile);
+        this.userSubject.next(user.profile as any);
         return this.success(state);
       } catch (popupError) {
         if (popupError.message === 'Popup window closed') {
@@ -132,7 +132,7 @@ export class AuthorizeService {
     try {
       await this.ensureUserManagerInitialized();
       const user = await this.userManager.signinCallback(url);
-      this.userSubject.next(user && <any>user.profile);
+      this.userSubject.next(user && (user.profile as any));
       return this.success(user && user.state);
     } catch (error) {
       console.log('There was an error signing in: ', error);
@@ -213,7 +213,7 @@ export class AuthorizeService {
   private getUserFromStorage(): Observable<IUser> {
     return from(this.ensureUserManagerInitialized()).pipe(
       mergeMap(() => this.userManager.getUser()),
-      map(u => u && <any>u.profile),
+      map(u => u && (u.profile as any)),
     );
   }
 }
