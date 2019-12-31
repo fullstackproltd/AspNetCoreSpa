@@ -32,5 +32,6 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USER }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           LOCAL_DIR: publish
+          METHOD: sftp
           ARGS: --delete
           # --delete arg will delete files on the server if you've deleted them in git
