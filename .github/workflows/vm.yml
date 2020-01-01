@@ -24,15 +24,29 @@ jobs:
       #     run: dotnet test AspNetCoreSpa.sln
       - name: Publish
         run: dotnet publish src/Presentation/Web/Web.csproj -c Release -o publish
-      # https://github.com/SamKirkland/FTP-Deploy-Action
-      - name: FTP-Deploy-Action
-        uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      - name: Deploy to server
+        id: deploy
+        uses: Pendect/action-rsyncer@v1.1.0
         env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USER }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          LOCAL_DIR: publish
-          # METHOD: sftp
-          PORT: 21
-          ARGS: --delete
-          # --delete arg will delete files on the server if you've deleted them in git
+          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+        with:
+          flags: "-avzr --delete"
+          options: ""
+          ssh_options: ""
+          src: "publish/"
+          dest: "asahi@asahi.ukwest.cloudapp.azure.com:/var/www/movieapp"
+
+      - name: Display status from deploy
+        run: echo "${{ steps.deploy.outputs.status }}"
+      # # https://github.com/SamKirkland/FTP-Deploy-Action
+      # - name: FTP-Deploy-Action
+      #   uses: SamKirkland/FTP-Deploy-Action@2.0.0
+      #   env:
+      #     FTP_SERVER: ${{ secrets.FTP_SERVER }}
+      #     FTP_USERNAME: ${{ secrets.FTP_USER }}
+      #     FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      #     LOCAL_DIR: publish
+      #     # METHOD: sftp
+      #     PORT: 21
+      #     ARGS: --delete
+      #     # --delete arg will delete files on the server if you've deleted them in git
