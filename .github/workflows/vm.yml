@@ -44,7 +44,7 @@ jobs:
           src: "publish/"
           dest: "asahi@asahi.ukwest.cloudapp.azure.com:/var/www/aspnetcorespa"
       # Start service
-      - name: Stat AspNetCoreSpa Service
+      - name: Start AspNetCoreSpa Service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_SERVER }}
