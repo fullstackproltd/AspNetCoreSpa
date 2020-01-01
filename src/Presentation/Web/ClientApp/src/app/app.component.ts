@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
+    console.log(this.appService.appData);
+
     this.updateTitleAndMeta();
     this.router.events.subscribe(evt => {
       if (!(evt instanceof NavigationEnd)) {
