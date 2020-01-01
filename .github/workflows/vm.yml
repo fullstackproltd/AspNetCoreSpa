@@ -20,33 +20,34 @@ jobs:
         working-directory: src/Presentation/Web/ClientApp
       - name: Build
         run: dotnet build AspNetCoreSpa.sln --configuration Release
-      #   - name: Test
-      #     run: dotnet test AspNetCoreSpa.sln
+      - name: Test
+        run: dotnet test AspNetCoreSpa.sln
       - name: Publish
         run: dotnet publish src/Presentation/Web/Web.csproj -c Release -o publish
+      # Stop service
+      - name: Stop AspNetCoreSpa Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: sudo service kestrel-aspnetcorespa stop
       - name: Deploy to server
         id: deploy
         uses: Pendect/action-rsyncer@v1.1.0
         env:
-          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         with:
           flags: "-avzr --delete"
           options: ""
           ssh_options: ""
           src: "publish/"
-          dest: "asahi@asahi.ukwest.cloudapp.azure.com:/var/www/movieapp"
-
-      - name: Display status from deploy
-        run: echo "${{ steps.deploy.outputs.status }}"
-      # # https://github.com/SamKirkland/FTP-Deploy-Action
-      # - name: FTP-Deploy-Action
-      #   uses: SamKirkland/FTP-Deploy-Action@2.0.0
-      #   env:
-      #     FTP_SERVER: ${{ secrets.FTP_SERVER }}
-      #     FTP_USERNAME: ${{ secrets.FTP_USER }}
-      #     FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-      #     LOCAL_DIR: publish
-      #     # METHOD: sftp
-      #     PORT: 21
-      #     ARGS: --delete
-      #     # --delete arg will delete files on the server if you've deleted them in git
+          dest: "asahi@asahi.ukwest.cloudapp.azure.com:/var/www/aspnetcorespa"
+      # Start service
+      - name: Stat AspNetCoreSpa Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: sudo service kestrel-aspnetcorespa start
