@@ -36,7 +36,7 @@ jobs:
         id: deploy
         uses: Pendect/action-rsyncer@v1.1.0
         env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+          DEPLOY_KEY: ${{ secrets.SSH_KEY }}
         with:
           flags: "-avzr --delete"
           options: ""
