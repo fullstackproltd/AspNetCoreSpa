@@ -37,7 +37,7 @@ jobs:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: service kestrel-aspnetcorespa stop
+          script: sudo service ${{ secrets.KESTREL_SERVICE_NAME }} stop
       - name: Deploy to server
         id: deploy
         uses: Pendect/action-rsyncer@v1.1.0
@@ -48,7 +48,7 @@ jobs:
           options: ""
           ssh_options: ""
           src: "publish/"
-          dest: "asahi@asahi.ukwest.cloudapp.azure.com:/var/www/aspnetcorespa"
+          dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER }}:${{ secrets.SSH_DEST_DIR }}"
       # Start service
       - name: Start AspNetCoreSpa Service
         uses: appleboy/ssh-action@master
@@ -56,4 +56,4 @@ jobs:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: service kestrel-aspnetcorespa start
+          script: sudo service ${{ secrets.KESTREL_SERVICE_NAME }} start
