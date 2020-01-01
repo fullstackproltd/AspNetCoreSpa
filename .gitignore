@@ -11,11 +11,9 @@
 /logs
 /bin
 /obj
-package-lock.json
 stats.json
 ClientApp/**/*.js.map
 npm-debug.log*
-project-lock.json
 .awcache
 # User-specific files
 *.suo
