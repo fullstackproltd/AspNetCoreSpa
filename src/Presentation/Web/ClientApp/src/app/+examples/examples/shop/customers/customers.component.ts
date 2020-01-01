@@ -17,9 +17,13 @@ export class CustomersComponent implements OnInit {
       this.columns = [
         {
           field: 'id',
+          filter: true,
+          sortable: true,
         },
         {
           field: 'name',
+          filter: true,
+          sortable: true,
         },
       ];
     });

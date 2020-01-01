@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../services';
 
 @Component({
-  selector: 'lib-loading',
+  selector: 'appc-loading',
   templateUrl: './loading.component.html',
   styleUrls: ['./loading.component.scss'],
 })

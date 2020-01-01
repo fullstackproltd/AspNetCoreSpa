@@ -1,8 +1,8 @@
 <div class="btn-group">
-  <button class="btn btn-primary btn-sm" title="Add context notes" (click)="primaryClicked($event)">
-    Edit Roles
+  <button class="btn btn-danger btn-sm" title="{{ params.secondaryLabel || 'Delete' }}" (click)="secondaryClicked($event)">
+    {{ params.secondaryLabel || 'Delete' }}
   </button>
-  <button class="btn btn-success btn-sm" title="Edit user" (click)="secondaryClicked($event)">
-    Edit User
+  <button class="btn btn-primary btn-sm" title="{{ params.primaryLabel || 'Edit' }}" (click)="primaryClicked($event)">
+    {{ params.primaryLabel || 'Edit' }}
   </button>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, OnChanges } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnChanges } from '@angular/core';
 import { ValueGetterParams, ColDef, GridApi, ColumnApi } from 'ag-grid-community';
 import { CurrencyPipe } from '@angular/common';
 import { format } from 'date-fns';
@@ -8,7 +8,7 @@ import { GridColumn, GridFieldType } from '../../models';
 import { DateFilterComponent, DropdownFloatingFilterComponent } from './components';
 
 @Component({
-  selector: 'lib-grid',
+  selector: 'appc-grid',
   styleUrls: ['./grid.component.scss'],
   templateUrl: './grid.component.html',
   encapsulation: ViewEncapsulation.None,
@@ -45,6 +45,7 @@ export class GridComponent implements OnChanges {
           width: c.width,
           headerName: c.headerName,
           filter: this.getFilters.call(this, c),
+          sortable: c.sortable,
           filterParams: this.getFilterParams.call(this, c),
           valueGetter: this.getValueGetter.call(this, c),
         };
@@ -57,18 +58,20 @@ export class GridComponent implements OnChanges {
         if (c.type === GridFieldType.ActionButtons) {
           col.cellRenderer = 'actionButtons';
           col.cellRendererParams = {
-            primaryClicked: c.primaryAction,
-            secondaryClicked: c.secondaryAction,
+            primaryClicked: c.cellRendererParams.primaryClicked,
+            secondaryClicked: c.cellRendererParams.secondaryClicked,
+            primaryLabel: c.cellRendererParams.primaryLabel,
+            secondaryLabel: c.cellRendererParams.secondaryLabel,
           };
         }
 
         if (c.type === GridFieldType.ActionButton) {
           col.cellRenderer = 'actionButton';
           col.cellRendererParams = {
-            click: c.primaryAction,
+            click: c.cellRendererParams.primaryClicked,
             show: c.show,
             buttonType: c.buttonType,
-            buttonText: c.text,
+            buttonText: c.cellRendererParams.primaryLabel,
           };
         }
 
@@ -114,7 +117,9 @@ export class GridComponent implements OnChanges {
           // provide comparator function
           comparator: (filterLocalDateAtMidnight, cellValue) => {
             const dateAsString = cellValue;
-            if (dateAsString == null) return 0;
+            if (dateAsString == null) {
+              return 0;
+            }
             // In the example application, dates are stored as dd/mm/yyyy
             // We create a Date object for comparison against the filter date
             const dateParts = dateAsString.split('/');

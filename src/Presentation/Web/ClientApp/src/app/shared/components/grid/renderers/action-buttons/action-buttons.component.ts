@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 
 @Component({
-  selector: 'app-action-buttons',
+  selector: 'appc-action-buttons',
   styleUrls: ['./action-buttons.component.scss'],
   templateUrl: './action-buttons.component.html',
 })

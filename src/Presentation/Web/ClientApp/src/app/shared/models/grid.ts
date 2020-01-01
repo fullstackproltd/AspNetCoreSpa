@@ -1,6 +1,7 @@
 export enum GridFieldType {
   Text,
   Number,
+  Boolean,
   Currency,
   Date,
   Dropdown,
@@ -17,19 +18,17 @@ export enum ButtonType {
 }
 
 export interface GridColumn {
-  field: string;
+  field?: string;
   headerName?: string;
   filter?: boolean;
+  sortable?: boolean;
   type?: GridFieldType;
   dropdownFilterOptions?: any[];
   width?: number;
   valueGetter?: any;
   cellRenderer?: any;
-  cellRendererParams?: any;
+  cellRendererParams?: { primaryClicked?; secondaryClicked?; primaryLabel?; secondaryLabel? };
   filterParams?: any;
-  primaryAction?: any;
-  secondaryAction?: any;
   show?: any;
-  text?: string;
   buttonType?: ButtonType;
 }

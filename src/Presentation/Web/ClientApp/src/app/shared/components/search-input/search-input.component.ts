@@ -4,7 +4,7 @@ import { debounceTime, distinctUntilChanged, tap, switchMap, catchError, map } f
 import { Observable, of, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'lib-search-input',
+  selector: 'appc-search-input',
   styleUrls: ['./search-input.component.scss'],
   templateUrl: './search-input.component.html',
 })
@@ -33,10 +33,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   }
 
   search = (text$: Observable<string>) => {
-    const textObservable = text$.pipe(
-      debounceTime(this.debounceTime),
-      distinctUntilChanged(),
-    );
+    const textObservable = text$.pipe(debounceTime(this.debounceTime), distinctUntilChanged());
 
     if (this.staticAction) {
       return textObservable.pipe(

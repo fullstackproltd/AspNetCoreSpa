@@ -9,7 +9,7 @@ export interface DropdownFloatingFilterParams extends IFloatingFilterParams {
 }
 
 @Component({
-  selector: 'lib-dropdown-filter',
+  selector: 'appc-dropdown-filter',
   templateUrl: './dropdown-filter.component.html',
   styleUrls: ['./dropdown-filter.component.scss'],
 })
