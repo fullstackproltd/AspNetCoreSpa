@@ -31,7 +31,7 @@ jobs:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: sudo service kestrel-aspnetcorespa stop
+          script: service kestrel-aspnetcorespa stop
       - name: Deploy to server
         id: deploy
         uses: Pendect/action-rsyncer@v1.1.0
@@ -50,4 +50,4 @@ jobs:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: sudo service kestrel-aspnetcorespa start
+          script: service kestrel-aspnetcorespa start
