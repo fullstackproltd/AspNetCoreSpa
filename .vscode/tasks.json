@@ -19,6 +19,8 @@
       "type": "process",
       "args": [
         "publish",
+        "-c",
+        "Release",
         "${workspaceFolder}/src/Presentation/Web/Web.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
@@ -56,6 +58,8 @@
       "type": "process",
       "args": [
         "publish",
+        "-c",
+        "Release",
         "${workspaceFolder}/src/Presentation/STS/STS.csproj",
         "/property:GenerateFullPaths=true",
         "/consoleloggerparameters:NoSummary"
