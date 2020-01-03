@@ -29,7 +29,7 @@
   "dataGroups": [
     {
       "name": "api-freshness",
-      "urls": ["/api", "/connect/authorize"],
+      "urls": ["/api/**", "/connect/authorize"],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 0,

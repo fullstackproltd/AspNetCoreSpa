@@ -828,7 +828,15 @@
             "type": "string",
             "nullable": true
           },
-          "commitId": {
+          "commitHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "branch": {
+            "type": "string",
+            "nullable": true
+          },
+          "tag": {
             "type": "string",
             "nullable": true
           }

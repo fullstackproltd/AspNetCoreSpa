@@ -10,6 +10,8 @@ namespace AspNetCoreSpa.Application.Abstractions
         string MachineName { get; }
         string RuntimeFramework { get; }
         string EnvironmentName { get; }
-        string DeploymentId { get; }
+        string CommitSha { get; }
+        string Branch { get; }
+        string Tag { get; }
     }
 }

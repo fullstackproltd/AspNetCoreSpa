@@ -1273,7 +1273,9 @@ export class EnvironmentInformation implements IEnvironmentInformation {
     machineName?: string | undefined;
     environmentName?: string | undefined;
     frameworkVersion?: string | undefined;
-    commitId?: string | undefined;
+    commitHash?: string | undefined;
+    branch?: string | undefined;
+    tag?: string | undefined;
 
     constructor(data?: IEnvironmentInformation) {
         if (data) {
@@ -1290,7 +1292,9 @@ export class EnvironmentInformation implements IEnvironmentInformation {
             this.machineName = _data["machineName"];
             this.environmentName = _data["environmentName"];
             this.frameworkVersion = _data["frameworkVersion"];
-            this.commitId = _data["commitId"];
+            this.commitHash = _data["commitHash"];
+            this.branch = _data["branch"];
+            this.tag = _data["tag"];
         }
     }
 
@@ -1307,7 +1311,9 @@ export class EnvironmentInformation implements IEnvironmentInformation {
         data["machineName"] = this.machineName;
         data["environmentName"] = this.environmentName;
         data["frameworkVersion"] = this.frameworkVersion;
-        data["commitId"] = this.commitId;
+        data["commitHash"] = this.commitHash;
+        data["branch"] = this.branch;
+        data["tag"] = this.tag;
         return data; 
     }
 }
@@ -1317,7 +1323,9 @@ export interface IEnvironmentInformation {
     machineName?: string | undefined;
     environmentName?: string | undefined;
     frameworkVersion?: string | undefined;
-    commitId?: string | undefined;
+    commitHash?: string | undefined;
+    branch?: string | undefined;
+    tag?: string | undefined;
 }
 
 export class CategoriesListVm implements ICategoriesListVm {

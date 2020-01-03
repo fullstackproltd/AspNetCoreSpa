@@ -57,13 +57,15 @@
 
     @RenderSection("Scripts", required: false)
 
-    <cache>
-        <!-- OS: @DeploymentEnvironment.OS -->
-        <!-- Machine: @DeploymentEnvironment.MachineName -->
-        <!-- Framework: @DeploymentEnvironment.RuntimeFramework -->
-        <!-- Environment: @DeploymentEnvironment.EnvironmentName -->
-        <!-- Deployment: @DeploymentEnvironment.DeploymentId -->
-    </cache>
+<cache>
+    <!-- OS: @DeploymentEnvironment.OS -->
+    <!-- Machine: @DeploymentEnvironment.MachineName -->
+    <!-- Framework: @DeploymentEnvironment.RuntimeFramework -->
+    <!-- Environment: @DeploymentEnvironment.EnvironmentName -->
+    <!-- Branch: @DeploymentEnvironment.Branch -->
+    <!-- Tag: @DeploymentEnvironment.Tag -->
+    <!-- CommitSha: @DeploymentEnvironment.CommitSha -->
+</cache>
 
 </body>
 </html>

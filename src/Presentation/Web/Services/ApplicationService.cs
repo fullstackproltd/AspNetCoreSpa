@@ -25,7 +25,7 @@ namespace AspNetCoreSpa.Web.Services
             IOptions<RequestLocalizationOptions> locOptions,
             IStringLocalizer<ApplicationService> stringLocalizer,
             IHttpContextAccessor contextAccessor,
-            IMemoryCache memoryCache, 
+            IMemoryCache memoryCache,
             IDeploymentEnvironment deploymentEnvironment)
         {
             _locOptions = locOptions.Value;
@@ -46,7 +46,7 @@ namespace AspNetCoreSpa.Web.Services
                         {
                             Value = c.Name,
                             Text = c.NativeName,
-                            Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name)
+                            Current = (c.Name == Thread.CurrentThread.CurrentCulture.Name),
                         })
                         .ToList(),
                 EnvironmentInfo = new EnvironmentInformation
@@ -55,8 +55,10 @@ namespace AspNetCoreSpa.Web.Services
                     MachineName = _deploymentEnvironment.MachineName,
                     EnvironmentName = _deploymentEnvironment.EnvironmentName,
                     FrameworkVersion = _deploymentEnvironment.RuntimeFramework,
-                    CommitId = _deploymentEnvironment.DeploymentId
-                }
+                    CommitHash = _deploymentEnvironment.CommitSha,
+                    Branch = _deploymentEnvironment.Branch,
+                    Tag = _deploymentEnvironment.Tag
+                },
             };
 
             return applicationData;
