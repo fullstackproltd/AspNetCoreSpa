@@ -1,6 +1,7 @@
 import { environment } from 'environments/environment';
-export const ApplicationName = location.host
-  .replace(':', '')
+export const ApplicationName = document.baseURI
+  .replace(/\//g, '')
+  .replace(/:/g, '')
   .split('.')
   .join('');
 
