@@ -99,7 +99,7 @@ namespace AspNetCoreSpa.Infrastructure
                     corsList.ForEach(host =>
                     {
                         var uri = new Uri(host);
-                        var hostElements = uri.Authority.Replace(":", string.Empty).Split(".");
+                        var hostElements = uri.AbsoluteUri.Replace(":", string.Empty).Replace("/", string.Empty).Split(".");
                         var clientId = string.Join(string.Empty, hostElements);
 
                         options.Clients.AddSPA(clientId, spa => spa.WithRedirectUri($"{host}/authentication/login-callback")

@@ -37,8 +37,8 @@ namespace AspNetCoreSpa.Infrastructure.Services
                     var clientParameters = _clientRequestParameters.GetClientParameters(_httpContextAccessor.HttpContext, clientId.Value);
                     clientParameters.TryGetValue("redirect_uri", out var clientRedirectUri);
                     var uri = new Uri(clientRedirectUri);
-
-                    var clientInfo = new ClientInfo { ClientId = clientId.Value, ClientUri = $"{uri.Scheme}://{uri.Authority}" };
+                    var clientUrl = uri.AbsoluteUri.Substring(0, uri.AbsoluteUri.IndexOf("authentication"));
+                    var clientInfo = new ClientInfo { ClientId = clientId.Value, ClientUri = clientUrl };
 
                     return clientInfo;
                 }
