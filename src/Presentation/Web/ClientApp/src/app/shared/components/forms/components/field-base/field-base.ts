@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Directive } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { IFieldConfig, Field } from '../../../../models';
 import { AppFormComponent } from '../form';
 import { FormsService } from '../../forms.service';
 
+@Directive()
 @Injectable()
 export abstract class FieldBaseComponent implements Field {
   config: IFieldConfig;
