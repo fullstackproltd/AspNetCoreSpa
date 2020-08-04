@@ -3,7 +3,7 @@ name: Web
 on:
   push:
     branches:
-      - ddd
+      - master
 
 jobs:
   build_aspnetcorespa:

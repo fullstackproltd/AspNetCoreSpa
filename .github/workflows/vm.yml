@@ -3,7 +3,7 @@ name: VM
 on:
   push:
     branches:
-      - ddd
+      - master
 
 jobs:
   build-test-publish-ftp:
