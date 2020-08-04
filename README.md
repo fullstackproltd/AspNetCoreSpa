@@ -10,22 +10,21 @@
 - [Entity Framework Core 3.1](https://docs.efproject.net/en/latest/)
   - Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 - [Identity Server 4](http://identityserver.io/)
-- [Angular 8](https://angular.io/)
-- [Angular CLI 8](https://cli.angular.io/)
+- [Angular 10](https://angular.io/)
+- [Angular CLI 10](https://cli.angular.io/)
 - Secure - with CSP and custom security headers
 - [SignalR](https://github.com/aspnet/SignalR/)
 - [SASS](http://sass-lang.com/)
 - Best [practices](https://angular.io/docs/ts/latest/guide/style-guide.html) for Angular code organisation.
-- [Clean Architecture](https://github.com/ardalis/CleanArchitecture) for ASP.Net Core code.
+- [Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture) inspired from Jason Taylor.
 - [PWA support](https://developers.google.com/web/progressive-web-apps/)
-- [SSR (Server side rendering)](https://angular.io/guide/universal) - Coming soon...
 - Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
 - E2E testing with [Protractor](http://www.protractortest.org).l
 - [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
 - Login and Registration functionality using [Identity Server implicit flow](http://identityserver.io/)
 - Extensible User/Role identity implementation
 - Social logins support with token based authentication, using [Identity Server](http://identityserver.io/)
-- [Angular dynamic forms] for reusable and DRY code.
+- Angular dynamic forms for reusable and DRY code.
 - [Swagger](http://swagger.io/) as Api explorer (Visit url **https://127.0.0.1:5005/swagger** OR whatever port visual studio has launched the website.). More [details](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 
 ## Pre-requisites
@@ -38,88 +37,131 @@
 
 ## Installation
 
-```
 1. Clone the repo:
-    git clone https://github.com/asadsahi/AspNetCoreSpa
+
+   git clone https://github.com/asadsahi/AspNetCoreSpa
+
 2. Change directory:
-    cd AspNetCoreSpa
+
+   cd AspNetCoreSpa
+
 3. Restore packages:
-    dotnet restore AspNetCoreSpa.sln
+
+   dotnet restore AspNetCoreSpa.sln
+
 4. Install npm packages:
-    cd src/AspNetCoreSpa.Web/ClientApp:
-    - npm install
-5. Run .Net project:
-    F5 from either [Visual Studio IDE](https://www.visualstudio.com/) OR [VScode] (https://code.visualstudio.com/):
-    Note: If you are running using Visual Studio Code, install dev certificates using command:
-    dotnet dev-certs https --trust
-6. Target either Sqlite or Microsoft SQL Server
+
+   - cd src/Presentation/Web/ClientApp:
+
+   - npm install
+
+5. Start Frontend:
+
+   - npm start
+
+6. Run Backend:
+
+   - Using [VSCode](https://code.visualstudio.com/):
+
+     - If you are running for the first time, install dev certificates using command:
+
+     ```
+     dotnet dev-certs https --trust
+     ```
+
+     - From debug menu select `Web` profile to run api application
+     - From debug menu select `STS` profile to run Identity Server application
+
+   - Using [Visual Studio IDE](https://www.visualstudio.com/):
+     - Run `Web` and `STS` projects either individually or by setting multiple projects in solutions properties and hit F5
+
+7. Target either Sqlite or Microsoft SQL Server
 
 This project supports both databases OOTB.
 
-* Run with Sqlite: (Already configured to quickly run the project)
-    * Project is already setup with Sqlite specific database migrations
+- Run with Sqlite: (Already configured to quickly run the project)
 
-* Run with Microsoft SQL Server:
-    * Delete `Migrations` folder from src/AspNetCoreSpa.Web
-    * Change setting in appsettings.json called `useSqLite` from `true` to `false`
-    * This will use `SqlServerConnectionString` connection string pointing to default instance of SQL server installed on local machine
+  - Project is already setup with Sqlite specific database migrations
 
-7. Identity server for authentication:
-    a. Open terminal
-    b. cd AspNetCoreSpa.STS
-    c. dotnet run
+- Run with Microsoft SQL Server:
+  - Delete `Migrations` folder from src/Infrastructure/Infrastructure/Persistence
+  - Change setting in appsettings.json called `useSqLite` from `true` to `false` and change `Web` connection string to your local Sql Server connection string
 
-	2 Test users:
-	Username: admin@admin.com
-	Password: P@ssw0rd!
-	OR
-	Username: user@user.com
-	Password: P@ssw0rd!
+7. Once the project is running use following test users to login:
 
-    Note: For production use Identity server hosted with appropriate configuration.
-```
+   2 Test users:
+   Username: admin@admin.com
+   Password: P@ssw0rd!
+   OR
+   Username: user@user.com
+   Password: P@ssw0rd!
+
+   Note: For production use Identity server hosted with appropriate configuration.
+
 # Managing Migrations
+
 ## Make sure you have ef core global tools installed
-dotnet tool install --global dotnet-ef
+
+`dotnet tool install --global dotnet-ef`
 
 # Web Migrations
+
 ## Using command line (from root of the project)
+
 ### Create Migration
-dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext -o Persistence/Migrations
+
+`dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext -o Persistence/Migrations`
+
 ### Update database
- dotnet ef database update  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext
+
+`dotnet ef database update --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext`
+
 ### Drop database
- dotnet ef database drop  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext
+
+`dotnet ef database drop --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext`
 
 # Localization Migrations
+
 ## Using command line (from root of the project)
+
 ### Create Migration
-dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext -o Localization/Migrations
+
+`dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext -o Localization/Migrations`
+
 ### Update database
- dotnet ef database update  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext
+
+`dotnet ef database update --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext`
+
 ### Drop database
- dotnet ef database drop  --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext
+
+`dotnet ef database drop --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext`
 
 # Identity Migrations
-## Using command line (from root of the project)
-### Create Migration
-dotnet ef migrations add migrationname --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext -o Identity/Migrations
-### Update database
- dotnet ef database update  --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext
-### Drop database
- dotnet ef database drop  --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext
 
+## Using command line (from root of the project)
+
+### Create Migration
+
+`dotnet ef migrations add migrationname --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext -o Identity/Migrations`
+
+### Update database
+
+`dotnet ef database update --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext`
+
+### Drop database
+
+`dotnet ef database drop --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext`
 
 # Other commands
 
 ### Angular component scaffolding
 
-Note: You need to run commands from `src/AspNetCoreSpa.Web/ClientApp` directory: More information [here](https://angular.io/cli)
+Note: You need to run commands from `src/Presentation/Web/ClientApp` directory: More information [here](https://angular.io/cli)
 
 ### Angular tests - Using [Jest](https://jestjs.io/en/) and Angular jest [preset](https://github.com/thymikee/jest-preset-angular)
 
 ```bash
-cd src/AspNetCoreSpa.Web/ClientApp
+cd src/Presentation/Web/ClientApp
 
 npm test
 ```
@@ -128,7 +170,7 @@ npm test
 
 - Steps to generate:
   - npm i compodoc -g
-  - cd src/AspNetCoreSpa.Web/ClientApp
+  - cd src/Presentation/Web/ClientApp
   - npm run compodoc
   - cd documentation
   - http-server
