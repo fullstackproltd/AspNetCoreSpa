@@ -33,8 +33,8 @@ jobs:
       # Run dotnet build and publish
       - name: Build
         run: |
-          dotnet build --configuration Release
-          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/aspnetcorests'
+          dotnet build src/Presentation/STS/STS.csproj --configuration Release
+          dotnet publish src/Presentation/STS/STS.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/aspnetcorests'
 
       # Deploy to Azure Web apps
       - name: Publish
