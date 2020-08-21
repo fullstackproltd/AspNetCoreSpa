@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  stsUrl: 'https://aspnetcorests.herokuapp.com/',
+  stsUrl: 'https://identityserver.fullstackpro.xyz/',
 };
