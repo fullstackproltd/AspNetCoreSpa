@@ -1,4 +1,4 @@
-name: STS Azure App Service
+name: STS-Azure-App
 
 on:
   push:

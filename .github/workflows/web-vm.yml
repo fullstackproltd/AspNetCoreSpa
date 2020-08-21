@@ -1,4 +1,4 @@
-name: VM
+name: VM-Web
 
 on:
   push:

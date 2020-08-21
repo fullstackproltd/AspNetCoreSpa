@@ -1,4 +1,4 @@
-name: VM
+name: VM-STS
 
 on:
   push:
