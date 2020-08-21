@@ -1,0 +1,50 @@
+name: VM
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-test-publish-ftp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.100
+      - name: Build
+        run: dotnet build AspNetCoreSpa.sln --configuration Release
+      - name: Test
+        run: dotnet test AspNetCoreSpa.sln
+      - name: Publish
+        run: dotnet publish src/Presentation/STS/STS.csproj -c Release -o publish
+      # Stop service
+      - name: Stop STS Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: sudo service ${{ secrets.KESTREL_STS_SERVICE_NAME }} stop
+      - name: Deploy to server
+        id: deploy
+        uses: Pendect/action-rsyncer@v1.1.0
+        env:
+          DEPLOY_KEY: ${{ secrets.SSH_KEY }}
+        with:
+          flags: "-avzr --delete"
+          options: ""
+          ssh_options: ""
+          src: "publish/"
+          dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER }}:${{ secrets.SSH_STS_DEST_DIR }}"
+      # Start service
+      - name: Start STS Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: sudo service ${{ secrets.KESTREL_STS_SERVICE_NAME }} start
