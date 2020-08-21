@@ -292,7 +292,7 @@ namespace AspNetCoreSpa.Infrastructure
                 options.AddPolicy(Constants.DefaultCorsPolicy,
                     builder =>
                     {
-                        var corsList = configuration.GetSection("CorsOrigins").Get<List<string>>().ToArray();
+                        var corsList = configuration.GetSection("CorsOrigins").Get<List<string>>()?.ToArray() ?? new string[] { };
                         builder.WithOrigins(corsList)
                             .AllowAnyMethod()
                             .AllowAnyHeader();
