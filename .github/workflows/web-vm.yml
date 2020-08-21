@@ -31,13 +31,13 @@ jobs:
       - name: Publish
         run: dotnet publish src/Presentation/Web/Web.csproj -c Release -o publish
       # Stop service
-      - name: Stop AspNetCoreSpa Service
+      - name: Stop Service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: sudo service ${{ secrets.KESTREL_SERVICE_NAME }} stop
+          script: sudo service ${{ secrets.KESTREL_WEB_SERVICE_NAME }} stop
       - name: Deploy to server
         id: deploy
         uses: Pendect/action-rsyncer@v1.1.0
@@ -48,12 +48,12 @@ jobs:
           options: ""
           ssh_options: ""
           src: "publish/"
-          dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER }}:${{ secrets.SSH_DEST_DIR }}"
+          dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER }}:${{ secrets.SSH_WEB_DEST_DIR }}"
       # Start service
-      - name: Start AspNetCoreSpa Service
+      - name: Start Service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          script: sudo service ${{ secrets.KESTREL_SERVICE_NAME }} start
+          script: sudo service ${{ secrets.KESTREL_WEB_SERVICE_NAME }} start

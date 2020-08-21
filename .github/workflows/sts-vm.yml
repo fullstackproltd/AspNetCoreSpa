@@ -22,7 +22,7 @@ jobs:
       - name: Publish
         run: dotnet publish src/Presentation/STS/STS.csproj -c Release -o publish
       # Stop service
-      - name: Stop STS Service
+      - name: Stop Service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_SERVER }}
@@ -41,7 +41,7 @@ jobs:
           src: "publish/"
           dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER }}:${{ secrets.SSH_STS_DEST_DIR }}"
       # Start service
-      - name: Start STS Service
+      - name: Start Service
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_SERVER }}
