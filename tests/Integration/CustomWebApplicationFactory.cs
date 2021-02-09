@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace AspNetCoreSpa.Integration.Tests
 {
     #region snippet1
-    public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
+    public class CustomWebApplicationFactory<TStartup>
+        : WebApplicationFactory<TStartup> where TStartup : class
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {

@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
 {
     [DbContext(typeof(LocalizationDbContext))]
-    [Migration("20191225170206_Initial")]
-    partial class Initial
+    [Migration("20210124214600_migrationname")]
+    partial class migrationname
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0");
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Localization.Culture", b =>
                 {
@@ -59,6 +59,13 @@ namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Localization.Culture", "Culture")
                         .WithMany("Resources")
                         .HasForeignKey("CultureId");
+
+                    b.Navigation("Culture");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Localization.Culture", b =>
+                {
+                    b.Navigation("Resources");
                 });
 #pragma warning restore 612, 618
         }

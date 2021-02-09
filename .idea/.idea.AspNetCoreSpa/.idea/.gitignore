@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/.idea.AspNetCoreSpa.iml
+/modules.xml
+/contentModel.xml
+/projectSettingsUpdater.xml
+# Datasource local storage ignored files
+/../../../../../../:\dev\AspNetCoreSpa\.idea\.idea.AspNetCoreSpa\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

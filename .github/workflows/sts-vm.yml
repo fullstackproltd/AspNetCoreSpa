@@ -14,7 +14,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.100
+          dotnet-version: 5.0.102
       - name: Build
         run: dotnet build AspNetCoreSpa.sln --configuration Release
       - name: Test

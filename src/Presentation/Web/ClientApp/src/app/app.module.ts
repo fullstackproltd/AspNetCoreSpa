@@ -29,7 +29,7 @@ import { SharedModule } from './shared';
     // PrebootModule.withConfig({ appRoot: 'appc-root' }),
     BrowserAnimationsModule,
     BrowserTransferStateModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule,
   ],

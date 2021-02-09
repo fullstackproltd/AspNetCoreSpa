@@ -1,5 +1,5 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
@@ -11,7 +11,7 @@ describe('AppComponent', () => {
   let fixture;
 
   beforeEach(
-    async(() => {
+    waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [AppComponent],
         imports: [

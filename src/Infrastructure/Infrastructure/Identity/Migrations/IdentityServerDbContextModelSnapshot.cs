@@ -14,7 +14,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0");
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationRole", b =>
                 {
@@ -30,18 +30,18 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -82,8 +82,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
@@ -98,12 +98,12 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("TEXT");
@@ -121,17 +121,17 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -161,12 +161,12 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserLogin", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("TEXT");
@@ -202,12 +202,12 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(128);
+                        .HasMaxLength(128)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
@@ -222,6 +222,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("AllowedAccessTokenSigningAlgorithms")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("TEXT");
@@ -242,6 +245,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("NonEditable")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("ShowInDiscoveryDocument")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime?>("Updated")
@@ -293,7 +299,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ApiResourceProperty");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScope", b =>
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -302,51 +308,17 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Property<int>("ApiResourceId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Scope")
                         .HasColumnType("TEXT");
-
-                    b.Property<string>("DisplayName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Emphasize")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Required")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("ShowInDiscoveryDocument")
-                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApiResourceId");
 
-                    b.ToTable("ApiScope");
+                    b.ToTable("ApiResourceScope");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScopeClaim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ApiScopeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApiScopeId");
-
-                    b.ToTable("ApiScopeClaim");
-                });
-
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiSecret", b =>
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -374,7 +346,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasIndex("ApiResourceId");
 
-                    b.ToTable("ApiSecret");
+                    b.ToTable("ApiResourceSecret");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.Client", b =>
@@ -403,6 +375,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.Property<bool>("AllowRememberConsent")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("AllowedIdentityTokenSigningAlgorithms")
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("AlwaysIncludeUserClaimsInIdToken")
                         .HasColumnType("INTEGER");
@@ -489,6 +464,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("RequirePkce")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("RequireRequestObject")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("SlidingRefreshTokenLifetime")
@@ -703,34 +681,42 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(50000);
+                        .HasMaxLength(50000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("DeviceCode")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("Expiration")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SessionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("SubjectId")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserCode");
 
@@ -740,25 +726,6 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.HasIndex("Expiration");
 
                     b.ToTable("DeviceCodes");
-                });
-
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityClaim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdentityResourceId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdentityResourceId");
-
-                    b.ToTable("IdentityClaim");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResource", b =>
@@ -802,6 +769,25 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("IdentityResources");
                 });
 
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("IdentityResourceId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdentityResourceId");
+
+                    b.ToTable("IdentityResourceClaim");
+                });
+
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceProperty", b =>
                 {
                     b.Property<int>("Id")
@@ -827,39 +813,52 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClientId")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("ConsumedTime")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(50000);
+                        .HasMaxLength(50000)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("Expiration")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("SessionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("SubjectId")
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(200);
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Key");
 
                     b.HasIndex("Expiration");
 
                     b.HasIndex("SubjectId", "ClientId", "Type");
+
+                    b.HasIndex("SubjectId", "SessionId", "Type");
 
                     b.ToTable("PersistedGrants");
                 });
@@ -871,6 +870,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserClaim", b =>
@@ -880,6 +881,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserLogin", b =>
@@ -889,6 +892,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserRole", b =>
@@ -904,6 +909,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserToken", b =>
@@ -913,6 +922,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceClaim", b =>
@@ -922,6 +933,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceProperty", b =>
@@ -931,33 +944,30 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScope", b =>
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceScope", b =>
                 {
                     b.HasOne("IdentityServer4.EntityFramework.Entities.ApiResource", "ApiResource")
                         .WithMany("Scopes")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiScopeClaim", b =>
-                {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.ApiScope", "ApiScope")
-                        .WithMany("UserClaims")
-                        .HasForeignKey("ApiScopeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiSecret", b =>
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceSecret", b =>
                 {
                     b.HasOne("IdentityServer4.EntityFramework.Entities.ApiResource", "ApiResource")
                         .WithMany("Secrets")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApiResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientClaim", b =>
@@ -967,6 +977,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientCorsOrigin", b =>
@@ -976,6 +988,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientGrantType", b =>
@@ -985,6 +999,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientIdPRestriction", b =>
@@ -994,6 +1010,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
@@ -1003,6 +1021,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientProperty", b =>
@@ -1012,6 +1032,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientRedirectUri", b =>
@@ -1021,6 +1043,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientScope", b =>
@@ -1030,6 +1054,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientSecret", b =>
@@ -1039,15 +1065,19 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityClaim", b =>
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceClaim", b =>
                 {
                     b.HasOne("IdentityServer4.EntityFramework.Entities.IdentityResource", "IdentityResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("IdentityResource");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceProperty", b =>
@@ -1057,6 +1087,65 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("IdentityResource");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationRole", b =>
+                {
+                    b.Navigation("RoleClaims");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Tokens");
+
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResource", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("Scopes");
+
+                    b.Navigation("Secrets");
+
+                    b.Navigation("UserClaims");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.Client", b =>
+                {
+                    b.Navigation("AllowedCorsOrigins");
+
+                    b.Navigation("AllowedGrantTypes");
+
+                    b.Navigation("AllowedScopes");
+
+                    b.Navigation("Claims");
+
+                    b.Navigation("ClientSecrets");
+
+                    b.Navigation("IdentityProviderRestrictions");
+
+                    b.Navigation("PostLogoutRedirectUris");
+
+                    b.Navigation("Properties");
+
+                    b.Navigation("RedirectUris");
+                });
+
+            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResource", b =>
+                {
+                    b.Navigation("Properties");
+
+                    b.Navigation("UserClaims");
                 });
 #pragma warning restore 612, 618
         }

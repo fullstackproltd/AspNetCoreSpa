@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/src/Presentation/Web/bin/Debug/netcoreapp3.1/AspNetCoreSpa.Web.dll",
+      "program": "${workspaceFolder}/src/Presentation/Web/bin/Debug/net5.0/AspNetCoreSpa.Web.dll",
       "args": [],
       "cwd": "${workspaceFolder}/src/Presentation/Web",
       "stopAtEntry": false,
@@ -29,7 +29,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "buildsts",
-      "program": "${workspaceFolder}/src/Presentation/STS/bin/Debug/netcoreapp3.1/AspNetCoreSpa.STS.dll",
+      "program": "${workspaceFolder}/src/Presentation/STS/bin/Debug/net5.0/AspNetCoreSpa.STS.dll",
       "args": [],
       "cwd": "${workspaceFolder}/src/Presentation/STS",
       "stopAtEntry": false,
@@ -48,7 +48,10 @@
   "compounds": [
     {
       "name": "Web/STS",
-      "configurations": ["Web", "STS"]
+      "configurations": [
+        "Web",
+        "STS"
+      ]
     }
   ]
 }

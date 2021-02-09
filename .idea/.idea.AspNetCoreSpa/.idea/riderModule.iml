@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.8.3/build/netcoreapp2.1" />
+    <content url="file://$USER_HOME$/.nuget/packages/microsoft.testplatform.testhost/16.8.3/build/netcoreapp2.1/x64/Microsoft.TestPlatform.PlatformAbstractions.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/microsoft.testplatform.testhost/16.8.3/build/netcoreapp2.1/x64/testhost.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/microsoft.testplatform.testhost/16.8.3/build/netcoreapp2.1/x64/testhost.exe" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.3/build/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.3/build/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.3/build/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
+    <content url="file://$MODULE_DIR$/../.." />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

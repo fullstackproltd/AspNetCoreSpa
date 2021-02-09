@@ -6,12 +6,12 @@
 
 ## Features
 
-- [ASP.NET Core 3.1](http://www.dot.net/)
-- [Entity Framework Core 3.1](https://docs.efproject.net/en/latest/)
+- [ASP.NET Core 5.0](http://www.dot.net/)
+- [Entity Framework Core 5.0](https://docs.efproject.net/en/latest/)
   - Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 - [Identity Server 4](http://identityserver.io/)
-- [Angular 10](https://angular.io/)
-- [Angular CLI 10](https://cli.angular.io/)
+- [Angular 11](https://angular.io/)
+- [Angular CLI 11](https://cli.angular.io/)
 - Secure - with CSP and custom security headers
 - [SignalR](https://github.com/aspnet/SignalR/)
 - [SASS](http://sass-lang.com/)
@@ -29,10 +29,10 @@
 
 ## Pre-requisites
 
-1. [.Net core 3.1 SDK](https://www.microsoft.com/net/core#windows)
+1. [.Net 5.0 SDK](https://www.microsoft.com/net/core#windows)
 2. [Visual studio 2019](https://www.visualstudio.com/) OR [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension
 3. [NodeJs](https://nodejs.org/en/) (Latest LTS)
-4. [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017) (Optional: If MS SQL server required instead of Sqlite during development)
+4. [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server) (Optional: If MS SQL server required instead of Sqlite during development)
 5. [Docker](https://www.docker.com/) (Optional: If application will run inside docker container)
 
 ## Installation
@@ -207,7 +207,7 @@ From powershell:
 ### Replace your app name where it is `aspnetcorespa`
 
 - dotnet publish -c release
-- docker build -t aspnetcorespa ./bin/release/netcoreapp3.1/publish
+- docker build -t aspnetcorespa ./bin/release/net5.0/publish
 - heroku login
 - heroku container:login
 - docker tag aspnetcorespa registry.heroku.com/aspnetcorespa/web

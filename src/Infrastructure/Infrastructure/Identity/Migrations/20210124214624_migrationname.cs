@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 {
-    public partial class Initial : Migration
+    public partial class migrationname : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,16 +11,18 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ApiResources",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Enabled = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    DisplayName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: true),
-                    LastAccessed = table.Column<DateTime>(nullable: true),
-                    NonEditable = table.Column<bool>(nullable: false)
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    AllowedAccessTokenSigningAlgorithms = table.Column<string>(type: "TEXT", nullable: true),
+                    ShowInDiscoveryDocument = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastAccessed = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    NonEditable = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +33,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,22 +48,22 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    Email = table.Column<string>(maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(nullable: false),
-                    PasswordHash = table.Column<string>(nullable: true),
-                    SecurityStamp = table.Column<string>(nullable: true),
-                    ConcurrencyStamp = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
-                    LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false),
-                    Mobile = table.Column<string>(nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Mobile = table.Column<string>(type: "TEXT", nullable: true),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,49 +74,51 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Enabled = table.Column<bool>(nullable: false),
-                    ClientId = table.Column<string>(nullable: true),
-                    ProtocolType = table.Column<string>(nullable: true),
-                    RequireClientSecret = table.Column<bool>(nullable: false),
-                    ClientName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    ClientUri = table.Column<string>(nullable: true),
-                    LogoUri = table.Column<string>(nullable: true),
-                    RequireConsent = table.Column<bool>(nullable: false),
-                    AllowRememberConsent = table.Column<bool>(nullable: false),
-                    AlwaysIncludeUserClaimsInIdToken = table.Column<bool>(nullable: false),
-                    RequirePkce = table.Column<bool>(nullable: false),
-                    AllowPlainTextPkce = table.Column<bool>(nullable: false),
-                    AllowAccessTokensViaBrowser = table.Column<bool>(nullable: false),
-                    FrontChannelLogoutUri = table.Column<string>(nullable: true),
-                    FrontChannelLogoutSessionRequired = table.Column<bool>(nullable: false),
-                    BackChannelLogoutUri = table.Column<string>(nullable: true),
-                    BackChannelLogoutSessionRequired = table.Column<bool>(nullable: false),
-                    AllowOfflineAccess = table.Column<bool>(nullable: false),
-                    IdentityTokenLifetime = table.Column<int>(nullable: false),
-                    AccessTokenLifetime = table.Column<int>(nullable: false),
-                    AuthorizationCodeLifetime = table.Column<int>(nullable: false),
-                    ConsentLifetime = table.Column<int>(nullable: true),
-                    AbsoluteRefreshTokenLifetime = table.Column<int>(nullable: false),
-                    SlidingRefreshTokenLifetime = table.Column<int>(nullable: false),
-                    RefreshTokenUsage = table.Column<int>(nullable: false),
-                    UpdateAccessTokenClaimsOnRefresh = table.Column<bool>(nullable: false),
-                    RefreshTokenExpiration = table.Column<int>(nullable: false),
-                    AccessTokenType = table.Column<int>(nullable: false),
-                    EnableLocalLogin = table.Column<bool>(nullable: false),
-                    IncludeJwtId = table.Column<bool>(nullable: false),
-                    AlwaysSendClientClaims = table.Column<bool>(nullable: false),
-                    ClientClaimsPrefix = table.Column<string>(nullable: true),
-                    PairWiseSubjectSalt = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: true),
-                    LastAccessed = table.Column<DateTime>(nullable: true),
-                    UserSsoLifetime = table.Column<int>(nullable: true),
-                    UserCodeType = table.Column<string>(nullable: true),
-                    DeviceCodeLifetime = table.Column<int>(nullable: false),
-                    NonEditable = table.Column<bool>(nullable: false)
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ClientId = table.Column<string>(type: "TEXT", nullable: true),
+                    ProtocolType = table.Column<string>(type: "TEXT", nullable: true),
+                    RequireClientSecret = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ClientName = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientUri = table.Column<string>(type: "TEXT", nullable: true),
+                    LogoUri = table.Column<string>(type: "TEXT", nullable: true),
+                    RequireConsent = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowRememberConsent = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AlwaysIncludeUserClaimsInIdToken = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RequirePkce = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowPlainTextPkce = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RequireRequestObject = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowAccessTokensViaBrowser = table.Column<bool>(type: "INTEGER", nullable: false),
+                    FrontChannelLogoutUri = table.Column<string>(type: "TEXT", nullable: true),
+                    FrontChannelLogoutSessionRequired = table.Column<bool>(type: "INTEGER", nullable: false),
+                    BackChannelLogoutUri = table.Column<string>(type: "TEXT", nullable: true),
+                    BackChannelLogoutSessionRequired = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AllowOfflineAccess = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IdentityTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    AllowedIdentityTokenSigningAlgorithms = table.Column<string>(type: "TEXT", nullable: true),
+                    AccessTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    AuthorizationCodeLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    ConsentLifetime = table.Column<int>(type: "INTEGER", nullable: true),
+                    AbsoluteRefreshTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    SlidingRefreshTokenLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    RefreshTokenUsage = table.Column<int>(type: "INTEGER", nullable: false),
+                    UpdateAccessTokenClaimsOnRefresh = table.Column<bool>(type: "INTEGER", nullable: false),
+                    RefreshTokenExpiration = table.Column<int>(type: "INTEGER", nullable: false),
+                    AccessTokenType = table.Column<int>(type: "INTEGER", nullable: false),
+                    EnableLocalLogin = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IncludeJwtId = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AlwaysSendClientClaims = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ClientClaimsPrefix = table.Column<string>(type: "TEXT", nullable: true),
+                    PairWiseSubjectSalt = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    LastAccessed = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    UserSsoLifetime = table.Column<int>(type: "INTEGER", nullable: true),
+                    UserCodeType = table.Column<string>(type: "TEXT", nullable: true),
+                    DeviceCodeLifetime = table.Column<int>(type: "INTEGER", nullable: false),
+                    NonEditable = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,13 +129,15 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "DeviceCodes",
                 columns: table => new
                 {
-                    UserCode = table.Column<string>(maxLength: 200, nullable: false),
-                    DeviceCode = table.Column<string>(maxLength: 200, nullable: false),
-                    SubjectId = table.Column<string>(maxLength: 200, nullable: true),
-                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
-                    CreationTime = table.Column<DateTime>(nullable: false),
-                    Expiration = table.Column<DateTime>(nullable: false),
-                    Data = table.Column<string>(maxLength: 50000, nullable: false)
+                    UserCode = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    DeviceCode = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    SubjectId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    SessionId = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Data = table.Column<string>(type: "TEXT", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -142,18 +148,18 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "IdentityResources",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Enabled = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    DisplayName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Required = table.Column<bool>(nullable: false),
-                    Emphasize = table.Column<bool>(nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Updated = table.Column<DateTime>(nullable: true),
-                    NonEditable = table.Column<bool>(nullable: false)
+                    Enabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    DisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Required = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Emphasize = table.Column<bool>(type: "INTEGER", nullable: false),
+                    ShowInDiscoveryDocument = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Updated = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    NonEditable = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -164,13 +170,16 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "PersistedGrants",
                 columns: table => new
                 {
-                    Key = table.Column<string>(maxLength: 200, nullable: false),
-                    Type = table.Column<string>(maxLength: 50, nullable: false),
-                    SubjectId = table.Column<string>(maxLength: 200, nullable: true),
-                    ClientId = table.Column<string>(maxLength: 200, nullable: false),
-                    CreationTime = table.Column<DateTime>(nullable: false),
-                    Expiration = table.Column<DateTime>(nullable: true),
-                    Data = table.Column<string>(maxLength: 50000, nullable: false)
+                    Key = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Type = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
+                    SubjectId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    SessionId = table.Column<string>(type: "TEXT", maxLength: 100, nullable: true),
+                    ClientId = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
+                    Description = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    CreationTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    ConsumedTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Data = table.Column<string>(type: "TEXT", maxLength: 50000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,10 +190,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ApiResourceClaim",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(nullable: true),
-                    ApiResourceId = table.Column<int>(nullable: false)
+                    ApiResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -201,11 +210,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ApiResourceProperty",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    ApiResourceId = table.Column<int>(nullable: false)
+                    ApiResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,24 +228,19 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiScope",
+                name: "ApiResourceScope",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
-                    DisplayName = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Required = table.Column<bool>(nullable: false),
-                    Emphasize = table.Column<bool>(nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(nullable: false),
-                    ApiResourceId = table.Column<int>(nullable: false)
+                    Scope = table.Column<string>(type: "TEXT", nullable: true),
+                    ApiResourceId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApiScope", x => x.Id);
+                    table.PrimaryKey("PK_ApiResourceScope", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiScope_ApiResources_ApiResourceId",
+                        name: "FK_ApiResourceScope_ApiResources_ApiResourceId",
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
@@ -244,23 +248,23 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ApiSecret",
+                name: "ApiResourceSecret",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    Expiration = table.Column<DateTime>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    ApiResourceId = table.Column<int>(nullable: false)
+                    ApiResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApiSecret", x => x.Id);
+                    table.PrimaryKey("PK_ApiResourceSecret", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ApiSecret_ApiResources_ApiResourceId",
+                        name: "FK_ApiResourceSecret_ApiResources_ApiResourceId",
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
@@ -271,11 +275,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RoleId = table.Column<Guid>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,11 +296,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<Guid>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -313,10 +317,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: false)
+                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -333,8 +337,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    RoleId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -357,10 +361,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<Guid>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
-                    Value = table.Column<string>(nullable: true)
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -377,11 +381,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientClaim",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -398,10 +402,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientCorsOrigin",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Origin = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    Origin = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -418,10 +422,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientGrantType",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    GrantType = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    GrantType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -438,10 +442,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientIdPRestriction",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Provider = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    Provider = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -458,10 +462,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientPostLogoutRedirectUri",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    PostLogoutRedirectUri = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    PostLogoutRedirectUri = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -478,11 +482,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientProperty",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -499,10 +503,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientRedirectUri",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    RedirectUri = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    RedirectUri = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -519,10 +523,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientScope",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Scope = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false)
+                    Scope = table.Column<string>(type: "TEXT", nullable: true),
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -539,14 +543,14 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ClientSecret",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    Expiration = table.Column<DateTime>(nullable: true),
-                    Type = table.Column<string>(nullable: true),
-                    Created = table.Column<DateTime>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false)
+                    ClientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
+                    Expiration = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Type = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -560,19 +564,19 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IdentityClaim",
+                name: "IdentityResourceClaim",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(nullable: true),
-                    IdentityResourceId = table.Column<int>(nullable: false)
+                    IdentityResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Type = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_IdentityClaim", x => x.Id);
+                    table.PrimaryKey("PK_IdentityResourceClaim", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_IdentityClaim_IdentityResources_IdentityResourceId",
+                        name: "FK_IdentityResourceClaim_IdentityResources_IdentityResourceId",
                         column: x => x.IdentityResourceId,
                         principalTable: "IdentityResources",
                         principalColumn: "Id",
@@ -583,11 +587,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "IdentityResourceProperty",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    IdentityResourceId = table.Column<int>(nullable: false)
+                    IdentityResourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -596,26 +600,6 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         name: "FK_IdentityResourceProperty_IdentityResources_IdentityResourceId",
                         column: x => x.IdentityResourceId,
                         principalTable: "IdentityResources",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ApiScopeClaim",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(nullable: true),
-                    ApiScopeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ApiScopeClaim", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ApiScopeClaim_ApiScope_ApiScopeId",
-                        column: x => x.ApiScopeId,
-                        principalTable: "ApiScope",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -631,18 +615,13 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 column: "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiScope_ApiResourceId",
-                table: "ApiScope",
+                name: "IX_ApiResourceScope_ApiResourceId",
+                table: "ApiResourceScope",
                 column: "ApiResourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApiScopeClaim_ApiScopeId",
-                table: "ApiScopeClaim",
-                column: "ApiScopeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ApiSecret_ApiResourceId",
-                table: "ApiSecret",
+                name: "IX_ApiResourceSecret_ApiResourceId",
+                table: "ApiResourceSecret",
                 column: "ApiResourceId");
 
             migrationBuilder.CreateIndex(
@@ -739,8 +718,8 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_IdentityClaim_IdentityResourceId",
-                table: "IdentityClaim",
+                name: "IX_IdentityResourceClaim_IdentityResourceId",
+                table: "IdentityResourceClaim",
                 column: "IdentityResourceId");
 
             migrationBuilder.CreateIndex(
@@ -757,6 +736,11 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "IX_PersistedGrants_SubjectId_ClientId_Type",
                 table: "PersistedGrants",
                 columns: new[] { "SubjectId", "ClientId", "Type" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersistedGrants_SubjectId_SessionId_Type",
+                table: "PersistedGrants",
+                columns: new[] { "SubjectId", "SessionId", "Type" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -768,10 +752,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "ApiResourceProperty");
 
             migrationBuilder.DropTable(
-                name: "ApiScopeClaim");
+                name: "ApiResourceScope");
 
             migrationBuilder.DropTable(
-                name: "ApiSecret");
+                name: "ApiResourceSecret");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -819,7 +803,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "DeviceCodes");
 
             migrationBuilder.DropTable(
-                name: "IdentityClaim");
+                name: "IdentityResourceClaim");
 
             migrationBuilder.DropTable(
                 name: "IdentityResourceProperty");
@@ -828,7 +812,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                 name: "PersistedGrants");
 
             migrationBuilder.DropTable(
-                name: "ApiScope");
+                name: "ApiResources");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -841,9 +825,6 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
             migrationBuilder.DropTable(
                 name: "IdentityResources");
-
-            migrationBuilder.DropTable(
-                name: "ApiResources");
         }
     }
 }

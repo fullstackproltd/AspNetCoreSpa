@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>AspNetCoreSpa.Infrastructure</RootNamespace>
+	  <TargetFramework>net5.0</TargetFramework>
+	  <RootNamespace>AspNetCoreSpa.Infrastructure</RootNamespace>
     <AssemblyName>AspNetCoreSpa.Infrastructure</AssemblyName>
   </PropertyGroup>
 
@@ -21,37 +21,37 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GitInfo" Version="2.0.26">
+    <PackageReference Include="GitInfo" Version="2.1.2">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.0">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.0" />
-    <PackageReference Include="Microsoft.Azure.KeyVault" Version="3.0.4" />
-    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.5" />
-    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.11.0" />
-    <PackageReference Include="OpenIddict" Version="2.0.1" />
-    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="2.0.1" />
-    <PackageReference Include="Sendgrid" Version="9.12.0" />
-    <PackageReference Include="NSwag.AspNetCore" Version="13.2.0" />
-    <PackageReference Include="NSwag.Core" Version="13.2.0" />
-    <PackageReference Include="CsvHelper" Version="12.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Twitter" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="5.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="5.2.8" />
+    <PackageReference Include="NetEscapades.AspNetCore.SecurityHeaders" Version="0.12.1" />
+    <PackageReference Include="OpenIddict" Version="3.0.0" />
+    <PackageReference Include="OpenIddict.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Sendgrid" Version="9.22.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.10.1" />
+    <PackageReference Include="NSwag.Core" Version="13.10.1" />
+    <PackageReference Include="CsvHelper" Version="21.2.0" />
 
   </ItemGroup>
 

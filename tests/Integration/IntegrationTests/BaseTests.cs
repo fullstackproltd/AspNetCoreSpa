@@ -6,7 +6,7 @@ using Xunit;
 namespace AspNetCoreSpa.Integration.Tests.IntegrationTests
 {
     #region snippet1
-    public class BasicTests : IClassFixture<WebApplicationFactory<Startup>>
+    public class BasicTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
 

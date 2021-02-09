@@ -4,53 +4,53 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
+  - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
-  solution: 'AspNetCoreSpa.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  solution: "AspNetCoreSpa.sln"
+  buildPlatform: "Any CPU"
+  buildConfiguration: "Release"
 
 steps:
-- task: NuGetToolInstaller@1
-  displayName: Install Nuget
+  - task: NuGetToolInstaller@1
+    displayName: Install Nuget
 
-- task: UseDotNet@2
-  displayName: Install 3.1.x
-  inputs:
-    version: '3.1.x'
+  - task: UseDotNet@2
+    displayName: Install 5.0.x
+    inputs:
+      version: "5.0.x"
 
-- task: NuGetCommand@2
-  displayName: Restore
-  inputs:
-    restoreSolution: '$(solution)'
+  - task: NuGetCommand@2
+    displayName: Restore
+    inputs:
+      restoreSolution: "$(solution)"
 
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: 'build'
-    arguments: '$(solution)'
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      command: "build"
+      arguments: "$(solution)"
 
-- task: DotNetCoreCLI@2
-  displayName: Test
-  inputs:
-    command: 'test'
-    arguments: '$(solution)'
+  - task: DotNetCoreCLI@2
+    displayName: Test
+    inputs:
+      command: "test"
+      arguments: "$(solution)"
 
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: publish
-    publishWebProjects: true
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: true
+  - task: DotNetCoreCLI@2
+    displayName: Publish
+    inputs:
+      command: publish
+      publishWebProjects: true
+      arguments: "--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)"
+      zipAfterPublish: true
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifacts: build'
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'build'
-    publishLocation: 'Container'
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifacts: build"
+    inputs:
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: "build"
+      publishLocation: "Container"

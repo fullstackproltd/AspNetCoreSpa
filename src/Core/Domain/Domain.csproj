@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>AspNetCoreSpa.Domain</RootNamespace>
-    <AssemblyName>AspNetCoreSpa.Domain</AssemblyName>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<RootNamespace>AspNetCoreSpa.Domain</RootNamespace>
+		<AssemblyName>AspNetCoreSpa.Domain</AssemblyName>
+	</PropertyGroup>
 
 </Project>

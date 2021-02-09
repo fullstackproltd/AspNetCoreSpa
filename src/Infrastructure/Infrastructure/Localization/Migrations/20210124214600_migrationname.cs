@@ -2,7 +2,7 @@
 
 namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
 {
-    public partial class Initial : Migration
+    public partial class migrationname : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -10,9 +10,9 @@ namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
                 name: "Cultures",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -23,11 +23,11 @@ namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
                 name: "Resources",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Key = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true),
-                    CultureId = table.Column<int>(nullable: true)
+                    Key = table.Column<string>(type: "TEXT", nullable: true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
+                    CultureId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {

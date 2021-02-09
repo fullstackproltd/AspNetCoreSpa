@@ -7,8 +7,7 @@ namespace AspNetCoreSpa.Infrastructure.Files
     {
         public ProductFileRecordMap()
         {
-            AutoMap();
-            Map(m => m.UnitPrice).Name("Unit Price").ConvertUsing(c => (c.UnitPrice ?? 0).ToString("C"));
+            Map(m => m.UnitPrice).Name("Unit Price").Convert(c => (c.UnitPrice ?? 0).ToString("C"));
         }
     }
 }
