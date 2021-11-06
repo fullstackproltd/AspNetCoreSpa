@@ -41,7 +41,7 @@
     "@angular/router": "12.2.13",
     "@microsoft/signalr": "5.0.2",
     "@microsoft/signalr-protocol-msgpack": "5.0.2",
-    "@ng-bootstrap/ng-bootstrap": "9.0.1",
+    "@ng-bootstrap/ng-bootstrap": "^10.0.0",
     "ag-grid-angular": "^25.0.1",
     "ag-grid-community": "^25.0.1",
     "aspnet-prerendering": "3.0.1",
