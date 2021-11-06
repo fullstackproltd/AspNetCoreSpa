@@ -9,19 +9,19 @@ const APP_DATA_KEY = makeStateKey<string>('appData');
   providedIn: 'root',
 })
 export class AppService {
-  constructor(@Inject('BASE_URL') private baseUrl: string, private transferState: TransferState, private dataService: DataService) {}
+  constructor(@Inject('BASE_URL') private baseUrl: string, private transferState: TransferState, private dataService: DataService) { }
 
   public get appData(): IApplicationConfig {
-    return this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
+    return this.transferState.get<IApplicationConfig>(APP_DATA_KEY, null as IApplicationConfig);
   }
   getAppData(): Promise<IApplicationConfig> {
-    const transferredAppData = this.transferState.get(APP_DATA_KEY, null as IApplicationConfig);
+    const transferredAppData = this.transferState.get<IApplicationConfig>(APP_DATA_KEY, null as IApplicationConfig);
     if (!transferredAppData) {
       return this.dataService
         .get('app/getapplicationdata')
         .toPromise()
         .then((data: IApplicationConfig) => {
-          this.transferState.set(APP_DATA_KEY, data);
+          this.transferState.set<IApplicationConfig>(APP_DATA_KEY, data);
           return data;
         });
     }
