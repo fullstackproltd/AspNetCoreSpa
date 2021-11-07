@@ -592,7 +592,7 @@ export class CustomersClient implements ICustomersClient {
 }
 
 export interface IEmployeesClient {
-    getAll(): Observable<EmployeeLookupDto[]>;
+    getAll(): Observable<EmployeesListVm>;
     get(id: number): Observable<EmployeeDetailVm>;
     upsert(command: UpsertEmployeeCommand): Observable<void>;
     delete(id: number): Observable<void>;
@@ -611,7 +611,7 @@ export class EmployeesClient implements IEmployeesClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "";
     }
 
-    getAll(): Observable<EmployeeLookupDto[]> {
+    getAll(): Observable<EmployeesListVm> {
         let url_ = this.baseUrl + "/api/Employees/GetAll";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -630,14 +630,14 @@ export class EmployeesClient implements IEmployeesClient {
                 try {
                     return this.processGetAll(<any>response_);
                 } catch (e) {
-                    return <Observable<EmployeeLookupDto[]>><any>_observableThrow(e);
+                    return <Observable<EmployeesListVm>><any>_observableThrow(e);
                 }
             } else
-                return <Observable<EmployeeLookupDto[]>><any>_observableThrow(response_);
+                return <Observable<EmployeesListVm>><any>_observableThrow(response_);
         }));
     }
 
-    protected processGetAll(response: HttpResponseBase): Observable<EmployeeLookupDto[]> {
+    protected processGetAll(response: HttpResponseBase): Observable<EmployeesListVm> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -648,11 +648,7 @@ export class EmployeesClient implements IEmployeesClient {
             return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (Array.isArray(resultData200)) {
-                result200 = [] as any;
-                for (let item of resultData200)
-                    result200!.push(EmployeeLookupDto.fromJS(item));
-            }
+            result200 = EmployeesListVm.fromJS(resultData200);
             return _observableOf(result200);
             }));
         } else if (status !== 200 && status !== 204) {
@@ -660,7 +656,7 @@ export class EmployeesClient implements IEmployeesClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             }));
         }
-        return _observableOf<EmployeeLookupDto[]>(<any>null);
+        return _observableOf<EmployeesListVm>(<any>null);
     }
 
     get(id: number): Observable<EmployeeDetailVm> {
@@ -1850,6 +1846,50 @@ export interface IUpdateCustomerCommand {
     phone?: string | undefined;
     postalCode?: string | undefined;
     region?: string | undefined;
+}
+
+export class EmployeesListVm implements IEmployeesListVm {
+    employees?: EmployeeLookupDto[] | undefined;
+
+    constructor(data?: IEmployeesListVm) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["employees"])) {
+                this.employees = [] as any;
+                for (let item of _data["employees"])
+                    this.employees!.push(EmployeeLookupDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): EmployeesListVm {
+        data = typeof data === 'object' ? data : {};
+        let result = new EmployeesListVm();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.employees)) {
+            data["employees"] = [];
+            for (let item of this.employees)
+                data["employees"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IEmployeesListVm {
+    employees?: EmployeeLookupDto[] | undefined;
 }
 
 export class EmployeeLookupDto implements IEmployeeLookupDto {

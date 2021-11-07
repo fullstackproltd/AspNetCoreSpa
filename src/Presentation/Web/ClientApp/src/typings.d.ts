@@ -1,7 +1,6 @@
 
 /* SystemJS module definition */
 declare var module: NodeModule;
-declare var global: NodeJS.Global;
 declare module NodeJS {
     interface Global {
         appData: IApplicationConfig

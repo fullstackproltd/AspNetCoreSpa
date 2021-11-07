@@ -18,12 +18,12 @@ export class ImageResizerComponent implements OnInit {
 
   public file_src: string;
 
-  constructor(private modalService: ModalService) {}
+  constructor(private modalService: ModalService) { }
 
   get imageSource(): string {
     return this.file_src || this.src;
   }
-  ngOnInit() {}
+  ngOnInit() { }
 
   onSave() {
     this.save.next(this.file_src);
@@ -48,9 +48,9 @@ export class ImageResizerComponent implements OnInit {
         .then(
           () => {
             input.value = '';
-            this.remove.next();
+            this.remove.next('');
           },
-          () => {},
+          () => { },
         );
     }
   }

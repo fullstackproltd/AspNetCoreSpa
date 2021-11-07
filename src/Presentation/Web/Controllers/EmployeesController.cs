@@ -13,7 +13,7 @@ namespace AspNetCoreSpa.Web.Controllers
     {
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IList<EmployeeLookupDto>>> GetAll()
+        public async Task<ActionResult<EmployeesListVm>> GetAll()
         {
             return Ok(await Mediator.Send(new GetEmployeesListQuery()));
         }
