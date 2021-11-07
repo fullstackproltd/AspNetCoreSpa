@@ -74,7 +74,7 @@ namespace AspNetCoreSpa.Web.Middlewares
                         builder.AddFrameAncestors()
                             .None();
 
-                        builder.AddFrameSource()
+                        builder.AddFrameSrc()
                             .From(stsUrl);
 
                         // You can also add arbitrary extra directives: plugin-types application/x-shockwave-flash"

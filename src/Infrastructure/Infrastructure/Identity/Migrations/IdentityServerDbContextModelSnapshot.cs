@@ -14,7 +14,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.11");
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationRole", b =>
                 {

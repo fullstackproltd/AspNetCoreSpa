@@ -40,7 +40,7 @@ namespace AspNetCoreSpa.Application.Features.Employees.Commands.DeleteEmployee
                     throw new BadRequestException("Employees cannot delete their own account.");
                 }
 
-                if (entity.UserId != null)
+                if (entity.UserId != default)
                 {
                     await _userManager.DeleteUserAsync(entity.UserId);
                 }

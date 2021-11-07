@@ -14,7 +14,7 @@ namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.11");
 
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Localization.Culture", b =>
                 {

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using FluentValidation.Validators;
 
 namespace AspNetCoreSpa.Application.Features.Customers.Commands.UpdateCustomer
 {
@@ -24,12 +23,12 @@ namespace AspNetCoreSpa.Application.Features.Customers.Commands.UpdateCustomer
                 .WithMessage("Australian Postcodes have 4 digits");
 
             RuleFor(c => c.Phone)
-                .Must(HaveQueenslandLandLine)
+                .Must((model, phone) => HaveQueenslandLandLine(model, phone))
                 .When(c => c.Country == "Australia" && c.PostalCode.StartsWith("4"))
                 .WithMessage("Customers in QLD require at least one QLD landline.");
         }
 
-        private static bool HaveQueenslandLandLine(UpdateCustomerCommand model, string phoneValue, PropertyValidatorContext ctx)
+        private static bool HaveQueenslandLandLine(UpdateCustomerCommand model, string phoneValue)
         {
             return model.Phone.StartsWith("07") || model.Fax.StartsWith("07");
         }

@@ -234,3 +234,4 @@ ModelManifest.xml
 .DS_Store
 
 **/.angular/cache
+**/.idea

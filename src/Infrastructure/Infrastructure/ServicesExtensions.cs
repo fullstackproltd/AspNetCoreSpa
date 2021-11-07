@@ -31,6 +31,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Localization;
+using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using NSwag.Generation.Processors.Security;
@@ -114,6 +115,7 @@ namespace AspNetCoreSpa.Infrastructure
                 });
 
             services.AddAuthentication()
+                .AddIdentityServerJwt()
                 .AddGoogle(options =>
                 {
                     options.ClientId = configuration["IdentityServer:ExternalAuth:Google:ClientId"];
@@ -129,8 +131,8 @@ namespace AspNetCoreSpa.Infrastructure
                     options.ConsumerKey = configuration["IdentityServer:ExternalAuth:Twitter:ConsumerKey"];
                     options.ConsumerSecret = configuration["IdentityServer:ExternalAuth:Twitter:ConsumerSecret"];
                 })
-                .AddAzureAD(options => { configuration.Bind("IdentityServer:ExternalAuth:AzureAd", options); })
-                .AddIdentityServerJwt();
+                .AddAzureAD(options => { configuration.Bind("IdentityServer:ExternalAuth:AzureAd", options); });
+            // .AddMicrosoftIdentityWebApp(configuration.GetSection("IdentityServer:ExternalAuth:AzureAd"));
 
             services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
             {
@@ -289,7 +291,7 @@ namespace AspNetCoreSpa.Infrastructure
         {
             services.AddCors(options =>
             {
-                options.AddPolicy(Constants.DefaultCorsPolicy,
+                options.AddPolicy(Common.Constants.DefaultCorsPolicy,
                     builder =>
                     {
                         var corsList = configuration.GetSection("CorsOrigins").Get<List<string>>()?.ToArray() ?? new string[] { };
