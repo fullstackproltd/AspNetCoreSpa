@@ -7,7 +7,6 @@
 		<SpaRoot>ClientApp\</SpaRoot>
 		<DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
 		<!-- Set this to true if you enable server-side prerendering -->
-		<BuildServerSideRenderer>false</BuildServerSideRenderer>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>.</DockerfileContext>
 		<DockerComposeProjectPath>docker-compose.dcproj</DockerComposeProjectPath>
@@ -78,7 +77,6 @@
 	<Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
 		<!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
 		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build" />
-		<Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
 
 		<!-- Include the newly-built files in the publish output -->
 		<ItemGroup>

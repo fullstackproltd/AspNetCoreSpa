@@ -100,25 +100,6 @@ namespace AspNetCoreSpa.Web
                       {
                           spa.Options.SourcePath = "ClientApp";
 
-                          /*
-                          // If you want to enable server-side rendering (SSR),
-                          // [1] In AspNetCoreSpa.csproj, change the <BuildServerSideRenderer> property
-                          //     value to 'true', so that the SSR bundle is built during publish
-                          // [2] Uncomment this code block
-                          */
-
-                          //   spa.UseSpaPrerendering(options =>
-                          //    {
-                          //        options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
-                          //        options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
-                          //        options.ExcludeUrls = new[] { "/sockjs-node" };
-                          //        options.SupplyData = (requestContext, obj) =>
-                          //        {
-                          //          //  var result = appService.GetApplicationData(requestContext).GetAwaiter().GetResult();
-                          //          obj.Add("Cookies", requestContext.Request.Cookies);
-                          //        };
-                          //    });
-
                           if (HostingEnvironment.IsDevelopment())
                           {
                               //spa.UseAngularCliServer(npmScript: "start");
