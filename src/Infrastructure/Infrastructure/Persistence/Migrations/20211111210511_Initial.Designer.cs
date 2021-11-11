@@ -6,17 +6,18 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211107144130_migrationname")]
-    partial class migrationname
+    [Migration("20211111210511_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.11");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Category", b =>
                 {
@@ -350,7 +351,7 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Order Details");
+                    b.ToTable("Order Details", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Domain.Entities.Product", b =>
@@ -554,14 +555,14 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Employee", "Employee")
                         .WithMany("EmployeeTerritories")
                         .HasForeignKey("EmployeeId")
-                        .HasConstraintName("FK_EmployeeTerritories_Employees")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_EmployeeTerritories_Employees");
 
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Territory", "Territory")
                         .WithMany("EmployeeTerritories")
                         .HasForeignKey("TerritoryId")
-                        .HasConstraintName("FK_EmployeeTerritories_Territories")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_EmployeeTerritories_Territories");
 
                     b.Navigation("Employee");
 
@@ -595,14 +596,14 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .HasConstraintName("FK_Order_Details_Orders")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Order_Details_Orders");
 
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
-                        .HasConstraintName("FK_Order_Details_Products")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Order_Details_Products");
 
                     b.Navigation("Order");
 
@@ -629,8 +630,8 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                     b.HasOne("AspNetCoreSpa.Domain.Entities.Region", "Region")
                         .WithMany("Territories")
                         .HasForeignKey("RegionId")
-                        .HasConstraintName("FK_Territories_Region")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Territories_Region");
 
                     b.Navigation("Region");
                 });

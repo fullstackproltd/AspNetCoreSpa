@@ -6,8 +6,8 @@
 
 ## Features
 
-- [ASP.NET Core 5.0](http://www.dot.net/)
-- [Entity Framework Core 5.0](https://docs.efproject.net/en/latest/)
+- [ASP.NET Core 6.0](http://www.dot.net/)
+- [Entity Framework Core 6.0](https://docs.efproject.net/en/latest/)
   - Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
 - [Identity Server 4](http://identityserver.io/)
 - [Angular 11](https://angular.io/)
@@ -29,7 +29,7 @@
 
 ## Pre-requisites
 
-1. [.Net 5.0 SDK](https://www.microsoft.com/net/core#windows)
+1. [.Net 6.0 SDK](https://www.microsoft.com/net/core#windows)
 2. [Visual studio 2019](https://www.visualstudio.com/) OR [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension
 3. [NodeJs](https://nodejs.org/en/) (Latest LTS)
 4. [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server) (Optional: If MS SQL server required instead of Sqlite during development)
@@ -207,7 +207,7 @@ From powershell:
 ### Replace your app name where it is `aspnetcorespa`
 
 - dotnet publish -c release
-- docker build -t aspnetcorespa ./bin/release/net5.0/publish
+- docker build -t aspnetcorespa ./bin/release/net6.0/publish
 - heroku login
 - heroku container:login
 - docker tag aspnetcorespa registry.heroku.com/aspnetcorespa/web

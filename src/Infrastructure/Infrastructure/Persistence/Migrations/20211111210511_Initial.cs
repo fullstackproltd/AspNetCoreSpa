@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
 {
-    public partial class migrationname : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,8 +96,7 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                         name: "FK_Employees_Employees",
                         column: x => x.ReportsTo,
                         principalTable: "Employees",
-                        principalColumn: "EmployeeID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "EmployeeID");
                 });
 
             migrationBuilder.CreateTable(
@@ -162,8 +163,7 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                         name: "FK_Territories_Region",
                         column: x => x.RegionID,
                         principalTable: "Region",
-                        principalColumn: "RegionID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "RegionID");
                 });
 
             migrationBuilder.CreateTable(
@@ -197,20 +197,17 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                         name: "FK_Orders_Customers_CustomerID",
                         column: x => x.CustomerID,
                         principalTable: "Customers",
-                        principalColumn: "CustomerID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "CustomerID");
                     table.ForeignKey(
                         name: "FK_Orders_Employees_EmployeeID",
                         column: x => x.EmployeeID,
                         principalTable: "Employees",
-                        principalColumn: "EmployeeID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "EmployeeID");
                     table.ForeignKey(
                         name: "FK_Orders_Shippers",
                         column: x => x.ShipVia,
                         principalTable: "Shippers",
-                        principalColumn: "ShipperID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ShipperID");
                 });
 
             migrationBuilder.CreateTable(
@@ -240,14 +237,12 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                         name: "FK_Products_Categories_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Categories",
-                        principalColumn: "CategoryID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "CategoryID");
                     table.ForeignKey(
                         name: "FK_Products_Suppliers_SupplierID",
                         column: x => x.SupplierID,
                         principalTable: "Suppliers",
-                        principalColumn: "SupplierID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "SupplierID");
                 });
 
             migrationBuilder.CreateTable(
@@ -264,14 +259,12 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                         name: "FK_EmployeeTerritories_Employees",
                         column: x => x.EmployeeID,
                         principalTable: "Employees",
-                        principalColumn: "EmployeeID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "EmployeeID");
                     table.ForeignKey(
                         name: "FK_EmployeeTerritories_Territories",
                         column: x => x.TerritoryID,
                         principalTable: "Territories",
-                        principalColumn: "TerritoryID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "TerritoryID");
                 });
 
             migrationBuilder.CreateTable(
@@ -295,14 +288,12 @@ namespace AspNetCoreSpa.Infrastructure.Persistence.Migrations
                         name: "FK_Order_Details_Orders",
                         column: x => x.OrderID,
                         principalTable: "Orders",
-                        principalColumn: "OrderID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "OrderID");
                     table.ForeignKey(
                         name: "FK_Order_Details_Products",
                         column: x => x.ProductID,
                         principalTable: "Products",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ProductID");
                 });
 
             migrationBuilder.CreateIndex(

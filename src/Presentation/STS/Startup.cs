@@ -3,7 +3,7 @@ using AspNetCoreSpa.Common;
 using AspNetCoreSpa.Infrastructure;
 using AspNetCoreSpa.Infrastructure.Identity;
 using AspNetCoreSpa.STS.Seed;
-using IdentityServer4.Services;
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

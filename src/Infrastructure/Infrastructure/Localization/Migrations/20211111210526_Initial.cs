@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
 {
-    public partial class migrationname : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,8 +38,7 @@ namespace AspNetCoreSpa.Infrastructure.Localization.Migrations
                         name: "FK_Resources_Cultures_CultureId",
                         column: x => x.CultureId,
                         principalTable: "Cultures",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(

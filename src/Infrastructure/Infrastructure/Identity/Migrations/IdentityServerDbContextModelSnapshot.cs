@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(IdentityServerDbContext))]
@@ -13,8 +15,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.11");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationRole", b =>
                 {
@@ -43,7 +44,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .IsUnique()
                         .HasDatabaseName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationRoleClaim", b =>
@@ -65,7 +66,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUser", b =>
@@ -133,7 +134,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserClaim", b =>
@@ -155,7 +156,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserLogin", b =>
@@ -178,7 +179,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserRole", b =>
@@ -193,7 +194,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationUserToken", b =>
@@ -214,10 +215,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResource", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,6 +248,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Property<bool>("NonEditable")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("RequireResourceIndicator")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("ShowInDiscoveryDocument")
                         .HasColumnType("INTEGER");
 
@@ -258,7 +262,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ApiResources");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceClaim", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -277,7 +281,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ApiResourceClaim");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceProperty", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -299,7 +303,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ApiResourceProperty");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceScope", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -318,7 +322,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ApiResourceScope");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceSecret", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -349,7 +353,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ApiResourceSecret");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.Client", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -489,7 +493,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientClaim", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -511,7 +515,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientClaim");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientCorsOrigin", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientCorsOrigin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -530,7 +534,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientCorsOrigin");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientGrantType", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientGrantType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -549,7 +553,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientGrantType");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientIdPRestriction", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientIdPRestriction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -568,7 +572,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientIdPRestriction");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -587,7 +591,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientPostLogoutRedirectUri");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientProperty", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -609,7 +613,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientProperty");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientRedirectUri", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientRedirectUri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -628,7 +632,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientRedirectUri");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientScope", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -647,7 +651,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientScope");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientSecret", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -678,7 +682,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("ClientSecret");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
                         .HasMaxLength(200)
@@ -725,10 +729,10 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasIndex("Expiration");
 
-                    b.ToTable("DeviceCodes");
+                    b.ToTable("DeviceCodes", (string)null);
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResource", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -769,7 +773,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("IdentityResources");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceClaim", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -788,7 +792,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("IdentityResourceClaim");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceProperty", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -810,7 +814,43 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.ToTable("IdentityResourceProperty");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.PersistedGrant", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Key", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Algorithm")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("DataProtected")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsX509Certificate")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Use")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Use");
+
+                    b.ToTable("Keys");
+                });
+
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
                         .HasMaxLength(200)
@@ -854,13 +894,15 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
 
                     b.HasKey("Key");
 
+                    b.HasIndex("ConsumedTime");
+
                     b.HasIndex("Expiration");
 
                     b.HasIndex("SubjectId", "ClientId", "Type");
 
                     b.HasIndex("SubjectId", "SessionId", "Type");
 
-                    b.ToTable("PersistedGrants");
+                    b.ToTable("PersistedGrants", (string)null);
                 });
 
             modelBuilder.Entity("AspNetCoreSpa.Infrastructure.Identity.Entities.ApplicationRoleClaim", b =>
@@ -926,9 +968,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceClaim", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceClaim", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -937,9 +979,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceProperty", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceProperty", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
                         .WithMany("Properties")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -948,9 +990,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceScope", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceScope", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
                         .WithMany("Scopes")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -959,9 +1001,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResourceSecret", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResourceSecret", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.ApiResource", "ApiResource")
                         .WithMany("Secrets")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -970,9 +1012,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("ApiResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientClaim", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientClaim", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("Claims")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -981,9 +1023,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientCorsOrigin", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientCorsOrigin", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("AllowedCorsOrigins")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -992,9 +1034,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientGrantType", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientGrantType", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("AllowedGrantTypes")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1003,9 +1045,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientIdPRestriction", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientIdPRestriction", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("IdentityProviderRestrictions")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1014,9 +1056,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientPostLogoutRedirectUri", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("PostLogoutRedirectUris")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1025,9 +1067,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientProperty", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientProperty", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("Properties")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1036,9 +1078,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientRedirectUri", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientRedirectUri", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("RedirectUris")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1047,9 +1089,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientScope", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientScope", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("AllowedScopes")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1058,9 +1100,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ClientSecret", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ClientSecret", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.Client", "Client")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.Client", "Client")
                         .WithMany("ClientSecrets")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1069,9 +1111,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceClaim", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceClaim", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.IdentityResource", "IdentityResource")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", "IdentityResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1080,9 +1122,9 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("IdentityResource");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResourceProperty", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResourceProperty", b =>
                 {
-                    b.HasOne("IdentityServer4.EntityFramework.Entities.IdentityResource", "IdentityResource")
+                    b.HasOne("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", "IdentityResource")
                         .WithMany("Properties")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1109,7 +1151,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("UserRoles");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.ApiResource", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.ApiResource", b =>
                 {
                     b.Navigation("Properties");
 
@@ -1120,7 +1162,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("UserClaims");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.Client", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.Client", b =>
                 {
                     b.Navigation("AllowedCorsOrigins");
 
@@ -1141,7 +1183,7 @@ namespace AspNetCoreSpa.Infrastructure.Identity.Migrations
                     b.Navigation("RedirectUris");
                 });
 
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.IdentityResource", b =>
+            modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.IdentityResource", b =>
                 {
                     b.Navigation("Properties");
 
