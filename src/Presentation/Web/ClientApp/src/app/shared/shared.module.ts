@@ -7,68 +7,68 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 
 import {
-  CustomDateFormatter,
-  CustomNgbDateNativeUTCAdapter,
-  AuthInterceptor,
-  LoadingInterceptor,
-  JwtInterceptor,
-  TimingInterceptor,
-  GlobalErrorHandler,
-  AppService,
+    CustomDateFormatter,
+    CustomNgbDateNativeUTCAdapter,
+    AuthInterceptor,
+    LoadingInterceptor,
+    JwtInterceptor,
+    TimingInterceptor,
+    GlobalErrorHandler,
+    AppService,
 } from './services';
 
 // Components
 import {
-  // Forms
-  AppFormComponent,
-  FormFieldDirective,
-  FormButtonComponent,
-  FormInputComponent,
-  FormFileComponent,
-  FormDateComponent,
-  FormTimeComponent,
-  FormTextareaComponent,
-  FormCheckboxComponent,
-  FormCheckboxListComponent,
-  FormRadioListComponent,
-  FormSelectComponent,
-  FormFieldErrorComponent,
-  FormsService,
-  FieldColorValidationDirective,
-  FormButtonGroupComponent,
-  FormInputGroupComponent,
-  FormFilePathComponent,
-  // Custom components
-  AccordionComponent,
-  PageHeadingComponent,
-  CardDeckComponent,
-  CardComponent,
-  ToggleSwitchComponent,
-  SearchInputComponent,
-  TypeaheadComponent,
-  ListComponent,
-  ModalComponent,
-  ModalTemplateDirective,
-  ToastComponent,
-  AppFileInputDirective,
-  ImageResizerComponent,
-  LoadingComponent,
-  LoginComponent,
-  LogoutComponent,
-  LoginMenuComponent,
-  // Grid
-  GridComponent,
-  ActionButtonsComponent,
-  ActionButtonComponent,
-  DateFilterComponent,
-  DropdownFloatingFilterComponent,
+    // Forms
+    AppFormComponent,
+    FormFieldDirective,
+    FormButtonComponent,
+    FormInputComponent,
+    FormFileComponent,
+    FormDateComponent,
+    FormTimeComponent,
+    FormTextareaComponent,
+    FormCheckboxComponent,
+    FormCheckboxListComponent,
+    FormRadioListComponent,
+    FormSelectComponent,
+    FormFieldErrorComponent,
+    FormsService,
+    FieldColorValidationDirective,
+    FormButtonGroupComponent,
+    FormInputGroupComponent,
+    FormFilePathComponent,
+    // Custom components
+    AccordionComponent,
+    PageHeadingComponent,
+    CardDeckComponent,
+    CardComponent,
+    ToggleSwitchComponent,
+    SearchInputComponent,
+    TypeaheadComponent,
+    ListComponent,
+    ModalComponent,
+    ModalTemplateDirective,
+    ToastComponent,
+    AppFileInputDirective,
+    ImageResizerComponent,
+    LoadingComponent,
+    LoginComponent,
+    LogoutComponent,
+    LoginMenuComponent,
+    // Grid
+    GridComponent,
+    ActionButtonsComponent,
+    ActionButtonComponent,
+    DateFilterComponent,
+    DropdownFloatingFilterComponent,
 } from './components';
 import { ApplicationPaths } from './constants';
 // Pipes
 import { UppercasePipe, TranslatePipe, GroupByPipe, SafePipe } from './pipes';
 
 export function appServiceFactory(appService: AppService): () => Promise<any> {
-  return () => appService.getAppData();
+    return () => appService.getAppData();
 }
 @NgModule({
     imports: [
@@ -78,7 +78,7 @@ export function appServiceFactory(appService: AppService): () => Promise<any> {
         ReactiveFormsModule,
         NgbModule,
         NgbModule,
-        AgGridModule.withComponents([ActionButtonsComponent, ActionButtonComponent, DateFilterComponent, DropdownFloatingFilterComponent]),
+        AgGridModule,
         RouterModule.forChild([
             { path: ApplicationPaths.Register, component: LoginComponent },
             { path: ApplicationPaths.Profile, component: LoginComponent },
@@ -220,7 +220,7 @@ export function appServiceFactory(appService: AppService): () => Promise<any> {
         { provide: NgbDateAdapter, useClass: CustomNgbDateNativeUTCAdapter },
     ]
 })
-export class SharedModule {}
+export class SharedModule { }
 
 // Public apis
 export * from './components';

@@ -3,7 +3,7 @@ import { Injectable, Inject } from '@angular/core';
 
 import { DataService } from './data.service';
 
-const APP_DATA_KEY = makeStateKey<string>('appData');
+const APP_DATA_KEY = makeStateKey<IApplicationConfig>('appData');
 
 @Injectable({
   providedIn: 'root',
