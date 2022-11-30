@@ -25,7 +25,7 @@ import { SharedModule } from './shared';
   imports: [
     BrowserAnimationsModule,
     BrowserTransferStateModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled', relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     SharedModule,
   ],
