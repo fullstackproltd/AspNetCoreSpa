@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
-import { NgForm, FormGroup, AbstractControl, FormArray } from '@angular/forms';
+import { NgForm, UntypedFormGroup, AbstractControl, UntypedFormArray } from '@angular/forms';
 import { tap } from 'rxjs/operators';
 
 import { IFieldConfig } from '../../models';
@@ -15,13 +15,13 @@ export class FormsService {
 
   constructor() {}
 
-  valid(form: FormGroup, fieldConfig: IFieldConfig, formRef: NgForm) {
+  valid(form: UntypedFormGroup, fieldConfig: IFieldConfig, formRef: NgForm) {
     if (form.controls[fieldConfig.name]) {
       const valid = form.controls[fieldConfig.name].valid && (form.controls[fieldConfig.name].touched || formRef.submitted);
       return valid;
     }
   }
-  invalid(form: FormGroup, fieldConfig: IFieldConfig, formRef: NgForm) {
+  invalid(form: UntypedFormGroup, fieldConfig: IFieldConfig, formRef: NgForm) {
     return !form.controls[fieldConfig.name].valid && (form.controls[fieldConfig.name].touched || formRef.submitted);
   }
 
@@ -40,7 +40,7 @@ export class FormsService {
     }
     return '';
   }
-  multipleCheckboxRequireAtLeastOne(fa: FormArray) {
+  multipleCheckboxRequireAtLeastOne(fa: UntypedFormArray) {
     let valid = false;
 
     for (let x = 0; x < fa.length; ++x) {
@@ -55,7 +55,7 @@ export class FormsService {
           multipleCheckboxRequireAtLeastOne: true,
         };
   }
-  multipleCheckboxRequireMoreThanOne(fa: FormArray) {
+  multipleCheckboxRequireMoreThanOne(fa: UntypedFormArray) {
     let checkedCount = 0;
 
     for (let x = 0; x < fa.length; ++x) {

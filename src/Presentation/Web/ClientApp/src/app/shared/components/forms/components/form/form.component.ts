@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, NgForm, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, UntypedFormBuilder, NgForm, UntypedFormArray } from '@angular/forms';
 import { IFieldConfig, FieldTypes } from '../../../../models';
 
 @Component({
@@ -12,7 +12,7 @@ export class AppFormComponent implements OnChanges, OnInit {
   @ViewChild('formRef', { static: true }) ngForm: NgForm;
   @Input() model: any;
   @Input() fullWidth: boolean;
-  form: FormGroup;
+  form: UntypedFormGroup;
   _config: IFieldConfig[] = [];
 
   @Input()
@@ -43,7 +43,7 @@ export class AppFormComponent implements OnChanges, OnInit {
     return this.ngForm.submitted;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit() {
     this.form = this.createGroup();
@@ -74,7 +74,7 @@ export class AppFormComponent implements OnChanges, OnInit {
     return group;
   }
 
-  createControl(config: IFieldConfig): FormControl | FormArray {
+  createControl(config: IFieldConfig): UntypedFormControl | UntypedFormArray {
     const { disabled, validation, value, options } = config;
     if (config.type === FieldTypes.Checkboxlist) {
       return this.fb.array(

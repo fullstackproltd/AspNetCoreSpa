@@ -1,5 +1,5 @@
 import { Injectable, Directive } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 import { IFieldConfig, Field } from '../../../../models';
 import { AppFormComponent } from '../form';
@@ -12,7 +12,7 @@ export abstract class FieldBaseComponent implements Field {
 
   constructor(public fc: AppFormComponent, public formService: FormsService) {}
 
-  get formGroup(): FormGroup {
+  get formGroup(): UntypedFormGroup {
     return this.fc.form;
   }
 
