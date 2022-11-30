@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace AspNetCoreSpa.Application.Behaviours
 {
     public class RequestPerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse>
     {
         private readonly Stopwatch _timer;
         private readonly ILogger<TRequest> _logger;
@@ -21,7 +22,7 @@ namespace AspNetCoreSpa.Application.Behaviours
             _currentUserService = currentUserService;
         }
 
-        public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
             _timer.Start();
 
@@ -33,7 +34,7 @@ namespace AspNetCoreSpa.Application.Behaviours
             {
                 var name = typeof(TRequest).Name;
 
-                _logger.LogWarning("AspNetCoreSpa Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}", 
+                _logger.LogWarning("AspNetCoreSpa Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
                     name, _timer.ElapsedMilliseconds, _currentUserService.UserId, request);
             }
 
