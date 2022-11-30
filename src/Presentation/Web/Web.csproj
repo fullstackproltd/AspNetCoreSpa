@@ -44,7 +44,7 @@
 
 	<Target Name="NSwag" AfterTargets="Build" Condition="'$(Configuration)' == 'Debug'">
 		<Copy SourceFiles="@(Reference)" DestinationFolder="$(OutDir)References" />
-		<Exec Command="$(NSwagExe_Net60) run /variables:Configuration=$(Configuration)" />
+		<Exec Command="$(NSwagExe_Net70) run /variables:Configuration=$(Configuration)" />
 		<RemoveDir Directories="$(OutDir)References" />
 	</Target>
 
