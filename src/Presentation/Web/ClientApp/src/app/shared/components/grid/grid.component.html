@@ -12,18 +12,7 @@
     </div>
   </div>
 </div>
-<ag-grid-angular
-  style="width: 100%; height: 600px;"
-  class="ag-theme-balham"
-  [rowData]="rows"
-  [columnDefs]="gridColumns"
-  [pagination]="true"
-  [floatingFilter]="true"
-  [frameworkComponents]="frameworkComponents"
-  [defaultColDef]="defaultColumnDef"
-  [rowHeight]="34"
-  [rowSelection]="enableCsvExport ? 'multiple' : null"
-  [paginationPageSize]="20"
-  (gridReady)="onGridReady($event)"
->
+<ag-grid-angular style="width: 100%; height: 600px;" class="ag-theme-balham" [rowData]="rows" [columnDefs]="gridColumns"
+  [pagination]="true" [frameworkComponents]="frameworkComponents" [defaultColDef]="defaultColumnDef" [rowHeight]="34"
+  [rowSelection]="enableCsvExport ? 'multiple' : null" [paginationPageSize]="20" (gridReady)="onGridReady($event)">
 </ag-grid-angular>
