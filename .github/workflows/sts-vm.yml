@@ -27,6 +27,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: sudo service ${{ secrets.KESTREL_STS_SERVICE_NAME }} stop
       - name: Deploy to server
@@ -37,7 +38,7 @@ jobs:
         with:
           flags: "-avzr --delete"
           options: ""
-          ssh_options: ""
+          ssh_options: "-p ${{ secrets.SSH_PORT }}"
           src: "publish/"
           dest: "${{ secrets.SSH_USER }}@${{ secrets.SSH_SERVER }}:${{ secrets.SSH_STS_DEST_DIR }}"
       # Start service
@@ -46,5 +47,6 @@ jobs:
         with:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: sudo service ${{ secrets.KESTREL_STS_SERVICE_NAME }} start
