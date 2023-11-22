@@ -1,0 +1,21 @@
+name: sts-win
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build with dotnet
+        run: dotnet build AspNetCoreSpa.sln -c Release
+      - name: dotnet publish
+        run: dotnet publish src/Presentation/STS/STS.csproj -c Release -o publish
+      - name: Deploy to IIS
+        run: |
+          iisreset /stop
+          Copy-Item ./publish/* C:/inetpub/wwwroot/identityserver -Recurse -Force
+          iisreset /start
