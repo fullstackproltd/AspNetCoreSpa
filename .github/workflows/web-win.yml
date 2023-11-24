@@ -15,9 +15,9 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '7.0.100'
-      - name: Build
-        run: dotnet build AspNetCoreSpa.sln -c Release
-
+      - name: npm install
+        run: npm install
+        working-directory: src/Presentation/Web/ClientApp
       - name: Publish
         run: dotnet publish src/Presentation/Web/Web.csproj -c Release -o publish
       - name: Deploy
