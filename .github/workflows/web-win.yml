@@ -31,4 +31,3 @@ jobs:
           target: '/c/inetpub/wwwroot/aspnetcorespa/'
           tar_dereference: true
           strip_components: 1
-          rm: true

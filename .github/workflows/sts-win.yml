@@ -29,4 +29,3 @@ jobs:
           target: '/c/inetpub/wwwroot/identityserver/'
           tar_dereference: true
           strip_components: 1
-          rm: true
