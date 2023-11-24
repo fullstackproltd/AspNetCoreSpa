@@ -1,21 +1,32 @@
-name: sts-win
+name: win-ssh-sts
 
 on:
   push:
     branches:
       - master
+
 jobs:
-  build-deploy:
-    runs-on: self-hosted
+  build-test-publish-ftp:
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Build with dotnet
-        run: dotnet build AspNetCoreSpa.sln -c Release
-      - name: dotnet publish
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '7.0.100'
+
+      - name: Publish
         run: dotnet publish src/Presentation/STS/STS.csproj -c Release -o publish
-      - name: Deploy to IIS
-        run: |
-          iisreset /stop
-          Copy-Item ./publish/* C:/inetpub/wwwroot/identityserver -Recurse -Force
-          iisreset /start
+      - name: Deploy
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_SERVER }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 2222
+          source: publish/*
+          target: '/c/inetpub/wwwroot/identityserver/'
+          tar_dereference: true
+          strip_components: 1
+          rm: true
