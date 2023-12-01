@@ -87,7 +87,7 @@ This project supports both databases OOTB.
   - Delete `Migrations` folder from src/Infrastructure/Infrastructure/Persistence
   - Change setting in appsettings.json called `useSqLite` from `true` to `false` and change `Web` connection string to your local Sql Server connection string
 
-7. Once the project is running use following test users to login:
+8. Once the project is running use following test users to login:
 
    2 Test users:
    Username: admin@admin.com
